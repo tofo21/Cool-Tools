@@ -8,17 +8,19 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <style>
 :root {
-  --bg: #0e0f11;
+  --bg:      #0e0f11;
   --surface: #16181c;
-  --surface2: #1e2126;
-  --border: rgba(255,255,255,0.07);
+  --surf2:   #1e2126;
+  --border:  rgba(255,255,255,0.07);
   --border2: rgba(255,255,255,0.13);
-  --text: #f0f0ee;
-  --muted: #7a7d85;
-  --accent: #4af0a0;
-  --accent2: #ff6b35;
-  --blue: #4da6ff;
-  --track: rgba(255,255,255,0.08);
+  --text:    #f0f0ee;
+  --muted:   #7a7d85;
+  --accent:  #4af0a0;
+  --orange:  #ff6b35;
+  --blue:    #4da6ff;
+  --red:     #ff4d6b;
+  --yellow:  #ffd166;
+  --track:   rgba(255,255,255,0.08);
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { background: var(--bg); color: var(--text); font-family: 'Barlow', sans-serif; font-size: 14px; line-height: 1.5; min-height: 100vh; }
@@ -28,17 +30,17 @@ header { display: flex; align-items: baseline; gap: 16px; margin-bottom: 32px; b
 h1 { font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; }
 .header-sub { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: 0.04em; }
 
-/* sliders */
-.main-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+/* ── slider cards ── */
+.main-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
 .slider-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; position: relative; transition: border-color 0.15s; }
 .slider-card.active-driver { border-color: var(--accent); background: #16201b; }
 .slider-card.active-driver .card-top-line { background: var(--accent); }
-.card-top-line { position: absolute; top: 0; left: 0; right: 0; height: 2px; background: transparent; border-radius: 10px 10px 0 0; transition: background 0.15s; }
+.card-top-line { position: absolute; top: 0; left: 0; right: 0; height: 2px; background: transparent; border-radius: 10px 10px 0 0; }
 .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
 .card-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.08em; color: var(--muted); text-transform: uppercase; }
 .dbadge { font-family: 'DM Mono', monospace; font-size: 9px; padding: 2px 8px; border-radius: 3px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 500; }
 .dbadge.driving { background: rgba(74,240,160,0.15); color: var(--accent); border: 1px solid rgba(74,240,160,0.3); }
-.dbadge.derived { background: rgba(255,255,255,0.04); color: var(--muted); border: 1px solid var(--border); }
+.dbadge.derived  { background: rgba(255,255,255,0.04); color: var(--muted); border: 1px solid var(--border); }
 .card-value { font-family: 'Barlow Condensed', sans-serif; font-size: 44px; font-weight: 700; line-height: 1; margin-bottom: 14px; letter-spacing: -0.01em; }
 .card-value .unit { font-size: 16px; font-weight: 400; color: var(--muted); margin-left: 4px; }
 input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 4px; background: var(--track); border-radius: 2px; outline: none; cursor: pointer; }
@@ -46,75 +48,82 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; appearance: 
 input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.15); }
 .slider-card.active-driver input[type=range]::-webkit-slider-thumb { box-shadow: 0 0 0 4px rgba(74,240,160,0.25); }
 
-/* metrics strip */
-.metrics-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px; }
-.metric { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; }
-.metric-label { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; }
-.metric-value { font-family: 'Barlow Condensed', sans-serif; font-size: 26px; font-weight: 600; color: var(--blue); }
-.metric-unit { font-size: 11px; color: var(--muted); margin-left: 3px; }
+/* ── section labels ── */
+.sec-title { font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 4px; }
+.sec-sub { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); margin-bottom: 14px; letter-spacing: 0.03em; }
 
-/* chart */
+/* ── info grid ── */
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+
+.ic { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; position: relative; overflow: hidden; }
+.ic::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
+
+/* stripe colors per card — warm early, cool late */
+.ic-s010::before   { background: linear-gradient(90deg, var(--red),    var(--orange)); }
+.ic-s020::before   { background: linear-gradient(90deg, var(--orange),  var(--yellow)); }
+.ic-s030::before   { background: linear-gradient(90deg, var(--yellow),  var(--accent)); }
+.ic-f1020::before  { background: linear-gradient(90deg, var(--orange),  var(--yellow)); }
+.ic-f2030::before  { background: linear-gradient(90deg, var(--yellow),  var(--accent)); }
+.ic-f3040::before  { background: linear-gradient(90deg, var(--accent),  var(--blue));  }
+.ic-prof::before   { background: linear-gradient(90deg, var(--accent),  var(--blue));  }
+.ic-ratio::before  { background: linear-gradient(90deg, var(--blue),    var(--orange));}
+
+.ic-lbl { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+.ic-val { font-family: 'Barlow Condensed', sans-serif; font-size: 40px; font-weight: 700; line-height: 1; letter-spacing: -0.01em; margin-bottom: 2px; }
+.ic-val .u { font-size: 14px; font-weight: 400; color: var(--muted); margin-left: 3px; }
+.ic-body { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 5px; }
+.ic-row { display: flex; justify-content: space-between; align-items: baseline; }
+.ic-sl { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.ic-sv { font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 500; color: var(--text); }
+.ic-sv.g { color: var(--accent); }
+.ic-sv.o { color: var(--orange); }
+.pbar { margin-top: 6px; height: 3px; background: var(--track); border-radius: 2px; overflow: hidden; }
+.pfill { height: 100%; border-radius: 2px; background: var(--accent); transition: width 0.2s ease; }
+.pfill.orange { background: var(--orange); }
+.plbl { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--muted); margin-top: 3px; }
+
+/* profile card extras */
+.pill { display: inline-block; font-family: 'DM Mono', monospace; font-size: 10px; padding: 3px 10px; border-radius: 4px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; margin-top: 8px; }
+.pill-e   { background: rgba(74,240,160,0.12);  color: var(--accent);  border: 1px solid rgba(74,240,160,0.25); }
+.pill-b   { background: rgba(255,107,53,0.12);  color: var(--orange);  border: 1px solid rgba(255,107,53,0.25); }
+.pill-bal { background: rgba(77,166,255,0.12);  color: var(--blue);    border: 1px solid rgba(77,166,255,0.25); }
+.ic-tau-desc { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); margin-top: 8px; }
+.ic-tau-val  { font-family: 'DM Mono', monospace; font-size: 9px;  color: var(--border2); margin-top: 4px; }
+
+/* ── chart ── */
 .chart-section { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px; margin-bottom: 16px; }
 .chart-wrap { position: relative; width: 100%; height: 220px; }
 .chart-legend { display: flex; gap: 20px; margin-top: 12px; flex-wrap: wrap; }
 .legend-item { display: flex; align-items: center; gap: 7px; font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); }
 .legend-dot { width: 12px; height: 3px; border-radius: 2px; }
 
-/* ref chips */
+/* ── chips ── */
 .ref-section { margin-bottom: 20px; }
 .ref-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
 .ref-chips { display: flex; gap: 8px; flex-wrap: wrap; }
 .chip { font-family: 'DM Mono', monospace; font-size: 10px; padding: 5px 12px; border-radius: 20px; border: 1px solid var(--border2); color: var(--muted); background: var(--surface); cursor: pointer; letter-spacing: 0.04em; transition: all 0.12s; }
 .chip:hover { border-color: var(--accent); color: var(--accent); background: rgba(74,240,160,0.06); }
-.chip.starred { border-color: rgba(255,107,53,0.5); color: var(--accent2); }
+.chip.starred { border-color: rgba(255,107,53,0.5); color: var(--orange); }
 .chip.starred:hover { background: rgba(255,107,53,0.08); }
 
 .divider { height: 1px; background: var(--border); margin: 24px 0; }
 
-/* splits */
-.section-title { font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 4px; }
-.section-sub { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); margin-bottom: 14px; letter-spacing: 0.03em; }
-.splits-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
-.split-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 14px 12px; position: relative; overflow: hidden; }
-.split-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
-.split-card.s5::before  { background: linear-gradient(90deg, #ff4d6b, #ff6b35); }
-.split-card.s10::before { background: linear-gradient(90deg, #ff6b35, #ffd166); }
-.split-card.s20::before { background: linear-gradient(90deg, #ffd166, #4af0a0); }
-.split-card.s30::before { background: linear-gradient(90deg, #4af0a0, #4da6ff); }
-.split-yard { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
-.split-time { font-family: 'Barlow Condensed', sans-serif; font-size: 36px; font-weight: 700; line-height: 1; letter-spacing: -0.01em; margin-bottom: 2px; }
-.split-time .su { font-size: 14px; font-weight: 400; color: var(--muted); margin-left: 2px; }
-.split-stats { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 5px; }
-.split-stat-row { display: flex; justify-content: space-between; align-items: baseline; }
-.ssl { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
-.ssv { font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 500; }
-.ssv.pc { color: var(--accent); }
-.ssv.ac { color: var(--accent2); }
-.pct-bar { margin-top: 8px; height: 3px; background: var(--track); border-radius: 2px; overflow: hidden; }
-.pct-fill { height: 100%; border-radius: 2px; background: var(--accent); transition: width 0.2s ease; }
-.pct-label { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--muted); margin-top: 4px; letter-spacing: 0.04em; }
-
-/* outliers */
-.outlier-section { margin-bottom: 24px; }
+/* ── outlier table ── */
 table { width: 100%; border-collapse: collapse; font-size: 12px; }
 thead th { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border2); }
 tbody td { padding: 8px 10px; border-bottom: 1px solid var(--border); color: var(--text); font-variant-numeric: tabular-nums; }
 tbody tr:last-child td { border-bottom: none; }
-tbody tr:hover td { background: var(--surface2); }
+tbody tr:hover td { background: var(--surf2); }
 .mono { font-family: 'DM Mono', monospace; font-size: 11px; }
-.pill { display: inline-block; font-family: 'DM Mono', monospace; font-size: 9px; padding: 2px 8px; border-radius: 3px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; }
-.pill-e { background: rgba(74,240,160,0.12); color: var(--accent); border: 1px solid rgba(74,240,160,0.25); }
-.pill-b { background: rgba(255,107,53,0.12); color: var(--accent2); border: 1px solid rgba(255,107,53,0.25); }
-.pill-bal { background: rgba(77,166,255,0.12); color: var(--blue); border: 1px solid rgba(77,166,255,0.25); }
 .row-sep td { border-top: 1px solid var(--border2); }
 .tau-note { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); margin-top: 16px; padding: 10px 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; line-height: 1.7; }
 .tau-note strong { color: var(--text); font-weight: 500; }
 
-@media (max-width: 620px) {
-  .main-grid { grid-template-columns: 1fr; }
-  .splits-cards { grid-template-columns: 1fr 1fr; }
-  .metrics-strip { grid-template-columns: 1fr 1fr; }
+@media (max-width: 600px) {
+  .main-grid  { grid-template-columns: 1fr; }
+  .info-grid  { grid-template-columns: 1fr 1fr; }
   .card-value { font-size: 36px; }
+  .ic-val     { font-size: 30px; }
 }
 </style>
 </head>
@@ -126,6 +135,7 @@ tbody tr:hover td { background: var(--surface2); }
   <span class="header-sub">v(t) = v_peak &times; (1 &minus; e<sup>&minus;t/&tau;</sup>) &nbsp;&middot;&nbsp; &tau; = 0.77s default (Clark et al. 2019)</span>
 </header>
 
+<!-- FOUR BIDIRECTIONAL SLIDERS -->
 <div class="main-grid">
   <div class="slider-card active-driver" id="card-40">
     <div class="card-top-line"></div>
@@ -165,77 +175,103 @@ tbody tr:hover td { background: var(--surface2); }
   </div>
 </div>
 
-<div class="metrics-strip">
-  <div class="metric">
-    <div class="metric-label">Flying 20 avg</div>
-    <div><span class="metric-value" id="met-fly">--</span><span class="metric-unit">mph</span></div>
-  </div>
-  <div class="metric">
-    <div class="metric-label">Est. 10-yd split</div>
-    <div><span class="metric-value" id="met-split">--</span><span class="metric-unit">s</span></div>
-  </div>
-  <div class="metric">
-    <div class="metric-label">Peak / avg ratio</div>
-    <div><span class="metric-value" id="met-ratio">--</span><span class="metric-unit">x</span></div>
-  </div>
-  <div class="metric profile-metric">
-    <div class="metric-label">Accel. profile</div>
-    <div id="met-profile-wrap" style="margin-top:6px;">
-      <span class="pill pill-e" id="met-profile">--</span>
+<!-- 8-CARD SPRINT BREAKDOWN -->
+<div class="sec-title">Sprint Breakdown</div>
+<div class="sec-sub">splits and flying segments &mdash; seg avg speed (green) &middot; speed at endpoint &middot; % of peak</div>
+
+<div class="info-grid">
+
+  <!-- ROW 1 -->
+  <div class="ic ic-s010">
+    <div class="ic-lbl">0 &rarr; 10 yd split</div>
+    <div class="ic-val" id="v-s010-t">--<span class="u">s</span></div>
+    <div class="ic-body">
+      <div class="ic-row"><span class="ic-sl">seg avg speed</span><span class="ic-sv g" id="v-s010-avg">--</span></div>
+      <div class="ic-row"><span class="ic-sl">speed at 10 yd</span><span class="ic-sv" id="v-s010-spd">--</span></div>
+      <div class="pbar"><div class="pfill" id="pb-s010" style="width:0%"></div></div>
+      <div class="plbl" id="pl-s010">-- % of peak</div>
     </div>
-    <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);margin-top:8px;" id="met-tau-desc">--</div>
   </div>
+
+  <div class="ic ic-s020">
+    <div class="ic-lbl">0 &rarr; 20 yd split</div>
+    <div class="ic-val" id="v-s020-t">--<span class="u">s</span></div>
+    <div class="ic-body">
+      <div class="ic-row"><span class="ic-sl">seg avg speed</span><span class="ic-sv g" id="v-s020-avg">--</span></div>
+      <div class="ic-row"><span class="ic-sl">speed at 20 yd</span><span class="ic-sv" id="v-s020-spd">--</span></div>
+      <div class="pbar"><div class="pfill" id="pb-s020" style="width:0%"></div></div>
+      <div class="plbl" id="pl-s020">-- % of peak</div>
+    </div>
+  </div>
+
+  <!-- ROW 2 -->
+  <div class="ic ic-s030">
+    <div class="ic-lbl">0 &rarr; 30 yd split</div>
+    <div class="ic-val" id="v-s030-t">--<span class="u">s</span></div>
+    <div class="ic-body">
+      <div class="ic-row"><span class="ic-sl">seg avg speed</span><span class="ic-sv g" id="v-s030-avg">--</span></div>
+      <div class="ic-row"><span class="ic-sl">speed at 30 yd</span><span class="ic-sv" id="v-s030-spd">--</span></div>
+      <div class="pbar"><div class="pfill" id="pb-s030" style="width:0%"></div></div>
+      <div class="plbl" id="pl-s030">-- % of peak</div>
+    </div>
+  </div>
+
+  <div class="ic ic-f1020">
+    <div class="ic-lbl">10 &rarr; 20 yd fly</div>
+    <div class="ic-val" id="v-f1020-t">--<span class="u">s</span></div>
+    <div class="ic-body">
+      <div class="ic-row"><span class="ic-sl">fly avg speed</span><span class="ic-sv g" id="v-f1020-avg">--</span></div>
+      <div class="ic-row"><span class="ic-sl">speed at 20 yd</span><span class="ic-sv" id="v-f1020-spd">--</span></div>
+      <div class="pbar"><div class="pfill" id="pb-f1020" style="width:0%"></div></div>
+      <div class="plbl" id="pl-f1020">-- % of peak</div>
+    </div>
+  </div>
+
+  <!-- ROW 3 -->
+  <div class="ic ic-f2030">
+    <div class="ic-lbl">20 &rarr; 30 yd fly</div>
+    <div class="ic-val" id="v-f2030-t">--<span class="u">s</span></div>
+    <div class="ic-body">
+      <div class="ic-row"><span class="ic-sl">fly avg speed</span><span class="ic-sv g" id="v-f2030-avg">--</span></div>
+      <div class="ic-row"><span class="ic-sl">speed at 30 yd</span><span class="ic-sv" id="v-f2030-spd">--</span></div>
+      <div class="pbar"><div class="pfill" id="pb-f2030" style="width:0%"></div></div>
+      <div class="plbl" id="pl-f2030">-- % of peak</div>
+    </div>
+  </div>
+
+  <div class="ic ic-f3040">
+    <div class="ic-lbl">30 &rarr; 40 yd fly</div>
+    <div class="ic-val" id="v-f3040-t">--<span class="u">s</span></div>
+    <div class="ic-body">
+      <div class="ic-row"><span class="ic-sl">fly avg speed</span><span class="ic-sv g" id="v-f3040-avg">--</span></div>
+      <div class="ic-row"><span class="ic-sl">speed at 40 yd</span><span class="ic-sv" id="v-f3040-spd">--</span></div>
+      <div class="pbar"><div class="pfill" id="pb-f3040" style="width:0%"></div></div>
+      <div class="plbl" id="pl-f3040">-- % of peak</div>
+    </div>
+  </div>
+
+  <!-- ROW 4 -->
+  <div class="ic ic-prof">
+    <div class="ic-lbl">Accel. profile</div>
+    <span class="pill pill-e" id="v-profile">--</span>
+    <div class="ic-tau-desc" id="v-tau-desc">--</div>
+    <div class="ic-tau-val"  id="v-tau-val">tau: --</div>
+  </div>
+
+  <div class="ic ic-ratio">
+    <div class="ic-lbl">Peak / avg ratio</div>
+    <div class="ic-val" id="v-ratio">--<span class="u">x</span></div>
+    <div class="ic-body">
+      <div class="ic-row"><span class="ic-sl">peak speed</span><span class="ic-sv g" id="v-ratio-peak">--</span></div>
+      <div class="ic-row"><span class="ic-sl">avg speed</span><span class="ic-sv o" id="v-ratio-avg">--</span></div>
+    </div>
+  </div>
+
 </div>
 
-<div class="section-title" style="margin-bottom:4px;">Split Breakdown</div>
-<div class="section-sub">estimated time, instantaneous speed at split, and avg speed from 0 to that point</div>
-<div class="splits-cards">
-  <div class="split-card s5">
-    <div class="split-yard">5 yards</div>
-    <div class="split-time" id="st-5">--<span class="su">s</span></div>
-    <div class="split-stats">
-      <div class="split-stat-row"><span class="ssl">speed at split</span><span class="ssv pc" id="ss-5">--</span></div>
-      <div class="split-stat-row"><span class="ssl">avg 0&rarr;split</span><span class="ssv ac" id="sa-5">--</span></div>
-      <div class="pct-bar"><div class="pct-fill" id="sp-5" style="width:0%"></div></div>
-      <div class="pct-label" id="sl-pct-5">-- % of peak</div>
-    </div>
-  </div>
-  <div class="split-card s10">
-    <div class="split-yard">10 yards</div>
-    <div class="split-time" id="st-10">--<span class="su">s</span></div>
-    <div class="split-stats">
-      <div class="split-stat-row"><span class="ssl">speed at split</span><span class="ssv pc" id="ss-10">--</span></div>
-      <div class="split-stat-row"><span class="ssl">avg 0&rarr;split</span><span class="ssv ac" id="sa-10">--</span></div>
-      <div class="pct-bar"><div class="pct-fill" id="sp-10" style="width:0%"></div></div>
-      <div class="pct-label" id="sl-pct-10">-- % of peak</div>
-    </div>
-  </div>
-  <div class="split-card s20">
-    <div class="split-yard">20 yards</div>
-    <div class="split-time" id="st-20">--<span class="su">s</span></div>
-    <div class="split-stats">
-      <div class="split-stat-row"><span class="ssl">speed at split</span><span class="ssv pc" id="ss-20">--</span></div>
-      <div class="split-stat-row"><span class="ssl">avg 0&rarr;split</span><span class="ssv ac" id="sa-20">--</span></div>
-      <div class="pct-bar"><div class="pct-fill" id="sp-20" style="width:0%"></div></div>
-      <div class="pct-label" id="sl-pct-20">-- % of peak</div>
-    </div>
-  </div>
-  <div class="split-card s30">
-    <div class="split-yard">30 yards</div>
-    <div class="split-time" id="st-30">--<span class="su">s</span></div>
-    <div class="split-stats">
-      <div class="split-stat-row"><span class="ssl">speed at split</span><span class="ssv pc" id="ss-30">--</span></div>
-      <div class="split-stat-row"><span class="ssl">avg 0&rarr;split</span><span class="ssv ac" id="sa-30">--</span></div>
-      <div class="pct-bar"><div class="pct-fill" id="sp-30" style="width:0%"></div></div>
-      <div class="pct-label" id="sl-pct-30">-- % of peak</div>
-    </div>
-  </div>
-</div>
-
+<!-- VELOCITY CHART -->
 <div class="chart-section">
-  <div class="chart-wrap">
-    <canvas id="velChart"></canvas>
-  </div>
+  <div class="chart-wrap"><canvas id="velChart"></canvas></div>
   <div class="chart-legend">
     <div class="legend-item"><div class="legend-dot" style="background:#4da6ff"></div>velocity curve</div>
     <div class="legend-item"><div class="legend-dot" style="background:#4af0a0"></div>peak speed</div>
@@ -243,6 +279,7 @@ tbody tr:hover td { background: var(--surface2); }
   </div>
 </div>
 
+<!-- QUICK LOAD -->
 <div class="ref-section">
   <div class="ref-label">Quick load &mdash; 2026 combine notables</div>
   <div class="ref-chips" id="refChips"></div>
@@ -250,267 +287,215 @@ tbody tr:hover td { background: var(--surface2); }
 
 <div class="divider"></div>
 
-<div class="outlier-section">
-  <div class="section-title">2026 Combine &tau; Outliers</div>
-  <div class="section-sub">most explosive vs. most back-loaded athletes, estimated from split ratios</div>
-  <table>
-    <thead>
-      <tr>
-        <th>Player</th><th>Pos</th><th>40 time</th><th>10y split</th>
-        <th>Split %</th><th>Est. &tau;</th><th>Profile</th><th></th>
-      </tr>
-    </thead>
-    <tbody id="outlierTbody"></tbody>
-  </table>
-  <div class="tau-note">
-    <strong>&tau; (tau)</strong> is the time constant controlling how quickly an athlete reaches peak speed.
-    Lower &tau; = more explosive off the line. Higher &tau; = top-end speed carries the time.
-    NFL combine average: <strong>~0.77s</strong> (Clark et al., J Strength Cond Res 2019).
-    Worthy 4.21 &rarr; 24.41 mph confirmed by NFL Next Gen Stats.
-  </div>
+<!-- OUTLIER TABLE -->
+<div class="sec-title">2026 Combine &tau; Outliers</div>
+<div class="sec-sub">most explosive vs. most back-loaded athletes, estimated from split ratios</div>
+<table>
+  <thead>
+    <tr><th>Player</th><th>Pos</th><th>40 time</th><th>10y split</th><th>Split %</th><th>Est. &tau;</th><th>Profile</th><th></th></tr>
+  </thead>
+  <tbody id="outlierTbody"></tbody>
+</table>
+<div class="tau-note">
+  <strong>&tau; (tau)</strong> is the time constant controlling how quickly an athlete reaches peak speed.
+  Lower &tau; = more explosive off the line. Higher &tau; = top-end speed carries the time.
+  NFL combine average: <strong>~0.77s</strong> (Clark et al., J Strength Cond Res 2019).
+  Worthy 4.21 &rarr; 24.41 mph confirmed by NFL Next Gen Stats.
 </div>
 
-</div>
+</div><!-- /.app -->
+
 <script>
-var Y2M = 0.9144;
+var Y2M     = 0.9144;
 var MPS2MPH = 2.23694;
 var FORTY_M = 40 * Y2M;
-var DT = 0.001;
+var DT      = 0.001;
 
+/* ── physics ── */
 function computeVmax(t40, tau) {
   function dist(vm) {
-    var d = 0;
-    for (var t = 0; t < t40; t += DT) d += vm * (1 - Math.exp(-t / tau)) * DT;
+    var d = 0, t;
+    for (t = 0; t < t40; t += DT) d += vm * (1 - Math.exp(-t / tau)) * DT;
     return d;
   }
-  var lo = 3, hi = 18;
-  for (var i = 0; i < 80; i++) {
-    var m = (lo + hi) / 2;
-    if (dist(m) < FORTY_M) lo = m; else hi = m;
-  }
+  var lo = 3, hi = 18, i, m;
+  for (i = 0; i < 80; i++) { m = (lo + hi) / 2; if (dist(m) < FORTY_M) lo = m; else hi = m; }
   return (lo + hi) / 2;
 }
 
 function computeT40fromVmax(vmax, tau) {
   var d = 0, t = 0;
-  while (d < FORTY_M && t < 30) {
-    d += vmax * (1 - Math.exp(-t / tau)) * DT;
-    t += DT;
-  }
+  while (d < FORTY_M && t < 30) { d += vmax * (1 - Math.exp(-t / tau)) * DT; t += DT; }
   return t;
 }
 
-function flyingAvg(vmax, tau, t40) {
-  var d = 0, t20 = null;
-  for (var t = 0; t < 20; t += DT) {
+function timeAtYards(yards, vmax, tau) {
+  var tgt = yards * Y2M, d = 0, t;
+  for (t = DT; t < 30; t += DT) {
     d += vmax * (1 - Math.exp(-t / tau)) * DT;
-    if (d >= 20 * Y2M) { t20 = t; break; }
-  }
-  if (t20 === null) return 0;
-  return (20 * Y2M / (t40 - t20)) * MPS2MPH;
-}
-
-function split10(vmax, tau) {
-  var d = 0;
-  for (var t = 0; t < 20; t += DT) {
-    d += vmax * (1 - Math.exp(-t / tau)) * DT;
-    if (d >= 10 * Y2M) return t;
+    if (d >= tgt) return t;
   }
   return null;
 }
 
-function computeSplitAtYards(yards, vmax, tau) {
-  var targetM = yards * Y2M;
-  var d = 0;
-  for (var t = DT; t < 30; t += DT) {
-    d += vmax * (1 - Math.exp(-t / tau)) * DT;
-    if (d >= targetM) {
-      return {
-        time: t,
-        speedMph: vmax * (1 - Math.exp(-t / tau)) * MPS2MPH,
-        avgMph: (targetM / t) * MPS2MPH
-      };
-    }
-  }
-  return null;
+function spdAt(t, vmax, tau) { return vmax * (1 - Math.exp(-t / tau)) * MPS2MPH; }
+
+function segAvg(distYards, segTime) { return (distYards * Y2M / segTime) * MPS2MPH; }
+
+/* ── DOM helpers ── */
+function setText(id, v) { var el = document.getElementById(id); if (el) el.textContent = v; }
+function setHTML(id, v) { var el = document.getElementById(id); if (el) el.innerHTML  = v; }
+function setPct(id, p)  { var el = document.getElementById(id); if (el) el.style.width = p + '%'; }
+
+/* ── card updater ── */
+function fillCard(ids, segDist, segTime, endSpd, peakMph) {
+  var avg  = segAvg(segDist, segTime);
+  var pct  = Math.round((avg / peakMph) * 100);
+  setHTML(ids.t,   segTime.toFixed(2) + '<span class="u">s</span>');
+  setText(ids.avg, avg.toFixed(1) + ' mph');
+  setText(ids.spd, endSpd.toFixed(1) + ' mph');
+  setPct(ids.pb,   pct);
+  setText(ids.pl,  pct + '% of peak');
 }
 
-function updateSplitCards(vmax, tau, peakMph) {
-  var yards = [5, 10, 20, 30];
-  for (var i = 0; i < yards.length; i++) {
-    var y = yards[i];
-    var s = computeSplitAtYards(y, vmax, tau);
-    if (!s) continue;
-    var pct = Math.round((s.speedMph / peakMph) * 100);
-    document.getElementById('st-' + y).innerHTML = s.time.toFixed(2) + '<span class="su">s</span>';
-    document.getElementById('ss-' + y).textContent = s.speedMph.toFixed(1) + ' mph';
-    document.getElementById('sa-' + y).textContent = s.avgMph.toFixed(1) + ' mph';
-    document.getElementById('sp-' + y).style.width = pct + '%';
-    document.getElementById('sl-pct-' + y).textContent = pct + '% of peak';
-  }
-}
-
-var velChart = null;
-
-function buildChart(vmax, tau, t40) {
-  var step = 0.05;
-  var labels = [], velData = [], peakData = [], avgData = [];
+function updateCards(vmax, tau, t40) {
   var peakMph = vmax * MPS2MPH;
   var avgMph  = (FORTY_M / t40) * MPS2MPH;
-  for (var t = 0; t <= t40 + 0.01; t += step) {
+
+  var t10 = timeAtYards(10, vmax, tau);
+  var t20 = timeAtYards(20, vmax, tau);
+  var t30 = timeAtYards(30, vmax, tau);
+
+  var s10  = spdAt(t10,  vmax, tau);
+  var s20  = spdAt(t20,  vmax, tau);
+  var s30  = spdAt(t30,  vmax, tau);
+  var s40  = spdAt(t40,  vmax, tau);
+
+  /* 0-10 */
+  fillCard({ t:'v-s010-t', avg:'v-s010-avg', spd:'v-s010-spd', pb:'pb-s010', pl:'pl-s010' }, 10, t10, s10, peakMph);
+  /* 0-20 */
+  fillCard({ t:'v-s020-t', avg:'v-s020-avg', spd:'v-s020-spd', pb:'pb-s020', pl:'pl-s020' }, 20, t20, s20, peakMph);
+  /* 0-30 */
+  fillCard({ t:'v-s030-t', avg:'v-s030-avg', spd:'v-s030-spd', pb:'pb-s030', pl:'pl-s030' }, 30, t30, s30, peakMph);
+  /* 10-20 */
+  fillCard({ t:'v-f1020-t', avg:'v-f1020-avg', spd:'v-f1020-spd', pb:'pb-f1020', pl:'pl-f1020' }, 10, t20 - t10, s20, peakMph);
+  /* 20-30 */
+  fillCard({ t:'v-f2030-t', avg:'v-f2030-avg', spd:'v-f2030-spd', pb:'pb-f2030', pl:'pl-f2030' }, 10, t30 - t20, s30, peakMph);
+  /* 30-40 */
+  fillCard({ t:'v-f3040-t', avg:'v-f3040-avg', spd:'v-f3040-spd', pb:'pb-f3040', pl:'pl-f3040' }, 10, t40 - t30, s40, peakMph);
+
+  /* accel profile */
+  var profEl = document.getElementById('v-profile');
+  var descEl = document.getElementById('v-tau-desc');
+  if (tau < 0.70)      { profEl.textContent = 'explosive';    profEl.className = 'pill pill-e';   descEl.textContent = 'elite burst off the line'; }
+  else if (tau < 0.80) { profEl.textContent = 'explosive';    profEl.className = 'pill pill-e';   descEl.textContent = 'above avg acceleration'; }
+  else if (tau < 0.90) { profEl.textContent = 'balanced';     profEl.className = 'pill pill-bal'; descEl.textContent = 'typical combine range'; }
+  else if (tau < 1.00) { profEl.textContent = 'back-loaded';  profEl.className = 'pill pill-b';   descEl.textContent = 'top-end speed driven'; }
+  else                 { profEl.textContent = 'back-loaded';  profEl.className = 'pill pill-b';   descEl.textContent = 'slow starter, strong finish'; }
+  setText('v-tau-val', 'tau = ' + tau.toFixed(2) + 's');
+
+  /* ratio */
+  var ratio = peakMph / avgMph;
+  setHTML('v-ratio', ratio.toFixed(2) + '<span class="u">x</span>');
+  setText('v-ratio-peak', peakMph.toFixed(1) + ' mph');
+  setText('v-ratio-avg',  avgMph.toFixed(1)  + ' mph');
+}
+
+/* ── chart ── */
+var velChart = null;
+function buildChart(vmax, tau, t40) {
+  var step = 0.05, t, labels = [], vel = [], pk = [], av = [];
+  var peakMph = vmax * MPS2MPH;
+  var avgMph  = (FORTY_M / t40) * MPS2MPH;
+  for (t = 0; t <= t40 + 0.01; t += step) {
     labels.push(t.toFixed(2));
-    velData.push(parseFloat((vmax * (1 - Math.exp(-t / tau)) * MPS2MPH).toFixed(3)));
-    peakData.push(parseFloat(peakMph.toFixed(2)));
-    avgData.push(parseFloat(avgMph.toFixed(2)));
+    vel.push(parseFloat((vmax * (1 - Math.exp(-t / tau)) * MPS2MPH).toFixed(3)));
+    pk.push(parseFloat(peakMph.toFixed(2)));
+    av.push(parseFloat(avgMph.toFixed(2)));
   }
   if (!velChart) {
     velChart = new Chart(document.getElementById('velChart'), {
       type: 'line',
-      data: {
-        labels: labels,
-        datasets: [
-          { label: 'Speed', data: velData, borderColor: '#4da6ff', backgroundColor: 'rgba(77,166,255,0.08)', fill: true, tension: 0.4, pointRadius: 0, borderWidth: 2 },
-          { label: 'Peak',  data: peakData, borderColor: 'rgba(74,240,160,0.55)', borderWidth: 1.5, borderDash: [5,4], pointRadius: 0, fill: false },
-          { label: 'Avg',   data: avgData,  borderColor: 'rgba(255,107,53,0.55)', borderWidth: 1.5, borderDash: [3,3], pointRadius: 0, fill: false }
-        ]
-      },
+      data: { labels: labels, datasets: [
+        { data: vel, borderColor: '#4da6ff', backgroundColor: 'rgba(77,166,255,0.08)', fill: true, tension: 0.4, pointRadius: 0, borderWidth: 2 },
+        { data: pk,  borderColor: 'rgba(74,240,160,0.55)',  borderWidth: 1.5, borderDash: [5,4], pointRadius: 0, fill: false },
+        { data: av,  borderColor: 'rgba(255,107,53,0.55)',  borderWidth: 1.5, borderDash: [3,3], pointRadius: 0, fill: false }
+      ]},
       options: {
-        responsive: true,
-        maintainAspectRatio: false,
+        responsive: true, maintainAspectRatio: false,
         plugins: {
           legend: { display: false },
           tooltip: {
-            backgroundColor: '#1e2126',
-            borderColor: 'rgba(255,255,255,0.1)',
-            borderWidth: 1,
-            titleColor: '#7a7d85',
-            bodyColor: '#f0f0ee',
+            backgroundColor: '#1e2126', borderColor: 'rgba(255,255,255,0.1)', borderWidth: 1,
+            titleColor: '#7a7d85', bodyColor: '#f0f0ee',
             callbacks: {
-              title: function(ctx) { return 't = ' + ctx[0].label + 's'; },
-              label: function(ctx) { return ctx.datasetIndex === 0 ? '  speed: ' + ctx.parsed.y.toFixed(1) + ' mph' : ''; },
-              filter: function(ctx) { return ctx.datasetIndex === 0; }
+              title:  function(c) { return 't = ' + c[0].label + 's'; },
+              label:  function(c) { return c.datasetIndex === 0 ? '  ' + c.parsed.y.toFixed(1) + ' mph' : ''; },
+              filter: function(c) { return c.datasetIndex === 0; }
             }
           }
         },
         scales: {
-          x: {
-            title: { display: true, text: 'time (s)', color: '#7a7d85', font: { size: 10, family: 'DM Mono' } },
-            ticks: { maxTicksLimit: 10, color: '#7a7d85', font: { size: 10, family: 'DM Mono' } },
-            grid: { color: 'rgba(255,255,255,0.04)' }
-          },
-          y: {
-            title: { display: true, text: 'speed (mph)', color: '#7a7d85', font: { size: 10, family: 'DM Mono' } },
-            ticks: { color: '#7a7d85', font: { size: 10, family: 'DM Mono' } },
-            grid: { color: 'rgba(255,255,255,0.04)' },
-            min: 0, max: 28
-          }
+          x: { ticks: { maxTicksLimit: 10, color: '#7a7d85', font: { size: 10, family: 'DM Mono' } }, grid: { color: 'rgba(255,255,255,0.04)' }, title: { display: true, text: 'time (s)', color: '#7a7d85', font: { size: 10, family: 'DM Mono' } } },
+          y: { ticks: { color: '#7a7d85', font: { size: 10, family: 'DM Mono' } }, grid: { color: 'rgba(255,255,255,0.04)' }, title: { display: true, text: 'speed (mph)', color: '#7a7d85', font: { size: 10, family: 'DM Mono' } }, min: 0, max: 28 }
         }
       }
     });
   } else {
     velChart.data.labels = labels;
-    velChart.data.datasets[0].data = velData;
-    velChart.data.datasets[1].data = peakData;
-    velChart.data.datasets[2].data = avgData;
+    velChart.data.datasets[0].data = vel;
+    velChart.data.datasets[1].data = pk;
+    velChart.data.datasets[2].data = av;
     velChart.update('none');
   }
 }
 
+/* ── driver badges ── */
 var CARDS = ['40','tau','peak','avg'];
-
 function setDriverStyles(source) {
-  for (var i = 0; i < CARDS.length; i++) {
-    var c = CARDS[i];
-    var isDriving = (source === '40' || source === 'tau') ? (c === '40' || c === 'tau') : (c === source);
+  var i, c, isDriving;
+  for (i = 0; i < CARDS.length; i++) {
+    c = CARDS[i];
+    isDriving = (source === '40' || source === 'tau') ? (c === '40' || c === 'tau') : (c === source);
     var card  = document.getElementById('card-' + c);
     var badge = document.getElementById('badge-' + c);
-    if (isDriving) {
-      card.classList.add('active-driver');
-      badge.textContent = 'driving';
-      badge.className = 'dbadge driving';
-    } else {
-      card.classList.remove('active-driver');
-      badge.textContent = 'derived';
-      badge.className = 'dbadge derived';
-    }
+    if (isDriving) { card.classList.add('active-driver');    badge.textContent = 'driving'; badge.className = 'dbadge driving'; }
+    else           { card.classList.remove('active-driver'); badge.textContent = 'derived'; badge.className = 'dbadge derived'; }
   }
 }
 
+/* ── main update ── */
 var updating = false;
-
 function updateAll(source) {
   if (updating) return;
   updating = true;
-
   var t40     = parseFloat(document.getElementById('sl-40').value)   / 100;
   var tau     = parseFloat(document.getElementById('sl-tau').value)   / 100;
   var peakMph = parseFloat(document.getElementById('sl-peak').value)  / 10;
   var avgMph  = parseFloat(document.getElementById('sl-avg').value)   / 10;
-
-  var vmax_mps, t40_actual;
-
+  var vmax, t40a;
   if (source === '40' || source === 'tau') {
-    vmax_mps   = computeVmax(t40, tau);
-    t40_actual = t40;
+    vmax = computeVmax(t40, tau); t40a = t40;
   } else if (source === 'peak') {
-    vmax_mps   = peakMph / MPS2MPH;
-    t40_actual = computeT40fromVmax(vmax_mps, tau);
-    t40_actual = Math.min(Math.max(t40_actual, 4.20), 5.50);
-    document.getElementById('sl-40').value = Math.round(t40_actual * 100);
-  } else if (source === 'avg') {
-    t40_actual = FORTY_M / (avgMph / MPS2MPH);
-    t40_actual = Math.min(Math.max(t40_actual, 4.20), 5.50);
-    vmax_mps   = computeVmax(t40_actual, tau);
-    document.getElementById('sl-40').value = Math.round(t40_actual * 100);
-  }
-
-  var displayPeak = vmax_mps * MPS2MPH;
-  var displayAvg  = (FORTY_M / t40_actual) * MPS2MPH;
-
-  document.getElementById('sl-peak').value = Math.round(displayPeak * 10);
-  document.getElementById('sl-avg').value  = Math.round(displayAvg  * 10);
-
-  document.getElementById('val-40').innerHTML   = t40_actual.toFixed(2) + '<span class="unit">s</span>';
-  document.getElementById('val-tau').innerHTML  = tau.toFixed(2)        + '<span class="unit">s</span>';
-  document.getElementById('val-peak').innerHTML = displayPeak.toFixed(1) + '<span class="unit">mph</span>';
-  document.getElementById('val-avg').innerHTML  = displayAvg.toFixed(1)  + '<span class="unit">mph</span>';
-
-  var fly   = flyingAvg(vmax_mps, tau, t40_actual);
-  var sp    = split10(vmax_mps, tau);
-  var ratio = displayPeak / displayAvg;
-
-  document.getElementById('met-fly').textContent   = fly.toFixed(1);
-  document.getElementById('met-split').textContent = sp ? sp.toFixed(2) : '--';
-  document.getElementById('met-ratio').textContent = ratio.toFixed(2);
-
-  // Profile card
-  var profileEl  = document.getElementById('met-profile');
-  var tauDescEl  = document.getElementById('met-tau-desc');
-  if (tau < 0.70) {
-    profileEl.textContent = 'explosive';
-    profileEl.className = 'pill pill-e';
-    tauDescEl.textContent = 'elite burst off line';
-  } else if (tau < 0.80) {
-    profileEl.textContent = 'explosive';
-    profileEl.className = 'pill pill-e';
-    tauDescEl.textContent = 'above avg acceleration';
-  } else if (tau < 0.90) {
-    profileEl.textContent = 'balanced';
-    profileEl.className = 'pill pill-bal';
-    tauDescEl.textContent = 'typical combine range';
-  } else if (tau < 1.00) {
-    profileEl.textContent = 'back-loaded';
-    profileEl.className = 'pill pill-b';
-    tauDescEl.textContent = 'top-end speed driven';
+    vmax = peakMph / MPS2MPH;
+    t40a = Math.min(Math.max(computeT40fromVmax(vmax, tau), 4.20), 5.50);
+    document.getElementById('sl-40').value = Math.round(t40a * 100);
   } else {
-    profileEl.textContent = 'back-loaded';
-    profileEl.className = 'pill pill-b';
-    tauDescEl.textContent = 'slow starter, strong finish';
+    t40a = Math.min(Math.max(FORTY_M / (avgMph / MPS2MPH), 4.20), 5.50);
+    vmax = computeVmax(t40a, tau);
+    document.getElementById('sl-40').value = Math.round(t40a * 100);
   }
-
+  var dPeak = vmax * MPS2MPH;
+  var dAvg  = (FORTY_M / t40a) * MPS2MPH;
+  document.getElementById('sl-peak').value = Math.round(dPeak * 10);
+  document.getElementById('sl-avg').value  = Math.round(dAvg  * 10);
+  setHTML('val-40',   t40a.toFixed(2)  + '<span class="unit">s</span>');
+  setHTML('val-tau',  tau.toFixed(2)   + '<span class="unit">s</span>');
+  setHTML('val-peak', dPeak.toFixed(1) + '<span class="unit">mph</span>');
+  setHTML('val-avg',  dAvg.toFixed(1)  + '<span class="unit">mph</span>');
   setDriverStyles(source);
-  buildChart(vmax_mps, tau, t40_actual);
-  updateSplitCards(vmax_mps, tau, displayPeak);
+  updateCards(vmax, tau, t40a);
+  buildChart(vmax, tau, t40a);
   updating = false;
 }
 
@@ -519,72 +504,63 @@ document.getElementById('sl-tau').addEventListener('input',  function() { update
 document.getElementById('sl-peak').addEventListener('input', function() { updateAll('peak'); });
 document.getElementById('sl-avg').addEventListener('input',  function() { updateAll('avg');  });
 
+/* ── ref chips ── */
 var REFS = [
-  {label:'Worthy 4.21 (NGS: 24.4mph)', t40:4.21, starred:true},
-  {label:'Thompson 4.26', t40:4.26},
-  {label:'Styles DB 4.27', t40:4.27},
-  {label:'Burks 4.30', t40:4.30},
-  {label:'Caldwell 4.31', t40:4.31},
-  {label:'4.40 benchmark', t40:4.40},
-  {label:'4.50', t40:4.50},
-  {label:'4.60', t40:4.60}
+  { label: 'Worthy 4.21 (NGS: 24.4mph)', t40: 4.21, starred: true },
+  { label: 'Thompson 4.26', t40: 4.26 }, { label: 'Styles DB 4.27', t40: 4.27 },
+  { label: 'Burks 4.30', t40: 4.30 },   { label: 'Caldwell 4.31', t40: 4.31 },
+  { label: '4.40 benchmark', t40: 4.40 }, { label: '4.50', t40: 4.50 }, { label: '4.60', t40: 4.60 }
 ];
-
 var chipsEl = document.getElementById('refChips');
-for (var ri = 0; ri < REFS.length; ri++) {
+var ri;
+for (ri = 0; ri < REFS.length; ri++) {
   (function(r) {
     var btn = document.createElement('button');
     btn.className = 'chip' + (r.starred ? ' starred' : '');
     btn.textContent = r.label;
-    btn.addEventListener('click', function() {
-      document.getElementById('sl-40').value = Math.round(r.t40 * 100);
-      updateAll('40');
-    });
+    btn.addEventListener('click', function() { document.getElementById('sl-40').value = Math.round(r.t40 * 100); updateAll('40'); });
     chipsEl.appendChild(btn);
   })(REFS[ri]);
 }
 
+/* ── outlier table ── */
 var OUTLIERS = [
-  {name:'Sonny Styles',       pos:'LB', f:4.46, s:1.52, pct:'34.1%', tauStr:'~0.65s', type:'e'},
-  {name:'Jeff Caldwell',      pos:'WR', f:4.31, s:1.48, pct:'34.3%', tauStr:'~0.66s', type:'e'},
-  {name:'Zachariah Branch',   pos:'WR', f:4.35, s:1.50, pct:'34.5%', tauStr:'~0.67s', type:'e'},
-  {name:'Deion Burks',        pos:'WR', f:4.30, s:1.49, pct:'34.7%', tauStr:'~0.67s', type:'e'},
-  {name:'Mike Washington Jr.',pos:'RB', f:4.33, s:1.51, pct:'34.9%', tauStr:'~0.68s', type:'e'},
-  {name:'Lorenzo Styles Jr.', pos:'DB', f:4.27, s:1.50, pct:'35.1%', tauStr:'~0.68s', type:'e'},
-  {name:'Barion Brown',       pos:'WR', f:4.40, s:1.62, pct:'36.8%', tauStr:'~1.02s', type:'b', sep:true},
-  {name:'Kevin Coleman Jr.',  pos:'WR', f:4.49, s:1.62, pct:'36.1%', tauStr:'~0.99s', type:'b'},
-  {name:'Khalil Dinkins',     pos:'TE', f:4.72, s:1.70, pct:'36.0%', tauStr:'~1.05s', type:'b'},
-  {name:'Jalon Daniels',      pos:'QB', f:4.65, s:1.63, pct:'35.1%', tauStr:'~0.97s', type:'b'},
-  {name:'Alan Herron',        pos:'OL', f:5.09, s:1.84, pct:'36.1%', tauStr:'~1.08s', type:'b'}
+  { name: 'Sonny Styles',        pos: 'LB', f: 4.46, s: 1.52, pct: '34.1%', tauStr: '~0.65s', type: 'e' },
+  { name: 'Jeff Caldwell',       pos: 'WR', f: 4.31, s: 1.48, pct: '34.3%', tauStr: '~0.66s', type: 'e' },
+  { name: 'Zachariah Branch',    pos: 'WR', f: 4.35, s: 1.50, pct: '34.5%', tauStr: '~0.67s', type: 'e' },
+  { name: 'Deion Burks',         pos: 'WR', f: 4.30, s: 1.49, pct: '34.7%', tauStr: '~0.67s', type: 'e' },
+  { name: 'Mike Washington Jr.', pos: 'RB', f: 4.33, s: 1.51, pct: '34.9%', tauStr: '~0.68s', type: 'e' },
+  { name: 'Lorenzo Styles Jr.',  pos: 'DB', f: 4.27, s: 1.50, pct: '35.1%', tauStr: '~0.68s', type: 'e' },
+  { name: 'Barion Brown',        pos: 'WR', f: 4.40, s: 1.62, pct: '36.8%', tauStr: '~1.02s', type: 'b', sep: true },
+  { name: 'Kevin Coleman Jr.',   pos: 'WR', f: 4.49, s: 1.62, pct: '36.1%', tauStr: '~0.99s', type: 'b' },
+  { name: 'Khalil Dinkins',      pos: 'TE', f: 4.72, s: 1.70, pct: '36.0%', tauStr: '~1.05s', type: 'b' },
+  { name: 'Jalon Daniels',       pos: 'QB', f: 4.65, s: 1.63, pct: '35.1%', tauStr: '~0.97s', type: 'b' },
+  { name: 'Alan Herron',         pos: 'OL', f: 5.09, s: 1.84, pct: '36.1%', tauStr: '~1.08s', type: 'b' }
 ];
-
 var tbody = document.getElementById('outlierTbody');
-for (var oi = 0; oi < OUTLIERS.length; oi++) {
+var oi;
+for (oi = 0; oi < OUTLIERS.length; oi++) {
   (function(o) {
     var tr = document.createElement('tr');
     if (o.sep) tr.className = 'row-sep';
-    var tauVal  = o.type === 'e' ? 67 : 97;
-    var pillCls = o.type === 'e' ? 'pill-e' : 'pill-b';
-    var pillTxt = o.type === 'e' ? 'explosive' : 'back-loaded';
-    var td0 = document.createElement('td'); td0.textContent = o.name; tr.appendChild(td0);
-    var td1 = document.createElement('td'); td1.textContent = o.pos; td1.style.color = 'var(--muted)'; tr.appendChild(td1);
-    var td2 = document.createElement('td'); td2.textContent = o.f.toFixed(2) + 's'; td2.className = 'mono'; tr.appendChild(td2);
-    var td3 = document.createElement('td'); td3.textContent = o.s.toFixed(2) + 's'; td3.className = 'mono'; tr.appendChild(td3);
-    var td4 = document.createElement('td'); td4.textContent = o.pct; td4.className = 'mono'; td4.style.color = 'var(--muted)'; tr.appendChild(td4);
-    var td5 = document.createElement('td'); td5.textContent = o.tauStr; td5.className = 'mono'; td5.style.color = o.type === 'e' ? 'var(--accent)' : 'var(--accent2)'; tr.appendChild(td5);
-    var td6 = document.createElement('td'); var span = document.createElement('span'); span.className = 'pill ' + pillCls; span.textContent = pillTxt; td6.appendChild(span); tr.appendChild(td6);
+    var tauVal = o.type === 'e' ? 67 : 97;
+    function mktd(txt, cls, col) { var el = document.createElement('td'); el.textContent = txt; if (cls) el.className = cls; if (col) el.style.color = col; return el; }
+    tr.appendChild(mktd(o.name));
+    tr.appendChild(mktd(o.pos, '', 'var(--muted)'));
+    tr.appendChild(mktd(o.f.toFixed(2) + 's', 'mono'));
+    tr.appendChild(mktd(o.s.toFixed(2) + 's', 'mono'));
+    tr.appendChild(mktd(o.pct, 'mono', 'var(--muted)'));
+    tr.appendChild(mktd(o.tauStr, 'mono', o.type === 'e' ? 'var(--accent)' : 'var(--orange)'));
+    var td6 = document.createElement('td');
+    var sp = document.createElement('span');
+    sp.className = o.type === 'e' ? 'pill pill-e' : 'pill pill-b';
+    sp.textContent = o.type === 'e' ? 'explosive' : 'back-loaded';
+    td6.appendChild(sp); tr.appendChild(td6);
     var td7 = document.createElement('td');
     var btn = document.createElement('button');
-    btn.className = 'chip';
-    btn.style.cssText = 'padding:3px 9px;font-size:9px;';
-    btn.textContent = 'load';
-    btn.addEventListener('click', function() {
-      document.getElementById('sl-40').value  = Math.round(o.f * 100);
-      document.getElementById('sl-tau').value = tauVal;
-      updateAll('40');
-    });
-    td7.appendChild(btn);
-    tr.appendChild(td7);
+    btn.className = 'chip'; btn.style.cssText = 'padding:3px 9px;font-size:9px;'; btn.textContent = 'load';
+    btn.addEventListener('click', function() { document.getElementById('sl-40').value = Math.round(o.f * 100); document.getElementById('sl-tau').value = tauVal; updateAll('40'); });
+    td7.appendChild(btn); tr.appendChild(td7);
     tbody.appendChild(tr);
   })(OUTLIERS[oi]);
 }
