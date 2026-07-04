@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>40-Yard Dash Speed Model</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+:root {
+  --bg:      #0e0f11;
+  --surface: #16181c;
+  --surf2:   #1e2126;
+  --border:  rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.13);
+  --text:    #f0f0ee;
+  --muted:   #7a7d85;
+  --accent:  #4af0a0;
+  --orange:  #ff6b35;
+  --blue:    #4da6ff;
+  --red:     #ff4d6b;
+  --yellow:  #ffd166;
+  --track:   rgba(255,255,255,0.08);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--text); font-family: 'Barlow', sans-serif; font-size: 14px; line-height: 1.5; min-height: 100vh; }
+.app { max-width: 880px; margin: 0 auto; padding: 32px 24px 64px; }
+
+header { display: flex; align-items: baseline; gap: 16px; margin-bottom: 32px; border-bottom: 1px solid var(--border); padding-bottom: 20px; flex-wrap: wrap; }
+h1 { font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; }
+.header-sub { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: 0.04em; }
+
+.main-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+.slider-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; position: relative; transition: border-color 0.15s; }
+.slider-card.active-driver { border-color: var(--accent); background: #16201b; }
+.slider-card.active-driver .card-top-line { background: var(--accent); }
+.card-top-line { position: absolute; top: 0; left: 0; right: 0; height: 2px; background: transparent; border-radius: 10px 10px 0 0; }
+.card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.card-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.08em; color: var(--muted); text-transform: uppercase; }
+.dbadge { font-family: 'DM Mono', monospace; font-size: 9px; padding: 2px 8px; border-radius: 3px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 500; }
+.dbadge.driving { background: rgba(74,240,160,0.15); color: var(--accent); border: 1px solid rgba(74,240,160,0.3); }
+.dbadge.derived  { background: rgba(255,255,255,0.04); color: var(--muted); border: 1px solid var(--border); }
+.card-value { font-family: 'Barlow Condensed', sans-serif; font-size: 44px; font-weight: 700; line-height: 1; margin-bottom: 14px; letter-spacing: -0.01em; }
+.card-value .unit { font-size: 16px; font-weight: 400; color: var(--muted); margin-left: 4px; }
+input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 4px; background: var(--track); border-radius: 2px; outline: none; cursor: pointer; }
+input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 16px; height: 16px; border-radius: 50%; background: var(--accent); cursor: pointer; transition: transform 0.1s; box-shadow: 0 0 0 3px rgba(74,240,160,0.15); }
+input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.15); }
+.slider-card.active-driver input[type=range]::-webkit-slider-thumb { box-shadow: 0 0 0 4px rgba(74,240,160,0.25); }
+
+.sec-title { font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 4px; }
+.sec-sub { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); margin-bottom: 14px; letter-spacing: 0.03em; }
+
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+.ic { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; position: relative; overflow: hidden; }
+.ic::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
+.ic-s010::before  { background: linear-gradient(90deg, var(--red),    var(--orange)); }
+.ic-s020::before  { background: linear-gradient(90deg, var(--orange),  var(--yellow)); }
+.ic-s030::before  { background: linear-gradient(90deg, var(--yellow),  var(--accent)); }
+.ic-f1020::before { background: linear-gradient(90deg, var(--orange),  var(--yellow)); }
+.ic-f2030::before { background: linear-gradient(90deg, var(--yellow),  var(--accent)); }
+.ic-f3040::before { background: linear-gradient(90deg, var(--accent),  var(--blue));  }
+.ic-prof::before  { background: linear-gradient(90deg, var(--accent),  var(--blue));  }
+.ic-ratio::before { background: linear-gradient(90deg, var(--blue),    var(--orange));}
+.ic-lbl { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+.ic-val { font-family: 'Barlow Condensed', sans-serif; font-size: 40px; font-weight: 700; line-height: 1; letter-spacing: -0.01em; margin-bottom: 2px; }
+.ic-val .u { font-size: 14px; font-weight: 400; color: var(--muted); margin-left: 3px; }
+.ic-body { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 5px; }
+.ic-row { display: flex; justify-content: space-between; align-items: baseline; }
+.ic-sl { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.ic-sv { font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 500; color: var(--text); }
+.ic-sv.g { color: var(--accent); }
+.ic-sv.o { color: var(--orange); }
+.pbar { margin-top: 6px; height: 3px; background: var(--track); border-radius: 2px; overflow: hidden; }
+.pfill { height: 100%; border-radius: 2px; background: var(--accent); transition: width 0.2s ease; }
+.pfill.orange { background: var(--orange); }
+.plbl { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--muted); margin-top: 3px; }
+.pill { display: inline-block; font-family: 'DM Mono', monospace; font-size: 10px; padding: 3px 10px; border-radius: 4px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; margin-top: 8px; }
+.pill-e   { background: rgba(74,240,160,0.12);  color: var(--accent);  border: 1px solid rgba(74,240,160,0.25); }
+.pill-b   { background: rgba(255,107,53,0.12);  color: var(--orange);  border: 1px solid rgba(255,107,53,0.25); }
+.pill-bal { background: rgba(77,166,255,0.12);  color: var(--blue);    border: 1px solid rgba(77,166,255,0.25); }
+.ic-tau-desc { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); margin-top: 8px; }
+.ic-tau-val  { font-family: 'DM Mono', monospace; font-size: 9px;  color: var(--border2); margin-top: 4px; }
+
+.chart-section { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px; margin-bottom: 16px; }
+.chart-wrap { position: relative; width: 100%; height: 220px; }
+.chart-legend { display: flex; gap: 20px; margin-top: 12px; flex-wrap: wrap; }
+.legend-item { display: flex; align-items: center; gap: 7px; font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); }
+.legend-dot { width: 12px; height: 3px; border-radius: 2px; }
+
+.ref-section { margin-bottom: 24px; }
+.ref-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+.ref-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+.chip { font-family: 'DM Mono', monospace; font-size: 10px; padding: 5px 12px; border-radius: 20px; border: 1px solid var(--border2); color: var(--muted); background: var(--surface); cursor: pointer; letter-spacing: 0.04em; transition: all 0.12s; }
+.chip:hover { border-color: var(--accent); color: var(--accent); background: rgba(74,240,160,0.06); }
+.chip.starred { border-color: rgba(255,107,53,0.5); color: var(--orange); }
+.chip.starred:hover { background: rgba(255,107,53,0.08); }
+
+.divider { height: 1px; background: var(--border); margin: 24px 0; }
+
+/* ── fly calculator ── */
+.calc-section { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px 22px; }
+.calc-section::before { content: ''; display: block; height: 2px; background: linear-gradient(90deg, var(--blue), var(--accent)); border-radius: 10px 10px 0 0; margin: -20px -22px 16px; }
+.calc-input-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+.calc-input-wrap { position: relative; display: flex; align-items: center; }
+.calc-input { font-family: 'Barlow Condensed', sans-serif; font-size: 32px; font-weight: 700; background: var(--surf2); border: 1px solid var(--border2); border-radius: 8px; color: var(--text); width: 130px; padding: 10px 44px 10px 14px; outline: none; letter-spacing: -0.01em; transition: border-color 0.15s; -moz-appearance: textfield; }
+.calc-input::-webkit-outer-spin-button,
+.calc-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.calc-input:focus { border-color: var(--accent); }
+.calc-input-unit { position: absolute; right: 12px; font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); pointer-events: none; }
+.calc-label-txt { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: 0.04em; line-height: 1.5; }
+.calc-results { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.calc-result-card { background: var(--surf2); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; }
+.calc-result-label { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+.calc-result-val { font-family: 'Barlow Condensed', sans-serif; font-size: 38px; font-weight: 700; line-height: 1; letter-spacing: -0.01em; }
+.calc-result-val .u { font-size: 14px; font-weight: 400; color: var(--muted); margin-left: 3px; }
+.calc-result-val.green { color: var(--accent); }
+.calc-result-val.blue  { color: var(--blue); }
+.calc-sub-row { display: flex; justify-content: space-between; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border); }
+.calc-sub-lbl { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.calc-sub-val { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text); font-weight: 500; }
+.calc-note { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--muted); margin-top: 12px; line-height: 1.6; letter-spacing: 0.03em; }
+.calc-empty { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); padding: 20px 0; text-align: center; letter-spacing: 0.04em; }
+
+@media (max-width: 600px) {
+  .main-grid  { grid-template-columns: 1fr; }
+  .info-grid  { grid-template-columns: 1fr 1fr; }
+  .card-value { font-size: 36px; }
+  .ic-val     { font-size: 30px; }
+  .calc-results { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+<header>
+  <h1>40-Yard Dash Model</h1>
+  <span class="header-sub">v(t) = v_peak &times; (1 &minus; e<sup>&minus;t/&tau;</sup>) &nbsp;&middot;&nbsp; &tau; = 0.77s default (Clark et al. 2019)</span>
+</header>
+
+<div class="main-grid">
+  <div class="slider-card active-driver" id="card-40">
+    <div class="card-top-line"></div>
+    <div class="card-header"><span class="card-label">40-yard dash time</span><span class="dbadge driving" id="badge-40">driving</span></div>
+    <div class="card-value" id="val-40">4.40<span class="unit">s</span></div>
+    <input type="range" id="sl-40" min="300" max="800" step="1" value="440">
+  </div>
+  <div class="slider-card active-driver" id="card-tau">
+    <div class="card-top-line"></div>
+    <div class="card-header"><span class="card-label">Accel. profile (&tau;)</span><span class="dbadge driving" id="badge-tau">driving</span></div>
+    <div class="card-value" id="val-tau">0.77<span class="unit">s</span></div>
+    <input type="range" id="sl-tau" min="55" max="115" step="1" value="77">
+  </div>
+  <div class="slider-card" id="card-peak">
+    <div class="card-top-line"></div>
+    <div class="card-header"><span class="card-label">Peak speed</span><span class="dbadge derived" id="badge-peak">derived</span></div>
+    <div class="card-value" id="val-peak">--<span class="unit">mph</span></div>
+    <input type="range" id="sl-peak" min="140" max="300" step="1" value="220">
+  </div>
+  <div class="slider-card" id="card-avg">
+    <div class="card-top-line"></div>
+    <div class="card-header"><span class="card-label">Average speed</span><span class="dbadge derived" id="badge-avg">derived</span></div>
+    <div class="card-value" id="val-avg">--<span class="unit">mph</span></div>
+    <input type="range" id="sl-avg" min="100" max="250" step="1" value="186">
+  </div>
+</div>
+
+<div class="sec-title">Sprint Breakdown</div>
+<div class="sec-sub">splits and flying segments &mdash; seg avg speed (green) &middot; speed at endpoint &middot; % of peak</div>
+
+<div class="info-grid">
+  <div class="ic ic-s010">
+    <div class="ic-lbl">0 &rarr; 10 yd split</div>
+    <div class="ic-val" id="v-s010-t">--<span class="u">s</span></div>
+    <div class="ic-body">
+      <div class="ic-row"><span class="ic-sl">seg avg speed</span><span class="ic-sv g" id="v-s010-avg">--</span></div>
+      <div class="ic-row"><span class="ic-sl">speed at 10 yd</span><span class="ic-sv" id="v-s010-spd">--</span></div>
+      <div class="pbar"><div class="pfill" id="pb-s010" style="width:0%"></div></div>
+      <div class="plbl" id="pl-s010">-- % of peak</div>
+    </div>
+  </div>
+  <div class="ic ic-f1020">
+    <div class="ic-lbl">10 &rarr; 20 yd fly</div>
+    <div class="ic-val" id="v-f1020-t">--<span class="u">s</span></div>
+    <div class="ic-body">
+      <div class="ic-row"><span class="ic-sl">fly avg speed</span><span class="ic-sv g" id="v-f1020-avg">--</span></div>
+      <div class="ic-row"><span class="ic-sl">speed at 20 yd</span><span class="ic-sv" id="v-f1020-spd">--</span></div>
+      <div class="pbar"><div class="pfill" id="pb-f1020" style="width:0%"></div></div>
+      <div class="plbl" id="pl-f1020">-- % of peak</div>
+    </div>
+  </div>
+  <div class="ic ic-s020">
+    <div class="ic-lbl">0 &rarr; 20 yd split</div>
+    <div class="ic-val" id="v-s020-t">--<span class="u">s</span></div>
+    <div class="ic-body">
+      <div class="ic-row"><span class="ic-sl">seg avg speed</span><span class="ic-sv g" id="v-s020-avg">--</span></div>
+      <div class="ic-row"><span class="ic-sl">speed at 20 yd</span><span class="ic-sv" id="v-s020-spd">--</span></div>
+      <div class="pbar"><div class="pfill" id="pb-s020" style="width:0%"></div></div>
+      <div class="plbl" id="pl-s020">-- % of peak</div>
+    </div>
+  </div>
+  <div class="ic ic-f2030">
+    <div class="ic-lbl">20 &rarr; 30 yd fly</div>
+    <div class="ic-val" id="v-f2030-t">--<span class="u">s</span></div>
+    <div class="ic-body">
+      <div class="ic-row"><span class="ic-sl">fly avg speed</span><span class="ic-sv g" id="v-f2030-avg">--</span></div>
+      <div class="ic-row"><span class="ic-sl">speed at 30 yd</span><span class="ic-sv" id="v-f2030-spd">--</span></div>
+      <div class="pbar"><div class="pfill" id="pb-f2030" style="width:0%"></div></div>
+      <div class="plbl" id="pl-f2030">-- % of peak</div>
+    </div>
+  </div>
+  <div class="ic ic-s030">
+    <div class="ic-lbl">0 &rarr; 30 yd split</div>
+    <div class="ic-val" id="v-s030-t">--<span class="u">s</span></div>
+    <div class="ic-body">
+      <div class="ic-row"><span class="ic-sl">seg avg speed</span><span class="ic-sv g" id="v-s030-avg">--</span></div>
+      <div class="ic-row"><span class="ic-sl">speed at 30 yd</span><span class="ic-sv" id="v-s030-spd">--</span></div>
+      <div class="pbar"><div class="pfill" id="pb-s030" style="width:0%"></div></div>
+      <div class="plbl" id="pl-s030">-- % of peak</div>
+    </div>
+  </div>
+  <div class="ic ic-f3040">
+    <div class="ic-lbl">30 &rarr; 40 yd fly</div>
+    <div class="ic-val" id="v-f3040-t">--<span class="u">s</span></div>
+    <div class="ic-body">
+      <div class="ic-row"><span class="ic-sl">fly avg speed</span><span class="ic-sv g" id="v-f3040-avg">--</span></div>
+      <div class="ic-row"><span class="ic-sl">speed at 40 yd</span><span class="ic-sv" id="v-f3040-spd">--</span></div>
+      <div class="pbar"><div class="pfill" id="pb-f3040" style="width:0%"></div></div>
+      <div class="plbl" id="pl-f3040">-- % of peak</div>
+    </div>
+  </div>
+  <div class="ic ic-prof">
+    <div class="ic-lbl">Accel. profile</div>
+    <span class="pill pill-e" id="v-profile">--</span>
+    <div class="ic-tau-desc" id="v-tau-desc">--</div>
+    <div class="ic-tau-val"  id="v-tau-val">tau: --</div>
+  </div>
+  <div class="ic ic-ratio">
+    <div class="ic-lbl">Peak / avg ratio</div>
+    <div class="ic-val" id="v-ratio">--<span class="u">x</span></div>
+    <div class="ic-body">
+      <div class="ic-row"><span class="ic-sl">peak speed</span><span class="ic-sv g" id="v-ratio-peak">--</span></div>
+      <div class="ic-row"><span class="ic-sl">avg speed</span><span class="ic-sv o" id="v-ratio-avg">--</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="chart-section">
+  <div class="chart-wrap"><canvas id="velChart"></canvas></div>
+  <div class="chart-legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#4da6ff"></div>velocity curve</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#4af0a0"></div>peak speed</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#ff6b35"></div>average speed</div>
+  </div>
+</div>
+
+<div class="ref-section">
+  <div class="ref-label">Quick load &mdash; 2026 combine notables</div>
+  <div class="ref-chips" id="refChips"></div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 10-YARD FLY CALCULATOR -->
+<div class="sec-title">10-Yard Fly Calculator</div>
+<div class="sec-sub">enter a flying 10-yard split time &mdash; get avg and estimated peak speed</div>
+
+<div class="calc-section">
+  <div class="calc-input-row">
+    <div class="calc-input-wrap">
+      <input type="number" id="flyInput" class="calc-input" placeholder="0.00" min="0.5" max="3.0" step="0.01">
+      <span class="calc-input-unit">sec</span>
+    </div>
+    <div class="calc-label-txt">flying 10-yard<br>split time</div>
+  </div>
+  <div id="calcResults">
+    <div class="calc-empty">enter a time above to calculate</div>
+  </div>
+</div>
+
+</div>
+<script>
+var Y2M     = 0.9144;
+var MPS2MPH = 2.23694;
+var FORTY_M = 40 * Y2M;
+var TEN_M   = 10 * Y2M;
+var DT      = 0.001;
+
+function distanceAtTime(t, vmax, tau) {
+  return vmax * (t - tau * (1 - Math.exp(-t / tau)));
+}
+
+function timeForDistance(targetMeters, vmax, tau) {
+  var lo = 0;
+  var hi = Math.max(1, targetMeters / Math.max(vmax, 0.001) + tau * 4);
+  var i, m;
+  while (distanceAtTime(hi, vmax, tau) < targetMeters && hi < 30) hi *= 1.5;
+  for (i = 0; i < 80; i++) {
+    m = (lo + hi) / 2;
+    if (distanceAtTime(m, vmax, tau) < targetMeters) lo = m;
+    else hi = m;
+  }
+  return (lo + hi) / 2;
+}
+
+function computeVmax(t40, tau) {
+  return FORTY_M / (t40 - tau * (1 - Math.exp(-t40 / tau)));
+}
+
+function computeT40fromVmax(vmax, tau) {
+  return timeForDistance(FORTY_M, vmax, tau);
+}
+
+function timeAtYards(yards, vmax, tau) {
+  return timeForDistance(yards * Y2M, vmax, tau);
+}
+
+function spdAt(t, vmax, tau) { return vmax * (1 - Math.exp(-t / tau)) * MPS2MPH; }
+function segAvg(distYards, segTime) { return (distYards * Y2M / segTime) * MPS2MPH; }
+
+function setText(id, v) { var el = document.getElementById(id); if (el) el.textContent = v; }
+function setHTML(id, v) { var el = document.getElementById(id); if (el) el.innerHTML  = v; }
+function setPct(id, p)  { var el = document.getElementById(id); if (el) el.style.width = p + '%'; }
+
+function fillCard(ids, segDist, segTime, endSpd, peakMph) {
+  var avg = segAvg(segDist, segTime);
+  var pct = Math.round((avg / peakMph) * 100);
+  setHTML(ids.t,   segTime.toFixed(2) + '<span class="u">s</span>');
+  setText(ids.avg, avg.toFixed(1) + ' mph');
+  setText(ids.spd, endSpd.toFixed(1) + ' mph');
+  setPct(ids.pb,   pct);
+  setText(ids.pl,  pct + '% of peak');
+}
+
+function updateCards(vmax, tau, t40) {
+  var peakMph = vmax * MPS2MPH;
+  var avgMph  = (FORTY_M / t40) * MPS2MPH;
+  var t10 = timeAtYards(10, vmax, tau);
+  var t20 = timeAtYards(20, vmax, tau);
+  var t30 = timeAtYards(30, vmax, tau);
+  fillCard({ t:'v-s010-t', avg:'v-s010-avg', spd:'v-s010-spd', pb:'pb-s010', pl:'pl-s010' }, 10, t10, spdAt(t10, vmax, tau), peakMph);
+  fillCard({ t:'v-s020-t', avg:'v-s020-avg', spd:'v-s020-spd', pb:'pb-s020', pl:'pl-s020' }, 20, t20, spdAt(t20, vmax, tau), peakMph);
+  fillCard({ t:'v-s030-t', avg:'v-s030-avg', spd:'v-s030-spd', pb:'pb-s030', pl:'pl-s030' }, 30, t30, spdAt(t30, vmax, tau), peakMph);
+  fillCard({ t:'v-f1020-t', avg:'v-f1020-avg', spd:'v-f1020-spd', pb:'pb-f1020', pl:'pl-f1020' }, 10, t20 - t10, spdAt(t20, vmax, tau), peakMph);
+  fillCard({ t:'v-f2030-t', avg:'v-f2030-avg', spd:'v-f2030-spd', pb:'pb-f2030', pl:'pl-f2030' }, 10, t30 - t20, spdAt(t30, vmax, tau), peakMph);
+  fillCard({ t:'v-f3040-t', avg:'v-f3040-avg', spd:'v-f3040-spd', pb:'pb-f3040', pl:'pl-f3040' }, 10, t40 - t30, spdAt(t40, vmax, tau), peakMph);
+  var profEl = document.getElementById('v-profile');
+  var descEl = document.getElementById('v-tau-desc');
+  if (tau < 0.70)      { profEl.textContent = 'explosive';   profEl.className = 'pill pill-e';   descEl.textContent = 'elite burst off the line'; }
+  else if (tau < 0.80) { profEl.textContent = 'explosive';   profEl.className = 'pill pill-e';   descEl.textContent = 'above avg acceleration'; }
+  else if (tau < 0.90) { profEl.textContent = 'balanced';    profEl.className = 'pill pill-bal'; descEl.textContent = 'typical combine range'; }
+  else if (tau < 1.00) { profEl.textContent = 'back-loaded'; profEl.className = 'pill pill-b';   descEl.textContent = 'top-end speed driven'; }
+  else                 { profEl.textContent = 'back-loaded'; profEl.className = 'pill pill-b';   descEl.textContent = 'slow starter, strong finish'; }
+  setText('v-tau-val', 'tau = ' + tau.toFixed(2) + 's');
+  var ratio = peakMph / avgMph;
+  setHTML('v-ratio', ratio.toFixed(2) + '<span class="u">x</span>');
+  setText('v-ratio-peak', peakMph.toFixed(1) + ' mph');
+  setText('v-ratio-avg',  avgMph.toFixed(1)  + ' mph');
+}
+
+var velChart = null;
+function buildChart(vmax, tau, t40) {
+  var step = 0.05, t, labels = [], vel = [], pk = [], av = [];
+  var peakMph = vmax * MPS2MPH, avgMph = (FORTY_M / t40) * MPS2MPH;
+  for (t = 0; t <= t40 + 0.01; t += step) {
+    labels.push(t.toFixed(2));
+    vel.push(parseFloat((vmax * (1 - Math.exp(-t / tau)) * MPS2MPH).toFixed(3)));
+    pk.push(parseFloat(peakMph.toFixed(2)));
+    av.push(parseFloat(avgMph.toFixed(2)));
+  }
+  if (!velChart) {
+    velChart = new Chart(document.getElementById('velChart'), {
+      type: 'line',
+      data: { labels: labels, datasets: [
+        { data: vel, borderColor: '#4da6ff', backgroundColor: 'rgba(77,166,255,0.08)', fill: true, tension: 0.4, pointRadius: 0, borderWidth: 2 },
+        { data: pk,  borderColor: 'rgba(74,240,160,0.55)',  borderWidth: 1.5, borderDash: [5,4], pointRadius: 0, fill: false },
+        { data: av,  borderColor: 'rgba(255,107,53,0.55)',  borderWidth: 1.5, borderDash: [3,3], pointRadius: 0, fill: false }
+      ]},
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: '#1e2126', borderColor: 'rgba(255,255,255,0.1)', borderWidth: 1,
+            titleColor: '#7a7d85', bodyColor: '#f0f0ee',
+            callbacks: {
+              title:  function(c) { return 't = ' + c[0].label + 's'; },
+              label:  function(c) { return c.datasetIndex === 0 ? '  ' + c.parsed.y.toFixed(1) + ' mph' : ''; },
+              filter: function(c) { return c.datasetIndex === 0; }
+            }
+          }
+        },
+        scales: {
+          x: { ticks: { maxTicksLimit: 10, color: '#7a7d85', font: { size: 10, family: 'DM Mono' } }, grid: { color: 'rgba(255,255,255,0.04)' }, title: { display: true, text: 'time (s)', color: '#7a7d85', font: { size: 10, family: 'DM Mono' } } },
+          y: { ticks: { color: '#7a7d85', font: { size: 10, family: 'DM Mono' } }, grid: { color: 'rgba(255,255,255,0.04)' }, title: { display: true, text: 'speed (mph)', color: '#7a7d85', font: { size: 10, family: 'DM Mono' } }, min: 0, max: 28 }
+        }
+      }
+    });
+  } else {
+    velChart.data.labels = labels;
+    velChart.data.datasets[0].data = vel;
+    velChart.data.datasets[1].data = pk;
+    velChart.data.datasets[2].data = av;
+    velChart.update('none');
+  }
+}
+
+var CARDS = ['40','tau','peak','avg'];
+function setDriverStyles(source) {
+  var i, c, isDriving;
+  for (i = 0; i < CARDS.length; i++) {
+    c = CARDS[i];
+    isDriving = (source === '40' || source === 'tau') ? (c === '40' || c === 'tau') : (c === source);
+    var card = document.getElementById('card-' + c), badge = document.getElementById('badge-' + c);
+    if (isDriving) { card.classList.add('active-driver');    badge.textContent = 'driving'; badge.className = 'dbadge driving'; }
+    else           { card.classList.remove('active-driver'); badge.textContent = 'derived'; badge.className = 'dbadge derived'; }
+  }
+}
+
+var updating = false;
+function syncSlider(id, value) {
+  var el = document.getElementById(id);
+  var min = parseFloat(el.min);
+  var max = parseFloat(el.max);
+  el.value = Math.min(Math.max(value, min), max);
+}
+
+function updateAll(source) {
+  if (updating) return;
+  updating = true;
+  var t40     = parseFloat(document.getElementById('sl-40').value)   / 100;
+  var tau     = parseFloat(document.getElementById('sl-tau').value)   / 100;
+  var peakMph = parseFloat(document.getElementById('sl-peak').value)  / 10;
+  var avgMph  = parseFloat(document.getElementById('sl-avg').value)   / 10;
+  var vmax, t40a;
+  if (source === '40' || source === 'tau') {
+    vmax = computeVmax(t40, tau);
+    t40a = t40;
+  } else if (source === 'peak') {
+    vmax = peakMph / MPS2MPH;
+    t40a = computeT40fromVmax(vmax, tau);
+    syncSlider('sl-40', Math.round(t40a * 100));
+  } else {
+    t40a = FORTY_M / (avgMph / MPS2MPH);
+    vmax = computeVmax(t40a, tau);
+    syncSlider('sl-40', Math.round(t40a * 100));
+  }
+  var dPeak = vmax * MPS2MPH, dAvg = (FORTY_M / t40a) * MPS2MPH;
+  syncSlider('sl-peak', Math.round(dPeak * 10));
+  syncSlider('sl-avg',  Math.round(dAvg  * 10));
+  setHTML('val-40',   t40a.toFixed(2)  + '<span class="unit">s</span>');
+  setHTML('val-tau',  tau.toFixed(2)   + '<span class="unit">s</span>');
+  setHTML('val-peak', dPeak.toFixed(1) + '<span class="unit">mph</span>');
+  setHTML('val-avg',  dAvg.toFixed(1)  + '<span class="unit">mph</span>');
+  setDriverStyles(source);
+  updateCards(vmax, tau, t40a);
+  buildChart(vmax, tau, t40a);
+  updating = false;
+}
+
+document.getElementById('sl-40').addEventListener('input',   function() { updateAll('40');   });
+document.getElementById('sl-tau').addEventListener('input',  function() { updateAll('tau');  });
+document.getElementById('sl-peak').addEventListener('input', function() { updateAll('peak'); });
+document.getElementById('sl-avg').addEventListener('input',  function() { updateAll('avg');  });
+
+var REFS = [
+  { label: 'Worthy 4.21', t40: 4.21, starred: true },
+  { label: 'Thompson 4.26', t40: 4.26 }, { label: 'Styles 4.27', t40: 4.27 },
+  { label: 'Burks 4.30',   t40: 4.30 }, { label: 'Caldwell 4.31', t40: 4.31 },
+  { label: '4.40', t40: 4.40 }, { label: '4.50', t40: 4.50 }, { label: '4.60', t40: 4.60 },
+  { label: '4.70', t40: 4.70 }, { label: '4.80', t40: 4.80 },
+  { label: '4.90', t40: 4.90 }, { label: '5.00', t40: 5.00 }
+];
+var chipsEl = document.getElementById('refChips'), ri;
+for (ri = 0; ri < REFS.length; ri++) {
+  (function(r) {
+    var btn = document.createElement('button');
+    btn.className = 'chip' + (r.starred ? ' starred' : '');
+    btn.textContent = r.label;
+    btn.addEventListener('click', function() { document.getElementById('sl-40').value = Math.round(r.t40 * 100); updateAll('40'); });
+    chipsEl.appendChild(btn);
+  })(REFS[ri]);
+}
+
+/* ── 10-yard fly calculator ── */
+function calcFly10(flyTime) {
+  if (!flyTime || flyTime <= 0 || flyTime > 3.0) return;
+
+  var avgMph  = (TEN_M / flyTime) * MPS2MPH;
+
+  /* Peak speed estimate:
+     In a true flying 10 the athlete is near max velocity.
+     Using the exponential model: over a flying 10-yard segment at
+     near-peak speed, avg ≈ vmax * correction where correction
+     depends on how far along the acceleration curve the athlete is.
+     For the 30-40yd segment at tau=0.77, avg/peak ≈ 0.987.
+     For the 20-30yd segment,                avg/peak ≈ 0.975.
+     We use 0.981 as a midpoint for a generic flying 10,
+     and also show the range across those two anchors. */
+  var RATIO_MID  = 0.981;
+  var RATIO_LO   = 0.972;  /* earlier in run, more spread between avg and peak */
+  var RATIO_HI   = 0.990;  /* later in run, nearly at peak */
+
+  var peakMid  = avgMph / RATIO_MID;
+  var peakLo   = avgMph / RATIO_HI;   /* lower peak = later in run */
+  var peakHi   = avgMph / RATIO_LO;   /* higher peak = earlier in run */
+
+  var mps      = (TEN_M / flyTime);
+  var mpsStr   = mps.toFixed(2);
+
+  var html = '';
+  html += '<div class="calc-results">';
+
+  /* avg speed card */
+  html += '<div class="calc-result-card">';
+  html += '<div class="calc-result-label">avg speed</div>';
+  html += '<div class="calc-result-val green">' + avgMph.toFixed(1) + '<span class="u">mph</span></div>';
+  html += '<div class="calc-sub-row"><span class="calc-sub-lbl">m/s</span><span class="calc-sub-val">' + mpsStr + ' m/s</span></div>';
+  html += '</div>';
+
+  /* est peak speed card */
+  html += '<div class="calc-result-card">';
+  html += '<div class="calc-result-label">est. peak speed</div>';
+  html += '<div class="calc-result-val blue">' + peakMid.toFixed(1) + '<span class="u">mph</span></div>';
+  html += '<div class="calc-sub-row"><span class="calc-sub-lbl">range</span><span class="calc-sub-val">' + peakLo.toFixed(1) + ' &ndash; ' + peakHi.toFixed(1) + ' mph</span></div>';
+  html += '</div>';
+
+  html += '</div>';
+  html += '<div class="calc-note">';
+  html += 'avg speed is exact. peak estimated using exponential model: avg/peak &asymp; 0.972&ndash;0.990 for a flying 10 depending on where in the run it occurs (earlier = wider gap, later = tighter). ';
+  html += 'for a true 30&rarr;40 yd fly, use the upper end of the range.';
+  html += '</div>';
+
+  document.getElementById('calcResults').innerHTML = html;
+}
+
+document.getElementById('flyInput').addEventListener('input', function() {
+  var val = parseFloat(this.value);
+  if (val && val > 0.3 && val < 3.0) {
+    calcFly10(val);
+  } else {
+    document.getElementById('calcResults').innerHTML = '<div class="calc-empty">enter a time above to calculate</div>';
+  }
+});
+
+updateAll('40');
+</script>
+</body>
+</html>
