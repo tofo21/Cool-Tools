@@ -47,3 +47,75 @@ This file records source-interpretation decisions that materially affect the his
 ### Build
 
 Reproducible pipeline entrypoint: `fantasy-draft/research/attach_platform_layers_v02c.py` via `.github/workflows/build-fantasy-research-panel.yml`.
+
+---
+
+## v0.4 | Historical consensus statistical projections / Step 8 | 2026-08-30
+
+### Core interpretation
+
+1. **Consensus statistical projections are a Player Truth baseline, not a draft-market signal.** Do not substitute ECR, ADP, ESPN rank, or Sleeper order for missing statistical projections.
+2. **Canonical projected fantasy points are recomputed from projected football components.** The workbook's standard-scoring FPTS field is retained for provenance but is not the full-PPR modeling target.
+3. **Use the same standardized full-PPR scoring formula for projected and realized outcomes.** This prevents scoring-system differences from masquerading as projection error.
+
+### Accepted source family
+
+1. **2022-2025:** direct final pre-kickoff annual ElBoberto workbooks using FantasyPros consensus projections.
+2. **2021:** accepted as a separately flagged bridge using the contemporaneous Roto Street Journal ElBoberto-derived workbook. Its accompanying article states aggregate FantasyPros projections updated 2021-08-27.
+3. **2021 provenance must remain distinguishable** with `fantasypros_consensus_via_2021_rotostreet_elboberto_workbook`; do not relabel it as a direct annual ElBoberto release.
+4. **2020 is frozen as `SOURCE_GAP_FROZEN_NOT_IMPUTED`.** The original Reddit post body/download is deleted; targeted Wayback recovery found no preserved thread captures; the accessible Roto Street derivative explicitly blends FantasyPros (75%) and FantasyPoints (25%) and is therefore rejected from the primary series.
+
+### Final accepted snapshots
+
+- 2021: Roto Street / ElBoberto-derived FantasyPros consensus, 2021-08-27
+- 2022: ElBoberto v1.5, 2022-09-06
+- 2023: ElBoberto v1.03, 2023-09-05
+- 2024: ElBoberto v1.05, 2024-08-29
+- 2025: ElBoberto v1.06, 2025-09-03
+
+All accepted snapshots are pre-kickoff and pass the build validation.
+
+### Final coverage
+
+| Season | Draft-market projection coverage | ECR Top-300 coverage | State |
+|---|---:|---:|---|
+| 2020 | 0.00% | 0.00% | Frozen source gap |
+| 2021 | 91.21% | 98.27% | PASS |
+| 2022 | 90.89% | 97.18% | PASS |
+| 2023 | 94.83% | 97.83% | PASS |
+| 2024 | 90.61% | 99.64% | PASS |
+| 2025 | 95.28% | 99.65% | PASS |
+
+### Validation policy
+
+1. Primary Model A / Model B historical validation uses **2021-2025**.
+2. Run a **2022-2025 same-direct-distribution sensitivity test** because those seasons use the direct annual ElBoberto releases.
+3. Do not impute the 2020 consensus projection feature.
+4. The known 2020 75/25 blended derivative may be tested later only as a separately labeled robustness specification.
+5. Direct FantasyPros historical `year=` page queries remain disallowed because testing showed that they can silently return current-season content.
+
+### Implemented panel fields
+
+- `consensus_proj_points`
+- `consensus_proj_pass_attempts`
+- `consensus_proj_pass_completions`
+- `consensus_proj_pass_yards`
+- `consensus_proj_pass_tds`
+- `consensus_proj_pass_ints`
+- `consensus_proj_rush_attempts`
+- `consensus_proj_rush_yards`
+- `consensus_proj_rush_tds`
+- `consensus_proj_receptions`
+- `consensus_proj_rec_yards`
+- `consensus_proj_rec_tds`
+- `consensus_proj_fumbles_lost`
+- `consensus_proj_source_points_standard`
+- consensus source URL/version/date/hash/state provenance fields
+
+### Build
+
+Canonical Step 8 entrypoint: `fantasy-draft/research/attach_preserved_consensus_v04.py` via `.github/workflows/build-fantasy-research-panel.yml`.
+
+Canonical Step 8 panel: `master_player_season_panel_2020_2025_v0_4.csv`.
+
+**Step 8 status: COMPLETE.**
