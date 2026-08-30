@@ -1,0 +1,38 @@
+name: Recover 2020 ElBoberto Source
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'fantasy-draft/research/recover_2020_elboberto.py'
+      - '.github/workflows/recover-2020-elboberto.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Recover archived 2020 workbook links
+        run: python fantasy-draft/research/recover_2020_elboberto.py
+
+      - name: Upload recovery artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: recover-2020-elboberto
+          path: |
+            fantasy-draft/research/output/recover_2020_elboberto_attempts.csv
+            fantasy-draft/research/output/recover_2020_elboberto_links.csv
+            fantasy-draft/research/output/recover_2020_elboberto_errors.txt
+          if-no-files-found: error
+          retention-days: 30
