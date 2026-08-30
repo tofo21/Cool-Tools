@@ -20,7 +20,8 @@
     <div class="topbar-meta">
       <span class="status-dot"><i></i> Board loaded</span>
       <span class="league-chip">10-team · PPR · 2 FLEX · Pick 1.05</span>
-      <button class="ghost-btn" id="resetDraft" type="button">Reset draft</button>
+      <span class="save-status" id="saveStatus">Recovery ready</span>
+      <button class="ghost-btn" id="resetDraft" type="button">Reset live picks</button>
     </div>
   </header>
 
@@ -32,7 +33,7 @@
           <span id="roundPick">1.01</span>
           <small id="overallPick">Overall 1</small>
         </div>
-        <div class="clock-owner" id="clockOwner">Team 1 is on the clock</div>
+        <div class="clock-owner" id="clockOwner">Justin Gerkin is on the clock</div>
         <div class="progress-track"><span id="draftProgress"></span></div>
         <p class="micro" id="nextTonyText">Tony picks in 4 selections at 1.05</p>
       </section>
@@ -51,6 +52,19 @@
           <div><dt>Roster</dt><dd>16 · no K/DST</dd></div>
           <div><dt>Format</dt><dd>Snake · 1 keeper</dd></div>
         </dl>
+        <div class="backup-actions" aria-label="Draft backup controls">
+          <button class="ghost-btn" id="exportDraft" type="button">Export backup</button>
+          <button class="ghost-btn" id="importDraft" type="button">Import backup</button>
+          <button class="ghost-btn" id="recoverDraft" type="button">Recover prior</button>
+          <input class="sr-only" id="importDraftFile" type="file" accept="application/json,.json">
+        </div>
+      </section>
+
+      <section class="panel keepers-panel">
+        <div class="panel-heading compact">
+          <div><p class="eyebrow">League setup</p><h2>Managers & keepers</h2></div>
+        </div>
+        <div class="keeper-list" id="keeperList"></div>
       </section>
 
       <section class="panel picks-panel">
@@ -123,9 +137,13 @@
     <aside class="right-rail">
       <section class="panel roster-panel">
         <div class="panel-heading">
-          <div><p class="eyebrow">Tony's team</p><h2>Roster build</h2></div>
+          <div><p class="eyebrow">Team roster</p><h2 id="rosterManagerName">Tony Fontana</h2></div>
           <span class="roster-count" id="rosterCount">0 / 16</span>
         </div>
+        <label class="manager-picker">
+          <span class="sr-only">Choose manager roster</span>
+          <select id="rosterManager"></select>
+        </label>
         <div class="roster-needs" id="rosterNeeds"></div>
         <div class="roster-list" id="rosterList"></div>
       </section>
@@ -141,6 +159,27 @@
       <section class="panel cliff-panel" id="cliffPanel"></section>
     </aside>
   </main>
+
+  <dialog class="pick-dialog" id="pickDialog">
+    <form method="dialog" id="pickDialogForm">
+      <div class="dialog-head">
+        <div><p class="eyebrow">Correct draft event</p><h2 id="dialogTitle">Edit pick</h2></div>
+        <button class="dialog-close" value="cancel" aria-label="Close edit pick dialog">×</button>
+      </div>
+      <p class="dialog-copy" id="dialogCopy"></p>
+      <label class="dialog-search">
+        <span>Replacement player</span>
+        <input id="replacementSearch" type="search" placeholder="Search available players" autocomplete="off">
+      </label>
+      <div class="replacement-list" id="replacementList"></div>
+      <div class="dialog-actions">
+        <button class="danger-btn" id="removePick" type="button">Remove pick</button>
+        <button class="danger-btn" id="rewindPick" type="button">Rewind from here</button>
+        <span></span>
+        <button class="ghost-btn" value="cancel">Cancel</button>
+      </div>
+    </form>
+  </dialog>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <script src="./data/players.js"></script>
