@@ -35,7 +35,7 @@ jobs:
         run: python fantasy-draft/research/finalize_panel_v01.py
 
       - name: Attach ESPN and Sleeper platform layers
-        run: python fantasy-draft/research/attach_platform_layers_v02b.py
+        run: python fantasy-draft/research/attach_platform_layers_v02c.py
 
       - name: Upload research panel artifact
         uses: actions/upload-artifact@v4
