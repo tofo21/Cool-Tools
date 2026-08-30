@@ -1,0 +1,38 @@
+name: Probe Preserved Consensus Workbooks
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'fantasy-draft/research/probe_elboberto_consensus_v03.py'
+      - '.github/workflows/probe-elboberto-consensus.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Probe preserved workbooks
+        run: python fantasy-draft/research/probe_elboberto_consensus_v03.py
+
+      - name: Upload probe artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: elboberto-consensus-probe-v03
+          path: |
+            fantasy-draft/research/output/elboberto_workbook_manifest_v03.csv
+            fantasy-draft/research/output/elboberto_sheet_inventory_v03.csv
+            fantasy-draft/research/output/elboberto_candidate_sheet_samples_v03.csv
+          if-no-files-found: error
+          retention-days: 30
