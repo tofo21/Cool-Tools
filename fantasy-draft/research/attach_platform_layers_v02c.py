@@ -33,5 +33,10 @@ def robust_read_fp_archive(season: int) -> pd.DataFrame:
 
 base.read_fp_archive = robust_read_fp_archive
 
+# Pandas 3.0 no longer permits assigning strings into float columns initialized
+# with np.nan. The base builder uses np.nan only to create new mixed-type
+# platform/provenance columns, so initialize those columns with None/object dtype.
+base.np.nan = None
+
 if __name__ == "__main__":
     base.build()
