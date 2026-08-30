@@ -26,7 +26,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pandas numpy requests pyarrow rapidfuzz
+          pip install pandas numpy requests pyarrow rapidfuzz beautifulsoup4 lxml pypdf
 
       - name: Build 2020-2025 master player-season panel
         run: python fantasy-draft/research/build_master_panel.py
@@ -34,10 +34,13 @@ jobs:
       - name: Finalize identity and QA
         run: python fantasy-draft/research/finalize_panel_v01.py
 
+      - name: Attach ESPN and Sleeper platform layers
+        run: python fantasy-draft/research/attach_platform_layers_v02.py
+
       - name: Upload research panel artifact
         uses: actions/upload-artifact@v4
         with:
-          name: master-player-season-panel-2020-2025-v0-1
+          name: master-player-season-panel-2020-2025-v0-2
           path: fantasy-draft/research/output/
           if-no-files-found: error
           retention-days: 30
