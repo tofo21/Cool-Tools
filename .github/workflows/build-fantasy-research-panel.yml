@@ -37,10 +37,13 @@ jobs:
       - name: Attach ESPN and Sleeper platform layers
         run: python fantasy-draft/research/attach_platform_layers_v02c.py
 
+      - name: Attach historical consensus projections
+        run: python fantasy-draft/research/attach_consensus_projections_v03.py
+
       - name: Upload research panel artifact
         uses: actions/upload-artifact@v4
         with:
-          name: master-player-season-panel-2020-2025-v0-2
+          name: master-player-season-panel-2020-2025-v0-3
           path: fantasy-draft/research/output/
           if-no-files-found: error
           retention-days: 30
