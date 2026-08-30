@@ -1,0 +1,41 @@
+name: Build Fantasy Research Panel
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'fantasy-draft/research/**'
+      - '.github/workflows/build-fantasy-research-panel.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  build-panel:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pandas numpy requests pyarrow rapidfuzz
+
+      - name: Build 2020-2025 master player-season panel
+        run: python fantasy-draft/research/build_master_panel.py
+
+      - name: Upload research panel artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: master-player-season-panel-2020-2025-v0-1
+          path: fantasy-draft/research/output/
+          if-no-files-found: error
+          retention-days: 30
