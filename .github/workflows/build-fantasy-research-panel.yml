@@ -26,7 +26,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pandas numpy requests pyarrow rapidfuzz beautifulsoup4 lxml pypdf openpyxl xlrd
+          pip install requests beautifulsoup4 lxml
 
-      - name: Diagnose FantasyPros export
-        run: python fantasy-draft/research/diagnose_fp_export.py
+      - name: Inspect FantasyPros HTML
+        run: python fantasy-draft/research/diagnose_fp_html.py
