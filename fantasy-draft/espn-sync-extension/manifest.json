@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "Draft Command ESPN Sync",
+  "version": "0.1.0",
+  "description": "Locally relays visible ESPN fantasy draft picks to Tony's Draft Command board.",
+  "permissions": ["storage"],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://fantasy.espn.com/football/draft*",
+        "https://fantasy.espn.com/football/mockdraft*"
+      ],
+      "js": ["espn-main.js"],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": [
+        "https://fantasy.espn.com/football/draft*",
+        "https://fantasy.espn.com/football/mockdraft*"
+      ],
+      "js": ["espn-relay.js"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["https://tofo21.github.io/Cool-Tools/fantasy-draft/*"],
+      "js": ["app-relay.js"],
+      "run_at": "document_start"
+    }
+  ]
+}

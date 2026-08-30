@@ -38,6 +38,48 @@
         <p class="micro" id="nextTonyText">Tony picks in 4 selections at 1.05</p>
       </section>
 
+      <section class="panel sync-panel">
+        <div class="panel-heading compact">
+          <div><p class="eyebrow">Pick ingestion</p><h2>Live sync</h2></div>
+          <span class="sync-state" id="syncState"><i></i><span>Manual</span></span>
+        </div>
+        <div class="sync-tabs" role="group" aria-label="Live draft source">
+          <button class="sync-tab active" data-sync-source="manual" type="button">Manual</button>
+          <button class="sync-tab" data-sync-source="espn" type="button">ESPN</button>
+          <button class="sync-tab" data-sync-source="sleeper" type="button">Sleeper</button>
+        </div>
+        <div class="sync-view" data-sync-view="manual">
+          <p>Board buttons remain active as the emergency entry and correction path.</p>
+        </div>
+        <div class="sync-view" data-sync-view="espn" hidden>
+          <p id="espnSyncMessage">Install the local bridge, then keep the ESPN draft room and Draft Command open in the same browser.</p>
+          <div class="sync-actions">
+            <a class="sync-download" href="./espn-sync-extension.zip" download>Download bridge</a>
+            <button class="ghost-btn" id="espnCheckBridge" type="button">Check connection</button>
+          </div>
+          <details class="sync-help">
+            <summary>One-time installation</summary>
+            <ol>
+              <li>Unzip the download.</li>
+              <li>Open <strong>Extensions</strong> in Chrome or Edge.</li>
+              <li>Turn on <strong>Developer mode</strong>.</li>
+              <li>Choose <strong>Load unpacked</strong> and select the unzipped folder.</li>
+              <li>Open the ESPN draft room and this page.</li>
+            </ol>
+          </details>
+        </div>
+        <div class="sync-view" data-sync-view="sleeper" hidden>
+          <label class="sync-input"><span>Sleeper draft URL or ID</span><input id="sleeperDraftId" type="text" inputmode="numeric" placeholder="Paste draft URL or ID"></label>
+          <div class="sync-actions">
+            <button class="sync-primary" id="sleeperConnect" type="button">Connect</button>
+            <button class="ghost-btn" id="sleeperSyncNow" type="button">Sync now</button>
+          </div>
+          <p id="sleeperSyncMessage">Uses Sleeper's public read-only draft feed. Format must match this 10-team, 16-round board.</p>
+        </div>
+        <div class="sync-issues" id="syncIssues" hidden></div>
+        <p class="sync-foot" id="syncFoot">No automatic source connected.</p>
+      </section>
+
       <section class="panel settings-panel">
         <div class="panel-heading">
           <div><p class="eyebrow">Price layer</p><h2>Draft room</h2></div>
@@ -184,5 +226,6 @@
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <script src="./data/players.js"></script>
   <script src="./app.js"></script>
+  <script src="./sync.js"></script>
 </body>
 </html>

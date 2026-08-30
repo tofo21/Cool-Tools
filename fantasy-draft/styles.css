@@ -60,7 +60,31 @@ button { color: inherit; }
 .progress-track span { display: block; width: 0; height: 100%; background: var(--green); transition: width .25s ease; }
 .micro { margin: 0; color: var(--muted); font: 400 9px/1.5 "DM Mono", monospace; }
 
-.settings-panel, .picks-panel, .keepers-panel, .roster-panel, .history-panel, .cliff-panel { padding: 16px; }
+.settings-panel, .sync-panel, .picks-panel, .keepers-panel, .roster-panel, .history-panel, .cliff-panel { padding: 16px; }
+.sync-state { display: inline-flex; align-items: center; gap: 5px; color: var(--muted); font: 500 7px "DM Mono", monospace; text-transform: uppercase; }
+.sync-state i { width: 6px; height: 6px; border-radius: 50%; background: var(--muted-2); }
+.sync-live { color: var(--green); }.sync-live i { background: var(--green); box-shadow: 0 0 8px rgba(168,255,62,.7); }
+.sync-waiting { color: var(--amber); }.sync-waiting i { background: var(--amber); }
+.sync-error { color: var(--red); }.sync-error i { background: var(--red); }
+.sync-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; margin: 12px 0 10px; padding: 3px; border: 1px solid var(--line); border-radius: 6px; background: #0c110e; }
+.sync-tab { padding: 7px 2px; border: 0; border-radius: 4px; color: var(--muted); background: transparent; cursor: pointer; font: 500 8px "DM Mono", monospace; text-transform: uppercase; }
+.sync-tab.active { color: #0c110e; background: var(--green); }
+.sync-view p { margin: 0; color: var(--muted); font: 400 8px/1.55 "DM Mono", monospace; }
+.sync-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 10px; }
+.sync-actions .ghost-btn, .sync-download, .sync-primary { display: grid; place-items: center; min-height: 31px; padding: 6px; border-radius: 5px; cursor: pointer; font: 500 8px "DM Mono", monospace; text-align: center; text-decoration: none; }
+.sync-download, .sync-primary { border: 1px solid rgba(168,255,62,.4); color: #0c110e; background: var(--green); }
+.sync-help { margin-top: 9px; color: var(--muted); font: 400 8px/1.5 "DM Mono", monospace; }
+.sync-help summary { cursor: pointer; color: var(--text); }
+.sync-help ol { margin: 8px 0 0; padding-left: 18px; }
+.sync-input { display: block; }
+.sync-input span { display: block; margin-bottom: 5px; color: var(--muted); font: 500 7px "DM Mono", monospace; text-transform: uppercase; }
+.sync-input input { width: 100%; padding: 8px; border: 1px solid var(--line); border-radius: 5px; outline: 0; color: var(--text); background: #090d0b; font: 400 9px "DM Mono", monospace; }
+.sync-input input:focus { border-color: rgba(168,255,62,.5); }
+.sync-view .sync-actions + p { margin-top: 9px; }
+.sync-issues { display: flex; flex-direction: column; gap: 4px; margin-top: 10px; padding: 8px; border: 1px solid rgba(255,202,88,.22); border-radius: 5px; background: rgba(255,202,88,.05); }
+.sync-issues strong { color: var(--amber); font: 600 8px "DM Mono", monospace; text-transform: uppercase; }
+.sync-issues span, .sync-issues small { color: var(--muted); font: 400 7px/1.45 "DM Mono", monospace; }
+.sync-foot { margin: 10px 0 0; padding-top: 9px; border-top: 1px solid var(--line); color: var(--muted-2); font: 400 7px/1.45 "DM Mono", monospace; }
 .segmented { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin: 14px 0; padding: 4px; border-radius: 7px; background: #0c110e; border: 1px solid var(--line); }
 .platform-btn { border: 0; border-radius: 5px; padding: 8px; background: transparent; color: var(--muted); cursor: pointer; font: 600 10px "DM Mono", monospace; letter-spacing: .05em; text-transform: uppercase; }
 .platform-btn.active { color: #0c110e; background: var(--green); }

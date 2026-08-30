@@ -50,6 +50,18 @@
   };
 
   const PLAYER_BY_ID = new Map(window.PLAYER_DATA.map((player) => [player.id, player]));
+  const normalizePlayerName = (name) => String(name || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/\b(jr|sr|ii|iii|iv)\b/g, "")
+    .replace(/[^a-z0-9]/g, "");
+  const PLAYER_BY_NAME = new Map(window.PLAYER_DATA.map((player) => [normalizePlayerName(player.name), player]));
+  const PLAYER_NAME_ALIASES = new Map([
+    ["gabe davis", "gabriel davis"],
+    ["hollywood brown", "marquise brown"],
+    ["tank dell", "nathaniel dell"],
+  ].map(([alias, canonical]) => [normalizePlayerName(alias), normalizePlayerName(canonical)]));
   let renderCache = {};
 
   const els = Object.fromEntries([
@@ -100,6 +112,9 @@
       playerId: Number(event.playerId),
       source: event.source || "manual",
       timestamp: event.timestamp || new Date().toISOString(),
+      syncKey: event.syncKey || null,
+      externalId: event.externalId == null ? null : String(event.externalId),
+      externalName: event.externalName || null,
     })).filter((event) => {
       if (!Number.isInteger(event.overall) || event.overall < 1 || event.overall > TOTAL_PICKS) return false;
       if (KEEPER_OVERALLS.has(event.overall) || KEEPER_PLAYER_IDS.has(event.playerId)) return false;
@@ -229,6 +244,149 @@
 
   function draftedIds() {
     return new Set(allEvents().map((event) => event.playerId));
+  }
+
+  function resolveExternalPlayer(rawPick) {
+    const externalName = rawPick.playerName || rawPick.name || [rawPick.firstName, rawPick.lastName].filter(Boolean).join(" ");
+    const normalized = normalizePlayerName(externalName);
+    return PLAYER_BY_NAME.get(normalized) || PLAYER_BY_NAME.get(PLAYER_NAME_ALIASES.get(normalized)) || null;
+  }
+
+  function sourceLabel(event) {
+    if (event.source === "keeper") return "KEEPER";
+    if (event.source === "espn-sync") return "ESPN SYNC";
+    if (event.source === "sleeper-sync") return "SLEEPER SYNC";
+    if (event.source === "manual-correction") return "CORRECTED";
+    return "MANUAL";
+  }
+
+  function ingestSnapshot(snapshot) {
+    const source = snapshot?.source === "sleeper" ? "sleeper-sync" : "espn-sync";
+    const syncKey = String(snapshot?.syncKey || source);
+    const teamCount = Number(snapshot?.teamCount || TEAM_COUNT);
+    const rounds = Number(snapshot?.rounds || ROUNDS);
+    const result = { ok: true, added: 0, updated: 0, removed: 0, matched: 0, unresolved: [], conflicts: [], source, syncKey };
+
+    if (teamCount !== TEAM_COUNT || rounds !== ROUNDS) {
+      return {
+        ...result,
+        ok: false,
+        code: "FORMAT_MISMATCH",
+        message: `This board is configured for ${TEAM_COUNT} teams and ${ROUNDS} rounds; the connected draft reports ${teamCount} teams and ${rounds} rounds.`,
+      };
+    }
+    if (!Array.isArray(snapshot?.picks)) {
+      return { ...result, ok: false, code: "INVALID_SNAPSHOT", message: "The connected source did not provide a valid pick list." };
+    }
+
+    const incomingOveralls = new Set();
+    const incomingPlayerIds = new Set();
+    const working = state.events.map((event) => ({ ...event }));
+    const byOverall = new Map(working.map((event) => [event.overall, event]));
+    const playerOverall = new Map(allEvents().map((event) => [event.playerId, event.overall]));
+    const sortedPicks = snapshot.picks.slice().sort((a, b) => Number(a.overall) - Number(b.overall));
+
+    for (const rawPick of sortedPicks) {
+      const overall = Number(rawPick.overall);
+      const externalName = rawPick.playerName || rawPick.name || [rawPick.firstName, rawPick.lastName].filter(Boolean).join(" ") || "Unknown player";
+      if (!Number.isInteger(overall) || overall < 1 || overall > TOTAL_PICKS) {
+        result.unresolved.push({ overall: rawPick.overall, playerName: externalName, reason: "invalid pick number" });
+        continue;
+      }
+      if (incomingOveralls.has(overall)) {
+        result.conflicts.push({ overall, playerName: externalName, reason: "duplicate pick number in source" });
+        continue;
+      }
+      incomingOveralls.add(overall);
+
+      const player = resolveExternalPlayer(rawPick);
+      if (!player) {
+        result.unresolved.push({ overall, playerName: externalName, reason: "player is not on the current 200-player board" });
+        continue;
+      }
+      if (incomingPlayerIds.has(player.id)) {
+        result.conflicts.push({ overall, playerName: externalName, reason: "player appears twice in source" });
+        continue;
+      }
+      incomingPlayerIds.add(player.id);
+
+      if (KEEPER_OVERALLS.has(overall)) {
+        const keeper = KEEPERS.find((event) => event.overall === overall);
+        if (keeper?.playerId === player.id) result.matched += 1;
+        else result.conflicts.push({ overall, playerName: externalName, reason: "source conflicts with configured keeper slot" });
+        continue;
+      }
+      if (KEEPER_PLAYER_IDS.has(player.id)) {
+        result.conflicts.push({ overall, playerName: externalName, reason: "player is already reserved as a keeper" });
+        continue;
+      }
+
+      const existing = byOverall.get(overall);
+      if (existing) {
+        if (existing.playerId === player.id) {
+          result.matched += 1;
+          continue;
+        }
+        if (existing.syncKey !== syncKey) {
+          result.conflicts.push({ overall, playerName: externalName, reason: `pick already contains ${playerById(existing.playerId)?.name || "another player"}` });
+          continue;
+        }
+        const usedAt = playerOverall.get(player.id);
+        if (usedAt && usedAt !== overall) {
+          result.conflicts.push({ overall, playerName: externalName, reason: `player is already recorded at ${pickLabel(usedAt)}` });
+          continue;
+        }
+        playerOverall.delete(existing.playerId);
+        existing.playerId = player.id;
+        existing.externalId = rawPick.externalId == null ? null : String(rawPick.externalId);
+        existing.externalName = externalName;
+        existing.timestamp = snapshot.timestamp || new Date().toISOString();
+        playerOverall.set(player.id, overall);
+        result.updated += 1;
+        continue;
+      }
+
+      const usedAt = playerOverall.get(player.id);
+      if (usedAt) {
+        result.conflicts.push({ overall, playerName: externalName, reason: `player is already recorded at ${pickLabel(usedAt)}` });
+        continue;
+      }
+      const event = {
+        overall,
+        team: pickOwner(overall),
+        playerId: player.id,
+        source,
+        syncKey,
+        externalId: rawPick.externalId == null ? null : String(rawPick.externalId),
+        externalName,
+        timestamp: snapshot.timestamp || new Date().toISOString(),
+      };
+      working.push(event);
+      byOverall.set(overall, event);
+      playerOverall.set(player.id, overall);
+      result.added += 1;
+    }
+
+    if (snapshot.authoritative) {
+      const completeThrough = Number(snapshot.completeThrough ?? Math.max(0, ...incomingOveralls));
+      for (let index = working.length - 1; index >= 0; index -= 1) {
+        const event = working[index];
+        if (event.syncKey === syncKey && event.overall <= completeThrough && !incomingOveralls.has(event.overall)) {
+          working.splice(index, 1);
+          result.removed += 1;
+        }
+      }
+    }
+
+    if (result.added || result.updated || result.removed) {
+      state.events = canonicalizeEvents(working);
+      state.visible = 20;
+      renderCache = {};
+      saveState();
+      render();
+      showToast(`${result.added + result.updated} synced pick${result.added + result.updated === 1 ? "" : "s"} applied`);
+    }
+    return result;
   }
 
   function price(player) { return player[state.platform] ?? player.market ?? player.adp; }
@@ -450,7 +608,7 @@
     els.rosterManagerName.textContent = manager(state.rosterTeam).name;
     els.rosterCount.textContent = `${roster.length} / 16`;
     els.rosterNeeds.innerHTML = Object.keys(TARGETS).map((pos) => `<div class="need-box"><strong>${counts[pos]}</strong><small>${pos} / ${TARGETS[pos]}</small></div>`).join("");
-    els.rosterList.innerHTML = roster.length ? roster.map(({ event, player }) => `<div class="roster-row"><div><span>${player.name}</span><small>${player.team} · ${pickLabel(event.overall)}${event.source === "keeper" ? " · KEEPER" : ""}</small></div><span class="pos-pill pos-${player.pos}">${player.pos}</span></div>`).join("") : `<div class="empty-state">${manager(state.rosterTeam).short}'s players will appear here as live picks are entered.</div>`;
+    els.rosterList.innerHTML = roster.length ? roster.map(({ event, player }) => `<div class="roster-row"><div><span>${player.name}</span><small>${player.team} · ${pickLabel(event.overall)} · ${sourceLabel(event)}</small></div><span class="pos-pill pos-${player.pos}">${player.pos}</span></div>`).join("") : `<div class="empty-state">${manager(state.rosterTeam).short}'s players will appear here as live picks are entered.</div>`;
   }
 
   function renderHistory() {
@@ -458,7 +616,7 @@
     els.undoPick.disabled = !state.events.length;
     els.historyList.innerHTML = recent.length ? recent.map((event) => {
       const player = playerById(event.playerId);
-      return `<div class="history-row"><div class="history-main"><span>${player?.name || "Unknown"}</span><small>${pickLabel(event.overall)} · ${manager(event.team).name}</small></div><div class="history-actions"><span class="pos-pill pos-${player?.pos || "QB"}">${player?.pos || "?"}</span><button class="history-edit" data-edit-pick="${event.overall}" type="button">Edit</button></div></div>`;
+      return `<div class="history-row"><div class="history-main"><span>${player?.name || "Unknown"}</span><small>${pickLabel(event.overall)} · ${manager(event.team).name} · ${sourceLabel(event)}</small></div><div class="history-actions"><span class="pos-pill pos-${player?.pos || "QB"}">${player?.pos || "?"}</span><button class="history-edit" data-edit-pick="${event.overall}" type="button">Edit</button></div></div>`;
     }).join("") : `<div class="empty-state">All 10 keepers are loaded. Enter the first live selection from the board.</div>`;
   }
 
@@ -545,6 +703,9 @@
     event.playerId = player.id;
     event.timestamp = new Date().toISOString();
     event.source = "manual-correction";
+    event.syncKey = null;
+    event.externalId = null;
+    event.externalName = null;
     saveState();
     els.pickDialog.close();
     render();
@@ -685,6 +846,13 @@
   els.recoverDraft.addEventListener("click", recoverPriorSnapshot);
   els.removePick.addEventListener("click", removeEditingPick);
   els.rewindPick.addEventListener("click", rewindEditingPick);
+
+  window.DraftCommandLive = Object.freeze({
+    ingestSnapshot,
+    resolvePlayer: (rawPick) => resolveExternalPlayer(rawPick),
+    profile: Object.freeze({ teamCount: TEAM_COUNT, rounds: ROUNDS, platform: "espn", league: "Tony 2026 ESPN keeper league" }),
+    state: () => ({ events: state.events.map((event) => ({ ...event })), currentPick: currentPick() }),
+  });
 
   els.rosterManager.innerHTML = MANAGERS.slice(1).map((item) => `<option value="${item.id}">${item.id}. ${item.name}</option>`).join("");
   loadState();
