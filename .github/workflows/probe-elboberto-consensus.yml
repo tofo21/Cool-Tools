@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - 'fantasy-draft/research/probe_elboberto_consensus_v03.py'
+      - 'fantasy-draft/research/probe_elboberto_consensus_v03*.py'
       - '.github/workflows/probe-elboberto-consensus.yml'
 
 permissions:
@@ -24,7 +24,7 @@ jobs:
           python-version: '3.12'
 
       - name: Probe preserved workbooks
-        run: python fantasy-draft/research/probe_elboberto_consensus_v03.py
+        run: python fantasy-draft/research/probe_elboberto_consensus_v03b.py
 
       - name: Upload probe artifact
         uses: actions/upload-artifact@v4
