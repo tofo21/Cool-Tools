@@ -31,6 +31,9 @@ jobs:
       - name: Build 2020-2025 master player-season panel
         run: python fantasy-draft/research/build_master_panel.py
 
+      - name: Finalize identity and QA
+        run: python fantasy-draft/research/finalize_panel_v01.py
+
       - name: Upload research panel artifact
         uses: actions/upload-artifact@v4
         with:
