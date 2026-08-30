@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b0f0d">
+  <meta name="description" content="A live 2026 fantasy football draft decision engine for Tony's 10-team PPR keeper league.">
+  <title>Draft Command 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="../" aria-label="Cool Tools home">
+      <span class="brand-mark">DC</span>
+      <span><strong>Draft Command</strong><small>2026 decision engine</small></span>
+    </a>
+    <div class="topbar-meta">
+      <span class="status-dot"><i></i> Board loaded</span>
+      <span class="league-chip">10-team · PPR · 2 FLEX · Pick 1.05</span>
+      <button class="ghost-btn" id="resetDraft" type="button">Reset draft</button>
+    </div>
+  </header>
+
+  <main class="app-shell">
+    <aside class="left-rail">
+      <section class="panel on-clock-panel">
+        <p class="eyebrow">Live draft</p>
+        <div class="pick-display">
+          <span id="roundPick">1.01</span>
+          <small id="overallPick">Overall 1</small>
+        </div>
+        <div class="clock-owner" id="clockOwner">Team 1 is on the clock</div>
+        <div class="progress-track"><span id="draftProgress"></span></div>
+        <p class="micro" id="nextTonyText">Tony picks in 4 selections at 1.05</p>
+      </section>
+
+      <section class="panel settings-panel">
+        <div class="panel-heading">
+          <div><p class="eyebrow">Price layer</p><h2>Draft room</h2></div>
+        </div>
+        <div class="segmented" role="group" aria-label="Draft platform">
+          <button class="platform-btn active" data-platform="espn" type="button">ESPN</button>
+          <button class="platform-btn" data-platform="sleeper" type="button">Sleeper</button>
+        </div>
+        <dl class="league-rules">
+          <div><dt>Scoring</dt><dd>Full PPR</dd></div>
+          <div><dt>Starters</dt><dd>1 / 2 / 2 / 1 / 2F</dd></div>
+          <div><dt>Roster</dt><dd>16 · no K/DST</dd></div>
+          <div><dt>Format</dt><dd>Snake · 1 keeper</dd></div>
+        </dl>
+      </section>
+
+      <section class="panel picks-panel">
+        <div class="panel-heading compact">
+          <div><p class="eyebrow">Tony's capital</p><h2>Pick map</h2></div>
+        </div>
+        <div class="pick-map" id="pickMap"></div>
+      </section>
+    </aside>
+
+    <section class="workspace">
+      <div class="workspace-head">
+        <div>
+          <p class="eyebrow">Decision window <span id="decisionWindow">1.05 → 2.06</span></p>
+          <h1 id="workspaceTitle">Projected targets for Tony at 1.05</h1>
+        </div>
+        <div class="snapshot-note">Board snapshot <strong>Aug. 27</strong></div>
+      </div>
+
+      <section class="recommendation-grid" aria-label="Draft recommendations">
+        <article class="recommend-card primary" id="bestOverallCard"></article>
+        <article class="recommend-card" id="bestValueCard"></article>
+        <article class="recommend-card" id="bestFitCard"></article>
+      </section>
+
+      <section class="decision-strip" id="decisionStrip"></section>
+
+      <section class="panel board-panel">
+        <div class="board-toolbar">
+          <div>
+            <p class="eyebrow">Live player pool</p>
+            <h2>Decision board</h2>
+          </div>
+          <label class="search-box">
+            <span aria-hidden="true">⌕</span>
+            <input id="playerSearch" type="search" placeholder="Search player or team" autocomplete="off">
+          </label>
+        </div>
+        <div class="filter-row" role="group" aria-label="Position filter">
+          <button class="filter-btn active" data-pos="ALL" type="button">All</button>
+          <button class="filter-btn" data-pos="QB" type="button">QB</button>
+          <button class="filter-btn" data-pos="RB" type="button">RB</button>
+          <button class="filter-btn" data-pos="WR" type="button">WR</button>
+          <button class="filter-btn" data-pos="TE" type="button">TE</button>
+          <span class="board-count" id="boardCount"></span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Player</th>
+                <th>League value</th>
+                <th id="platformHeader">ESPN price</th>
+                <th>Survives next pick</th>
+                <th>Call</th>
+                <th><span class="sr-only">Draft action</span></th>
+              </tr>
+            </thead>
+            <tbody id="playerTable"></tbody>
+          </table>
+        </div>
+        <button class="load-more" id="loadMore" type="button">Show 20 more</button>
+      </section>
+
+      <footer class="source-note">
+        <strong>Model:</strong> ECR is the underlying value anchor; roster construction and 2-FLEX scarcity create league value; ESPN/Sleeper room order creates price and survival. Availability is probabilistic, not a guarantee. Source layer: ESPN & Sleeper 2020–2026 sourcebooks plus the Aug. 27, 2026 JuiceBoxOne PPR room-rank snapshot.
+      </footer>
+    </section>
+
+    <aside class="right-rail">
+      <section class="panel roster-panel">
+        <div class="panel-heading">
+          <div><p class="eyebrow">Tony's team</p><h2>Roster build</h2></div>
+          <span class="roster-count" id="rosterCount">0 / 16</span>
+        </div>
+        <div class="roster-needs" id="rosterNeeds"></div>
+        <div class="roster-list" id="rosterList"></div>
+      </section>
+
+      <section class="panel history-panel">
+        <div class="panel-heading">
+          <div><p class="eyebrow">Draft log</p><h2>Recent picks</h2></div>
+          <button class="text-btn" id="undoPick" type="button" disabled>Undo</button>
+        </div>
+        <div class="history-list" id="historyList"></div>
+      </section>
+
+      <section class="panel cliff-panel" id="cliffPanel"></section>
+    </aside>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="./data/players.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
