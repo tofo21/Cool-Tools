@@ -38,7 +38,7 @@ jobs:
         run: python fantasy-draft/research/attach_platform_layers_v02c.py
 
       - name: Attach preserved 2022-2025 FantasyPros consensus projections
-        run: python fantasy-draft/research/attach_preserved_consensus_v03.py
+        run: python fantasy-draft/research/attach_preserved_consensus_v03b.py
 
       - name: Upload research panel artifact
         uses: actions/upload-artifact@v4
