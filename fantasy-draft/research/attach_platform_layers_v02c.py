@@ -1,13 +1,45 @@
 import io
+from pathlib import Path
 
 import pandas as pd
 
 import attach_platform_layers_v02b as base
 
+ORIG_READ_CSV = pd.read_csv
+STRING_PLATFORM_FIELDS = [
+    "espn_snapshot_date",
+    "sleeper_snapshot_date",
+    "sleeper_source_state",
+    "espn_rank_snapshot_date",
+    "espn_adp_snapshot_date",
+    "espn_rank_source_url",
+    "espn_adp_source_url",
+    "espn_adp_retrieval_url",
+    "sleeper_source_url",
+    "sleeper_retrieval_url",
+    "sleeper_source_note",
+]
+
+
+def read_csv_with_platform_dtypes(*args, **kwargs):
+    df = ORIG_READ_CSV(*args, **kwargs)
+    if args:
+        try:
+            is_panel = Path(args[0]).resolve() == Path(base.INFILE).resolve()
+        except (TypeError, OSError):
+            is_panel = False
+        if is_panel:
+            for col in STRING_PLATFORM_FIELDS:
+                if col not in df.columns:
+                    df[col] = pd.Series([None] * len(df), dtype="object")
+                else:
+                    df[col] = df[col].astype("object")
+    return df
+
 
 def robust_read_fp_archive(season: int) -> pd.DataFrame:
     raw_bytes = base.get_bytes(base.FP_MIRRORS[season])
-    raw = pd.read_csv(
+    raw = ORIG_READ_CSV(
         io.BytesIO(raw_bytes),
         engine="python",
         on_bad_lines="skip",
@@ -31,12 +63,8 @@ def robust_read_fp_archive(season: int) -> pd.DataFrame:
     return out
 
 
+base.pd.read_csv = read_csv_with_platform_dtypes
 base.read_fp_archive = robust_read_fp_archive
-
-# Pandas 3.0 no longer permits assigning strings into float columns initialized
-# with np.nan. The base builder uses np.nan only to create new mixed-type
-# platform/provenance columns, so initialize those columns with None/object dtype.
-base.np.nan = None
 
 if __name__ == "__main__":
     base.build()
