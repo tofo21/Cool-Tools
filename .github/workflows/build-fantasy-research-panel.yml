@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - 'fantasy-draft/research/**'
+      - 'fantasy-draft/research/*.py'
       - '.github/workflows/build-fantasy-research-panel.yml'
 
 permissions:
@@ -37,8 +37,8 @@ jobs:
       - name: Attach ESPN and Sleeper platform layers
         run: python fantasy-draft/research/attach_platform_layers_v02c.py
 
-      - name: Attach preserved 2021-2025 FantasyPros consensus projections
-        run: python fantasy-draft/research/attach_preserved_consensus_v03c.py
+      - name: Attach frozen Step 8 consensus projection layer
+        run: python fantasy-draft/research/attach_preserved_consensus_v04.py
 
       - name: Upload research panel artifact
         uses: actions/upload-artifact@v4
