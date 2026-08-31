@@ -1,282 +1,174 @@
-# Fantasy Draft Research Source Commit Log
+# Fantasy Draft Research Source Commit Log v0.7
 
-This file records source-interpretation decisions that materially affect the historical player-season panel schema or downstream model treatment. It supplements, but does not replace, the canonical research contract and sourcebooks.
+This file records source-interpretation decisions that materially affect the historical player-season panel or downstream model treatment.
 
-## v0.2 | ESPN + Sleeper historical platform layers | 2026-08-30
+## v0.2 | ESPN and Sleeper platform layers
 
 ### ESPN
 
-1. **Treat ESPN official/default rank and realized ESPN ADP as separate features.** Their disagreement is a potentially useful behavioral signal and should not be collapsed during ingestion.
-2. **Store the preserved 2020-2025 ESPN ADP archive as `espn_adp_rank` (ordinal), not `espn_adp` (continuous average pick).** Do not manufacture decimal ADP from ordinal archive values. Leave `espn_adp` null unless a defensible continuous source is acquired.
-3. **Store ranking and ADP snapshot dates separately.** The official ranking artifact and the historical ADP archive often come from different preseason dates. Use `espn_rank_snapshot_date` and `espn_adp_snapshot_date`; retain `espn_snapshot_date` only for backwards compatibility with the official ranking snapshot.
-4. **Compute `espn_rank_adp_gap = espn_adp_rank - espn_rank` only when both values exist.** This is a derived divergence feature, not a new independent source.
-5. **Canonical rank source:** official ESPN PPR draft-kit PDFs. **Canonical ADP source:** FantasyPros historical ESPN-specific PPR ADP column. Public GitHub CSV copies are retrieval mirrors only and their currentized team metadata must not be used.
+- Preserve official/default PPR rank and realized ESPN ADP separately.
+- Historical ordinal ADP remains ordinal; do not manufacture decimal average-pick precision.
+- Store rank and ADP snapshot dates separately.
+- Compute rank-versus-ADP gaps only from comparable fields.
+- Preserve raw values and retrieval provenance.
 
 ### Sleeper
 
-1. **Sleeper's default redraft board is ADP-driven.** Do not count a separate Sleeper 'rank' and Sleeper ADP as two independent market votes.
-2. **For 2021-2025, store the preserved FantasyPros Sleeper-specific historical PPR value as `sleeper_adp_order` (ordinal).** Do not convert the ordinal archive into fictitious continuous ADP.
-3. **For 2020 only, use FantasyData historical PPR ADP as a medium-confidence reconstruction.** Populate continuous `sleeper_adp`, derive `sleeper_adp_order`, and mark `sleeper_source_state = reconstructed`. This must remain distinguishable from the preserved 2021-2025 Sleeper-specific archive.
-4. **Sensitivity rule:** analyses that require strict identical-source comparability across all seasons should either exclude the 2020 Sleeper feature or run it as a separate sensitivity specification.
-
-### General provenance / QA
-
-1. Preserve both **canonical source URL** and **retrieval mirror URL** when the historical data is downloaded from a public archival copy.
-2. Never use currentized team fields from historical mirror CSVs for player-season identity or preseason team assignment.
-3. Missing platform values remain null. Coverage limits are source coverage, not values to impute during ingestion.
-4. Validate each season against known sourcebook anchors (official ESPN top-five ordering and ESPN/Sleeper ADP leaders) before accepting the build.
+- Sleeper default redraft order is generally ADP-driven.
+- Do not count default order and ADP as two independent market votes.
+- 2021-2025 uses the preserved Sleeper-specific ordinal archive.
+- 2020 is a separately flagged FantasyData reconstruction.
+- Missing platform values remain missing.
 
-### Implemented panel fields
+## v0.4 | Consensus projections
 
-- `espn_rank`
-- `espn_rank_snapshot_date`
-- `espn_adp_rank`
-- `espn_adp_snapshot_date`
-- `espn_rank_adp_gap`
-- `espn_rank_source_url`
-- `espn_adp_source_url`
-- `espn_adp_retrieval_url`
-- `sleeper_adp`
-- `sleeper_adp_order`
-- `sleeper_snapshot_date`
-- `sleeper_source_state`
-- `sleeper_source_url`
-- `sleeper_retrieval_url`
-- `sleeper_source_note`
+- Consensus statistical projections are the Player Truth baseline.
+- ECR and ADP do not substitute for missing component projections.
+- Canonical full-PPR projected points are recomputed from projected football statistics.
+- 2021 uses the Roto Street / ElBoberto FantasyPros-consensus bridge.
+- 2022-2025 uses direct annual ElBoberto releases.
+- 2020 is `SOURCE_GAP_FROZEN_NOT_IMPUTED`.
+- Primary Model A / Model B testing uses 2021-2025.
+- Same-direct-source sensitivity uses 2022-2025.
 
-### Build
+Canonical panel: `master_player_season_panel_2020_2025_v0_4.csv`
 
-Reproducible pipeline entrypoint: `fantasy-draft/research/attach_platform_layers_v02c.py` via `.github/workflows/build-fantasy-research-panel.yml`.
+## v0.5 | High-stakes markets
 
----
+- Do not create a universal `high_stakes_adp` field.
+- FFPC/FPC, NFFC, and best ball remain separate market families.
+- High stakes is a hypothesis, not an automatic predictive credential.
+- 2021-2023 FFPC/FPC data remains explicitly TE-premium.
+- 2024-2025 NFFC observations remain ordinal and early.
+- Compare high-stakes models on identical rows.
+- Run position-specific and TE-adjusted/non-TE sensitivities.
+- NFFC gaps are not filled with FFPC values.
 
-## v0.4 | Historical consensus statistical projections / Step 8 | 2026-08-30
+Final source matching:
 
-### Core interpretation
+| Season | Source | Matched |
+|---|---|---:|
+| 2021 | FFPC/FPC | 214 / 214 |
+| 2022 | FFPC/FPC | 157 / 159 |
+| 2023 | FFPC | 160 / 160 |
+| 2024 | NFFC | 50 / 50 |
+| 2025 | NFFC | 211 / 211 |
 
-1. **Consensus statistical projections are a Player Truth baseline, not a draft-market signal.** Do not substitute ECR, ADP, ESPN rank, or Sleeper order for missing statistical projections.
-2. **Canonical projected fantasy points are recomputed from projected football components.** The workbook's standard-scoring FPTS field is retained for provenance but is not the full-PPR modeling target.
-3. **Use the same standardized full-PPR scoring formula for projected and realized outcomes.** This prevents scoring-system differences from masquerading as projection error.
+Canonical panel: `master_player_season_panel_2020_2025_v0_5.csv`
 
-### Accepted source family
+## v0.6 | Sportsbook and Vegas markets
 
-1. **2022-2025:** direct final pre-kickoff annual ElBoberto workbooks using FantasyPros consensus projections.
-2. **2021:** accepted as a separately flagged bridge using the contemporaneous Roto Street Journal ElBoberto-derived workbook. Its accompanying article states aggregate FantasyPros projections updated 2021-08-27.
-3. **2021 provenance must remain distinguishable** with `fantasypros_consensus_via_2021_rotostreet_elboberto_workbook`; do not relabel it as a direct annual ElBoberto release.
-4. **2020 is frozen as `SOURCE_GAP_FROZEN_NOT_IMPUTED`.** The original Reddit post body/download is deleted; targeted Wayback recovery found no preserved thread captures; the accessible Roto Street derivative explicitly blends FantasyPros (75%) and FantasyPoints (25%) and is therefore rejected from the primary series.
+### Core rules
 
-### Final accepted snapshots
+- Sportsbook information is an independent hypothesis, not revealed truth.
+- Team environment, player props, and category calibration stay separate.
+- Season-long availability risk is separated from performance conditional on playing.
+- Regional, editorial, and projection-screened prop tables remain selection-biased observations.
+- Source date, source family, book definition, and odds availability remain explicit.
 
-- 2021: Roto Street / ElBoberto-derived FantasyPros consensus, 2021-08-27
-- 2022: ElBoberto v1.5, 2022-09-06
-- 2023: ElBoberto v1.03, 2023-09-05
-- 2024: ElBoberto v1.05, 2024-08-29
-- 2025: ElBoberto v1.06, 2025-09-03
+### Team win totals
 
-All accepted snapshots are pre-kickoff and pass the build validation.
+The archive contains 192 observations, exactly 32 teams for each season from 2020 through 2025.
 
-### Final coverage
+Accepted snapshots:
 
-| Season | Draft-market projection coverage | ECR Top-300 coverage | State |
-|---|---:|---:|---|
-| 2020 | 0.00% | 0.00% | Frozen source gap |
-| 2021 | 91.21% | 98.27% | PASS |
-| 2022 | 90.89% | 97.18% | PASS |
-| 2023 | 94.83% | 97.83% | PASS |
-| 2024 | 90.61% | 99.64% | PASS |
-| 2025 | 95.28% | 99.65% | PASS |
+- 2020 Boyd's Bets retrospective archive;
+- 2021 FanDuel via SportsBettingDime, dated 2021-09-06;
+- 2022 Barstool via SportsBettingDime, dated 2022-03-28;
+- 2023 Caesars via CBS Sports, dated 2023-03-29;
+- 2024 theScore post-free-agency opening market;
+- 2025 Boyd's Bets multi-book summary, dated 2025-08-03.
 
-### Validation policy
+Team win totals populate 3,736 of 3,902 player-season rows. Generic win totals do not become offense-only scores.
 
-1. Primary Model A / Model B historical validation uses **2021-2025**.
-2. Run a **2022-2025 same-direct-distribution sensitivity test** because those seasons use the direct annual ElBoberto releases.
-3. Do not impute the 2020 consensus projection feature.
-4. The known 2020 75/25 blended derivative may be tested later only as a separately labeled robustness specification.
-5. Direct FantasyPros historical `year=` page queries remain disallowed because testing showed that they can silently return current-season content.
+### Player props
 
-### Implemented panel fields
+The final long-form archive contains 68 selected observations:
 
-- `consensus_proj_points`
-- `consensus_proj_pass_attempts`
-- `consensus_proj_pass_completions`
-- `consensus_proj_pass_yards`
-- `consensus_proj_pass_tds`
-- `consensus_proj_pass_ints`
-- `consensus_proj_rush_attempts`
-- `consensus_proj_rush_yards`
-- `consensus_proj_rush_tds`
-- `consensus_proj_receptions`
-- `consensus_proj_rec_yards`
-- `consensus_proj_rec_tds`
-- `consensus_proj_fumbles_lost`
-- `consensus_proj_source_points_standard`
-- consensus source URL/version/date/hash/state provenance fields
+- 2021 PFF regional excerpt: 11;
+- 2024 Footballguys editorial set: 5;
+- 2025 PFF projection-screened set: 52.
 
-### Build
+All match canonical identity, but all remain `primary_model_eligible = false`. The primary player-level `vegas_*` fields remain blank.
 
-Canonical Step 8 entrypoint: `fantasy-draft/research/attach_preserved_consensus_v04.py` via `.github/workflows/build-fantasy-research-panel.yml`.
+Canonical panel: `master_player_season_panel_2020_2025_v0_6.csv`
 
-Canonical Step 8 panel: `master_player_season_panel_2020_2025_v0_4.csv`.
+## v0.7 | Football fundamentals / Step 11
 
-**Step 8 status: COMPLETE.**
+### Temporal rule
 
----
+- Every football feature is lagged exactly one completed regular season.
+- Target season `Y` uses source season `Y - 1`.
+- No target-season regular-season usage or efficiency enters a preseason row.
+- Rookies and players without a prior NFL sample remain missing rather than zero-filled.
 
-## v0.5 | High-stakes / advanced fantasy draft markets / Step 9 | 2026-08-30
+### Accepted source families
 
-### Core interpretation
+- nflverse player regular-season summaries, 2019-2024;
+- nflverse/PFR snap counts, 2019-2024 regular seasons;
+- nflverse play-by-play, 2019-2024 regular seasons;
+- ffverse `ffopportunity` expected fantasy points, 2019-2024;
+- PFR advanced rushing and receiving through nflverse;
+- NFL Next Gen Stats passing, rushing, and receiving through nflverse;
+- DynastyProcess stable-ID crosswalk.
 
-1. **Do not create a synthetic universal `high_stakes_adp` field at ingestion.** NFFC, FFPC/FPC, and best-ball markets have different scoring, roster structures, contest incentives, and historical source quality.
-2. **High stakes is a hypothesis, not a credential.** NFFC/FFPC receives no special production weight until incremental predictive value is demonstrated out of sample after consensus/public/platform markets are controlled.
-3. **Preserve source-family meaning before normalization.** Residuals and scoring/position adjustments belong downstream.
+### Opportunity and role
 
-### NFFC direct historical audit
+The layer adds:
 
-1. The current NFFC page loads data from `/adp.data.php` using team/date/team-count/draft-type/sport/position/league filters.
-2. Valid 2026 requests return a full board with continuous ADP, minimum pick, maximum pick, and pick count.
-3. The same valid request structure returned `No ADP Information Available` for preseason windows in every historical season 2020-2025.
-4. Therefore the current NFFC backend is a **2026 live/application source**, not a historical archive for the training panel.
+- games, pass attempts, carries, targets, receptions, and touches;
+- offensive snaps and weighted snap share;
+- active-game carry, target, and air-yard shares;
+- WOPR;
+- red-zone, goal-line, end-zone, deep, third-down, and two-minute opportunity;
+- expected fantasy points and team share;
+- opportunity-per-snap and expected-points-per-opportunity measures.
 
-### Accepted FFPC/FPC full-table observations
+Quarterback kneels are excluded from rushing opportunity.
 
-- 2021-09-02: normal season-long FFPC/FPC, full public table, `preserved_full_table`
-- 2022-06-25: normal season-long FFPC/FPC, full public table, `preserved_full_table_early`
-- 2023-08-01: normal season-long FFPC, full public table, `preserved_full_table`
+### Efficiency
 
-All three explicitly use **1.5 PPR for tight ends**. Do not treat their ADP gap versus standard-PPR markets as a pure information signal without position/scoring adjustment.
+The layer preserves:
 
-### Accepted NFFC ordinal observations
+- EPA and CPOE;
+- volume-normalized basic efficiency;
+- PFR contact, broken-tackle, aDOT, drop, and YAC metrics;
+- NGS separation, expected YAC, rushing yards over expectation, stacked-box, time-to-throw, aggressiveness, and expected-completion metrics;
+- ffopportunity fantasy points and yards over expectation.
 
-- 2024-05-23: public top-50 recent-NFFC ordinal board, `preserved_ordinal_early_generic`
-- 2025-05-30: public NFFC ordinal movement board, `preserved_ordinal_early_generic`
+Raw efficiency and its denominator remain separate. Shrinkage, minimum-volume filters, and transformations occur inside model-training folds rather than in ingestion.
 
-These sources do not expose defensible continuous ADP. Store the published ordinal rank only. Do not manufacture decimal precision.
+### Route and first-read gaps
 
-### Best-ball rule
+- No accepted comparable public all-player route-run series spans 2019-2024.
+- `prev_routes`, `prev_route_participation`, `prev_targets_per_route`, and `prev_yards_per_route` remain null.
+- Offensive snaps are not relabeled as routes.
+- First-read target share remains an explicit public historical source gap.
 
-Best-ball observations remain a separate market family. Do not merge FFPC best ball, Underdog, DraftKings, Drafters, or best-ball-inclusive NFFC aggregates into managed redraft ADP at the source layer.
+### Final v0.7 integrity
 
-### Model-D validation rule
+- 3,902 player-season rows;
+- 268 fields;
+- 132 new football fields;
+- 0 duplicate season/player IDs;
+- 0 lag-alignment violations;
+- 2,905 rows with prior core NFL statistics;
+- 2,943 rows with snap share;
+- 2,947 rows with weighted opportunity;
+- 0 populated route values.
 
-1. Compare Model C and Model D on the **same player-season rows** to prevent source coverage from masquerading as predictive lift.
-2. Run position-specific specifications.
-3. Run an FFPC non-TE or TE-adjusted sensitivity analysis.
-4. Treat early snapshots as early information, not final preseason prices.
-5. Report season count and player-season sample size for every high-stakes result.
-6. Never impute missing NFFC from FFPC or vice versa.
+Draft-market coverage for core/snap/opportunity families is approximately 80% by season. PFR advanced coverage is approximately 79%-82%. NGS coverage is approximately 39%-47%, reflecting qualifying-player thresholds.
 
-### Implemented v0.5 fields
+Canonical panel: `master_player_season_panel_2020_2025_v0_7.csv`
 
-Separate FFPC and NFFC fields are added for ADP/rank/prior rank/min/max/date/source state/source URL/contest/scoring format where the source actually exposes those values.
+Canonical production entrypoint: `fantasy-draft/research/build_football_fundamentals_v07.py`
 
-Long-form audit output: `high_stakes_market_observations_v05.csv`.
+Final workflow run: `33353208203`
 
-### Build
+Artifact SHA-256: `fe6872854174169800250ba654695bc29fd7c7695d612d50bb0205efbf2a6d20`
 
-Canonical Step 9 entrypoint: `fantasy-draft/research/build_high_stakes_market_v05b.py` via `.github/workflows/build-fantasy-research-panel.yml`.
+## Current status
 
-Canonical Step 9 panel: `master_player_season_panel_2020_2025_v0_5.csv`.
+Steps 8, 9, 10, and 11 are complete.
 
-**Step 9 status: COMPLETE.**
-
----
-
-## v0.6 | Sportsbook / Vegas market / Step 10 | 2026-08-30
-
-### Core interpretation
-
-1. **Sportsbook information is a hypothesis, not revealed truth.** Raw player season-total lines are not automatically unbiased expected means.
-2. **Keep team environment, player props and published calibration evidence separate.** Do not create one generic `vegas_score` at ingestion.
-3. **Separate availability from conditional performance.** Season-long overs have asymmetric failure paths through injury, benching, role loss and related availability shocks.
-4. **Selection bias is source metadata.** Regional excerpts, editorial picks and projection-screened disagreements cannot be treated as representative full boards.
-5. **Mixed-source timing must remain visible.** A March opening line and an August late-preseason line are not interchangeable observations.
-
-### Team win-total layer
-
-The final source archive contains exactly 192 team-season observations: 32 teams for every season from 2020 through 2025.
-
-Accepted public snapshots:
-
-- 2020 Boyd's Bets retrospective archive, line only, `retrospective_preserved_archive_no_odds`
-- 2021-09-06 SportsBettingDime / FanDuel, `preserved_late_preseason_book_table`
-- 2022-03-28 SportsBettingDime / Barstool Sportsbook, `preserved_early_preseason_book_table`
-- 2023-03-29 CBS Sports / Caesars, `preserved_early_preseason_book_table`
-- 2024 theScore post-free-agency opening market, over price only, `preserved_opening_market_table_partial_odds`
-- 2025-08-03 Boyd's Bets multi-book summary, `preserved_preseason_multi_book_summary`
-
-Rules:
-
-1. Store source line and exposed American odds separately.
-2. Missing odds remain null.
-3. Use exact dates only when supported; otherwise preserve a bounded snapshot window.
-4. Retain source family and timing for downstream control and sensitivity tests.
-5. Do not populate `team_offense_market_score` from a generic win total.
-
-After team normalization, `team_win_total` is populated for 3,736 of 3,902 player-seasons. Unmatched rows are primarily free agents or noncanonical preseason-team labels, not missing team source rows.
-
-### Player-prop public archive audit
-
-No comprehensive, consistently sampled, timestamped public NFL season-futures player-prop archive was verified across 2020-2025.
-
-Accepted long-form observations remain non-production:
-
-- 2021 PFF NFC North excerpt: 11 rows, `regional_public_excerpt_nfc_north`
-- 2024 Footballguys selected WR props: 5 rows, `editorial_selected_props`
-- 2025 PFF projection-versus-line tables: 52 rows, `projection_screened_extremes`
-
-The final archive contains 68 observations across 58 unique player-seasons. All 68 match the canonical identity panel, and all carry `primary_model_eligible = false`.
-
-### Calibration evidence
-
-The 4for4 retrospective study of 604 closing 2021-2022 season-long props is retained at category level. It reported 369 unders and 235 overs overall. Thirty rows are stored: ten market categories for 2021, ten for 2022 and ten combined summaries.
-
-### Formal Model-C rule
-
-1. Do not populate the primary `vegas_*` fields from selected or excerpted observations.
-2. A future player-prop source must provide broad, consistently sampled preseason coverage with player, market, line, book/consensus definition and timestamp or bounded window.
-3. Compare Model B and Model C on identical rows.
-4. Preserve odds and remove vig only downstream.
-5. Build category-aware Vegas-versus-consensus residuals rather than using raw lines as universal expectations.
-6. Require a verified sample/schema before recommending a paid vendor; weekly game-prop coverage is not evidence of historical season-futures coverage.
-7. Team win totals are eligible for controlled environment testing now; player props remain a nested exploratory lane.
-
-### Implemented v0.6 fields
-
-Team market:
-
-- `team_win_total`
-- `team_win_total_super_bowl_odds`
-- snapshot/source/window/provider/book provenance fields
-
-Player observation metadata:
-
-- `sportsbook_player_prop_observation_count`
-- `sportsbook_player_prop_source_count`
-- `sportsbook_player_prop_sampling_frames`
-- `sportsbook_player_prop_primary_model_eligible`
-
-The primary `vegas_*` line fields remain empty and `team_offense_market_score` remains null.
-
-### Build and QA
-
-Canonical Step 10 entrypoint: `fantasy-draft/research/build_sportsbook_market_v06c.py` via `.github/workflows/build-fantasy-research-panel.yml`.
-
-Supporting modules:
-
-- `build_sportsbook_market_v06.py`: schema, matching, QA and output logic
-- `build_sportsbook_market_v06b.py`: curated complete team-market snapshots
-- `build_sportsbook_market_v06c.py`: curated 2025 PFF player-prop tables and final entrypoint
-
-Canonical Step 10 panel: `master_player_season_panel_2020_2025_v0_6.csv`.
-
-Final integrity:
-
-- 3,902 player-season rows
-- 0 duplicate season/player IDs
-- 192 team-market observations
-- 68 of 68 player-prop identity matches
-- 0 primary-model-eligible player-prop rows
-- 0 populated primary `vegas_*` fields
-- 0 populated `team_offense_market_score` values
-
-**Step 10 status: COMPLETE.**
+Next: the formal walk-forward signal scorecard, beginning with consensus, fantasy markets, team win totals, opportunity/role, and position-specific shrunk efficiency. Sparse high-stakes and player-prop families remain nested-sample studies.
