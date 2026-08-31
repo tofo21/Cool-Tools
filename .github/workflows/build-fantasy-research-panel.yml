@@ -13,7 +13,7 @@ permissions:
 jobs:
   build-panel:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 45
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -46,10 +46,13 @@ jobs:
       - name: Attach Step 10 sportsbook market layer
         run: python fantasy-draft/research/build_sportsbook_market_v06c.py
 
+      - name: Attach Step 11 football fundamentals layer
+        run: python fantasy-draft/research/build_football_fundamentals_v07.py
+
       - name: Upload research panel artifact
         uses: actions/upload-artifact@v4
         with:
-          name: master-player-season-panel-2020-2025-v0-6
+          name: master-player-season-panel-2020-2025-v0-7
           path: fantasy-draft/research/output/
           if-no-files-found: error
           retention-days: 30
