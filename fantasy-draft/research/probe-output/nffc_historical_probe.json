@@ -1,0 +1,867 @@
+{
+  "attempts": [
+    {
+      "season": 2020,
+      "variant": 0,
+      "from_date": "2020-08-01",
+      "to_date": "2020-09-09",
+      "team_id": "",
+      "time_period": "",
+      "num_teams": "",
+      "draft_type": "",
+      "sport": "nfl",
+      "position": "",
+      "league_teams": "0",
+      "as_board": "",
+      "status": 200,
+      "final_url": "https://nfc.shgn.com/adp.data.php",
+      "body_len": 64,
+      "parsed_rows": 1,
+      "first_row": "No ADP Information Available",
+      "second_row": "",
+      "contains_error": false
+    },
+    {
+      "season": 2020,
+      "variant": 1,
+      "from_date": "2020-08-01",
+      "to_date": "2020-09-09",
+      "team_id": "0",
+      "time_period": "custom",
+      "num_teams": "12",
+      "draft_type": "",
+      "sport": "nfl",
+      "position": "",
+      "league_teams": "0",
+      "as_board": "",
+      "status": 200,
+      "final_url": "https://nfc.shgn.com/adp.data.php",
+      "body_len": 64,
+      "parsed_rows": 1,
+      "first_row": "No ADP Information Available",
+      "second_row": "",
+      "contains_error": false
+    },
+    {
+      "season": 2020,
+      "variant": 2,
+      "from_date": "2020-08-01",
+      "to_date": "2020-09-09",
+      "team_id": "0",
+      "time_period": "custom",
+      "num_teams": "12",
+      "draft_type": "draft",
+      "sport": "nfl",
+      "position": "",
+      "league_teams": "0",
+      "as_board": "",
+      "status": 200,
+      "final_url": "https://nfc.shgn.com/adp.data.php",
+      "body_len": 64,
+      "parsed_rows": 1,
+      "first_row": "No ADP Information Available",
+      "second_row": "",
+      "contains_error": false
+    },
+    {
+      "season": 2021,
+      "variant": 0,
+      "from_date": "2021-08-01",
+      "to_date": "2021-09-08",
+      "team_id": "",
+      "time_period": "",
+      "num_teams": "",
+      "draft_type": "",
+      "sport": "nfl",
+      "position": "",
+      "league_teams": "0",
+      "as_board": "",
+      "status": 200,
+      "final_url": "https://nfc.shgn.com/adp.data.php",
+      "body_len": 64,
+      "parsed_rows": 1,
+      "first_row": "No ADP Information Available",
+      "second_row": "",
+      "contains_error": false
+    },
+    {
+      "season": 2021,
+      "variant": 1,
+      "from_date": "2021-08-01",
+      "to_date": "2021-09-08",
+      "team_id": "0",
+      "time_period": "custom",
+      "num_teams": "12",
+      "draft_type": "",
+      "sport": "nfl",
+      "position": "",
+      "league_teams": "0",
+      "as_board": "",
+      "status": 200,
+      "final_url": "https://nfc.shgn.com/adp.data.php",
+      "body_len": 64,
+      "parsed_rows": 1,
+      "first_row": "No ADP Information Available",
+      "second_row": "",
+      "contains_error": false
+    },
+    {
+      "season": 2021,
+      "variant": 2,
+      "from_date": "2021-08-01",
+      "to_date": "2021-09-08",
+      "team_id": "0",
+      "time_period": "custom",
+      "num_teams": "12",
+      "draft_type": "draft",
+      "sport": "nfl",
+      "position": "",
+      "league_teams": "0",
+      "as_board": "",
+      "status": 200,
+      "final_url": "https://nfc.shgn.com/adp.data.php",
+      "body_len": 64,
+      "parsed_rows": 1,
+      "first_row": "No ADP Information Available",
+      "second_row": "",
+      "contains_error": false
+    },
+    {
+      "season": 2022,
+      "variant": 0,
+      "from_date": "2022-08-01",
+      "to_date": "2022-09-07",
+      "team_id": "",
+      "time_period": "",
+      "num_teams": "",
+      "draft_type": "",
+      "sport": "nfl",
+      "position": "",
+      "league_teams": "0",
+      "as_board": "",
+      "status": 200,
+      "final_url": "https://nfc.shgn.com/adp.data.php",
+      "body_len": 64,
+      "parsed_rows": 1,
+      "first_row": "No ADP Information Available",
+      "second_row": "",
+      "contains_error": false
+    },
+    {
+      "season": 2022,
+      "variant": 1,
+      "from_date": "2022-08-01",
+      "to_date": "2022-09-07",
+      "team_id": "0",
+      "time_period": "custom",
+      "num_teams": "12",
+      "draft_type": "",
+      "sport": "nfl",
+      "position": "",
+      "league_teams": "0",
+      "as_board": "",
+      "status": 200,
+      "final_url": "https://nfc.shgn.com/adp.data.php",
+      "body_len": 64,
+      "parsed_rows": 1,
+      "first_row": "No ADP Information Available",
+      "second_row": "",
+      "contains_error": false
+    },
+    {
+      "season": 2022,
+      "variant": 2,
+      "from_date": "2022-08-01",
+      "to_date": "2022-09-07",
+      "team_id": "0",
+      "time_period": "custom",
+      "num_teams": "12",
+      "draft_type": "draft",
+      "sport": "nfl",
+      "position": "",
+      "league_teams": "0",
+      "as_board": "",
+      "status": 200,
+      "final_url": "https://nfc.shgn.com/adp.data.php",
+      "body_len": 64,
+      "parsed_rows": 1,
+      "first_row": "No ADP Information Available",
+      "second_row": "",
+      "contains_error": false
+    },
+    {
+      "season": 2023,
+      "variant": 0,
+      "from_date": "2023-08-01",
+      "to_date": "2023-09-06",
+      "team_id": "",
+      "time_period": "",
+      "num_teams": "",
+      "draft_type": "",
+      "sport": "nfl",
+      "position": "",
+      "league_teams": "0",
+      "as_board": "",
+      "status": 200,
+      "final_url": "https://nfc.shgn.com/adp.data.php",
+      "body_len": 64,
+      "parsed_rows": 1,
+      "first_row": "No ADP Information Available",
+      "second_row": "",
+      "contains_error": false
+    },
+    {
+      "season": 2023,
+      "variant": 1,
+      "from_date": "2023-08-01",
+      "to_date": "2023-09-06",
+      "team_id": "0",
+      "time_period": "custom",
+      "num_teams": "12",
+      "draft_type": "",
+      "sport": "nfl",
+      "position": "",
+      "league_teams": "0",
+      "as_board": "",
+      "status": 200,
+      "final_url": "https://nfc.shgn.com/adp.data.php",
+      "body_len": 64,
+      "parsed_rows": 1,
+      "first_row": "No ADP Information Available",
+      "second_row": "",
+      "contains_error": false
+    },
+    {
+      "season": 2023,
+      "variant": 2,
+      "from_date": "2023-08-01",
+      "to_date": "2023-09-06",
+      "team_id": "0",
+      "time_period": "custom",
+      "num_teams": "12",
+      "draft_type": "draft",
+      "sport": "nfl",
+      "position": "",
+      "league_teams": "0",
+      "as_board": "",
+      "status": 200,
+      "final_url": "https://nfc.shgn.com/adp.data.php",
+      "body_len": 64,
+      "parsed_rows": 1,
+      "first_row": "No ADP Information Available",
+      "second_row": "",
+      "contains_error": false
+    },
+    {
+      "season": 2024,
+      "variant": 0,
+      "from_date": "2024-08-01",
+      "to_date": "2024-09-04",
+      "team_id": "",
+      "time_period": "",
+      "num_teams": "",
+      "draft_type": "",
+      "sport": "nfl",
+      "position": "",
+      "league_teams": "0",
+      "as_board": "",
+      "status": 200,
+      "final_url": "https://nfc.shgn.com/adp.data.php",
+      "body_len": 64,
+      "parsed_rows": 1,
+      "first_row": "No ADP Information Available",
+      "second_row": "",
+      "contains_error": false
+    },
+    {
+      "season": 2024,
+      "variant": 1,
+      "from_date": "2024-08-01",
+      "to_date": "2024-09-04",
+      "team_id": "0",
+      "time_period": "custom",
+      "num_teams": "12",
+      "draft_type": "",
+      "sport": "nfl",
+      "position": "",
+      "league_teams": "0",
+      "as_board": "",
+      "status": 200,
+      "final_url": "https://nfc.shgn.com/adp.data.php",
+      "body_len": 64,
+      "parsed_rows": 1,
+      "first_row": "No ADP Information Available",
+      "second_row": "",
+      "contains_error": false
+    },
+    {
+      "season": 2024,
+      "variant": 2,
+      "from_date": "2024-08-01",
+      "to_date": "2024-09-04",
+      "team_id": "0",
+      "time_period": "custom",
+      "num_teams": "12",
+      "draft_type": "draft",
+      "sport": "nfl",
+      "position": "",
+      "league_teams": "0",
+      "as_board": "",
+      "status": 200,
+      "final_url": "https://nfc.shgn.com/adp.data.php",
+      "body_len": 64,
+      "parsed_rows": 1,
+      "first_row": "No ADP Information Available",
+      "second_row": "",
+      "contains_error": false
+    },
+    {
+      "season": 2025,
+      "variant": 0,
+      "from_date": "2025-08-01",
+      "to_date": "2025-09-03",
+      "team_id": "",
+      "time_period": "",
+      "num_teams": "",
+      "draft_type": "",
+      "sport": "nfl",
+      "position": "",
+      "league_teams": "0",
+      "as_board": "",
+      "status": 200,
+      "final_url": "https://nfc.shgn.com/adp.data.php",
+      "body_len": 64,
+      "parsed_rows": 1,
+      "first_row": "No ADP Information Available",
+      "second_row": "",
+      "contains_error": false
+    },
+    {
+      "season": 2025,
+      "variant": 1,
+      "from_date": "2025-08-01",
+      "to_date": "2025-09-03",
+      "team_id": "0",
+      "time_period": "custom",
+      "num_teams": "12",
+      "draft_type": "",
+      "sport": "nfl",
+      "position": "",
+      "league_teams": "0",
+      "as_board": "",
+      "status": 200,
+      "final_url": "https://nfc.shgn.com/adp.data.php",
+      "body_len": 64,
+      "parsed_rows": 1,
+      "first_row": "No ADP Information Available",
+      "second_row": "",
+      "contains_error": false
+    },
+    {
+      "season": 2025,
+      "variant": 2,
+      "from_date": "2025-08-01",
+      "to_date": "2025-09-03",
+      "team_id": "0",
+      "time_period": "custom",
+      "num_teams": "12",
+      "draft_type": "draft",
+      "sport": "nfl",
+      "position": "",
+      "league_teams": "0",
+      "as_board": "",
+      "status": 200,
+      "final_url": "https://nfc.shgn.com/adp.data.php",
+      "body_len": 64,
+      "parsed_rows": 1,
+      "first_row": "No ADP Information Available",
+      "second_row": "",
+      "contains_error": false
+    },
+    {
+      "season": 2026,
+      "variant": 0,
+      "from_date": "2026-08-01",
+      "to_date": "2026-08-30",
+      "team_id": "",
+      "time_period": "",
+      "num_teams": "",
+      "draft_type": "",
+      "sport": "nfl",
+      "position": "",
+      "league_teams": "0",
+      "as_board": "",
+      "status": 200,
+      "final_url": "https://nfc.shgn.com/adp.data.php",
+      "body_len": 64,
+      "parsed_rows": 1,
+      "first_row": "No ADP Information Available",
+      "second_row": "",
+      "contains_error": false
+    },
+    {
+      "season": 2026,
+      "variant": 1,
+      "from_date": "2026-08-01",
+      "to_date": "2026-08-30",
+      "team_id": "0",
+      "time_period": "custom",
+      "num_teams": "12",
+      "draft_type": "",
+      "sport": "nfl",
+      "position": "",
+      "league_teams": "0",
+      "as_board": "",
+      "status": 200,
+      "final_url": "https://nfc.shgn.com/adp.data.php",
+      "body_len": 64,
+      "parsed_rows": 1,
+      "first_row": "No ADP Information Available",
+      "second_row": "",
+      "contains_error": false
+    },
+    {
+      "season": 2026,
+      "variant": 2,
+      "from_date": "2026-08-01",
+      "to_date": "2026-08-30",
+      "team_id": "0",
+      "time_period": "custom",
+      "num_teams": "12",
+      "draft_type": "draft",
+      "sport": "nfl",
+      "position": "",
+      "league_teams": "0",
+      "as_board": "",
+      "status": 200,
+      "final_url": "https://nfc.shgn.com/adp.data.php",
+      "body_len": 64,
+      "parsed_rows": 1,
+      "first_row": "No ADP Information Available",
+      "second_row": "",
+      "contains_error": false
+    }
+  ],
+  "samples": {
+    "2020_v0": {
+      "payload": {
+        "team_id": "",
+        "time_period": "",
+        "num_teams": "",
+        "draft_type": "",
+        "sport": "nfl",
+        "position": "",
+        "league_teams": "0",
+        "as_board": "",
+        "from_date": "2020-08-01",
+        "to_date": "2020-09-09"
+      },
+      "body_prefix": "\t<tr><td colspan=\"100%\">No ADP Information Available</td></tr>\n\t",
+      "rows": [
+        [
+          "No ADP Information Available"
+        ]
+      ]
+    },
+    "2020_v1": {
+      "payload": {
+        "team_id": "0",
+        "time_period": "custom",
+        "num_teams": "12",
+        "draft_type": "",
+        "sport": "nfl",
+        "position": "",
+        "league_teams": "0",
+        "as_board": "",
+        "from_date": "2020-08-01",
+        "to_date": "2020-09-09"
+      },
+      "body_prefix": "\t<tr><td colspan=\"100%\">No ADP Information Available</td></tr>\n\t",
+      "rows": [
+        [
+          "No ADP Information Available"
+        ]
+      ]
+    },
+    "2020_v2": {
+      "payload": {
+        "team_id": "0",
+        "time_period": "custom",
+        "num_teams": "12",
+        "draft_type": "draft",
+        "sport": "nfl",
+        "position": "",
+        "league_teams": "0",
+        "as_board": "",
+        "from_date": "2020-08-01",
+        "to_date": "2020-09-09"
+      },
+      "body_prefix": "\t<tr><td colspan=\"100%\">No ADP Information Available</td></tr>\n\t",
+      "rows": [
+        [
+          "No ADP Information Available"
+        ]
+      ]
+    },
+    "2021_v0": {
+      "payload": {
+        "team_id": "",
+        "time_period": "",
+        "num_teams": "",
+        "draft_type": "",
+        "sport": "nfl",
+        "position": "",
+        "league_teams": "0",
+        "as_board": "",
+        "from_date": "2021-08-01",
+        "to_date": "2021-09-08"
+      },
+      "body_prefix": "\t<tr><td colspan=\"100%\">No ADP Information Available</td></tr>\n\t",
+      "rows": [
+        [
+          "No ADP Information Available"
+        ]
+      ]
+    },
+    "2021_v1": {
+      "payload": {
+        "team_id": "0",
+        "time_period": "custom",
+        "num_teams": "12",
+        "draft_type": "",
+        "sport": "nfl",
+        "position": "",
+        "league_teams": "0",
+        "as_board": "",
+        "from_date": "2021-08-01",
+        "to_date": "2021-09-08"
+      },
+      "body_prefix": "\t<tr><td colspan=\"100%\">No ADP Information Available</td></tr>\n\t",
+      "rows": [
+        [
+          "No ADP Information Available"
+        ]
+      ]
+    },
+    "2021_v2": {
+      "payload": {
+        "team_id": "0",
+        "time_period": "custom",
+        "num_teams": "12",
+        "draft_type": "draft",
+        "sport": "nfl",
+        "position": "",
+        "league_teams": "0",
+        "as_board": "",
+        "from_date": "2021-08-01",
+        "to_date": "2021-09-08"
+      },
+      "body_prefix": "\t<tr><td colspan=\"100%\">No ADP Information Available</td></tr>\n\t",
+      "rows": [
+        [
+          "No ADP Information Available"
+        ]
+      ]
+    },
+    "2022_v0": {
+      "payload": {
+        "team_id": "",
+        "time_period": "",
+        "num_teams": "",
+        "draft_type": "",
+        "sport": "nfl",
+        "position": "",
+        "league_teams": "0",
+        "as_board": "",
+        "from_date": "2022-08-01",
+        "to_date": "2022-09-07"
+      },
+      "body_prefix": "\t<tr><td colspan=\"100%\">No ADP Information Available</td></tr>\n\t",
+      "rows": [
+        [
+          "No ADP Information Available"
+        ]
+      ]
+    },
+    "2022_v1": {
+      "payload": {
+        "team_id": "0",
+        "time_period": "custom",
+        "num_teams": "12",
+        "draft_type": "",
+        "sport": "nfl",
+        "position": "",
+        "league_teams": "0",
+        "as_board": "",
+        "from_date": "2022-08-01",
+        "to_date": "2022-09-07"
+      },
+      "body_prefix": "\t<tr><td colspan=\"100%\">No ADP Information Available</td></tr>\n\t",
+      "rows": [
+        [
+          "No ADP Information Available"
+        ]
+      ]
+    },
+    "2022_v2": {
+      "payload": {
+        "team_id": "0",
+        "time_period": "custom",
+        "num_teams": "12",
+        "draft_type": "draft",
+        "sport": "nfl",
+        "position": "",
+        "league_teams": "0",
+        "as_board": "",
+        "from_date": "2022-08-01",
+        "to_date": "2022-09-07"
+      },
+      "body_prefix": "\t<tr><td colspan=\"100%\">No ADP Information Available</td></tr>\n\t",
+      "rows": [
+        [
+          "No ADP Information Available"
+        ]
+      ]
+    },
+    "2023_v0": {
+      "payload": {
+        "team_id": "",
+        "time_period": "",
+        "num_teams": "",
+        "draft_type": "",
+        "sport": "nfl",
+        "position": "",
+        "league_teams": "0",
+        "as_board": "",
+        "from_date": "2023-08-01",
+        "to_date": "2023-09-06"
+      },
+      "body_prefix": "\t<tr><td colspan=\"100%\">No ADP Information Available</td></tr>\n\t",
+      "rows": [
+        [
+          "No ADP Information Available"
+        ]
+      ]
+    },
+    "2023_v1": {
+      "payload": {
+        "team_id": "0",
+        "time_period": "custom",
+        "num_teams": "12",
+        "draft_type": "",
+        "sport": "nfl",
+        "position": "",
+        "league_teams": "0",
+        "as_board": "",
+        "from_date": "2023-08-01",
+        "to_date": "2023-09-06"
+      },
+      "body_prefix": "\t<tr><td colspan=\"100%\">No ADP Information Available</td></tr>\n\t",
+      "rows": [
+        [
+          "No ADP Information Available"
+        ]
+      ]
+    },
+    "2023_v2": {
+      "payload": {
+        "team_id": "0",
+        "time_period": "custom",
+        "num_teams": "12",
+        "draft_type": "draft",
+        "sport": "nfl",
+        "position": "",
+        "league_teams": "0",
+        "as_board": "",
+        "from_date": "2023-08-01",
+        "to_date": "2023-09-06"
+      },
+      "body_prefix": "\t<tr><td colspan=\"100%\">No ADP Information Available</td></tr>\n\t",
+      "rows": [
+        [
+          "No ADP Information Available"
+        ]
+      ]
+    },
+    "2024_v0": {
+      "payload": {
+        "team_id": "",
+        "time_period": "",
+        "num_teams": "",
+        "draft_type": "",
+        "sport": "nfl",
+        "position": "",
+        "league_teams": "0",
+        "as_board": "",
+        "from_date": "2024-08-01",
+        "to_date": "2024-09-04"
+      },
+      "body_prefix": "\t<tr><td colspan=\"100%\">No ADP Information Available</td></tr>\n\t",
+      "rows": [
+        [
+          "No ADP Information Available"
+        ]
+      ]
+    },
+    "2024_v1": {
+      "payload": {
+        "team_id": "0",
+        "time_period": "custom",
+        "num_teams": "12",
+        "draft_type": "",
+        "sport": "nfl",
+        "position": "",
+        "league_teams": "0",
+        "as_board": "",
+        "from_date": "2024-08-01",
+        "to_date": "2024-09-04"
+      },
+      "body_prefix": "\t<tr><td colspan=\"100%\">No ADP Information Available</td></tr>\n\t",
+      "rows": [
+        [
+          "No ADP Information Available"
+        ]
+      ]
+    },
+    "2024_v2": {
+      "payload": {
+        "team_id": "0",
+        "time_period": "custom",
+        "num_teams": "12",
+        "draft_type": "draft",
+        "sport": "nfl",
+        "position": "",
+        "league_teams": "0",
+        "as_board": "",
+        "from_date": "2024-08-01",
+        "to_date": "2024-09-04"
+      },
+      "body_prefix": "\t<tr><td colspan=\"100%\">No ADP Information Available</td></tr>\n\t",
+      "rows": [
+        [
+          "No ADP Information Available"
+        ]
+      ]
+    },
+    "2025_v0": {
+      "payload": {
+        "team_id": "",
+        "time_period": "",
+        "num_teams": "",
+        "draft_type": "",
+        "sport": "nfl",
+        "position": "",
+        "league_teams": "0",
+        "as_board": "",
+        "from_date": "2025-08-01",
+        "to_date": "2025-09-03"
+      },
+      "body_prefix": "\t<tr><td colspan=\"100%\">No ADP Information Available</td></tr>\n\t",
+      "rows": [
+        [
+          "No ADP Information Available"
+        ]
+      ]
+    },
+    "2025_v1": {
+      "payload": {
+        "team_id": "0",
+        "time_period": "custom",
+        "num_teams": "12",
+        "draft_type": "",
+        "sport": "nfl",
+        "position": "",
+        "league_teams": "0",
+        "as_board": "",
+        "from_date": "2025-08-01",
+        "to_date": "2025-09-03"
+      },
+      "body_prefix": "\t<tr><td colspan=\"100%\">No ADP Information Available</td></tr>\n\t",
+      "rows": [
+        [
+          "No ADP Information Available"
+        ]
+      ]
+    },
+    "2025_v2": {
+      "payload": {
+        "team_id": "0",
+        "time_period": "custom",
+        "num_teams": "12",
+        "draft_type": "draft",
+        "sport": "nfl",
+        "position": "",
+        "league_teams": "0",
+        "as_board": "",
+        "from_date": "2025-08-01",
+        "to_date": "2025-09-03"
+      },
+      "body_prefix": "\t<tr><td colspan=\"100%\">No ADP Information Available</td></tr>\n\t",
+      "rows": [
+        [
+          "No ADP Information Available"
+        ]
+      ]
+    },
+    "2026_v0": {
+      "payload": {
+        "team_id": "",
+        "time_period": "",
+        "num_teams": "",
+        "draft_type": "",
+        "sport": "nfl",
+        "position": "",
+        "league_teams": "0",
+        "as_board": "",
+        "from_date": "2026-08-01",
+        "to_date": "2026-08-30"
+      },
+      "body_prefix": "\t<tr><td colspan=\"100%\">No ADP Information Available</td></tr>\n\t",
+      "rows": [
+        [
+          "No ADP Information Available"
+        ]
+      ]
+    },
+    "2026_v1": {
+      "payload": {
+        "team_id": "0",
+        "time_period": "custom",
+        "num_teams": "12",
+        "draft_type": "",
+        "sport": "nfl",
+        "position": "",
+        "league_teams": "0",
+        "as_board": "",
+        "from_date": "2026-08-01",
+        "to_date": "2026-08-30"
+      },
+      "body_prefix": "\t<tr><td colspan=\"100%\">No ADP Information Available</td></tr>\n\t",
+      "rows": [
+        [
+          "No ADP Information Available"
+        ]
+      ]
+    },
+    "2026_v2": {
+      "payload": {
+        "team_id": "0",
+        "time_period": "custom",
+        "num_teams": "12",
+        "draft_type": "draft",
+        "sport": "nfl",
+        "position": "",
+        "league_teams": "0",
+        "as_board": "",
+        "from_date": "2026-08-01",
+        "to_date": "2026-08-30"
+      },
+      "body_prefix": "\t<tr><td colspan=\"100%\">No ADP Information Available</td></tr>\n\t",
+      "rows": [
+        [
+          "No ADP Information Available"
+        ]
+      ]
+    }
+  }
+}
