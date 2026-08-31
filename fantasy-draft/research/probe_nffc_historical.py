@@ -6,7 +6,6 @@ import json
 import re
 import urllib.parse
 import urllib.request
-from datetime import date
 from pathlib import Path
 
 OUT = Path(__file__).resolve().parent / "output"
@@ -14,15 +13,6 @@ OUT.mkdir(parents=True, exist_ok=True)
 UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/142 Safari/537.36"
 URL = "https://nfc.shgn.com/adp.data.php"
 
-KICKOFF = {
-    2020: "2020-09-10",
-    2021: "2021-09-09",
-    2022: "2022-09-08",
-    2023: "2023-09-07",
-    2024: "2024-09-05",
-    2025: "2025-09-04",
-    2026: "2026-09-10",
-}
 WINDOWS = {
     2020: ("2020-08-01", "2020-09-09"),
     2021: ("2021-08-01", "2021-09-08"),
@@ -70,10 +60,12 @@ def parse_rows(body: str) -> list[list[str]]:
 def main() -> None:
     attempts = []
     samples = {}
+    # Variant 0 reproduces the visible page's all-leagues payload as closely as possible.
+    # Remaining variants test 12-team and draft-type filters without changing source family.
     variants = [
-        {"team_id": "", "time_period": "", "num_teams": "", "draft_type": "", "sport": "nfl", "position": "", "league_teams": "0", "as_board": ""},
-        {"team_id": "0", "time_period": "custom", "num_teams": "12", "draft_type": "", "sport": "nfl", "position": "", "league_teams": "0", "as_board": ""},
-        {"team_id": "0", "time_period": "custom", "num_teams": "12", "draft_type": "draft", "sport": "nfl", "position": "", "league_teams": "0", "as_board": ""},
+        {"team_id": "0", "time_period": "", "num_teams": "", "draft_type": "", "sport": "football", "position": "", "league_teams": "0", "as_board": ""},
+        {"team_id": "0", "time_period": "", "num_teams": "12", "draft_type": "", "sport": "football", "position": "", "league_teams": "0", "as_board": ""},
+        {"team_id": "0", "time_period": "", "num_teams": "12", "draft_type": "draft", "sport": "football", "position": "", "league_teams": "0", "as_board": ""},
     ]
 
     for season, (from_date, to_date) in WINDOWS.items():
@@ -84,6 +76,7 @@ def main() -> None:
             try:
                 status, final_url, body = post(payload)
                 parsed = parse_rows(body)
+                txt = clean_text(body)
                 row.update({
                     "status": status,
                     "final_url": final_url,
@@ -91,7 +84,7 @@ def main() -> None:
                     "parsed_rows": len(parsed),
                     "first_row": " | ".join(parsed[0]) if parsed else "",
                     "second_row": " | ".join(parsed[1]) if len(parsed) > 1 else "",
-                    "contains_error": bool(re.search(r"error|invalid|no data|no results", clean_text(body), flags=re.I)),
+                    "no_adp": "No ADP Information Available" in txt,
                 })
                 key = f"{season}_v{vi}"
                 samples[key] = {"payload": payload, "body_prefix": body[:5000], "rows": parsed[:12]}
