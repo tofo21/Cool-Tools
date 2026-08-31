@@ -60,3 +60,12 @@ Do not collapse ESPN default rank and ESPN ADP. Do not double-count Sleeper ADP
 and order. Preserve source metadata and point-in-time timestamps. A package may
 be labeled `production` only after the contracted walk-forward and survival-
 calibration tests pass.
+
+## Replay acceptance gate
+
+Use the isolated [replay harness](../replay/README.md) before promoting a
+research package. It consumes this same adapter and league profile, records
+model version/coverage in the exported report, and withholds calibration scores
+when a decision window contains unresolved picks. Candidate-to-production
+promotion should compare walk-forward reports rather than the bundled
+deterministic UI fixture, whose purpose is functional verification only.

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b0f0d">
+  <meta name="description" content="Replay historical fantasy drafts and evaluate Draft Command recommendations, survival calibration, and strategy choices.">
+  <title>Draft Command Replay Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./replay.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="../"><span class="brand-mark">DC</span><span><strong>Replay Lab</strong><small>model evaluation workspace</small></span></a>
+    <div class="top-actions">
+      <span class="isolation"><i></i> Isolated from live draft</span>
+      <a class="ghost-btn" href="../">Return to live board</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Research integration · validation gate</p>
+        <h1>Replay decisions.<br><em>Measure the model.</em></h1>
+        <p class="lede">Load a completed or partial draft log. The lab reconstructs every Tony decision, tests player and tier survival probabilities, and compares Draft Command against static board strategies.</p>
+      </div>
+      <div class="model-card">
+        <span id="modelBadge">Checking model</span>
+        <strong id="modelVersion">—</strong>
+        <small id="modelCoverage">—</small>
+      </div>
+    </section>
+
+    <section class="control-panel panel">
+      <div class="control-copy">
+        <p class="eyebrow">Replay source</p>
+        <h2 id="sourceName">Deterministic ESPN fixture</h2>
+        <p id="sourceStatus">A complete 160-slot test draft is ready. Use it to verify the harness, then replace it with a real export.</p>
+      </div>
+      <div class="control-actions">
+        <label class="file-btn">Import draft JSON<input id="fileInput" type="file" accept="application/json,.json"></label>
+        <button class="ghost-btn" id="loadSample" type="button">Reload sample</button>
+        <button class="primary-btn" id="runReplay" type="button">Run replay</button>
+        <button class="ghost-btn" id="exportReport" type="button" disabled>Export report</button>
+      </div>
+      <details class="format-help">
+        <summary>Accepted formats</summary>
+        <p>Standard Draft Command backups (<code>events</code>), Sleeper pick arrays (<code>pick_no</code> and <code>metadata</code>), and ESPN-style exports (<code>pickNumber</code> plus player name or ID). The 10-team, 16-round snake profile and configured keepers are validated automatically.</p>
+      </details>
+    </section>
+
+    <section class="summary-grid" aria-label="Replay summary">
+      <article class="metric panel"><span>Decision windows</span><strong id="decisionCount">—</strong><small id="decisionCoverage">Run a replay</small></article>
+      <article class="metric panel"><span>Individual Brier</span><strong id="brierScore">—</strong><small>Lower is better · 0 is perfect</small></article>
+      <article class="metric panel"><span>Calibration error</span><strong id="eceScore">—</strong><small>Predicted vs observed survival</small></article>
+      <article class="metric panel"><span>Model agreement</span><strong id="agreementScore">—</strong><small>Best Pick Now vs recorded pick</small></article>
+      <article class="metric panel"><span>TAKE / WAIT tests</span><strong id="counterScore">—</strong><small id="counterCount">Completed windows only</small></article>
+    </section>
+
+    <section class="two-column">
+      <article class="panel table-panel">
+        <div class="panel-head"><div><p class="eyebrow">Decision-time comparison</p><h2>Strategy scoreboard</h2></div><span class="note">Not realized-season results</span></div>
+        <div class="table-scroll"><table><thead><tr><th>Strategy</th><th>Choices</th><th>Mean draft score</th><th>Mean value gap</th><th>Matches actual</th></tr></thead><tbody id="strategyRows"><tr><td colspan="5" class="empty">Run a replay to compare strategies.</td></tr></tbody></table></div>
+      </article>
+      <article class="panel calibration-panel">
+        <div class="panel-head"><div><p class="eyebrow">Probability audit</p><h2>Survival calibration</h2></div><span class="note" id="calibrationSamples">0 samples</span></div>
+        <div class="calibration-chart" id="calibrationChart"><div class="empty">Calibration buckets appear after a replay.</div></div>
+      </article>
+    </section>
+
+    <section class="panel decision-panel">
+      <div class="panel-head"><div><p class="eyebrow">Reconstructed state</p><h2>Tony decision log</h2></div><span class="note" id="issueCount">No import issues</span></div>
+      <div class="table-scroll"><table class="decision-table"><thead><tr><th>Pick</th><th>Recorded</th><th>Best Pick Now</th><th>Call</th><th>Next-pick survival</th><th>Counterfactual</th></tr></thead><tbody id="decisionRows"><tr><td colspan="6" class="empty">Run a replay to reconstruct decisions.</td></tr></tbody></table></div>
+    </section>
+
+    <section class="panel issues-panel" id="issuesPanel" hidden>
+      <div class="panel-head"><div><p class="eyebrow">Normalization report</p><h2>Import issues</h2></div></div>
+      <div id="issuesList"></div>
+    </section>
+
+    <footer>
+      <p>Replay state is held in memory only. It never reads or writes Draft Command's live draft, autosave, sync, or recovery storage.</p>
+    </footer>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="../data/players.js"></script>
+  <script src="../data/model-package.js"></script>
+  <script src="../model/model-adapter.js"></script>
+  <script src="./replay-engine.js"></script>
+  <script src="./replay.js"></script>
+</body>
+</html>
