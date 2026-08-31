@@ -1,0 +1,733 @@
+{
+  "page": {
+    "status": 200,
+    "final_url": "https://nfc.shgn.com/adp/football",
+    "length": 37046
+  },
+  "scripts": [
+    {
+      "url": "https://nfc.shgn.com/frontend/js/modules/player_search.module.js?v=2.1766",
+      "status": 200,
+      "final_url": "https://nfc.shgn.com/frontend/js/modules/player_search.module.js?v=2.1766",
+      "length": 1962
+    },
+    {
+      "url": "https://nfc.shgn.com/frontend/js/pages/adp.page.js?v=2.1766",
+      "status": 200,
+      "final_url": "https://nfc.shgn.com/frontend/js/pages/adp.page.js?v=2.1766",
+      "length": 5197
+    },
+    {
+      "url": "https://nfc.shgn.com/frontend/js/modules/watchlist.module.js?v=2.1766",
+      "status": 200,
+      "final_url": "https://nfc.shgn.com/frontend/js/modules/watchlist.module.js?v=2.1766",
+      "length": 2379
+    },
+    {
+      "url": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "status": 200,
+      "final_url": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "length": 6559
+    },
+    {
+      "url": "https://assets.shgn.com/static/js/shgn-init.js?v=2.1766",
+      "status": 200,
+      "final_url": "https://assets.shgn.com/static/js/shgn-init.js?v=2.1766",
+      "length": 1547
+    },
+    {
+      "url": "https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js",
+      "status": 200,
+      "final_url": "https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js",
+      "length": 87533
+    },
+    {
+      "url": "https://code.jquery.com/jquery-migrate-3.4.1.min.js",
+      "status": 200,
+      "final_url": "https://code.jquery.com/jquery-migrate-3.4.1.min.js",
+      "length": 13577
+    },
+    {
+      "url": "https://ajax.googleapis.com/ajax/libs/jqueryui/1.14.1/jquery-ui.min.js",
+      "status": 200,
+      "final_url": "https://ajax.googleapis.com/ajax/libs/jqueryui/1.14.1/jquery-ui.min.js",
+      "length": 252957
+    },
+    {
+      "url": "https://nfc.shgn.com/frontend/js/modules/z_subnav.v2.js?v=2.1766",
+      "status": 200,
+      "final_url": "https://nfc.shgn.com/frontend/js/modules/z_subnav.v2.js?v=2.1766",
+      "length": 1259
+    },
+    {
+      "url": "https://nfc.shgn.com/frontend/js/modules/tabBook.module.js?v=2.1766",
+      "status": 200,
+      "final_url": "https://nfc.shgn.com/frontend/js/modules/tabBook.module.js?v=2.1766",
+      "length": 1137
+    },
+    {
+      "url": "https://nfc.shgn.com/frontend/js/modules/dialog.module.js?v=2.1766",
+      "status": 200,
+      "final_url": "https://nfc.shgn.com/frontend/js/modules/dialog.module.js?v=2.1766",
+      "length": 1286
+    },
+    {
+      "url": "https://nfc.shgn.com/frontend/js/modules/playerPopup.module.js?v=2.1766",
+      "status": 200,
+      "final_url": "https://nfc.shgn.com/frontend/js/modules/playerPopup.module.js?v=2.1766",
+      "length": 1608
+    },
+    {
+      "url": "https://nfc.shgn.com/frontend/js/modules/teamSelector.module.js?v=2.1766",
+      "status": 200,
+      "final_url": "https://nfc.shgn.com/frontend/js/modules/teamSelector.module.js?v=2.1766",
+      "length": 1819
+    },
+    {
+      "url": "https://nfc.shgn.com/frontend/js/modules/sortableTable.multiCol.module.js?v=2.1766",
+      "status": 200,
+      "final_url": "https://nfc.shgn.com/frontend/js/modules/sortableTable.multiCol.module.js?v=2.1766",
+      "length": 5240
+    },
+    {
+      "url": "https://nfc.shgn.com/frontend/js/script.js?v=2.1766",
+      "status": 200,
+      "final_url": "https://nfc.shgn.com/frontend/js/script.js?v=2.1766",
+      "length": 417
+    }
+  ],
+  "matches": [
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/player_search.module.js?v=2.1766",
+      "match": "loadPlayers_"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/player_search.module.js?v=2.1766",
+      "match": "(loadPlayers_)"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/pages/adp.page.js?v=2.1766",
+      "match": "/adp.data.php"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/pages/adp.page.js?v=2.1766",
+      "match": "ADP_Page"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/pages/adp.page.js?v=2.1766",
+      "match": "#adp"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/pages/adp.page.js?v=2.1766",
+      "match": "adp"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/pages/adp.page.js?v=2.1766",
+      "match": "Download"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/pages/adp.page.js?v=2.1766",
+      "match": "this_.downloadPrint"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/pages/adp.page.js?v=2.1766",
+      "match": "#adp_range"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/watchlist.module.js?v=2.1766",
+      "match": "/api/player/watchlist/add/"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/watchlist.module.js?v=2.1766",
+      "match": "/api/player/watchlist/remove/"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "/api/gameListWidgetData/update/"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "/data-speed"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "/api/gameListWidgetData/"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "/api/gameListWidgetData2/"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "contestById_"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "updateTimeContests_"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "contest"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "formatContestTime(contest)"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "contest.seconds)"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "contest.seconds;"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "contest.dt;"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "contest.seconds"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "contest.seconds-1);"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "updateTimeContests_.forEach(function(contest)"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "contest.timeQtrl.html(formatContestTime(contest));"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "formatContestCount(contest)"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "contest.open"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "+Object.keys(contestById_).join("
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "success:function(contestIdCounts)"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "contestIdCounts.forEach(function(contestIdCount)"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "contestId"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "contestIdCount[0];"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "contestById_[contestId];"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "contest.count"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "contestIdCount[1];"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "contest.max"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "contest.count);"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "contest.open)"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "contest.countQtrl.html(formatContestCount(contest));"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "contest.countQtrl.addClass("
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "contest.countQtrl.removeClass("
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "Object.values(contestById_).forEach(function(contest)"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "contestQtrl"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "contest.sport)"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "contest.speed);"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "contestQtrl.children("
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "+contest.signup+"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "+contest.theme+"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "+contest.sport"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "+contest.sport+"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "+contest.signup);"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "contestQtrl.children();"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "+contest.logo);"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": ").html(contest.name);"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": ").html(contest.speed);"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": ").html(contest.prize);"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "contest.countQtrl"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": ").html(formatContestCount(contest));"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "contest.timeQtrl"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": ").html(formatContestTime(contest));"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "+contest.gameId+"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "+contest.theme"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "+contest.gameId);"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "contests,"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "success:function(contests)"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "contests.length)"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "contests"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "contests.forEach(function(contest,"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "contestIndex)"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "contestById_[contest.id]"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "contest;"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "contest.logo"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "contest.theme)"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "contest.theme"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "contest.sport+"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "contest.speed)"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "contest.speed"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "contest.speed+"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "(contest.speed/60)+"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "updateTimeContests_.push(contest);"
+    },
+    {
+      "script": "https://nfc.shgn.com/frontend/js/modules/GameListWidget.module.js?v=2.1766",
+      "match": "updateTimeContests_.length)"
+    },
+    {
+      "script": "https://assets.shgn.com/static/js/shgn-init.js?v=2.1766",
+      "match": "https://assets.shgn.com"
+    },
+    {
+      "script": "https://assets.shgn.com/static/js/shgn-init.js?v=2.1766",
+      "match": "https://www.googletagmanager.com/gtm.js?id="
+    },
+    {
+      "script": "https://ajax.googleapis.com/ajax/libs/jqueryui/1.14.1/jquery-ui.min.js",
+      "match": "https://jqueryui.com"
+    },
+    {
+      "script": "HTML",
+      "match": "https://nfc.shgn.com/frontend/theme/nfc/img/favicon150.png?v=2.1766"
+    },
+    {
+      "script": "HTML",
+      "match": "https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+    },
+    {
+      "script": "HTML",
+      "match": "https://browsehappy.com/"
+    },
+    {
+      "script": "HTML",
+      "match": "https://wallet.fanball.com/account-settings"
+    },
+    {
+      "script": "HTML",
+      "match": "https://wallet.fanball.com/responsible-play"
+    },
+    {
+      "script": "HTML",
+      "match": "https://terms.shgn.com/termsandprivacy/responsibleplay?theme=nfc"
+    },
+    {
+      "script": "HTML",
+      "match": "https://terms.shgn.com/terms?theme=nfc"
+    },
+    {
+      "script": "HTML",
+      "match": "https://terms.shgn.com/privacy?theme=nfc"
+    },
+    {
+      "script": "HTML",
+      "match": "https://servedbyadbutler.com/adserve/;ID=172500;size=0x0;setID=390212;type=js;sw="
+    },
+    {
+      "script": "HTML",
+      "match": "https://servedbyadbutler.com/adserve/;ID=172500;size=0x0;setID=390217;type=js;sw="
+    },
+    {
+      "script": "HTML",
+      "match": "https://servedbyadbutler.com/adserve/;ID=172500;size=0x0;setID=390218;type=js;sw="
+    },
+    {
+      "script": "HTML",
+      "match": "https://servedbyadbutler.com/adserve/;ID=172500;size=0x0;setID=390219;type=js;sw="
+    },
+    {
+      "script": "HTML",
+      "match": "https://nffcforums.shgn.com"
+    },
+    {
+      "script": "HTML",
+      "match": "https://nfbcforums.shgn.com"
+    },
+    {
+      "script": "HTML",
+      "match": "https://nfbkcforums.shgn.com"
+    },
+    {
+      "script": "HTML",
+      "match": "https://discord.com/channels/1167178224791466025/1167178224791466028"
+    },
+    {
+      "script": "HTML",
+      "match": "https://twitter.com/theNFFC"
+    },
+    {
+      "script": "HTML",
+      "match": "https://www.facebook.com/playnffc"
+    },
+    {
+      "script": "HTML",
+      "match": "https://www.youtube.com/channel/UCXYCJJ1cIsZZbSb-VngrVBw/"
+    },
+    {
+      "script": "HTML",
+      "match": "https://assets.shgn.com/static/js/shgn-init.js?v=2.1766"
+    },
+    {
+      "script": "HTML",
+      "match": "https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+    },
+    {
+      "script": "HTML",
+      "match": "https://code.jquery.com/jquery-migrate-3.4.1.min.js"
+    },
+    {
+      "script": "HTML",
+      "match": "https://ajax.googleapis.com/ajax/libs/jqueryui/1.14.1/jquery-ui.min.js"
+    },
+    {
+      "script": "HTML",
+      "match": "/adp\\/baseball"
+    },
+    {
+      "script": "HTML",
+      "match": "/adp\\/football"
+    },
+    {
+      "script": "HTML",
+      "match": "/adp\\/basketball"
+    },
+    {
+      "script": "HTML",
+      "match": "/adp/football"
+    },
+    {
+      "script": "HTML",
+      "match": "/football_champions_league_qualifier"
+    },
+    {
+      "script": "HTML",
+      "match": "/adp.page.css?v=2.1766"
+    },
+    {
+      "script": "HTML",
+      "match": "/adp.page.js?v=2.1766"
+    },
+    {
+      "script": "HTML",
+      "match": "/adp/baseball"
+    },
+    {
+      "script": "HTML",
+      "match": "/adp/basketball"
+    },
+    {
+      "script": "HTML",
+      "match": "/ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+    },
+    {
+      "script": "HTML",
+      "match": "/ajax.googleapis.com/ajax/libs/jqueryui/1.14.1/jquery-ui.min.js"
+    },
+    {
+      "script": "HTML",
+      "match": "adp"
+    },
+    {
+      "script": "HTML",
+      "match": "ADP"
+    },
+    {
+      "script": "HTML",
+      "match": "\\/adp\\/baseball"
+    },
+    {
+      "script": "HTML",
+      "match": "\\/adp\\/football"
+    },
+    {
+      "script": "HTML",
+      "match": "\\/adp\\/basketball"
+    },
+    {
+      "script": "HTML",
+      "match": ">ADP</a>"
+    },
+    {
+      "script": "HTML",
+      "match": "/frontend/css/pages/adp.page.css?v=2.1766"
+    },
+    {
+      "script": "HTML",
+      "match": "/frontend/js/pages/adp.page.js?v=2.1766"
+    },
+    {
+      "script": "HTML",
+      "match": "adp,"
+    },
+    {
+      "script": "HTML",
+      "match": "adp_range"
+    },
+    {
+      "script": "HTML",
+      "match": "Download"
+    },
+    {
+      "script": "HTML",
+      "match": "ADP_Page.downloadPrint(this);"
+    },
+    {
+      "script": "HTML",
+      "match": "downloadPrintForm"
+    },
+    {
+      "script": "HTML",
+      "match": "download"
+    },
+    {
+      "script": "HTML",
+      "match": "fa-download"
+    },
+    {
+      "script": "HTML",
+      "match": "Download</button>"
+    },
+    {
+      "script": "HTML",
+      "match": "adp_module_wrapper"
+    },
+    {
+      "script": "HTML",
+      "match": "adp_module"
+    },
+    {
+      "script": "HTML",
+      "match": "adp_item_data"
+    },
+    {
+      "script": "HTML",
+      "match": "ADP_Page.sort(0,"
+    },
+    {
+      "script": "HTML",
+      "match": "ADP_Page.sort(1,"
+    },
+    {
+      "script": "HTML",
+      "match": "ADP_Page.sort(2,"
+    },
+    {
+      "script": "HTML",
+      "match": "ADP_Page.sort(3,"
+    },
+    {
+      "script": "HTML",
+      "match": "ADP_Page.sort(4,"
+    },
+    {
+      "script": "HTML",
+      "match": "ADP_Page.sort(5,"
+    },
+    {
+      "script": "HTML",
+      "match": "ADP_Page.sort(6,"
+    },
+    {
+      "script": "HTML",
+      "match": "ADP_Page.sort(7,"
+    },
+    {
+      "script": "HTML",
+      "match": "ADP_Page.sort(8,"
+    },
+    {
+      "script": "HTML",
+      "match": "ADP_Page.sort(9,"
+    },
+    {
+      "script": "HTML",
+      "match": "ADP_Page.sort(10,"
+    },
+    {
+      "script": "HTML",
+      "match": "apple_download_link"
+    },
+    {
+      "script": "HTML",
+      "match": "google_download_link"
+    },
+    {
+      "script": "HTML",
+      "match": "/contestsignups/football"
+    },
+    {
+      "script": "HTML",
+      "match": ">Contest"
+    },
+    {
+      "script": "HTML",
+      "match": ">ADP</a></div>"
+    },
+    {
+      "script": "HTML",
+      "match": "/contestsignups/baseball"
+    },
+    {
+      "script": "HTML",
+      "match": "/contestsignups/basketball"
+    },
+    {
+      "script": "HTML",
+      "match": "/change_theme.php?theme=dark&url=/adp/football"
+    },
+    {
+      "script": "HTML",
+      "match": "/change_theme.php?theme=light&url=/adp/football"
+    }
+  ]
+}
