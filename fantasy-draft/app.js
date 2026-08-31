@@ -74,7 +74,7 @@
     "exportDraft", "importDraft", "importDraftFile", "recoverDraft", "pickDialog", "dialogTitle",
     "dialogCopy", "replacementSearch", "replacementList", "removePick", "rewindPick",
     "modelStatusBadge", "modelVersion", "modelFreshness", "modelCoverage", "modelStatusCopy",
-    "modelSourceNote", "snapshotNote", "decisionLenses",
+    "modelSourceNote", "snapshotNote", "decisionLenses", "roomRankNote", "boardOrderNote",
   ].map((id) => [id, document.getElementById(id)]));
 
   const MODEL = window.DraftModel.createAdapter({
@@ -400,8 +400,12 @@
     return result;
   }
 
-  function fallbackPrice(player) { return player[state.platform] ?? player.market ?? player.adp; }
-  function price(player) { return MODEL.market(player, state.platform, () => fallbackPrice(player)).price; }
+  function fallbackPrice(player, platform = state.platform) { return player[platform] ?? player.market ?? player.adp; }
+  function price(player, platform = state.platform) { return MODEL.market(player, platform, () => fallbackPrice(player, platform)).price; }
+  function roomOrder(player, platform = state.platform) {
+    const value = Number(price(player, platform));
+    return Number.isFinite(value) ? value : Number.POSITIVE_INFINITY;
+  }
   function clamp(value, min, max) { return Math.max(min, Math.min(max, value)); }
   function manager(team) { return MANAGERS[Number(team)]; }
 
@@ -662,14 +666,12 @@
     }).join("");
   }
 
-  function boardRows() {
+  function boardRows(platform = state.platform) {
     const query = state.search.trim().toLowerCase();
-    return availablePlayers().filter((player) => state.position === "ALL" || player.pos === state.position).filter((player) => !query || `${player.name} ${player.team}`.toLowerCase().includes(query)).sort((a, b) => {
-      const target = nextTonyPick() || Math.min(currentPick(), TOTAL_PICKS);
-      const aScore = leagueScore(a) * (0.72 + survival(a, target) * .28);
-      const bScore = leagueScore(b) * (0.72 + survival(b, target) * .28);
-      return bScore - aScore;
-    });
+    return availablePlayers()
+      .filter((player) => state.position === "ALL" || player.pos === state.position)
+      .filter((player) => !query || `${player.name} ${player.team}`.toLowerCase().includes(query))
+      .sort((a, b) => roomOrder(a, platform) - roomOrder(b, platform) || leagueScore(b) - leagueScore(a) || a.id - b.id);
   }
 
   function renderBoard() {
@@ -677,8 +679,11 @@
     const target = nextTonyPick() || Math.min(currentPick(), TOTAL_PICKS);
     const nextTurn = followingTonyPick(target);
     const after = nextTurn || TOTAL_PICKS;
-    els.boardCount.textContent = `${rows.length} available`;
-    els.platformHeader.textContent = `${state.platform === "espn" ? "ESPN" : "Sleeper"} price`;
+    const platformName = state.platform === "espn" ? "ESPN" : "Sleeper";
+    els.boardCount.textContent = `${rows.length} available · ${platformName} room order`;
+    els.platformHeader.textContent = `${platformName} default`;
+    els.roomRankNote.textContent = `Player list follows ${platformName}'s current default room order.`;
+    els.boardOrderNote.textContent = `Sorted by ${platformName} default room rank`;
     els.playerTable.innerHTML = rows.slice(0, state.visible).map((player, index) => {
       const rank = leagueRank(player);
       const gap = valueGap(player);
@@ -756,10 +761,12 @@
         : health.valid
           ? "Research adapter is ready. Current recommendations use the visible provisional ECR, room-price and roster heuristics."
           : `Research package rejected safely: ${health.errors[0] || "incompatible package"}`;
-    els.snapshotNote.textContent = `${health.modelVersion} · ${freshnessLabel(health.effectiveAt)}`;
-    els.modelSourceNote.innerHTML = health.mode === "research"
+    const roomSnapshot = window.PLAYER_DATA_META?.displayDate || "current snapshot";
+    els.snapshotNote.textContent = `${health.modelVersion} · room board ${roomSnapshot}`;
+    const modelNote = health.mode === "research"
       ? `<strong>Model:</strong> ${health.modelVersion} · ${percent}% player coverage · ${health.sourceCount} registered source layers. Missing player fields use the provisional fallback and are never imputed silently.`
       : `<strong>Model:</strong> Provisional fallback active. The versioned research adapter is ready, but the production outcome, league-value and calibrated survival package has not been loaded yet.`;
+    els.modelSourceNote.innerHTML = `${modelNote}<br><strong>Draft-room order:</strong> ESPN and Sleeper PPR defaults from ${window.PLAYER_DATA_META?.source || "the platform source layer"}, ${roomSnapshot}. The selected platform controls the player-list order; league value and recommendations remain independent.`;
   }
 
   function render() {
@@ -980,6 +987,7 @@
     state: () => ({ events: state.events.map((event) => ({ ...event })), currentPick: currentPick() }),
     modelHealth: () => MODEL.health(),
     recommendations: () => recommendations(),
+    boardOrder: (platform = state.platform) => boardRows(platform).map((player) => ({ id: player.id, name: player.name, roomRank: roomOrder(player, platform) })),
   });
 
   els.rosterManager.innerHTML = MANAGERS.slice(1).map((item) => `<option value="${item.id}">${item.id}. ${item.name}</option>`).join("");

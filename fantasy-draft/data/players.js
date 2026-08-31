@@ -1,5 +1,12 @@
 // Generated from JuiceBoxOne's 2026 Abusing Draft Rankings workbook, PPR tabs.
 // Snapshot visible in workbook: August 27, 2026.
+window.PLAYER_DATA_META = Object.freeze({
+  snapshotDate: "2026-08-27",
+  displayDate: "Aug. 27, 2026",
+  source: "JuiceBoxOne / FirstSeed Sports",
+  espnMethod: "ESPN mock-draft default order",
+  sleeperMethod: "Sleeper PPR default order via BeatADP",
+});
 window.PLAYER_DATA = [
   {
     "id": 1,

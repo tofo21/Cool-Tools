@@ -83,6 +83,16 @@ for (const key of ["bestPlayer", "bestValue", "bestFit", "bestCeiling", "safestW
   assert.ok(fallbackRecommendations[key]?.player, `${key} should resolve a player`);
 }
 assert.doesNotMatch(fallback.elements.get("playerTable").innerHTML, /call-pass/);
+assert.equal(fallback.context.PLAYER_DATA_META.snapshotDate, "2026-08-27");
+const espnBoard = fallback.context.DraftCommandLive.boardOrder();
+assert.deepEqual(Array.from(espnBoard.slice(0, 4), (player) => player.name), ["Jahmyr Gibbs", "Bijan Robinson", "Ja'Marr Chase", "Puka Nacua"]);
+assert.ok(espnBoard.every((player, index) => index === 0 || espnBoard[index - 1].roomRank <= player.roomRank), "ESPN board should be in ascending room-rank order");
+assert.equal(espnBoard[4].name, "Jonathan Taylor");
+const sleeperBoard = fallback.context.DraftCommandLive.boardOrder("sleeper");
+assert.equal(sleeperBoard[4].name, "Christian McCaffrey");
+assert.ok(sleeperBoard.every((player, index) => index === 0 || sleeperBoard[index - 1].roomRank <= player.roomRank), "Sleeper board should be in ascending room-rank order");
+assert.match(fallback.elements.get("boardOrderNote").textContent, /ESPN default room rank/);
+assert.match(fallback.elements.get("modelSourceNote").innerHTML, /Aug\. 27, 2026/);
 const mismatch = fallback.context.DraftCommandLive.ingestSnapshot({ source: "sleeper", teamCount: 12, rounds: 16, picks: [] });
 assert.equal(mismatch.ok, false);
 assert.equal(mismatch.code, "FORMAT_MISMATCH");
@@ -137,8 +147,13 @@ assert.deepEqual(scripts.slice(-5), [
   "./app.js",
   "./sync.js",
 ]);
-for (const id of ["modelStatusBadge", "modelVersion", "modelFreshness", "modelCoverage", "modelStatusCopy", "modelSourceNote", "snapshotNote", "decisionLenses"]) {
+for (const id of ["modelStatusBadge", "modelVersion", "modelFreshness", "modelCoverage", "modelStatusCopy", "modelSourceNote", "snapshotNote", "decisionLenses", "roomRankNote", "boardOrderNote"]) {
   assert.match(index, new RegExp(`id="${id}"`));
+}
+
+const css = read("styles.css");
+for (const tinySize of ["6px", "7px", "8px", "9px"]) {
+  assert.doesNotMatch(css, new RegExp(`font(?:-size)?:[^;\\n]*\\b${tinySize}\\b`), `readability pass should remove ${tinySize} interface type`);
 }
 
 console.log("app model-integration tests passed");
