@@ -1,0 +1,33 @@
+name: Probe NFFC ADP
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'fantasy-draft/research/probe_nffc_adp.py'
+      - '.github/workflows/probe-nffc-adp.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Probe NFFC page and scripts
+        run: python fantasy-draft/research/probe_nffc_adp.py
+      - name: Upload probe artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: nffc-adp-probe
+          path: |
+            fantasy-draft/research/output/nffc_probe_report.json
+            fantasy-draft/research/output/nffc_adp_page.html
+            fantasy-draft/research/output/nffc_script_*.js
+          if-no-files-found: error
+          retention-days: 30
