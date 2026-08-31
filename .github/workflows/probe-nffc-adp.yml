@@ -8,7 +8,7 @@ on:
       - '.github/workflows/probe-nffc-adp.yml'
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   probe:
@@ -21,6 +21,15 @@ jobs:
           python-version: '3.12'
       - name: Probe NFFC page and scripts
         run: python fantasy-draft/research/probe_nffc_adp.py
+      - name: Persist inspectable probe report
+        run: |
+          mkdir -p fantasy-draft/research/probe-output
+          cp fantasy-draft/research/output/nffc_probe_report.json fantasy-draft/research/probe-output/nffc_probe_report.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add fantasy-draft/research/probe-output/nffc_probe_report.json
+          git diff --cached --quiet || git commit -m "Record NFFC ADP probe results"
+          git push
       - name: Upload probe artifact
         uses: actions/upload-artifact@v4
         with:
