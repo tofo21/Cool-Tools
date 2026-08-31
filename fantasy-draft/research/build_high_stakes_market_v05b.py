@@ -7,18 +7,29 @@ import requests
 
 import build_high_stakes_market_v05 as base
 
+_ORIGINAL_NORM_TEXT = base.norm_text
+_ORIGINAL_STANDARDIZE = base.standardize
+
+
+def norm_text(value) -> str:
+    """Normalize identity text and resolve only audited historical nickname aliases."""
+    s = _ORIGINAL_NORM_TEXT(value)
+    if s == "ken walker":
+        return "kenneth walker"
+    return s
+
 
 def _promote_visual_header(table: pd.DataFrame) -> pd.DataFrame:
     """Promote a first-row visual header when legacy HTML uses <td> instead of <th>."""
     t = base.flatten_columns(table)
-    normalized_columns = {base.norm_text(c) for c in t.columns}
+    normalized_columns = {_ORIGINAL_NORM_TEXT(c) for c in t.columns}
     if "player" in normalized_columns and ("rank" in normalized_columns or "adp" in normalized_columns):
         return t
     if t.empty:
         return t
 
     first = [str(x).strip() for x in t.iloc[0].tolist()]
-    normalized_first = {base.norm_text(x) for x in first}
+    normalized_first = {_ORIGINAL_NORM_TEXT(x) for x in first}
     if "player" in normalized_first and ("rank" in normalized_first or "adp" in normalized_first):
         t = t.iloc[1:].copy()
         t.columns = first
@@ -33,7 +44,7 @@ def fetch_table(source: dict) -> pd.DataFrame:
 
     candidates = []
     for t in tables:
-        cols = {base.norm_text(c): c for c in t.columns}
+        cols = {_ORIGINAL_NORM_TEXT(c): c for c in t.columns}
         has_player = any(k == "player" or k.endswith(" player") for k in cols)
         has_rank = any(k == "rank" or k.startswith("rank ") for k in cols)
         has_adp = any(k == "adp" or k.endswith(" adp") for k in cols)
@@ -48,9 +59,25 @@ def fetch_table(source: dict) -> pd.DataFrame:
     return table
 
 
-# Patch only the HTML-table compatibility layer; all source definitions,
-# normalization, matching, provenance, coverage, and output logic remain v0.5.
+def standardize(table: pd.DataFrame, source: dict) -> pd.DataFrame:
+    """Use v0.5 standardization, then remove only obvious non-player HTML debris."""
+    out = _ORIGINAL_STANDARDIZE(table, source)
+    if out.empty:
+        return out
+    names = out["player_name"].astype(str)
+    valid = (
+        names.str.len().le(100)
+        & ~names.str.contains("already a subscriber", case=False, na=False)
+        & ~names.str.contains("continue reading this content", case=False, na=False)
+    )
+    return out.loc[valid].copy()
+
+
+# Patch compatibility/identity-only behavior. Raw tables remain preserved exactly;
+# source definitions, market values, provenance, coverage, and output logic remain v0.5.
+base.norm_text = norm_text
 base.fetch_table = fetch_table
+base.standardize = standardize
 
 
 if __name__ == "__main__":
