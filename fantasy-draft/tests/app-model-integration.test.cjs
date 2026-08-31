@@ -54,8 +54,8 @@ function boot(modelPackageOverride) {
     navigator: {},
     URL: { createObjectURL() { return "blob:test"; }, revokeObjectURL() {} },
     Blob: class Blob {},
-    setTimeout,
-    clearTimeout,
+    setTimeout() { return 1; },
+    clearTimeout() {},
     setInterval() { return 1; },
     clearInterval() {},
     requestAnimationFrame(callback) { callback(); },
@@ -71,8 +71,10 @@ function boot(modelPackageOverride) {
   vm.createContext(context);
   vm.runInContext(read("data/players.js"), context, { filename: "players.js" });
   vm.runInContext(read("data/model-package.js"), context, { filename: "model-package.js" });
+  vm.runInContext(read("data/opponent-intent-package.js"), context, { filename: "opponent-intent-package.js" });
   if (modelPackageOverride) context.DRAFT_INTELLIGENCE_PACKAGE = modelPackageOverride(context.PLAYER_DATA);
   vm.runInContext(read("model/model-adapter.js"), context, { filename: "model-adapter.js" });
+  vm.runInContext(read("model/opponent-intent.js"), context, { filename: "opponent-intent.js" });
   vm.runInContext(read("app.js"), context, { filename: "app.js" });
   return { context, elements };
 }
@@ -101,6 +103,20 @@ assert.equal(sleeperBoard[4].name, "Christian McCaffrey");
 assert.ok(sleeperBoard.every((player, index) => index === 0 || sleeperBoard[index - 1].roomRank <= player.roomRank), "Sleeper board should be in ascending room-rank order");
 assert.match(fallback.elements.get("boardOrderNote").textContent, /ESPN default room rank/);
 assert.match(fallback.elements.get("modelSourceNote").innerHTML, /Aug\. 27, 2026/);
+assert.equal(fallback.context.DraftCommandLive.opponentModelHealth().mode, "live");
+assert.equal(fallback.context.DraftCommandLive.opponentBoard().opponents.length, 9);
+assert.match(fallback.elements.get("onClockManagerCard").innerHTML, /Justin Gerkin/);
+assert.match(fallback.elements.get("opponentBoard").innerHTML, /ESPN 10/);
+
+const leagueValueDescending = fallback.context.DraftCommandLive.decisionBoard({ key: "leagueValue", direction: "desc" });
+assert.ok(leagueValueDescending.every((player, index) => index === 0 || leagueValueDescending[index - 1].leagueValue >= player.leagueValue), "League Value must sort best to worst on first click");
+fallback.context.DraftCommandLive.setBoardSort("leagueValue");
+assert.match(fallback.elements.get("boardOrderNote").textContent, /League Value.*high to low/i);
+fallback.context.DraftCommandLive.setBoardSort("leagueValue");
+assert.match(fallback.elements.get("boardOrderNote").textContent, /League Value.*low to high/i);
+const opponentWindow = fallback.context.DraftCommandLive.opponentWindow({ simulations: 20, targetPlayerIds: fallback.context.PLAYER_DATA.slice(0, 8).map((player) => player.id) });
+assert.equal(opponentWindow.interveningPicks.length, 4);
+assert.ok(opponentWindow.threats.every((threat) => Math.abs(threat.probabilityTakenBeforeTony + threat.probabilitySurviving - 1) < 1e-12));
 const mismatch = fallback.context.DraftCommandLive.ingestSnapshot({ source: "sleeper", teamCount: 12, rounds: 16, picks: [] });
 assert.equal(mismatch.ok, false);
 assert.equal(mismatch.code, "FORMAT_MISMATCH");
@@ -185,14 +201,16 @@ assert.equal(invalidPackage.context.DraftCommandLive.state().currentPick, 1);
 
 const index = read("index.html");
 const scripts = [...index.matchAll(/<script src="([^"]+)"/g)].map((match) => match[1]);
-assert.deepEqual(scripts.slice(-5), [
+assert.deepEqual(scripts.slice(-7), [
   "./data/players.js",
   "./data/model-package.js",
+  "./data/opponent-intent-package.js",
   "./model/model-adapter.js",
+  "./model/opponent-intent.js",
   "./app.js",
   "./sync.js",
 ]);
-for (const id of ["modelStatusBadge", "modelVersion", "modelFreshness", "modelCoverage", "modelStatusCopy", "modelSourceNote", "snapshotNote", "decisionLenses", "roomRankNote", "boardOrderNote", "exportAuditLog", "nextPickHeader", "callHeader"]) {
+for (const id of ["modelStatusBadge", "modelVersion", "modelFreshness", "modelCoverage", "modelStatusCopy", "modelSourceNote", "snapshotNote", "decisionLenses", "roomRankNote", "boardOrderNote", "exportAuditLog", "nextPickHeader", "callHeader", "onClockManagerCard", "opponentBoard", "threatBoard", "espnAdpHeader", "takenBeforeTonyHeader", "opponentThreatHeader"]) {
   assert.match(index, new RegExp(`id="${id}"`));
 }
 
