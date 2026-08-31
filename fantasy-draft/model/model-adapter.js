@@ -8,7 +8,7 @@
   const CONTRACT_VERSION = "1.0.0";
   const SUPPORTED_SCHEMA_MAJOR = 1;
   const STATUS_LEVELS = new Set(["provisional", "research", "candidate", "production"]);
-  const DECISION_TAGS = new Set(["TAKE", "WAIT", "VALUE", "UPSIDE", "POSITION CLIFF", "FADE AT PRICE"]);
+  const DECISION_TAGS = new Set(["TAKE", "WAIT", "VALUE", "UPSIDE", "POSITION CLIFF", "FADE AT PRICE", "ADVISORY"]);
 
   function asNumber(value, fallback = null) {
     const number = Number(value);
@@ -75,6 +75,20 @@
     const expiresAtMs = Date.parse(metadata.expiresAt || "");
     const stale = validation.ok && Number.isFinite(expiresAtMs) && Date.now() > expiresAtMs;
     const mode = validation.ok && !stale && declaredStatus !== "provisional" && coveredKnownPlayers > 0 ? "research" : "fallback";
+    const approval = data.decisionPolicy?.approval || {};
+    const approvedAtMs = Date.parse(approval.approvedAt || "");
+    const decisionPolicyApproved = mode === "research" && declaredStatus === "production" &&
+      approval.status === "approved" && approval.calibrated === true &&
+      typeof approval.version === "string" && approval.version.trim().length > 0 && Number.isFinite(approvedAtMs);
+    const decisionPolicyReason = decisionPolicyApproved
+      ? `Calibrated decision policy ${approval.version} approved ${approval.approvedAt}.`
+      : !validation.ok
+        ? "Model package is invalid or missing."
+        : stale
+          ? "Model package is expired or stale."
+          : declaredStatus !== "production"
+            ? `Model status ${declaredStatus} is not approved for calibrated draft calls.`
+            : "Calibrated decision-policy approval is missing or incomplete.";
     const policy = {
       takeMaxSurvival: asNumber(data.decisionPolicy?.takeMaxSurvival, 0.24),
       waitMinSurvival: asNumber(data.decisionPolicy?.waitMinSurvival, 0.48),
@@ -117,20 +131,41 @@
       };
     }
 
-    function survival(player, platform, targetPick, fallback, context = {}) {
+    function survivalDetail(player, platform, targetPick, fallback, context = {}) {
       const survivalEntry = getPath(entry(player), `survival.${platform}`) || {};
       const anchors = survivalEntry.anchors;
+      let value = null;
+      let source = "fallback-heuristic";
       if (anchors && typeof anchors === "object") {
         const exact = asNumber(anchors[String(targetPick)]);
-        if (exact != null) return clamp(exact, 0.01, 0.99);
+        if (exact != null) {
+          value = clamp(exact, 0.01, 0.99);
+          source = "model-anchor";
+        }
       }
       const center = asNumber(survivalEntry.center);
       const scale = asNumber(survivalEntry.scale);
-      if (center != null && scale != null && scale > 0) {
+      if (value == null && center != null && scale != null && scale > 0) {
         const roomAdjustment = asNumber(context.roomAdjustment, 0);
-        return clamp(1 / (1 + Math.exp((Number(targetPick) - center - roomAdjustment) / scale)), 0.01, 0.99);
+        value = clamp(1 / (1 + Math.exp((Number(targetPick) - center - roomAdjustment) / scale)), 0.01, 0.99);
+        source = "model-curve";
       }
-      return clamp(typeof fallback === "function" ? fallback() : asNumber(fallback, 0.5), 0.01, 0.99);
+      if (value == null) value = clamp(typeof fallback === "function" ? fallback() : asNumber(fallback, 0.5), 0.01, 0.99);
+      const calibrationVersion = typeof survivalEntry.calibrationVersion === "string" && survivalEntry.calibrationVersion.trim()
+        ? survivalEntry.calibrationVersion.trim()
+        : null;
+      const calibrated = source !== "fallback-heuristic" && mode === "research" && declaredStatus === "production" && Boolean(calibrationVersion);
+      return Object.freeze({
+        value,
+        source,
+        calibrated,
+        calibrationVersion,
+        qualification: calibrated ? "calibrated" : source === "fallback-heuristic" ? "heuristic" : "uncalibrated-model",
+      });
+    }
+
+    function survival(player, platform, targetPick, fallback, context = {}) {
+      return survivalDetail(player, platform, targetPick, fallback, context).value;
     }
 
     function tier(player, fallback = {}) {
@@ -161,6 +196,7 @@
     }
 
     function decisionTag(inputs) {
+      if (!decisionPolicyApproved) return "ADVISORY";
       if (DECISION_TAGS.has(inputs?.override)) return inputs.override;
       if (inputs.reach >= policy.fadeMinReach) return "FADE AT PRICE";
       if (inputs.survival <= policy.takeMaxSurvival && inputs.quality) return "TAKE";
@@ -191,6 +227,10 @@
         stale,
         errors: validation.errors.slice(),
         warnings: validation.warnings.slice(),
+        decisionPolicyApproved,
+        decisionMode: decisionPolicyApproved ? "calibrated" : "advisory",
+        decisionPolicyVersion: decisionPolicyApproved ? approval.version : null,
+        decisionPolicyReason,
       };
     }
 
@@ -202,6 +242,7 @@
       list,
       market,
       survival,
+      survivalDetail,
       tier,
       outcome,
       decisionTag,

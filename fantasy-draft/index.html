@@ -100,6 +100,7 @@
           <button class="ghost-btn" id="exportDraft" type="button">Export backup</button>
           <button class="ghost-btn" id="importDraft" type="button">Import backup</button>
           <button class="ghost-btn" id="recoverDraft" type="button">Recover prior</button>
+          <button class="ghost-btn" id="exportAuditLog" type="button">Export log</button>
           <input class="sr-only" id="importDraftFile" type="file" accept="application/json,.json">
         </div>
       </section>
@@ -178,8 +179,8 @@
                 <th>Player</th>
                 <th>League value</th>
                 <th id="platformHeader">ESPN price</th>
-                <th>Survives next pick</th>
-                <th>Call</th>
+                <th id="nextPickHeader">Next-pick signal</th>
+                <th id="callHeader">Status</th>
                 <th><span class="sr-only">Draft action</span></th>
               </tr>
             </thead>

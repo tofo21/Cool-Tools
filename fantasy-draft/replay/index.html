@@ -57,7 +57,7 @@
       <article class="metric panel"><span>Individual Brier</span><strong id="brierScore">—</strong><small>Lower is better · 0 is perfect</small></article>
       <article class="metric panel"><span>Calibration error</span><strong id="eceScore">—</strong><small>Predicted vs observed survival</small></article>
       <article class="metric panel"><span>Model agreement</span><strong id="agreementScore">—</strong><small>Best Pick Now vs recorded pick</small></article>
-      <article class="metric panel"><span>TAKE / WAIT tests</span><strong id="counterScore">—</strong><small id="counterCount">Completed windows only</small></article>
+      <article class="metric panel"><span>TAKE / WAIT tests</span><strong id="counterScore">—</strong><small id="counterCount">Suppressed until policy approval</small></article>
     </section>
 
     <section class="two-column">
@@ -73,7 +73,7 @@
 
     <section class="panel decision-panel">
       <div class="panel-head"><div><p class="eyebrow">Reconstructed state</p><h2>Tony decision log</h2></div><span class="note" id="issueCount">No import issues</span></div>
-      <div class="table-scroll"><table class="decision-table"><thead><tr><th>Pick</th><th>Recorded</th><th>Best Pick Now</th><th>Call</th><th>Next-pick survival</th><th>Counterfactual</th></tr></thead><tbody id="decisionRows"><tr><td colspan="6" class="empty">Run a replay to reconstruct decisions.</td></tr></tbody></table></div>
+      <div class="table-scroll"><table class="decision-table"><thead><tr><th>Pick</th><th>Recorded</th><th>Best Pick Now</th><th>Call</th><th>Next-pick availability</th><th>Counterfactual</th></tr></thead><tbody id="decisionRows"><tr><td colspan="6" class="empty">Run a replay to reconstruct decisions.</td></tr></tbody></table></div>
     </section>
 
     <section class="panel issues-panel" id="issuesPanel" hidden>

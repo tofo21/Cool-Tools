@@ -77,7 +77,12 @@ function boot(modelPackageOverride) {
 const fallback = boot();
 assert.equal(fallback.context.DraftCommandLive.modelHealth().mode, "fallback");
 assert.equal(fallback.elements.get("modelStatusBadge").textContent, "Provisional");
-assert.match(fallback.elements.get("modelStatusCopy").textContent, /adapter is ready/i);
+assert.match(fallback.elements.get("modelStatusCopy").textContent, /ADVISORY \/ UNCALIBRATED/i);
+assert.match(fallback.elements.get("decisionStrip").innerHTML, /ADVISORY/);
+assert.match(fallback.elements.get("decisionStrip").innerHTML, /UNCALIBRATED/);
+assert.match(fallback.elements.get("playerTable").innerHTML, /UNCAL\./);
+assert.match(fallback.elements.get("playerTable").innerHTML, /call-advisory/);
+assert.doesNotMatch(fallback.elements.get("playerTable").innerHTML, /call-(take|wait|position-cliff)/);
 const fallbackRecommendations = fallback.context.DraftCommandLive.recommendations();
 for (const key of ["bestPlayer", "bestValue", "bestFit", "bestCeiling", "safestWait", "projectedTarget", "bestPickNow"]) {
   assert.ok(fallbackRecommendations[key]?.player, `${key} should resolve a player`);
@@ -108,6 +113,30 @@ assert.equal(syncResult.ok, true);
 assert.equal(syncResult.added, 1);
 assert.equal(fallback.context.DraftCommandLive.state().currentPick, 2);
 assert.equal(fallback.context.DraftCommandLive.modelHealth().mode, "fallback");
+assert.equal(fallback.context.DraftCommandLive.modelHealth().decisionPolicyApproved, false);
+const syncPlayers = fallback.context.PLAYER_DATA.filter((player) => ![68, 24, 45, 50, 90, 30, 47, 52, 26, 33].includes(player.id)).slice(0, 5);
+const syncThroughTony = fallback.context.DraftCommandLive.ingestSnapshot({
+  source: "sleeper",
+  syncKey: "test-draft",
+  teamCount: 10,
+  rounds: 16,
+  picks: syncPlayers.map((player, index) => ({ overall: index + 1, playerName: player.name, externalId: `fixture-${index + 1}` })),
+});
+assert.equal(syncThroughTony.ok, true);
+assert.equal(fallback.context.DraftCommandLive.state().currentPick, 6);
+const audit = fallback.context.DraftCommandLive.auditExport();
+assert.equal(audit.schemaVersion, "draft-command-audit-v1");
+assert.equal(audit.draftEvents.length, 5);
+assert.equal(audit.auditTrail.length, 5);
+const tonyAudit = audit.auditTrail.find((record) => record.event?.overall === 5);
+assert.ok(tonyAudit.recommendationBeforeTonyPick);
+assert.equal(tonyAudit.recommendationBeforeTonyPick.advisoryState.label, "ADVISORY");
+assert.equal(tonyAudit.recommendationBeforeTonyPick.advisoryState.calibrated, false);
+assert.equal(tonyAudit.model.modelVersion, "fallback-2026.08.27");
+assert.equal(tonyAudit.marketSnapshot.snapshotDate, "2026-08-27");
+assert.equal(tonyAudit.source, "sleeper-sync");
+assert.equal(tonyAudit.rosterState.teams.length, 10);
+assert.ok(tonyAudit.recommendationBeforeTonyPick.components.bestPlayer.name);
 
 const research = boot((players) => ({
   schemaVersion: "1.0.0",
@@ -134,9 +163,21 @@ const research = boot((players) => ({
 const health = research.context.DraftCommandLive.modelHealth();
 assert.equal(health.mode, "research");
 assert.equal(health.modelVersion, "candidate-integration-1");
+assert.equal(health.decisionPolicyApproved, false);
 assert.equal(research.context.DraftCommandLive.recommendations().bestPlayer.player.name, "Justin Jefferson");
 assert.equal(research.elements.get("modelStatusBadge").textContent, "Research candidate");
 assert.match(research.elements.get("bestOverallCard").innerHTML, /Research fixture/);
+assert.match(research.elements.get("decisionStrip").innerHTML, /ADVISORY/);
+
+const invalidPackage = boot(() => ({ schemaVersion: "99.0.0", season: 2025, players: [] }));
+assert.equal(invalidPackage.context.DraftCommandLive.modelHealth().mode, "fallback");
+assert.equal(invalidPackage.context.DraftCommandLive.modelHealth().valid, false);
+assert.ok(invalidPackage.context.DraftCommandLive.recommendations().bestPlayer.player);
+assert.match(invalidPackage.elements.get("playerTable").innerHTML, /data-draft-id/);
+assert.match(invalidPackage.elements.get("decisionStrip").innerHTML, /ADVISORY/);
+const invalidSync = invalidPackage.context.DraftCommandLive.ingestSnapshot({ source: "espn", teamCount: 12, rounds: 16, picks: [] });
+assert.equal(invalidSync.ok, false);
+assert.equal(invalidPackage.context.DraftCommandLive.state().currentPick, 1);
 
 const index = read("index.html");
 const scripts = [...index.matchAll(/<script src="([^"]+)"/g)].map((match) => match[1]);
@@ -147,7 +188,7 @@ assert.deepEqual(scripts.slice(-5), [
   "./app.js",
   "./sync.js",
 ]);
-for (const id of ["modelStatusBadge", "modelVersion", "modelFreshness", "modelCoverage", "modelStatusCopy", "modelSourceNote", "snapshotNote", "decisionLenses", "roomRankNote", "boardOrderNote"]) {
+for (const id of ["modelStatusBadge", "modelVersion", "modelFreshness", "modelCoverage", "modelStatusCopy", "modelSourceNote", "snapshotNote", "decisionLenses", "roomRankNote", "boardOrderNote", "exportAuditLog", "nextPickHeader", "callHeader"]) {
   assert.match(index, new RegExp(`id="${id}"`));
 }
 

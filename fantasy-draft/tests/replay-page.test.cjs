@@ -22,5 +22,7 @@ for (const id of ["fileInput", "loadSample", "runReplay", "exportReport", "strat
 }
 assert.match(appIndex, /href="\.\/replay\/"/);
 assert.doesNotMatch(replayScript, /localStorage|sessionStorage/);
+assert.match(index, /Suppressed until policy approval/);
+assert.match(replayScript, /uncalibrated signal/);
 
 console.log("replay-page tests passed");

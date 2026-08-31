@@ -11,6 +11,8 @@
   const LEGACY_STORE_KEY = "draft-command-2026-v1";
   const SNAPSHOT_KEY = "draft-command-2026-snapshots-v2";
   const SCHEMA_VERSION = 2;
+  const AUDIT_SCHEMA_VERSION = "draft-command-audit-v1";
+  const MAX_AUDIT_RECORDS = 2500;
   const MODEL_LEAGUE_PROFILE_ID = "espn-keeper-10-ppr-2flex-2026";
 
   const MANAGERS = [
@@ -48,6 +50,7 @@
     visible: 20,
     rosterTeam: TONY_TEAM,
     editingOverall: null,
+    auditLog: [],
   };
 
   const PLAYER_BY_ID = new Map(window.PLAYER_DATA.map((player) => [player.id, player]));
@@ -75,6 +78,7 @@
     "dialogCopy", "replacementSearch", "replacementList", "removePick", "rewindPick",
     "modelStatusBadge", "modelVersion", "modelFreshness", "modelCoverage", "modelStatusCopy",
     "modelSourceNote", "snapshotNote", "decisionLenses", "roomRankNote", "boardOrderNote",
+    "exportAuditLog", "nextPickHeader", "callHeader",
   ].map((id) => [id, document.getElementById(id)]));
 
   const MODEL = window.DraftModel.createAdapter({
@@ -137,6 +141,11 @@
     }).sort((a, b) => a.overall - b.overall);
   }
 
+  function canonicalizeAuditLog(records) {
+    return (Array.isArray(records) ? records : []).filter((record) => record && typeof record === "object" && record.recordedAt)
+      .map((record) => structuredClone(record)).slice(-MAX_AUDIT_RECORDS);
+  }
+
   function statePayload() {
     return {
       schemaVersion: SCHEMA_VERSION,
@@ -145,6 +154,7 @@
       platform: state.platform,
       rosterTeam: state.rosterTeam,
       events: state.events,
+      auditLog: state.auditLog,
     };
   }
 
@@ -180,9 +190,11 @@
 
   function applyPayload(payload) {
     state.events = canonicalizeEvents(payload?.events || payload?.picks || []);
+    state.auditLog = canonicalizeAuditLog(payload?.auditLog);
     state.platform = payload?.platform === "sleeper" ? "sleeper" : "espn";
     const rosterTeam = Number(payload?.rosterTeam);
     state.rosterTeam = rosterTeam >= 1 && rosterTeam <= TEAM_COUNT ? rosterTeam : TONY_TEAM;
+    if (!state.auditLog.length && state.events.length) state.auditLog = rebuildAuditLog(state.events);
   }
 
   function migrateLegacyEvents(picks) {
@@ -290,6 +302,7 @@
       return { ...result, ok: false, code: "INVALID_SNAPSHOT", message: "The connected source did not provide a valid pick list." };
     }
 
+    const previousEvents = state.events.map((event) => ({ ...event }));
     const incomingOveralls = new Set();
     const incomingPlayerIds = new Set();
     const working = state.events.map((event) => ({ ...event }));
@@ -390,7 +403,26 @@
     }
 
     if (result.added || result.updated || result.removed) {
-      state.events = canonicalizeEvents(working);
+      const finalEvents = canonicalizeEvents(working);
+      const previousByOverall = new Map(previousEvents.map((event) => [event.overall, event]));
+      const finalByOverall = new Map(finalEvents.map((event) => [event.overall, event]));
+      const changes = [];
+      for (const event of finalEvents) {
+        const previous = previousByOverall.get(event.overall);
+        if (!previous) changes.push({ action: "pick-recorded", event, previous: null });
+        else if (previous.playerId !== event.playerId) changes.push({ action: "pick-updated", event, previous });
+      }
+      for (const event of previousEvents) {
+        if (!finalByOverall.has(event.overall)) changes.push({ action: "pick-removed", event, previous: event });
+      }
+      state.events = finalEvents;
+      for (const change of changes.sort((a, b) => a.event.overall - b.event.overall)) {
+        const sourceEvents = change.action === "pick-removed" ? previousEvents : finalEvents;
+        appendAuditRecord(change.action, change.event, sourceEvents.filter((item) => item.overall < change.event.overall), {
+          platform: snapshot?.source === "sleeper" ? "sleeper" : "espn",
+          details: change.previous ? { previousPlayerId: change.previous.playerId, syncKey } : { syncKey },
+        });
+      }
       state.visible = 20;
       renderCache = {};
       saveState();
@@ -503,10 +535,27 @@
   }
 
   function survival(player, targetPick) {
-    return MODEL.survival(player, state.platform, targetPick, () => {
+    return survivalDetail(player, targetPick).value;
+  }
+
+  function survivalDetail(player, targetPick) {
+    return MODEL.survivalDetail(player, state.platform, targetPick, () => {
       const sigma = clamp(3.2 + price(player) * 0.045, 3.5, 10.5);
       return clamp(1 / (1 + Math.exp((targetPick - price(player)) / sigma)), 0.01, 0.99);
     });
+  }
+
+  function availabilitySignal(value) {
+    if (value >= 0.68) return "HIGH";
+    if (value >= 0.34) return "MEDIUM";
+    return "LOW";
+  }
+
+  function availabilityDisplay(detail, { compact = false } = {}) {
+    if (detail.calibrated) return compact ? `${Math.round(detail.value * 100)}%` : `${Math.round(detail.value * 100)}% calibrated`;
+    const signal = availabilitySignal(detail.value);
+    if (detail.qualification === "heuristic") return compact ? `${signal} · UNCAL.` : `${signal} uncalibrated availability signal`;
+    return compact ? `${Math.round(detail.value * 100)}% · UNCAL.` : `${Math.round(detail.value * 100)}% uncalibrated model estimate`;
   }
 
   function tierInfo(player) {
@@ -589,6 +638,176 @@
     return { label, cls: label.toLowerCase().replace(/\s+/g, "-") };
   }
 
+  function modelAuditSnapshot() {
+    const health = MODEL.health();
+    return {
+      packageId: health.packageId,
+      modelVersion: health.modelVersion,
+      status: health.status,
+      mode: health.mode,
+      valid: health.valid,
+      stale: health.stale,
+      coverage: health.coverage,
+      decisionMode: health.decisionMode,
+      decisionPolicyApproved: health.decisionPolicyApproved,
+      decisionPolicyVersion: health.decisionPolicyVersion,
+      decisionPolicyReason: health.decisionPolicyReason,
+    };
+  }
+
+  function marketAuditSnapshot(platform = state.platform) {
+    return {
+      platform,
+      snapshotDate: window.PLAYER_DATA_META?.snapshotDate || null,
+      displayDate: window.PLAYER_DATA_META?.displayDate || null,
+      source: window.PLAYER_DATA_META?.source || null,
+      playerCount: window.PLAYER_DATA.length,
+    };
+  }
+
+  function rosterAuditSnapshot(eventsBefore) {
+    const events = [...KEEPERS, ...canonicalizeEvents(eventsBefore)].sort((a, b) => a.overall - b.overall);
+    return {
+      phase: "immediately-before-event",
+      teams: MANAGERS.slice(1).map((item) => ({
+        team: item.id,
+        manager: item.name,
+        players: events.filter((event) => event.team === item.id).map((event) => {
+          const player = playerById(event.playerId);
+          return {
+            overall: event.overall,
+            pick: pickLabel(event.overall),
+            playerId: event.playerId,
+            name: player?.name || event.externalName || "Unknown",
+            position: player?.pos || null,
+            source: event.source,
+          };
+        }),
+      })),
+    };
+  }
+
+  function withEventState(eventsBefore, platform, callback) {
+    const originalEvents = state.events;
+    const originalPlatform = state.platform;
+    const originalCache = renderCache;
+    state.events = canonicalizeEvents(eventsBefore);
+    state.platform = platform === "sleeper" ? "sleeper" : "espn";
+    renderCache = {};
+    try {
+      return callback();
+    } finally {
+      state.events = originalEvents;
+      state.platform = originalPlatform;
+      renderCache = originalCache;
+    }
+  }
+
+  function recommendationComponent(entry, targetPick) {
+    if (!entry) return null;
+    const nextTurn = followingTonyPick(targetPick) || TOTAL_PICKS;
+    const availability = survivalDetail(entry.player, nextTurn);
+    return {
+      playerId: entry.player.id,
+      name: entry.player.name,
+      position: entry.player.pos,
+      team: entry.player.team,
+      leagueScore: Number(entry.score.toFixed(4)),
+      leagueBase: Number(entry.baseScore.toFixed(4)),
+      roomPrice: price(entry.player),
+      fairPick: fairPick(entry.player),
+      valueGap: Number(entry.gap.toFixed(4)),
+      fitImpact: Number(entry.fitImpact.toFixed(4)),
+      cliffDelta: Number(entry.cliff.toFixed(4)),
+      confidence: entry.confidence,
+      outcome: { ...entry.outcome },
+      nextPickAvailability: {
+        value: availability.value,
+        signal: availabilitySignal(availability.value),
+        source: availability.source,
+        calibrated: availability.calibrated,
+        calibrationVersion: availability.calibrationVersion,
+        qualification: availability.qualification,
+      },
+    };
+  }
+
+  function recommendationAuditSnapshot(eventsBefore, platform, decisionOverall) {
+    return withEventState(eventsBefore, platform, () => {
+      const recs = recommendations();
+      const targetPick = decisionOverall || currentPick();
+      const primary = recs.bestPickNow;
+      const call = primary ? verdict(primary.player) : null;
+      return {
+        capturedAt: new Date().toISOString(),
+        decisionOverall: targetPick,
+        decisionPick: pickLabel(targetPick),
+        advisoryState: {
+          label: call?.label || "ADVISORY",
+          calibrated: MODEL.health().decisionPolicyApproved,
+          reason: MODEL.health().decisionPolicyReason,
+        },
+        components: {
+          bestPlayer: recommendationComponent(recs.bestPlayer, targetPick),
+          bestValue: recommendationComponent(recs.bestValue, targetPick),
+          bestFit: recommendationComponent(recs.bestFit, targetPick),
+          bestCeiling: recommendationComponent(recs.bestCeiling, targetPick),
+          safestWait: recommendationComponent(recs.safestWait, targetPick),
+          projectedTarget: recommendationComponent(recs.projectedTarget, targetPick),
+          bestPickNow: recommendationComponent(recs.bestPickNow, targetPick),
+        },
+      };
+    });
+  }
+
+  function appendAuditRecord(action, event, eventsBefore, details = {}) {
+    const recordedAt = new Date().toISOString();
+    const eventCopy = event ? { ...event, pick: pickLabel(event.overall), playerName: playerById(event.playerId)?.name || event.externalName || null } : null;
+    const record = {
+      auditId: `${recordedAt}:${action}:${event?.overall || "draft"}:${state.auditLog.length + 1}`,
+      recordedAt,
+      action,
+      source: event?.source || details.source || "manual",
+      event: eventCopy,
+      model: modelAuditSnapshot(),
+      marketSnapshot: marketAuditSnapshot(details.platform || state.platform),
+      rosterState: rosterAuditSnapshot(eventsBefore),
+      recommendationBeforeTonyPick: event?.team === TONY_TEAM && ["pick-recorded", "pick-updated", "restored-event"].includes(action)
+        ? recommendationAuditSnapshot(eventsBefore, details.platform || state.platform, event.overall)
+        : null,
+      details: details.details || null,
+    };
+    state.auditLog.push(record);
+    state.auditLog = state.auditLog.slice(-MAX_AUDIT_RECORDS);
+    return record;
+  }
+
+  function rebuildAuditLog(events) {
+    const originalAudit = state.auditLog;
+    state.auditLog = [];
+    const ordered = canonicalizeEvents(events);
+    for (const event of ordered) appendAuditRecord("restored-event", event, ordered.filter((item) => item.overall < event.overall));
+    const rebuilt = state.auditLog.slice();
+    state.auditLog = originalAudit;
+    return rebuilt;
+  }
+
+  function auditExportPayload() {
+    return {
+      schemaVersion: AUDIT_SCHEMA_VERSION,
+      exportedAt: new Date().toISOString(),
+      league: "Tony 2026 ESPN keeper league",
+      platform: state.platform,
+      currentPick: currentPick(),
+      model: modelAuditSnapshot(),
+      marketSnapshot: marketAuditSnapshot(),
+      managers: MANAGERS.slice(1),
+      keepers: KEEPERS,
+      draftEvents: state.events.map((event) => ({ ...event })),
+      auditTrail: state.auditLog.map((record) => structuredClone(record)),
+    };
+  }
+
   function renderStatus() {
     const pick = currentPick();
     if (pick > TOTAL_PICKS) {
@@ -638,23 +857,29 @@
       els.decisionLenses.innerHTML = "";
       return;
     }
-    els.bestOverallCard.innerHTML = recCard(primary, onClock ? "Best pick now" : "Projected target", (p, arrive) => `${Math.round(arrive * 100)}% chance to reach Tony's next turn · league value ${leagueScore(p).toFixed(1)}.`);
-    els.bestValueCard.innerHTML = recCard(recs.bestValue, "Best value", (p, arrive, gap) => `${gap >= 0 ? "+" : ""}${gap.toFixed(1)} slots versus fair value · ${Math.round(arrive * 100)}% projected availability.`);
-    els.bestFitCard.innerHTML = recCard(recs.bestFit, "Best fit", (p) => `${needBonus(p) > 2 ? "Fills a priority roster need" : "Supports the 2-FLEX build"} · ${cliffDelta(p).toFixed(1)}-point positional cliff.`);
-    els.decisionLenses.innerHTML = [
-      { label: "Best player", entry: recs.bestPlayer, metric: `LV ${recs.bestPlayer.baseScore.toFixed(1)}` },
-      { label: "Best ceiling", entry: recs.bestCeiling, metric: `${Math.round(recs.bestCeiling.outcome.ceilingProbability * 100)}% upside` },
-      { label: "Safest wait", entry: recs.safestWait, metric: `${Math.round(recs.safestWait.surviveNext * 100)}% survives` },
-    ].map(({ label, entry, metric }) => `<div class="lens-card"><span>${label}</span><strong>${entry.player.name}</strong><small>${metric}</small></div>`).join("");
     const target = nextTonyPick() || Math.min(currentPick(), TOTAL_PICKS);
     const nextTurn = followingTonyPick(target);
     const after = nextTurn || TOTAL_PICKS;
+    els.bestOverallCard.innerHTML = recCard(primary, onClock ? "Best pick now" : "Projected target", (p) => `${availabilityDisplay(survivalDetail(p, target))} to Tony's next turn · league value ${leagueScore(p).toFixed(1)}.`);
+    els.bestValueCard.innerHTML = recCard(recs.bestValue, "Best value", (p, arrive, gap) => `${gap >= 0 ? "+" : ""}${gap.toFixed(1)} slots versus fair value · ${availabilityDisplay(survivalDetail(p, target))}.`);
+    els.bestFitCard.innerHTML = recCard(recs.bestFit, "Best fit", (p) => `${needBonus(p) > 2 ? "Fills a priority roster need" : "Supports the 2-FLEX build"} · ${cliffDelta(p).toFixed(1)}-point score-drop watch.`);
+    els.decisionLenses.innerHTML = [
+      { label: "Best player", entry: recs.bestPlayer, metric: `LV ${recs.bestPlayer.baseScore.toFixed(1)}` },
+      { label: "Best ceiling", entry: recs.bestCeiling, metric: `${Math.round(recs.bestCeiling.outcome.ceilingProbability * 100)}% upside` },
+      { label: "Safest wait", entry: recs.safestWait, metric: availabilityDisplay(survivalDetail(recs.safestWait.player, after), { compact: true }) },
+    ].map(({ label, entry, metric }) => `<div class="lens-card"><span>${label}</span><strong>${entry.player.name}</strong><small>${metric}</small></div>`).join("");
     const v = verdict(primary.player);
-    const survive = survival(primary.player, after);
+    const availability = survivalDetail(primary.player, after);
+    const health = MODEL.health();
     const reason = MODEL.list(primary.player, "decision.reasons")[0];
-    els.decisionStrip.innerHTML = `<div class="decision-call">${v.label}</div>
-      <div class="decision-copy"><strong>${primary.player.name} at ${pickLabel(target)}</strong><span>${reason || (v.label === "TAKE" || v.label === "POSITION CLIFF" ? "The next viable window is unlikely to stay open." : "The model sees enough depth to preserve optionality.")} ${samePositionNext(primary.player)?.name || "No comparable fallback"} is the next ${primary.player.pos}.</span></div>
-      <div class="decision-metric"><strong>${Math.round(survive * 100)}%</strong><small>survival to ${nextTurn ? pickLabel(after) : "end"}</small></div>`;
+    els.decisionStrip.classList.toggle("uncalibrated", !health.decisionPolicyApproved);
+    els.decisionStrip.innerHTML = health.decisionPolicyApproved
+      ? `<div class="decision-call">${v.label}</div>
+        <div class="decision-copy"><strong>${primary.player.name} at ${pickLabel(target)}</strong><span>${reason || (v.label === "TAKE" || v.label === "POSITION CLIFF" ? "The next viable window is unlikely to stay open." : "The calibrated policy sees enough depth to preserve optionality.")} ${samePositionNext(primary.player)?.name || "No comparable fallback"} is the next ${primary.player.pos}.</span></div>
+        <div class="decision-metric"><strong>${availabilityDisplay(availability, { compact: true })}</strong><small>survival to ${nextTurn ? pickLabel(after) : "end"}</small></div>`
+      : `<div class="decision-call">ADVISORY</div>
+        <div class="decision-copy"><strong>UNCALIBRATED · ${primary.player.name} at ${pickLabel(target)}</strong><span>Directional ranking only. TAKE, WAIT, and POSITION CLIFF calls are disabled until a fresh production package has explicit calibrated policy approval.</span></div>
+        <div class="decision-metric"><strong>${availabilityDisplay(availability, { compact: true })}</strong><small>availability signal to ${nextTurn ? pickLabel(after) : "end"}</small></div>`;
   }
 
   function renderPickMap() {
@@ -680,21 +905,26 @@
     const nextTurn = followingTonyPick(target);
     const after = nextTurn || TOTAL_PICKS;
     const platformName = state.platform === "espn" ? "ESPN" : "Sleeper";
+    const health = MODEL.health();
     els.boardCount.textContent = `${rows.length} available · ${platformName} room order`;
     els.platformHeader.textContent = `${platformName} default`;
     els.roomRankNote.textContent = `Player list follows ${platformName}'s current default room order.`;
     els.boardOrderNote.textContent = `Sorted by ${platformName} default room rank`;
+    els.nextPickHeader.textContent = health.decisionPolicyApproved ? "Survives next pick" : "Next-pick signal";
+    els.callHeader.textContent = health.decisionPolicyApproved ? "Call" : "Status";
     els.playerTable.innerHTML = rows.slice(0, state.visible).map((player, index) => {
       const rank = leagueRank(player);
       const gap = valueGap(player);
-      const prob = survival(player, after);
+      const availability = survivalDetail(player, after);
       const call = verdict(player);
       const tier = tierInfo(player);
+      const signal = availabilitySignal(availability.value);
+      const barWidth = availability.calibrated ? Math.round(availability.value * 100) : signal === "HIGH" ? 100 : signal === "MEDIUM" ? 66 : 33;
       return `<tr>
         <td><div class="player-cell"><span class="rank-num">${index + 1}</span><span class="pos-pill pos-${player.pos}">${player.pos}</span><div><span class="player-name">${player.name}</span><span class="player-meta">${player.team} · BYE ${player.bye}</span></div></div></td>
         <td><span class="metric-main">#${rank}</span><span class="metric-sub">${tier.label} · score ${leagueScore(player).toFixed(1)}</span></td>
         <td><span class="metric-main ${gap >= 4 ? "value-positive" : gap <= -4 ? "value-negative" : ""}">#${price(player)}</span><span class="metric-sub">${gap >= 0 ? "+" : ""}${gap.toFixed(1)} vs fair pick</span></td>
-        <td><div class="survival"><div class="survival-head"><span>${nextTurn ? pickLabel(after) : "END"}</span><span>${Math.round(prob * 100)}%</span></div><div class="survival-bar"><span style="width:${Math.round(prob * 100)}%"></span></div></div></td>
+        <td><div class="survival"><div class="survival-head"><span>${nextTurn ? pickLabel(after) : "END"}</span><span>${availabilityDisplay(availability, { compact: true })}</span></div><div class="survival-bar ${availability.calibrated ? "" : "uncalibrated"}"><span style="width:${barWidth}%"></span></div></div></td>
         <td><span class="call-badge call-${call.cls}">${call.label}</span></td>
         <td><button class="draft-btn" data-draft-id="${player.id}" type="button" ${currentPick() > TOTAL_PICKS ? "disabled" : ""}>Draft</button></td>
       </tr>`;
@@ -731,7 +961,8 @@
   function renderCliffs() {
     const positions = ["RB", "WR", "TE", "QB"];
     const items = positions.map((pos) => availablePlayers().filter((p) => p.pos === pos).sort((a, b) => leagueScore(b) - leagueScore(a))[0]).filter(Boolean);
-    els.cliffPanel.innerHTML = `<p class="eyebrow">Scarcity monitor</p><h2>Position cliffs</h2>${items.map((player) => {
+    const approved = MODEL.health().decisionPolicyApproved;
+    els.cliffPanel.innerHTML = `<p class="eyebrow">Scarcity monitor</p><h2>Position cliffs</h2>${approved ? "" : '<p class="cliff-advisory">ADVISORY · score gaps only</p>'}${items.map((player) => {
       const next = samePositionNext(player);
       const delta = cliffDelta(player);
       return `<div class="cliff-player"><strong><span>${player.pos}: ${player.name}</span><span class="cliff-severity">${delta >= 4 ? "STEEP" : delta >= 2 ? "WATCH" : "DEPTH"}</span></strong><p>${next ? `${next.name} is next; ${delta.toFixed(1)} score points down.` : "No comparable option remains."}</p></div>`;
@@ -755,18 +986,18 @@
     els.modelFreshness.textContent = freshnessLabel(health.effectiveAt);
     els.modelCoverage.textContent = `${percent}%`;
     els.modelStatusCopy.textContent = health.mode === "research"
-      ? `${health.coveredPlayers} of ${health.totalPlayers} board players use the ${health.status} research package; missing fields fall back individually.`
+      ? `${health.coveredPlayers} of ${health.totalPlayers} board players use the ${health.status} research package; ${health.decisionPolicyApproved ? "calibrated decision policy is approved" : "decision calls remain ADVISORY / UNCALIBRATED"}.`
       : health.stale
         ? "The loaded research package has expired, so recommendations reverted to the provisional fallback."
         : health.valid
-          ? "Research adapter is ready. Current recommendations use the visible provisional ECR, room-price and roster heuristics."
+          ? "ADVISORY / UNCALIBRATED. Best-player and roster lenses remain available; calibrated TAKE/WAIT and POSITION CLIFF calls are disabled."
           : `Research package rejected safely: ${health.errors[0] || "incompatible package"}`;
     const roomSnapshot = window.PLAYER_DATA_META?.displayDate || "current snapshot";
     els.snapshotNote.textContent = `${health.modelVersion} · room board ${roomSnapshot}`;
     const modelNote = health.mode === "research"
       ? `<strong>Model:</strong> ${health.modelVersion} · ${percent}% player coverage · ${health.sourceCount} registered source layers. Missing player fields use the provisional fallback and are never imputed silently.`
       : `<strong>Model:</strong> Provisional fallback active. The versioned research adapter is ready, but the production outcome, league-value and calibrated survival package has not been loaded yet.`;
-    els.modelSourceNote.innerHTML = `${modelNote}<br><strong>Draft-room order:</strong> ESPN and Sleeper PPR defaults from ${window.PLAYER_DATA_META?.source || "the platform source layer"}, ${roomSnapshot}. The selected platform controls the player-list order; league value and recommendations remain independent.`;
+    els.modelSourceNote.innerHTML = `${modelNote}<br><strong>Decision safety:</strong> ${health.decisionPolicyApproved ? `Calibrated policy ${health.decisionPolicyVersion} is approved.` : "ADVISORY / UNCALIBRATED. Fallback logistic outputs are shown only as qualitative availability signals; TAKE/WAIT and POSITION CLIFF calls are suppressed."}<br><strong>Draft-room order:</strong> ESPN and Sleeper PPR defaults from ${window.PLAYER_DATA_META?.source || "the platform source layer"}, ${roomSnapshot}. The selected platform controls the player-list order; league value and recommendations remain independent.`;
   }
 
   function render() {
@@ -788,7 +1019,9 @@
     const player = playerById(id);
     if (!player || draftedIds().has(player.id)) return;
     const team = pickOwner(overall);
-    state.events.push({ overall, team, playerId: player.id, source: "manual", timestamp: new Date().toISOString() });
+    const event = { overall, team, playerId: player.id, source: "manual", timestamp: new Date().toISOString() };
+    appendAuditRecord("pick-recorded", event, state.events);
+    state.events.push(event);
     state.events.sort((a, b) => a.overall - b.overall);
     state.visible = 20;
     saveState();
@@ -832,6 +1065,7 @@
     const blocked = draftedIds();
     blocked.delete(event.playerId);
     if (blocked.has(player.id)) return;
+    const oldEvent = { ...event };
     const oldPlayer = playerById(event.playerId);
     event.playerId = player.id;
     event.timestamp = new Date().toISOString();
@@ -839,6 +1073,9 @@
     event.syncKey = null;
     event.externalId = null;
     event.externalName = null;
+    appendAuditRecord("pick-updated", event, state.events.filter((item) => item.overall < event.overall), {
+      details: { previousPlayerId: oldEvent.playerId, previousPlayerName: oldPlayer.name, reason: "manual-correction" },
+    });
     saveState();
     els.pickDialog.close();
     render();
@@ -848,6 +1085,8 @@
   function removeEditingPick() {
     const event = editEvent(state.editingOverall);
     if (!event || !window.confirm(`Remove ${playerById(event.playerId).name} from ${pickLabel(event.overall)}? Later picks will stay in place until this slot is corrected.`)) return;
+    const beforeEvents = state.events.map((item) => ({ ...item }));
+    appendAuditRecord("pick-removed", event, beforeEvents, { details: { reason: "manual-removal" } });
     state.events = state.events.filter((item) => item.overall !== event.overall);
     saveState();
     els.pickDialog.close();
@@ -860,6 +1099,10 @@
     if (!event) return;
     const affected = state.events.filter((item) => item.overall >= event.overall).length;
     if (!window.confirm(`Rewind to ${pickLabel(event.overall)}? This clears ${affected} live selection${affected === 1 ? "" : "s"} from that pick forward. Keepers remain loaded.`)) return;
+    const beforeEvents = state.events.map((item) => ({ ...item }));
+    for (const removed of beforeEvents.filter((item) => item.overall >= event.overall)) {
+      appendAuditRecord("pick-removed", removed, beforeEvents, { details: { reason: "rewind", rewindTo: event.overall } });
+    }
     state.events = state.events.filter((item) => item.overall < event.overall);
     saveState();
     els.pickDialog.close();
@@ -879,6 +1122,18 @@
     anchor.click();
     URL.revokeObjectURL(url);
     showToast("Draft backup exported");
+  }
+
+  function exportAuditLog() {
+    const payload = auditExportPayload();
+    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement("a");
+    anchor.href = url;
+    anchor.download = `draft-command-audit-${new Date().toISOString().replace(/[:.]/g, "-")}.json`;
+    anchor.click();
+    URL.revokeObjectURL(url);
+    showToast("Decision and event log exported");
   }
 
   async function importDraft(file) {
@@ -960,6 +1215,7 @@
   els.undoPick.addEventListener("click", () => {
     const removed = state.events.slice().sort((a, b) => b.overall - a.overall)[0];
     if (!removed) return;
+    appendAuditRecord("pick-removed", removed, state.events, { details: { reason: "undo" } });
     state.events = state.events.filter((event) => event.overall !== removed.overall);
     saveState();
     render();
@@ -967,6 +1223,8 @@
   });
   els.resetDraft.addEventListener("click", () => {
     if (!state.events.length || window.confirm("Reset every live selection? The manager list and 10 keepers will remain loaded, and the prior state will stay available as a recovery snapshot.")) {
+      const beforeEvents = state.events.map((event) => ({ ...event }));
+      for (const removed of beforeEvents) appendAuditRecord("pick-removed", removed, beforeEvents, { details: { reason: "draft-reset" } });
       state.events = [];
       saveState();
       render();
@@ -974,6 +1232,7 @@
     }
   });
   els.exportDraft.addEventListener("click", exportDraft);
+  els.exportAuditLog.addEventListener("click", exportAuditLog);
   els.importDraft.addEventListener("click", () => els.importDraftFile.click());
   els.importDraftFile.addEventListener("change", (event) => importDraft(event.target.files?.[0]));
   els.recoverDraft.addEventListener("click", recoverPriorSnapshot);
@@ -984,7 +1243,8 @@
     ingestSnapshot,
     resolvePlayer: (rawPick) => resolveExternalPlayer(rawPick),
     profile: Object.freeze({ teamCount: TEAM_COUNT, rounds: ROUNDS, platform: "espn", league: "Tony 2026 ESPN keeper league" }),
-    state: () => ({ events: state.events.map((event) => ({ ...event })), currentPick: currentPick() }),
+    state: () => ({ events: state.events.map((event) => ({ ...event })), auditLog: state.auditLog.map((record) => structuredClone(record)), currentPick: currentPick() }),
+    auditExport: () => structuredClone(auditExportPayload()),
     modelHealth: () => MODEL.health(),
     recommendations: () => recommendations(),
     boardOrder: (platform = state.platform) => boardRows(platform).map((player) => ({ id: player.id, name: player.name, roomRank: roomOrder(player, platform) })),

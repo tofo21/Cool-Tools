@@ -38,10 +38,15 @@ assert.equal(report.ok, true);
 assert.equal(report.summary.decisions, 15);
 assert.equal(report.summary.completeThrough, 160);
 assert.equal(report.strategies.length, 4);
-assert.ok(report.summary.individualCalibration.count > 100);
-assert.ok(report.summary.individualCalibration.brier >= 0 && report.summary.individualCalibration.brier <= 1);
+assert.equal(report.summary.individualCalibration.count, 0);
+assert.equal(report.summary.individualCalibration.brier, null);
 assert.ok(report.decisions.every((decision) => decision.recommendation?.name));
+assert.ok(report.decisions.every((decision) => decision.recommendation?.tag === "ADVISORY"));
+assert.ok(report.decisions.every((decision) => decision.recommendation?.survival == null));
+assert.ok(report.decisions.every((decision) => decision.recommendation?.availabilitySignal));
+assert.equal(report.summary.counterfactualCount, 0);
 assert.equal(report.modelHealth.mode, "fallback");
+assert.equal(report.modelHealth.decisionPolicyApproved, false);
 
 const sleeperPlayer = context.PLAYER_DATA.find((player) => player.id === 1);
 const normalizedSleeper = engine.normalizeLog({

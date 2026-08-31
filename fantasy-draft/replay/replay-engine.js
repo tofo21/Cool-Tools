@@ -245,10 +245,11 @@
         };
       };
       const outcome = (player) => model.outcome(player, fallbackOutcome(player));
-      const survival = (player, target = nextTony) => model.survival(player, platform, target, () => {
+      const survivalDetail = (player, target = nextTony) => model.survivalDetail(player, platform, target, () => {
         const sigma = clamp(3.2 + price(player) * 0.045, 3.5, 10.5);
         return clamp(1 / (1 + Math.exp((target - price(player)) / sigma)), 0.01, 0.99);
       });
+      const survival = (player, target = nextTony) => survivalDetail(player, target).value;
       const ordered = available.slice().sort((a, b) => leagueScore(b) - leagueScore(a));
       const ranks = new Map(ordered.map((player, index) => [player.id, index + 1]));
       const tier = (player) => model.tier(player, { id: `${player.pos}-${Math.max(1, Math.ceil((ranks.get(player.id) || player.ecr || 1) / 8))}`, label: `${player.pos} depth` });
@@ -259,7 +260,8 @@
       const pool = available.map((player) => {
         const score = leagueScore(player);
         const gap = valueGap(player);
-        const surviveNext = survival(player);
+        const availability = survivalDetail(player);
+        const surviveNext = availability.value;
         const playerOutcome = outcome(player);
         const fitImpact = needBonus(player) + model.number(player, "leagueValue.rosterFitBase", 0);
         const cliffValue = cliff(player);
@@ -272,6 +274,9 @@
           score,
           gap,
           surviveNext,
+          survivalCalibrated: availability.calibrated,
+          survivalSource: availability.source,
+          survivalQualification: availability.qualification,
           tier: tier(player),
           cliff: cliffValue,
           fitImpact,
@@ -333,7 +338,8 @@
           const candidateRows = context.pool.slice().sort((a, b) => b.pickNow - a.pickNow).slice(0, 20).filter((entry) => entry.player.id !== event.playerId);
 
           if (completeWindow) {
-            for (const entry of candidateRows) {
+            const calibratedCandidates = candidateRows.filter((entry) => entry.survivalCalibrated);
+            for (const entry of calibratedCandidates) {
               const selected = eventsByPlayer.get(entry.player.id);
               individualRecords.push({
                 decisionOverall: event.overall,
@@ -344,7 +350,7 @@
               });
             }
             const tiers = new Map();
-            for (const entry of candidateRows) {
+            for (const entry of calibratedCandidates) {
               if (!tiers.has(entry.tier.id)) tiers.set(entry.tier.id, []);
               tiers.get(entry.tier.id).push(entry);
             }
@@ -359,10 +365,12 @@
             }
           }
 
-          let counterfactual = { status: "pending", correct: null };
-          if (recommended && recommended.player.id === event.playerId) {
+          let counterfactual = model.health().decisionPolicyApproved
+            ? { status: "pending", correct: null }
+            : { status: "uncalibrated", correct: null };
+          if (model.health().decisionPolicyApproved && recommended && recommended.player.id === event.playerId) {
             counterfactual = { status: "taken", correct: actualCall === "TAKE" || actualCall === "VALUE" || actualCall === "UPSIDE" || actualCall === "POSITION CLIFF" };
-          } else if (recommended && completeWindow) {
+          } else if (model.health().decisionPolicyApproved && recommended && completeWindow) {
             const selected = eventsByPlayer.get(recommended.player.id);
             const survived = !selected || selected.overall >= context.nextTony;
             const waitCall = actualCall === "WAIT" || actualCall === "FADE AT PRICE";
@@ -393,10 +401,22 @@
             nextTonyOverall: context.nextTony,
             nextTonyPick: pickLabel(context.nextTony, profile.teamCount),
             actual: actualEntry ? { playerId: actualPlayer.id, name: actualPlayer.name, pos: actualPlayer.pos, score: round(actualEntry.score), valueGap: round(actualEntry.gap) } : { playerId: actualPlayer.id, name: actualPlayer.name, pos: actualPlayer.pos, score: null, valueGap: null },
-            recommendation: recommended ? { playerId: recommended.player.id, name: recommended.player.name, pos: recommended.player.pos, score: round(recommended.score), valueGap: round(recommended.gap), survival: round(recommended.surviveNext), tag: actualCall } : null,
+            recommendation: recommended ? {
+              playerId: recommended.player.id,
+              name: recommended.player.name,
+              pos: recommended.player.pos,
+              score: round(recommended.score),
+              valueGap: round(recommended.gap),
+              survival: recommended.survivalCalibrated ? round(recommended.surviveNext) : null,
+              availabilitySignal: recommended.surviveNext >= 0.68 ? "HIGH" : recommended.surviveNext >= 0.34 ? "MEDIUM" : "LOW",
+              survivalCalibrated: recommended.survivalCalibrated,
+              survivalSource: recommended.survivalSource,
+              survivalQualification: recommended.survivalQualification,
+              tag: actualCall,
+            } : null,
             agreed: recommended?.player.id === event.playerId,
             counterfactual,
-            calibrationReady: completeWindow,
+            calibrationReady: completeWindow && Boolean(recommended?.survivalCalibrated),
           });
         }
         eventsBefore.push(event);

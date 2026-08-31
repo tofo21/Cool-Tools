@@ -93,7 +93,6 @@ button { color: inherit; }
 .league-rules dt { color: var(--muted); font: 400 10px "DM Mono", monospace; text-transform: uppercase; }
 .league-rules dd { margin: 0; font-size: 10px; font-weight: 600; }
 .backup-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 13px; }
-.backup-actions #recoverDraft { grid-column: 1 / -1; }
 .backup-actions .ghost-btn { padding-inline: 4px; font-size: 10px; }
 .platform-note { margin: -4px 0 14px; color: var(--muted); font: 400 10px/1.45 "DM Mono", monospace; }
 .model-badge { padding: 5px 7px; border: 1px solid var(--line); border-radius: 4px; font: 600 10px "DM Mono", monospace; letter-spacing: .04em; text-transform: uppercase; }
@@ -133,6 +132,8 @@ button { color: inherit; }
 .pos-QB { background: var(--qb); }.pos-RB { background: var(--rb); }.pos-WR { background: var(--wr); }.pos-TE { background: var(--te); }
 
 .decision-strip { margin: 10px 0; min-height: 78px; border: 1px solid rgba(168,255,62,.26); background: linear-gradient(90deg, rgba(168,255,62,.1), rgba(168,255,62,.025)); border-radius: 10px; padding: 13px 16px; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 14px; }
+.decision-strip.uncalibrated { border-color: rgba(255,202,88,.42); background: linear-gradient(90deg, rgba(255,202,88,.14), rgba(255,202,88,.025)); }
+.decision-strip.uncalibrated .decision-call, .decision-strip.uncalibrated .decision-metric strong { color: var(--amber); }
 .decision-call { min-width: 64px; color: var(--green); font: 800 28px "Barlow Condensed", sans-serif; letter-spacing: .03em; }
 .decision-copy strong { display: block; font-size: 12px; margin-bottom: 3px; }
 .decision-copy span { color: var(--muted); font-size: 12px; }
@@ -174,12 +175,14 @@ tbody tr:hover { background: rgba(255,255,255,.025); }
 .survival-head { display: flex; justify-content: space-between; font: 500 10px "DM Mono", monospace; }
 .survival-bar { height: 3px; margin-top: 5px; background: rgba(255,255,255,.07); border-radius: 10px; overflow: hidden; }
 .survival-bar span { display: block; height: 100%; background: var(--green); }
+.survival-bar.uncalibrated span { background: var(--amber); opacity: .72; }
 .call-badge { display: inline-flex; align-items: center; gap: 4px; padding: 5px 7px; border-radius: 4px; font: 600 10px "DM Mono", monospace; letter-spacing: .03em; }
 .call-take { color: var(--green); background: var(--green-dim); }
 .call-wait { color: var(--amber); background: rgba(255,202,88,.1); }
 .call-value, .call-upside { color: #091116; background: #8fdcff; }
 .call-position-cliff { color: #160b04; background: #ff9f5a; }
 .call-fade-at-price { color: #fff; background: rgba(255,91,91,.68); }
+.call-advisory { color: var(--amber); border: 1px solid rgba(255,202,88,.3); background: rgba(255,202,88,.08); }
 .draft-btn { min-height: 32px; border: 1px solid var(--line-strong); background: transparent; color: var(--muted); padding: 6px 10px; border-radius: 5px; cursor: pointer; font: 500 10px "DM Mono", monospace; text-transform: uppercase; }
 .draft-btn:hover, .draft-btn:focus-visible { border-color: var(--green); color: var(--green); }
 .draft-btn:disabled { opacity: .35; cursor: default; }
@@ -208,6 +211,7 @@ tbody tr:hover { background: rgba(255,255,255,.025); }
 .text-btn:disabled { color: var(--muted-2); cursor: default; }
 .history-list { max-height: 330px; overflow-y: auto; }
 .cliff-panel h2 { margin: 0 0 12px; font: 700 18px "Barlow Condensed", sans-serif; text-transform: uppercase; }
+.cliff-advisory { margin: -6px 0 12px; color: var(--amber); font: 600 10px "DM Mono", monospace; letter-spacing: .04em; }
 .cliff-player { padding: 9px 0; border-top: 1px solid var(--line); }
 .cliff-player strong { display: flex; align-items: center; justify-content: space-between; font: 600 11px "Barlow Condensed", sans-serif; text-transform: uppercase; }
 .cliff-player p { margin: 4px 0 0; color: var(--muted); font: 400 10px/1.45 "DM Mono", monospace; }

@@ -44,7 +44,19 @@
         "valueMinGap": { "type": "number" },
         "upsideMinProbability": { "type": "number", "minimum": 0, "maximum": 1 },
         "cliffMinDelta": { "type": "number", "minimum": 0 },
-        "fadeMinReach": { "type": "number", "minimum": 0 }
+        "fadeMinReach": { "type": "number", "minimum": 0 },
+        "approval": {
+          "type": "object",
+          "required": ["status", "calibrated", "version", "approvedAt"],
+          "properties": {
+            "status": { "enum": ["pending", "approved", "rejected"] },
+            "calibrated": { "type": "boolean" },
+            "version": { "type": "string", "minLength": 1 },
+            "approvedAt": { "type": "string", "format": "date-time" },
+            "approvedBy": { "type": ["string", "null"] }
+          },
+          "additionalProperties": true
+        }
       },
       "additionalProperties": false
     },

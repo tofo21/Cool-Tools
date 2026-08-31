@@ -62,6 +62,7 @@
   }
 
   function counterLabel(decision) {
+    if (decision.counterfactual.status === "uncalibrated") return `<span class="muted">Suppressed · uncalibrated</span>`;
     if (decision.counterfactual.status === "taken") return `<span class="positive">Taken now</span>`;
     if (decision.counterfactual.status === "pending") return `<span class="muted">Window incomplete</span>`;
     const label = decision.counterfactual.status === "survived" ? "Survived" : "Lost before turn";
@@ -75,7 +76,7 @@
         <td>${escapeHtml(decision.actual.name)} <span class="muted">${decision.actual.pos}</span></td>
         <td class="${decision.agreed ? "positive" : ""}">${escapeHtml(decision.recommendation?.name || "—")} <span class="muted">${decision.recommendation?.pos || ""}</span></td>
         <td><span class="tag">${escapeHtml(decision.recommendation?.tag || "—")}</span></td>
-        <td>${percent(decision.recommendation?.survival)} <span class="muted">to ${decision.nextTonyPick}</span></td>
+        <td>${decision.recommendation?.survivalCalibrated ? percent(decision.recommendation.survival) : `${escapeHtml(decision.recommendation?.availabilitySignal || "—")} <span class="muted">uncalibrated signal</span>`} <span class="muted">to ${decision.nextTonyPick}</span></td>
         <td>${counterLabel(decision)}</td>
       </tr>`).join("") : `<tr><td colspan="6" class="empty">No Tony selections were found in this log.</td></tr>`;
   }
