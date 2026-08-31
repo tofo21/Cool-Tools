@@ -44,7 +44,7 @@ jobs:
         run: python fantasy-draft/research/build_high_stakes_market_v05b.py
 
       - name: Attach Step 10 sportsbook market layer
-        run: python fantasy-draft/research/build_sportsbook_market_v06b.py
+        run: python fantasy-draft/research/build_sportsbook_market_v06c.py
 
       - name: Upload research panel artifact
         uses: actions/upload-artifact@v4
