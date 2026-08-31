@@ -69,6 +69,9 @@ jobs:
       - name: Step 13 Model H context scorecard
         run: python fantasy-draft/research/build_model_h_context_v09.py
 
+      - name: Finalize Step 13 source-gap audit
+        run: python fantasy-draft/research/finalize_model_h_context_v09.py
+
       - name: Upload research and scorecard artifact
         uses: actions/upload-artifact@v4
         with:
