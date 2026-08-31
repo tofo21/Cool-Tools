@@ -16,6 +16,7 @@
   const AUDIT_SCHEMA_VERSION = "draft-command-audit-v2";
   const APP_RELEASE = "F5D-2026.08.31";
   const MAX_AUDIT_RECORDS = 2500;
+  const MAX_RECOVERY_SNAPSHOTS = 12;
   const MODEL_LEAGUE_PROFILE_ID = "espn-keeper-10-ppr-2flex-2026";
 
   const MANAGERS = [
@@ -79,6 +80,7 @@
     ["tank dell", "nathaniel dell"],
   ].map(([alias, canonical]) => [normalizePlayerName(alias), normalizePlayerName(canonical)]));
   let renderCache = {};
+  let persistenceWarning = null;
 
   const els = Object.fromEntries([
     "roundPick", "overallPick", "clockOwner", "draftProgress", "nextTonyText", "pickMap",
@@ -253,24 +255,105 @@
     }
   }
 
+  function isStorageQuotaError(error) {
+    return error?.name === "QuotaExceededError" || error?.name === "NS_ERROR_DOM_QUOTA_REACHED" || error?.code === 22 || error?.code === 1014;
+  }
+
+  function recoverySnapshotPayload(payload) {
+    const { auditLog: _auditLog, ...snapshot } = payload;
+    return { ...snapshot, recoverySnapshot: true };
+  }
+
+  function clearRecoveryStorage() {
+    for (const key of [SNAPSHOT_KEY, ...LEGACY_SNAPSHOT_KEYS]) {
+      try { localStorage.removeItem(key); } catch (_) { /* active in-memory draft remains usable */ }
+    }
+  }
+
+  function writeActiveState(payload) {
+    const serialized = JSON.stringify(payload);
+    try {
+      localStorage.setItem(STORE_KEY, serialized);
+      persistenceWarning = null;
+      return true;
+    } catch (error) {
+      if (!isStorageQuotaError(error)) {
+        persistenceWarning = "Live in memory · export backup";
+        return false;
+      }
+    }
+
+    clearRecoveryStorage();
+    try {
+      localStorage.setItem(STORE_KEY, serialized);
+      persistenceWarning = "Saved · old recovery history cleared";
+      return true;
+    } catch (error) {
+      if (!isStorageQuotaError(error)) {
+        persistenceWarning = "Live in memory · export backup";
+        return false;
+      }
+    }
+
+    // Preserve the active board and source cursor even if the detailed audit trail
+    // outgrows browser storage. The in-memory audit remains exportable, and it is
+    // deterministically rebuilt from persisted events after a refresh.
+    const compactPayload = { ...payload, auditLog: [], auditRebuildRequired: true };
+    try {
+      localStorage.setItem(STORE_KEY, JSON.stringify(compactPayload));
+      persistenceWarning = "Saved · audit retained in memory";
+      return true;
+    } catch (_) {
+      persistenceWarning = "Live in memory · export backup";
+      return false;
+    }
+  }
+
+  function writeRecoverySnapshots(snapshots) {
+    const candidates = [
+      snapshots.slice(-MAX_RECOVERY_SNAPSHOTS),
+      snapshots.slice(-4),
+      snapshots.slice(-1),
+    ];
+    for (const candidate of candidates) {
+      try {
+        localStorage.setItem(SNAPSHOT_KEY, JSON.stringify(candidate));
+        return true;
+      } catch (error) {
+        if (!isStorageQuotaError(error)) return false;
+      }
+    }
+    try { localStorage.removeItem(SNAPSHOT_KEY); } catch (_) { /* active state is still authoritative */ }
+    persistenceWarning = persistenceWarning || "Saved · recovery history unavailable";
+    return false;
+  }
+
   function updateSaveStatus(savedAt) {
     if (!els.saveStatus) return;
+    if (persistenceWarning) {
+      els.saveStatus.textContent = persistenceWarning;
+      els.saveStatus.title = "The active draft remains usable. Export a backup and audit log when practical.";
+      return;
+    }
     const time = new Date(savedAt);
     els.saveStatus.textContent = Number.isNaN(time.getTime()) ? "Recovery ready" : `Saved ${time.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })}`;
+    els.saveStatus.title = "";
   }
 
   function saveState({ snapshot = true } = {}) {
     const payload = statePayload();
-    localStorage.setItem(STORE_KEY, JSON.stringify(payload));
+    writeActiveState(payload);
     if (snapshot) {
-      const snapshots = readSnapshots();
+      const storedSnapshots = readSnapshots();
+      const snapshots = storedSnapshots.map(recoverySnapshotPayload);
       const fingerprint = JSON.stringify([payload.events, payload.sourceObservations, payload.keeperSeeds]);
       const last = snapshots.at(-1);
       const lastFingerprint = last ? JSON.stringify([last.events || [], last.sourceObservations || [], last.keeperSeeds || []]) : null;
       if (fingerprint !== lastFingerprint) {
-        snapshots.push(payload);
-        localStorage.setItem(SNAPSHOT_KEY, JSON.stringify(snapshots.slice(-12)));
+        snapshots.push(recoverySnapshotPayload(payload));
       }
+      const needsCompaction = storedSnapshots.some((stored) => Array.isArray(stored?.auditLog) && stored.auditLog.length);
+      if (fingerprint !== lastFingerprint || needsCompaction) writeRecoverySnapshots(snapshots);
     }
     updateSaveStatus(payload.savedAt);
   }

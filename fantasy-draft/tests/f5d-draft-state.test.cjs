@@ -15,9 +15,9 @@ function element() {
   };
 }
 
-function boot() {
+function boot(options = {}) {
   const elements = new Map();
-  const storage = new Map();
+  const storage = options.storage || new Map();
   let uuid = 0;
   const document = {
     body: element(), hidden: false,
@@ -28,7 +28,10 @@ function boot() {
     console, document, structuredClone,
     localStorage: {
       getItem(key) { return storage.has(key) ? storage.get(key) : null; },
-      setItem(key, value) { storage.set(key, String(value)); },
+      setItem(key, value) {
+        if (options.setItem) return options.setItem({ key, value: String(value), storage });
+        storage.set(key, String(value));
+      },
       removeItem(key) { storage.delete(key); },
     },
     crypto: { randomUUID() { uuid += 1; return `session-${uuid}`; } },
@@ -47,6 +50,12 @@ function boot() {
   vm.runInContext(read("model/model-adapter.js"), context, { filename: "model-adapter.js" });
   vm.runInContext(read("app.js"), context, { filename: "app.js" });
   return { context, storage, elements };
+}
+
+function quotaError() {
+  const error = new Error("Browser storage quota exceeded");
+  error.name = "QuotaExceededError";
+  return error;
 }
 
 function snapshot(context, picks, overrides = {}) {
@@ -319,6 +328,89 @@ function pick(player, overall) {
   assert.equal(state.events[0].source, "manual");
   assert.equal(state.sourceObservations[0].source, "manual");
   assert.equal(state.currentPick, 2);
+}
+
+// 19. A full browser-storage quota cannot freeze initialization before Manual mode renders.
+{
+  const storage = new Map();
+  const persisted = {
+    schemaVersion: 3,
+    events: [],
+    modeledEvents: [],
+    sourceObservations: [],
+    keeperMode: false,
+    keeperSeeds: [],
+    seedReconciliations: [],
+    sessionId: "persisted-session",
+    generation: 1,
+    sourceIngestionPaused: false,
+    platform: "espn",
+    rosterTeam: 5,
+    auditLog: [],
+  };
+  storage.set("draft-command-2026-v3", JSON.stringify(persisted));
+  storage.set("draft-command-2026-snapshots-v3", JSON.stringify([{ ...persisted, auditLog: [{ recordedAt: "2026-08-31T20:00:00Z", payload: "x".repeat(1000) }] }]));
+  let quotaFailures = 0;
+  const first = boot({
+    storage,
+    setItem({ key, value, storage: liveStorage }) {
+      if (key === "draft-command-2026-v3" && liveStorage.has("draft-command-2026-snapshots-v3")) {
+        quotaFailures += 1;
+        throw quotaError();
+      }
+      liveStorage.set(key, value);
+    },
+  });
+  assert.equal(quotaFailures, 1);
+  assert.equal(first.context.DraftCommandLive.state().currentPick, 1);
+  assert.equal(first.context.DraftCommandLive.state().keeperMode, false);
+  assert.match(first.elements.get("modelVersion").textContent, /fallback-/i);
+  assert.match(first.elements.get("playerTable").innerHTML, /Jahmyr Gibbs/);
+  assert.equal(storage.has("draft-command-2026-snapshots-v3"), false);
+
+  const refreshed = boot({ storage });
+  assert.equal(refreshed.context.DraftCommandLive.state().currentPick, 1);
+  assert.match(refreshed.elements.get("modelVersion").textContent, /fallback-/i);
+  assert.match(refreshed.elements.get("playerTable").innerHTML, /Jahmyr Gibbs/);
+}
+
+// 20. Rolling recovery snapshots omit the duplicated audit trail.
+{
+  const { context, storage } = boot();
+  context.DraftCommandLive.recordManualPick(context.PLAYER_DATA[0].id);
+  const snapshots = JSON.parse(storage.get("draft-command-2026-snapshots-v3"));
+  assert.equal(snapshots.length, 1);
+  assert.equal(Object.hasOwn(snapshots[0], "auditLog"), false);
+  assert.equal(snapshots[0].events.length, 1);
+  assert.equal(snapshots[0].sourceObservations.length, 1);
+}
+
+// 21. A full 160-pick draft remains live and reloadable when detailed audit data exceeds storage capacity.
+{
+  const storage = new Map();
+  const storageLimit = 900_000;
+  const limitedSetItem = ({ key, value, storage: liveStorage }) => {
+    const candidate = new Map(liveStorage);
+    candidate.set(key, value);
+    const size = [...candidate].reduce((total, [storedKey, storedValue]) => total + (storedKey.length + storedValue.length) * 2, 0);
+    if (size > storageLimit) throw quotaError();
+    liveStorage.set(key, value);
+  };
+  const first = boot({ storage, setItem: limitedSetItem });
+  const picks = first.context.PLAYER_DATA.slice(0, 160).map((player, index) => pick(player, index + 1));
+  assert.doesNotThrow(() => first.context.DraftCommandLive.ingestSnapshot(snapshot(first.context, picks)));
+  assert.equal(first.context.DraftCommandLive.state().currentPick, 161);
+  assert.equal(first.context.DraftCommandLive.state().events.length, 160);
+  assert.equal(new Set(first.context.DraftCommandLive.state().events.map((event) => event.playerId)).size, 160);
+  const persisted = JSON.parse(storage.get("draft-command-2026-v3"));
+  assert.equal(persisted.auditRebuildRequired, true);
+  assert.equal(persisted.auditLog.length, 0);
+
+  const refreshed = boot({ storage, setItem: limitedSetItem });
+  assert.equal(refreshed.context.DraftCommandLive.state().currentPick, 161);
+  assert.equal(refreshed.context.DraftCommandLive.state().events.length, 160);
+  assert.equal(new Set(refreshed.context.DraftCommandLive.state().events.map((event) => event.playerId)).size, 160);
+  assert.match(refreshed.elements.get("modelVersion").textContent, /fallback-/i);
 }
 
 console.log("F5D draft-state tests passed");
