@@ -552,6 +552,19 @@
         observation.reasonCode = "DUPLICATE_SOURCE_PLAYER";
         observation.unresolvedReasonCode = "DUPLICATE_SOURCE_PLAYER";
         observation.reason = "player appears twice in the source snapshot";
+        const seedAtIndex = workingSeeds.findIndex((seed) => seed.overall === overall);
+        if (seedAtIndex >= 0) {
+          const [seedAt] = workingSeeds.splice(seedAtIndex, 1);
+          playerOverall.delete(seedAt.playerId);
+          result.reconciliation.push({ action: "seed-overridden-duplicate", overall, seededPlayerId: seedAt.playerId, sourcePlayerId: player.id });
+        }
+        const existing = byOverall.get(overall);
+        if (existing?.syncKey === syncKey) {
+          working.splice(working.indexOf(existing), 1);
+          byOverall.delete(overall);
+          playerOverall.delete(existing.playerId);
+          result.removed += 1;
+        }
         result.conflicts.push({ overall, playerName: externalName, reason: observation.reason, code: observation.reasonCode, message: missingPickMessage(overall) });
         continue;
       }
@@ -1443,6 +1456,18 @@
     event.syncKey = null;
     event.externalId = null;
     event.externalName = null;
+    const observation = state.sourceObservations.find((item) => item.overall === event.overall && (item.manualPlayerId || item.source === "manual"));
+    if (observation) {
+      observation.playerId = player.id;
+      observation.manualPlayerId = player.id;
+      observation.status = "resolved";
+      observation.resolutionStatus = "manually-resolved";
+      observation.lastObservedAt = event.timestamp;
+      if (observation.source === "manual") {
+        observation.externalName = player.name;
+        observation.rawPlayerName = player.name;
+      }
+    }
     appendAuditRecord("pick-updated", event, state.events.filter((item) => item.overall < event.overall), {
       details: { previousPlayerId: oldEvent.playerId, previousPlayerName: oldPlayer.name, reason: "manual-correction" },
     });
@@ -1550,10 +1575,28 @@
     const beforeEvents = state.events.map((item) => ({ ...item }));
     appendAuditRecord("pick-removed", event, beforeEvents, { details: { reason: "manual-removal" } });
     state.events = state.events.filter((item) => item.overall !== event.overall);
+    removeManualObservation(event);
     saveState();
     els.pickDialog.close();
     render();
     showToast(`Removed pick ${pickLabel(event.overall)}`);
+  }
+
+  function removeManualObservation(event) {
+    const observation = state.sourceObservations.find((item) => item.overall === event.overall && (item.manualPlayerId === event.playerId || item.source === "manual"));
+    if (!observation) return;
+    if (observation.source === "manual") {
+      state.sourceObservations = state.sourceObservations.filter((item) => item !== observation);
+      return;
+    }
+    observation.playerId = null;
+    observation.manualPlayerId = null;
+    observation.status = "unresolved";
+    observation.resolutionStatus = "unresolved";
+    observation.reasonCode = observation.unresolvedReasonCode || "PLAYER_NOT_ON_BOARD";
+    observation.unresolvedReasonCode = observation.reasonCode;
+    observation.reason = "manual mapping removed; player is not on the current board";
+    observation.lastObservedAt = new Date().toISOString();
   }
 
   function rewindEditingPick() {
@@ -1740,7 +1783,7 @@
     if (!isManualEvent(removed)) return;
     appendAuditRecord("pick-removed", removed, state.events, { details: { reason: "undo" } });
     state.events = state.events.filter((event) => event.overall !== removed.overall);
-    if (removed.source === "manual") state.sourceObservations = state.sourceObservations.filter((observation) => !(observation.source === "manual" && observation.overall === removed.overall));
+    removeManualObservation(removed);
     saveState();
     render();
     showToast(`Undid pick ${pickLabel(removed.overall)}`);

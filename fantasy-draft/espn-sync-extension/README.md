@@ -7,15 +7,16 @@ This private Chromium extension moves ESPN draft-room pick data between two tabs
 
 It does not collect passwords, cookies, browsing history, or data from unrelated sites. Draft snapshots remain in the browser's local extension storage and are not sent to a separate server.
 
-## Install in Chrome or Edge
+## Install or replace in Chrome or Edge
 
-1. Unzip `espn-sync-extension.zip`.
-2. Open the browser's Extensions page.
-3. Turn on **Developer mode**.
-4. Choose **Load unpacked**.
-5. Select the unzipped `espn-sync-extension` folder containing `manifest.json`.
-6. Open the ESPN draft room and Draft Command in the same browser.
-7. In Draft Command, select **Live sync → ESPN** and choose **Check connection**.
+1. In Draft Command, run **Hard Reset Draft**, then close the old ESPN draft-room tab.
+2. Download the new `espn-sync-extension.zip` and extract it to a new folder.
+3. Open `chrome://extensions` (or `edge://extensions`) and turn on **Developer mode**.
+4. Remove the old **Draft Command ESPN Sync** extension. An unpacked extension does not update itself.
+5. Choose **Load unpacked** and select the newly extracted `espn-sync-extension` folder that directly contains `manifest.json`.
+6. Confirm the extension card reports version **0.3.0**.
+7. Reload Draft Command with `Ctrl+Shift+R`.
+8. Open the intended ESPN draft room, select **Live sync → ESPN**, and choose **Check / resume ESPN**.
 
 ## Reset between drafts
 
