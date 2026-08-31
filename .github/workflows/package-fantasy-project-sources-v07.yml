@@ -1,0 +1,56 @@
+name: Package Fantasy Project Sources v0.7
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'fantasy-draft/research/FOOTBALL_FUNDAMENTALS_SOURCE_CONTRACT.md'
+      - 'fantasy-draft/research/Fantasy_Draft_Intelligence_RESEARCH_FINDINGS_v0.7.md'
+      - 'fantasy-draft/research/SOURCE_COMMIT_LOG_v0.7.md'
+      - '.github/workflows/package-fantasy-project-sources-v07.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Stage Project Source documents
+        run: |
+          mkdir -p project-source-update-v0.7
+          cp fantasy-draft/research/FOOTBALL_FUNDAMENTALS_SOURCE_CONTRACT.md project-source-update-v0.7/
+          cp fantasy-draft/research/Fantasy_Draft_Intelligence_RESEARCH_FINDINGS_v0.7.md project-source-update-v0.7/
+          cp fantasy-draft/research/SOURCE_COMMIT_LOG_v0.7.md project-source-update-v0.7/
+          cat > project-source-update-v0.7/PROJECT_SOURCE_UPDATE_INSTRUCTIONS_v0.7.md <<'EOF'
+          # Fantasy Football 2026 Project Sources Update v0.7
+
+          ## Keep unchanged
+
+          Keep the Master Research Contract, ESPN and Sleeper platform sourcebooks, Sleeper league settings sourcebook, Consensus Projection Source Contract, High-Stakes Market Source Contract, and Sportsbook Market Source Contract.
+
+          ## Replace
+
+          Replace `Fantasy_Draft_Intelligence_RESEARCH_FINDINGS_v0.6.md` with `Fantasy_Draft_Intelligence_RESEARCH_FINDINGS_v0.7.md`.
+
+          Replace `SOURCE_COMMIT_LOG_v0.6.md` with `SOURCE_COMMIT_LOG_v0.7.md`.
+
+          ## Add
+
+          Add `FOOTBALL_FUNDAMENTALS_SOURCE_CONTRACT.md`.
+
+          ## Do not upload
+
+          Do not upload the master CSV, raw source tables, QA CSVs, identity crosswalks, scripts, or workflow logs to Project Sources. Those remain in GitHub and the v0.7 research artifact.
+          EOF
+
+      - name: Upload Project Source update
+        uses: actions/upload-artifact@v4
+        with:
+          name: fantasy-project-source-update-v0-7
+          path: project-source-update-v0.7/
+          if-no-files-found: error
+          retention-days: 30
