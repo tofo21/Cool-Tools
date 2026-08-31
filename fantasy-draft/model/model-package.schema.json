@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tofo21.github.io/Cool-Tools/fantasy-draft/model/model-package.schema.json",
+  "title": "Draft Command Intelligence Package",
+  "type": "object",
+  "required": ["schemaVersion", "packageId", "season", "leagueProfileId", "metadata", "players"],
+  "properties": {
+    "schemaVersion": { "type": "string", "pattern": "^1\\." },
+    "packageId": { "type": "string", "minLength": 1 },
+    "season": { "type": "integer", "minimum": 2026 },
+    "leagueProfileId": { "type": "string", "minLength": 1 },
+    "metadata": {
+      "type": "object",
+      "required": ["status", "modelVersion", "generatedAt", "effectiveAt", "sources"],
+      "properties": {
+        "status": { "enum": ["provisional", "research", "candidate", "production"] },
+        "modelVersion": { "type": "string", "minLength": 1 },
+        "generatedAt": { "type": "string", "format": "date-time" },
+        "effectiveAt": { "type": "string", "format": "date-time" },
+        "expiresAt": { "type": ["string", "null"], "format": "date-time" },
+        "description": { "type": "string" },
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "layer"],
+            "properties": {
+              "id": { "type": "string" },
+              "layer": { "enum": ["player-truth", "league-value", "platform", "room-market", "survival", "policy"] },
+              "version": { "type": ["string", "null"] },
+              "snapshotAt": { "type": ["string", "null"], "format": "date-time" }
+            },
+            "additionalProperties": true
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "decisionPolicy": {
+      "type": "object",
+      "properties": {
+        "takeMaxSurvival": { "type": "number", "minimum": 0, "maximum": 1 },
+        "waitMinSurvival": { "type": "number", "minimum": 0, "maximum": 1 },
+        "valueMinGap": { "type": "number" },
+        "upsideMinProbability": { "type": "number", "minimum": 0, "maximum": 1 },
+        "cliffMinDelta": { "type": "number", "minimum": 0 },
+        "fadeMinReach": { "type": "number", "minimum": 0 }
+      },
+      "additionalProperties": false
+    },
+    "players": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["playerId"],
+        "properties": {
+          "playerId": { "type": "integer", "minimum": 1 },
+          "outcome": {
+            "type": "object",
+            "properties": {
+              "meanPoints": { "type": ["number", "null"] },
+              "meanPpg": { "type": ["number", "null"] },
+              "gamesPlayed": { "type": ["number", "null"] },
+              "floorPoints": { "type": ["number", "null"] },
+              "medianPoints": { "type": ["number", "null"] },
+              "ceilingPoints": { "type": ["number", "null"] },
+              "ceilingProbability": { "$ref": "#/$defs/probability" },
+              "bustProbability": { "$ref": "#/$defs/probability" },
+              "eliteProbability": { "$ref": "#/$defs/probability" },
+              "starterProbability": { "$ref": "#/$defs/probability" }
+            },
+            "additionalProperties": true
+          },
+          "leagueValue": {
+            "type": "object",
+            "properties": {
+              "score": { "type": ["number", "null"] },
+              "rank": { "type": ["number", "null"] },
+              "vorp": { "type": ["number", "null"] },
+              "fairPick": { "type": ["number", "null"] },
+              "rosterFitBase": { "type": ["number", "null"] },
+              "championshipEquityBase": { "type": ["number", "null"] },
+              "tierId": { "type": ["string", "null"] },
+              "tierLabel": { "type": ["string", "null"] },
+              "tierRank": { "type": ["number", "null"] },
+              "tierValue": { "type": ["number", "null"] }
+            },
+            "additionalProperties": true
+          },
+          "market": {
+            "type": "object",
+            "properties": {
+              "espn": { "$ref": "#/$defs/market" },
+              "sleeper": { "$ref": "#/$defs/market" }
+            },
+            "additionalProperties": false
+          },
+          "survival": {
+            "type": "object",
+            "properties": {
+              "espn": { "$ref": "#/$defs/survival" },
+              "sleeper": { "$ref": "#/$defs/survival" }
+            },
+            "additionalProperties": false
+          },
+          "decision": {
+            "type": "object",
+            "properties": {
+              "upsideScore": { "type": ["number", "null"] },
+              "riskScore": { "type": ["number", "null"] },
+              "expectedVorpLostByWaiting": { "type": ["number", "null"] },
+              "confidence": { "$ref": "#/$defs/probability" },
+              "override": { "enum": ["TAKE", "WAIT", "VALUE", "UPSIDE", "POSITION CLIFF", "FADE AT PRICE", null] },
+              "reasons": { "type": "array", "items": { "type": "string" } }
+            },
+            "additionalProperties": true
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "$defs": {
+    "probability": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+    "market": {
+      "type": "object",
+      "properties": {
+        "price": { "type": ["number", "null"] },
+        "defaultRank": { "type": ["number", "null"] },
+        "adp": { "type": ["number", "null"] },
+        "order": { "type": ["number", "null"] },
+        "sigma": { "type": ["number", "null"], "exclusiveMinimum": 0 },
+        "source": { "type": ["string", "null"] }
+      },
+      "additionalProperties": true
+    },
+    "survival": {
+      "type": "object",
+      "properties": {
+        "center": { "type": ["number", "null"] },
+        "scale": { "type": ["number", "null"], "exclusiveMinimum": 0 },
+        "anchors": {
+          "type": "object",
+          "patternProperties": { "^[0-9]+$": { "$ref": "#/$defs/probability" } },
+          "additionalProperties": false
+        },
+        "calibrationVersion": { "type": ["string", "null"] }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

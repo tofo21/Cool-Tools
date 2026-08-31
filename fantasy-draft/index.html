@@ -102,6 +102,19 @@
         </div>
       </section>
 
+      <section class="panel model-panel">
+        <div class="panel-heading compact">
+          <div><p class="eyebrow">Intelligence layer</p><h2>Model health</h2></div>
+          <span class="model-badge model-fallback" id="modelStatusBadge">Provisional</span>
+        </div>
+        <dl class="model-stats">
+          <div><dt>Version</dt><dd id="modelVersion">Loading</dd></div>
+          <div><dt>Freshness</dt><dd id="modelFreshness">—</dd></div>
+          <div><dt>Coverage</dt><dd id="modelCoverage">0%</dd></div>
+        </dl>
+        <p class="model-copy" id="modelStatusCopy">Checking the research package.</p>
+      </section>
+
       <section class="panel keepers-panel">
         <div class="panel-heading compact">
           <div><p class="eyebrow">League setup</p><h2>Managers & keepers</h2></div>
@@ -123,7 +136,7 @@
           <p class="eyebrow">Decision window <span id="decisionWindow">1.05 → 2.06</span></p>
           <h1 id="workspaceTitle">Projected targets for Tony at 1.05</h1>
         </div>
-        <div class="snapshot-note">Board snapshot <strong>Aug. 27</strong></div>
+        <div class="snapshot-note" id="snapshotNote">Loading model</div>
       </div>
 
       <section class="recommendation-grid" aria-label="Draft recommendations">
@@ -133,6 +146,8 @@
       </section>
 
       <section class="decision-strip" id="decisionStrip"></section>
+
+      <section class="decision-lenses" id="decisionLenses" aria-label="Additional decision lenses"></section>
 
       <section class="panel board-panel">
         <div class="board-toolbar">
@@ -171,9 +186,7 @@
         <button class="load-more" id="loadMore" type="button">Show 20 more</button>
       </section>
 
-      <footer class="source-note">
-        <strong>Model:</strong> ECR is the underlying value anchor; roster construction and 2-FLEX scarcity create league value; ESPN/Sleeper room order creates price and survival. Availability is probabilistic, not a guarantee. Source layer: ESPN & Sleeper 2020–2026 sourcebooks plus the Aug. 27, 2026 JuiceBoxOne PPR room-rank snapshot.
-      </footer>
+      <footer class="source-note" id="modelSourceNote"></footer>
     </section>
 
     <aside class="right-rail">
@@ -225,6 +238,8 @@
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <script src="./data/players.js"></script>
+  <script src="./data/model-package.js"></script>
+  <script src="./model/model-adapter.js"></script>
   <script src="./app.js"></script>
   <script src="./sync.js"></script>
 </body>

@@ -11,6 +11,7 @@
   const LEGACY_STORE_KEY = "draft-command-2026-v1";
   const SNAPSHOT_KEY = "draft-command-2026-snapshots-v2";
   const SCHEMA_VERSION = 2;
+  const MODEL_LEAGUE_PROFILE_ID = "espn-keeper-10-ppr-2flex-2026";
 
   const MANAGERS = [
     null,
@@ -72,7 +73,17 @@
     "cliffPanel", "platformHeader", "toast", "saveStatus", "keeperList", "resetDraft",
     "exportDraft", "importDraft", "importDraftFile", "recoverDraft", "pickDialog", "dialogTitle",
     "dialogCopy", "replacementSearch", "replacementList", "removePick", "rewindPick",
+    "modelStatusBadge", "modelVersion", "modelFreshness", "modelCoverage", "modelStatusCopy",
+    "modelSourceNote", "snapshotNote", "decisionLenses",
   ].map((id) => [id, document.getElementById(id)]));
+
+  const MODEL = window.DraftModel.createAdapter({
+    packageData: window.DRAFT_INTELLIGENCE_PACKAGE,
+    players: window.PLAYER_DATA,
+    season: 2026,
+    leagueProfileId: MODEL_LEAGUE_PROFILE_ID,
+    fallbackVersion: "fallback-2026.08.27",
+  });
 
   function pickLabel(overall) {
     const round = Math.ceil(overall / TEAM_COUNT);
@@ -389,7 +400,8 @@
     return result;
   }
 
-  function price(player) { return player[state.platform] ?? player.market ?? player.adp; }
+  function fallbackPrice(player) { return player[state.platform] ?? player.market ?? player.adp; }
+  function price(player) { return MODEL.market(player, state.platform, () => fallbackPrice(player)).price; }
   function clamp(value, min, max) { return Math.max(min, Math.min(max, value)); }
   function manager(team) { return MANAGERS[Number(team)]; }
 
@@ -435,10 +447,40 @@
     return 0;
   }
 
-  function leagueScore(player) {
+  function fallbackLeagueBase(player) {
     const base = 102 - player.ecr * 0.48;
     const priceSignal = ((player.market || player.adp) - player.ecr) * 0.08;
-    return base + positionAdjustment(player) + needBonus(player) + priceSignal;
+    return base + positionAdjustment(player) + priceSignal;
+  }
+
+  function leagueBase(player) {
+    return MODEL.number(player, "leagueValue.score", () => fallbackLeagueBase(player));
+  }
+
+  function leagueScore(player) {
+    return leagueBase(player) + needBonus(player);
+  }
+
+  function fairPick(player) {
+    return MODEL.number(player, "leagueValue.fairPick", player.ecr);
+  }
+
+  function valueGap(player) {
+    return price(player) - fairPick(player);
+  }
+
+  function outcome(player) {
+    const strength = clamp(1 - ((player.ecr || 200) - 1) / 200, 0, 1);
+    return MODEL.outcome(player, {
+      ceilingProbability: clamp(0.10 + strength * 0.21, 0.1, 0.31),
+      bustProbability: clamp(0.29 - strength * 0.15 + ((player.landmine || 5.5) - 5.5) * 0.02, 0.1, 0.36),
+      eliteProbability: clamp(0.04 + strength * 0.19, 0.04, 0.23),
+      starterProbability: clamp(0.34 + strength * 0.48, 0.34, 0.82),
+    });
+  }
+
+  function confidence(player) {
+    return MODEL.number(player, "decision.confidence", 0.45);
   }
 
   function availablePlayers() {
@@ -457,8 +499,15 @@
   }
 
   function survival(player, targetPick) {
-    const sigma = clamp(3.2 + price(player) * 0.045, 3.5, 10.5);
-    return clamp(1 / (1 + Math.exp((targetPick - price(player)) / sigma)), 0.01, 0.99);
+    return MODEL.survival(player, state.platform, targetPick, () => {
+      const sigma = clamp(3.2 + price(player) * 0.045, 3.5, 10.5);
+      return clamp(1 / (1 + Math.exp((targetPick - price(player)) / sigma)), 0.01, 0.99);
+    });
+  }
+
+  function tierInfo(player) {
+    const fallbackTier = Math.max(1, Math.ceil((leagueRank(player) || player.ecr || 1) / 8));
+    return MODEL.tier(player, { id: `${player.pos}-${fallbackTier}`, label: `${player.pos} tier ${fallbackTier}`, rank: fallbackTier });
   }
 
   function samePositionNext(player) {
@@ -474,30 +523,66 @@
   function recommendationPool() {
     const target = nextTonyPick() || Math.min(currentPick(), TOTAL_PICKS);
     const onClock = currentPick() <= TOTAL_PICKS && pickOwner(currentPick()) === TONY_TEAM;
+    const nextTurn = followingTonyPick(target) || TOTAL_PICKS;
     return availablePlayers().map((player) => {
       const arrive = onClock ? 1 : survival(player, target);
-      const gap = price(player) - player.ecr;
+      const surviveNext = survival(player, nextTurn);
+      const gap = valueGap(player);
       const score = leagueScore(player);
-      return { player, arrive, gap, score, projected: score * (0.58 + arrive * 0.42) };
+      const baseScore = leagueBase(player);
+      const playerOutcome = outcome(player);
+      const cliff = cliffDelta(player);
+      const fitImpact = needBonus(player) + MODEL.number(player, "leagueValue.rosterFitBase", 0);
+      const championshipEquity = MODEL.number(player, "leagueValue.championshipEquityBase", 0);
+      const vorpLost = MODEL.number(player, "decision.expectedVorpLostByWaiting", () => cliff * (1 - surviveNext));
+      const projected = score * (0.58 + arrive * 0.42);
+      const pickNow = score + gap * 0.72 + fitImpact * 0.9 + (1 - surviveNext) * 9 + vorpLost * 1.1 + championshipEquity * 100 - playerOutcome.bustProbability * 3;
+      return {
+        player,
+        arrive,
+        surviveNext,
+        gap,
+        score,
+        baseScore,
+        projected,
+        fitImpact,
+        cliff,
+        vorpLost,
+        championshipEquity,
+        outcome: playerOutcome,
+        confidence: confidence(player),
+        pickNow,
+      };
     });
   }
 
   function recommendations() {
     const pool = recommendationPool();
-    const overall = pool.slice().sort((a, b) => b.projected - a.projected)[0];
-    const value = pool.slice().sort((a, b) => ((b.gap * 1.8) + b.score * .12 + b.arrive * 8) - ((a.gap * 1.8) + a.score * .12 + a.arrive * 8))[0];
-    const fit = pool.slice().sort((a, b) => ((b.score + needBonus(b.player) * 1.8 + cliffDelta(b.player)) * (0.65 + b.arrive * .35)) - ((a.score + needBonus(a.player) * 1.8 + cliffDelta(a.player)) * (0.65 + a.arrive * .35)))[0];
-    return { overall, value, fit };
+    const by = (scorer) => pool.slice().sort((a, b) => scorer(b) - scorer(a))[0];
+    const bestPlayer = by((entry) => entry.baseScore);
+    const bestValue = by((entry) => entry.gap * 1.8 + entry.score * .12 + entry.arrive * 8);
+    const bestFit = by((entry) => (entry.score + entry.fitImpact * 1.8 + entry.cliff) * (0.65 + entry.arrive * .35));
+    const bestCeiling = by((entry) => entry.outcome.ceilingProbability * 60 + entry.outcome.eliteProbability * 35 + entry.score * .2 - entry.outcome.bustProbability * 12);
+    const safestWait = by((entry) => entry.surviveNext * 52 + entry.score * .2 - entry.vorpLost * 2.2);
+    const projectedTarget = by((entry) => entry.projected);
+    const bestPickNow = by((entry) => entry.pickNow);
+    return { bestPlayer, bestValue, bestFit, bestCeiling, safestWait, projectedTarget, bestPickNow };
   }
 
   function verdict(player) {
     const target = nextTonyPick() || Math.min(currentPick(), TOTAL_PICKS);
     const after = followingTonyPick(target) || TOTAL_PICKS;
     const survive = survival(player, after);
-    const rankAtPick = price(player) - target;
-    if (survive < .24 && leagueScore(player) > 38) return { label: "TAKE", cls: "take" };
-    if (survive >= .48 && rankAtPick > -8) return { label: "WAIT", cls: "wait" };
-    return { label: "PASS", cls: "pass" };
+    const label = MODEL.decisionTag({
+      override: MODEL.text(player, "decision.override", null),
+      reach: fairPick(player) - target,
+      survival: survive,
+      quality: leagueRank(player) <= Math.max(36, target + 18),
+      cliff: cliffDelta(player),
+      valueGap: valueGap(player),
+      ceilingProbability: outcome(player).ceilingProbability,
+    });
+    return { label, cls: label.toLowerCase().replace(/\s+/g, "-") };
   }
 
   function renderStatus() {
@@ -530,31 +615,41 @@
 
   function recCard(entry, label, detail) {
     const { player, arrive, gap } = entry;
+    const tier = tierInfo(player);
     return `<div class="rec-label"><span>${label}</span><span class="pos-pill pos-${player.pos}">${player.pos}</span></div>
       <div class="rec-name">${player.name}</div>
-      <div class="rec-meta">${player.team} · ECR ${player.ecr} · ${state.platform.toUpperCase()} ${price(player)}</div>
+      <div class="rec-meta">${player.team} · ${tier.label} · ${state.platform.toUpperCase()} ${price(player)}</div>
       <p class="rec-reason">${detail(player, arrive, gap)}</p>`;
   }
 
   function renderRecommendations() {
-    const { overall, value, fit } = recommendations();
-    if (!overall) {
+    const recs = recommendations();
+    const onClock = currentPick() <= TOTAL_PICKS && pickOwner(currentPick()) === TONY_TEAM;
+    const primary = onClock ? recs.bestPickNow : recs.projectedTarget;
+    if (!primary) {
       els.bestOverallCard.innerHTML = "";
       els.bestValueCard.innerHTML = "";
       els.bestFitCard.innerHTML = "";
       els.decisionStrip.innerHTML = "";
+      els.decisionLenses.innerHTML = "";
       return;
     }
-    els.bestOverallCard.innerHTML = recCard(overall, "Best player", (p, arrive) => `${Math.round(arrive * 100)}% chance to reach Tony's next turn · league-adjusted score ${leagueScore(p).toFixed(1)}.`);
-    els.bestValueCard.innerHTML = recCard(value, "Best value", (p, arrive, gap) => `${gap >= 0 ? "+" : ""}${gap} slots versus ECR · ${Math.round(arrive * 100)}% projected availability.`);
-    els.bestFitCard.innerHTML = recCard(fit, "Best fit", (p) => `${needBonus(p) > 2 ? "Fills a priority roster need" : "Supports the 2-FLEX build"} · ${cliffDelta(p).toFixed(1)}-point positional cliff.`);
+    els.bestOverallCard.innerHTML = recCard(primary, onClock ? "Best pick now" : "Projected target", (p, arrive) => `${Math.round(arrive * 100)}% chance to reach Tony's next turn · league value ${leagueScore(p).toFixed(1)}.`);
+    els.bestValueCard.innerHTML = recCard(recs.bestValue, "Best value", (p, arrive, gap) => `${gap >= 0 ? "+" : ""}${gap.toFixed(1)} slots versus fair value · ${Math.round(arrive * 100)}% projected availability.`);
+    els.bestFitCard.innerHTML = recCard(recs.bestFit, "Best fit", (p) => `${needBonus(p) > 2 ? "Fills a priority roster need" : "Supports the 2-FLEX build"} · ${cliffDelta(p).toFixed(1)}-point positional cliff.`);
+    els.decisionLenses.innerHTML = [
+      { label: "Best player", entry: recs.bestPlayer, metric: `LV ${recs.bestPlayer.baseScore.toFixed(1)}` },
+      { label: "Best ceiling", entry: recs.bestCeiling, metric: `${Math.round(recs.bestCeiling.outcome.ceilingProbability * 100)}% upside` },
+      { label: "Safest wait", entry: recs.safestWait, metric: `${Math.round(recs.safestWait.surviveNext * 100)}% survives` },
+    ].map(({ label, entry, metric }) => `<div class="lens-card"><span>${label}</span><strong>${entry.player.name}</strong><small>${metric}</small></div>`).join("");
     const target = nextTonyPick() || Math.min(currentPick(), TOTAL_PICKS);
     const nextTurn = followingTonyPick(target);
     const after = nextTurn || TOTAL_PICKS;
-    const v = verdict(overall.player);
-    const survive = survival(overall.player, after);
+    const v = verdict(primary.player);
+    const survive = survival(primary.player, after);
+    const reason = MODEL.list(primary.player, "decision.reasons")[0];
     els.decisionStrip.innerHTML = `<div class="decision-call">${v.label}</div>
-      <div class="decision-copy"><strong>${overall.player.name} at ${pickLabel(target)}</strong><span>${v.label === "TAKE" ? "The next viable window is unlikely to stay open." : "The model sees enough depth to preserve optionality."} ${samePositionNext(overall.player)?.name || "No comparable fallback"} is the next ${overall.player.pos}.</span></div>
+      <div class="decision-copy"><strong>${primary.player.name} at ${pickLabel(target)}</strong><span>${reason || (v.label === "TAKE" || v.label === "POSITION CLIFF" ? "The next viable window is unlikely to stay open." : "The model sees enough depth to preserve optionality.")} ${samePositionNext(primary.player)?.name || "No comparable fallback"} is the next ${primary.player.pos}.</span></div>
       <div class="decision-metric"><strong>${Math.round(survive * 100)}%</strong><small>survival to ${nextTurn ? pickLabel(after) : "end"}</small></div>`;
   }
 
@@ -586,13 +681,14 @@
     els.platformHeader.textContent = `${state.platform === "espn" ? "ESPN" : "Sleeper"} price`;
     els.playerTable.innerHTML = rows.slice(0, state.visible).map((player, index) => {
       const rank = leagueRank(player);
-      const gap = price(player) - player.ecr;
+      const gap = valueGap(player);
       const prob = survival(player, after);
       const call = verdict(player);
+      const tier = tierInfo(player);
       return `<tr>
         <td><div class="player-cell"><span class="rank-num">${index + 1}</span><span class="pos-pill pos-${player.pos}">${player.pos}</span><div><span class="player-name">${player.name}</span><span class="player-meta">${player.team} · BYE ${player.bye}</span></div></div></td>
-        <td><span class="metric-main">#${rank}</span><span class="metric-sub">ECR ${player.ecr} · score ${leagueScore(player).toFixed(1)}</span></td>
-        <td><span class="metric-main ${gap >= 4 ? "value-positive" : gap <= -4 ? "value-negative" : ""}">#${price(player)}</span><span class="metric-sub">${gap >= 0 ? "+" : ""}${gap} vs ECR</span></td>
+        <td><span class="metric-main">#${rank}</span><span class="metric-sub">${tier.label} · score ${leagueScore(player).toFixed(1)}</span></td>
+        <td><span class="metric-main ${gap >= 4 ? "value-positive" : gap <= -4 ? "value-negative" : ""}">#${price(player)}</span><span class="metric-sub">${gap >= 0 ? "+" : ""}${gap.toFixed(1)} vs fair pick</span></td>
         <td><div class="survival"><div class="survival-head"><span>${nextTurn ? pickLabel(after) : "END"}</span><span>${Math.round(prob * 100)}%</span></div><div class="survival-bar"><span style="width:${Math.round(prob * 100)}%"></span></div></div></td>
         <td><span class="call-badge call-${call.cls}">${call.label}</span></td>
         <td><button class="draft-btn" data-draft-id="${player.id}" type="button" ${currentPick() > TOTAL_PICKS ? "disabled" : ""}>Draft</button></td>
@@ -637,6 +733,35 @@
     }).join("")}`;
   }
 
+  function freshnessLabel(timestamp) {
+    if (!timestamp) return "Unknown";
+    const date = new Date(timestamp);
+    if (Number.isNaN(date.getTime())) return "Unknown";
+    const days = Math.max(0, Math.floor((Date.now() - date.getTime()) / 86400000));
+    return days === 0 ? "Today" : `${days}d old`;
+  }
+
+  function renderModelHealth() {
+    const health = MODEL.health();
+    const percent = Math.round(health.coverage * 100);
+    els.modelStatusBadge.textContent = health.label;
+    els.modelStatusBadge.className = `model-badge model-${health.mode}`;
+    els.modelVersion.textContent = health.modelVersion;
+    els.modelFreshness.textContent = freshnessLabel(health.effectiveAt);
+    els.modelCoverage.textContent = `${percent}%`;
+    els.modelStatusCopy.textContent = health.mode === "research"
+      ? `${health.coveredPlayers} of ${health.totalPlayers} board players use the ${health.status} research package; missing fields fall back individually.`
+      : health.stale
+        ? "The loaded research package has expired, so recommendations reverted to the provisional fallback."
+        : health.valid
+          ? "Research adapter is ready. Current recommendations use the visible provisional ECR, room-price and roster heuristics."
+          : `Research package rejected safely: ${health.errors[0] || "incompatible package"}`;
+    els.snapshotNote.textContent = `${health.modelVersion} · ${freshnessLabel(health.effectiveAt)}`;
+    els.modelSourceNote.innerHTML = health.mode === "research"
+      ? `<strong>Model:</strong> ${health.modelVersion} · ${percent}% player coverage · ${health.sourceCount} registered source layers. Missing player fields use the provisional fallback and are never imputed silently.`
+      : `<strong>Model:</strong> Provisional fallback active. The versioned research adapter is ready, but the production outcome, league-value and calibrated survival package has not been loaded yet.`;
+  }
+
   function render() {
     renderCache = {};
     renderStatus();
@@ -646,6 +771,7 @@
     renderRoster();
     renderHistory();
     renderCliffs();
+    renderModelHealth();
     document.querySelectorAll(".platform-btn").forEach((button) => button.classList.toggle("active", button.dataset.platform === state.platform));
   }
 
@@ -852,6 +978,8 @@
     resolvePlayer: (rawPick) => resolveExternalPlayer(rawPick),
     profile: Object.freeze({ teamCount: TEAM_COUNT, rounds: ROUNDS, platform: "espn", league: "Tony 2026 ESPN keeper league" }),
     state: () => ({ events: state.events.map((event) => ({ ...event })), currentPick: currentPick() }),
+    modelHealth: () => MODEL.health(),
+    recommendations: () => recommendations(),
   });
 
   els.rosterManager.innerHTML = MANAGERS.slice(1).map((item) => `<option value="${item.id}">${item.id}. ${item.name}</option>`).join("");
