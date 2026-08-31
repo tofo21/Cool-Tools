@@ -1,22 +1,22 @@
-as_board,body_len,contains_error,draft_type,final_url,first_row,from_date,league_teams,num_teams,parsed_rows,position,season,second_row,sport,status,team_id,time_period,to_date,variant
-,64,False,,https://nfc.shgn.com/adp.data.php,No ADP Information Available,2020-08-01,0,,1,,2020,,nfl,200,,,2020-09-09,0
-,64,False,,https://nfc.shgn.com/adp.data.php,No ADP Information Available,2020-08-01,0,12,1,,2020,,nfl,200,0,custom,2020-09-09,1
-,64,False,draft,https://nfc.shgn.com/adp.data.php,No ADP Information Available,2020-08-01,0,12,1,,2020,,nfl,200,0,custom,2020-09-09,2
-,64,False,,https://nfc.shgn.com/adp.data.php,No ADP Information Available,2021-08-01,0,,1,,2021,,nfl,200,,,2021-09-08,0
-,64,False,,https://nfc.shgn.com/adp.data.php,No ADP Information Available,2021-08-01,0,12,1,,2021,,nfl,200,0,custom,2021-09-08,1
-,64,False,draft,https://nfc.shgn.com/adp.data.php,No ADP Information Available,2021-08-01,0,12,1,,2021,,nfl,200,0,custom,2021-09-08,2
-,64,False,,https://nfc.shgn.com/adp.data.php,No ADP Information Available,2022-08-01,0,,1,,2022,,nfl,200,,,2022-09-07,0
-,64,False,,https://nfc.shgn.com/adp.data.php,No ADP Information Available,2022-08-01,0,12,1,,2022,,nfl,200,0,custom,2022-09-07,1
-,64,False,draft,https://nfc.shgn.com/adp.data.php,No ADP Information Available,2022-08-01,0,12,1,,2022,,nfl,200,0,custom,2022-09-07,2
-,64,False,,https://nfc.shgn.com/adp.data.php,No ADP Information Available,2023-08-01,0,,1,,2023,,nfl,200,,,2023-09-06,0
-,64,False,,https://nfc.shgn.com/adp.data.php,No ADP Information Available,2023-08-01,0,12,1,,2023,,nfl,200,0,custom,2023-09-06,1
-,64,False,draft,https://nfc.shgn.com/adp.data.php,No ADP Information Available,2023-08-01,0,12,1,,2023,,nfl,200,0,custom,2023-09-06,2
-,64,False,,https://nfc.shgn.com/adp.data.php,No ADP Information Available,2024-08-01,0,,1,,2024,,nfl,200,,,2024-09-04,0
-,64,False,,https://nfc.shgn.com/adp.data.php,No ADP Information Available,2024-08-01,0,12,1,,2024,,nfl,200,0,custom,2024-09-04,1
-,64,False,draft,https://nfc.shgn.com/adp.data.php,No ADP Information Available,2024-08-01,0,12,1,,2024,,nfl,200,0,custom,2024-09-04,2
-,64,False,,https://nfc.shgn.com/adp.data.php,No ADP Information Available,2025-08-01,0,,1,,2025,,nfl,200,,,2025-09-03,0
-,64,False,,https://nfc.shgn.com/adp.data.php,No ADP Information Available,2025-08-01,0,12,1,,2025,,nfl,200,0,custom,2025-09-03,1
-,64,False,draft,https://nfc.shgn.com/adp.data.php,No ADP Information Available,2025-08-01,0,12,1,,2025,,nfl,200,0,custom,2025-09-03,2
-,64,False,,https://nfc.shgn.com/adp.data.php,No ADP Information Available,2026-08-01,0,,1,,2026,,nfl,200,,,2026-08-30,0
-,64,False,,https://nfc.shgn.com/adp.data.php,No ADP Information Available,2026-08-01,0,12,1,,2026,,nfl,200,0,custom,2026-08-30,1
-,64,False,draft,https://nfc.shgn.com/adp.data.php,No ADP Information Available,2026-08-01,0,12,1,,2026,,nfl,200,0,custom,2026-08-30,2
+as_board,body_len,draft_type,final_url,first_row,from_date,league_teams,no_adp,num_teams,parsed_rows,position,season,second_row,sport,status,team_id,time_period,to_date,variant
+,64,,https://nfc.shgn.com/adp.data.php,No ADP Information Available,2020-08-01,0,True,,1,,2020,,football,200,0,,2020-09-09,0
+,64,,https://nfc.shgn.com/adp.data.php,No ADP Information Available,2020-08-01,0,True,12,1,,2020,,football,200,0,,2020-09-09,1
+,64,draft,https://nfc.shgn.com/adp.data.php,No ADP Information Available,2020-08-01,0,True,12,1,,2020,,football,200,0,,2020-09-09,2
+,64,,https://nfc.shgn.com/adp.data.php,No ADP Information Available,2021-08-01,0,True,,1,,2021,,football,200,0,,2021-09-08,0
+,64,,https://nfc.shgn.com/adp.data.php,No ADP Information Available,2021-08-01,0,True,12,1,,2021,,football,200,0,,2021-09-08,1
+,64,draft,https://nfc.shgn.com/adp.data.php,No ADP Information Available,2021-08-01,0,True,12,1,,2021,,football,200,0,,2021-09-08,2
+,64,,https://nfc.shgn.com/adp.data.php,No ADP Information Available,2022-08-01,0,True,,1,,2022,,football,200,0,,2022-09-07,0
+,64,,https://nfc.shgn.com/adp.data.php,No ADP Information Available,2022-08-01,0,True,12,1,,2022,,football,200,0,,2022-09-07,1
+,64,draft,https://nfc.shgn.com/adp.data.php,No ADP Information Available,2022-08-01,0,True,12,1,,2022,,football,200,0,,2022-09-07,2
+,64,,https://nfc.shgn.com/adp.data.php,No ADP Information Available,2023-08-01,0,True,,1,,2023,,football,200,0,,2023-09-06,0
+,64,,https://nfc.shgn.com/adp.data.php,No ADP Information Available,2023-08-01,0,True,12,1,,2023,,football,200,0,,2023-09-06,1
+,64,draft,https://nfc.shgn.com/adp.data.php,No ADP Information Available,2023-08-01,0,True,12,1,,2023,,football,200,0,,2023-09-06,2
+,64,,https://nfc.shgn.com/adp.data.php,No ADP Information Available,2024-08-01,0,True,,1,,2024,,football,200,0,,2024-09-04,0
+,64,,https://nfc.shgn.com/adp.data.php,No ADP Information Available,2024-08-01,0,True,12,1,,2024,,football,200,0,,2024-09-04,1
+,64,draft,https://nfc.shgn.com/adp.data.php,No ADP Information Available,2024-08-01,0,True,12,1,,2024,,football,200,0,,2024-09-04,2
+,64,,https://nfc.shgn.com/adp.data.php,No ADP Information Available,2025-08-01,0,True,,1,,2025,,football,200,0,,2025-09-03,0
+,64,,https://nfc.shgn.com/adp.data.php,No ADP Information Available,2025-08-01,0,True,12,1,,2025,,football,200,0,,2025-09-03,1
+,64,draft,https://nfc.shgn.com/adp.data.php,No ADP Information Available,2025-08-01,0,True,12,1,,2025,,football,200,0,,2025-09-03,2
+,305662,,https://nfc.shgn.com/adp.data.php,1 | Jahmyr Gibbs | DET | RB | 1.28 | 1 | 6 |  | 590 |  | ,2026-08-01,0,False,,520,,2026,2 | Bijan Robinson | ATL | RB | 1.89 | 1 | 6 |  | 590 |  | ,football,200,0,,2026-08-30,0
+,305665,,https://nfc.shgn.com/adp.data.php,1 | Jahmyr Gibbs | DET | RB | 1.26 | 1 | 6 |  | 536 |  | ,2026-08-01,0,False,12,520,,2026,2 | Bijan Robinson | ATL | RB | 1.91 | 1 | 6 |  | 536 |  | ,football,200,0,,2026-08-30,1
+,305665,draft,https://nfc.shgn.com/adp.data.php,1 | Jahmyr Gibbs | DET | RB | 1.26 | 1 | 6 |  | 536 |  | ,2026-08-01,0,False,12,520,,2026,2 | Bijan Robinson | ATL | RB | 1.91 | 1 | 6 |  | 536 |  | ,football,200,0,,2026-08-30,2
