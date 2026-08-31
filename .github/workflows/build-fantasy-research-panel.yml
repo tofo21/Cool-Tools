@@ -40,10 +40,13 @@ jobs:
       - name: Attach frozen Step 8 consensus projection layer
         run: python fantasy-draft/research/attach_preserved_consensus_v04.py
 
+      - name: Attach Step 9 high-stakes market layer
+        run: python fantasy-draft/research/build_high_stakes_market_v05.py
+
       - name: Upload research panel artifact
         uses: actions/upload-artifact@v4
         with:
-          name: master-player-season-panel-2020-2025-v0-4
+          name: master-player-season-panel-2020-2025-v0-5
           path: fantasy-draft/research/output/
           if-no-files-found: error
           retention-days: 30
