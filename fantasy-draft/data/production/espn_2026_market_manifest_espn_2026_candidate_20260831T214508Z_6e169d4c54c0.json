@@ -32,7 +32,7 @@
   "freshness_status": "current_candidate",
   "generation_time_cdt": "2026-08-31T16:45:08-05:00",
   "generation_time_utc": "2026-08-31T21:45:08Z",
-  "git_commit": "36513f9daa0a43c6f9fa46320c1229406a88f04c",
+  "git_commit": "f18bb3ae27a02146c129ef8fd5b71dd8de2d8d9e",
   "identity_match_coverage": {
     "count": 199,
     "denominator": 200,
