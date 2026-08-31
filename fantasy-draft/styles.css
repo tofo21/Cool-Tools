@@ -198,7 +198,7 @@ tbody tr:hover { background: rgba(255,255,255,.025); }
 .roster-list, .history-list { display: flex; flex-direction: column; gap: 0; }
 .roster-row, .history-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 0; border-top: 1px solid var(--line); }
 .roster-row span, .history-row span { font: 600 13px "Barlow Condensed", sans-serif; text-transform: uppercase; }
-.roster-row small, .history-row small { color: var(--muted); font: 400 10px/1.35 "DM Mono", monospace; }
+.roster-row small, .history-row small { display: block; margin-top: 3px; color: var(--muted); font: 400 10px/1.35 "DM Mono", monospace; }
 .history-main { min-width: 0; flex: 1; }
 .history-actions { display: flex; align-items: center; gap: 5px; }
 .history-edit { border: 1px solid var(--line); border-radius: 4px; padding: 5px 6px; color: var(--muted); background: transparent; cursor: pointer; font: 500 10px "DM Mono", monospace; text-transform: uppercase; }
