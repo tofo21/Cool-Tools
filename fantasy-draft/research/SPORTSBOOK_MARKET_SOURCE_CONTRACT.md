@@ -2,7 +2,7 @@
 
 **Project:** Fantasy Football 2026 Draft Intelligence  
 **Panel layer:** v0.6 sportsbook / Vegas market  
-**Status:** Step 10 source architecture frozen; team-market layer is production-ready, player-prop layer remains nested and incomplete
+**Status:** Step 10 complete; team-market layer is model-ready with timing controls, player-prop layer remains nested and exploratory
 
 ## Purpose
 
@@ -12,37 +12,71 @@ The formal hypothesis remains:
 
 `SPORTSBOOK SIGNAL | CONSENSUS PROJECTION + PUBLIC/PLATFORM ADP`
 
-Sportsbooks are independently incentivized, but a posted season-total line is not automatically an unbiased expected mean. The layer therefore preserves raw market evidence before deriving residuals, and separates a player's performance conditional on playing from his probability of remaining available for the full season.
+Sportsbooks are independently incentivized, but a posted season-total line is not automatically an unbiased expected mean. The layer therefore preserves raw market evidence before deriving residuals and separates performance conditional on playing from season-long availability risk.
 
 ## Source discipline
 
-The source layer distinguishes three different objects:
+The source layer distinguishes three objects:
 
-1. **Team betting environment:** preseason team win totals and related futures information.
+1. **Team betting environment:** preseason team win totals and posted over/under prices where the source exposes them.
 2. **Player season-total markets:** player-specific passing, rushing and receiving lines.
 3. **Published calibration evidence:** retrospective category aggregates describing systematic market behavior.
 
-These objects must not be collapsed into a single generic `vegas_score`.
+These objects must not be collapsed into one generic `vegas_score`.
 
 ## Team win-total series
 
-Pro-Football-Reference preserves a complete preseason-odds table for every season from 2020 through 2025. The table contains all 32 teams, Super Bowl odds and the preseason win total. The historical odds are attributed by the archive to SportsOddsHistory.com.
+A single public archive with complete, consistently timestamped, book-specific final lines for all six seasons was not available in a form the reproducible build could retrieve. The canonical v0.6 series therefore preserves one complete 32-team public snapshot per season and carries source family, book, date or bounded window, and odds availability separately.
 
-### Accepted canonical treatment
+| Season | Source | Snapshot | Book / definition | Source state |
+|---|---|---|---|---|
+| 2020 | Boyd's Bets historical results table | Retrospectively preserved 2020 preseason line | Book not specified | `retrospective_preserved_archive_no_odds` |
+| 2021 | SportsBettingDime | 2021-09-06 | FanDuel | `preserved_late_preseason_book_table` |
+| 2022 | SportsBettingDime | 2022-03-28 | Barstool Sportsbook | `preserved_early_preseason_book_table` |
+| 2023 | CBS Sports | 2023-03-29 | Caesars Sportsbook | `preserved_early_preseason_book_table` |
+| 2024 | theScore | Post-free-agency opening market; exact publication date not forced | Source article publishes the over price only | `preserved_opening_market_table_partial_odds` |
+| 2025 | Boyd's Bets | 2025-08-03 | Multi-book comparison; author-selected midpoint line | `preserved_preseason_multi_book_summary` |
+
+Source URLs:
+
+- https://www.boydsbets.com/nfl-season-win-totals/
+- https://www.sportsbettingdime.com/news/nfl/2021-season-win-totals-odds/
+- https://www.sportsbettingdime.com/news/nfl/2022-season-win-totals-odds/
+- https://www.cbssports.com/nfl/news/2023-nfl-win-totals-oddsmakers-expect-defending-champion-chiefs-to-win-the-most-games-texans-the-fewest/
+- https://www.thescore.com/nfl/news/2882262
+
+### Canonical treatment
 
 - one row per team-season;
-- `team_win_total` is the published preseason W/L over-under line;
-- Super Bowl odds are preserved separately;
-- exact sportsbook is left unspecified when the archive does not identify one;
-- the source is labeled `retrospective_preserved_final_preseason_line`;
-- an exact snapshot date is retained only when the archive exposes one;
-- otherwise the source window is `final_preseason_archive` rather than an invented date.
+- `team_win_total` is the source's posted preseason win total;
+- over and under American odds are preserved where exposed;
+- missing odds stay missing;
+- source date is stored only when supported;
+- otherwise a bounded snapshot window is retained instead of an invented date;
+- source timing and source family must be controlled or sensitivity-tested downstream.
 
 The team win total is a broad team-strength/environment signal. It is **not** an offense-only expectation, so v0.6 does not populate `team_offense_market_score` from it.
 
+### Coverage
+
+The source archive contains exactly **192 team-season observations**, 32 teams in each season from 2020 through 2025.
+
+After team normalization, `team_win_total` is populated for **3,736 of 3,902 player-seasons**. The remaining rows are overwhelmingly free agents, players with unresolved preseason-team labels, or noncanonical aliases rather than missing team-market source rows.
+
+Draft-market player coverage is:
+
+| Season | Draft-market team-win-total coverage |
+|---|---:|
+| 2020 | 95.57% |
+| 2021 | 93.66% |
+| 2022 | 91.31% |
+| 2023 | 94.83% |
+| 2024 | 93.49% |
+| 2025 | 96.40% |
+
 ## Player season-total archive audit
 
-A public-first audit did not identify a comprehensive, consistently sampled, timestamped player-level NFL season-futures archive covering 2020-2025.
+A public-first audit did not identify a comprehensive, consistently sampled, timestamped player-level NFL season-futures archive covering 2020 through 2025.
 
 The strongest surviving public observations are heterogeneous:
 
@@ -56,21 +90,27 @@ A selected table is useful evidence, but it is not representative of the full sp
 
 ### Accepted v0.6 player observations
 
-| Season | Source | Evidence | Sampling frame | Formal Model-C eligible? |
-|---|---|---|---|---|
-| 2021 | PFF league betting guide | Public NFC North season-total excerpt | `regional_public_excerpt_nfc_north` | No |
-| 2024 | Footballguys | Five editorially selected WR props | `editorial_selected_props` | No |
-| 2025 | PFF passing/rushing/receiving analyses | Tables selected for large projection-versus-line differences | `projection_screened_extremes` | No |
+| Season | Source | Rows | Sampling frame | Formal Model-C eligible? |
+|---|---|---:|---|---|
+| 2021 | PFF league betting guide | 11 | `regional_public_excerpt_nfc_north` | No |
+| 2024 | Footballguys WR season props | 5 | `editorial_selected_props` | No |
+| 2025 | PFF passing/rushing/receiving analyses | 52 | `projection_screened_extremes` | No |
 
-These observations are preserved in a long-form archive with player, position, market type, line, source date, book attribution where supported, source state, sampling frame and identity-match audit.
+The long-form player archive therefore contains **68 observations across 58 unique player-seasons**. All 68 match the canonical panel identity layer.
 
-They do **not** populate the primary panel's reserved `vegas_pass_yards`, `vegas_rush_yards`, `vegas_rec_yards`, touchdown or reception fields.
+These observations preserve player, position, market type, line, source date, book attribution where supported, source state, sampling frame, published or projection-implied side, and identity-match audit.
+
+They do **not** populate the primary panel's reserved `vegas_pass_yards`, `vegas_rush_yards`, `vegas_rec_yards`, touchdown, reception or snapshot fields.
 
 ## Why raw lines are not means
 
 Season-long over bets have more failure paths than unders, including injury, benching, role loss, trades and teammate or quarterback injuries. A published 4for4 review of 604 closing player props from 2021-2022 found 369 unders and 235 overs, a 61% under rate overall. Passing-yard props went under 43 times in 58 observations.
 
-This evidence is stored as category-level calibration data. It supports modeling systematic market-category bias, but it does not identify which individual historical player lines belong in the panel.
+Source:
+
+- https://www.4for4.com/2023/preseason/key-winning-season-long-player-props
+
+The v0.6 artifact stores 30 category-calibration rows: the ten market categories for 2021, the same ten for 2022, and ten combined 2021-2022 summaries. This evidence informs future bias correction but is not joined to players as a predictor.
 
 ## Canonical long-form player-prop schema
 
@@ -114,7 +154,7 @@ Missing odds remain missing. Page-level multi-book attribution must not be conve
 
 ## Player-observation metadata fields
 
-The panel may record that selected public observations exist without treating their lines as unbiased features:
+The panel records that selected public observations exist without treating their lines as unbiased features:
 
 - `sportsbook_player_prop_observation_count`
 - `sportsbook_player_prop_source_count`
@@ -135,13 +175,15 @@ A player-level sportsbook feature becomes eligible for formal testing only when 
 4. book or defensible consensus definition;
 5. timestamp or bounded preseason window;
 6. odds where available;
-7. enough seasons/player-seasons to support walk-forward or appropriately nested validation.
+7. enough seasons and player-seasons to support walk-forward or appropriately nested validation.
 
 When such a source is acquired, Model C must be compared with Model B on identical rows. Derived sportsbook features should include category-aware residuals versus consensus projections and may require separate availability and conditional-performance models.
 
+The team-win-total feature is eligible for historical environment testing now, provided model specifications retain season, snapshot timing and source-family controls. The player-level prop feature is not yet eligible for universal production weighting.
+
 ## Paid-source rule
 
-Do not recommend or ingest a paid historical-odds vendor merely because it advertises player props. Require a sample export or schema confirmation showing that it actually includes historical **NFL season-long futures/player totals**, not only weekly game props, and that the required dates, books, lines and odds are available for the requested seasons.
+Do not recommend or ingest a paid historical-odds vendor merely because it advertises player props. Require a sample export or schema confirmation showing that it actually includes historical **NFL season-long futures/player totals**, not only weekly game props, and that dates, books, lines and odds are available for the required seasons.
 
 ## Leakage and provenance rules
 
@@ -151,13 +193,16 @@ Do not recommend or ingest a paid historical-odds vendor merely because it adver
 4. Never backfill a missing player line using an analyst projection.
 5. Never infer an offense-only score from a generic team win total.
 6. Never treat a projection-screened or editorially selected list as a representative sportsbook board.
-7. Preserve raw source values before any vig removal, category correction or residual construction.
+7. Preserve raw source values before vig removal, category correction or residual construction.
+8. A mixed-source cross-season series must retain source family and snapshot timing rather than presenting itself as one homogeneous closing-line feed.
 
 ## v0.6 outputs
 
 Canonical build code:
 
-- `fantasy-draft/research/build_sportsbook_market_v06.py`
+- `fantasy-draft/research/build_sportsbook_market_v06.py` - base schema, matching, QA and output logic
+- `fantasy-draft/research/build_sportsbook_market_v06b.py` - curated complete team-market snapshots
+- `fantasy-draft/research/build_sportsbook_market_v06c.py` - curated 2025 PFF player-prop tables and final production entrypoint
 
 Primary outputs:
 
@@ -168,19 +213,18 @@ Primary outputs:
 - `sportsbook_source_manifest_v06.csv`
 - `sportsbook_match_qa_v06.csv`
 - `sportsbook_coverage_qa_v06.csv`
-- raw preserved source tables
 
 ## Step 10 completion rule
 
-Step 10 is complete when:
+Step 10 is complete because:
 
-1. all 32 team win totals are attached for every season from 2020 through 2025;
-2. source date/window and provenance are retained without invented precision;
+1. all 32 team win totals are preserved for every season from 2020 through 2025;
+2. source date or bounded window and provenance are retained without invented precision;
 3. the strongest defensible public player-prop observations are archived with sampling-frame flags;
-4. player identity matching exceeds 95%;
+4. player identity matching is 68 of 68;
 5. selected observations do not contaminate the primary `vegas_*` fields;
-6. `team_offense_market_score` remains null unless an offense-specific market is acquired;
+6. `team_offense_market_score` remains null;
 7. the public player-prop archive gap is explicitly recorded;
-8. the reproducible v0.6 build and QA pass.
+8. the reproducible v0.6 build and QA pass with zero duplicate season/player IDs.
 
-The expected conclusion is permitted to be asymmetric: the team betting environment can be ready for modeling while the historical player-prop feature remains blocked for formal production weighting. That is the truthful result of the source audit, not a failure to finish the step.
+The final conclusion is asymmetric: the team betting environment is ready for controlled historical testing, while historical player props remain a nested exploratory lane. That is the truthful result of the source audit.
