@@ -119,3 +119,62 @@ Canonical Step 8 entrypoint: `fantasy-draft/research/attach_preserved_consensus_
 Canonical Step 8 panel: `master_player_season_panel_2020_2025_v0_4.csv`.
 
 **Step 8 status: COMPLETE.**
+
+---
+
+## v0.5 | High-stakes / advanced fantasy draft markets / Step 9 | 2026-08-30
+
+### Core interpretation
+
+1. **Do not create a synthetic universal `high_stakes_adp` field at ingestion.** NFFC, FFPC/FPC, and best-ball markets have different scoring, roster structures, contest incentives, and historical source quality.
+2. **High stakes is a hypothesis, not a credential.** NFFC/FFPC receives no special production weight until incremental predictive value is demonstrated out of sample after consensus/public/platform markets are controlled.
+3. **Preserve source-family meaning before normalization.** Residuals and scoring/position adjustments belong downstream.
+
+### NFFC direct historical audit
+
+1. The current NFFC page loads data from `/adp.data.php` using team/date/team-count/draft-type/sport/position/league filters.
+2. Valid 2026 requests return a full board with continuous ADP, minimum pick, maximum pick, and pick count.
+3. The same valid request structure returned `No ADP Information Available` for preseason windows in every historical season 2020-2025.
+4. Therefore the current NFFC backend is a **2026 live/application source**, not a historical archive for the training panel.
+
+### Accepted FFPC/FPC full-table observations
+
+- 2021-09-02: normal season-long FFPC/FPC, full public table, `preserved_full_table`
+- 2022-06-25: normal season-long FFPC/FPC, full public table, `preserved_full_table_early`
+- 2023-08-01: normal season-long FFPC, full public table, `preserved_full_table`
+
+All three explicitly use **1.5 PPR for tight ends**. Do not treat their ADP gap versus standard-PPR markets as a pure information signal without position/scoring adjustment.
+
+### Accepted NFFC ordinal observations
+
+- 2024-05-23: public top-50 recent-NFFC ordinal board, `preserved_ordinal_early_generic`
+- 2025-05-30: public NFFC ordinal movement board, `preserved_ordinal_early_generic`
+
+These sources do not expose defensible continuous ADP. Store the published ordinal rank only. Do not manufacture decimal precision.
+
+### Best-ball rule
+
+Best-ball observations remain a separate market family. Do not merge FFPC best ball, Underdog, DraftKings, Drafters, or best-ball-inclusive NFFC aggregates into managed redraft ADP at the source layer.
+
+### Model-D validation rule
+
+1. Compare Model C and Model D on the **same player-season rows** to prevent source coverage from masquerading as predictive lift.
+2. Run position-specific specifications.
+3. Run an FFPC non-TE or TE-adjusted sensitivity analysis.
+4. Treat early snapshots as early information, not final preseason prices.
+5. Report season count and player-season sample size for every high-stakes result.
+6. Never impute missing NFFC from FFPC or vice versa.
+
+### Implemented v0.5 fields
+
+Separate FFPC and NFFC fields are added for ADP/rank/prior rank/min/max/date/source state/source URL/contest/scoring format where the source actually exposes those values.
+
+Long-form audit output: `high_stakes_market_observations_v05.csv`.
+
+### Build
+
+Canonical Step 9 entrypoint: `fantasy-draft/research/build_high_stakes_market_v05.py` via `.github/workflows/build-fantasy-research-panel.yml`.
+
+Canonical Step 9 panel: `master_player_season_panel_2020_2025_v0_5.csv`.
+
+**Step 9 status: COMPLETE when the v0.5 reproducible build and QA pass.**
