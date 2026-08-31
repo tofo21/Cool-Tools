@@ -5,6 +5,7 @@ on:
   push:
     paths:
       - 'fantasy-draft/research/*.py'
+      - 'fantasy-draft/research/scorecard_v08_payload/**'
       - '.github/workflows/build-fantasy-research-panel.yml'
 
 permissions:
@@ -13,7 +14,7 @@ permissions:
 jobs:
   build-panel:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 60
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -26,7 +27,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pandas numpy requests pyarrow rapidfuzz lxml pypdf
+          pip install pandas numpy requests pyarrow rapidfuzz lxml pypdf scipy scikit-learn tabulate
 
       - name: Build 2020-2025 master player-season panel
         run: python fantasy-draft/research/build_master_panel.py
@@ -49,10 +50,25 @@ jobs:
       - name: Attach Step 11 football fundamentals layer
         run: python fantasy-draft/research/build_football_fundamentals_v07.py
 
-      - name: Upload research panel artifact
+      - name: Step 12 regression primary walk-forward
+        run: python fantasy-draft/research/build_walk_forward_signal_scorecard_v08.py --phase regression-primary
+
+      - name: Step 12 regression same-source sensitivity
+        run: python fantasy-draft/research/build_walk_forward_signal_scorecard_v08.py --phase regression-sensitivity
+
+      - name: Step 12 probability calibration
+        run: python fantasy-draft/research/build_walk_forward_signal_scorecard_v08.py --phase classification
+
+      - name: Step 12 nested high-stakes tests
+        run: python fantasy-draft/research/build_walk_forward_signal_scorecard_v08.py --phase high-stakes
+
+      - name: Step 12 aggregate signal scorecard
+        run: python fantasy-draft/research/build_walk_forward_signal_scorecard_v08.py --phase aggregate
+
+      - name: Upload research and scorecard artifact
         uses: actions/upload-artifact@v4
         with:
-          name: master-player-season-panel-2020-2025-v0-7
+          name: fantasy-draft-signal-scorecard-v0-8
           path: fantasy-draft/research/output/
           if-no-files-found: error
           retention-days: 30
