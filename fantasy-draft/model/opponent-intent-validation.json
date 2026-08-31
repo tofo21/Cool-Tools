@@ -1,0 +1,77 @@
+{
+  "modelVersion": "espn_opponent_intent_v1.1_candidate",
+  "buildTimestampUtc": "2026-08-31T22:45:00Z",
+  "status": "VALIDATED_BASELINE_CANDIDATE",
+  "coverage": {
+    "history": "2020-2025",
+    "heldOutSeasons": [2023, 2024, 2025],
+    "heldOutContexts": 173,
+    "validatedRounds": [1, 2, 3, 4, 5, 6]
+  },
+  "position": {
+    "roomRoundBaseline": { "logLoss": 1.1505931914, "brier": 0.1581844837, "top1Accuracy": 0.5028901734, "top2Coverage": 0.8265895954 },
+    "plusRosterNeeds": { "logLoss": 1.0625610588, "brier": 0.1486573518, "top1Accuracy": 0.5375722543, "top2Coverage": 0.8265895954 },
+    "plusRosterRunsAndLiveBoard": { "logLoss": 0.8796874837, "brier": 0.1305009771, "top1Accuracy": 0.5780346821, "top2Coverage": 0.8843930636 },
+    "uncappedManagerCandidate": { "logLoss": 0.8823337716, "brier": 0.1296822571, "top1Accuracy": 0.6069364162, "top2Coverage": 0.8612716763 },
+    "selectedRuntime": "plusRosterRunsAndLiveBoard"
+  },
+  "player": {
+    "marketOnly": { "logLoss": 2.0902057249, "top1Accuracy": 0.3179190751, "top3Coverage": 0.6300578035, "top5Coverage": 0.8265895954, "meanActualPredictedRank": 3.7514450867, "averageEspnBoardDistance": 3.2393063584, "conditionalLogLoss": 1.2105182413 },
+    "managerProfileCandidate": "identical at selected zero residual weight",
+    "selectedRuntime": "marketOnly"
+  },
+  "calibration": {
+    "position": {
+      "events": 692,
+      "bins": [
+        { "band": "0-.1", "n": 262, "meanProbability": 0.0237412587, "observedRate": 0.0190839695, "absoluteGap": 0.0046572893 },
+        { "band": ".1-.2", "n": 85, "meanProbability": 0.1471786378, "observedRate": 0.1764705882, "absoluteGap": 0.0292919505 },
+        { "band": ".2-.3", "n": 79, "meanProbability": 0.2474965128, "observedRate": 0.2405063291, "absoluteGap": 0.0069901836 },
+        { "band": ".3-.4", "n": 81, "meanProbability": 0.3445800253, "observedRate": 0.3086419753, "absoluteGap": 0.03593805 },
+        { "band": ".4-.5", "n": 70, "meanProbability": 0.4468610526, "observedRate": 0.5, "absoluteGap": 0.0531389474 },
+        { "band": ".5-.6", "n": 46, "meanProbability": 0.5411946967, "observedRate": 0.4782608696, "absoluteGap": 0.0629338271 },
+        { "band": ".6-.7", "n": 32, "meanProbability": 0.6340767092, "observedRate": 0.6875, "absoluteGap": 0.0534232908 },
+        { "band": ".7-.8", "n": 22, "meanProbability": 0.7471260605, "observedRate": 0.8181818182, "absoluteGap": 0.0710557577 },
+        { "band": ".8-.9", "n": 7, "meanProbability": 0.8536642067, "observedRate": 0.5714285714, "absoluteGap": 0.2822356353 },
+        { "band": ".9-1", "n": 8, "meanProbability": 0.9910365301, "observedRate": 1, "absoluteGap": 0.0089634699 }
+      ],
+      "interpretation": "Most populated bands are close; the .8-.9 band is sparse (n=7) and materially overconfident."
+    },
+    "player": {
+      "events": 5076,
+      "bins": [
+        { "band": "0-.01", "n": 3398, "meanProbability": 0.0011637862, "observedRate": 0.0035314891, "absoluteGap": 0.0023677029 },
+        { "band": ".01-.02", "n": 295, "meanProbability": 0.0143804987, "observedRate": 0.0101694915, "absoluteGap": 0.0042110072 },
+        { "band": ".02-.05", "n": 464, "meanProbability": 0.0325826398, "observedRate": 0.0323275862, "absoluteGap": 0.0002550536 },
+        { "band": ".05-.1", "n": 351, "meanProbability": 0.0722055866, "observedRate": 0.0598290598, "absoluteGap": 0.0123765268 },
+        { "band": ".1-.2", "n": 315, "meanProbability": 0.1443142242, "observedRate": 0.1587301587, "absoluteGap": 0.0144159346 },
+        { "band": ".2-.4", "n": 217, "meanProbability": 0.2790285921, "observedRate": 0.267281106, "absoluteGap": 0.0117474861 },
+        { "band": ".4-.6", "n": 31, "meanProbability": 0.4529209271, "observedRate": 0.3225806452, "absoluteGap": 0.1303402819 },
+        { "band": ".6-.8", "n": 2, "meanProbability": 0.6172646186, "observedRate": 0.5, "absoluteGap": 0.1172646186 },
+        { "band": ".8-1", "n": 3, "meanProbability": 0.9912283059, "observedRate": 1, "absoluteGap": 0.0087716941 }
+      ],
+      "interpretation": "Low and mid probability bands are close; high-probability bins are too sparse for strong calibration claims."
+    }
+  },
+  "historicalReplay": {
+    "method": "chronological pre-pick reconstruction",
+    "heldOutPredictionRows": 173,
+    "outputsSanitized": true,
+    "subgroupsEvaluated": ["manager", "round", "actual position"],
+    "note": "Only aggregate metrics are published; the pick-level prediction ledger remains private."
+  },
+  "calibrationPolicy": {
+    "rounds1To6": "CALIBRATED_BASELINE",
+    "rounds7To16": "CONTEXTUAL_UNVALIDATED",
+    "positionManagerResidualWeight": 0,
+    "playerManagerResidualWeight": 0,
+    "promotionDecision": "REJECTED_GLOBAL_NO_ROBUST_HOLDOUT_GAIN",
+    "reason": "Manager candidate worsened held-out position log loss and top-two coverage; no robust exact-player improvement was demonstrated."
+  },
+  "limitations": [
+    "Final same-day ESPN market snapshot is not frozen.",
+    "Historical ESPN enrichment covers Rounds 1-6 only.",
+    "Manager profiles remain explanatory and do not alter probabilities.",
+    "Runtime Monte Carlo sampling adds finite-simulation noise, controlled by a fixed seed."
+  ]
+}

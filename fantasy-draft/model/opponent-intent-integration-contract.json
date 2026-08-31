@@ -1,0 +1,49 @@
+{
+  "contractVersion": "1.0.0",
+  "modelVersion": "espn_opponent_intent_v1.1_candidate",
+  "status": "CANDIDATE_INTEGRATION",
+  "startingProductionCommit": "0a6ea9538f2806413d33ef2bc3a261b21ad7fc62",
+  "league": {
+    "espnLeagueId": "167404",
+    "teams": 10,
+    "rounds": 16,
+    "tonyDraftSlot": 5,
+    "tonyEspnTeamId": 9
+  },
+  "inputs": {
+    "immutableBundle": "../data/opponent-intent-package.js",
+    "canonicalLiveState": ["draft events", "source observations after resolution", "keeper template and reconciliations"],
+    "market": ["ESPN default rank", "ESPN ADP"],
+    "dynamic": ["manager on clock", "round", "overall pick", "roster counts", "open starter slots", "FLEX pressure", "last manager position", "recent positional run", "available pool", "exact snake geometry"]
+  },
+  "outputs": {
+    "onClockManagerCard": ["position distribution", "top five players", "other", "roster", "needs", "profile summary", "confidence", "status"],
+    "opponentBoard": ["all nine opponents", "next pick", "top position", "top five players", "Tony-target threat", "confidence"],
+    "tonyThreatBoard": ["taken probability", "survival probability", "top two likely takers", "manager breakdown", "tier survival"]
+  },
+  "promotionPolicy": {
+    "positionManagerResidualWeight": 0,
+    "playerManagerResidualWeight": 0,
+    "decision": "REJECTED_GLOBAL_NO_ROBUST_HOLDOUT_GAIN",
+    "managerProfiles": "EXPLANATION_ONLY",
+    "validatedScope": "Rounds 1-6 chronological replay; 2023-2025 held out",
+    "lateRoundScope": "CONTEXTUAL_UNVALIDATED"
+  },
+  "mutationBoundary": {
+    "mayReadTonyTargetsForDisplay": true,
+    "mayMutatePlayerTruth": false,
+    "mayMutateLeagueValue": false,
+    "mayMutateTiers": false,
+    "mayMutateBpa": false,
+    "mayMutateEspnRankOrAdp": false
+  },
+  "runtime": {
+    "simulation": "deterministic seeded sequential depletion",
+    "browserWorker": "./opponent-intent-worker.js",
+    "ingestionBlocking": false,
+    "persistentSimulationState": false,
+    "reconstruction": "derive from canonical observations after refresh",
+    "hardReset": "discard in-flight generation and worker, then reconstruct empty live state",
+    "failureMode": "render explicit fallback/unavailable status; never block board, ESPN ingestion or Manual picks"
+  }
+}

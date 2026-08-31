@@ -14,23 +14,24 @@
   const SYNC_SETTINGS_KEY = "draft-command-live-sync-v1";
   const SCHEMA_VERSION = 3;
   const AUDIT_SCHEMA_VERSION = "draft-command-audit-v2";
-  const APP_RELEASE = "F5D-2026.08.31";
+  const APP_RELEASE = "F5D-2026.08.31-OI1-candidate";
   const MAX_AUDIT_RECORDS = 2500;
   const MAX_RECOVERY_SNAPSHOTS = 12;
   const MODEL_LEAGUE_PROFILE_ID = "espn-keeper-10-ppr-2flex-2026";
+  const OPPONENT_SIMULATIONS = window.__DRAFT_COMMAND_TEST__ ? 8 : 300;
 
   const MANAGERS = [
     null,
-    { id: 1, name: "Justin Gerkin", short: "Gerkin" },
-    { id: 2, name: "Dan Merrick", short: "Dan" },
-    { id: 3, name: "Matt Castleman", short: "Castleman" },
-    { id: 4, name: "Matt Hull", short: "Hull" },
-    { id: 5, name: "Tony Fontana", short: "Tony" },
-    { id: 6, name: "Matt Runge", short: "Runge" },
-    { id: 7, name: "Jon Merrick", short: "Jon" },
-    { id: 8, name: "Matt Sloka", short: "Sloka" },
-    { id: 9, name: "Kyle Cavanaugh", short: "Kyle" },
-    { id: 10, name: "Brenden Lautenbach", short: "Brenden" },
+    { id: 1, espnTeamId: 10, name: "Justin Gerkin", short: "Gerkin" },
+    { id: 2, espnTeamId: 1, name: "Dan Merrick", short: "Dan" },
+    { id: 3, espnTeamId: 8, name: "Matt Castleman", short: "Castleman" },
+    { id: 4, espnTeamId: 4, name: "Matt Hull", short: "Hull" },
+    { id: 5, espnTeamId: 9, name: "Tony Fontana", short: "Tony" },
+    { id: 6, espnTeamId: 7, name: "Matt Runge", short: "Runge" },
+    { id: 7, espnTeamId: 2, name: "Jon Merrick", short: "Jon" },
+    { id: 8, espnTeamId: 5, name: "Matt Sloka", short: "Sloka" },
+    { id: 9, espnTeamId: 11, name: "Kyle Cavanaugh", short: "Kyle" },
+    { id: 10, espnTeamId: 12, name: "Brenden Lautenbach", short: "Brenden" },
   ];
 
   const KEEPER_CONFIG = [
@@ -58,8 +59,8 @@
     platform: "espn",
     position: "ALL",
     search: "",
-    boardSort: "platform",
-    boardSortDirection: "asc",
+    boardSort: { key: "espnPrice", direction: "asc" },
+    opponentSort: { key: "nextPick", direction: "asc" },
     visible: 20,
     rosterTeam: TONY_TEAM,
     editingOverall: null,
@@ -95,7 +96,9 @@
     "modelStatusBadge", "modelVersion", "modelFreshness", "modelCoverage", "modelStatusCopy",
     "modelSourceNote", "snapshotNote", "decisionLenses", "roomRankNote", "boardOrderNote",
     "exportAuditLog", "nextPickHeader", "callHeader", "keeperToggle", "keeperModeNote",
-    "draftAlerts",
+    "draftAlerts", "onClockManagerCard", "opponentIntentStatus", "opponentBoard",
+    "opponentBoardStatus", "threatBoard", "threatBoardStatus", "tierSurvival",
+    "espnAdpHeader", "takenBeforeTonyHeader", "opponentThreatHeader",
   ].map((id) => [id, document.getElementById(id)]));
 
   const MODEL = window.DraftModel.createAdapter({
@@ -105,6 +108,20 @@
     leagueProfileId: MODEL_LEAGUE_PROFILE_ID,
     fallbackVersion: "fallback-2026.08.27",
   });
+
+  const OPPONENT_INTENT = window.OpponentIntentModel?.createEngine({
+    packageData: window.OPPONENT_INTENT_PACKAGE,
+    players: window.PLAYER_DATA,
+    managers: MANAGERS,
+    season: 2026,
+    leagueProfileId: MODEL_LEAGUE_PROFILE_ID,
+    teamCount: TEAM_COUNT,
+    tonyTeam: TONY_TEAM,
+  }) || null;
+  let opponentContext = { signature: null, status: "loading", board: null, threat: null, liveState: null, window: null, error: null };
+  let opponentSimulationTimer = null;
+  let opponentSimulationGeneration = 0;
+  let opponentWorker = null;
 
   function pickLabel(overall) {
     const round = Math.ceil(overall / TEAM_COUNT);
@@ -244,7 +261,11 @@
       sessionId: state.sessionId,
       generation: state.generation,
       sourceIngestionPaused: state.sourceIngestionPaused,
-      auditLog: state.auditLog,
+      // Detailed audits remain in memory for export and are deterministically
+      // rebuilt from canonical events after refresh. This keeps browser storage
+      // bounded through a complete 160-pick draft.
+      auditLog: [],
+      auditRebuildRequired: state.auditLog.length > 0,
     };
   }
 
@@ -896,6 +917,143 @@
     return renderCache.available;
   }
 
+  function opponentKeeperSeeds() {
+    return KEEPERS.filter((keeper) => !state.events.some((event) => event.overall === keeper.overall || event.playerId === keeper.playerId))
+      .map((keeper) => ({ ...keeper, source: "keeper-template" }));
+  }
+
+  function opponentLiveState(beforeOverall = currentPick()) {
+    if (!OPPONENT_INTENT) return null;
+    return OPPONENT_INTENT.createLiveState({
+      events: state.events,
+      keeperSeeds: opponentKeeperSeeds(),
+      beforeOverall,
+    });
+  }
+
+  function opponentThreatWindow() {
+    const current = currentPick();
+    if (current > TOTAL_PICKS) return { start: TOTAL_PICKS + 1, nextTony: null, onClock: false };
+    const onClock = pickOwner(current) === TONY_TEAM;
+    const nextTony = onClock ? followingTonyPick(current) : nextTonyPick(current);
+    return {
+      start: onClock ? current + 1 : current,
+      nextTony,
+      onClock,
+    };
+  }
+
+  function opponentSignature() {
+    return JSON.stringify([
+      state.generation,
+      state.events.map((event) => [event.overall, event.playerId, event.source]),
+      state.keeperMode,
+      state.keeperSeeds.map((seed) => [seed.overall, seed.playerId]),
+    ]);
+  }
+
+  function threatMap() {
+    if (!renderCache.threatMap) renderCache.threatMap = new Map((opponentContext.threat?.threats || []).map((threat) => [Number(threat.playerId), threat]));
+    return renderCache.threatMap;
+  }
+
+  function threatFor(player) {
+    return threatMap().get(Number(player?.id)) || null;
+  }
+
+  function opponentTargetPlayers(limit = 12) {
+    const recs = recommendations();
+    const preferred = [recs.bestPickNow, recs.bestValue, recs.bestPlayer, recs.bestFit, recs.bestCeiling, recs.safestWait]
+      .map((entry) => entry?.player).filter(Boolean);
+    const leaders = availablePlayers().slice().sort((a, b) => leagueScore(b) - leagueScore(a) || a.id - b.id);
+    const seen = new Set();
+    return [...preferred, ...leaders].filter((player) => {
+      if (seen.has(player.id)) return false;
+      seen.add(player.id);
+      return true;
+    }).slice(0, limit);
+  }
+
+  function opponentTierTargets() {
+    const leaders = availablePlayers().slice().sort((a, b) => leagueScore(b) - leagueScore(a) || a.id - b.id).slice(0, 5);
+    return { "Current League Value top five": leaders.map((player) => player.id) };
+  }
+
+  function finishOpponentSimulation(generation, threat, error = null) {
+    if (generation !== opponentSimulationGeneration) return;
+    opponentContext = error
+      ? { ...opponentContext, status: "fallback", threat: null, error: error.message || String(error) || "Opponent simulation failed safely." }
+      : { ...opponentContext, status: "ready", threat, error: null };
+    renderCache = {};
+    renderOpponentIntent();
+    renderBoard();
+  }
+
+  function postOpponentWorker(generation, options) {
+    if (typeof window.Worker !== "function") return false;
+    try {
+      if (!opponentWorker) {
+        opponentWorker = new window.Worker("./model/opponent-intent-worker.js");
+        opponentWorker.addEventListener("message", (event) => {
+          const message = event.data || {};
+          if (message.type === "opponent-intent-result") finishOpponentSimulation(message.generation, message.threat);
+          if (message.type === "opponent-intent-error") finishOpponentSimulation(message.generation, null, new Error(message.error || "Opponent worker failed safely."));
+        });
+        opponentWorker.addEventListener("error", (error) => finishOpponentSimulation(opponentSimulationGeneration, null, error));
+      }
+      opponentWorker.postMessage({ type: "simulate-opponent-window", generation, options });
+      return true;
+    } catch (_) {
+      opponentWorker?.terminate?.();
+      opponentWorker = null;
+      return false;
+    }
+  }
+
+  function scheduleOpponentIntent() {
+    if (!OPPONENT_INTENT) {
+      opponentContext = { signature: "missing", status: "unavailable", board: null, threat: null, liveState: null, window: null, error: "Opponent Intent runtime did not load." };
+      renderOpponentIntent();
+      return;
+    }
+    const signature = opponentSignature();
+    if (opponentContext.signature === signature) return;
+    const generation = ++opponentSimulationGeneration;
+    if (opponentSimulationTimer != null) clearTimeout(opponentSimulationTimer);
+    try {
+      const liveState = opponentLiveState();
+      const windowState = opponentThreatWindow();
+      const boardTarget = nextTonyPick(currentPick());
+      const board = OPPONENT_INTENT.fullBoard({ currentOverallPick: currentPick(), nextTonyPick: boardTarget, liveState });
+      opponentContext = { signature, status: windowState.nextTony ? "calculating" : "complete", board, threat: null, liveState, window: windowState, error: null };
+      renderCache = {};
+      renderOpponentIntent();
+      renderBoard();
+      if (!windowState.nextTony || !liveState.availablePlayerIds.length) return;
+      const simulationOptions = {
+        currentOverallPick: windowState.start,
+        nextTonyPick: windowState.nextTony,
+        liveState,
+        targetPlayerIds: liveState.availablePlayerIds,
+        tiers: opponentTierTargets(),
+        simulations: OPPONENT_SIMULATIONS,
+        seed: 20260831,
+      };
+      if (postOpponentWorker(generation, simulationOptions)) return;
+      opponentSimulationTimer = setTimeout(() => {
+        if (generation !== opponentSimulationGeneration) return;
+        try {
+          finishOpponentSimulation(generation, OPPONENT_INTENT.simulateTonyWindow(simulationOptions));
+        } catch (error) {
+          finishOpponentSimulation(generation, null, error);
+        }
+      }, 0);
+    } catch (error) {
+      opponentContext = { signature, status: "fallback", board: null, threat: null, liveState: null, window: null, error: error.message || "Opponent Intent failed safely." };
+      renderOpponentIntent();
+    }
+  }
+
   function leagueRank(player) {
     if (!renderCache.leagueRanks) {
       renderCache.leagueRanks = new Map(availablePlayers().slice().sort((a, b) => leagueScore(b) - leagueScore(a)).map((item, index) => [item.id, index + 1]));
@@ -1269,31 +1427,86 @@
     }).join("");
   }
 
-  function boardRows(platform = state.platform) {
+  const BOARD_SORT_DEFAULTS = Object.freeze({
+    name: "asc", position: "asc", leagueValue: "desc", espnPrice: "asc", espnAdp: "asc",
+    survival: "desc", taken: "desc", threat: "desc",
+  });
+
+  function espnAdp(player) {
+    return OPPONENT_INTENT?.market(player.id)?.espnAdp ?? null;
+  }
+
+  function boardMetric(player, key, platform, after) {
+    const threat = threatFor(player);
+    if (key === "name") return player.name.toLowerCase();
+    if (key === "position") return player.pos;
+    if (key === "leagueValue") return leagueScore(player);
+    if (key === "espnPrice") return roomOrder(player, platform);
+    if (key === "espnAdp") return espnAdp(player);
+    if (key === "survival") return survivalDetail(player, after).value;
+    if (key === "taken") return threat?.probabilityTakenBeforeTony ?? null;
+    if (key === "threat") return threat?.mostLikelyTaker?.probability ?? null;
+    return player.id;
+  }
+
+  function compareMetrics(left, right, direction) {
+    const leftMissing = left == null || (typeof left === "number" && !Number.isFinite(left));
+    const rightMissing = right == null || (typeof right === "number" && !Number.isFinite(right));
+    if (leftMissing || rightMissing) return leftMissing === rightMissing ? 0 : leftMissing ? 1 : -1;
+    const result = typeof left === "string" ? left.localeCompare(right) : left - right;
+    return direction === "desc" ? -result : result;
+  }
+
+  function boardRows(platform = state.platform, sort = state.boardSort) {
     const query = state.search.trim().toLowerCase();
-    const direction = state.boardSortDirection === "desc" ? -1 : 1;
+    const target = nextTonyPick() || Math.min(currentPick(), TOTAL_PICKS);
+    const after = followingTonyPick(target) || TOTAL_PICKS;
     return availablePlayers()
       .filter((player) => state.position === "ALL" || player.pos === state.position)
       .filter((player) => !query || `${player.name} ${player.team}`.toLowerCase().includes(query))
-      .sort((a, b) => {
-        const comparison = state.boardSort === "league"
-          ? leagueScore(a) - leagueScore(b) || leagueRank(b) - leagueRank(a)
-          : roomOrder(a, platform) - roomOrder(b, platform) || leagueScore(b) - leagueScore(a);
-        return comparison * direction || a.id - b.id;
-      });
+      .sort((a, b) => compareMetrics(boardMetric(a, sort.key, platform, after), boardMetric(b, sort.key, platform, after), sort.direction)
+        || roomOrder(a, platform) - roomOrder(b, platform) || leagueScore(b) - leagueScore(a) || a.id - b.id);
   }
 
-  function setBoardSort(sortKey) {
-    if (!new Set(["league", "platform"]).has(sortKey)) return false;
-    if (state.boardSort === sortKey) {
-      state.boardSortDirection = state.boardSortDirection === "asc" ? "desc" : "asc";
-    } else {
-      state.boardSort = sortKey;
-      state.boardSortDirection = sortKey === "league" ? "desc" : "asc";
-    }
+  function sortLabel(key, platformName) {
+    return ({
+      name: "player name", position: "position", leagueValue: "League Value", espnPrice: `${platformName} default room rank`,
+      espnAdp: "ESPN ADP", survival: "next-pick survival", taken: "probability taken before Tony", threat: "strongest opponent threat",
+    })[key] || key;
+  }
+
+  function updateSortHeaders() {
+    document.querySelectorAll("[data-board-sort]").forEach((button) => {
+      const active = button.dataset.boardSort === state.boardSort.key;
+      button.classList.toggle("active", active);
+      button.dataset.direction = active ? state.boardSort.direction : "";
+      button.setAttribute?.("aria-pressed", String(active));
+    });
+    document.querySelectorAll("[data-opponent-sort]").forEach((button) => {
+      const active = button.dataset.opponentSort === state.opponentSort.key;
+      button.classList.toggle("active", active);
+      button.dataset.direction = active ? state.opponentSort.direction : "";
+      button.setAttribute?.("aria-pressed", String(active));
+    });
+  }
+
+  function setBoardSort(key) {
+    if (!(key in BOARD_SORT_DEFAULTS)) return false;
+    state.boardSort = state.boardSort.key === key
+      ? { key, direction: state.boardSort.direction === "asc" ? "desc" : "asc" }
+      : { key, direction: BOARD_SORT_DEFAULTS[key] };
     state.visible = 20;
     renderBoard();
     return true;
+  }
+
+  function setOpponentSort(key) {
+    const defaults = { manager: "asc", nextPick: "asc", position: "desc", threat: "desc", confidence: "desc" };
+    if (!(key in defaults)) return;
+    state.opponentSort = state.opponentSort.key === key
+      ? { key, direction: state.opponentSort.direction === "asc" ? "desc" : "asc" }
+      : { key, direction: defaults[key] };
+    renderOpponentBoard();
   }
 
   function renderBoard() {
@@ -1303,23 +1516,13 @@
     const after = nextTurn || TOTAL_PICKS;
     const platformName = state.platform === "espn" ? "ESPN" : "Sleeper";
     const health = MODEL.health();
-    const leagueActive = state.boardSort === "league";
-    const ascending = state.boardSortDirection === "asc";
-    const sortDescription = leagueActive
-      ? `League value ${ascending ? "worst → best" : "best → worst"}`
-      : `${platformName} room order ${ascending ? "best → worst" : "worst → best"}`;
-    els.boardCount.textContent = `${rows.length} available · ${sortDescription}`;
-    els.platformHeaderLabel.textContent = `${platformName} price`;
-    els.roomRankNote.textContent = `Player list follows ${platformName}'s current default room order.`;
-    els.boardOrderNote.textContent = `Sorted by ${sortDescription}`;
-    els.leagueValueHeader.ariaSort = leagueActive ? (ascending ? "ascending" : "descending") : "none";
-    els.platformHeader.ariaSort = leagueActive ? "none" : (ascending ? "ascending" : "descending");
-    els.leagueSortIndicator.textContent = leagueActive ? (ascending ? "↑" : "↓") : "↕";
-    els.platformSortIndicator.textContent = leagueActive ? "↕" : (ascending ? "↑" : "↓");
-    els.leagueSortButton.classList.toggle("active", leagueActive);
-    els.platformSortButton.classList.toggle("active", !leagueActive);
+    els.boardCount.textContent = `${rows.length} available`;
+    els.platformHeader.textContent = `${platformName} price`;
+    els.roomRankNote.textContent = `${platformName} controls the room-price column; League Value remains independent.`;
+    els.boardOrderNote.textContent = `Sorted by ${sortLabel(state.boardSort.key, platformName)} · ${state.boardSort.direction === "asc" ? "low to high / A–Z" : "high to low / Z–A"}`;
     els.nextPickHeader.textContent = health.decisionPolicyApproved ? "Survives next pick" : "Next-pick signal";
     els.callHeader.textContent = health.decisionPolicyApproved ? "Call" : "Status";
+    updateSortHeaders();
     els.playerTable.innerHTML = rows.slice(0, state.visible).map((player, index) => {
       const rank = leagueRank(player);
       const gap = valueGap(player);
@@ -1328,11 +1531,18 @@
       const tier = tierInfo(player);
       const signal = availabilitySignal(availability.value);
       const barWidth = availability.calibrated ? Math.round(availability.value * 100) : signal === "HIGH" ? 100 : signal === "MEDIUM" ? 66 : 33;
+      const threat = threatFor(player);
+      const taken = threat ? `${Math.round(threat.probabilityTakenBeforeTony * 100)}%` : opponentContext.status === "calculating" ? "…" : "—";
+      const taker = threat?.mostLikelyTaker;
       return `<tr data-player-id="${player.id}">
-        <td><div class="player-cell"><span class="rank-num">${index + 1}</span><span class="pos-pill pos-${player.pos}">${player.pos}</span><div><span class="player-name">${player.name}</span><span class="player-meta">${player.team} · BYE ${player.bye}</span></div></div></td>
+        <td><div class="player-cell"><span class="rank-num">${index + 1}</span><div><span class="player-name">${player.name}</span><span class="player-meta">${player.team} · BYE ${player.bye}</span></div></div></td>
+        <td><span class="pos-pill pos-${player.pos}">${player.pos}</span></td>
         <td><span class="metric-main">#${rank}</span><span class="metric-sub">${tier.label} · score ${leagueScore(player).toFixed(1)}</span></td>
         <td><span class="metric-main ${gap >= 4 ? "value-positive" : gap <= -4 ? "value-negative" : ""}">#${price(player)}</span><span class="metric-sub">${gap >= 0 ? "+" : ""}${gap.toFixed(1)} vs fair pick</span></td>
+        <td><span class="metric-main">${espnAdp(player) == null ? "—" : espnAdp(player).toFixed(1)}</span><span class="metric-sub">separate ESPN signal</span></td>
         <td><div class="survival"><div class="survival-head"><span>${nextTurn ? pickLabel(after) : "END"}</span><span>${availabilityDisplay(availability, { compact: true })}</span></div><div class="survival-bar ${availability.calibrated ? "" : "uncalibrated"}"><span style="width:${barWidth}%"></span></div></div></td>
+        <td><span class="metric-main">${taken}</span><span class="metric-sub">${opponentContext.window?.nextTony ? `before ${pickLabel(opponentContext.window.nextTony)}` : "window complete"}</span></td>
+        <td><span class="metric-main">${taker ? taker.manager : "—"}</span><span class="metric-sub">${taker ? `${Math.round(taker.probability * 100)}% direct threat` : opponentContext.status === "calculating" ? "recalculating" : "no simulated threat"}</span></td>
         <td><span class="call-badge call-${call.cls}">${call.label}</span></td>
         <td><button class="draft-btn" data-draft-id="${player.id}" type="button" ${currentPick() > TOTAL_PICKS ? "disabled" : ""}>Draft</button></td>
       </tr>`;
@@ -1413,6 +1623,118 @@
     }).join("")}`;
   }
 
+  function percent(value, digits = 0) {
+    return Number.isFinite(Number(value)) ? `${(Number(value) * 100).toFixed(digits)}%` : "—";
+  }
+
+  function likelyPosition(row) {
+    return Object.entries(row?.positionProbabilities || {}).sort((a, b) => b[1] - a[1])[0] || ["—", 0];
+  }
+
+  function managerThreatScore(team) {
+    return opponentTargetPlayers().reduce((sum, player) => {
+      const breakdown = threatFor(player)?.managerThreatBreakdown || [];
+      return sum + (breakdown.find((entry) => entry.team === Number(team))?.probability || 0);
+    }, 0);
+  }
+
+  function renderOnClockManagerCard() {
+    const health = OPPONENT_INTENT?.health();
+    const rows = opponentContext.board?.opponents || [];
+    const current = currentPick();
+    const currentTeam = current <= TOTAL_PICKS ? pickOwner(current) : null;
+    const row = currentTeam && currentTeam !== TONY_TEAM
+      ? rows.find((item) => item.team === currentTeam)
+      : rows.filter((item) => item.overallPick != null && item.overallPick > current).sort((a, b) => a.overallPick - b.overallPick)[0];
+    const status = opponentContext.status === "calculating" ? "Recalculating" : health?.mode === "live" ? "Baseline live" : "Fallback";
+    els.opponentIntentStatus.textContent = status;
+    els.opponentIntentStatus.className = `intent-status intent-${health?.mode === "live" ? "live" : "fallback"}`;
+    if (!row) {
+      els.onClockManagerCard.innerHTML = `<div class="empty-state">${current > TOTAL_PICKS ? "Draft complete." : "Tony is on the clock; no later opponent selection remains."}</div>`;
+      return;
+    }
+    const [position, probability] = likelyPosition(row);
+    const roster = row.rosterCounts || {};
+    const needs = row.openNeeds || {};
+    const topPlayers = row.topPlayers || [];
+    els.onClockManagerCard.innerHTML = `
+      <div class="intent-manager-head"><div><strong>${row.manager}</strong><small>ESPN team ${row.espnTeamId ?? "—"} · ${row.overallPick ? pickLabel(row.overallPick) : "complete"}</small></div><span class="pos-pill pos-${position}">${position}</span></div>
+      <div class="intent-primary"><strong>${percent(probability)}</strong><span>most likely position</span></div>
+      <div class="intent-roster"><span>Roster</span><strong>QB ${roster.QB || 0} · RB ${roster.RB || 0} · WR ${roster.WR || 0} · TE ${roster.TE || 0}</strong><small>Open: QB ${needs.QB || 0} · RB ${needs.RB || 0} · WR ${needs.WR || 0} · TE ${needs.TE || 0}</small></div>
+      <div class="position-distribution">${Object.entries(row.positionProbabilities || {}).map(([pos, value]) => `<div><span>${pos}</span><i><b style="width:${Math.round(value * 100)}%"></b></i><strong>${percent(value)}</strong></div>`).join("")}</div>
+      <div class="intent-player-list">${topPlayers.map((player, index) => `<div><span>${index + 1}. ${player.playerName}</span><strong>${percent(player.probability, 1)}</strong></div>`).join("")}<div><span>Other</span><strong>${percent(row.otherProbability, 1)}</strong></div></div>
+      <p class="intent-summary">${row.profileSummary || row.error || "Room and roster context only."}</p>
+      <p class="intent-meta">${row.confidence} · ${String(row.status || "fallback").replaceAll("_", " ")} · ${row.profileEvidence?.sampleSize || 0} historical R1–6 picks · ${row.picksUntilFollowingTurn ?? "—"} picks to following turn · manager residual 0</p>`;
+  }
+
+  function opponentRowMetric(row, key) {
+    const [position, probability] = likelyPosition(row);
+    if (key === "manager") return row.manager.toLowerCase();
+    if (key === "nextPick") return row.overallPick;
+    if (key === "position") return probability;
+    if (key === "threat") return managerThreatScore(row.team);
+    if (key === "confidence") return ({ MEDIUM: 3, LOW: 2, FALLBACK: 1, UNAVAILABLE: 0, COMPLETE: 0 })[row.confidence] || 0;
+    return position;
+  }
+
+  function renderOpponentBoard() {
+    const rows = (opponentContext.board?.opponents || []).slice();
+    els.opponentBoardStatus.textContent = opponentContext.status === "calculating" ? "Threats calculating" : opponentContext.status === "ready" ? "Live" : opponentContext.status === "complete" ? "Complete" : "Fallback";
+    if (!rows.length) {
+      els.opponentBoard.innerHTML = `<tr><td colspan="6"><div class="empty-state">${opponentContext.error || "Opponent model unavailable; the draft board remains fully usable."}</div></td></tr>`;
+      return;
+    }
+    rows.sort((a, b) => compareMetrics(opponentRowMetric(a, state.opponentSort.key), opponentRowMetric(b, state.opponentSort.key), state.opponentSort.direction)
+      || (a.overallPick ?? Infinity) - (b.overallPick ?? Infinity) || a.team - b.team);
+    els.opponentBoard.innerHTML = rows.map((row) => {
+      const [position, probability] = likelyPosition(row);
+      const top = row.topPlayers?.[0];
+      const topFive = (row.topPlayers || []).map((player) => `${player.playerName} ${percent(player.probability, 1)}`).join(" · ");
+      const threat = managerThreatScore(row.team);
+      const roster = row.rosterCounts || {};
+      return `<tr class="${row.picksBeforeTony ? "before-tony" : ""}">
+        <td><span class="metric-main">${row.manager}</span><span class="metric-sub">ESPN ${row.espnTeamId ?? "—"} · QB ${roster.QB || 0} RB ${roster.RB || 0} WR ${roster.WR || 0} TE ${roster.TE || 0}</span></td>
+        <td><span class="metric-main">${row.overallPick ? pickLabel(row.overallPick) : "—"}</span><span class="metric-sub">${row.picksBeforeTony ? "BEFORE TONY" : "later"}</span></td>
+        <td><span class="metric-main"><span class="pos-pill pos-${position}">${position}</span> ${percent(probability)}</span><span class="metric-sub">${Object.entries(row.positionProbabilities || {}).map(([pos, value]) => `${pos} ${percent(value)}`).join(" · ")}</span></td>
+        <td><span class="metric-main">${top?.playerName || "—"}</span><span class="metric-sub top-five-summary" title="${topFive}">${topFive || row.status}</span></td>
+        <td><span class="metric-main">${opponentContext.threat ? threat.toFixed(2) : opponentContext.status === "calculating" ? "…" : "—"}</span><span class="metric-sub">expected displayed-target picks</span></td>
+        <td><span class="intent-confidence confidence-${String(row.confidence || "fallback").toLowerCase()}">${row.confidence}</span><span class="metric-sub">${String(row.status || "fallback").replaceAll("_", " ")}</span></td>
+      </tr>`;
+    }).join("");
+    updateSortHeaders();
+  }
+
+  function renderThreatBoard() {
+    const threat = opponentContext.threat;
+    els.threatBoardStatus.textContent = opponentContext.status === "calculating" ? "Recalculating" : opponentContext.status === "ready" ? `${threat.simulations} seeded runs` : opponentContext.status === "complete" ? "Complete" : "Fallback";
+    if (!threat) {
+      els.tierSurvival.innerHTML = "";
+      els.threatBoard.innerHTML = `<div class="empty-state">${opponentContext.status === "calculating" ? "Sequential depletion simulation is running; ESPN ingestion remains active." : opponentContext.error || "No Tony window remains."}</div>`;
+      return;
+    }
+    const targets = opponentTargetPlayers();
+    const mapped = targets.map((player) => ({ player, threat: threatFor(player) })).filter((entry) => entry.threat);
+    const tier = threat.tierSurvival?.["Current League Value top five"];
+    els.tierSurvival.innerHTML = tier ? `<span>League Value top-five tier</span><strong>${tier.expectedRemaining.toFixed(1)} expected to survive · ${percent(tier.probabilityAtLeastOneSurvives)} chance at least one remains</strong>` : "";
+    els.threatBoard.innerHTML = mapped.map(({ player, threat: row }) => {
+      const top = row.mostLikelyTaker;
+      const second = row.secondMostLikelyTaker;
+      const breakdown = row.managerThreatBreakdown.slice(0, 4).map((entry) => `${entry.manager} ${percent(entry.probability)}`).join(" · ");
+      return `<article class="threat-card">
+        <div><span class="pos-pill pos-${player.pos}">${player.pos}</span><strong>${player.name}</strong></div>
+        <div class="threat-prob"><strong>${percent(row.probabilityTakenBeforeTony)}</strong><span>taken</span><strong>${percent(row.probabilitySurviving)}</strong><span>survives</span></div>
+        <p>${top ? `${top.manager} is the leading threat (${percent(top.probability)}).` : "No modeled opponent selected him in this window."}${second ? ` Next: ${second.manager} (${percent(second.probability)}).` : ""}</p>
+        <small>${breakdown || "No manager-specific threat in seeded runs"} · ${row.status.replaceAll("_", " ")}</small>
+      </article>`;
+    }).join("") || `<div class="empty-state">No available Tony targets remain.</div>`;
+  }
+
+  function renderOpponentIntent() {
+    renderOnClockManagerCard();
+    renderOpponentBoard();
+    renderThreatBoard();
+  }
+
   function freshnessLabel(timestamp) {
     if (!timestamp) return "Unknown";
     const date = new Date(timestamp);
@@ -1456,6 +1778,8 @@
     renderDraftAlerts();
     renderCliffs();
     renderModelHealth();
+    renderOpponentIntent();
+    scheduleOpponentIntent();
     document.querySelectorAll(".platform-btn").forEach((button) => button.classList.toggle("active", button.dataset.platform === state.platform));
   }
 
@@ -1830,6 +2154,12 @@
     state.visible = 20;
     state.sessionId = nextSessionId;
     state.generation = nextGeneration;
+    opponentSimulationGeneration += 1;
+    if (opponentSimulationTimer != null) clearTimeout(opponentSimulationTimer);
+    opponentSimulationTimer = null;
+    opponentWorker?.terminate?.();
+    opponentWorker = null;
+    opponentContext = { signature: null, status: "loading", board: null, threat: null, liveState: null, window: null, error: null };
     for (const key of [STORE_KEY, ...LEGACY_STORE_KEYS, SNAPSHOT_KEY, ...LEGACY_SNAPSHOT_KEYS, SYNC_SETTINGS_KEY]) localStorage.removeItem(key);
     renderCache = {};
     saveState({ snapshot: false });
@@ -1871,8 +2201,6 @@
       document.querySelectorAll(".filter-btn").forEach((button) => button.classList.toggle("active", button === filter));
       renderBoard();
     }
-    const boardSort = event.target.closest("[data-board-sort]");
-    if (boardSort) setBoardSort(boardSort.dataset.boardSort);
     const edit = event.target.closest("[data-edit-pick]");
     if (edit) openEditDialog(edit.dataset.editPick);
     const replacement = event.target.closest("[data-replace-id]");
@@ -1881,6 +2209,10 @@
     if (unresolved) openObservationDialog(unresolved.dataset.resolveObservation);
     const missing = event.target.closest("[data-resolve-missing]");
     if (missing) openMissingDialog(missing.dataset.resolveMissing);
+    const boardSort = event.target.closest("[data-board-sort]");
+    if (boardSort) setBoardSort(boardSort.dataset.boardSort);
+    const opponentSort = event.target.closest("[data-opponent-sort]");
+    if (opponentSort) setOpponentSort(opponentSort.dataset.opponentSort);
   });
 
   els.playerSearch.addEventListener("input", (event) => {
@@ -1943,8 +2275,44 @@
     recordManualPick: draftPlayer,
     auditExport: () => structuredClone(auditExportPayload()),
     modelHealth: () => MODEL.health(),
+    opponentModelHealth: () => OPPONENT_INTENT?.health() || { mode: "fallback", valid: false, errors: ["runtime missing"] },
+    opponentBoard: () => structuredClone(opponentContext.board || OPPONENT_INTENT?.fullBoard({ currentOverallPick: currentPick(), nextTonyPick: nextTonyPick(currentPick()), liveState: opponentLiveState() }) || { opponents: [] }),
+    opponentWindow: (options = {}) => {
+      if (!OPPONENT_INTENT) return null;
+      const windowState = opponentThreatWindow();
+      if (!windowState.nextTony) return null;
+      return OPPONENT_INTENT.simulateTonyWindow({
+        currentOverallPick: windowState.start,
+        nextTonyPick: windowState.nextTony,
+        liveState: opponentLiveState(),
+        targetPlayerIds: options.targetPlayerIds || availablePlayers().map((player) => player.id),
+        tiers: options.tiers || {},
+        simulations: options.simulations || 100,
+        seed: options.seed || 20260831,
+      });
+    },
     recommendations: () => recommendations(),
-    boardOrder: (platform = state.platform) => boardRows(platform).map((player) => ({
+    setBoardSort,
+    setPositionFilter: (position) => {
+      state.position = ["ALL", "QB", "RB", "WR", "TE"].includes(position) ? position : "ALL";
+      state.visible = 20;
+      renderBoard();
+    },
+    setPlayerSearch: (search) => {
+      state.search = String(search || "");
+      state.visible = 20;
+      renderBoard();
+    },
+    boardSort: () => ({ ...state.boardSort }),
+    decisionBoard: (sort = state.boardSort, platform = state.platform) => boardRows(platform, sort).map((player) => {
+      const threat = threatFor(player);
+      return {
+        id: player.id, name: player.name, position: player.pos, leagueValue: leagueScore(player), roomRank: roomOrder(player, platform),
+        espnAdp: espnAdp(player), probabilityTakenBeforeTony: threat?.probabilityTakenBeforeTony ?? null,
+        opponentThreat: threat?.mostLikelyTaker?.probability ?? null,
+      };
+    }),
+    boardOrder: (platform = state.platform, sort = state.boardSort) => boardRows(platform, sort).map((player) => ({
       id: player.id,
       name: player.name,
       pos: player.pos,

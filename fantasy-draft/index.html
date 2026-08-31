@@ -157,6 +157,43 @@
 
       <section class="decision-lenses" id="decisionLenses" aria-label="Additional decision lenses"></section>
 
+      <section class="panel threat-panel" aria-labelledby="threatBoardTitle">
+        <div class="intelligence-heading">
+          <div>
+            <p class="eyebrow">Sequential Tony-window simulation</p>
+            <h2 id="threatBoardTitle">Tony Threat Board</h2>
+          </div>
+          <span class="intent-status" id="threatBoardStatus">Loading model</span>
+        </div>
+        <div class="tier-survival" id="tierSurvival"></div>
+        <div class="threat-grid" id="threatBoard" aria-live="polite"></div>
+      </section>
+
+      <section class="panel opponent-board-panel" aria-labelledby="opponentBoardTitle">
+        <div class="intelligence-heading">
+          <div>
+            <p class="eyebrow">All nine opponents</p>
+            <h2 id="opponentBoardTitle">Opponent Board</h2>
+          </div>
+          <span class="intent-status" id="opponentBoardStatus">Loading model</span>
+        </div>
+        <div class="table-wrap">
+          <table class="opponent-table">
+            <thead>
+              <tr>
+                <th><button class="sort-header" data-opponent-sort="manager" type="button">Manager</button></th>
+                <th><button class="sort-header" data-opponent-sort="nextPick" type="button">Next pick</button></th>
+                <th><button class="sort-header" data-opponent-sort="position" type="button">Likely position</button></th>
+                <th>Top player</th>
+                <th><button class="sort-header" data-opponent-sort="threat" type="button">Tony-target threat</button></th>
+                <th><button class="sort-header" data-opponent-sort="confidence" type="button">Confidence</button></th>
+              </tr>
+            </thead>
+            <tbody id="opponentBoard"></tbody>
+          </table>
+        </div>
+      </section>
+
       <section class="panel board-panel">
         <div class="board-toolbar">
           <div>
@@ -181,18 +218,14 @@
           <table>
             <thead>
               <tr>
-                <th>Player</th>
-                <th id="leagueValueHeader" aria-sort="none">
-                  <button class="sort-header" id="leagueSortButton" data-board-sort="league" type="button">
-                    <span>League value</span><span class="sort-indicator" id="leagueSortIndicator" aria-hidden="true">↕</span>
-                  </button>
-                </th>
-                <th id="platformHeader" aria-sort="ascending">
-                  <button class="sort-header active" id="platformSortButton" data-board-sort="platform" type="button">
-                    <span id="platformHeaderLabel">ESPN price</span><span class="sort-indicator" id="platformSortIndicator" aria-hidden="true">↑</span>
-                  </button>
-                </th>
-                <th id="nextPickHeader">Next-pick signal</th>
+                <th><button class="sort-header" data-board-sort="name" type="button">Player</button></th>
+                <th><button class="sort-header" data-board-sort="position" type="button">Pos</button></th>
+                <th id="leagueValueHeader" aria-sort="none"><button class="sort-header" id="leagueSortButton" data-board-sort="leagueValue" type="button">League value</button></th>
+                <th><button class="sort-header" id="platformHeader" data-board-sort="espnPrice" type="button">ESPN price</button></th>
+                <th><button class="sort-header" id="espnAdpHeader" data-board-sort="espnAdp" type="button">ESPN ADP</button></th>
+                <th><button class="sort-header" id="nextPickHeader" data-board-sort="survival" type="button">Next-pick signal</button></th>
+                <th><button class="sort-header" id="takenBeforeTonyHeader" data-board-sort="taken" type="button">Taken before Tony</button></th>
+                <th><button class="sort-header" id="opponentThreatHeader" data-board-sort="threat" type="button">Opponent threat</button></th>
                 <th id="callHeader">Status</th>
                 <th><span class="sr-only">Draft action</span></th>
               </tr>
@@ -207,6 +240,14 @@
     </section>
 
     <aside class="right-rail">
+      <section class="panel intent-clock-panel">
+        <div class="panel-heading compact">
+          <div><p class="eyebrow">Opponent Intent</p><h2>On-Clock Manager</h2></div>
+          <span class="intent-status" id="opponentIntentStatus">Loading</span>
+        </div>
+        <div id="onClockManagerCard" aria-live="polite"></div>
+      </section>
+
       <section class="panel roster-panel">
         <div class="panel-heading">
           <div><p class="eyebrow">Team roster</p><h2 id="rosterManagerName">Tony Fontana</h2></div>
@@ -256,7 +297,9 @@
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <script src="./data/players.js"></script>
   <script src="./data/model-package.js"></script>
+  <script src="./data/opponent-intent-package.js"></script>
   <script src="./model/model-adapter.js"></script>
+  <script src="./model/opponent-intent.js"></script>
   <script src="./app.js"></script>
   <script src="./sync.js"></script>
 </body>

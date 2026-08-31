@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tofo21.github.io/Cool-Tools/fantasy-draft/model/opponent-intent-package.schema.json",
+  "title": "Draft Command Opponent Intent Runtime Package",
+  "type": "object",
+  "required": ["schemaVersion", "packageId", "season", "leagueProfileId", "leagueId", "metadata", "policy", "positionModel", "playerModel", "validation", "managers", "playerMarket"],
+  "properties": {
+    "schemaVersion": { "type": "string", "pattern": "^1\\." },
+    "packageId": { "type": "string", "minLength": 1 },
+    "season": { "const": 2026 },
+    "leagueProfileId": { "const": "espn-keeper-10-ppr-2flex-2026" },
+    "leagueId": { "const": "167404" },
+    "metadata": {
+      "type": "object",
+      "required": ["status", "modelVersion", "generatedAt", "effectiveAt", "historicalCoverage", "calibratedRounds", "confidencePolicy", "knownLimitations", "publicAssetPolicy"]
+    },
+    "policy": {
+      "type": "object",
+      "required": ["positionManagerResidualWeight", "playerManagerResidualWeight", "promotionStatus", "tonyValuesAffectSelectionProbability", "tierLabelsAffectSelectionProbability"],
+      "properties": {
+        "positionManagerResidualWeight": { "const": 0 },
+        "playerManagerResidualWeight": { "const": 0 },
+        "tonyValuesAffectSelectionProbability": { "const": false },
+        "tierLabelsAffectSelectionProbability": { "const": false }
+      }
+    },
+    "positionModel": {
+      "type": "object",
+      "required": ["dynamicBase", "roomBaselines"]
+    },
+    "playerModel": {
+      "type": "object",
+      "required": ["rankWeight", "adpWeight", "boardDecayLambda"]
+    },
+    "validation": { "type": "object" },
+    "managers": {
+      "type": "array",
+      "minItems": 9,
+      "maxItems": 9,
+      "items": {
+        "type": "object",
+        "required": ["espnTeamId", "draftSlot", "manager", "keeper", "sampleSize", "boardStyle", "alignment", "profileSummary", "historicalEvidence"]
+      }
+    },
+    "playerMarket": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["playerId", "espnDefaultRank", "espnAdp", "marketCoverage"],
+        "properties": {
+          "playerId": { "type": "integer", "minimum": 1 },
+          "espnDefaultRank": { "type": ["number", "null"] },
+          "espnAdp": { "type": ["number", "null"] }
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}
