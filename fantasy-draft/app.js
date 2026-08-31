@@ -7,11 +7,14 @@
   const TOTAL_PICKS = TEAM_COUNT * ROUNDS;
   const TONY_PICKS = [5, 16, 25, 36, 45, 56, 65, 76, 85, 96, 105, 116, 125, 136, 145, 156];
   const TARGETS = { QB: 2, RB: 5, WR: 7, TE: 2 };
-  const STORE_KEY = "draft-command-2026-v2";
-  const LEGACY_STORE_KEY = "draft-command-2026-v1";
-  const SNAPSHOT_KEY = "draft-command-2026-snapshots-v2";
-  const SCHEMA_VERSION = 2;
-  const AUDIT_SCHEMA_VERSION = "draft-command-audit-v1";
+  const STORE_KEY = "draft-command-2026-v3";
+  const LEGACY_STORE_KEYS = ["draft-command-2026-v2", "draft-command-2026-v1"];
+  const SNAPSHOT_KEY = "draft-command-2026-snapshots-v3";
+  const LEGACY_SNAPSHOT_KEYS = ["draft-command-2026-snapshots-v2"];
+  const SYNC_SETTINGS_KEY = "draft-command-live-sync-v1";
+  const SCHEMA_VERSION = 3;
+  const AUDIT_SCHEMA_VERSION = "draft-command-audit-v2";
+  const APP_RELEASE = "F5D-2026.08.31";
   const MAX_AUDIT_RECORDS = 2500;
   const MODEL_LEAGUE_PROFILE_ID = "espn-keeper-10-ppr-2flex-2026";
 
@@ -44,12 +47,21 @@
 
   const state = {
     events: [],
+    sourceObservations: [],
+    keeperMode: false,
+    keeperSeeds: [],
+    seedReconciliations: [],
+    sessionId: null,
+    generation: 1,
+    sourceIngestionPaused: false,
     platform: "espn",
     position: "ALL",
     search: "",
     visible: 20,
     rosterTeam: TONY_TEAM,
     editingOverall: null,
+    resolvingObservationOverall: null,
+    resolvingMissingOverall: null,
     auditLog: [],
   };
 
@@ -78,7 +90,8 @@
     "dialogCopy", "replacementSearch", "replacementList", "removePick", "rewindPick",
     "modelStatusBadge", "modelVersion", "modelFreshness", "modelCoverage", "modelStatusCopy",
     "modelSourceNote", "snapshotNote", "decisionLenses", "roomRankNote", "boardOrderNote",
-    "exportAuditLog", "nextPickHeader", "callHeader",
+    "exportAuditLog", "nextPickHeader", "callHeader", "keeperToggle", "keeperModeNote",
+    "draftAlerts",
   ].map((id) => [id, document.getElementById(id)]));
 
   const MODEL = window.DraftModel.createAdapter({
@@ -111,8 +124,9 @@
     source: "keeper",
     timestamp: null,
   }));
-  const KEEPER_OVERALLS = new Set(KEEPERS.map((keeper) => keeper.overall));
-  const KEEPER_PLAYER_IDS = new Set(KEEPERS.map((keeper) => keeper.playerId));
+  function createSessionId() {
+    try { return crypto.randomUUID(); } catch (_) { return `${Date.now()}-${Math.random().toString(16).slice(2)}`; }
+  }
 
   function playerById(id) {
     return PLAYER_BY_ID.get(Number(id));
@@ -120,25 +134,89 @@
 
   function canonicalizeEvents(events) {
     const usedOveralls = new Set();
-    const usedPlayers = new Set(KEEPER_PLAYER_IDS);
+    const usedPlayers = new Set();
     return (Array.isArray(events) ? events : []).map((event) => ({
       overall: Number(event.overall),
       team: Number(event.team),
       playerId: Number(event.playerId),
       source: event.source || "manual",
+      status: event.status || (String(event.source || "").includes("sync") ? "source-confirmed" : "modeled"),
       timestamp: event.timestamp || new Date().toISOString(),
       syncKey: event.syncKey || null,
       externalId: event.externalId == null ? null : String(event.externalId),
       externalName: event.externalName || null,
+      manager: event.manager || manager(Number(event.team))?.name || null,
+      rosterAssignment: Number(event.rosterAssignment || event.team),
+      status: event.status || (event.source === "keeper-seed" ? "keeper-seed" : event.source === "manual" ? "manual" : "source-confirmed"),
     })).filter((event) => {
       if (!Number.isInteger(event.overall) || event.overall < 1 || event.overall > TOTAL_PICKS) return false;
-      if (KEEPER_OVERALLS.has(event.overall) || KEEPER_PLAYER_IDS.has(event.playerId)) return false;
       if (!playerById(event.playerId) || pickOwner(event.overall) !== event.team) return false;
       if (usedOveralls.has(event.overall) || usedPlayers.has(event.playerId)) return false;
       usedOveralls.add(event.overall);
       usedPlayers.add(event.playerId);
       return true;
     }).sort((a, b) => a.overall - b.overall);
+  }
+
+  function canonicalizeKeeperSeeds(seeds, active = state.keeperMode) {
+    if (!active) return [];
+    const configured = new Map(KEEPERS.map((keeper) => [`${keeper.overall}:${keeper.playerId}`, keeper]));
+    const usedOveralls = new Set();
+    const usedPlayers = new Set();
+    return (Array.isArray(seeds) ? seeds : []).map((seed) => ({
+      overall: Number(seed.overall),
+      team: Number(seed.team),
+      playerId: Number(seed.playerId),
+      round: Number(seed.round),
+      source: "keeper-seed",
+      status: seed.status || "seeded",
+      timestamp: seed.timestamp || null,
+    })).filter((seed) => {
+      if (!configured.has(`${seed.overall}:${seed.playerId}`) || seed.team !== pickOwner(seed.overall)) return false;
+      if (usedOveralls.has(seed.overall) || usedPlayers.has(seed.playerId)) return false;
+      usedOveralls.add(seed.overall);
+      usedPlayers.add(seed.playerId);
+      return true;
+    }).sort((a, b) => a.overall - b.overall);
+  }
+
+  function canonicalizeObservations(observations) {
+    const byKey = new Map();
+    for (const raw of Array.isArray(observations) ? observations : []) {
+      const overall = Number(raw?.overall);
+      if (!Number.isInteger(overall) || overall < 1 || overall > TOTAL_PICKS) continue;
+      const source = raw.source === "sleeper-sync" ? "sleeper-sync" : raw.source === "manual" ? "manual" : "espn-sync";
+      const syncKey = String(raw.syncKey || source);
+      const observation = {
+        observationId: raw.observationId || `${state.sessionId || "session"}:${syncKey}:${overall}`,
+        overall,
+        round: Math.ceil(overall / TEAM_COUNT),
+        roundPick: ((overall - 1) % TEAM_COUNT) + 1,
+        team: pickOwner(overall),
+        manager: raw.manager || manager(pickOwner(overall))?.name || null,
+        sourceTeam: raw.sourceTeam || raw.espnTeam || null,
+        sourceManager: raw.sourceManager || raw.espnManager || null,
+        source,
+        syncKey,
+        sourceUrl: raw.sourceUrl || raw.espnUrl || null,
+        futureKeeperHint: raw.futureKeeperHint === true,
+        externalId: raw.externalId == null ? null : String(raw.externalId),
+        externalName: raw.externalName || raw.playerName || null,
+        rawPlayerName: raw.rawPlayerName || raw.externalName || raw.playerName || null,
+        playerId: playerById(raw.playerId) ? Number(raw.playerId) : null,
+        manualPlayerId: playerById(raw.manualPlayerId) ? Number(raw.manualPlayerId) : null,
+        status: raw.status || (raw.playerId ? "resolved" : "unresolved"),
+        reasonCode: raw.reasonCode || null,
+        reason: raw.reason || null,
+        resolutionStatus: raw.resolutionStatus || raw.status || (raw.playerId ? "resolved" : "unresolved"),
+        unresolvedReasonCode: raw.unresolvedReasonCode || raw.reasonCode || null,
+        firstObservedAt: raw.firstObservedAt || raw.timestamp || new Date().toISOString(),
+        lastObservedAt: raw.lastObservedAt || raw.timestamp || new Date().toISOString(),
+        generation: Number(raw.generation || state.generation || 1),
+      };
+      byKey.set(`${syncKey}:${overall}`, observation);
+    }
+    return [...byKey.values()].sort((a, b) => a.overall - b.overall);
   }
 
   function canonicalizeAuditLog(records) {
@@ -154,6 +232,14 @@
       platform: state.platform,
       rosterTeam: state.rosterTeam,
       events: state.events,
+      modeledEvents: state.events,
+      sourceObservations: state.sourceObservations,
+      keeperMode: state.keeperMode,
+      keeperSeeds: state.keeperSeeds,
+      seedReconciliations: state.seedReconciliations,
+      sessionId: state.sessionId,
+      generation: state.generation,
+      sourceIngestionPaused: state.sourceIngestionPaused,
       auditLog: state.auditLog,
     };
   }
@@ -178,8 +264,9 @@
     localStorage.setItem(STORE_KEY, JSON.stringify(payload));
     if (snapshot) {
       const snapshots = readSnapshots();
-      const fingerprint = JSON.stringify(payload.events);
-      const lastFingerprint = snapshots.length ? JSON.stringify(snapshots[snapshots.length - 1].events || []) : null;
+      const fingerprint = JSON.stringify([payload.events, payload.sourceObservations, payload.keeperSeeds]);
+      const last = snapshots.at(-1);
+      const lastFingerprint = last ? JSON.stringify([last.events || [], last.sourceObservations || [], last.keeperSeeds || []]) : null;
       if (fingerprint !== lastFingerprint) {
         snapshots.push(payload);
         localStorage.setItem(SNAPSHOT_KEY, JSON.stringify(snapshots.slice(-12)));
@@ -189,7 +276,18 @@
   }
 
   function applyPayload(payload) {
-    state.events = canonicalizeEvents(payload?.events || payload?.picks || []);
+    state.events = canonicalizeEvents(payload?.modeledEvents || payload?.events || payload?.picks || []);
+    state.sessionId = typeof payload?.sessionId === "string" && payload.sessionId ? payload.sessionId : createSessionId();
+    state.generation = Math.max(1, Number(payload?.generation) || 1);
+    state.sourceIngestionPaused = payload?.sourceIngestionPaused === true;
+    state.keeperMode = payload?.schemaVersion >= 3 && payload?.keeperMode === true;
+    state.keeperSeeds = canonicalizeKeeperSeeds(payload?.keeperSeeds || (state.keeperMode ? KEEPERS : []), state.keeperMode);
+    state.seedReconciliations = (Array.isArray(payload?.seedReconciliations) ? payload.seedReconciliations : []).filter((item) => item && item.action).map((item) => ({ ...item }));
+    state.sourceObservations = canonicalizeObservations(payload?.sourceObservations || state.events.map((event) => ({
+      ...event,
+      externalName: playerById(event.playerId)?.name,
+      status: "resolved",
+    })));
     state.auditLog = canonicalizeAuditLog(payload?.auditLog);
     state.platform = payload?.platform === "sleeper" ? "sleeper" : "espn";
     const rosterTeam = Number(payload?.rosterTeam);
@@ -199,12 +297,11 @@
 
   function migrateLegacyEvents(picks) {
     const events = [];
-    const usedPlayers = new Set(KEEPER_PLAYER_IDS);
+    const usedPlayers = new Set();
     let overall = 1;
     for (const oldPick of Array.isArray(picks) ? picks : []) {
       const playerId = Number(oldPick.playerId);
       if (!playerById(playerId) || usedPlayers.has(playerId)) continue;
-      while (overall <= TOTAL_PICKS && KEEPER_OVERALLS.has(overall)) overall += 1;
       if (overall > TOTAL_PICKS) break;
       events.push({ overall, team: pickOwner(overall), playerId, source: "legacy-migration", timestamp: new Date().toISOString() });
       usedPlayers.add(playerId);
@@ -220,8 +317,10 @@
     } catch (_) { /* try recovery history below */ }
     if (!saved) {
       try {
-        const legacy = JSON.parse(localStorage.getItem(LEGACY_STORE_KEY));
-        if (legacy) saved = legacy;
+        for (const key of LEGACY_STORE_KEYS) {
+          const legacy = JSON.parse(localStorage.getItem(key));
+          if (legacy) { saved = legacy; break; }
+        }
       } catch (_) { /* ignore malformed legacy state */ }
     }
     if (!saved) saved = readSnapshots().at(-1) || null;
@@ -232,11 +331,12 @@
         applyPayload(saved);
       }
     }
+    if (!state.sessionId) state.sessionId = createSessionId();
     saveState({ snapshot: false });
   }
 
   function allEvents() {
-    if (!renderCache.allEvents) renderCache.allEvents = [...KEEPERS, ...state.events].sort((a, b) => a.overall - b.overall);
+    if (!renderCache.allEvents) renderCache.allEvents = [...state.keeperSeeds, ...state.events].sort((a, b) => a.overall - b.overall);
     return renderCache.allEvents;
   }
 
@@ -248,7 +348,9 @@
   function currentPick() {
     if (renderCache.currentPick) return renderCache.currentPick;
     for (let overall = 1; overall <= TOTAL_PICKS; overall += 1) {
-      if (!eventAt(overall)) {
+      const observed = state.sourceObservations.some((observation) => observation.overall === overall);
+      const seeded = state.keeperSeeds.some((seed) => seed.overall === overall);
+      if (!observed && !seeded) {
         renderCache.currentPick = overall;
         return overall;
       }
@@ -258,11 +360,11 @@
   }
 
   function nextTonyPick(from = currentPick()) {
-    return TONY_PICKS.find((pick) => pick >= from && !KEEPER_OVERALLS.has(pick) && !eventAt(pick)) || null;
+    return TONY_PICKS.find((pick) => pick >= from && !eventAt(pick)) || null;
   }
 
   function followingTonyPick(from) {
-    return TONY_PICKS.find((pick) => pick > from && !KEEPER_OVERALLS.has(pick) && !eventAt(pick)) || null;
+    return TONY_PICKS.find((pick) => pick > from && !eventAt(pick)) || null;
   }
 
   function draftedIds() {
@@ -276,11 +378,67 @@
   }
 
   function sourceLabel(event) {
-    if (event.source === "keeper") return "KEEPER";
+    if (event.source === "keeper-seed" || event.source === "keeper") return "KEEPER SEED";
     if (event.source === "espn-sync") return "ESPN SYNC";
     if (event.source === "sleeper-sync") return "SLEEPER SYNC";
     if (event.source === "manual-correction") return "CORRECTED";
     return "MANUAL";
+  }
+
+  function isManualEvent(event) {
+    return Boolean(event && ["manual", "manual-recovery", "manual-resolution", "manual-correction"].includes(event.source));
+  }
+
+  function missingPickMessage(overall) {
+    const round = Math.ceil(overall / TEAM_COUNT);
+    const roundPick = ((overall - 1) % TEAM_COUNT) + 1;
+    return `Need pick for ${manager(pickOwner(overall)).name} — Round ${round}, Pick ${roundPick}`;
+  }
+
+  function snapshotDiagnostics(snapshot, result) {
+    const observed = state.sourceObservations.map((item) => item.overall);
+    const progressionObserved = state.sourceObservations.filter((item) => !item.futureKeeperHint).map((item) => item.overall);
+    const maxObserved = progressionObserved.length ? Math.max(...progressionObserved) : 0;
+    const maxSourceObserved = observed.length ? Math.max(...observed) : 0;
+    const observedSet = new Set(observed);
+    const gaps = [];
+    for (let overall = 1; overall <= maxObserved; overall += 1) {
+      if (!observedSet.has(overall) && !state.keeperSeeds.some((seed) => seed.overall === overall)) gaps.push(overall);
+    }
+    return {
+      appRelease: APP_RELEASE,
+      snapshotTimestamp: snapshot?.timestamp || new Date().toISOString(),
+      sourceUrl: snapshot?.sourceUrl || snapshot?.espnUrl || null,
+      sessionId: state.sessionId,
+      generation: state.generation,
+      syncKey: result.syncKey,
+      bridgeVersion: snapshot?.bridgeVersion || null,
+      rawSourcePickCount: snapshot?.picks?.length || 0,
+      sourceObservedOveralls: observed,
+      sourceObservedCount: observed.length,
+      modeledEventCount: state.events.length,
+      activeKeeperSeedCount: state.keeperSeeds.length,
+      maxObserved,
+      maxSourceObserved,
+      displayedNextPick: currentPick(),
+      resolvedCount: state.sourceObservations.filter((item) => item.status === "resolved").length,
+      unresolvedCount: state.sourceObservations.filter((item) => item.status !== "resolved").length,
+      unresolvedOveralls: state.sourceObservations.filter((item) => item.status !== "resolved").map((item) => item.overall),
+      unresolvedReasonCodes: [...new Set(state.sourceObservations.filter((item) => item.status !== "resolved").map((item) => item.reasonCode || "RESOLUTION_FAILED"))],
+      missingSourceSlots: gaps,
+      seedReconciliationEvents: result.reconciliation,
+      cursorIntegrityWarning: currentPick() <= maxObserved ? `Displayed cursor ${currentPick()} is behind source-observed pick ${maxObserved}.` : null,
+    };
+  }
+
+  function recordSystemAudit(action, details = {}) {
+    appendAuditRecord(action, null, state.events, { source: details.source || "system", details: { appRelease: APP_RELEASE, sessionId: state.sessionId, generation: state.generation, ...details } });
+    saveState({ snapshot: false });
+  }
+
+  function rejectSnapshot(result, action, details = {}) {
+    recordSystemAudit(action, { source: result.source, syncKey: result.syncKey, ...details });
+    return result;
   }
 
   function ingestSnapshot(snapshot) {
@@ -288,83 +446,198 @@
     const syncKey = String(snapshot?.syncKey || source);
     const teamCount = Number(snapshot?.teamCount || TEAM_COUNT);
     const rounds = Number(snapshot?.rounds || ROUNDS);
-    const result = { ok: true, added: 0, updated: 0, removed: 0, matched: 0, unresolved: [], conflicts: [], source, syncKey };
+    const result = { ok: true, added: 0, updated: 0, removed: 0, matched: 0, observed: 0, unresolved: [], conflicts: [], reconciliation: [], source, syncKey };
 
     if (teamCount !== TEAM_COUNT || rounds !== ROUNDS) {
-      return {
-        ...result,
-        ok: false,
-        code: "FORMAT_MISMATCH",
-        message: `This board is configured for ${TEAM_COUNT} teams and ${ROUNDS} rounds; the connected draft reports ${teamCount} teams and ${rounds} rounds.`,
-      };
+      return rejectSnapshot({ ...result, ok: false, code: "FORMAT_MISMATCH", message: `This board is configured for ${TEAM_COUNT} teams and ${ROUNDS} rounds; the connected draft reports ${teamCount} teams and ${rounds} rounds.` }, "source-rejected-format", { teamCount, rounds });
     }
-    if (!Array.isArray(snapshot?.picks)) {
-      return { ...result, ok: false, code: "INVALID_SNAPSHOT", message: "The connected source did not provide a valid pick list." };
+    if (!Array.isArray(snapshot?.picks)) return rejectSnapshot({ ...result, ok: false, code: "INVALID_SNAPSHOT", message: "The connected source did not provide a valid pick list." }, "source-rejected-invalid");
+    if (source === "espn-sync" && snapshot?.generation != null && Number(snapshot.generation) !== state.generation) {
+      return rejectSnapshot({ ...result, ok: false, code: "STALE_GENERATION", message: "A stale ESPN bridge snapshot was rejected after reset." }, "bridge-stale-rejected", { receivedGeneration: Number(snapshot.generation), bridgeVersion: snapshot?.bridgeVersion || null });
+    }
+    if (source === "espn-sync" && snapshot?.sessionId && snapshot.sessionId !== state.sessionId) {
+      return rejectSnapshot({ ...result, ok: false, code: "STALE_SESSION", message: "An ESPN snapshot from the prior draft session was rejected." }, "bridge-stale-rejected", { receivedSessionId: snapshot.sessionId, bridgeVersion: snapshot?.bridgeVersion || null });
+    }
+    if (state.sourceIngestionPaused) {
+      return rejectSnapshot({ ...result, ok: false, code: "SOURCE_PAUSED", message: "Source ingestion is paused after Hard Reset Draft. Reconnect explicitly to continue." }, "source-rejected-paused", { bridgeVersion: snapshot?.bridgeVersion || null });
     }
 
     const previousEvents = state.events.map((event) => ({ ...event }));
     const incomingOveralls = new Set();
-    const incomingPlayerIds = new Set();
     const working = state.events.map((event) => ({ ...event }));
+    const workingSeeds = state.keeperSeeds.map((seed) => ({ ...seed }));
+    const incomingPlayerIds = new Set();
     const byOverall = new Map(working.map((event) => [event.overall, event]));
-    const playerOverall = new Map(allEvents().map((event) => [event.playerId, event.overall]));
+    const playerOverall = new Map([...workingSeeds, ...working].map((event) => [event.playerId, event.overall]));
+    const observationByKey = new Map(state.sourceObservations.map((observation) => [`${observation.syncKey}:${observation.overall}`, { ...observation }]));
     const sortedPicks = snapshot.picks.slice().sort((a, b) => Number(a.overall) - Number(b.overall));
 
     for (const rawPick of sortedPicks) {
       const overall = Number(rawPick.overall);
       const externalName = rawPick.playerName || rawPick.name || [rawPick.firstName, rawPick.lastName].filter(Boolean).join(" ") || "Unknown player";
       if (!Number.isInteger(overall) || overall < 1 || overall > TOTAL_PICKS) {
-        result.unresolved.push({ overall: rawPick.overall, playerName: externalName, reason: "invalid pick number" });
+        result.unresolved.push({ overall: rawPick.overall, playerName: externalName, reason: "invalid pick number", code: "INVALID_PICK" });
         continue;
       }
       if (incomingOveralls.has(overall)) {
-        result.conflicts.push({ overall, playerName: externalName, reason: "duplicate pick number in source" });
+        result.conflicts.push({ overall, playerName: externalName, reason: "duplicate pick number in source", code: "DUPLICATE_SOURCE_PICK" });
         continue;
       }
       incomingOveralls.add(overall);
 
-      const player = resolveExternalPlayer(rawPick);
+      const key = `${syncKey}:${overall}`;
+      const prior = observationByKey.get(key);
+      const externalId = rawPick.externalId == null ? null : String(rawPick.externalId);
+      const sameIdentity = prior && prior.externalName === externalName && prior.externalId === externalId;
+      const manuallyMapped = sameIdentity ? playerById(prior.manualPlayerId) : null;
+      const player = manuallyMapped || resolveExternalPlayer(rawPick);
+      const observedAt = snapshot.timestamp || new Date().toISOString();
+      const observation = {
+        observationId: prior?.observationId || `${state.sessionId}:${syncKey}:${overall}`,
+        overall,
+        round: Math.ceil(overall / TEAM_COUNT),
+        roundPick: ((overall - 1) % TEAM_COUNT) + 1,
+        team: pickOwner(overall),
+        manager: manager(pickOwner(overall)).name,
+        sourceTeam: rawPick.teamName || rawPick.espnTeam || rawPick.team || null,
+        sourceManager: rawPick.managerName || rawPick.espnManager || rawPick.manager || null,
+        source,
+        syncKey,
+        sourceUrl: snapshot.sourceUrl || snapshot.espnUrl || null,
+        futureKeeperHint: rawPick.isKeeper === true || KEEPERS.some((keeper) => keeper.overall === overall && keeper.playerId === player?.id),
+        externalId,
+        externalName,
+        rawPlayerName: externalName,
+        playerId: player?.id || null,
+        manualPlayerId: manuallyMapped?.id || null,
+        status: player ? "resolved" : "unresolved",
+        reasonCode: player ? null : "PLAYER_NOT_ON_BOARD",
+        reason: player ? null : "player is not on the current board",
+        resolutionStatus: player ? "resolved" : "unresolved",
+        unresolvedReasonCode: player ? null : "PLAYER_NOT_ON_BOARD",
+        firstObservedAt: prior?.firstObservedAt || observedAt,
+        lastObservedAt: observedAt,
+        generation: state.generation,
+      };
+      observationByKey.set(key, observation);
+      if (!prior) result.observed += 1;
+      if (!prior || !sameIdentity) {
+        appendAuditRecord("source-observed", { overall, team: pickOwner(overall), playerId: player?.id || null, externalName, source, syncKey, timestamp: observedAt }, working.filter((event) => event.overall < overall), {
+          platform: source === "sleeper-sync" ? "sleeper" : "espn",
+          details: { observationId: observation.observationId, resolutionStatus: observation.status },
+        });
+      }
+
       if (!player) {
-        result.unresolved.push({ overall, playerName: externalName, reason: "player is not on the current 200-player board" });
+        const seedAtIndex = workingSeeds.findIndex((seed) => seed.overall === overall);
+        if (seedAtIndex >= 0) {
+          const [seedAt] = workingSeeds.splice(seedAtIndex, 1);
+          playerOverall.delete(seedAt.playerId);
+          result.reconciliation.push({ action: "seed-overridden-unresolved", overall, seededPlayerId: seedAt.playerId, externalName });
+        }
+        const existing = byOverall.get(overall);
+        if (existing?.syncKey === syncKey) {
+          working.splice(working.indexOf(existing), 1);
+          byOverall.delete(overall);
+          playerOverall.delete(existing.playerId);
+          result.removed += 1;
+        }
+        result.unresolved.push({ overall, playerName: externalName, reason: "player is not on the current board — map this observation manually", code: "PLAYER_NOT_ON_BOARD", message: missingPickMessage(overall) });
         continue;
       }
+
       if (incomingPlayerIds.has(player.id)) {
-        result.conflicts.push({ overall, playerName: externalName, reason: "player appears twice in source" });
+        observation.status = "conflict";
+        observation.resolutionStatus = "conflict";
+        observation.reasonCode = "DUPLICATE_SOURCE_PLAYER";
+        observation.unresolvedReasonCode = "DUPLICATE_SOURCE_PLAYER";
+        observation.reason = "player appears twice in the source snapshot";
+        result.conflicts.push({ overall, playerName: externalName, reason: observation.reason, code: observation.reasonCode, message: missingPickMessage(overall) });
         continue;
       }
       incomingPlayerIds.add(player.id);
 
-      if (KEEPER_OVERALLS.has(overall)) {
-        const keeper = KEEPERS.find((event) => event.overall === overall);
-        if (keeper?.playerId === player.id) result.matched += 1;
-        else result.conflicts.push({ overall, playerName: externalName, reason: "source conflicts with configured keeper slot" });
+      const seedAtIndex = workingSeeds.findIndex((seed) => seed.overall === overall);
+      const seedAt = workingSeeds[seedAtIndex];
+      if (seedAt?.playerId === player.id) {
+        workingSeeds.splice(seedAtIndex, 1);
+        playerOverall.delete(player.id);
+        const existing = byOverall.get(overall);
+        if (existing && existing.playerId !== player.id) {
+          working.splice(working.indexOf(existing), 1);
+          playerOverall.delete(existing.playerId);
+          byOverall.delete(overall);
+        }
+        const confirmedEvent = existing?.playerId === player.id ? existing : {
+          overall,
+          team: pickOwner(overall),
+          playerId: player.id,
+          source,
+          syncKey,
+          externalId,
+          externalName,
+          timestamp: observedAt,
+        };
+        confirmedEvent.source = source;
+        confirmedEvent.status = "source-confirmed";
+        confirmedEvent.syncKey = syncKey;
+        confirmedEvent.externalId = externalId;
+        confirmedEvent.externalName = externalName;
+        confirmedEvent.timestamp = observedAt;
+        if (!working.includes(confirmedEvent)) working.push(confirmedEvent);
+        byOverall.set(overall, confirmedEvent);
+        playerOverall.set(player.id, overall);
+        result.matched += 1;
+        result.reconciliation.push({ action: "seed-confirmed", overall, playerId: player.id });
         continue;
       }
-      if (KEEPER_PLAYER_IDS.has(player.id)) {
-        result.conflicts.push({ overall, playerName: externalName, reason: "player is already reserved as a keeper" });
-        continue;
+      if (seedAt) {
+        workingSeeds.splice(seedAtIndex, 1);
+        playerOverall.delete(seedAt.playerId);
+        result.reconciliation.push({ action: "seed-overridden", overall, seededPlayerId: seedAt.playerId, sourcePlayerId: player.id });
+      }
+      const seedForPlayerIndex = workingSeeds.findIndex((seed) => seed.playerId === player.id);
+      if (seedForPlayerIndex >= 0) {
+        const moved = workingSeeds[seedForPlayerIndex];
+        workingSeeds.splice(seedForPlayerIndex, 1);
+        playerOverall.delete(player.id);
+        result.reconciliation.push({ action: "seed-moved", fromOverall: moved.overall, toOverall: overall, playerId: player.id });
       }
 
       const existing = byOverall.get(overall);
       if (existing) {
         if (existing.playerId === player.id) {
+          if (existing.source !== source || existing.syncKey !== syncKey) {
+            const priorSource = existing.source;
+            existing.source = source;
+            existing.status = "source-confirmed";
+            existing.syncKey = syncKey;
+            existing.externalId = externalId;
+            existing.externalName = externalName;
+            existing.timestamp = observedAt;
+            result.updated += 1;
+            result.reconciliation.push({ action: "manual-recovery-source-confirmed", overall, playerId: player.id, priorSource });
+          }
           result.matched += 1;
-          continue;
-        }
-        if (existing.syncKey !== syncKey) {
-          result.conflicts.push({ overall, playerName: externalName, reason: `pick already contains ${playerById(existing.playerId)?.name || "another player"}` });
           continue;
         }
         const usedAt = playerOverall.get(player.id);
         if (usedAt && usedAt !== overall) {
-          result.conflicts.push({ overall, playerName: externalName, reason: `player is already recorded at ${pickLabel(usedAt)}` });
-          continue;
+          const duplicate = byOverall.get(usedAt);
+          if (duplicate) {
+            working.splice(working.indexOf(duplicate), 1);
+            byOverall.delete(usedAt);
+            result.reconciliation.push({ action: "source-player-moved", fromOverall: usedAt, toOverall: overall, playerId: player.id });
+          }
         }
         playerOverall.delete(existing.playerId);
         existing.playerId = player.id;
-        existing.externalId = rawPick.externalId == null ? null : String(rawPick.externalId);
+        existing.source = source;
+        existing.status = "source-confirmed";
+        existing.syncKey = syncKey;
+        existing.externalId = externalId;
         existing.externalName = externalName;
-        existing.timestamp = snapshot.timestamp || new Date().toISOString();
+        existing.timestamp = observedAt;
         playerOverall.set(player.id, overall);
         result.updated += 1;
         continue;
@@ -372,21 +645,16 @@
 
       const usedAt = playerOverall.get(player.id);
       if (usedAt) {
-        result.conflicts.push({ overall, playerName: externalName, reason: `player is already recorded at ${pickLabel(usedAt)}` });
-        continue;
+        const duplicate = byOverall.get(usedAt);
+        if (duplicate) {
+          working.splice(working.indexOf(duplicate), 1);
+          byOverall.delete(usedAt);
+          result.reconciliation.push({ action: "source-player-moved", fromOverall: usedAt, toOverall: overall, playerId: player.id });
+        }
       }
-      const event = {
-        overall,
-        team: pickOwner(overall),
-        playerId: player.id,
-        source,
-        syncKey,
-        externalId: rawPick.externalId == null ? null : String(rawPick.externalId),
-        externalName,
-        timestamp: snapshot.timestamp || new Date().toISOString(),
-      };
-      working.push(event);
-      byOverall.set(overall, event);
+      const draftEvent = { overall, team: pickOwner(overall), playerId: player.id, source, status: "source-confirmed", syncKey, externalId, externalName, timestamp: observedAt };
+      working.push(draftEvent);
+      byOverall.set(overall, draftEvent);
       playerOverall.set(player.id, overall);
       result.added += 1;
     }
@@ -400,35 +668,38 @@
           result.removed += 1;
         }
       }
+      for (const [key, observation] of observationByKey) {
+        if (observation.syncKey === syncKey && observation.overall <= completeThrough && !incomingOveralls.has(observation.overall)) observationByKey.delete(key);
+      }
     }
 
-    if (result.added || result.updated || result.removed) {
-      const finalEvents = canonicalizeEvents(working);
-      const previousByOverall = new Map(previousEvents.map((event) => [event.overall, event]));
-      const finalByOverall = new Map(finalEvents.map((event) => [event.overall, event]));
-      const changes = [];
-      for (const event of finalEvents) {
-        const previous = previousByOverall.get(event.overall);
-        if (!previous) changes.push({ action: "pick-recorded", event, previous: null });
-        else if (previous.playerId !== event.playerId) changes.push({ action: "pick-updated", event, previous });
-      }
-      for (const event of previousEvents) {
-        if (!finalByOverall.has(event.overall)) changes.push({ action: "pick-removed", event, previous: event });
-      }
-      state.events = finalEvents;
-      for (const change of changes.sort((a, b) => a.event.overall - b.event.overall)) {
-        const sourceEvents = change.action === "pick-removed" ? previousEvents : finalEvents;
-        appendAuditRecord(change.action, change.event, sourceEvents.filter((item) => item.overall < change.event.overall), {
-          platform: snapshot?.source === "sleeper" ? "sleeper" : "espn",
-          details: change.previous ? { previousPlayerId: change.previous.playerId, syncKey } : { syncKey },
-        });
-      }
-      state.visible = 20;
-      renderCache = {};
-      saveState();
-      render();
-      showToast(`${result.added + result.updated} synced pick${result.added + result.updated === 1 ? "" : "s"} applied`);
+    const finalEvents = canonicalizeEvents(working);
+    const previousByOverall = new Map(previousEvents.map((event) => [event.overall, event]));
+    const finalByOverall = new Map(finalEvents.map((event) => [event.overall, event]));
+    state.events = finalEvents;
+    state.keeperSeeds = canonicalizeKeeperSeeds(workingSeeds, state.keeperMode);
+    state.sourceObservations = canonicalizeObservations([...observationByKey.values()]);
+    const reconciledAt = snapshot.timestamp || new Date().toISOString();
+    state.seedReconciliations = [...state.seedReconciliations, ...result.reconciliation.map((item) => ({ ...item, syncKey, timestamp: reconciledAt }))].slice(-100);
+    renderCache = {};
+    for (const event of finalEvents) {
+      const previous = previousByOverall.get(event.overall);
+      if (!previous || previous.playerId !== event.playerId || previous.source !== event.source || previous.syncKey !== event.syncKey) appendAuditRecord(previous ? "pick-updated" : "pick-recorded", event, finalEvents.filter((item) => item.overall < event.overall), {
+        platform: source === "sleeper-sync" ? "sleeper" : "espn",
+        details: previous ? { previousPlayerId: previous.playerId, previousSource: previous.source, syncKey } : { syncKey },
+      });
     }
+    for (const event of previousEvents) {
+      if (!finalByOverall.has(event.overall)) appendAuditRecord("pick-removed", event, previousEvents.filter((item) => item.overall < event.overall), { details: { syncKey, reason: "source-reconciliation" } });
+    }
+    for (const reconciliation of result.reconciliation) {
+      appendAuditRecord(`keeper-${reconciliation.action}`, null, state.events, { source, details: { syncKey, ...reconciliation } });
+    }
+    appendAuditRecord("source-snapshot", null, state.events, { source, platform: source === "sleeper-sync" ? "sleeper" : "espn", details: snapshotDiagnostics(snapshot, result) });
+    state.visible = 20;
+    saveState();
+    render();
+    if (result.observed || result.added || result.updated) showToast(`${result.observed} new source observation${result.observed === 1 ? "" : "s"}`);
     return result;
   }
 
@@ -666,7 +937,7 @@
   }
 
   function rosterAuditSnapshot(eventsBefore) {
-    const events = [...KEEPERS, ...canonicalizeEvents(eventsBefore)].sort((a, b) => a.overall - b.overall);
+    const events = [...state.keeperSeeds, ...canonicalizeEvents(eventsBefore)].sort((a, b) => a.overall - b.overall);
     return {
       phase: "immediately-before-event",
       teams: MANAGERS.slice(1).map((item) => ({
@@ -772,7 +1043,7 @@
       model: modelAuditSnapshot(),
       marketSnapshot: marketAuditSnapshot(details.platform || state.platform),
       rosterState: rosterAuditSnapshot(eventsBefore),
-      recommendationBeforeTonyPick: event?.team === TONY_TEAM && ["pick-recorded", "pick-updated", "restored-event"].includes(action)
+      recommendationBeforeTonyPick: event?.team === TONY_TEAM && ["source-observed", "pick-recorded", "pick-updated", "restored-event"].includes(action)
         ? recommendationAuditSnapshot(eventsBefore, details.platform || state.platform, event.overall)
         : null,
       details: details.details || null,
@@ -799,11 +1070,20 @@
       league: "Tony 2026 ESPN keeper league",
       platform: state.platform,
       currentPick: currentPick(),
+      appRelease: APP_RELEASE,
+      sessionId: state.sessionId,
+      generation: state.generation,
       model: modelAuditSnapshot(),
       marketSnapshot: marketAuditSnapshot(),
       managers: MANAGERS.slice(1),
-      keepers: KEEPERS,
+      keeperMode: state.keeperMode,
+      configuredKeepers: KEEPERS,
+      activeKeeperSeeds: state.keeperSeeds.map((seed) => ({ ...seed })),
+      seedReconciliations: state.seedReconciliations.map((item) => ({ ...item })),
+      sourceObservations: state.sourceObservations.map((observation) => ({ ...observation })),
       draftEvents: state.events.map((event) => ({ ...event })),
+      modeledEvents: state.events.map((event) => ({ ...event })),
+      sourceIngestionPaused: state.sourceIngestionPaused,
       auditTrail: state.auditLog.map((record) => structuredClone(record)),
     };
   }
@@ -812,7 +1092,7 @@
     const pick = currentPick();
     if (pick > TOTAL_PICKS) {
       els.roundPick.textContent = "DONE";
-      els.overallPick.textContent = "160 selections resolved";
+      els.overallPick.textContent = "160 source selections observed";
       els.clockOwner.textContent = "Draft complete";
       els.clockOwner.style.color = "var(--green)";
       els.draftProgress.style.width = "100%";
@@ -885,7 +1165,7 @@
   function renderPickMap() {
     const next = nextTonyPick();
     els.pickMap.innerHTML = TONY_PICKS.map((pick) => {
-      const isKeeper = KEEPER_OVERALLS.has(pick);
+      const isKeeper = state.keeperSeeds.some((seed) => seed.overall === pick);
       const classes = [pick < currentPick() || eventAt(pick) ? "done" : "", pick === next ? "next" : "", isKeeper ? "keeper" : ""].filter(Boolean).join(" ");
       return `<span class="pick-token ${classes}" title="${isKeeper ? "Jaxson Dart keeper cost" : `Tony pick ${pickLabel(pick)}`}">${isKeeper ? "K16" : pick}</span>`;
     }).join("");
@@ -944,18 +1224,54 @@
 
   function renderHistory() {
     const recent = state.events.slice().sort((a, b) => b.overall - a.overall).slice(0, 10);
-    els.undoPick.disabled = !state.events.length;
+    const latest = state.events.slice().sort((a, b) => b.overall - a.overall)[0];
+    els.undoPick.disabled = !isManualEvent(latest);
+    els.undoPick.title = isManualEvent(latest) ? "Undo the latest manual event" : "ESPN source events are authoritative; use Hard Reset Draft for a new session.";
     els.historyList.innerHTML = recent.length ? recent.map((event) => {
       const player = playerById(event.playerId);
-      return `<div class="history-row"><div class="history-main"><span>${player?.name || "Unknown"}</span><small>${pickLabel(event.overall)} · ${manager(event.team).name} · ${sourceLabel(event)}</small></div><div class="history-actions"><span class="pos-pill pos-${player?.pos || "QB"}">${player?.pos || "?"}</span><button class="history-edit" data-edit-pick="${event.overall}" type="button">Edit</button></div></div>`;
-    }).join("") : `<div class="empty-state">All 10 keepers are loaded. Enter the first live selection from the board.</div>`;
+      return `<div class="history-row"><div class="history-main"><span>${player?.name || "Unknown"}</span><small>${pickLabel(event.overall)} · ${manager(event.team).name} · ${sourceLabel(event)}</small></div><div class="history-actions"><span class="pos-pill pos-${player?.pos || "QB"}">${player?.pos || "?"}</span>${isManualEvent(event) ? `<button class="history-edit" data-edit-pick="${event.overall}" type="button">Edit manual</button>` : ""}</div></div>`;
+    }).join("") : `<div class="empty-state">No modeled picks yet. Enter manually or connect ESPN; keeper seeds are ${state.keeperMode ? "loaded" : "off"}.</div>`;
   }
 
   function renderKeepers() {
+    els.keeperToggle.textContent = state.keeperMode ? `Remove ESPN keepers · ${KEEPERS.length} loaded` : "Load ESPN keepers";
+    els.keeperToggle.classList.toggle("active", state.keeperMode);
+    els.keeperModeNote.textContent = state.keeperMode
+      ? "Seeds are active. ESPN observations remain authoritative and can confirm, move, or override them."
+      : "Off by default. Use only when the live ESPN room has keeper slots configured the same way.";
     els.keeperList.innerHTML = KEEPERS.map((keeper) => {
       const player = playerById(keeper.playerId);
-      return `<div class="keeper-row"><div><strong>${manager(keeper.team).name}</strong><small>${player?.name || "Unknown"}</small></div><span class="keeper-round">R${keeper.round}</span></div>`;
+      const seed = state.keeperSeeds.find((item) => item.overall === keeper.overall);
+      const confirmed = state.events.some((event) => event.overall === keeper.overall && event.playerId === keeper.playerId && event.status === "source-confirmed");
+      const reconciliation = state.seedReconciliations.slice().reverse().find((item) => item.playerId === keeper.playerId || item.seededPlayerId === keeper.playerId || item.overall === keeper.overall || item.fromOverall === keeper.overall);
+      const label = !state.keeperMode ? "OFF" : seed ? `R${keeper.round}` : confirmed ? "CONFIRMED" : reconciliation?.action.includes("moved") ? "MOVED" : reconciliation?.action.includes("override") ? "OVERRIDDEN" : "RESOLVED";
+      return `<div class="keeper-row ${state.keeperMode && (seed || confirmed) ? "active" : "inactive"}"><div><strong>${manager(keeper.team).name}</strong><small>${player?.name || "Unknown"} · ${pickLabel(keeper.overall)}</small></div><span class="keeper-round">${label}</span></div>`;
     }).join("");
+  }
+
+  function draftIssues() {
+    const issues = [];
+    const observed = new Set(state.sourceObservations.map((observation) => observation.overall));
+    const progression = state.sourceObservations.filter((observation) => !observation.futureKeeperHint).map((observation) => observation.overall);
+    const maxObserved = progression.length ? Math.max(...progression) : 0;
+    for (let overall = 1; overall <= maxObserved; overall += 1) {
+      if (!observed.has(overall) && !state.keeperSeeds.some((seed) => seed.overall === overall)) {
+        issues.push({ overall, code: "SOURCE_PICK_MISSING", detail: "ESPN never reported this slot; later selections were observed.", resolvable: "missing", integrity: true });
+      }
+    }
+    for (const observation of state.sourceObservations.filter((item) => item.status !== "resolved")) {
+      const seedAction = state.seedReconciliations.slice().reverse().find((item) => item.overall === observation.overall || item.toOverall === observation.overall);
+      const seedDetail = seedAction ? ` Keeper seed was ${seedAction.action.replaceAll("-", " ")}.` : "";
+      issues.push({ overall: observation.overall, code: observation.reasonCode || "RESOLUTION_FAILED", detail: `${observation.rawPlayerName || observation.externalName || "Unknown player"} was reported by ESPN but the internal player board lacks a match.${seedDetail}`, resolvable: true });
+    }
+    return issues.sort((a, b) => a.overall - b.overall);
+  }
+
+  function renderDraftAlerts() {
+    const issues = draftIssues();
+    els.draftAlerts.hidden = !issues.length;
+    const integrity = issues.some((issue) => issue.integrity);
+    els.draftAlerts.innerHTML = issues.length ? `<div><strong>${integrity ? "Integrity warning · " : ""}${issues.length} source pick${issues.length === 1 ? "" : "s"} need attention</strong><span>The source clock continues from observations; unresolved players are not added to a roster until mapped.</span></div>${issues.slice(0, 8).map((issue) => `<div class="draft-alert-row"><span><strong>${missingPickMessage(issue.overall)}</strong><small>${issue.code.replaceAll("_", " ")} · ${issue.detail}</small></span>${issue.resolvable ? `<button type="button" ${issue.resolvable === "missing" ? `data-resolve-missing="${issue.overall}"` : `data-resolve-observation="${issue.overall}"`}>${issue.resolvable === "missing" ? "Assign manually" : "Map player"}</button>` : ""}</div>`).join("")}` : "";
   }
 
   function renderCliffs() {
@@ -1008,6 +1324,8 @@
     renderBoard();
     renderRoster();
     renderHistory();
+    renderKeepers();
+    renderDraftAlerts();
     renderCliffs();
     renderModelHealth();
     document.querySelectorAll(".platform-btn").forEach((button) => button.classList.toggle("active", button.dataset.platform === state.platform));
@@ -1019,7 +1337,15 @@
     const player = playerById(id);
     if (!player || draftedIds().has(player.id)) return;
     const team = pickOwner(overall);
-    const event = { overall, team, playerId: player.id, source: "manual", timestamp: new Date().toISOString() };
+    const timestamp = new Date().toISOString();
+    const event = { overall, team, playerId: player.id, source: "manual", status: "manual", syncKey: "manual", timestamp };
+    state.sourceObservations.push({
+      observationId: `${state.sessionId}:manual:${overall}`,
+      overall, team, playerId: player.id, manualPlayerId: player.id, externalName: player.name,
+      externalId: null, source: "manual", syncKey: "manual", status: "resolved", reasonCode: null,
+      firstObservedAt: timestamp, lastObservedAt: timestamp, generation: state.generation,
+    });
+    state.sourceObservations = canonicalizeObservations(state.sourceObservations);
     appendAuditRecord("pick-recorded", event, state.events);
     state.events.push(event);
     state.events.sort((a, b) => a.overall - b.overall);
@@ -1035,12 +1361,48 @@
 
   function openEditDialog(overall) {
     const event = editEvent(overall);
-    if (!event) return;
+    if (!isManualEvent(event)) return;
     const player = playerById(event.playerId);
     state.editingOverall = event.overall;
+    state.resolvingObservationOverall = null;
+    state.resolvingMissingOverall = null;
+    els.removePick.hidden = false;
+    els.rewindPick.hidden = true;
     els.dialogTitle.textContent = `${pickLabel(event.overall)} · ${manager(event.team).name}`;
-    els.dialogCopy.textContent = `Current selection: ${player.name}. Choose an available replacement, remove only this event, or rewind the live draft from this point.`;
+    els.dialogCopy.textContent = `Current manual selection: ${player.name}. Choose an available replacement or remove only this manual event.`;
     els.replacementSearch.value = "";
+    renderReplacementList();
+    els.pickDialog.showModal();
+    requestAnimationFrame(() => els.replacementSearch.focus());
+  }
+
+  function openObservationDialog(overall) {
+    const observation = state.sourceObservations.find((item) => item.overall === Number(overall) && item.status !== "resolved");
+    if (!observation) return;
+    state.editingOverall = null;
+    state.resolvingObservationOverall = observation.overall;
+    state.resolvingMissingOverall = null;
+    els.dialogTitle.textContent = `${pickLabel(observation.overall)} · ${manager(observation.team).name}`;
+    els.dialogCopy.textContent = `${observation.externalName || "Unknown source player"} was observed by ${sourceLabel(observation)} but was not found on the board. Choose the correct player to map this source observation.`;
+    els.replacementSearch.value = "";
+    els.removePick.hidden = true;
+    els.rewindPick.hidden = true;
+    renderReplacementList();
+    els.pickDialog.showModal();
+    requestAnimationFrame(() => els.replacementSearch.focus());
+  }
+
+  function openMissingDialog(overall) {
+    const pick = Number(overall);
+    if (!Number.isInteger(pick) || pick < 1 || pick > TOTAL_PICKS || state.sourceObservations.some((item) => item.overall === pick)) return;
+    state.editingOverall = null;
+    state.resolvingObservationOverall = null;
+    state.resolvingMissingOverall = pick;
+    els.dialogTitle.textContent = `${pickLabel(pick)} · ${manager(pickOwner(pick)).name}`;
+    els.dialogCopy.textContent = "ESPN never reported this slot. Choose the player selected here to create a clearly labeled manual recovery event at the original missing pick.";
+    els.replacementSearch.value = "";
+    els.removePick.hidden = true;
+    els.rewindPick.hidden = true;
     renderReplacementList();
     els.pickDialog.showModal();
     requestAnimationFrame(() => els.replacementSearch.focus());
@@ -1059,6 +1421,14 @@
   }
 
   function replacePick(playerId) {
+    if (state.resolvingMissingOverall != null) {
+      resolveMissingPick(state.resolvingMissingOverall, playerId);
+      return;
+    }
+    if (state.resolvingObservationOverall != null) {
+      resolveObservation(state.resolvingObservationOverall, playerId);
+      return;
+    }
     const event = editEvent(state.editingOverall);
     const player = playerById(playerId);
     if (!event || !player) return;
@@ -1082,6 +1452,98 @@
     showToast(`${pickLabel(event.overall)} corrected: ${oldPlayer.name} → ${player.name}`);
   }
 
+  function resolveObservation(overall, playerId) {
+    const observation = state.sourceObservations.find((item) => item.overall === Number(overall) && item.status !== "resolved");
+    const player = playerById(playerId);
+    if (!observation || !player || draftedIds().has(player.id)) return false;
+    const seedAt = state.keeperSeeds.find((seed) => seed.overall === observation.overall);
+    const seedForPlayer = state.keeperSeeds.find((seed) => seed.playerId === player.id);
+    state.keeperSeeds = state.keeperSeeds.filter((seed) => seed !== seedAt && seed !== seedForPlayer);
+    state.events = state.events.filter((event) => event.overall !== observation.overall && event.playerId !== player.id);
+    const event = {
+      overall: observation.overall,
+      team: pickOwner(observation.overall),
+      playerId: player.id,
+      source: "manual-resolution",
+      status: "manual-resolution",
+      syncKey: observation.syncKey,
+      externalId: observation.externalId,
+      externalName: observation.externalName,
+      timestamp: new Date().toISOString(),
+    };
+    observation.playerId = player.id;
+    observation.manualPlayerId = player.id;
+    observation.status = "resolved";
+    observation.resolutionStatus = "manually-resolved";
+    observation.reasonCode = null;
+    observation.unresolvedReasonCode = null;
+    observation.reason = null;
+    observation.lastObservedAt = event.timestamp;
+    state.events.push(event);
+    state.events = canonicalizeEvents(state.events);
+    appendAuditRecord("pick-recorded", event, state.events.filter((item) => item.overall < event.overall), {
+      details: { reason: "manual-observation-resolution", observationId: observation.observationId },
+    });
+    state.editingOverall = null;
+    state.resolvingObservationOverall = null;
+    els.removePick.hidden = false;
+    els.rewindPick.hidden = false;
+    els.pickDialog.close();
+    renderCache = {};
+    saveState();
+    render();
+    showToast(`${observation.externalName || "Source player"} mapped to ${player.name}`);
+    return true;
+  }
+
+  function resolveMissingPick(overall, playerId) {
+    const pick = Number(overall);
+    const player = playerById(playerId);
+    if (!Number.isInteger(pick) || !player || draftedIds().has(player.id) || state.sourceObservations.some((item) => item.overall === pick)) return false;
+    const timestamp = new Date().toISOString();
+    const team = pickOwner(pick);
+    const observation = {
+      observationId: `${state.sessionId}:manual-missing:${pick}`,
+      overall: pick,
+      round: Math.ceil(pick / TEAM_COUNT),
+      roundPick: ((pick - 1) % TEAM_COUNT) + 1,
+      team,
+      manager: manager(team).name,
+      source: "manual",
+      syncKey: "manual-missing-recovery",
+      sourceUrl: null,
+      externalId: null,
+      externalName: player.name,
+      rawPlayerName: player.name,
+      playerId: player.id,
+      manualPlayerId: player.id,
+      status: "resolved",
+      resolutionStatus: "resolved",
+      reasonCode: "SOURCE_PICK_MANUALLY_RECOVERED",
+      unresolvedReasonCode: null,
+      firstObservedAt: timestamp,
+      lastObservedAt: timestamp,
+      generation: state.generation,
+    };
+    const event = { overall: pick, team, playerId: player.id, source: "manual-recovery", status: "manual-recovery", syncKey: observation.syncKey, timestamp };
+    state.sourceObservations.push(observation);
+    state.sourceObservations = canonicalizeObservations(state.sourceObservations);
+    state.events.push(event);
+    state.events = canonicalizeEvents(state.events);
+    appendAuditRecord("pick-recorded", event, state.events.filter((item) => item.overall < pick), {
+      details: { reason: "missing-source-slot-manual-recovery", observationId: observation.observationId },
+    });
+    state.resolvingMissingOverall = null;
+    els.removePick.hidden = false;
+    els.rewindPick.hidden = false;
+    els.pickDialog.close();
+    renderCache = {};
+    saveState();
+    render();
+    showToast(`${missingPickMessage(pick)} manually resolved with ${player.name}`);
+    return true;
+  }
+
   function removeEditingPick() {
     const event = editEvent(state.editingOverall);
     if (!event || !window.confirm(`Remove ${playerById(event.playerId).name} from ${pickLabel(event.overall)}? Later picks will stay in place until this slot is corrected.`)) return;
@@ -1098,7 +1560,7 @@
     const event = editEvent(state.editingOverall);
     if (!event) return;
     const affected = state.events.filter((item) => item.overall >= event.overall).length;
-    if (!window.confirm(`Rewind to ${pickLabel(event.overall)}? This clears ${affected} live selection${affected === 1 ? "" : "s"} from that pick forward. Keepers remain loaded.`)) return;
+    if (!window.confirm(`Rewind modeled events to ${pickLabel(event.overall)}? This clears ${affected} roster event${affected === 1 ? "" : "s"}; source observations remain authoritative and may restore them.`)) return;
     const beforeEvents = state.events.map((item) => ({ ...item }));
     for (const removed of beforeEvents.filter((item) => item.overall >= event.overall)) {
       appendAuditRecord("pick-removed", removed, beforeEvents, { details: { reason: "rewind", rewindTo: event.overall } });
@@ -1143,7 +1605,7 @@
       if (Number(payload.schemaVersion) !== SCHEMA_VERSION || !Array.isArray(payload.events)) throw new Error("Unsupported backup format");
       const imported = canonicalizeEvents(payload.events);
       if (imported.length !== payload.events.length) throw new Error("Backup contains invalid or conflicting picks");
-      if (!window.confirm(`Replace the current live draft with this backup containing ${imported.length} entered picks? The 10 configured keepers remain fixed.`)) return;
+      if (!window.confirm(`Replace the current live draft with this backup containing ${imported.length} modeled events? Keeper-seed mode will match the backup.`)) return;
       applyPayload(payload);
       saveState();
       render();
@@ -1156,8 +1618,8 @@
   }
 
   function recoverPriorSnapshot() {
-    const currentFingerprint = JSON.stringify(state.events);
-    const prior = readSnapshots().slice().reverse().find((snapshot) => JSON.stringify(snapshot.events || []) !== currentFingerprint);
+    const currentFingerprint = JSON.stringify([state.events, state.sourceObservations, state.keeperSeeds]);
+    const prior = readSnapshots().slice().reverse().find((snapshot) => JSON.stringify([snapshot.events || [], snapshot.sourceObservations || [], snapshot.keeperSeeds || []]) !== currentFingerprint);
     if (!prior) {
       showToast("No earlier recovery snapshot is available");
       return;
@@ -1168,6 +1630,63 @@
     saveState();
     render();
     showToast("Prior recovery snapshot restored");
+  }
+
+  function setKeeperMode(enabled, { force = false } = {}) {
+    const desired = Boolean(enabled);
+    if (desired === state.keeperMode) return true;
+    if (state.sourceObservations.length && !force) {
+      const message = `Changing keeper mode will perform Hard Reset Draft and clear the active draft before ${desired ? "loading" : "removing"} keeper seeds. Continue?`;
+      if (!window.confirm(message)) return false;
+      hardReset({ confirmed: true });
+    }
+    state.keeperMode = desired;
+    state.keeperSeeds = desired ? canonicalizeKeeperSeeds(KEEPERS.map((keeper) => ({ ...keeper, source: "keeper-seed", status: "seeded" })), true) : [];
+    appendAuditRecord(desired ? "keeper-seeds-loaded" : "keeper-seeds-removed", null, state.events, {
+      details: { configured: KEEPERS.length, active: state.keeperSeeds.length },
+    });
+    renderCache = {};
+    saveState();
+    render();
+    showToast(desired ? `${state.keeperSeeds.length} ESPN keeper seeds loaded` : "ESPN keeper seeds removed");
+    return true;
+  }
+
+  function hardReset({ confirmed = false } = {}) {
+    if (!confirmed) {
+      const message = "This clears the active draft, ESPN synchronization history, manual picks, active keeper seeds and audit events. League settings, managers, rankings, model data and the stored keeper template remain. Continue?";
+      if (!window.confirm(message)) return false;
+    }
+    state.sourceIngestionPaused = true;
+    const nextGeneration = state.generation + 1;
+    const nextSessionId = createSessionId();
+    state.events = [];
+    state.sourceObservations = [];
+    state.keeperMode = false;
+    state.keeperSeeds = [];
+    state.seedReconciliations = [];
+    state.auditLog = [];
+    state.editingOverall = null;
+    state.resolvingObservationOverall = null;
+    state.resolvingMissingOverall = null;
+    state.visible = 20;
+    state.sessionId = nextSessionId;
+    state.generation = nextGeneration;
+    for (const key of [STORE_KEY, ...LEGACY_STORE_KEYS, SNAPSHOT_KEY, ...LEGACY_SNAPSHOT_KEYS, SYNC_SETTINGS_KEY]) localStorage.removeItem(key);
+    renderCache = {};
+    saveState({ snapshot: false });
+    render();
+    window.dispatchEvent(new CustomEvent("draft-command-hard-reset", {
+      detail: { resetAt: new Date().toISOString(), sessionId: nextSessionId, generation: nextGeneration, appRelease: APP_RELEASE },
+    }));
+    showToast("Draft hard reset complete · ESPN paused · keeper seeds off");
+    return true;
+  }
+
+  function resumeSourceIngestion(details = {}) {
+    state.sourceIngestionPaused = false;
+    recordSystemAudit("bridge-reconnected", { source: details.source || "espn-bridge", bridgeVersion: details.bridgeVersion || null });
+    return true;
   }
 
   let toastTimer;
@@ -1198,6 +1717,10 @@
     if (edit) openEditDialog(edit.dataset.editPick);
     const replacement = event.target.closest("[data-replace-id]");
     if (replacement) replacePick(replacement.dataset.replaceId);
+    const unresolved = event.target.closest("[data-resolve-observation]");
+    if (unresolved) openObservationDialog(unresolved.dataset.resolveObservation);
+    const missing = event.target.closest("[data-resolve-missing]");
+    if (missing) openMissingDialog(missing.dataset.resolveMissing);
   });
 
   els.playerSearch.addEventListener("input", (event) => {
@@ -1214,26 +1737,18 @@
   });
   els.undoPick.addEventListener("click", () => {
     const removed = state.events.slice().sort((a, b) => b.overall - a.overall)[0];
-    if (!removed) return;
+    if (!isManualEvent(removed)) return;
     appendAuditRecord("pick-removed", removed, state.events, { details: { reason: "undo" } });
     state.events = state.events.filter((event) => event.overall !== removed.overall);
+    if (removed.source === "manual") state.sourceObservations = state.sourceObservations.filter((observation) => !(observation.source === "manual" && observation.overall === removed.overall));
     saveState();
     render();
     showToast(`Undid pick ${pickLabel(removed.overall)}`);
   });
   els.resetDraft.addEventListener("click", () => {
-    if (!state.events.length || window.confirm("Reset every live selection? The manager list and 10 keepers will remain loaded, and the prior state will stay available as a recovery snapshot.")) {
-      const beforeEvents = state.events.map((event) => ({ ...event }));
-      for (const removed of beforeEvents) appendAuditRecord("pick-removed", removed, beforeEvents, { details: { reason: "draft-reset" } });
-      state.events = [];
-      saveState();
-      render();
-      window.dispatchEvent(new CustomEvent("draft-command-reset-live-picks", {
-        detail: { resetAt: new Date().toISOString() },
-      }));
-      showToast("Live picks and sync cache reset; keepers preserved");
-    }
+    hardReset();
   });
+  els.keeperToggle.addEventListener("click", () => setKeeperMode(!state.keeperMode));
   els.exportDraft.addEventListener("click", exportDraft);
   els.exportAuditLog.addEventListener("click", exportAuditLog);
   els.importDraft.addEventListener("click", () => els.importDraftFile.click());
@@ -1246,7 +1761,26 @@
     ingestSnapshot,
     resolvePlayer: (rawPick) => resolveExternalPlayer(rawPick),
     profile: Object.freeze({ teamCount: TEAM_COUNT, rounds: ROUNDS, platform: "espn", league: "Tony 2026 ESPN keeper league" }),
-    state: () => ({ events: state.events.map((event) => ({ ...event })), auditLog: state.auditLog.map((record) => structuredClone(record)), currentPick: currentPick() }),
+    state: () => ({
+      events: state.events.map((event) => ({ ...event })),
+      modeledEvents: state.events.map((event) => ({ ...event })),
+      sourceObservations: state.sourceObservations.map((observation) => ({ ...observation })),
+      keeperMode: state.keeperMode,
+      keeperSeeds: state.keeperSeeds.map((seed) => ({ ...seed })),
+      seedReconciliations: state.seedReconciliations.map((item) => ({ ...item })),
+      auditLog: state.auditLog.map((record) => structuredClone(record)),
+      currentPick: currentPick(), sessionId: state.sessionId, generation: state.generation, sourceIngestionPaused: state.sourceIngestionPaused,
+    }),
+    syncIdentity: () => ({ sessionId: state.sessionId, generation: state.generation, appRelease: APP_RELEASE }),
+    setKeeperMode,
+    resolveObservation,
+    resolveMissingPick,
+    hardReset,
+    resumeSourceIngestion,
+    recordSyncDiagnostic: (action, details = {}) => recordSystemAudit(action, { source: "espn-bridge", ...details }),
+    issues: () => structuredClone(draftIssues()),
+    configuredKeepers: () => KEEPERS.map((keeper) => ({ ...keeper })),
+    recordManualPick: draftPlayer,
     auditExport: () => structuredClone(auditExportPayload()),
     modelHealth: () => MODEL.health(),
     recommendations: () => recommendations(),

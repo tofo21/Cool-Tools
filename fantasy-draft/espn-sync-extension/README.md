@@ -19,15 +19,18 @@ It does not collect passwords, cookies, browsing history, or data from unrelated
 
 ## Reset between drafts
 
-**Reset live picks** in Draft Command now performs one coordinated reset:
+**Hard Reset Draft** in Draft Command performs one coordinated reset:
 
-1. clears the app's live selections while preserving configured keepers;
-2. clears the extension's cached ESPN snapshot;
-3. pauses the bridge so an open or completed mock cannot repopulate the board;
-4. returns Draft Command to Manual mode.
+1. clears modeled events, source observations, optional keeper seeds, logs and recovery snapshots;
+2. creates a new session ID and bridge generation;
+3. clears both extension and ESPN-page caches;
+4. pauses the bridge so an old or completed mock cannot repopulate the board;
+5. returns Draft Command to Manual mode.
 
 Close the prior ESPN room. When the intended room is open, select **ESPN** or choose **Check connection** to resume the bridge from a fresh snapshot.
 
-The ESPN panel also includes **Clear bridge cache** when only the extension snapshot needs to be discarded.
+After a reset, open the intended ESPN room and choose **Check / resume ESPN**. Reusing the same ESPN URL is supported because the new generation forces a fresh in-page scan.
+
+Bridge version: **0.3.0**.
 
 Manual draft entry remains available if ESPN changes its draft-room internals.

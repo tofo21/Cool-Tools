@@ -9,6 +9,8 @@
   let lastEmit = 0;
   let lastDetection = "waiting";
   let paused = true;
+  let sessionId = null;
+  let generation = 0;
 
   const numberFrom = (...values) => {
     for (const value of values) {
@@ -45,10 +47,17 @@
     if (!overall || !playerName || overall > 500) return null;
 
     const externalId = player.id || player.playerId || player.player_id || player.athleteId || value.playerId || value.athleteId || null;
+    const teamObject = value.team || value.draftTeam || value.roster || value.owner || {};
+    const sourceTeam = typeof teamObject === "string" ? teamObject : teamObject.name || teamObject.teamName || teamObject.location || value.teamName || null;
+    const sourceManager = value.managerName || value.ownerName || teamObject.ownerName || teamObject.managerName || teamObject.owner?.displayName || null;
+    const isKeeper = Boolean(value.isKeeper || value.keeper || value.keeperPick || value.selectionType === "KEEPER" || value.pickType === "KEEPER");
     return {
       overall,
       playerName,
       externalId,
+      teamName: sourceTeam,
+      managerName: sourceManager,
+      isKeeper,
       position: player.position?.abbrev || player.position?.name || player.positionAbbrev || player.position || value.position || null,
       nflTeam: player.proTeam?.abbrev || player.team?.abbrev || player.proTeamAbbrev || player.teamAbbrev || value.proTeamAbbrev || null,
     };
@@ -108,6 +117,8 @@
       timestamp: new Date().toISOString(),
       detectedBy: lastDetection,
       espnUrl: location.href,
+      sessionId,
+      generation,
     } }));
   }
 
@@ -172,6 +183,8 @@
 
   window.addEventListener(CONTROL_EVENT, (event) => {
     paused = Boolean(event.detail?.paused);
+    sessionId = event.detail?.sessionId || null;
+    generation = Number(event.detail?.generation || 0);
     picks.clear();
     meta.teamCount = null;
     meta.rounds = null;

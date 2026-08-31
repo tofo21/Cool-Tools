@@ -4,6 +4,7 @@ const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
 const vm = require("node:vm");
+const { execFileSync } = require("node:child_process");
 
 const root = path.resolve(__dirname, "..");
 const read = (file) => fs.readFileSync(path.join(root, file), "utf8");
@@ -84,7 +85,8 @@ function eventEnvironment(initial = {}) {
 }
 
 const appRelay = eventEnvironment({
-  draftCommandEspnSnapshot: { picks: [{ overall: 1 }], detectedBy: "fixture" },
+  draftCommandEspnSnapshot: { picks: [{ overall: 1 }], detectedBy: "fixture", sessionId: "session-1", generation: 1 },
+  draftCommandEspnControl: { paused: false, sessionId: "session-1", generation: 1 },
 });
 vm.runInNewContext(read("espn-sync-extension/app-relay.js"), {
   window: appRelay.window,
@@ -96,15 +98,23 @@ vm.runInNewContext(read("espn-sync-extension/app-relay.js"), {
 });
 assert.equal(appRelay.posted.at(-1).type, "ESPN_PICKS");
 
-appRelay.sendMessage({ source: "draft-command-app", type: "ESPN_BRIDGE_CLEAR" });
+appRelay.sendMessage({ source: "draft-command-app", type: "ESPN_BRIDGE_HARD_RESET", sessionId: "session-2", generation: 2 });
 assert.equal(appRelay.data.draftCommandEspnSnapshot, undefined);
 assert.equal(appRelay.data.draftCommandEspnControl.paused, true);
+assert.equal(appRelay.data.draftCommandEspnControl.sessionId, "session-2");
+assert.equal(appRelay.data.draftCommandEspnControl.generation, 2);
 assert.ok(appRelay.posted.some((message) => message.type === "ESPN_BRIDGE_CLEARED"));
 
-appRelay.sendMessage({ source: "draft-command-app", type: "ESPN_BRIDGE_RESUME" });
+appRelay.sendMessage({ source: "draft-command-app", type: "ESPN_BRIDGE_RESUME", sessionId: "session-2", generation: 2 });
 assert.equal(appRelay.data.draftCommandEspnSnapshot, undefined);
 assert.equal(appRelay.data.draftCommandEspnControl.paused, false);
 assert.ok(appRelay.posted.some((message) => message.type === "ESPN_BRIDGE_RESUMED"));
+
+appRelay.chrome.storage.local.set({
+  draftCommandEspnSnapshot: { picks: [{ overall: 99 }], sessionId: "session-1", generation: 1 },
+});
+appRelay.sendMessage({ source: "draft-command-app", type: "ESPN_BRIDGE_PING" });
+assert.equal(appRelay.posted.at(-1).type, "ESPN_BRIDGE_STATUS", "stale generation must not be published as picks");
 
 class CustomEvent {
   constructor(type, options = {}) {
@@ -128,26 +138,28 @@ espnRelay.window.dispatchEvent(new CustomEvent("draft-command-espn-state", {
 assert.equal(espnRelay.data.draftCommandEspnSnapshot, undefined, "paused bridge must reject stale snapshots");
 
 espnRelay.chrome.storage.local.set({
-  draftCommandEspnControl: { paused: false, resetToken: "reset-2" },
+  draftCommandEspnControl: { paused: false, resetToken: "reset-2", sessionId: "session-2", generation: 2 },
 });
 espnRelay.window.dispatchEvent(new CustomEvent("draft-command-espn-state", {
   detail: { picks: [{ overall: 1 }] },
 }));
 assert.equal(espnRelay.data.draftCommandEspnSnapshot.picks.length, 1, "resumed bridge should accept fresh snapshots");
+assert.equal(espnRelay.data.draftCommandEspnSnapshot.sessionId, "session-2");
+assert.equal(espnRelay.data.draftCommandEspnSnapshot.generation, 2);
 
 const appSource = read("app.js");
 const syncSource = read("sync.js");
 const index = read("index.html");
 const manifest = JSON.parse(read("espn-sync-extension/manifest.json"));
-const zip = fs.readFileSync(path.join(root, "espn-sync-extension.zip"));
+const zippedManifest = JSON.parse(execFileSync("unzip", ["-p", path.join(root, "espn-sync-extension.zip"), "espn-sync-extension/manifest.json"], { encoding: "utf8" }));
 
-assert.match(appSource, /draft-command-reset-live-picks/);
-assert.match(syncSource, /ESPN_BRIDGE_CLEAR/);
+assert.match(appSource, /draft-command-hard-reset/);
+assert.match(syncSource, /ESPN_BRIDGE_HARD_RESET/);
 assert.match(syncSource, /ESPN_BRIDGE_RESUME/);
 assert.match(syncSource, /window\.DraftCommandSync/);
-assert.match(index, /id="espnClearBridge"/);
-assert.equal(manifest.version, "0.2.0");
-assert.ok(zip.includes(Buffer.from('"version": "0.2.0"')), "downloadable ZIP should contain bridge v0.2.0");
+assert.match(index, /id="resetDraft"/);
+assert.equal(manifest.version, "0.3.0");
+assert.equal(zippedManifest.version, "0.3.0", "downloadable ZIP should contain bridge v0.3.0");
 assert.match(read("espn-sync-extension/espn-main.js"), /if \(paused\) return;/);
 
 console.log("ESPN sync reset tests passed");

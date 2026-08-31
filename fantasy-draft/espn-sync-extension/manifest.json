@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Draft Command ESPN Sync",
-  "version": "0.2.0",
-  "description": "Locally relays ESPN fantasy draft picks to Tony's Draft Command board with coordinated cache reset.",
+  "version": "0.3.0",
+  "description": "Locally relays ESPN draft observations with session-safe reset and stale-snapshot rejection.",
   "permissions": [
     "storage"
   ],

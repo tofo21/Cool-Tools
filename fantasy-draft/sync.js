@@ -4,7 +4,7 @@
   const STORE_KEY = "draft-command-live-sync-v1";
   const POLL_MS = 3000;
   const els = Object.fromEntries([
-    "syncState", "syncIssues", "syncFoot", "espnSyncMessage", "espnCheckBridge", "espnClearBridge",
+    "syncState", "syncIssues", "syncFoot", "espnSyncMessage", "espnCheckBridge",
     "sleeperDraftId", "sleeperConnect", "sleeperSyncNow", "sleeperSyncMessage",
   ].map((id) => [id, document.getElementById(id)]));
 
@@ -72,10 +72,12 @@
   }
 
   function postBridgeCommand(type) {
-    window.postMessage({ source: "draft-command-app", type, timestamp: Date.now() }, window.location.origin);
+    const identity = window.DraftCommandLive.syncIdentity();
+    window.postMessage({ source: "draft-command-app", type, timestamp: Date.now(), ...identity }, window.location.origin);
   }
 
   function resumeEspnBridge() {
+    window.DraftCommandLive.resumeSourceIngestion({ source: "espn-bridge", bridgeVersion: state.espnDetails?.bridgeVersion || null });
     state.espnPaused = false;
     state.espnResetPending = false;
     state.espnLastSeen = 0;
@@ -84,16 +86,24 @@
     setTimeout(requestEspnStatus, 200);
   }
 
-  function clearEspnBridge() {
+  function clearEspnBridge(resetDetail = {}) {
     stopSleeperPolling();
     state.source = "manual";
+    if (resetDetail?.sessionId) {
+      state.sleeperDraftId = "";
+      state.sleeperStatus = null;
+      state.sleeperFailures = 0;
+      els.sleeperDraftId.value = "";
+    }
     state.espnPaused = true;
     state.espnResetPending = true;
     state.espnLastSeen = 0;
     state.espnDetails = null;
     saveState();
     renderSource();
-    postBridgeCommand("ESPN_BRIDGE_CLEAR");
+    window.DraftCommandLive.recordSyncDiagnostic("bridge-clear-requested", { bridgeVersion: state.espnDetails?.bridgeVersion || null, resetAt: resetDetail?.resetAt || null });
+    const identity = window.DraftCommandLive.syncIdentity();
+    window.postMessage({ source: "draft-command-app", type: "ESPN_BRIDGE_HARD_RESET", timestamp: Date.now(), ...identity, ...resetDetail }, window.location.origin);
   }
 
   function selectSource(source) {
@@ -109,7 +119,7 @@
   function renderEspnStatus() {
     if (state.espnPaused) {
       setStatus("waiting", "ESPN paused");
-      els.espnSyncMessage.textContent = "Bridge cache cleared. Open the intended ESPN draft room, then click Check connection to resume.";
+      els.espnSyncMessage.textContent = "Bridge paused for this new draft session. Open the intended ESPN room, then click Check / resume ESPN.";
       els.syncFoot.textContent = "No cached ESPN picks can enter the board while paused.";
       return;
     }
@@ -118,7 +128,7 @@
       setStatus("live", "ESPN live");
       const pickCount = Number(state.espnDetails?.pickCount || 0);
       els.espnSyncMessage.textContent = `Bridge connected${pickCount ? ` · ${pickCount} ESPN picks detected` : " · waiting for the draft room"}.`;
-      els.syncFoot.textContent = `ESPN bridge checked ${timeLabel(state.espnLastSeen)}.`;
+      els.syncFoot.textContent = `ESPN bridge ${state.espnDetails?.bridgeVersion || "version unknown"} checked ${timeLabel(state.espnLastSeen)}.`;
     } else {
       setStatus("waiting", "ESPN waiting");
       els.espnSyncMessage.textContent = "Bridge not detected yet. Install it, then keep the ESPN draft room and Draft Command open in the same browser.";
@@ -139,11 +149,23 @@
   function handleEspnMessage(message) {
     if (message?.source !== "draft-command-espn-bridge") return;
 
+    const identity = window.DraftCommandLive.syncIdentity();
+    if (message.details?.generation != null && Number(message.details.generation) !== identity.generation) {
+      window.DraftCommandLive.recordSyncDiagnostic("bridge-stale-rejected", { receivedGeneration: Number(message.details.generation), bridgeVersion: message.details?.bridgeVersion || null });
+      return;
+    }
+    if (message.details?.sessionId && message.details.sessionId !== identity.sessionId) {
+      window.DraftCommandLive.recordSyncDiagnostic("bridge-stale-rejected", { receivedSessionId: message.details.sessionId, bridgeVersion: message.details?.bridgeVersion || null });
+      return;
+    }
+    if (message.details?.staleRejected) window.DraftCommandLive.recordSyncDiagnostic("bridge-stale-rejected", { bridgeVersion: message.details?.bridgeVersion || null, reason: "extension-storage-generation-mismatch" });
+
     if (message.type === "ESPN_BRIDGE_CLEARED") {
       state.espnPaused = true;
       state.espnResetPending = false;
       state.espnLastSeen = 0;
       state.espnDetails = message.details || null;
+      window.DraftCommandLive.recordSyncDiagnostic("bridge-cleared-paused", { bridgeVersion: message.details?.bridgeVersion || null });
       renderSource();
       return;
     }
@@ -153,6 +175,7 @@
       state.espnResetPending = false;
       state.espnLastSeen = Date.now();
       state.espnDetails = message.details || null;
+      window.DraftCommandLive.recordSyncDiagnostic("bridge-resumed", { bridgeVersion: message.details?.bridgeVersion || null });
       if (state.source === "espn") renderEspnStatus();
       return;
     }
@@ -166,6 +189,9 @@
         source: "espn",
         syncKey: message.snapshot.syncKey || "espn:draft-room",
         authoritative: Boolean(message.snapshot.authoritative),
+        sessionId: message.details?.sessionId,
+        generation: message.details?.generation,
+        bridgeVersion: message.details?.bridgeVersion,
       });
       showIssues(result);
       if (!result.ok) {
@@ -276,6 +302,7 @@
       return;
     }
     stopSleeperPolling();
+    window.DraftCommandLive.resumeSourceIngestion({ source: "sleeper" });
     state.sleeperDraftId = draftId;
     state.sleeperStatus = null;
     state.sleeperFailures = 0;
@@ -289,7 +316,6 @@
     if (sourceButton) selectSource(sourceButton.dataset.syncSource);
   });
   els.espnCheckBridge.addEventListener("click", requestEspnStatus);
-  els.espnClearBridge.addEventListener("click", clearEspnBridge);
   els.sleeperConnect.addEventListener("click", connectSleeper);
   els.sleeperSyncNow.addEventListener("click", () => {
     if (!state.sleeperDraftId) connectSleeper();
@@ -299,7 +325,7 @@
   window.addEventListener("message", (event) => {
     if (event.source === window && event.origin === window.location.origin) handleEspnMessage(event.data);
   });
-  window.addEventListener("draft-command-reset-live-picks", clearEspnBridge);
+  window.addEventListener("draft-command-hard-reset", (event) => clearEspnBridge(event.detail || {}));
   document.addEventListener("visibilitychange", () => {
     if (!document.hidden && state.source === "sleeper" && state.sleeperDraftId) syncSleeper(false);
   });

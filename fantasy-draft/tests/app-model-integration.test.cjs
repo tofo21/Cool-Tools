@@ -48,6 +48,7 @@ function boot(modelPackageOverride) {
     localStorage: {
       getItem(key) { return store.has(key) ? store.get(key) : null; },
       setItem(key, value) { store.set(key, String(value)); },
+      removeItem(key) { store.delete(key); },
     },
     location: { origin: "https://example.test", pathname: "/fantasy-draft/", search: "" },
     navigator: {},
@@ -59,6 +60,8 @@ function boot(modelPackageOverride) {
     clearInterval() {},
     requestAnimationFrame(callback) { callback(); },
     confirm() { return false; },
+    prompt() { return null; },
+    CustomEvent: class CustomEvent { constructor(type, options = {}) { this.type = type; this.detail = options.detail; } },
     addEventListener() {},
     postMessage() {},
     structuredClone,
@@ -125,10 +128,11 @@ const syncThroughTony = fallback.context.DraftCommandLive.ingestSnapshot({
 assert.equal(syncThroughTony.ok, true);
 assert.equal(fallback.context.DraftCommandLive.state().currentPick, 6);
 const audit = fallback.context.DraftCommandLive.auditExport();
-assert.equal(audit.schemaVersion, "draft-command-audit-v1");
+assert.equal(audit.schemaVersion, "draft-command-audit-v2");
 assert.equal(audit.draftEvents.length, 5);
-assert.equal(audit.auditTrail.length, 5);
-const tonyAudit = audit.auditTrail.find((record) => record.event?.overall === 5);
+assert.ok(audit.auditTrail.length >= 5);
+assert.equal(audit.sourceObservations.length, 5);
+const tonyAudit = audit.auditTrail.find((record) => record.event?.overall === 5 && record.recommendationBeforeTonyPick);
 assert.ok(tonyAudit.recommendationBeforeTonyPick);
 assert.equal(tonyAudit.recommendationBeforeTonyPick.advisoryState.label, "ADVISORY");
 assert.equal(tonyAudit.recommendationBeforeTonyPick.advisoryState.calibrated, false);
