@@ -28,7 +28,7 @@ It does not collect passwords, cookies, browsing history, or data from unrelated
 4. pauses the bridge so an old or completed mock cannot repopulate the board;
 5. returns Draft Command to Manual mode.
 
-Close the prior ESPN room. When the intended room is open, select **ESPN** or choose **Check connection** to resume the bridge from a fresh snapshot.
+Close the prior ESPN room. When the intended room is open, select **ESPN** or choose **Check / resume ESPN** to resume the bridge from a fresh snapshot.
 
 After a reset, open the intended ESPN room and choose **Check / resume ESPN**. Reusing the same ESPN URL is supported because the new generation forces a fresh in-page scan.
 
