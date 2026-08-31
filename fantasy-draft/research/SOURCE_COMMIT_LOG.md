@@ -178,3 +178,72 @@ Canonical Step 9 entrypoint: `fantasy-draft/research/build_high_stakes_market_v0
 Canonical Step 9 panel: `master_player_season_panel_2020_2025_v0_5.csv`.
 
 **Step 9 status: COMPLETE when the v0.5 reproducible build and QA pass.**
+
+---
+
+## v0.6 | Sportsbook / Vegas market / Step 10 | 2026-08-30
+
+### Core interpretation
+
+1. **Sportsbook information is a hypothesis, not revealed truth.** Raw player season-total lines are not automatically unbiased expected means.
+2. **Keep team environment, player props and published calibration evidence separate.** Do not create one generic `vegas_score` at ingestion.
+3. **Separate availability from conditional performance.** Season-long overs have asymmetric failure paths through injury, benching, role loss and related availability shocks.
+4. **Selection bias is source metadata.** Regional excerpts, editorial picks and projection-screened disagreements cannot be treated as representative full boards.
+
+### Team win-total layer
+
+1. Pro-Football-Reference preserves a complete 32-team preseason-odds table for every season from 2020 through 2025.
+2. The archive attributes historical odds to SportsOddsHistory.com and exposes a preseason W/L over-under line plus Super Bowl odds.
+3. Store `team_win_total` and the futures price separately.
+4. Preserve an exact snapshot date only where the archive exposes one; otherwise use `final_preseason_archive` as the bounded source window.
+5. Do not populate `team_offense_market_score` from a generic team win total. It is a broad team-strength/environment measure, not an offense-only forecast.
+
+### Player-prop public archive audit
+
+No comprehensive, consistently sampled, timestamped public NFL season-futures player-prop archive was verified across 2020-2025.
+
+Accepted long-form observations are intentionally marked non-production:
+
+- 2021 PFF NFC North public excerpt: `regional_public_excerpt_nfc_north`
+- 2024 Footballguys selected WR props: `editorial_selected_props`
+- 2025 PFF passing/rushing/receiving comparison tables: `projection_screened_extremes`
+
+All carry `primary_model_eligible = false`.
+
+### Calibration evidence
+
+The 4for4 retrospective study of 604 closing 2021-2022 season-long props is retained at category level. It reported 369 unders and 235 overs overall. These category counts inform later bias correction and study design but do not create player-level features.
+
+### Formal Model-C rule
+
+1. Do not populate the primary `vegas_*` fields from selected or excerpted observations.
+2. A future player-prop source must provide broad, consistently sampled preseason coverage with player, market, line, book/consensus definition and timestamp or bounded window.
+3. Compare Model B and Model C on identical rows.
+4. Preserve odds and remove vig only downstream.
+5. Build category-aware Vegas-versus-consensus residuals rather than using raw lines as universal expectations.
+6. Require a verified sample/schema before recommending a paid vendor; weekly game-prop coverage is not evidence of historical season-futures coverage.
+
+### Implemented v0.6 fields
+
+Team market:
+
+- `team_win_total`
+- `team_win_total_super_bowl_odds`
+- snapshot/source/window/provider/book provenance fields
+
+Player observation metadata:
+
+- `sportsbook_player_prop_observation_count`
+- `sportsbook_player_prop_source_count`
+- `sportsbook_player_prop_sampling_frames`
+- `sportsbook_player_prop_primary_model_eligible`
+
+Long-form outputs preserve the raw selected lines and identity-match audit without promoting them into the primary feature columns.
+
+### Build
+
+Canonical Step 10 entrypoint: `fantasy-draft/research/build_sportsbook_market_v06.py` via `.github/workflows/build-fantasy-research-panel.yml`.
+
+Canonical Step 10 panel: `master_player_season_panel_2020_2025_v0_6.csv`.
+
+**Step 10 status: COMPLETE when all 192 team-season rows, player-observation match QA, source-discipline assertions and the reproducible v0.6 build pass.**
