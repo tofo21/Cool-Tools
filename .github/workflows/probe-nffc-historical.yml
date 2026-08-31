@@ -1,0 +1,42 @@
+name: Probe NFFC Historical ADP
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'fantasy-draft/research/probe_nffc_historical.py'
+      - '.github/workflows/probe-nffc-historical.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Probe historical NFFC windows
+        run: python fantasy-draft/research/probe_nffc_historical.py
+      - name: Persist probe results
+        run: |
+          mkdir -p fantasy-draft/research/probe-output
+          cp fantasy-draft/research/output/nffc_historical_probe.csv fantasy-draft/research/probe-output/nffc_historical_probe.csv
+          cp fantasy-draft/research/output/nffc_historical_probe.json fantasy-draft/research/probe-output/nffc_historical_probe.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add fantasy-draft/research/probe-output/nffc_historical_probe.*
+          git diff --cached --quiet || git commit -m "Record NFFC historical ADP probe"
+          git push
+      - name: Upload probe artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: nffc-historical-probe
+          path: |
+            fantasy-draft/research/output/nffc_historical_probe.*
+            fantasy-draft/research/output/nffc_adp_*_raw.html
+          if-no-files-found: error
+          retention-days: 30
