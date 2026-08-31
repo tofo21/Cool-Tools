@@ -2,11 +2,13 @@
   "use strict";
 
   const EVENT_NAME = "draft-command-espn-state";
+  const CONTROL_EVENT = "draft-command-espn-control";
   const picks = new Map();
   const meta = { teamCount: null, rounds: null };
   let lastFingerprint = "";
   let lastEmit = 0;
   let lastDetection = "waiting";
+  let paused = true;
 
   const numberFrom = (...values) => {
     for (const value of values) {
@@ -89,6 +91,7 @@
   }
 
   function emit(force = false) {
+    if (paused) return;
     const ordered = [...picks.values()].sort((a, b) => a.overall - b.overall);
     const fingerprint = JSON.stringify(ordered.map((pick) => [pick.overall, pick.playerName]));
     if (!force && fingerprint === lastFingerprint && Date.now() - lastEmit < 4000) return;
@@ -109,6 +112,7 @@
   }
 
   function inspectPayload(payload, detectedBy) {
+    if (paused) return;
     try {
       const result = scanObject(payload, detectedBy);
       if (result.found) lastDetection = detectedBy;
@@ -152,6 +156,7 @@
   }
 
   function scanReact() {
+    if (paused) return;
     const roots = [document.getElementById("root"), document.querySelector("[id*='draft']"), document.body].filter(Boolean);
     const elements = document.querySelectorAll("*");
     for (let index = 0; index < Math.min(elements.length, 1600); index += 1) {
@@ -164,6 +169,17 @@
     if (found) lastDetection = "react";
     emit(found > 0);
   }
+
+  window.addEventListener(CONTROL_EVENT, (event) => {
+    paused = Boolean(event.detail?.paused);
+    picks.clear();
+    meta.teamCount = null;
+    meta.rounds = null;
+    lastFingerprint = "";
+    lastEmit = 0;
+    lastDetection = paused ? "paused" : "waiting";
+    if (!paused) setTimeout(scanReact, 0);
+  });
 
   setInterval(scanReact, 2000);
   setInterval(() => emit(true), 5000);

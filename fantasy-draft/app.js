@@ -1228,7 +1228,10 @@
       state.events = [];
       saveState();
       render();
-      showToast("Live picks reset; keepers preserved");
+      window.dispatchEvent(new CustomEvent("draft-command-reset-live-picks", {
+        detail: { resetAt: new Date().toISOString() },
+      }));
+      showToast("Live picks and sync cache reset; keepers preserved");
     }
   });
   els.exportDraft.addEventListener("click", exportDraft);
