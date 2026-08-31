@@ -1,0 +1,28 @@
+{
+  "schema_version": "espn-market-candidate-index-v1",
+  "selected_snapshot_id": "espn_2026_candidate_20260831T214508Z_6e169d4c54c0",
+  "selected_manifest": "fantasy-draft/data/production/espn_2026_market_manifest_espn_2026_candidate_20260831T214508Z_6e169d4c54c0.json",
+  "selection_reason": "Current live capture using schema v1.1; corrected ESPN ADP cap treatment; manifest hashes, row counts, position counts, identity coverage and keeper coverage validate.",
+  "captures": [
+    {
+      "snapshot_id": "espn_2026_candidate_20260831T213651Z_6e169d4c54c0",
+      "promotion_status": "superseded_diagnostic",
+      "reason": "Initial QA treated capped continuous ADP as numerically top-250. Raw source is preserved; this manifest is not approved downstream."
+    },
+    {
+      "snapshot_id": "espn_2026_candidate_20260831T213926Z_6e169d4c54c0",
+      "promotion_status": "superseded_diagnostic",
+      "reason": "Diagnostic QA derived an ordinal top-160 from capped ADP and correctly blocked promotion. No ordinal ADP is used in the selected package."
+    },
+    {
+      "snapshot_id": "espn_2026_candidate_20260831T214153Z_6e169d4c54c0",
+      "promotion_status": "superseded_valid",
+      "reason": "Passed corrected market and identity QA; superseded by schema v1.1 manifest count and scoring-state validation."
+    },
+    {
+      "snapshot_id": "espn_2026_candidate_20260831T214508Z_6e169d4c54c0",
+      "promotion_status": "selected_candidate",
+      "reason": "Definitive candidate for downstream integration preparation and final-freeze refresh."
+    }
+  ]
+}

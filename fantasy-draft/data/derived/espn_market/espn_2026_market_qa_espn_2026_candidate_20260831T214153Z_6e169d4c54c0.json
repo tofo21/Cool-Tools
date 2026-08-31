@@ -1,0 +1,60 @@
+{
+  "adp_cap_analysis": {
+    "detected": true,
+    "effect": "continuous ESPN ADP cannot identify an ordinal top-250 universe",
+    "observed_maximum": 171.85,
+    "percentage_between_169_and_171": 0.646,
+    "rows_between_169_and_171": 323
+  },
+  "adp_coverage": {
+    "count": 199,
+    "denominator": 199,
+    "percentage": 1.0
+  },
+  "blocking_conflicts": [],
+  "draft_command_player_count": 200,
+  "dual_coverage": {
+    "count": 199,
+    "denominator": 199,
+    "percentage": 1.0
+  },
+  "duplicate_espn_player_ids": [],
+  "duplicate_internal_player_ids": [],
+  "identity_match_coverage": {
+    "count": 199,
+    "denominator": 200,
+    "percentage": 0.995
+  },
+  "keeper_coverage": 1.0,
+  "mapped_draft_command_player_count": 199,
+  "missing_draft_command_player_ids": [
+    190
+  ],
+  "notes": [
+    "Coverage denominators use the 200-player Draft Command candidate universe; all 500 ESPN source rows are preserved.",
+    "Top-160 uses raw ESPN rank <=160 or continuous ESPN ADP <=160; no ordinal ADP is invented.",
+    "When the ESPN ADP cap near 170 is detected, top-250 identity QA uses ESPN rank <=250 and reports that continuous ADP cannot identify an ordinal top-250 universe.",
+    "Exact live draft-room sort order was not separately observable and is not imputed from API rank."
+  ],
+  "position_counts": {
+    "QB": 76,
+    "RB": 123,
+    "TE": 110,
+    "WR": 191
+  },
+  "rank_coverage": {
+    "count": 199,
+    "denominator": 199,
+    "percentage": 1.0
+  },
+  "release_ready": true,
+  "same_name_conflicts": [],
+  "schema_version": "espn-market-2026-v1",
+  "scoring_verification_status": "incomplete_authentication_required",
+  "source_row_count": 500,
+  "team_or_position_conflicts": [],
+  "top_160_union_count": 142,
+  "top_160_unresolved": [],
+  "top_250_union_count": 172,
+  "top_250_unresolved": []
+}

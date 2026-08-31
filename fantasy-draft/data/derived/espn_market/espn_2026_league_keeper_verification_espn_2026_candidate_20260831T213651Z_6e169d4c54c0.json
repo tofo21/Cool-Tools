@@ -1,0 +1,226 @@
+{
+  "adapter_checks": {
+    "keeper_espn_ids_unique": true,
+    "keeper_internal_ids_unique": true,
+    "manager_order": true,
+    "one_keeper_per_team": true,
+    "rounds": true,
+    "team_count": true,
+    "ten_keeper_rows": true,
+    "tony_pick_calendar": true,
+    "tony_team": true
+  },
+  "canonical_profile": {
+    "draft_type": "standard_snake",
+    "keeper_count_per_team": 1,
+    "league_id": "167404",
+    "lineup": {
+      "DST": 0,
+      "K": 0,
+      "QB": 1,
+      "RB": 2,
+      "RB_WR_TE_FLEX": 2,
+      "TE": 1,
+      "WR": 2
+    },
+    "rounds": 16,
+    "scoring_format": "full_ppr",
+    "team_count": 10,
+    "tony_draft_slot": 5
+  },
+  "draft_order": [
+    "Justin Gerkin",
+    "Dan Merrick",
+    "Matt Castleman",
+    "Matt Hull",
+    "Tony Fontana",
+    "Matt Runge",
+    "Jon Merrick",
+    "Matt Sloka",
+    "Kyle Cavanaugh",
+    "Brenden Lautenbach"
+  ],
+  "keeper_coverage": 1.0,
+  "keepers": [
+    {
+      "espn_player_id": 4430027,
+      "internal_player_id": 68,
+      "keeper_round": 6,
+      "manager": "Justin Gerkin",
+      "mapped": true,
+      "overall_slot": 60,
+      "player_name": "Sam LaPorta",
+      "position": "TE",
+      "team_id": 1
+    },
+    {
+      "espn_player_id": 4426354,
+      "internal_player_id": 24,
+      "keeper_round": 6,
+      "manager": "Dan Merrick",
+      "mapped": true,
+      "overall_slot": 59,
+      "player_name": "George Pickens",
+      "position": "WR",
+      "team_id": 2
+    },
+    {
+      "espn_player_id": 4696981,
+      "internal_player_id": 45,
+      "keeper_round": 10,
+      "manager": "Matt Castleman",
+      "mapped": true,
+      "overall_slot": 98,
+      "player_name": "Cam Skattebo",
+      "position": "RB",
+      "team_id": 3
+    },
+    {
+      "espn_player_id": 4431459,
+      "internal_player_id": 50,
+      "keeper_round": 9,
+      "manager": "Matt Hull",
+      "mapped": true,
+      "overall_slot": 84,
+      "player_name": "Tyler Warren",
+      "position": "TE",
+      "team_id": 4
+    },
+    {
+      "espn_player_id": 4689114,
+      "internal_player_id": 90,
+      "keeper_round": 16,
+      "manager": "Tony Fontana",
+      "mapped": true,
+      "overall_slot": 156,
+      "player_name": "Jaxson Dart",
+      "position": "QB",
+      "team_id": 5
+    },
+    {
+      "espn_player_id": 4428331,
+      "internal_player_id": 30,
+      "keeper_round": 7,
+      "manager": "Matt Runge",
+      "mapped": true,
+      "overall_slot": 66,
+      "player_name": "Rashee Rice",
+      "position": "WR",
+      "team_id": 6
+    },
+    {
+      "espn_player_id": 4685702,
+      "internal_player_id": 47,
+      "keeper_round": 12,
+      "manager": "Jon Merrick",
+      "mapped": true,
+      "overall_slot": 114,
+      "player_name": "Quinshon Judkins",
+      "position": "RB",
+      "team_id": 7
+    },
+    {
+      "espn_player_id": 4685278,
+      "internal_player_id": 52,
+      "keeper_round": 14,
+      "manager": "Matt Sloka",
+      "mapped": true,
+      "overall_slot": 133,
+      "player_name": "Luther Burden",
+      "position": "WR",
+      "team_id": 8
+    },
+    {
+      "espn_player_id": 4361370,
+      "internal_player_id": 26,
+      "keeper_round": 9,
+      "manager": "Kyle Cavanaugh",
+      "mapped": true,
+      "overall_slot": 89,
+      "player_name": "Chris Olave",
+      "position": "WR",
+      "team_id": 9
+    },
+    {
+      "espn_player_id": 4361579,
+      "internal_player_id": 33,
+      "keeper_round": 9,
+      "manager": "Brenden Lautenbach",
+      "mapped": true,
+      "overall_slot": 90,
+      "player_name": "Javonte Williams",
+      "position": "RB",
+      "team_id": 10
+    }
+  ],
+  "scoring_verification": {
+    "probe": {
+      "endpoint": "https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/2026/segments/0/leagues/167404?view=mSettings&view=mTeam&view=mRoster&view=mDraftDetail",
+      "http_status": 401,
+      "status": "authentication_required",
+      "unresolved_fields": [
+        "passing yards",
+        "passing touchdowns",
+        "interceptions",
+        "rushing yards",
+        "receiving yards",
+        "receptions",
+        "rushing touchdowns",
+        "receiving touchdowns",
+        "two-point conversions",
+        "fumbles",
+        "yardage bonuses",
+        "long-play bonuses",
+        "first-down scoring",
+        "return scoring",
+        "custom scoring categories",
+        "IR/Stash eligibility and limits"
+      ]
+    },
+    "required_user_capture": {
+      "page": "ESPN league 167404 > League > Settings > Scoring",
+      "screenshots": [
+        "Scoring settings (all categories)",
+        "Roster settings including IR/Stash",
+        "Draft settings and keeper rules"
+      ]
+    },
+    "status": "incomplete_authentication_required",
+    "unresolved_fields": [
+      "passing yards",
+      "passing touchdowns",
+      "interceptions",
+      "rushing yards",
+      "receiving yards",
+      "receptions",
+      "rushing touchdowns",
+      "receiving touchdowns",
+      "two-point conversions",
+      "fumbles",
+      "yardage bonuses",
+      "long-play bonuses",
+      "first-down scoring",
+      "return scoring",
+      "custom scoring categories",
+      "IR/Stash eligibility and limits"
+    ]
+  },
+  "tony_pick_calendar": [
+    5,
+    16,
+    25,
+    36,
+    45,
+    56,
+    65,
+    76,
+    85,
+    96,
+    105,
+    116,
+    125,
+    136,
+    145,
+    156
+  ]
+}
