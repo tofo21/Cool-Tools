@@ -59,9 +59,9 @@
     platform: "espn",
     position: "ALL",
     search: "",
-    visible: 20,
     boardSort: { key: "espnPrice", direction: "asc" },
     opponentSort: { key: "nextPick", direction: "asc" },
+    visible: 20,
     rosterTeam: TONY_TEAM,
     editingOverall: null,
     resolvingObservationOverall: null,
@@ -1481,12 +1481,18 @@
       button.classList.toggle("active", active);
       button.dataset.direction = active ? state.boardSort.direction : "";
       button.setAttribute?.("aria-pressed", String(active));
+      button.setAttribute?.("aria-label", active
+        ? `${button.textContent.trim()}, sorted ${state.boardSort.direction === "asc" ? "ascending" : "descending"}`
+        : `${button.textContent.trim()}, activate sorting`);
     });
     document.querySelectorAll("[data-opponent-sort]").forEach((button) => {
       const active = button.dataset.opponentSort === state.opponentSort.key;
       button.classList.toggle("active", active);
       button.dataset.direction = active ? state.opponentSort.direction : "";
       button.setAttribute?.("aria-pressed", String(active));
+      button.setAttribute?.("aria-label", active
+        ? `${button.textContent.trim()}, sorted ${state.opponentSort.direction === "asc" ? "ascending" : "descending"}`
+        : `${button.textContent.trim()}, activate sorting`);
     });
   }
 
@@ -1533,7 +1539,7 @@
       const threat = threatFor(player);
       const taken = threat ? `${Math.round(threat.probabilityTakenBeforeTony * 100)}%` : opponentContext.status === "calculating" ? "…" : "—";
       const taker = threat?.mostLikelyTaker;
-      return `<tr>
+      return `<tr data-player-id="${player.id}">
         <td><div class="player-cell"><span class="rank-num">${index + 1}</span><div><span class="player-name">${player.name}</span><span class="player-meta">${player.team} · BYE ${player.bye}</span></div></div></td>
         <td><span class="pos-pill pos-${player.pos}">${player.pos}</span></td>
         <td><span class="metric-main">#${rank}</span><span class="metric-sub">${tier.label} · score ${leagueScore(player).toFixed(1)}</span></td>
@@ -2200,6 +2206,8 @@
       document.querySelectorAll(".filter-btn").forEach((button) => button.classList.toggle("active", button === filter));
       renderBoard();
     }
+    const boardSort = event.target.closest("[data-board-sort]");
+    if (boardSort) setBoardSort(boardSort.dataset.boardSort);
     const edit = event.target.closest("[data-edit-pick]");
     if (edit) openEditDialog(edit.dataset.editPick);
     const replacement = event.target.closest("[data-replace-id]");
@@ -2208,8 +2216,6 @@
     if (unresolved) openObservationDialog(unresolved.dataset.resolveObservation);
     const missing = event.target.closest("[data-resolve-missing]");
     if (missing) openMissingDialog(missing.dataset.resolveMissing);
-    const boardSort = event.target.closest("[data-board-sort]");
-    if (boardSort) setBoardSort(boardSort.dataset.boardSort);
     const opponentSort = event.target.closest("[data-opponent-sort]");
     if (opponentSort) setOpponentSort(opponentSort.dataset.opponentSort);
   });
@@ -2311,7 +2317,14 @@
         opponentThreat: threat?.mostLikelyTaker?.probability ?? null,
       };
     }),
-    boardOrder: (platform = state.platform) => boardRows(platform, { key: "espnPrice", direction: "asc" }).map((player) => ({ id: player.id, name: player.name, roomRank: roomOrder(player, platform) })),
+    boardOrder: (platform = state.platform) => boardRows(platform, { key: "espnPrice", direction: "asc" }).map((player) => ({
+      id: player.id,
+      name: player.name,
+      pos: player.pos,
+      roomRank: roomOrder(player, platform),
+      leagueRank: leagueRank(player),
+      leagueScore: leagueScore(player),
+    })),
   });
 
   els.rosterManager.innerHTML = MANAGERS.slice(1).map((item) => `<option value="${item.id}">${item.id}. ${item.name}</option>`).join("");
