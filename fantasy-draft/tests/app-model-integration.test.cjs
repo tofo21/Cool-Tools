@@ -9,6 +9,9 @@ const root = path.resolve(__dirname, "..");
 const read = (file) => fs.readFileSync(path.join(root, file), "utf8");
 
 function element() {
+  const listeners = new Map();
+  const attributes = new Map();
+  const children = new Map();
   return {
     textContent: "",
     innerHTML: "",
@@ -19,7 +22,11 @@ function element() {
     dataset: {},
     className: "",
     classList: { add() {}, remove() {}, toggle() {} },
-    addEventListener() {},
+    addEventListener(type, listener) { listeners.set(type, listener); },
+    dispatch(type, event = {}) { listeners.get(type)?.(event); },
+    setAttribute(name, value) { attributes.set(name, String(value)); },
+    getAttribute(name) { return attributes.get(name) || null; },
+    querySelector(selector) { if (!children.has(selector)) children.set(selector, element()); return children.get(selector); },
     click() {},
     close() {},
     showModal() {},
@@ -30,6 +37,7 @@ function element() {
 function boot(modelPackageOverride) {
   const elements = new Map();
   const store = new Map();
+  const documentListeners = new Map();
   const document = {
     hidden: false,
     body: element(),
@@ -39,7 +47,7 @@ function boot(modelPackageOverride) {
     },
     querySelectorAll() { return []; },
     querySelector() { return null; },
-    addEventListener() {},
+    addEventListener(type, listener) { documentListeners.set(type, listener); },
     createElement() { return element(); },
   };
   const context = {
@@ -74,7 +82,13 @@ function boot(modelPackageOverride) {
   if (modelPackageOverride) context.DRAFT_INTELLIGENCE_PACKAGE = modelPackageOverride(context.PLAYER_DATA);
   vm.runInContext(read("model/model-adapter.js"), context, { filename: "model-adapter.js" });
   vm.runInContext(read("app.js"), context, { filename: "app.js" });
-  return { context, elements };
+  return { context, elements, documentListeners };
+}
+
+function clickDocument(booted, selector, dataset) {
+  booted.documentListeners.get("click")({
+    target: { closest: (requested) => requested === selector ? { dataset } : null },
+  });
 }
 
 const fallback = boot();
@@ -99,8 +113,43 @@ assert.equal(espnBoard[4].name, "Jonathan Taylor");
 const sleeperBoard = fallback.context.DraftCommandLive.boardOrder("sleeper");
 assert.equal(sleeperBoard[4].name, "Christian McCaffrey");
 assert.ok(sleeperBoard.every((player, index) => index === 0 || sleeperBoard[index - 1].roomRank <= player.roomRank), "Sleeper board should be in ascending room-rank order");
-assert.match(fallback.elements.get("boardOrderNote").textContent, /ESPN default room rank/);
+assert.match(fallback.elements.get("boardOrderNote").textContent, /ESPN room order best → worst/);
 assert.match(fallback.elements.get("modelSourceNote").innerHTML, /Aug\. 27, 2026/);
+
+// Decision Board sorting is a deterministic view-only operation.
+const boardUI = boot();
+const pickBeforeSort = boardUI.context.DraftCommandLive.state().currentPick;
+const recommendationBeforeSort = boardUI.context.DraftCommandLive.recommendations().bestPickNow.player.id;
+clickDocument(boardUI, "[data-board-sort]", { boardSort: "league" });
+let sortedBoard = boardUI.context.DraftCommandLive.boardOrder();
+assert.ok(sortedBoard.every((player, index) => index === 0 || sortedBoard[index - 1].leagueScore >= player.leagueScore), "first League Value click should sort best value to worst");
+assert.equal(boardUI.elements.get("leagueValueHeader").ariaSort, "descending");
+assert.equal(boardUI.elements.get("leagueSortIndicator").textContent, "↓");
+assert.match(boardUI.elements.get("boardOrderNote").textContent, /League value best → worst/);
+assert.equal(boardUI.context.DraftCommandLive.state().currentPick, pickBeforeSort);
+assert.equal(boardUI.context.DraftCommandLive.recommendations().bestPickNow.player.id, recommendationBeforeSort);
+
+clickDocument(boardUI, "[data-board-sort]", { boardSort: "league" });
+sortedBoard = boardUI.context.DraftCommandLive.boardOrder();
+assert.ok(sortedBoard.every((player, index) => index === 0 || sortedBoard[index - 1].leagueScore <= player.leagueScore), "second League Value click should reverse the numeric order");
+assert.equal(boardUI.elements.get("leagueSortIndicator").textContent, "↑");
+
+clickDocument(boardUI, "[data-board-sort]", { boardSort: "platform" });
+sortedBoard = boardUI.context.DraftCommandLive.boardOrder();
+assert.ok(sortedBoard.every((player, index) => index === 0 || sortedBoard[index - 1].roomRank <= player.roomRank), "platform Price click should independently restore best room order first");
+assert.equal(boardUI.elements.get("platformHeader").ariaSort, "ascending");
+
+clickDocument(boardUI, "[data-board-sort]", { boardSort: "league" });
+clickDocument(boardUI, "[data-pos]", { pos: "RB" });
+sortedBoard = boardUI.context.DraftCommandLive.boardOrder();
+assert.ok(sortedBoard.length > 1 && sortedBoard.every((player) => player.pos === "RB"), "position filtering should remain active while sorted");
+assert.ok(sortedBoard.every((player, index) => index === 0 || sortedBoard[index - 1].leagueScore >= player.leagueScore));
+const searchedPlayer = sortedBoard[0];
+boardUI.elements.get("playerSearch").dispatch("input", { target: { value: searchedPlayer.name } });
+sortedBoard = boardUI.context.DraftCommandLive.boardOrder();
+assert.deepEqual(Array.from(sortedBoard, (player) => player.id), [searchedPlayer.id], "search should compose with position and numeric sorting");
+assert.equal(boardUI.context.DraftCommandLive.recordManualPick(searchedPlayer.id), undefined);
+assert.equal(boardUI.context.DraftCommandLive.boardOrder().some((player) => player.id === searchedPlayer.id), false, "drafted players must remain excluded from every sorted view");
 const mismatch = fallback.context.DraftCommandLive.ingestSnapshot({ source: "sleeper", teamCount: 12, rounds: 16, picks: [] });
 assert.equal(mismatch.ok, false);
 assert.equal(mismatch.code, "FORMAT_MISMATCH");

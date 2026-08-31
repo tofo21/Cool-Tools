@@ -182,8 +182,16 @@
             <thead>
               <tr>
                 <th>Player</th>
-                <th>League value</th>
-                <th id="platformHeader">ESPN price</th>
+                <th id="leagueValueHeader" aria-sort="none">
+                  <button class="sort-header" id="leagueSortButton" data-board-sort="league" type="button">
+                    <span>League value</span><span class="sort-indicator" id="leagueSortIndicator" aria-hidden="true">↕</span>
+                  </button>
+                </th>
+                <th id="platformHeader" aria-sort="ascending">
+                  <button class="sort-header active" id="platformSortButton" data-board-sort="platform" type="button">
+                    <span id="platformHeaderLabel">ESPN price</span><span class="sort-indicator" id="platformSortIndicator" aria-hidden="true">↑</span>
+                  </button>
+                </th>
                 <th id="nextPickHeader">Next-pick signal</th>
                 <th id="callHeader">Status</th>
                 <th><span class="sr-only">Draft action</span></th>

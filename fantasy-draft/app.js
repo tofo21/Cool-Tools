@@ -58,6 +58,8 @@
     platform: "espn",
     position: "ALL",
     search: "",
+    boardSort: "platform",
+    boardSortDirection: "asc",
     visible: 20,
     rosterTeam: TONY_TEAM,
     editingOverall: null,
@@ -87,7 +89,7 @@
     "decisionWindow", "workspaceTitle", "bestOverallCard", "bestValueCard", "bestFitCard",
     "decisionStrip", "playerSearch", "playerTable", "boardCount", "loadMore", "rosterCount",
     "rosterNeeds", "rosterList", "rosterManager", "rosterManagerName", "historyList", "undoPick",
-    "cliffPanel", "platformHeader", "toast", "saveStatus", "keeperList", "resetDraft",
+    "cliffPanel", "platformHeader", "platformHeaderLabel", "platformSortButton", "platformSortIndicator", "leagueValueHeader", "leagueSortButton", "leagueSortIndicator", "toast", "saveStatus", "keeperList", "resetDraft",
     "exportDraft", "importDraft", "importDraftFile", "recoverDraft", "pickDialog", "dialogTitle",
     "dialogCopy", "replacementSearch", "replacementList", "removePick", "rewindPick",
     "modelStatusBadge", "modelVersion", "modelFreshness", "modelCoverage", "modelStatusCopy",
@@ -1269,10 +1271,29 @@
 
   function boardRows(platform = state.platform) {
     const query = state.search.trim().toLowerCase();
+    const direction = state.boardSortDirection === "desc" ? -1 : 1;
     return availablePlayers()
       .filter((player) => state.position === "ALL" || player.pos === state.position)
       .filter((player) => !query || `${player.name} ${player.team}`.toLowerCase().includes(query))
-      .sort((a, b) => roomOrder(a, platform) - roomOrder(b, platform) || leagueScore(b) - leagueScore(a) || a.id - b.id);
+      .sort((a, b) => {
+        const comparison = state.boardSort === "league"
+          ? leagueScore(a) - leagueScore(b) || leagueRank(b) - leagueRank(a)
+          : roomOrder(a, platform) - roomOrder(b, platform) || leagueScore(b) - leagueScore(a);
+        return comparison * direction || a.id - b.id;
+      });
+  }
+
+  function setBoardSort(sortKey) {
+    if (!new Set(["league", "platform"]).has(sortKey)) return false;
+    if (state.boardSort === sortKey) {
+      state.boardSortDirection = state.boardSortDirection === "asc" ? "desc" : "asc";
+    } else {
+      state.boardSort = sortKey;
+      state.boardSortDirection = sortKey === "league" ? "desc" : "asc";
+    }
+    state.visible = 20;
+    renderBoard();
+    return true;
   }
 
   function renderBoard() {
@@ -1282,10 +1303,21 @@
     const after = nextTurn || TOTAL_PICKS;
     const platformName = state.platform === "espn" ? "ESPN" : "Sleeper";
     const health = MODEL.health();
-    els.boardCount.textContent = `${rows.length} available · ${platformName} room order`;
-    els.platformHeader.textContent = `${platformName} default`;
+    const leagueActive = state.boardSort === "league";
+    const ascending = state.boardSortDirection === "asc";
+    const sortDescription = leagueActive
+      ? `League value ${ascending ? "worst → best" : "best → worst"}`
+      : `${platformName} room order ${ascending ? "best → worst" : "worst → best"}`;
+    els.boardCount.textContent = `${rows.length} available · ${sortDescription}`;
+    els.platformHeaderLabel.textContent = `${platformName} price`;
     els.roomRankNote.textContent = `Player list follows ${platformName}'s current default room order.`;
-    els.boardOrderNote.textContent = `Sorted by ${platformName} default room rank`;
+    els.boardOrderNote.textContent = `Sorted by ${sortDescription}`;
+    els.leagueValueHeader.ariaSort = leagueActive ? (ascending ? "ascending" : "descending") : "none";
+    els.platformHeader.ariaSort = leagueActive ? "none" : (ascending ? "ascending" : "descending");
+    els.leagueSortIndicator.textContent = leagueActive ? (ascending ? "↑" : "↓") : "↕";
+    els.platformSortIndicator.textContent = leagueActive ? "↕" : (ascending ? "↑" : "↓");
+    els.leagueSortButton.classList.toggle("active", leagueActive);
+    els.platformSortButton.classList.toggle("active", !leagueActive);
     els.nextPickHeader.textContent = health.decisionPolicyApproved ? "Survives next pick" : "Next-pick signal";
     els.callHeader.textContent = health.decisionPolicyApproved ? "Call" : "Status";
     els.playerTable.innerHTML = rows.slice(0, state.visible).map((player, index) => {
@@ -1296,7 +1328,7 @@
       const tier = tierInfo(player);
       const signal = availabilitySignal(availability.value);
       const barWidth = availability.calibrated ? Math.round(availability.value * 100) : signal === "HIGH" ? 100 : signal === "MEDIUM" ? 66 : 33;
-      return `<tr>
+      return `<tr data-player-id="${player.id}">
         <td><div class="player-cell"><span class="rank-num">${index + 1}</span><span class="pos-pill pos-${player.pos}">${player.pos}</span><div><span class="player-name">${player.name}</span><span class="player-meta">${player.team} · BYE ${player.bye}</span></div></div></td>
         <td><span class="metric-main">#${rank}</span><span class="metric-sub">${tier.label} · score ${leagueScore(player).toFixed(1)}</span></td>
         <td><span class="metric-main ${gap >= 4 ? "value-positive" : gap <= -4 ? "value-negative" : ""}">#${price(player)}</span><span class="metric-sub">${gap >= 0 ? "+" : ""}${gap.toFixed(1)} vs fair pick</span></td>
@@ -1839,6 +1871,8 @@
       document.querySelectorAll(".filter-btn").forEach((button) => button.classList.toggle("active", button === filter));
       renderBoard();
     }
+    const boardSort = event.target.closest("[data-board-sort]");
+    if (boardSort) setBoardSort(boardSort.dataset.boardSort);
     const edit = event.target.closest("[data-edit-pick]");
     if (edit) openEditDialog(edit.dataset.editPick);
     const replacement = event.target.closest("[data-replace-id]");
@@ -1910,7 +1944,14 @@
     auditExport: () => structuredClone(auditExportPayload()),
     modelHealth: () => MODEL.health(),
     recommendations: () => recommendations(),
-    boardOrder: (platform = state.platform) => boardRows(platform).map((player) => ({ id: player.id, name: player.name, roomRank: roomOrder(player, platform) })),
+    boardOrder: (platform = state.platform) => boardRows(platform).map((player) => ({
+      id: player.id,
+      name: player.name,
+      pos: player.pos,
+      roomRank: roomOrder(player, platform),
+      leagueRank: leagueRank(player),
+      leagueScore: leagueScore(player),
+    })),
   });
 
   els.rosterManager.innerHTML = MANAGERS.slice(1).map((item) => `<option value="${item.id}">${item.id}. ${item.name}</option>`).join("");
