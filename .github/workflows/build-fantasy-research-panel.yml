@@ -6,6 +6,7 @@ on:
     paths:
       - 'fantasy-draft/research/*.py'
       - 'fantasy-draft/research/scorecard_v08_payload/**'
+      - 'fantasy-draft/research/model_h_v09_payload/**'
       - '.github/workflows/build-fantasy-research-panel.yml'
 
 permissions:
@@ -65,10 +66,13 @@ jobs:
       - name: Step 12 aggregate signal scorecard
         run: python fantasy-draft/research/build_walk_forward_signal_scorecard_v08.py --phase aggregate
 
+      - name: Step 13 Model H context scorecard
+        run: python fantasy-draft/research/build_model_h_context_v09.py
+
       - name: Upload research and scorecard artifact
         uses: actions/upload-artifact@v4
         with:
-          name: fantasy-draft-signal-scorecard-v0-8
+          name: fantasy-draft-signal-scorecard-v0-9
           path: fantasy-draft/research/output/
           if-no-files-found: error
           retention-days: 30
