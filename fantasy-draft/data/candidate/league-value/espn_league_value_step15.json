@@ -1,0 +1,3900 @@
+{
+  "artifactId": "espn-league-value-step15-2026",
+  "artifactType": "espn-league-value",
+  "artifactVersion": "step15-2026.1",
+  "effectiveAt": "2026-09-01T00:59:51Z",
+  "expiresAt": null,
+  "formula": {
+    "description": "Keeper-initialized mandatory starter allocation followed by exactly 20 highest-projected remaining RB/WR/TE FLEX starters; base score is projection minus the post-allocation position replacement value, with no second FLEX premium.",
+    "formulaVersion": "step15-espn-league-value-v1",
+    "generator": "fantasy-draft/research/step15/build_espn_league_value_step15.py",
+    "sourceArtifactIds": [
+      "player-truth-step14-2026",
+      "espn-keeper-10-ppr-2flex-2026",
+      "espn_2026_league_keeper_verification_espn_2026_frozen_20260901T003012Z_3379127ab1c0"
+    ],
+    "sourceCommits": [
+      "827a8f0fddc8ad979565edea0ab7e8138840f15b",
+      "546687a9f462ae6b26693055b15c0f13044f84e2",
+      "49951ca1d45b92a906f84366a02d40c8c2e07e12"
+    ]
+  },
+  "generatedAt": "2026-09-01T02:18:40Z",
+  "integrity": {
+    "canonicalization": "draft-command-canonical-json-v1",
+    "payloadSha256": "5957c33276b19d5d73305e1be50f9649c97be55c9bc55932ed9bafc39fd5f785"
+  },
+  "leagueConfiguration": {
+    "draftSlot": 5,
+    "keepers": [
+      {
+        "internalPlayerId": 68,
+        "overallPick": 60,
+        "round": 6,
+        "teamId": "team-01"
+      },
+      {
+        "internalPlayerId": 24,
+        "overallPick": 59,
+        "round": 6,
+        "teamId": "team-02"
+      },
+      {
+        "internalPlayerId": 45,
+        "overallPick": 98,
+        "round": 10,
+        "teamId": "team-03"
+      },
+      {
+        "internalPlayerId": 50,
+        "overallPick": 84,
+        "round": 9,
+        "teamId": "team-04"
+      },
+      {
+        "internalPlayerId": 90,
+        "overallPick": 156,
+        "round": 16,
+        "teamId": "team-05"
+      },
+      {
+        "internalPlayerId": 30,
+        "overallPick": 66,
+        "round": 7,
+        "teamId": "team-06"
+      },
+      {
+        "internalPlayerId": 47,
+        "overallPick": 114,
+        "round": 12,
+        "teamId": "team-07"
+      },
+      {
+        "internalPlayerId": 52,
+        "overallPick": 133,
+        "round": 14,
+        "teamId": "team-08"
+      },
+      {
+        "internalPlayerId": 26,
+        "overallPick": 89,
+        "round": 9,
+        "teamId": "team-09"
+      },
+      {
+        "internalPlayerId": 33,
+        "overallPick": 90,
+        "round": 9,
+        "teamId": "team-10"
+      }
+    ],
+    "leagueId": "167404",
+    "leagueSettingsVersion": "espn-167404-2026-v1",
+    "replacementLevelMethodVersion": "keeper-initialized-starter-allocation-v1",
+    "rosterFormat": {
+      "bench": 8,
+      "ir": 0,
+      "starters": {
+        "DST": 0,
+        "FLEX": 2,
+        "K": 0,
+        "QB": 1,
+        "RB": 2,
+        "TE": 1,
+        "WR": 2
+      }
+    },
+    "rounds": 16,
+    "scoringFormat": "full_ppr",
+    "settingsHash": "c2acb8af78601b65657016b4f292eb7af565442e2e9373ffc1bf390b64bd7245",
+    "teamCount": 10,
+    "tonyTeamId": "team-05",
+    "totalPicks": 160
+  },
+  "records": [
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 182.44,
+      "internalPlayerId": 1,
+      "leagueValueRank": 1,
+      "leagueValueScore": 182.44,
+      "marginalValue": 182.44,
+      "positionalRank": 1,
+      "projectedLeaguePoints": 372.3,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 182.31,
+      "internalPlayerId": 2,
+      "leagueValueRank": 2,
+      "leagueValueScore": 182.31,
+      "marginalValue": 182.31,
+      "positionalRank": 2,
+      "projectedLeaguePoints": 372.17,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 149.53,
+      "internalPlayerId": 4,
+      "leagueValueRank": 3,
+      "leagueValueScore": 149.53,
+      "marginalValue": 149.53,
+      "positionalRank": 1,
+      "projectedLeaguePoints": 339.8,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 145.74,
+      "internalPlayerId": 3,
+      "leagueValueRank": 4,
+      "leagueValueScore": 145.74,
+      "marginalValue": 145.74,
+      "positionalRank": 2,
+      "projectedLeaguePoints": 336.01,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 144.91,
+      "internalPlayerId": 5,
+      "leagueValueRank": 5,
+      "leagueValueScore": 144.91,
+      "marginalValue": 144.91,
+      "positionalRank": 3,
+      "projectedLeaguePoints": 334.77,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 134.08,
+      "internalPlayerId": 7,
+      "leagueValueRank": 6,
+      "leagueValueScore": 134.08,
+      "marginalValue": 134.08,
+      "positionalRank": 3,
+      "projectedLeaguePoints": 324.35,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 129.22,
+      "internalPlayerId": 8,
+      "leagueValueRank": 7,
+      "leagueValueScore": 129.22,
+      "marginalValue": 129.22,
+      "positionalRank": 4,
+      "projectedLeaguePoints": 319.49,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 123.0,
+      "internalPlayerId": 6,
+      "leagueValueRank": 8,
+      "leagueValueScore": 123.0,
+      "marginalValue": 123.0,
+      "positionalRank": 4,
+      "projectedLeaguePoints": 312.86,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 102.25,
+      "internalPlayerId": 12,
+      "leagueValueRank": 9,
+      "leagueValueScore": 102.25,
+      "marginalValue": 102.25,
+      "positionalRank": 5,
+      "projectedLeaguePoints": 292.11,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 98.65,
+      "internalPlayerId": 17,
+      "leagueValueRank": 10,
+      "leagueValueScore": 98.65,
+      "marginalValue": 98.65,
+      "positionalRank": 5,
+      "projectedLeaguePoints": 288.92,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 89.08,
+      "internalPlayerId": 14,
+      "leagueValueRank": 11,
+      "leagueValueScore": 89.08,
+      "marginalValue": 89.08,
+      "positionalRank": 6,
+      "projectedLeaguePoints": 278.94,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 86.61,
+      "internalPlayerId": 18,
+      "leagueValueRank": 12,
+      "leagueValueScore": 86.61,
+      "marginalValue": 86.61,
+      "positionalRank": 7,
+      "projectedLeaguePoints": 276.47,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 83.58,
+      "internalPlayerId": 23,
+      "leagueValueRank": 13,
+      "leagueValueScore": 83.58,
+      "marginalValue": 83.58,
+      "positionalRank": 1,
+      "projectedLeaguePoints": 254.5,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 170.92,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 83.38,
+      "internalPlayerId": 30,
+      "leagueValueRank": 14,
+      "leagueValueScore": 83.38,
+      "marginalValue": 83.38,
+      "positionalRank": 6,
+      "projectedLeaguePoints": 273.65,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 83.26,
+      "internalPlayerId": 16,
+      "leagueValueRank": 15,
+      "leagueValueScore": 83.26,
+      "marginalValue": 83.26,
+      "positionalRank": 8,
+      "projectedLeaguePoints": 273.12,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 82.28,
+      "internalPlayerId": 10,
+      "leagueValueRank": 16,
+      "leagueValueScore": 82.28,
+      "marginalValue": 82.28,
+      "positionalRank": 7,
+      "projectedLeaguePoints": 272.55,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 80.33,
+      "internalPlayerId": 9,
+      "leagueValueRank": 17,
+      "leagueValueScore": 80.33,
+      "marginalValue": 80.33,
+      "positionalRank": 9,
+      "projectedLeaguePoints": 270.19,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 79.3,
+      "internalPlayerId": 11,
+      "leagueValueRank": 18,
+      "leagueValueScore": 79.3,
+      "marginalValue": 79.3,
+      "positionalRank": 8,
+      "projectedLeaguePoints": 269.57,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 76.05,
+      "internalPlayerId": 13,
+      "leagueValueRank": 19,
+      "leagueValueScore": 76.05,
+      "marginalValue": 76.05,
+      "positionalRank": 10,
+      "projectedLeaguePoints": 265.91,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 74.07,
+      "internalPlayerId": 15,
+      "leagueValueRank": 20,
+      "leagueValueScore": 74.07,
+      "marginalValue": 74.07,
+      "positionalRank": 11,
+      "projectedLeaguePoints": 263.93,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 72.71,
+      "internalPlayerId": 21,
+      "leagueValueRank": 21,
+      "leagueValueScore": 72.71,
+      "marginalValue": 72.71,
+      "positionalRank": 2,
+      "projectedLeaguePoints": 243.63,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 170.92,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 70.036,
+      "internalPlayerId": 25,
+      "leagueValueRank": 22,
+      "leagueValueScore": 70.036,
+      "marginalValue": 70.036,
+      "positionalRank": 1,
+      "projectedLeaguePoints": 360.862,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 290.826,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 67.48,
+      "internalPlayerId": 26,
+      "leagueValueRank": 23,
+      "leagueValueScore": 67.48,
+      "marginalValue": 67.48,
+      "positionalRank": 9,
+      "projectedLeaguePoints": 257.75,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 66.99,
+      "internalPlayerId": 34,
+      "leagueValueRank": 24,
+      "leagueValueScore": 66.99,
+      "marginalValue": 66.99,
+      "positionalRank": 12,
+      "projectedLeaguePoints": 256.85,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 66.87,
+      "internalPlayerId": 20,
+      "leagueValueRank": 25,
+      "leagueValueScore": 66.87,
+      "marginalValue": 66.87,
+      "positionalRank": 10,
+      "projectedLeaguePoints": 257.14,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 65.34,
+      "internalPlayerId": 27,
+      "leagueValueRank": 26,
+      "leagueValueScore": 65.34,
+      "marginalValue": 65.34,
+      "positionalRank": 13,
+      "projectedLeaguePoints": 255.2,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 63.37,
+      "internalPlayerId": 31,
+      "leagueValueRank": 27,
+      "leagueValueScore": 63.37,
+      "marginalValue": 63.37,
+      "positionalRank": 14,
+      "projectedLeaguePoints": 253.23,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 61.87,
+      "internalPlayerId": 24,
+      "leagueValueRank": 28,
+      "leagueValueScore": 61.87,
+      "marginalValue": 61.87,
+      "positionalRank": 11,
+      "projectedLeaguePoints": 252.14,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 61.0,
+      "internalPlayerId": 19,
+      "leagueValueRank": 29,
+      "leagueValueScore": 61.0,
+      "marginalValue": 61.0,
+      "positionalRank": 15,
+      "projectedLeaguePoints": 250.86,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 58.25,
+      "internalPlayerId": 22,
+      "leagueValueRank": 30,
+      "leagueValueScore": 58.25,
+      "marginalValue": 58.25,
+      "positionalRank": 12,
+      "projectedLeaguePoints": 248.52,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 54.37,
+      "internalPlayerId": 45,
+      "leagueValueRank": 31,
+      "leagueValueScore": 54.37,
+      "marginalValue": 54.37,
+      "positionalRank": 16,
+      "projectedLeaguePoints": 244.23,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 53.51,
+      "internalPlayerId": 37,
+      "leagueValueRank": 32,
+      "leagueValueScore": 53.51,
+      "marginalValue": 53.51,
+      "positionalRank": 13,
+      "projectedLeaguePoints": 243.78,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 52.05,
+      "internalPlayerId": 38,
+      "leagueValueRank": 33,
+      "leagueValueScore": 52.05,
+      "marginalValue": 52.05,
+      "positionalRank": 14,
+      "projectedLeaguePoints": 242.32,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 50.31,
+      "internalPlayerId": 29,
+      "leagueValueRank": 34,
+      "leagueValueScore": 50.31,
+      "marginalValue": 50.31,
+      "positionalRank": 17,
+      "projectedLeaguePoints": 240.17,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 46.44,
+      "internalPlayerId": 32,
+      "leagueValueRank": 35,
+      "leagueValueScore": 46.44,
+      "marginalValue": 46.44,
+      "positionalRank": 15,
+      "projectedLeaguePoints": 236.71,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 44.43,
+      "internalPlayerId": 33,
+      "leagueValueRank": 36,
+      "leagueValueScore": 44.43,
+      "marginalValue": 44.43,
+      "positionalRank": 18,
+      "projectedLeaguePoints": 234.29,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 43.1,
+      "internalPlayerId": 28,
+      "leagueValueRank": 37,
+      "leagueValueScore": 43.1,
+      "marginalValue": 43.1,
+      "positionalRank": 16,
+      "projectedLeaguePoints": 233.37,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 42.26,
+      "internalPlayerId": 42,
+      "leagueValueRank": 38,
+      "leagueValueScore": 42.26,
+      "marginalValue": 42.26,
+      "positionalRank": 19,
+      "projectedLeaguePoints": 232.12,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 38.61,
+      "internalPlayerId": 40,
+      "leagueValueRank": 39,
+      "leagueValueScore": 38.61,
+      "marginalValue": 38.61,
+      "positionalRank": 3,
+      "projectedLeaguePoints": 209.53,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 170.92,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 37.9,
+      "internalPlayerId": 41,
+      "leagueValueRank": 40,
+      "leagueValueScore": 37.9,
+      "marginalValue": 37.9,
+      "positionalRank": 17,
+      "projectedLeaguePoints": 228.17,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 37.51,
+      "internalPlayerId": 36,
+      "leagueValueRank": 41,
+      "leagueValueScore": 37.51,
+      "marginalValue": 37.51,
+      "positionalRank": 18,
+      "projectedLeaguePoints": 227.78,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 34.24,
+      "internalPlayerId": 49,
+      "leagueValueRank": 42,
+      "leagueValueScore": 34.24,
+      "marginalValue": 34.24,
+      "positionalRank": 20,
+      "projectedLeaguePoints": 224.1,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 32.84,
+      "internalPlayerId": 46,
+      "leagueValueRank": 43,
+      "leagueValueScore": 32.84,
+      "marginalValue": 32.84,
+      "positionalRank": 21,
+      "projectedLeaguePoints": 222.7,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 31.64,
+      "internalPlayerId": 48,
+      "leagueValueRank": 44,
+      "leagueValueScore": 31.64,
+      "marginalValue": 31.64,
+      "positionalRank": 19,
+      "projectedLeaguePoints": 221.91,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 31.21,
+      "internalPlayerId": 35,
+      "leagueValueRank": 45,
+      "leagueValueScore": 31.21,
+      "marginalValue": 31.21,
+      "positionalRank": 20,
+      "projectedLeaguePoints": 221.48,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 31.04,
+      "internalPlayerId": 50,
+      "leagueValueRank": 46,
+      "leagueValueScore": 31.04,
+      "marginalValue": 31.04,
+      "positionalRank": 4,
+      "projectedLeaguePoints": 201.96,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 170.92,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 27.06,
+      "internalPlayerId": 55,
+      "leagueValueRank": 47,
+      "leagueValueScore": 27.06,
+      "marginalValue": 27.06,
+      "positionalRank": 21,
+      "projectedLeaguePoints": 217.33,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 25.634,
+      "internalPlayerId": 56,
+      "leagueValueRank": 48,
+      "leagueValueScore": 25.634,
+      "marginalValue": 25.634,
+      "positionalRank": 2,
+      "projectedLeaguePoints": 316.46,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 290.826,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 24.68,
+      "internalPlayerId": 74,
+      "leagueValueRank": 49,
+      "leagueValueScore": 24.68,
+      "marginalValue": 24.68,
+      "positionalRank": 5,
+      "projectedLeaguePoints": 195.6,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 170.92,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 23.946,
+      "internalPlayerId": 44,
+      "leagueValueRank": 50,
+      "leagueValueScore": 23.946,
+      "marginalValue": 23.946,
+      "positionalRank": 3,
+      "projectedLeaguePoints": 314.772,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 290.826,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 22.588,
+      "internalPlayerId": 60,
+      "leagueValueRank": 51,
+      "leagueValueScore": 22.588,
+      "marginalValue": 22.588,
+      "positionalRank": 4,
+      "projectedLeaguePoints": 313.414,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 290.826,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 22.544,
+      "internalPlayerId": 64,
+      "leagueValueRank": 52,
+      "leagueValueScore": 22.544,
+      "marginalValue": 22.544,
+      "positionalRank": 5,
+      "projectedLeaguePoints": 313.37,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 290.826,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 22.13,
+      "internalPlayerId": 39,
+      "leagueValueRank": 53,
+      "leagueValueScore": 22.13,
+      "marginalValue": 22.13,
+      "positionalRank": 22,
+      "projectedLeaguePoints": 212.4,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 21.04,
+      "internalPlayerId": 51,
+      "leagueValueRank": 54,
+      "leagueValueScore": 21.04,
+      "marginalValue": 21.04,
+      "positionalRank": 23,
+      "projectedLeaguePoints": 211.31,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 19.91,
+      "internalPlayerId": 47,
+      "leagueValueRank": 55,
+      "leagueValueScore": 19.91,
+      "marginalValue": 19.91,
+      "positionalRank": 22,
+      "projectedLeaguePoints": 209.77,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 19.41,
+      "internalPlayerId": 43,
+      "leagueValueRank": 56,
+      "leagueValueScore": 19.41,
+      "marginalValue": 19.41,
+      "positionalRank": 24,
+      "projectedLeaguePoints": 209.68,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 19.28,
+      "internalPlayerId": 58,
+      "leagueValueRank": 57,
+      "leagueValueScore": 19.28,
+      "marginalValue": 19.28,
+      "positionalRank": 25,
+      "projectedLeaguePoints": 209.55,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 18.12,
+      "internalPlayerId": 57,
+      "leagueValueRank": 58,
+      "leagueValueScore": 18.12,
+      "marginalValue": 18.12,
+      "positionalRank": 23,
+      "projectedLeaguePoints": 207.98,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 17.89,
+      "internalPlayerId": 54,
+      "leagueValueRank": 59,
+      "leagueValueScore": 17.89,
+      "marginalValue": 17.89,
+      "positionalRank": 26,
+      "projectedLeaguePoints": 208.16,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 17.77,
+      "internalPlayerId": 52,
+      "leagueValueRank": 60,
+      "leagueValueScore": 17.77,
+      "marginalValue": 17.77,
+      "positionalRank": 27,
+      "projectedLeaguePoints": 208.04,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 17.69,
+      "internalPlayerId": 71,
+      "leagueValueRank": 61,
+      "leagueValueScore": 17.69,
+      "marginalValue": 17.69,
+      "positionalRank": 6,
+      "projectedLeaguePoints": 188.61,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 170.92,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 16.94,
+      "internalPlayerId": 93,
+      "leagueValueRank": 62,
+      "leagueValueScore": 16.94,
+      "marginalValue": 16.94,
+      "positionalRank": 28,
+      "projectedLeaguePoints": 207.21,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 14.05,
+      "internalPlayerId": 81,
+      "leagueValueRank": 63,
+      "leagueValueScore": 14.05,
+      "marginalValue": 14.05,
+      "positionalRank": 29,
+      "projectedLeaguePoints": 204.32,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 13.83,
+      "internalPlayerId": 62,
+      "leagueValueRank": 64,
+      "leagueValueScore": 13.83,
+      "marginalValue": 13.83,
+      "positionalRank": 30,
+      "projectedLeaguePoints": 204.1,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 12.78,
+      "internalPlayerId": 68,
+      "leagueValueRank": 65,
+      "leagueValueScore": 12.78,
+      "marginalValue": 12.78,
+      "positionalRank": 7,
+      "projectedLeaguePoints": 183.7,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 170.92,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 11.78,
+      "internalPlayerId": 61,
+      "leagueValueRank": 66,
+      "leagueValueScore": 11.78,
+      "marginalValue": 11.78,
+      "positionalRank": 24,
+      "projectedLeaguePoints": 201.64,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 10.63,
+      "internalPlayerId": 105,
+      "leagueValueRank": 67,
+      "leagueValueScore": 10.63,
+      "marginalValue": 10.63,
+      "positionalRank": 8,
+      "projectedLeaguePoints": 181.55,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 170.92,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 9.23,
+      "internalPlayerId": 90,
+      "leagueValueRank": 68,
+      "leagueValueScore": 9.23,
+      "marginalValue": 9.23,
+      "positionalRank": 6,
+      "projectedLeaguePoints": 300.056,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 290.826,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 8.7,
+      "internalPlayerId": 117,
+      "leagueValueRank": 69,
+      "leagueValueScore": 8.7,
+      "marginalValue": 8.7,
+      "positionalRank": 9,
+      "projectedLeaguePoints": 179.62,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 170.92,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 8.466,
+      "internalPlayerId": 59,
+      "leagueValueRank": 70,
+      "leagueValueScore": 8.466,
+      "marginalValue": 8.466,
+      "positionalRank": 7,
+      "projectedLeaguePoints": 299.292,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 290.826,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 6.95,
+      "internalPlayerId": 67,
+      "leagueValueRank": 71,
+      "leagueValueScore": 6.95,
+      "marginalValue": 6.95,
+      "positionalRank": 31,
+      "projectedLeaguePoints": 197.22,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 4.66,
+      "internalPlayerId": 72,
+      "leagueValueRank": 72,
+      "leagueValueScore": 4.66,
+      "marginalValue": 4.66,
+      "positionalRank": 25,
+      "projectedLeaguePoints": 194.52,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 4.64,
+      "internalPlayerId": 73,
+      "leagueValueRank": 73,
+      "leagueValueScore": 4.64,
+      "marginalValue": 4.64,
+      "positionalRank": 32,
+      "projectedLeaguePoints": 194.91,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 4.35,
+      "internalPlayerId": 76,
+      "leagueValueRank": 74,
+      "leagueValueScore": 4.35,
+      "marginalValue": 4.35,
+      "positionalRank": 10,
+      "projectedLeaguePoints": 175.27,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 170.92,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 3.864,
+      "internalPlayerId": 75,
+      "leagueValueRank": 75,
+      "leagueValueScore": 3.864,
+      "marginalValue": 3.864,
+      "positionalRank": 8,
+      "projectedLeaguePoints": 294.69,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 290.826,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 1.82,
+      "internalPlayerId": 53,
+      "leagueValueRank": 76,
+      "leagueValueScore": 1.82,
+      "marginalValue": 1.82,
+      "positionalRank": 26,
+      "projectedLeaguePoints": 191.68,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 1.44,
+      "internalPlayerId": 77,
+      "leagueValueRank": 77,
+      "leagueValueScore": 1.44,
+      "marginalValue": 1.44,
+      "positionalRank": 27,
+      "projectedLeaguePoints": 191.3,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 1.368,
+      "internalPlayerId": 104,
+      "leagueValueRank": 78,
+      "leagueValueScore": 1.368,
+      "marginalValue": 1.368,
+      "positionalRank": 9,
+      "projectedLeaguePoints": 292.194,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 290.826,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 1.188,
+      "internalPlayerId": 112,
+      "leagueValueRank": 79,
+      "leagueValueScore": 1.188,
+      "marginalValue": 1.188,
+      "positionalRank": 10,
+      "projectedLeaguePoints": 292.014,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 290.826,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 0.46,
+      "internalPlayerId": 65,
+      "leagueValueRank": 80,
+      "leagueValueScore": 0.46,
+      "marginalValue": 0.46,
+      "positionalRank": 33,
+      "projectedLeaguePoints": 190.73,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 0.0,
+      "internalPlayerId": 63,
+      "leagueValueRank": 81,
+      "leagueValueScore": 0.0,
+      "marginalValue": 0.0,
+      "positionalRank": 28,
+      "projectedLeaguePoints": 189.86,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 0.0,
+      "internalPlayerId": 85,
+      "leagueValueRank": 82,
+      "leagueValueScore": 0.0,
+      "marginalValue": 0.0,
+      "positionalRank": 11,
+      "projectedLeaguePoints": 170.92,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 170.92,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 0.0,
+      "internalPlayerId": 86,
+      "leagueValueRank": 83,
+      "leagueValueScore": 0.0,
+      "marginalValue": 0.0,
+      "positionalRank": 34,
+      "projectedLeaguePoints": 190.27,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 0.0,
+      "internalPlayerId": 87,
+      "leagueValueRank": 84,
+      "leagueValueScore": 0.0,
+      "marginalValue": 0.0,
+      "positionalRank": 11,
+      "projectedLeaguePoints": 290.826,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 290.826,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -0.332,
+      "internalPlayerId": 79,
+      "leagueValueRank": 85,
+      "leagueValueScore": -0.332,
+      "marginalValue": -0.332,
+      "positionalRank": 12,
+      "projectedLeaguePoints": 290.494,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 290.826,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -1.34,
+      "internalPlayerId": 103,
+      "leagueValueRank": 86,
+      "leagueValueScore": -1.34,
+      "marginalValue": -1.34,
+      "positionalRank": 35,
+      "projectedLeaguePoints": 188.93,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -1.65,
+      "internalPlayerId": 82,
+      "leagueValueRank": 87,
+      "leagueValueScore": -1.65,
+      "marginalValue": -1.65,
+      "positionalRank": 29,
+      "projectedLeaguePoints": 188.21,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -2.174,
+      "internalPlayerId": 80,
+      "leagueValueRank": 88,
+      "leagueValueScore": -2.174,
+      "marginalValue": -2.174,
+      "positionalRank": 13,
+      "projectedLeaguePoints": 288.652,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 290.826,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -3.57,
+      "internalPlayerId": 84,
+      "leagueValueRank": 89,
+      "leagueValueScore": -3.57,
+      "marginalValue": -3.57,
+      "positionalRank": 30,
+      "projectedLeaguePoints": 186.29,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -3.58,
+      "internalPlayerId": 119,
+      "leagueValueRank": 90,
+      "leagueValueScore": -3.58,
+      "marginalValue": -3.58,
+      "positionalRank": 12,
+      "projectedLeaguePoints": 167.34,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 170.92,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -4.196,
+      "internalPlayerId": 113,
+      "leagueValueRank": 91,
+      "leagueValueScore": -4.196,
+      "marginalValue": -4.196,
+      "positionalRank": 14,
+      "projectedLeaguePoints": 286.63,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 290.826,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -4.32,
+      "internalPlayerId": 70,
+      "leagueValueRank": 92,
+      "leagueValueScore": -4.32,
+      "marginalValue": -4.32,
+      "positionalRank": 31,
+      "projectedLeaguePoints": 185.54,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -5.37,
+      "internalPlayerId": 115,
+      "leagueValueRank": 93,
+      "leagueValueScore": -5.37,
+      "marginalValue": -5.37,
+      "positionalRank": 13,
+      "projectedLeaguePoints": 165.55,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 170.92,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -5.448,
+      "internalPlayerId": 106,
+      "leagueValueRank": 94,
+      "leagueValueScore": -5.448,
+      "marginalValue": -5.448,
+      "positionalRank": 15,
+      "projectedLeaguePoints": 285.378,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 290.826,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -6.32,
+      "internalPlayerId": 109,
+      "leagueValueRank": 95,
+      "leagueValueScore": -6.32,
+      "marginalValue": -6.32,
+      "positionalRank": 36,
+      "projectedLeaguePoints": 183.95,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -7.55,
+      "internalPlayerId": 125,
+      "leagueValueRank": 96,
+      "leagueValueScore": -7.55,
+      "marginalValue": -7.55,
+      "positionalRank": 14,
+      "projectedLeaguePoints": 163.37,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 170.92,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -9.16,
+      "internalPlayerId": 66,
+      "leagueValueRank": 97,
+      "leagueValueScore": -9.16,
+      "marginalValue": -9.16,
+      "positionalRank": 37,
+      "projectedLeaguePoints": 181.11,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -9.8,
+      "internalPlayerId": 78,
+      "leagueValueRank": 98,
+      "leagueValueScore": -9.8,
+      "marginalValue": -9.8,
+      "positionalRank": 38,
+      "projectedLeaguePoints": 180.47,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -11.01,
+      "internalPlayerId": 69,
+      "leagueValueRank": 99,
+      "leagueValueScore": -11.01,
+      "marginalValue": -11.01,
+      "positionalRank": 39,
+      "projectedLeaguePoints": 179.26,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -11.06,
+      "internalPlayerId": 107,
+      "leagueValueRank": 100,
+      "leagueValueScore": -11.06,
+      "marginalValue": -11.06,
+      "positionalRank": 15,
+      "projectedLeaguePoints": 159.86,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 170.92,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -12.26,
+      "internalPlayerId": 94,
+      "leagueValueRank": 101,
+      "leagueValueScore": -12.26,
+      "marginalValue": -12.26,
+      "positionalRank": 32,
+      "projectedLeaguePoints": 177.6,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -13.44,
+      "internalPlayerId": 83,
+      "leagueValueRank": 102,
+      "leagueValueScore": -13.44,
+      "marginalValue": -13.44,
+      "positionalRank": 40,
+      "projectedLeaguePoints": 176.83,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -13.858,
+      "internalPlayerId": 124,
+      "leagueValueRank": 103,
+      "leagueValueScore": -13.858,
+      "marginalValue": -13.858,
+      "positionalRank": 16,
+      "projectedLeaguePoints": 276.968,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 290.826,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -14.12,
+      "internalPlayerId": 110,
+      "leagueValueRank": 104,
+      "leagueValueScore": -14.12,
+      "marginalValue": -14.12,
+      "positionalRank": 41,
+      "projectedLeaguePoints": 176.15,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -14.42,
+      "internalPlayerId": 89,
+      "leagueValueRank": 105,
+      "leagueValueScore": -14.42,
+      "marginalValue": -14.42,
+      "positionalRank": 42,
+      "projectedLeaguePoints": 175.85,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -15.77,
+      "internalPlayerId": 133,
+      "leagueValueRank": 106,
+      "leagueValueScore": -15.77,
+      "marginalValue": -15.77,
+      "positionalRank": 43,
+      "projectedLeaguePoints": 174.5,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -16.07,
+      "internalPlayerId": 96,
+      "leagueValueRank": 107,
+      "leagueValueScore": -16.07,
+      "marginalValue": -16.07,
+      "positionalRank": 44,
+      "projectedLeaguePoints": 174.2,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -16.32,
+      "internalPlayerId": 92,
+      "leagueValueRank": 108,
+      "leagueValueScore": -16.32,
+      "marginalValue": -16.32,
+      "positionalRank": 45,
+      "projectedLeaguePoints": 173.95,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -16.452,
+      "internalPlayerId": 138,
+      "leagueValueRank": 109,
+      "leagueValueScore": -16.452,
+      "marginalValue": -16.452,
+      "positionalRank": 17,
+      "projectedLeaguePoints": 274.374,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 290.826,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -16.52,
+      "internalPlayerId": 142,
+      "leagueValueRank": 110,
+      "leagueValueScore": -16.52,
+      "marginalValue": -16.52,
+      "positionalRank": 16,
+      "projectedLeaguePoints": 154.4,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 170.92,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -17.25,
+      "internalPlayerId": 139,
+      "leagueValueRank": 111,
+      "leagueValueScore": -17.25,
+      "marginalValue": -17.25,
+      "positionalRank": 17,
+      "projectedLeaguePoints": 153.67,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 170.92,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -17.85,
+      "internalPlayerId": 127,
+      "leagueValueRank": 112,
+      "leagueValueScore": -17.85,
+      "marginalValue": -17.85,
+      "positionalRank": 46,
+      "projectedLeaguePoints": 172.42,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -18.82,
+      "internalPlayerId": 91,
+      "leagueValueRank": 113,
+      "leagueValueScore": -18.82,
+      "marginalValue": -18.82,
+      "positionalRank": 33,
+      "projectedLeaguePoints": 171.04,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -18.88,
+      "internalPlayerId": 129,
+      "leagueValueRank": 114,
+      "leagueValueScore": -18.88,
+      "marginalValue": -18.88,
+      "positionalRank": 47,
+      "projectedLeaguePoints": 171.39,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -19.68,
+      "internalPlayerId": 146,
+      "leagueValueRank": 115,
+      "leagueValueScore": -19.68,
+      "marginalValue": -19.68,
+      "positionalRank": 18,
+      "projectedLeaguePoints": 151.24,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 170.92,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -20.45,
+      "internalPlayerId": 101,
+      "leagueValueRank": 116,
+      "leagueValueScore": -20.45,
+      "marginalValue": -20.45,
+      "positionalRank": 48,
+      "projectedLeaguePoints": 169.82,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -20.956,
+      "internalPlayerId": 131,
+      "leagueValueRank": 117,
+      "leagueValueScore": -20.956,
+      "marginalValue": -20.956,
+      "positionalRank": 18,
+      "projectedLeaguePoints": 269.87,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 290.826,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -21.18,
+      "internalPlayerId": 95,
+      "leagueValueRank": 118,
+      "leagueValueScore": -21.18,
+      "marginalValue": -21.18,
+      "positionalRank": 49,
+      "projectedLeaguePoints": 169.09,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -21.49,
+      "internalPlayerId": 98,
+      "leagueValueRank": 119,
+      "leagueValueScore": -21.49,
+      "marginalValue": -21.49,
+      "positionalRank": 34,
+      "projectedLeaguePoints": 168.37,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -21.64,
+      "internalPlayerId": 114,
+      "leagueValueRank": 120,
+      "leagueValueScore": -21.64,
+      "marginalValue": -21.64,
+      "positionalRank": 35,
+      "projectedLeaguePoints": 168.22,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -22.17,
+      "internalPlayerId": 164,
+      "leagueValueRank": 121,
+      "leagueValueScore": -22.17,
+      "marginalValue": -22.17,
+      "positionalRank": 19,
+      "projectedLeaguePoints": 148.75,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 170.92,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -22.46,
+      "internalPlayerId": 111,
+      "leagueValueRank": 122,
+      "leagueValueScore": -22.46,
+      "marginalValue": -22.46,
+      "positionalRank": 36,
+      "projectedLeaguePoints": 167.4,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -22.78,
+      "internalPlayerId": 126,
+      "leagueValueRank": 123,
+      "leagueValueScore": -22.78,
+      "marginalValue": -22.78,
+      "positionalRank": 50,
+      "projectedLeaguePoints": 167.49,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -24.578,
+      "internalPlayerId": 123,
+      "leagueValueRank": 124,
+      "leagueValueScore": -24.578,
+      "marginalValue": -24.578,
+      "positionalRank": 19,
+      "projectedLeaguePoints": 266.248,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 290.826,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -27.732,
+      "internalPlayerId": 155,
+      "leagueValueRank": 125,
+      "leagueValueScore": -27.732,
+      "marginalValue": -27.732,
+      "positionalRank": 20,
+      "projectedLeaguePoints": 263.094,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 290.826,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -27.95,
+      "internalPlayerId": 100,
+      "leagueValueRank": 126,
+      "leagueValueScore": -27.95,
+      "marginalValue": -27.95,
+      "positionalRank": 51,
+      "projectedLeaguePoints": 162.32,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -29.46,
+      "internalPlayerId": 122,
+      "leagueValueRank": 127,
+      "leagueValueScore": -29.46,
+      "marginalValue": -29.46,
+      "positionalRank": 52,
+      "projectedLeaguePoints": 160.81,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -30.21,
+      "internalPlayerId": 161,
+      "leagueValueRank": 128,
+      "leagueValueScore": -30.21,
+      "marginalValue": -30.21,
+      "positionalRank": 20,
+      "projectedLeaguePoints": 140.71,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 170.92,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -32.612,
+      "internalPlayerId": 148,
+      "leagueValueRank": 129,
+      "leagueValueScore": -32.612,
+      "marginalValue": -32.612,
+      "positionalRank": 21,
+      "projectedLeaguePoints": 258.214,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 290.826,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -32.98,
+      "internalPlayerId": 108,
+      "leagueValueRank": 130,
+      "leagueValueScore": -32.98,
+      "marginalValue": -32.98,
+      "positionalRank": 53,
+      "projectedLeaguePoints": 157.29,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -33.05,
+      "internalPlayerId": 141,
+      "leagueValueRank": 131,
+      "leagueValueScore": -33.05,
+      "marginalValue": -33.05,
+      "positionalRank": 54,
+      "projectedLeaguePoints": 157.22,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -33.738,
+      "internalPlayerId": 137,
+      "leagueValueRank": 132,
+      "leagueValueScore": -33.738,
+      "marginalValue": -33.738,
+      "positionalRank": 22,
+      "projectedLeaguePoints": 257.088,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 290.826,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -33.8,
+      "internalPlayerId": 99,
+      "leagueValueRank": 133,
+      "leagueValueScore": -33.8,
+      "marginalValue": -33.8,
+      "positionalRank": 37,
+      "projectedLeaguePoints": 156.06,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -36.77,
+      "internalPlayerId": 121,
+      "leagueValueRank": 134,
+      "leagueValueScore": -36.77,
+      "marginalValue": -36.77,
+      "positionalRank": 55,
+      "projectedLeaguePoints": 153.5,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -37.49,
+      "internalPlayerId": 185,
+      "leagueValueRank": 135,
+      "leagueValueScore": -37.49,
+      "marginalValue": -37.49,
+      "positionalRank": 21,
+      "projectedLeaguePoints": 133.43,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 170.92,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -37.53,
+      "internalPlayerId": 160,
+      "leagueValueRank": 136,
+      "leagueValueScore": -37.53,
+      "marginalValue": -37.53,
+      "positionalRank": 23,
+      "projectedLeaguePoints": 253.296,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 290.826,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -37.89,
+      "internalPlayerId": 192,
+      "leagueValueRank": 137,
+      "leagueValueScore": -37.89,
+      "marginalValue": -37.89,
+      "positionalRank": 56,
+      "projectedLeaguePoints": 152.38,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -40.78,
+      "internalPlayerId": 173,
+      "leagueValueRank": 138,
+      "leagueValueScore": -40.78,
+      "marginalValue": -40.78,
+      "positionalRank": 22,
+      "projectedLeaguePoints": 130.14,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 170.92,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -41.634,
+      "internalPlayerId": 170,
+      "leagueValueRank": 139,
+      "leagueValueScore": -41.634,
+      "marginalValue": -41.634,
+      "positionalRank": 24,
+      "projectedLeaguePoints": 249.192,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 290.826,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -45.45,
+      "internalPlayerId": 88,
+      "leagueValueRank": 140,
+      "leagueValueScore": -45.45,
+      "marginalValue": -45.45,
+      "positionalRank": 38,
+      "projectedLeaguePoints": 144.41,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -45.8,
+      "internalPlayerId": 102,
+      "leagueValueRank": 141,
+      "leagueValueScore": -45.8,
+      "marginalValue": -45.8,
+      "positionalRank": 39,
+      "projectedLeaguePoints": 144.06,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -46.36,
+      "internalPlayerId": 174,
+      "leagueValueRank": 142,
+      "leagueValueScore": -46.36,
+      "marginalValue": -46.36,
+      "positionalRank": 23,
+      "projectedLeaguePoints": 124.56,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 170.92,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -46.88,
+      "internalPlayerId": 165,
+      "leagueValueRank": 143,
+      "leagueValueScore": -46.88,
+      "marginalValue": -46.88,
+      "positionalRank": 24,
+      "projectedLeaguePoints": 124.04,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 170.92,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -47.71,
+      "internalPlayerId": 154,
+      "leagueValueRank": 144,
+      "leagueValueScore": -47.71,
+      "marginalValue": -47.71,
+      "positionalRank": 57,
+      "projectedLeaguePoints": 142.56,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -47.75,
+      "internalPlayerId": 120,
+      "leagueValueRank": 145,
+      "leagueValueScore": -47.75,
+      "marginalValue": -47.75,
+      "positionalRank": 58,
+      "projectedLeaguePoints": 142.52,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -48.24,
+      "internalPlayerId": 171,
+      "leagueValueRank": 146,
+      "leagueValueScore": -48.24,
+      "marginalValue": -48.24,
+      "positionalRank": 59,
+      "projectedLeaguePoints": 142.03,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -49.19,
+      "internalPlayerId": 189,
+      "leagueValueRank": 147,
+      "leagueValueScore": -49.19,
+      "marginalValue": -49.19,
+      "positionalRank": 60,
+      "projectedLeaguePoints": 141.08,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -51.5,
+      "internalPlayerId": 116,
+      "leagueValueRank": 148,
+      "leagueValueScore": -51.5,
+      "marginalValue": -51.5,
+      "positionalRank": 40,
+      "projectedLeaguePoints": 138.36,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -53.34,
+      "internalPlayerId": 97,
+      "leagueValueRank": 149,
+      "leagueValueScore": -53.34,
+      "marginalValue": -53.34,
+      "positionalRank": 41,
+      "projectedLeaguePoints": 136.52,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -53.45,
+      "internalPlayerId": 130,
+      "leagueValueRank": 150,
+      "leagueValueScore": -53.45,
+      "marginalValue": -53.45,
+      "positionalRank": 42,
+      "projectedLeaguePoints": 136.41,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -54.944,
+      "internalPlayerId": 177,
+      "leagueValueRank": 151,
+      "leagueValueScore": -54.944,
+      "marginalValue": -54.944,
+      "positionalRank": 25,
+      "projectedLeaguePoints": 235.882,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 290.826,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -56.06,
+      "internalPlayerId": 183,
+      "leagueValueRank": 152,
+      "leagueValueScore": -56.06,
+      "marginalValue": -56.06,
+      "positionalRank": 61,
+      "projectedLeaguePoints": 134.21,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -56.18,
+      "internalPlayerId": 157,
+      "leagueValueRank": 153,
+      "leagueValueScore": -56.18,
+      "marginalValue": -56.18,
+      "positionalRank": 25,
+      "projectedLeaguePoints": 114.74,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 170.92,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -56.58,
+      "internalPlayerId": 149,
+      "leagueValueRank": 154,
+      "leagueValueScore": -56.58,
+      "marginalValue": -56.58,
+      "positionalRank": 62,
+      "projectedLeaguePoints": 133.69,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -56.72,
+      "internalPlayerId": 186,
+      "leagueValueRank": 155,
+      "leagueValueScore": -56.72,
+      "marginalValue": -56.72,
+      "positionalRank": 63,
+      "projectedLeaguePoints": 133.55,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -58.22,
+      "internalPlayerId": 153,
+      "leagueValueRank": 156,
+      "leagueValueScore": -58.22,
+      "marginalValue": -58.22,
+      "positionalRank": 43,
+      "projectedLeaguePoints": 131.64,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -59.51,
+      "internalPlayerId": 197,
+      "leagueValueRank": 157,
+      "leagueValueScore": -59.51,
+      "marginalValue": -59.51,
+      "positionalRank": 26,
+      "projectedLeaguePoints": 111.41,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 170.92,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -60.23,
+      "internalPlayerId": 162,
+      "leagueValueRank": 158,
+      "leagueValueScore": -60.23,
+      "marginalValue": -60.23,
+      "positionalRank": 64,
+      "projectedLeaguePoints": 130.04,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -61.2,
+      "internalPlayerId": 118,
+      "leagueValueRank": 159,
+      "leagueValueScore": -61.2,
+      "marginalValue": -61.2,
+      "positionalRank": 65,
+      "projectedLeaguePoints": 129.07,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -65.08,
+      "internalPlayerId": 134,
+      "leagueValueRank": 160,
+      "leagueValueScore": -65.08,
+      "marginalValue": -65.08,
+      "positionalRank": 44,
+      "projectedLeaguePoints": 124.78,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -65.97,
+      "internalPlayerId": 168,
+      "leagueValueRank": 161,
+      "leagueValueScore": -65.97,
+      "marginalValue": -65.97,
+      "positionalRank": 66,
+      "projectedLeaguePoints": 124.3,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -66.51,
+      "internalPlayerId": 144,
+      "leagueValueRank": 162,
+      "leagueValueScore": -66.51,
+      "marginalValue": -66.51,
+      "positionalRank": 67,
+      "projectedLeaguePoints": 123.76,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -66.86,
+      "internalPlayerId": 135,
+      "leagueValueRank": 163,
+      "leagueValueScore": -66.86,
+      "marginalValue": -66.86,
+      "positionalRank": 45,
+      "projectedLeaguePoints": 123.0,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -68.888,
+      "internalPlayerId": 200,
+      "leagueValueRank": 164,
+      "leagueValueScore": -68.888,
+      "marginalValue": -68.888,
+      "positionalRank": 26,
+      "projectedLeaguePoints": 221.938,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 290.826,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -69.168,
+      "internalPlayerId": 182,
+      "leagueValueRank": 165,
+      "leagueValueScore": -69.168,
+      "marginalValue": -69.168,
+      "positionalRank": 27,
+      "projectedLeaguePoints": 221.658,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 290.826,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -69.63,
+      "internalPlayerId": 188,
+      "leagueValueRank": 166,
+      "leagueValueScore": -69.63,
+      "marginalValue": -69.63,
+      "positionalRank": 68,
+      "projectedLeaguePoints": 120.64,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -70.02,
+      "internalPlayerId": 195,
+      "leagueValueRank": 167,
+      "leagueValueScore": -70.02,
+      "marginalValue": -70.02,
+      "positionalRank": 46,
+      "projectedLeaguePoints": 119.84,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -73.79,
+      "internalPlayerId": 194,
+      "leagueValueRank": 168,
+      "leagueValueScore": -73.79,
+      "marginalValue": -73.79,
+      "positionalRank": 47,
+      "projectedLeaguePoints": 116.07,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -73.97,
+      "internalPlayerId": 156,
+      "leagueValueRank": 169,
+      "leagueValueScore": -73.97,
+      "marginalValue": -73.97,
+      "positionalRank": 48,
+      "projectedLeaguePoints": 115.89,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -78.37,
+      "internalPlayerId": 132,
+      "leagueValueRank": 170,
+      "leagueValueScore": -78.37,
+      "marginalValue": -78.37,
+      "positionalRank": 69,
+      "projectedLeaguePoints": 111.9,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -83.3,
+      "internalPlayerId": 187,
+      "leagueValueRank": 171,
+      "leagueValueScore": -83.3,
+      "marginalValue": -83.3,
+      "positionalRank": 70,
+      "projectedLeaguePoints": 106.97,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -83.69,
+      "internalPlayerId": 159,
+      "leagueValueRank": 172,
+      "leagueValueScore": -83.69,
+      "marginalValue": -83.69,
+      "positionalRank": 49,
+      "projectedLeaguePoints": 106.17,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.7,
+      "flexAdjustedValue": -84.65,
+      "internalPlayerId": 180,
+      "leagueValueRank": 173,
+      "leagueValueScore": -84.65,
+      "marginalValue": -84.65,
+      "positionalRank": 71,
+      "projectedLeaguePoints": 105.62,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -84.7,
+      "internalPlayerId": 178,
+      "leagueValueRank": 174,
+      "leagueValueScore": -84.7,
+      "marginalValue": -84.7,
+      "positionalRank": 72,
+      "projectedLeaguePoints": 105.57,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -91.84,
+      "internalPlayerId": 193,
+      "leagueValueRank": 175,
+      "leagueValueScore": -91.84,
+      "marginalValue": -91.84,
+      "positionalRank": 73,
+      "projectedLeaguePoints": 98.43,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -94.21,
+      "internalPlayerId": 136,
+      "leagueValueRank": 176,
+      "leagueValueScore": -94.21,
+      "marginalValue": -94.21,
+      "positionalRank": 50,
+      "projectedLeaguePoints": 95.65,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -94.9,
+      "internalPlayerId": 128,
+      "leagueValueRank": 177,
+      "leagueValueScore": -94.9,
+      "marginalValue": -94.9,
+      "positionalRank": 51,
+      "projectedLeaguePoints": 94.96,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -96.24,
+      "internalPlayerId": 167,
+      "leagueValueRank": 178,
+      "leagueValueScore": -96.24,
+      "marginalValue": -96.24,
+      "positionalRank": 74,
+      "projectedLeaguePoints": 94.03,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -97.15,
+      "internalPlayerId": 152,
+      "leagueValueRank": 179,
+      "leagueValueScore": -97.15,
+      "marginalValue": -97.15,
+      "positionalRank": 52,
+      "projectedLeaguePoints": 92.71,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -100.65,
+      "internalPlayerId": 175,
+      "leagueValueRank": 180,
+      "leagueValueScore": -100.65,
+      "marginalValue": -100.65,
+      "positionalRank": 75,
+      "projectedLeaguePoints": 89.62,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -100.73,
+      "internalPlayerId": 179,
+      "leagueValueRank": 181,
+      "leagueValueScore": -100.73,
+      "marginalValue": -100.73,
+      "positionalRank": 76,
+      "projectedLeaguePoints": 89.54,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -101.78,
+      "internalPlayerId": 198,
+      "leagueValueRank": 182,
+      "leagueValueScore": -101.78,
+      "marginalValue": -101.78,
+      "positionalRank": 77,
+      "projectedLeaguePoints": 88.49,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -102.28,
+      "internalPlayerId": 158,
+      "leagueValueRank": 183,
+      "leagueValueScore": -102.28,
+      "marginalValue": -102.28,
+      "positionalRank": 78,
+      "projectedLeaguePoints": 87.99,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -103.65,
+      "internalPlayerId": 166,
+      "leagueValueRank": 184,
+      "leagueValueScore": -103.65,
+      "marginalValue": -103.65,
+      "positionalRank": 53,
+      "projectedLeaguePoints": 86.21,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -112.47,
+      "internalPlayerId": 145,
+      "leagueValueRank": 185,
+      "leagueValueScore": -112.47,
+      "marginalValue": -112.47,
+      "positionalRank": 54,
+      "projectedLeaguePoints": 77.39,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -116.19,
+      "internalPlayerId": 172,
+      "leagueValueRank": 186,
+      "leagueValueScore": -116.19,
+      "marginalValue": -116.19,
+      "positionalRank": 79,
+      "projectedLeaguePoints": 74.08,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -117.06,
+      "internalPlayerId": 181,
+      "leagueValueRank": 187,
+      "leagueValueScore": -117.06,
+      "marginalValue": -117.06,
+      "positionalRank": 55,
+      "projectedLeaguePoints": 72.8,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -117.91,
+      "internalPlayerId": 176,
+      "leagueValueRank": 188,
+      "leagueValueScore": -117.91,
+      "marginalValue": -117.91,
+      "positionalRank": 80,
+      "projectedLeaguePoints": 72.36,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -119.44,
+      "internalPlayerId": 140,
+      "leagueValueRank": 189,
+      "leagueValueScore": -119.44,
+      "marginalValue": -119.44,
+      "positionalRank": 56,
+      "projectedLeaguePoints": 70.42,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -122.32,
+      "internalPlayerId": 150,
+      "leagueValueRank": 190,
+      "leagueValueScore": -122.32,
+      "marginalValue": -122.32,
+      "positionalRank": 57,
+      "projectedLeaguePoints": 67.54,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -124.77,
+      "internalPlayerId": 163,
+      "leagueValueRank": 191,
+      "leagueValueScore": -124.77,
+      "marginalValue": -124.77,
+      "positionalRank": 81,
+      "projectedLeaguePoints": 65.5,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 190.27,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -143.38,
+      "internalPlayerId": 190,
+      "leagueValueRank": 192,
+      "leagueValueScore": -143.38,
+      "marginalValue": -143.38,
+      "positionalRank": 58,
+      "projectedLeaguePoints": 46.48,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -146.34,
+      "internalPlayerId": 151,
+      "leagueValueRank": 193,
+      "leagueValueScore": -146.34,
+      "marginalValue": -146.34,
+      "positionalRank": 59,
+      "projectedLeaguePoints": 43.52,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -153.68,
+      "internalPlayerId": 169,
+      "leagueValueRank": 194,
+      "leagueValueScore": -153.68,
+      "marginalValue": -153.68,
+      "positionalRank": 60,
+      "projectedLeaguePoints": 36.18,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -155.19,
+      "internalPlayerId": 184,
+      "leagueValueRank": 195,
+      "leagueValueScore": -155.19,
+      "marginalValue": -155.19,
+      "positionalRank": 61,
+      "projectedLeaguePoints": 34.67,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -155.5,
+      "internalPlayerId": 191,
+      "leagueValueRank": 196,
+      "leagueValueScore": -155.5,
+      "marginalValue": -155.5,
+      "positionalRank": 62,
+      "projectedLeaguePoints": 34.36,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -157.06,
+      "internalPlayerId": 147,
+      "leagueValueRank": 197,
+      "leagueValueScore": -157.06,
+      "marginalValue": -157.06,
+      "positionalRank": 63,
+      "projectedLeaguePoints": 32.8,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -168.34,
+      "internalPlayerId": 199,
+      "leagueValueRank": 198,
+      "leagueValueScore": -168.34,
+      "marginalValue": -168.34,
+      "positionalRank": 64,
+      "projectedLeaguePoints": 21.52,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": -169.63,
+      "internalPlayerId": 196,
+      "leagueValueRank": 199,
+      "leagueValueScore": -169.63,
+      "marginalValue": -169.63,
+      "positionalRank": 65,
+      "projectedLeaguePoints": 20.23,
+      "provenance": {
+        "formulaVersion": "step15-espn-league-value-v1",
+        "sourceArtifactIds": [
+          "player-truth-step14-2026"
+        ]
+      },
+      "replacementValueByPosition": 189.86,
+      "rosterFitAdjustment": null,
+      "status": "validated"
+    }
+  ],
+  "schemaVersion": "1.0.0",
+  "season": 2026,
+  "status": "validated"
+}

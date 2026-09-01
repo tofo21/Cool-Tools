@@ -1,0 +1,50 @@
+{
+  "artifactId": "espn-league-value-step15-2026",
+  "artifactVersion": "step15-2026.1",
+  "coverage": {
+    "duplicateInternalPlayerIds": [],
+    "leagueValueRows": 199,
+    "matchedRows": 199,
+    "missingLeagueValueIds": [],
+    "orphanLeagueValueIds": [],
+    "playerTruthRows": 199,
+    "positionCounts": {
+      "QB": 27,
+      "RB": 65,
+      "TE": 26,
+      "WR": 81
+    },
+    "top160MatchedRows": 159,
+    "top160RepresentedPlayerTruthRows": 159
+  },
+  "generatedAt": "2026-09-01T02:18:40Z",
+  "keepers": {
+    "approvedCount": 10,
+    "internalPlayerIds": [
+      68,
+      24,
+      45,
+      50,
+      90,
+      30,
+      47,
+      52,
+      26,
+      33
+    ],
+    "resolvedCount": 10
+  },
+  "playerTruth": {
+    "artifactId": "player-truth-step14-2026",
+    "fileSha256": "f6488e648af2549f1b7fa50eb485aa8f29784280144796e5e6d581a13b477bd3",
+    "payloadSha256": "be052a59ad9a0643246b2ed113e2c728fc5abfafb97e4278c53b8ea621f89694"
+  },
+  "schemaVersion": "1.0.0",
+  "specialCases": {
+    "jaydonBlue190PresentByInternalId": true,
+    "joshJacobs34ProjectionUnadjusted": true,
+    "kayshonBoutte180RecordPresent": true,
+    "keenanAllen143Absent": true
+  },
+  "status": "PASS"
+}

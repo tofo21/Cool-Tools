@@ -1,0 +1,328 @@
+{
+  "artifactId": "espn-league-value-step15-2026",
+  "artifactVersion": "step15-2026.1",
+  "baseline": {
+    "flexPositionCounts": {
+      "RB": 7,
+      "TE": 0,
+      "WR": 13
+    },
+    "flexSlots": 20,
+    "replacementLevels": {
+      "QB": 290.826,
+      "RB": 189.86,
+      "TE": 170.92,
+      "WR": 190.27
+    }
+  },
+  "generatedAt": "2026-09-01T02:18:40Z",
+  "purpose": "Diagnostic only; the published formula remains fixed at 20 FLEX starters.",
+  "scenarios": [
+    {
+      "flexPositionCounts": {
+        "RB": 6,
+        "TE": 0,
+        "WR": 12
+      },
+      "flexSlots": 18,
+      "label": "flex-minus-2",
+      "largestRankShifts": [
+        {
+          "absoluteRankShift": 4,
+          "baselineRank": 81,
+          "internalPlayerId": 63,
+          "normalizedName": "Jadarian Price",
+          "scenarioRank": 85
+        },
+        {
+          "absoluteRankShift": 3,
+          "baselineRank": 58,
+          "internalPlayerId": 57,
+          "normalizedName": "Bhayshul Tuten",
+          "scenarioRank": 61
+        },
+        {
+          "absoluteRankShift": 3,
+          "baselineRank": 61,
+          "internalPlayerId": 71,
+          "normalizedName": "Harold Fannin Jr.",
+          "scenarioRank": 58
+        },
+        {
+          "absoluteRankShift": 3,
+          "baselineRank": 72,
+          "internalPlayerId": 72,
+          "normalizedName": "Jaylen Warren",
+          "scenarioRank": 75
+        },
+        {
+          "absoluteRankShift": 3,
+          "baselineRank": 77,
+          "internalPlayerId": 77,
+          "normalizedName": "Tony Pollard",
+          "scenarioRank": 80
+        },
+        {
+          "absoluteRankShift": 2,
+          "baselineRank": 55,
+          "internalPlayerId": 47,
+          "normalizedName": "Quinshon Judkins",
+          "scenarioRank": 57
+        },
+        {
+          "absoluteRankShift": 2,
+          "baselineRank": 76,
+          "internalPlayerId": 53,
+          "normalizedName": "David Montgomery",
+          "scenarioRank": 78
+        },
+        {
+          "absoluteRankShift": 2,
+          "baselineRank": 92,
+          "internalPlayerId": 70,
+          "normalizedName": "Rhamondre Stevenson",
+          "scenarioRank": 94
+        },
+        {
+          "absoluteRankShift": 2,
+          "baselineRank": 74,
+          "internalPlayerId": 76,
+          "normalizedName": "Tucker Kraft",
+          "scenarioRank": 72
+        },
+        {
+          "absoluteRankShift": 2,
+          "baselineRank": 85,
+          "internalPlayerId": 79,
+          "normalizedName": "Caleb Williams",
+          "scenarioRank": 83
+        }
+      ],
+      "maximumAbsoluteRankShift": 4,
+      "replacementLevels": {
+        "QB": 290.826,
+        "RB": 191.3,
+        "TE": 170.92,
+        "WR": 190.73
+      },
+      "spearmanRankCorrelation": 0.999869,
+      "top20OverlapCount": 19,
+      "topTen": [
+        {
+          "internalPlayerId": 1,
+          "leagueValueRank": 1,
+          "leagueValueScore": 181.0,
+          "normalizedName": "Jahmyr Gibbs"
+        },
+        {
+          "internalPlayerId": 2,
+          "leagueValueRank": 2,
+          "leagueValueScore": 180.87,
+          "normalizedName": "Bijan Robinson"
+        },
+        {
+          "internalPlayerId": 4,
+          "leagueValueRank": 3,
+          "leagueValueScore": 149.07,
+          "normalizedName": "Puka Nacua"
+        },
+        {
+          "internalPlayerId": 3,
+          "leagueValueRank": 4,
+          "leagueValueScore": 145.28,
+          "normalizedName": "Ja'Marr Chase"
+        },
+        {
+          "internalPlayerId": 5,
+          "leagueValueRank": 5,
+          "leagueValueScore": 143.47,
+          "normalizedName": "Christian McCaffrey"
+        },
+        {
+          "internalPlayerId": 7,
+          "leagueValueRank": 6,
+          "leagueValueScore": 133.62,
+          "normalizedName": "Jaxon Smith-Njigba"
+        },
+        {
+          "internalPlayerId": 8,
+          "leagueValueRank": 7,
+          "leagueValueScore": 128.76,
+          "normalizedName": "Amon-Ra St. Brown"
+        },
+        {
+          "internalPlayerId": 6,
+          "leagueValueRank": 8,
+          "leagueValueScore": 121.56,
+          "normalizedName": "Jonathan Taylor"
+        },
+        {
+          "internalPlayerId": 12,
+          "leagueValueRank": 9,
+          "leagueValueScore": 100.81,
+          "normalizedName": "De'Von Achane"
+        },
+        {
+          "internalPlayerId": 17,
+          "leagueValueRank": 10,
+          "leagueValueScore": 98.19,
+          "normalizedName": "Drake London"
+        }
+      ]
+    },
+    {
+      "flexPositionCounts": {
+        "RB": 8,
+        "TE": 0,
+        "WR": 14
+      },
+      "flexSlots": 22,
+      "label": "flex-plus-2",
+      "largestRankShifts": [
+        {
+          "absoluteRankShift": 4,
+          "baselineRank": 87,
+          "internalPlayerId": 82,
+          "normalizedName": "Rico Dowdle",
+          "scenarioRank": 83
+        },
+        {
+          "absoluteRankShift": 4,
+          "baselineRank": 117,
+          "internalPlayerId": 131,
+          "normalizedName": "Baker Mayfield",
+          "scenarioRank": 121
+        },
+        {
+          "absoluteRankShift": 3,
+          "baselineRank": 13,
+          "internalPlayerId": 23,
+          "normalizedName": "Trey McBride",
+          "scenarioRank": 16
+        },
+        {
+          "absoluteRankShift": 3,
+          "baselineRank": 79,
+          "internalPlayerId": 112,
+          "normalizedName": "Patrick Mahomes II",
+          "scenarioRank": 82
+        },
+        {
+          "absoluteRankShift": 3,
+          "baselineRank": 129,
+          "internalPlayerId": 148,
+          "normalizedName": "Malik Willis",
+          "scenarioRank": 132
+        },
+        {
+          "absoluteRankShift": 2,
+          "baselineRank": 15,
+          "internalPlayerId": 16,
+          "normalizedName": "Derrick Henry",
+          "scenarioRank": 13
+        },
+        {
+          "absoluteRankShift": 2,
+          "baselineRank": 53,
+          "internalPlayerId": 39,
+          "normalizedName": "Ladd McConkey",
+          "scenarioRank": 51
+        },
+        {
+          "absoluteRankShift": 2,
+          "baselineRank": 39,
+          "internalPlayerId": 40,
+          "normalizedName": "Colston Loveland",
+          "scenarioRank": 41
+        },
+        {
+          "absoluteRankShift": 2,
+          "baselineRank": 81,
+          "internalPlayerId": 63,
+          "normalizedName": "Jadarian Price",
+          "scenarioRank": 79
+        },
+        {
+          "absoluteRankShift": 2,
+          "baselineRank": 80,
+          "internalPlayerId": 65,
+          "normalizedName": "Christian Watson",
+          "scenarioRank": 78
+        }
+      ],
+      "maximumAbsoluteRankShift": 4,
+      "replacementLevels": {
+        "QB": 290.826,
+        "RB": 188.21,
+        "TE": 170.92,
+        "WR": 188.93
+      },
+      "spearmanRankCorrelation": 0.999849,
+      "top20OverlapCount": 20,
+      "topTen": [
+        {
+          "internalPlayerId": 1,
+          "leagueValueRank": 1,
+          "leagueValueScore": 184.09,
+          "normalizedName": "Jahmyr Gibbs"
+        },
+        {
+          "internalPlayerId": 2,
+          "leagueValueRank": 2,
+          "leagueValueScore": 183.96,
+          "normalizedName": "Bijan Robinson"
+        },
+        {
+          "internalPlayerId": 4,
+          "leagueValueRank": 3,
+          "leagueValueScore": 150.87,
+          "normalizedName": "Puka Nacua"
+        },
+        {
+          "internalPlayerId": 3,
+          "leagueValueRank": 4,
+          "leagueValueScore": 147.08,
+          "normalizedName": "Ja'Marr Chase"
+        },
+        {
+          "internalPlayerId": 5,
+          "leagueValueRank": 5,
+          "leagueValueScore": 146.56,
+          "normalizedName": "Christian McCaffrey"
+        },
+        {
+          "internalPlayerId": 7,
+          "leagueValueRank": 6,
+          "leagueValueScore": 135.42,
+          "normalizedName": "Jaxon Smith-Njigba"
+        },
+        {
+          "internalPlayerId": 8,
+          "leagueValueRank": 7,
+          "leagueValueScore": 130.56,
+          "normalizedName": "Amon-Ra St. Brown"
+        },
+        {
+          "internalPlayerId": 6,
+          "leagueValueRank": 8,
+          "leagueValueScore": 124.65,
+          "normalizedName": "Jonathan Taylor"
+        },
+        {
+          "internalPlayerId": 12,
+          "leagueValueRank": 9,
+          "leagueValueScore": 103.9,
+          "normalizedName": "De'Von Achane"
+        },
+        {
+          "internalPlayerId": 17,
+          "leagueValueRank": 10,
+          "leagueValueScore": 99.99,
+          "normalizedName": "Drake London"
+        }
+      ]
+    }
+  ],
+  "schemaVersion": "1.0.0",
+  "status": "PASS"
+}

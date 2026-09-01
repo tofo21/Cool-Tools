@@ -1,0 +1,81 @@
+{
+  "artifactId": "espn-league-value-step15-2026",
+  "artifactVersion": "step15-2026.1",
+  "canonicalPayloadSha256": "5957c33276b19d5d73305e1be50f9649c97be55c9bc55932ed9bafc39fd5f785",
+  "files": [
+    {
+      "bytes": 584,
+      "path": "../../../reports/STEP15_ESPN_LEAGUE_VALUE_COVERAGE.md",
+      "sha256": "a9b5638296b14b7d275e770f8d209a385dace6c286d2df0fda901a7b5c16e422"
+    },
+    {
+      "bytes": 5055,
+      "path": "../../../reports/STEP15_ESPN_LEAGUE_VALUE_FORMULA.md",
+      "sha256": "fc59830baf3cb5d1789e6c71daf3a2f34d07d341b850d53c790f58934b06c237"
+    },
+    {
+      "bytes": 1165,
+      "path": "../../../reports/STEP15_ESPN_LEAGUE_VALUE_REPLACEMENT_LEVELS.md",
+      "sha256": "87ab959ac0fde61c2281f8364a5d29a3627faaf0d9a069c0bfc4fe8ad5a8e4a8"
+    },
+    {
+      "bytes": 487,
+      "path": "../../../reports/STEP15_ESPN_LEAGUE_VALUE_SENSITIVITY.md",
+      "sha256": "cd0c5fd7571c973d3b3e49baa4b8da851868bcdac7121ce5c6219aa230d11e73"
+    },
+    {
+      "bytes": 1740,
+      "path": "../../../reports/STEP15_ESPN_LEAGUE_VALUE_VALIDATION.md",
+      "sha256": "efcf2b5291e57038816cc46f42e8661e08933c099c0a274f1bf57b9b0698347e"
+    },
+    {
+      "bytes": 525,
+      "path": "REPRODUCTION.md",
+      "sha256": "76d267a9f71b83236239c1830acdbd68afb7b9d9b90d4fa4da95350224a0a86e"
+    },
+    {
+      "bytes": 110145,
+      "path": "espn_league_value_step15.json",
+      "sha256": "d3acb8a3e681df4835e512cb6a3b694c7d470787a76be072166876db489b2272"
+    },
+    {
+      "bytes": 1190,
+      "path": "espn_league_value_step15_coverage_report.json",
+      "sha256": "0cec505c8d8e5af5235d1916109dcef6c3844616aa3b798f261da3ad6ac55831"
+    },
+    {
+      "bytes": 493,
+      "path": "espn_league_value_step15_deterministic_build_proof.json",
+      "sha256": "89aafa21cc2b1b01553260d7afdfbeeb8dd9701adfddcd7a2164bd504133b097"
+    },
+    {
+      "bytes": 7732,
+      "path": "espn_league_value_step15_replacement_level_report.json",
+      "sha256": "8f6afba38e953fa526164d58fec571cf7cf36e9cfe542fd4bb3675b05a873584"
+    },
+    {
+      "bytes": 8716,
+      "path": "espn_league_value_step15_sensitivity_report.json",
+      "sha256": "b321491cc94f8ba80a9df4cbede59cf804fc43bfb076c9054456efb4312da9cb"
+    },
+    {
+      "bytes": 3157,
+      "path": "espn_league_value_step15_validation_report.json",
+      "sha256": "9a199cfb2fea89a955d1419eda819fdca0938c26b9d73abcdd4205cb5eee72d7"
+    }
+  ],
+  "generatedAt": "2026-09-01T02:18:40Z",
+  "schemaVersion": "1.0.0",
+  "settingsHash": "c2acb8af78601b65657016b4f292eb7af565442e2e9373ffc1bf390b64bd7245",
+  "sourceInvariants": {
+    "builderFileSha256": "92f0210d3e091bf469fea89e850e1bb69381d569491c96cee9aaeb369ef84a12",
+    "leagueValueSchemaSha256": "4c72326f4e30d265c8a9f0a13349cbbe7ed462ff8a9abbb3b0756d5c2427b01e",
+    "playerTruthFileSha256": "f6488e648af2549f1b7fa50eb485aa8f29784280144796e5e6d581a13b477bd3",
+    "playerTruthPayloadSha256": "be052a59ad9a0643246b2ed113e2c728fc5abfafb97e4278c53b8ea621f89694",
+    "runtimeContractCommit": "546687a9f462ae6b26693055b15c0f13044f84e2",
+    "settingsFileSha256": "a87fef98bf52b2225378ecb6e253e77cd3cf3cb7f1348f60c32cc51e54855147",
+    "step14Commit": "827a8f0fddc8ad979565edea0ab7e8138840f15b",
+    "step14Tree": "b08d889414b5d9c18fdb86ace48abe799cfff81c"
+  },
+  "status": "PASS"
+}

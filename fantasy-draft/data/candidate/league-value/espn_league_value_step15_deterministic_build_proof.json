@@ -1,0 +1,11 @@
+{
+  "artifactId": "espn-league-value-step15-2026",
+  "artifactVersion": "step15-2026.1",
+  "byteIdentical": true,
+  "canonicalPayloadSha256": "5957c33276b19d5d73305e1be50f9649c97be55c9bc55932ed9bafc39fd5f785",
+  "firstBuildSha256": "d3acb8a3e681df4835e512cb6a3b694c7d470787a76be072166876db489b2272",
+  "generatedAt": "2026-09-01T02:18:40Z",
+  "schemaVersion": "1.0.0",
+  "secondBuildSha256": "d3acb8a3e681df4835e512cb6a3b694c7d470787a76be072166876db489b2272",
+  "serializationBuildCount": 2
+}

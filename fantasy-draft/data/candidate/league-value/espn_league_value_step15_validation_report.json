@@ -1,0 +1,124 @@
+{
+  "artifactId": "espn-league-value-step15-2026",
+  "artifactVersion": "step15-2026.1",
+  "checks": [
+    {
+      "check": "player_truth_file_hash",
+      "detail": "f6488e648af2549f1b7fa50eb485aa8f29784280144796e5e6d581a13b477bd3",
+      "status": "PASS"
+    },
+    {
+      "check": "player_truth_payload_hash",
+      "detail": "be052a59ad9a0643246b2ed113e2c728fc5abfafb97e4278c53b8ea621f89694",
+      "status": "PASS"
+    },
+    {
+      "check": "coverage_199_of_199",
+      "detail": "199",
+      "status": "PASS"
+    },
+    {
+      "check": "top160_159_of_159",
+      "detail": "159",
+      "status": "PASS"
+    },
+    {
+      "check": "no_duplicates",
+      "detail": "[]",
+      "status": "PASS"
+    },
+    {
+      "check": "no_orphans",
+      "detail": "[]",
+      "status": "PASS"
+    },
+    {
+      "check": "no_missing_records",
+      "detail": "[]",
+      "status": "PASS"
+    },
+    {
+      "check": "keenan_allen_absent",
+      "detail": "internalPlayerId 143 absent",
+      "status": "PASS"
+    },
+    {
+      "check": "jaydon_blue_internal_id_only",
+      "detail": "internalPlayerId 190 present; ESPN ID remains null upstream",
+      "status": "PASS"
+    },
+    {
+      "check": "josh_jacobs_unadjusted",
+      "detail": "256.850 points; 17 games",
+      "status": "PASS"
+    },
+    {
+      "check": "kayshon_boutte_conflict_preserved",
+      "detail": "Draft Command HOU; source NE limitation retained",
+      "status": "PASS"
+    },
+    {
+      "check": "keeper_count_and_identity",
+      "detail": "{'QB': 1, 'RB': 3, 'WR': 4, 'TE': 2}",
+      "status": "PASS"
+    },
+    {
+      "check": "league_geometry",
+      "detail": "10/16/5/160/team-05",
+      "status": "PASS"
+    },
+    {
+      "check": "mandatory_allocation",
+      "detail": "{'QB': 10, 'RB': 20, 'WR': 20, 'TE': 10}",
+      "status": "PASS"
+    },
+    {
+      "check": "flex_allocation",
+      "detail": "{'RB': 7, 'WR': 13, 'TE': 0}",
+      "status": "PASS"
+    },
+    {
+      "check": "no_flex_double_counting",
+      "detail": "flexAdjustedValue == marginalValue == leagueValueScore",
+      "status": "PASS"
+    },
+    {
+      "check": "numeric_rank_consistency",
+      "detail": "records emitted in numeric League Value rank order",
+      "status": "PASS"
+    },
+    {
+      "check": "tie_breaking",
+      "detail": "score descending; ID ascending",
+      "status": "PASS"
+    },
+    {
+      "check": "finite_numeric_values",
+      "detail": "all required numeric fields finite",
+      "status": "PASS"
+    },
+    {
+      "check": "roster_fit_separate",
+      "detail": "all rosterFitAdjustment values null",
+      "status": "PASS"
+    },
+    {
+      "check": "negative_values_retained",
+      "detail": "below-replacement values are not floored",
+      "status": "PASS"
+    },
+    {
+      "check": "market_fields_absent",
+      "detail": "no market or Opponent Intent fields in records",
+      "status": "PASS"
+    },
+    {
+      "check": "payload_signature",
+      "detail": "5957c33276b19d5d73305e1be50f9649c97be55c9bc55932ed9bafc39fd5f785",
+      "status": "PASS"
+    }
+  ],
+  "generatedAt": "2026-09-01T02:18:40Z",
+  "schemaVersion": "1.0.0",
+  "status": "PASS"
+}

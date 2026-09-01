@@ -1,0 +1,107 @@
+{
+  "schemaVersion": "1.0.0",
+  "leagueSettingsVersion": "espn-167404-2026-v1",
+  "leagueId": "167404",
+  "season": 2026,
+  "platform": "ESPN",
+  "scoringFormat": "full_ppr",
+  "teamCount": 10,
+  "rounds": 16,
+  "draftSlot": 5,
+  "totalPicks": 160,
+  "tonyTeamId": "team-05",
+  "rosterFormat": {
+    "starters": {
+      "QB": 1,
+      "RB": 2,
+      "WR": 2,
+      "TE": 1,
+      "FLEX": 2,
+      "K": 0,
+      "DST": 0
+    },
+    "bench": 8,
+    "ir": 0
+  },
+  "keepers": [
+    {
+      "teamId": "team-01",
+      "internalPlayerId": 68,
+      "normalizedName": "Sam LaPorta",
+      "round": 6,
+      "overallPick": 60
+    },
+    {
+      "teamId": "team-02",
+      "internalPlayerId": 24,
+      "normalizedName": "George Pickens",
+      "round": 6,
+      "overallPick": 59
+    },
+    {
+      "teamId": "team-03",
+      "internalPlayerId": 45,
+      "normalizedName": "Cam Skattebo",
+      "round": 10,
+      "overallPick": 98
+    },
+    {
+      "teamId": "team-04",
+      "internalPlayerId": 50,
+      "normalizedName": "Tyler Warren",
+      "round": 9,
+      "overallPick": 84
+    },
+    {
+      "teamId": "team-05",
+      "internalPlayerId": 90,
+      "normalizedName": "Jaxson Dart",
+      "round": 16,
+      "overallPick": 156
+    },
+    {
+      "teamId": "team-06",
+      "internalPlayerId": 30,
+      "normalizedName": "Rashee Rice",
+      "round": 7,
+      "overallPick": 66
+    },
+    {
+      "teamId": "team-07",
+      "internalPlayerId": 47,
+      "normalizedName": "Quinshon Judkins",
+      "round": 12,
+      "overallPick": 114
+    },
+    {
+      "teamId": "team-08",
+      "internalPlayerId": 52,
+      "normalizedName": "Luther Burden III",
+      "repositoryDisplayName": "Luther Burden",
+      "round": 14,
+      "overallPick": 133
+    },
+    {
+      "teamId": "team-09",
+      "internalPlayerId": 26,
+      "normalizedName": "Chris Olave",
+      "round": 9,
+      "overallPick": 89
+    },
+    {
+      "teamId": "team-10",
+      "internalPlayerId": 33,
+      "normalizedName": "Javonte Williams",
+      "round": 9,
+      "overallPick": 90
+    }
+  ],
+  "sourceProvenance": {
+    "step14Commit": "827a8f0fddc8ad979565edea0ab7e8138840f15b",
+    "runtimeContractCommit": "546687a9f462ae6b26693055b15c0f13044f84e2",
+    "espnMarketCommit": "49951ca1d45b92a906f84366a02d40c8c2e07e12",
+    "leagueProfileArtifact": "fantasy-draft/app.js@827a8f0fddc8ad979565edea0ab7e8138840f15b",
+    "keeperVerificationArtifact": "espn_2026_league_keeper_verification_espn_2026_frozen_20260901T003012Z_3379127ab1c0",
+    "rosterDerivation": "Sixteen active roster spots minus eight starters equals eight bench spots; IR is excluded from active draft demand."
+  }
+}

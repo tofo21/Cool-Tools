@@ -1,0 +1,301 @@
+{
+  "artifactId": "espn-league-value-step15-2026",
+  "artifactVersion": "step15-2026.1",
+  "flex": {
+    "allocated": 20,
+    "players": [
+      {
+        "internalPlayerId": 49,
+        "normalizedName": "Bucky Irving",
+        "position": "RB",
+        "projectedLeaguePoints": 224.1
+      },
+      {
+        "internalPlayerId": 46,
+        "normalizedName": "D'Andre Swift",
+        "position": "RB",
+        "projectedLeaguePoints": 222.7
+      },
+      {
+        "internalPlayerId": 35,
+        "normalizedName": "Tee Higgins",
+        "position": "WR",
+        "projectedLeaguePoints": 221.48
+      },
+      {
+        "internalPlayerId": 55,
+        "normalizedName": "Jameson Williams",
+        "position": "WR",
+        "projectedLeaguePoints": 217.33
+      },
+      {
+        "internalPlayerId": 39,
+        "normalizedName": "Ladd McConkey",
+        "position": "WR",
+        "projectedLeaguePoints": 212.4
+      },
+      {
+        "internalPlayerId": 51,
+        "normalizedName": "Terry McLaurin",
+        "position": "WR",
+        "projectedLeaguePoints": 211.31
+      },
+      {
+        "internalPlayerId": 43,
+        "normalizedName": "Jaylen Waddle",
+        "position": "WR",
+        "projectedLeaguePoints": 209.68
+      },
+      {
+        "internalPlayerId": 58,
+        "normalizedName": "Rome Odunze",
+        "position": "WR",
+        "projectedLeaguePoints": 209.55
+      },
+      {
+        "internalPlayerId": 54,
+        "normalizedName": "DJ Moore",
+        "position": "WR",
+        "projectedLeaguePoints": 208.16
+      },
+      {
+        "internalPlayerId": 57,
+        "normalizedName": "Bhayshul Tuten",
+        "position": "RB",
+        "projectedLeaguePoints": 207.98
+      },
+      {
+        "internalPlayerId": 93,
+        "normalizedName": "Alec Pierce",
+        "position": "WR",
+        "projectedLeaguePoints": 207.21
+      },
+      {
+        "internalPlayerId": 81,
+        "normalizedName": "Courtland Sutton",
+        "position": "WR",
+        "projectedLeaguePoints": 204.32
+      },
+      {
+        "internalPlayerId": 62,
+        "normalizedName": "Mike Evans",
+        "position": "WR",
+        "projectedLeaguePoints": 204.1
+      },
+      {
+        "internalPlayerId": 61,
+        "normalizedName": "TreVeyon Henderson",
+        "position": "RB",
+        "projectedLeaguePoints": 201.64
+      },
+      {
+        "internalPlayerId": 67,
+        "normalizedName": "Marvin Harrison Jr.",
+        "position": "WR",
+        "projectedLeaguePoints": 197.22
+      },
+      {
+        "internalPlayerId": 73,
+        "normalizedName": "DK Metcalf",
+        "position": "WR",
+        "projectedLeaguePoints": 194.91
+      },
+      {
+        "internalPlayerId": 72,
+        "normalizedName": "Jaylen Warren",
+        "position": "RB",
+        "projectedLeaguePoints": 194.52
+      },
+      {
+        "internalPlayerId": 53,
+        "normalizedName": "David Montgomery",
+        "position": "RB",
+        "projectedLeaguePoints": 191.68
+      },
+      {
+        "internalPlayerId": 77,
+        "normalizedName": "Tony Pollard",
+        "position": "RB",
+        "projectedLeaguePoints": 191.3
+      },
+      {
+        "internalPlayerId": 65,
+        "normalizedName": "Christian Watson",
+        "position": "WR",
+        "projectedLeaguePoints": 190.73
+      }
+    ],
+    "positionCounts": {
+      "RB": 7,
+      "TE": 0,
+      "WR": 13
+    },
+    "required": 20
+  },
+  "formulaVersion": "step15-espn-league-value-v1",
+  "generatedAt": "2026-09-01T02:18:40Z",
+  "initialRosterFitState": {
+    "assignedSlot": "QB",
+    "keeper": {
+      "internalPlayerId": 90,
+      "normalizedName": "Jaxson Dart",
+      "position": "QB",
+      "projectedLeaguePoints": 300.056
+    },
+    "reason": "live roster-fit function is separate from immutable base League Value",
+    "rosterFitAdjustment": null,
+    "teamId": "team-05"
+  },
+  "keeperAssignments": [
+    {
+      "assignedSlot": "TE1",
+      "internalPlayerId": 68,
+      "normalizedName": "Sam LaPorta",
+      "overallPick": 60,
+      "position": "TE",
+      "projectedLeaguePoints": 183.7,
+      "round": 6,
+      "teamId": "team-01"
+    },
+    {
+      "assignedSlot": "WR1",
+      "internalPlayerId": 24,
+      "normalizedName": "George Pickens",
+      "overallPick": 59,
+      "position": "WR",
+      "projectedLeaguePoints": 252.14,
+      "round": 6,
+      "teamId": "team-02"
+    },
+    {
+      "assignedSlot": "RB1",
+      "internalPlayerId": 45,
+      "normalizedName": "Cam Skattebo",
+      "overallPick": 98,
+      "position": "RB",
+      "projectedLeaguePoints": 244.23,
+      "round": 10,
+      "teamId": "team-03"
+    },
+    {
+      "assignedSlot": "TE1",
+      "internalPlayerId": 50,
+      "normalizedName": "Tyler Warren",
+      "overallPick": 84,
+      "position": "TE",
+      "projectedLeaguePoints": 201.96,
+      "round": 9,
+      "teamId": "team-04"
+    },
+    {
+      "assignedSlot": "QB1",
+      "internalPlayerId": 90,
+      "normalizedName": "Jaxson Dart",
+      "overallPick": 156,
+      "position": "QB",
+      "projectedLeaguePoints": 300.056,
+      "round": 16,
+      "teamId": "team-05"
+    },
+    {
+      "assignedSlot": "WR1",
+      "internalPlayerId": 30,
+      "normalizedName": "Rashee Rice",
+      "overallPick": 66,
+      "position": "WR",
+      "projectedLeaguePoints": 273.65,
+      "round": 7,
+      "teamId": "team-06"
+    },
+    {
+      "assignedSlot": "RB1",
+      "internalPlayerId": 47,
+      "normalizedName": "Quinshon Judkins",
+      "overallPick": 114,
+      "position": "RB",
+      "projectedLeaguePoints": 209.77,
+      "round": 12,
+      "teamId": "team-07"
+    },
+    {
+      "assignedSlot": "WR1",
+      "internalPlayerId": 52,
+      "normalizedName": "Luther Burden III",
+      "overallPick": 133,
+      "position": "WR",
+      "projectedLeaguePoints": 208.04,
+      "round": 14,
+      "teamId": "team-08"
+    },
+    {
+      "assignedSlot": "WR1",
+      "internalPlayerId": 26,
+      "normalizedName": "Chris Olave",
+      "overallPick": 89,
+      "position": "WR",
+      "projectedLeaguePoints": 257.75,
+      "round": 9,
+      "teamId": "team-09"
+    },
+    {
+      "assignedSlot": "RB1",
+      "internalPlayerId": 33,
+      "normalizedName": "Javonte Williams",
+      "overallPick": 90,
+      "position": "RB",
+      "projectedLeaguePoints": 234.29,
+      "round": 9,
+      "teamId": "team-10"
+    }
+  ],
+  "keeperPositionCounts": {
+    "QB": 1,
+    "RB": 3,
+    "TE": 2,
+    "WR": 4
+  },
+  "mandatoryDemand": {
+    "QB": 10,
+    "RB": 20,
+    "TE": 10,
+    "WR": 20
+  },
+  "mandatoryNonkeeperCounts": {
+    "QB": 9,
+    "RB": 17,
+    "TE": 8,
+    "WR": 16
+  },
+  "methodVersion": "keeper-initialized-starter-allocation-v1",
+  "replacementLevels": {
+    "QB": {
+      "definition": "highest projected available non-keeper after mandatory and FLEX allocation",
+      "internalPlayerId": 87,
+      "normalizedName": "Trevor Lawrence",
+      "position": "QB",
+      "projectedLeaguePoints": 290.826
+    },
+    "RB": {
+      "definition": "highest projected available non-keeper after mandatory and FLEX allocation",
+      "internalPlayerId": 63,
+      "normalizedName": "Jadarian Price",
+      "position": "RB",
+      "projectedLeaguePoints": 189.86
+    },
+    "TE": {
+      "definition": "highest projected available non-keeper after mandatory and FLEX allocation",
+      "internalPlayerId": 85,
+      "normalizedName": "George Kittle",
+      "position": "TE",
+      "projectedLeaguePoints": 170.92
+    },
+    "WR": {
+      "definition": "highest projected available non-keeper after mandatory and FLEX allocation",
+      "internalPlayerId": 86,
+      "normalizedName": "Michael Pittman Jr.",
+      "position": "WR",
+      "projectedLeaguePoints": 190.27
+    }
+  },
+  "schemaVersion": "1.0.0"
+}
