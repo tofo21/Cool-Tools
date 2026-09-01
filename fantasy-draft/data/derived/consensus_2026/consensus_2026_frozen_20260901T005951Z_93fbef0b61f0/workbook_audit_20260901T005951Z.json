@@ -1,0 +1,66 @@
+{
+  "archive_valid": true,
+  "attribution": "All consensus projections sourced from http://www.fantasypros.com/nfl/projections",
+  "core_metadata": {
+    "created": "2013-07-04T17:20:53Z",
+    "creator": "Bob",
+    "last_modified_by": "Bob Mello",
+    "modified": "2026-08-08T13:32:00Z"
+  },
+  "raw_sheet_headers": {
+    "QB": [
+      "Player",
+      "Team",
+      "PASSATT",
+      "PASSCMP",
+      "PASSYDS",
+      "PASSTDS",
+      "PASSINTS",
+      "RUSHATT",
+      "RUSHYDS",
+      "RUSHTDS",
+      "FL",
+      "FPTS"
+    ],
+    "RB": [
+      "PLAYER",
+      "TEAM",
+      "RUSHATT",
+      "RUSHYDS",
+      "RUSHTDS",
+      "REC",
+      "RECYDS",
+      "RECTDS",
+      "FL",
+      "FPTS"
+    ],
+    "TE": [
+      "Player",
+      "Team",
+      "REC",
+      "recYDS",
+      "recTDS",
+      "FL",
+      "FPTS"
+    ],
+    "WR": [
+      "Player",
+      "TEAM",
+      "REC",
+      "RECYDS",
+      "RECTDS",
+      "RUSHATT",
+      "RUSHYDS",
+      "RUDHTDS",
+      "FL",
+      "FPTS"
+    ]
+  },
+  "row_counts": {
+    "QB": 81,
+    "RB": 131,
+    "TE": 118,
+    "WR": 190
+  },
+  "sha256": "93fbef0b61f070d1a1ee66afa1d49355e739bd1b9277459dd1149717c909c48c"
+}

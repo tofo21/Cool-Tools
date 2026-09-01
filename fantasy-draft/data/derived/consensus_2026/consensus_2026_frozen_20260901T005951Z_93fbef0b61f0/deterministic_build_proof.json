@@ -1,0 +1,39 @@
+{
+  "build_a_equals_build_b": true,
+  "byte_identical": true,
+  "compared_file_count": 18,
+  "comparison_method": "SHA-256 and byte-for-byte equality for every generated file",
+  "core_aggregate_sha256": "cb4353fe303fdca26d90bf2112fe5cff7adcda549e8117f0d1f35d3dd3444e4b",
+  "core_file_count": 15,
+  "core_file_sha256": {
+    "CONSENSUS_PROJECTION_SOURCE_CONTRACT_2026_ADDENDUM.md": "6819f4bc1b6c2fec0995e0eb086957d7be50fbb829b727d9199bf50f55dbc600",
+    "REPRODUCTION.md": "4136d38432973263f4cf99476dde44df347a84843ad3fb6203f7553194d167b4",
+    "STEP14_CONSENSUS_PROJECTION_HANDOFF.md": "7cf2f86fb6175b516d8acc980b1719afc38e670b38cff837a613cb7a21078419",
+    "coverage_report_20260901T005951Z.csv": "d807d9623a2214940d6ed85231bc12f555cb10a74950e68368318c4668ea7f79",
+    "current_2026_consensus_components_20260901T005951Z.csv": "8ab2386145f49cf2a44bc0c5667400e68e8bb49b4d63d15f0d416d7bd1d742c6",
+    "duplicate_conflict_report_20260901T005951Z.csv": "ba8c2804b720b77918b89f83154839a7ef233b70507189c7a80010acd7f9f89f",
+    "identity_crosswalk_20260901T005951Z.csv": "a4bedd82a37f878e0949d7ce51986f50555ee45a072efcb3bd1594ce146178f0",
+    "raw_source_manifest_20260901T005951Z.csv": "e9be881eb986106079447dda783b0f5fb476d735c1070f109ed9213517bc2185",
+    "schema_20260901T005951Z.json": "8bcb9dd025aba231c20469275f72e79d3306a8bc4d582f61c907b3c9824eb262",
+    "source_comparison_detail_20260901T005951Z.csv": "f37808a4faf45a4eac18c715473c3cb7134651b1f15b6ed1ea654b592ac72973",
+    "source_comparison_report_20260901T005951Z.md": "0a27aa5a705e583ec33295aa315981f14035ca989b82586efcd5acf12b692e52",
+    "unmatched_players_20260901T005951Z.csv": "eae74705d4ad778b272fad351f8324d3f596df47170569a842eab0d0f00cce97",
+    "validation_report_20260901T005951Z.json": "176aac41d93df05306db0ed0c48d4a66867d7255e5724bef05d20237acb75bcb",
+    "validation_report_20260901T005951Z.md": "8d4252379eb455d96ca636dccb3cd2c7d45553765d3d771f73abf6a13846e619",
+    "workbook_audit_20260901T005951Z.json": "f02e170a3e1e4c8a7b6bd9b53e064b1b79385170ac507064abe7748aaa533187"
+  },
+  "finalization_outputs": [
+    "deterministic_build_proof.json",
+    "processed_source_manifest_20260901T005951Z.csv",
+    "SHA256SUMS"
+  ],
+  "frozen_input_sha256": {
+    "2026_FantasyFootball_0.4_elboberto_20260901T005951Z.xlsm": "93fbef0b61f070d1a1ee66afa1d49355e739bd1b9277459dd1149717c909c48c",
+    "fantasy-draft/data/players.js": "0550e7275294e3573f9fb3b7818fc110bc3925e08a30833f31def8647662eca3",
+    "fantasypros_2026_qb_20260901T005951Z.html": "7cc684630b2571ea4552c0dd0d64e1ced346a776ce8121fe5ddff3c0cb0c9b3b",
+    "fantasypros_2026_rb_20260901T005951Z.html": "e1237cb2861bb42d5fe7f3bf849a7ce1878fb3a951a580a845317a414793015b",
+    "fantasypros_2026_te_20260901T005951Z.html": "1635346aa71a65ba3f080324b588f9771f8139800a96fc4a82252d30bcec935a",
+    "fantasypros_2026_wr_20260901T005951Z.html": "876834d626a13f4936961b50fd09c2b876e3ce7cfdddbf93da6d329e3f2e912f"
+  },
+  "snapshot_id": "consensus_2026_frozen_20260901T005951Z_93fbef0b61f0"
+}

@@ -1,0 +1,2 @@
+conflict_type,severity,position,source_name,canonical_name,source_team,draft_command_team,resolution
+TEAM_MISMATCH_SOURCE_VS_DRAFT_COMMAND,INFORMATIONAL_SOURCE_TIMESTAMP_DIFFERENCE,WR,Kayshon Boutte,Kayshon Boutte,NE,HOU,preserve_source_team_do_not_overwrite

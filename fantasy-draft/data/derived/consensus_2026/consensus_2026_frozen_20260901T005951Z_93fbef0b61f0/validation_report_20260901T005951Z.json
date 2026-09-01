@@ -1,0 +1,66 @@
+{
+  "canonical_source": "ElBoberto 2026 v0.4",
+  "canonical_source_state": "FROZEN_CANONICAL_SAME_FAMILY_WORKBOOK_DIRECT_CAPTURE_INCOMPLETE",
+  "coverage": {
+    "board_gap_count": 1,
+    "board_gaps": [
+      {
+        "board_order": 143,
+        "name": "Keenan Allen",
+        "position": "WR",
+        "team": "IND"
+      }
+    ],
+    "overall_pct": "99.50",
+    "top_100_pct": "100.00"
+  },
+  "diagnostics": {
+    "duplicate_count": 0,
+    "finite_error_count": 0,
+    "informational_team_conflict_count": 1,
+    "missing_required_component_count": 0,
+    "recalculation_error_count": 0
+  },
+  "gates": {
+    "all_top_board_gaps_identified": "PASS",
+    "archive_integrity": "PASS",
+    "complete_position_applicable_components": "PASS",
+    "deterministic_build_design": "PASS",
+    "direct_capture_rejected_for_incomplete_coverage": "PASS",
+    "direct_pages_explicit_august_31_dates": "PASS",
+    "direct_pages_identified_as_2026": "PASS",
+    "direct_raw_sha256": "PASS",
+    "draft_command_universe_sha256": "PASS",
+    "each_position_coverage_at_least_95_pct": "PASS",
+    "explicit_workbook_source_date": "PASS",
+    "finite_numeric_values": "PASS",
+    "full_ppr_recalculation_exact": "PASS",
+    "josh_jacobs_source_projection_preserved_without_adjustment": "PASS",
+    "no_credentials_cookies_or_authenticated_responses": "PASS",
+    "no_rank_or_adp_fields": "PASS",
+    "overall_board_coverage_at_least_95_pct": "PASS",
+    "required_positions_only": "PASS",
+    "stable_unambiguous_identity_joins": "PASS",
+    "top_100_board_coverage_100_pct": "PASS",
+    "unique_canonical_name_position_records": "PASS",
+    "workbook_fantasypros_attribution": "PASS",
+    "workbook_sha256": "PASS"
+  },
+  "josh_jacobs": {
+    "adjustment_applied": false,
+    "source_name": "Josh Jacobs",
+    "source_provided_fantasy_points": 239.1,
+    "standardized_full_ppr_points": "256.850",
+    "team": "GB"
+  },
+  "overall_status": "PASS",
+  "row_counts": {
+    "QB": 81,
+    "RB": 131,
+    "TE": 118,
+    "WR": 190,
+    "draft_command_universe": 200,
+    "total": 520
+  },
+  "snapshot_id": "consensus_2026_frozen_20260901T005951Z_93fbef0b61f0"
+}

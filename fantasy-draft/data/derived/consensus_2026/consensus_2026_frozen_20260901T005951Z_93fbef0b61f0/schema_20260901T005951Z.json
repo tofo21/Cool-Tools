@@ -1,0 +1,213 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "canonical_name": {
+      "type": "string"
+    },
+    "capture_timestamp": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "fumbles_lost": {
+      "description": "source component; null means not reported by the source tab",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "identity_match_confidence": {
+      "maximum": 1,
+      "minimum": 0,
+      "type": "number"
+    },
+    "identity_match_method": {
+      "type": "string"
+    },
+    "interceptions": {
+      "description": "source component; null means not reported by the source tab",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "missing_field_indicators": {
+      "type": "string"
+    },
+    "nfl_team": {
+      "type": "string"
+    },
+    "passing_attempts": {
+      "description": "source component; null means not reported by the source tab",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "passing_completions": {
+      "description": "source component; null means not reported by the source tab",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "passing_touchdowns": {
+      "description": "source component; null means not reported by the source tab",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "passing_yards": {
+      "description": "source component; null means not reported by the source tab",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "position": {
+      "enum": [
+        "QB",
+        "RB",
+        "WR",
+        "TE"
+      ],
+      "type": "string"
+    },
+    "receiving_touchdowns": {
+      "description": "source component; null means not reported by the source tab",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "receiving_yards": {
+      "description": "source component; null means not reported by the source tab",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "receptions": {
+      "description": "source component; null means not reported by the source tab",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "rushing_attempts": {
+      "description": "source component; null means not reported by the source tab",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "rushing_touchdowns": {
+      "description": "source component; null means not reported by the source tab",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "rushing_yards": {
+      "description": "source component; null means not reported by the source tab",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "source_name": {
+      "type": "string"
+    },
+    "source_provided_fantasy_points": {
+      "type": "number"
+    },
+    "source_state": {
+      "type": "string"
+    },
+    "source_url": {
+      "type": "string"
+    },
+    "source_version": {
+      "type": "string"
+    },
+    "standardized_full_ppr_points": {
+      "type": "number"
+    }
+  },
+  "required": [
+    "canonical_name",
+    "source_name",
+    "nfl_team",
+    "position",
+    "passing_attempts",
+    "passing_completions",
+    "passing_yards",
+    "passing_touchdowns",
+    "interceptions",
+    "rushing_attempts",
+    "rushing_yards",
+    "rushing_touchdowns",
+    "receptions",
+    "receiving_yards",
+    "receiving_touchdowns",
+    "fumbles_lost",
+    "source_provided_fantasy_points",
+    "standardized_full_ppr_points",
+    "identity_match_method",
+    "identity_match_confidence",
+    "source_url",
+    "source_version",
+    "capture_timestamp",
+    "source_state",
+    "missing_field_indicators"
+  ],
+  "title": "Frozen 2026 Consensus Projection Components",
+  "type": "object",
+  "x-null-policy": {
+    "rule": "missing source components remain null/blank and are never zero-filled",
+    "structurally_unreported_by_position": {
+      "QB": [
+        "receptions",
+        "receiving_yards",
+        "receiving_touchdowns"
+      ],
+      "RB": [
+        "passing_attempts",
+        "passing_completions",
+        "passing_yards",
+        "passing_touchdowns",
+        "interceptions"
+      ],
+      "TE": [
+        "passing_attempts",
+        "passing_completions",
+        "passing_yards",
+        "passing_touchdowns",
+        "interceptions",
+        "rushing_attempts",
+        "rushing_yards",
+        "rushing_touchdowns"
+      ],
+      "WR": [
+        "passing_attempts",
+        "passing_completions",
+        "passing_yards",
+        "passing_touchdowns",
+        "interceptions"
+      ]
+    }
+  },
+  "x-standardized-full-ppr-scoring": {
+    "calculation_rule": "sum only the component families explicitly reported for that position; retain all unreported fields as null",
+    "fumbles_lost": -2,
+    "interceptions": -2,
+    "passing_touchdowns": 4,
+    "passing_yards": 0.04,
+    "receiving_touchdowns": 6,
+    "receiving_yards": 0.1,
+    "receptions": 1,
+    "rushing_touchdowns": 6,
+    "rushing_yards": 0.1
+  }
+}
