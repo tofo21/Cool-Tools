@@ -1,0 +1,63 @@
+{
+  "handoffVersion": "1.0.0",
+  "branch": "codex/opponent-intent-live-integration",
+  "runtimeArtifactCommit": "4e7e928e626372d6f826f3abd9ac276493699574",
+  "marketPublicationCommit": "49951ca1d45b92a906f84366a02d40c8c2e07e12",
+  "paths": {
+    "runtimeArtifact": "fantasy-draft/data/opponent-intent-package.js",
+    "schema": "fantasy-draft/model/opponent-intent-package.schema.json",
+    "contract": "fantasy-draft/model/opponent-intent-integration-contract.json",
+    "validation": "fantasy-draft/model/opponent-intent-validation.json",
+    "manifest": "fantasy-draft/model/opponent-intent-runtime-manifest.json",
+    "marketSnapshot": "fantasy-draft/data/derived/espn_market/espn_2026_market_snapshot_espn_2026_frozen_20260901T003012Z_3379127ab1c0.json",
+    "marketManifest": "fantasy-draft/data/production/espn_2026_market_manifest_espn_2026_frozen_20260901T003012Z_3379127ab1c0.json"
+  },
+  "artifactHashes": {
+    "runtimeArtifactSha256": "c2f25109da2ba5b23e52b8e8cceb8da7736acfaf45a8ac083a9a6b79813c0beb",
+    "runtimeEngineSha256": "dc123aa64daa7cad81905f14155266141b3c4a24a8d83332b4e4ed9cc660a426",
+    "runtimeWorkerSha256": "3d865bd34f4ca818d56880b9571d9d0328db2627b9a42a26c792bdd62adf326e",
+    "schemaSha256": "84a94a77a1cd71d1cd7ed314abb1498a438f1f820c8e7d48bfa7bf32e731413f",
+    "contractSha256": "48c5784100c3e644088d62b341ae789353991c51abc8b840131f427f321f2b18",
+    "validationSha256": "a0b0cfb0a5f99e4aa58dfd247728bfb28a9e0138bba642342039bc52cf8384d6",
+    "manifestSha256": "706415a23f9ea774dbf5fa261dfee6317a2483be4735ac66bdc1f9c8063bcc52",
+    "marketSnapshotSha256": "e333dfbc3196351ea1b04f6fa8a5525db5903067f38318c8d2a725d6f75bc2a2",
+    "marketManifestSha256": "d8908d38b3f048a1851d29193a17805d095115717e17ebef71107a4498933ccf"
+  },
+  "market": {
+    "snapshotId": "espn_2026_frozen_20260901T003012Z_3379127ab1c0",
+    "captureTimestampUtc": "2026-09-01T00:30:12Z",
+    "schemaVersion": "espn-market-2026-v1.1",
+    "status": "frozen",
+    "coverage": {
+      "sourceRows": 500,
+      "draftCommandIdentities": { "mapped": 199, "total": 200 },
+      "mappedWithEspnDefaultRank": { "count": 199, "total": 199 },
+      "mappedWithContinuousEspnAdp": { "count": 199, "total": 199 },
+      "keepersRepresented": { "count": 10, "total": 10 },
+      "unresolvedEspnTop160": 0,
+      "duplicateInternalPlayerIds": 0,
+      "duplicateEspnPlayerIds": 0,
+      "soleDraftCommandOnlyMiss": { "playerId": 190, "reason": "outside ESPN payload", "blocking": false }
+    },
+    "fieldPolicy": "ESPN default rank and continuous ESPN ADP are distinct nullable fields; no ordinal ADP rank is created and the fields are not blended."
+  },
+  "scope": {
+    "calibrated": "Rounds 1-6",
+    "contextualUnvalidated": "Rounds 7-16",
+    "selectedPositionRuntime": "roster needs, room runs and live board",
+    "selectedExactPlayerRuntime": "market-only",
+    "managerEvidence": "explanatory only",
+    "simulation": "fixed-seed deterministic sequential depletion",
+    "operatingMode": "reporting/advisory only"
+  },
+  "fallbackBehavior": "Missing or corrupt Opponent Intent renders an explicit fallback/unavailable state and never blocks ESPN ingestion, Manual picks, Hard Reset or the Decision Board.",
+  "validationCommand": "python fantasy-draft/research/validate_espn_market_2026.py fantasy-draft/data/production/espn_2026_market_manifest_espn_2026_frozen_20260901T003012Z_3379127ab1c0.json --require-status frozen && python -m unittest fantasy-draft/tests/test_espn_market_capture.py && for test_file in $(find fantasy-draft/tests -maxdepth 1 -name '*.test.cjs' -print | sort); do node \"$test_file\"; done",
+  "rebuildCommand": "node fantasy-draft/model/build-opponent-intent-runtime.js <private-research-root> fantasy-draft/data/opponent-intent-package.js && node fantasy-draft/model/build-opponent-intent-manifest.js",
+  "remainingLimitations": [
+    "Authenticated league-settings verification remains incomplete; the public market lock did not verify private scoring, roster or IR/Stash settings.",
+    "Rounds 7-16 remain contextual and unvalidated.",
+    "Manager evidence remains explanatory only and both manager residual weights remain zero.",
+    "Runtime Monte Carlo estimates have finite-simulation noise controlled by a fixed seed."
+  ],
+  "nextIntegrationStep": "Feed the refreshed Opponent Intent artifact, final frozen ESPN market artifact and completed Step 14 Player Truth artifact into the Draft Runtime Contract & Validation Harness before the thin Step 15 and final integration gate."
+}
