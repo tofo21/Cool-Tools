@@ -1,6 +1,10 @@
 # Final Draft Command Integration — Step 18 Acceptance Report
 
-Acceptance timestamp: `2026-09-01T04:04:09Z`
+Automated-gate timestamp: `2026-09-01T04:04:09Z`
+
+Real-browser acceptance date: `2026-09-01`
+
+Final decision: **GO**
 
 This report records the final integration and compressed Step 18 gate. It authorizes neither a merge nor a deployment.
 
@@ -171,9 +175,32 @@ PASS: the ESPN fixture completed all 160 selections with no duplicate simulated 
 
 ## 14. Browser acceptance result
 
-**UNEXECUTED / FAILED ACCEPTANCE GATE.** The local environment has no installed Chromium executable. The authenticated cloud browser blocks localhost (`ERR_BLOCKED_BY_CLIENT`). A safe feature-branch push was attempted solely to make the static candidate browser-accessible, but the environment denied publication before any external write. Per the safeguard, no alternate publication workaround was attempted.
+**PASS.** The mandatory smoke test was completed on Windows in Microsoft Edge from `http://127.0.0.1:8765/` on `2026-09-01`.
 
-No automated implementation assertion failed, but the required real-browser smoke acceptance is not evidenced. This is the sole reason the deployment recommendation is `NO-GO`.
+The tested candidate was bound to:
+
+- packaged integration head `75a0fb2fb3c242671e0fdef618933f8e3fc67976`
+- packaged integration tree `72e0d77aff886e89d0e7dcf7771eeed091243a25`
+- implementation commit `353864305ac5f3ff2bd2c9bd144493d2addf4779`
+- implementation tree `ef358147f870ad4a8885c61c0a8eba2e2e1e1f49`
+- original portable integration ZIP SHA-256 `33bfa518865655e6ee72464c41b2976d8368774530b25534392be308f82d0620`
+- browser-only runtime package SHA-256 `6c73da84ad22d035b19d7e5aa45b49bf98d9637c23530c233ad90f658a6c3364`
+
+Recorded browser evidence:
+
+1. Draft Command opened from the packaged runtime and reached a definite loaded state. Model Health displayed `VALIDATED LEAGUE VALUE`, freshness displayed `Today`, coverage displayed `100%` with explicit `199 of 200 board players`, and recommendation basis displayed `VALIDATED BASE`.
+2. Opponent Intent displayed `BASELINE LIVE`, completed 300 seeded runs, and remained functional through accepted picks.
+3. League Value sorted numerically in both directions; ESPN Price sorted independently; the active direction remained visible; search was responsive.
+4. Keenan Allen retained ESPN market data without fabricated League Value. Jaydon Blue retained League Value without fabricated ESPN Price.
+5. All ten ESPN keepers loaded, including Jaxson Dart on Tony/team-05.
+6. A Manual Jahmyr Gibbs pick removed him from availability, assigned him to Justin Gerkin, advanced 1.01 to 1.02 and Dan Merrick on the clock, and preserved opponent/threat displays.
+7. `Recover Prior` reversed that pick and restored Gibbs, pick 1.01, and Justin Gerkin on the clock.
+8. ESPN ingestion without a connected bridge entered its waiting/nonconnected state without blocking the Decision Board, Model Health, or Manual controls; returning to Manual was immediate.
+9. After Manual selections of Gibbs and Bijan Robinson plus a full refresh, pick 1.03, both roster assignments, all ten keepers, and `VALIDATED LEAGUE VALUE` were restored correctly.
+10. Hard Reset restored pick 1.01, both players to availability, empty rosters, Manual ingestion, keeper mode off, and `VALIDATED LEAGUE VALUE`.
+11. Edge Developer Tools Console was completely empty after a full reload: zero errors and zero warnings.
+
+The prior `NO-GO` was caused only by the then-unexecuted browser gate. This PASS clears that blocker; no application or model change was needed.
 
 ## 15. Deterministic-build proof
 
@@ -202,25 +229,39 @@ One-command inspection/run rollback: `git switch --detach bfe0bfd000137115b77471
 
 If only the final runtime application integration needs reverting on this feature branch, use `git revert 353864305ac5f3ff2bd2c9bd144493d2addf4779`. Neither rollback clears active draft storage. No rollback is presently required because no merge or deployment occurred.
 
-## 19. Remaining limitations
+## 19. Remaining limitations and nonblocking v1.1 requirements
 
-- Required real-browser smoke acceptance remains unexecuted.
 - Opponent Intent rounds 7–16 remain contextual/unvalidated and all outputs advisory.
 - Keenan Allen has no approved Player Truth/League Value; Jaydon Blue has no resolved ESPN market identity.
 - Step 14 null P10/P90/elite/starter/bust/availability-bust fields remain intentionally blank.
 - Josh Jacobs remains `COMMISSIONER_EXEMPT`, 17 games, p50/League Value base `256.850`, with no numerical availability adjustment or invented return date.
 - Keeper mode remains deliberately off on first load; Hard Reset documentation warns against use after the real draft starts.
 
+The following usability items are accepted as nonblocking v1.1 scope and were not implemented in this documentation-only update:
+
+1. Make the left controls column collapsible behind a hamburger or narrow ribbon so the center and right columns can reclaim its width.
+2. Make the right sidebar independently scrollable.
+3. Make manager names/rows in Opponent Intent and related displays select the corresponding Team Roster while retaining the dropdown.
+4. Add a collapsible full draft-board view showing ten teams by 16 rounds, snake order, keepers, and live/Manual selections.
+
 ## 20. Publication/package status
 
-Feature-branch push was denied by the environment before external publication. The branch was not published. An offline Git bundle/ZIP with exact reconstruction instructions is supplied separately. `main` and GitHub Pages remain unchanged.
+Feature-branch push was denied by the environment before external publication. The branch remains unpublished. The original offline Git bundle/ZIP is the exact application candidate used by the passing browser test; this later acceptance commit changes documentation only. `main` and GitHub Pages remain unchanged.
 
 ## 21. Deployment recommendation
 
-**NO-GO for deployment.**
+**GO for merge and deployment.**
 
-Failed/conditional gate:
+There are no failed or conditional Step 18 gates. Artifact, contract, deterministic-build, application, complete-draft, browser, storage, security, and regression acceptance all passed. The v1.1 usability requirements in section 19 are nonblocking.
 
-1. Real-browser smoke acceptance is unexecuted because no usable browser could reach the local candidate and feature-branch publication was denied.
+This decision does not itself authorize or perform a merge or deployment. After explicit authorization, and only while `origin/main` remains at the verified production base, the exact merge/deployment sequence is:
 
-All artifact, contract, deterministic-build, application, complete-draft, storage, security, and regression gates passed. Once the exact packaged branch passes browser smoke in an accessible browser environment, this acceptance decision can be reconsidered. Even a later `GO` would not authorize merge or deployment; those require explicit follow-up instructions.
+```bash
+git fetch origin
+test "$(git rev-parse origin/main)" = "bfe0bfd000137115b774718851fac999f08bec36"
+test "$(git rev-parse 353864305ac5f3ff2bd2c9bd144493d2addf4779^{tree})" = "ef358147f870ad4a8885c61c0a8eba2e2e1e1f49"
+git push -u origin codex/final-draft-command-integration
+git push origin codex/final-draft-command-integration:main
+```
+
+The second push is a fast-forward of `main` and triggers the repository's existing GitHub Pages publication behavior. If the guarded `origin/main` check fails, stop: reconcile the advanced production head and rerun the affected acceptance gates rather than forcing the push.
