@@ -1,0 +1,1155 @@
+{
+  "candidate_count": 13,
+  "decision_counts": {
+    "APPROVE_EXACT_SCOPE_SIGNAL": 12,
+    "REJECT_STEP14_CALIBRATION": 1
+  },
+  "decisions": [
+    {
+      "bootstrap_ci_high": 0.0686892344127285,
+      "bootstrap_ci_low": -0.0111340419405779,
+      "bootstrap_probability_of_improvement": 0.91,
+      "calibration_metrics": {
+        "applicable": false
+      },
+      "candidate_id": "S13B-REG-QB-GAMES-PLAYED-AGE-EXPERIENCE",
+      "decision": "APPROVE_EXACT_SCOPE_SIGNAL",
+      "downstream_consequence": "Admitted only for the named position/target/configuration. No numeric 2026 contribution is applied without audited 2026 feature inputs and an approved full-fit model weight.",
+      "exact_input_columns": [
+        "true_preseason_age",
+        "nfl_experience_years",
+        "nfl_first_active_season",
+        "career_team_count_prior",
+        "career_position_count_prior",
+        "career_team_change_count_prior"
+      ],
+      "exact_model_configuration_reference": {
+        "accepted_fold_hyperparameters": [
+          {
+            "accepted_hyperparameter": "100.0",
+            "baseline_bundle": "G_BASE",
+            "test_year": 2023
+          },
+          {
+            "accepted_hyperparameter": "100.0",
+            "baseline_bundle": "G_BASE",
+            "test_year": 2024
+          },
+          {
+            "accepted_hyperparameter": "100.0",
+            "baseline_bundle": "G_BASE",
+            "test_year": 2025
+          }
+        ],
+        "code": "repository_snapshot/fantasy-draft/research/step13b/code/run_step13b_ablations_v1.py",
+        "commit": "e3cf26eb863e4f54b6635e5a4aac50fe88e53e09"
+      },
+      "feature_family": "age_experience",
+      "folds_improved": 2,
+      "folds_total": 3,
+      "historical_coverage": {
+        "by_input_column": {
+          "career_position_count_prior": 0.9990958408679927,
+          "career_team_change_count_prior": 0.9990958408679927,
+          "career_team_count_prior": 0.9990958408679927,
+          "nfl_experience_years": 0.9990958408679927,
+          "nfl_first_active_season": 0.9990958408679927,
+          "true_preseason_age": 0.9990958408679927
+        },
+        "eligible_universe_rows": 2212,
+        "maximum_field_coverage": 0.9990958408679927,
+        "mean_field_coverage": 0.9990958408679927,
+        "minimum_field_coverage": 0.9990958408679927
+      },
+      "limitation": [
+        "Passing is a candidate signal, not production approval; source coverage and mechanism remain position/target specific.",
+        "Candidate status is not production approval and carries no promoted weight.",
+        "Scope is limited to the exact position and prediction target.",
+        "At least one family input is missing for part of the eligible panel; fold-local imputation remains required."
+      ],
+      "mechanism_review_result": "PASS",
+      "metric_kind": "regression",
+      "numeric_2026_contribution": null,
+      "numeric_application_status": "NOT_APPLIED_NO_AUDITED_2026_FEATURE_MATRIX_OR_APPROVED_FULL_FIT_WEIGHTS",
+      "pooled_improvement": 0.0277172628113629,
+      "position": "QB",
+      "rationale": "Step 13B candidate gate passed; mechanism review passed; no rookie/veteran direction conflict was recorded.",
+      "subgroup_direction_conflict": false,
+      "target": "games_played",
+      "worst_fold": -0.0089920370419303
+    },
+    {
+      "bootstrap_ci_high": 0.0531618455752022,
+      "bootstrap_ci_low": -0.0048106731714645,
+      "bootstrap_probability_of_improvement": 0.942,
+      "calibration_metrics": {
+        "applicable": false
+      },
+      "candidate_id": "S13B-REG-QB-GAMES-PLAYED-COMBINE",
+      "decision": "APPROVE_EXACT_SCOPE_SIGNAL",
+      "downstream_consequence": "Admitted only for the named position/target/configuration. No numeric 2026 contribution is applied without audited 2026 feature inputs and an approved full-fit model weight.",
+      "exact_input_columns": [
+        "combine_height_inches",
+        "combine_weight_lbs",
+        "combine_forty_seconds",
+        "combine_bench_reps",
+        "combine_vertical_inches",
+        "combine_broad_jump_inches",
+        "combine_cone_seconds",
+        "combine_shuttle_seconds",
+        "combine_bmi",
+        "combine_speed_score"
+      ],
+      "exact_model_configuration_reference": {
+        "accepted_fold_hyperparameters": [
+          {
+            "accepted_hyperparameter": "100.0",
+            "baseline_bundle": "G_BASE",
+            "test_year": 2023
+          },
+          {
+            "accepted_hyperparameter": "100.0",
+            "baseline_bundle": "G_BASE",
+            "test_year": 2024
+          },
+          {
+            "accepted_hyperparameter": "100.0",
+            "baseline_bundle": "G_BASE",
+            "test_year": 2025
+          }
+        ],
+        "code": "repository_snapshot/fantasy-draft/research/step13b/code/run_step13b_ablations_v1.py",
+        "commit": "e3cf26eb863e4f54b6635e5a4aac50fe88e53e09"
+      },
+      "feature_family": "combine",
+      "folds_improved": 2,
+      "folds_total": 3,
+      "historical_coverage": {
+        "by_input_column": {
+          "combine_bench_reps": 0.4145569620253164,
+          "combine_bmi": 0.8286618444846293,
+          "combine_broad_jump_inches": 0.6577757685352622,
+          "combine_cone_seconds": 0.4267631103074141,
+          "combine_forty_seconds": 0.7007233273056058,
+          "combine_height_inches": 0.8286618444846293,
+          "combine_shuttle_seconds": 0.4525316455696203,
+          "combine_speed_score": 0.6975587703435805,
+          "combine_vertical_inches": 0.6826401446654611,
+          "combine_weight_lbs": 0.8309222423146474
+        },
+        "eligible_universe_rows": 2212,
+        "maximum_field_coverage": 0.8309222423146474,
+        "mean_field_coverage": 0.6520795660036167,
+        "minimum_field_coverage": 0.4145569620253164
+      },
+      "limitation": [
+        "Passing is a candidate signal, not production approval; source coverage and mechanism remain position/target specific.",
+        "Candidate status is not production approval and carries no promoted weight.",
+        "Scope is limited to the exact position and prediction target.",
+        "At least one family input is missing for part of the eligible panel; fold-local imputation remains required."
+      ],
+      "mechanism_review_result": "PASS",
+      "metric_kind": "regression",
+      "numeric_2026_contribution": null,
+      "numeric_application_status": "NOT_APPLIED_NO_AUDITED_2026_FEATURE_MATRIX_OR_APPROVED_FULL_FIT_WEIGHTS",
+      "pooled_improvement": 0.0231188894492812,
+      "position": "QB",
+      "rationale": "Step 13B candidate gate passed; mechanism review passed; no rookie/veteran direction conflict was recorded.",
+      "subgroup_direction_conflict": false,
+      "target": "games_played",
+      "worst_fold": -0.0026102006168038
+    },
+    {
+      "bootstrap_ci_high": 0.0805475260274256,
+      "bootstrap_ci_low": 0.0057957526956148,
+      "bootstrap_probability_of_improvement": 0.988,
+      "calibration_metrics": {
+        "applicable": false
+      },
+      "candidate_id": "S13B-REG-TE-GAMES-PLAYED-HISTORICAL-INJURY",
+      "decision": "APPROVE_EXACT_SCOPE_SIGNAL",
+      "downstream_consequence": "Admitted only for the named position/target/configuration. No numeric 2026 contribution is applied without audited 2026 feature inputs and an approved full-fit model weight.",
+      "exact_input_columns": [
+        "injury_report_weeks_last1",
+        "injury_report_weeks_weighted3",
+        "injury_report_out_weeks_last1",
+        "injury_report_out_weeks_weighted3",
+        "injury_report_doubtful_weeks_weighted3",
+        "injury_report_questionable_weeks_weighted3",
+        "practice_dnp_weeks_last1",
+        "practice_dnp_weeks_weighted3",
+        "practice_limited_weeks_weighted3",
+        "injury_category_count_3y",
+        "injury_recurrence_category_count_3y",
+        "injury_recurrence_flag_3y",
+        "injury_concussion_head_weeks_3y",
+        "injury_neck_weeks_3y",
+        "injury_shoulder_weeks_3y",
+        "injury_arm_elbow_weeks_3y",
+        "injury_hand_wrist_finger_weeks_3y",
+        "injury_chest_rib_weeks_3y",
+        "injury_back_weeks_3y",
+        "injury_hip_groin_weeks_3y",
+        "injury_hamstring_weeks_3y",
+        "injury_quad_thigh_weeks_3y",
+        "injury_knee_weeks_3y",
+        "injury_calf_achilles_weeks_3y",
+        "injury_ankle_weeks_3y",
+        "injury_foot_toe_weeks_3y",
+        "injury_illness_weeks_3y",
+        "injury_rest_admin_weeks_3y",
+        "injury_other_weeks_3y"
+      ],
+      "exact_model_configuration_reference": {
+        "accepted_fold_hyperparameters": [
+          {
+            "accepted_hyperparameter": "100.0",
+            "baseline_bundle": "H_AVAILABILITY",
+            "test_year": 2023
+          },
+          {
+            "accepted_hyperparameter": "100.0",
+            "baseline_bundle": "H_AVAILABILITY",
+            "test_year": 2024
+          },
+          {
+            "accepted_hyperparameter": "1000.0",
+            "baseline_bundle": "H_AVAILABILITY",
+            "test_year": 2025
+          }
+        ],
+        "code": "repository_snapshot/fantasy-draft/research/step13b/code/run_step13b_ablations_v1.py",
+        "commit": "e3cf26eb863e4f54b6635e5a4aac50fe88e53e09"
+      },
+      "feature_family": "historical_injury",
+      "folds_improved": 2,
+      "folds_total": 3,
+      "historical_coverage": {
+        "by_input_column": {
+          "injury_ankle_weeks_3y": 0.9990958408679927,
+          "injury_arm_elbow_weeks_3y": 0.9990958408679927,
+          "injury_back_weeks_3y": 0.9990958408679927,
+          "injury_calf_achilles_weeks_3y": 0.9990958408679927,
+          "injury_category_count_3y": 0.9990958408679927,
+          "injury_chest_rib_weeks_3y": 0.9990958408679927,
+          "injury_concussion_head_weeks_3y": 0.9990958408679927,
+          "injury_foot_toe_weeks_3y": 0.9990958408679927,
+          "injury_hamstring_weeks_3y": 0.9990958408679927,
+          "injury_hand_wrist_finger_weeks_3y": 0.9990958408679927,
+          "injury_hip_groin_weeks_3y": 0.9990958408679927,
+          "injury_illness_weeks_3y": 0.9990958408679927,
+          "injury_knee_weeks_3y": 0.9990958408679927,
+          "injury_neck_weeks_3y": 0.9990958408679927,
+          "injury_other_weeks_3y": 0.9990958408679927,
+          "injury_quad_thigh_weeks_3y": 0.9990958408679927,
+          "injury_recurrence_category_count_3y": 0.9990958408679927,
+          "injury_recurrence_flag_3y": 0.9990958408679927,
+          "injury_report_doubtful_weeks_weighted3": 0.9990958408679927,
+          "injury_report_out_weeks_last1": 0.9990958408679927,
+          "injury_report_out_weeks_weighted3": 0.9990958408679927,
+          "injury_report_questionable_weeks_weighted3": 0.9990958408679927,
+          "injury_report_weeks_last1": 0.9990958408679927,
+          "injury_report_weeks_weighted3": 0.9990958408679927,
+          "injury_rest_admin_weeks_3y": 0.9990958408679927,
+          "injury_shoulder_weeks_3y": 0.9990958408679927,
+          "practice_dnp_weeks_last1": 0.9990958408679927,
+          "practice_dnp_weeks_weighted3": 0.9990958408679927,
+          "practice_limited_weeks_weighted3": 0.9990958408679927
+        },
+        "eligible_universe_rows": 2212,
+        "maximum_field_coverage": 0.9990958408679927,
+        "mean_field_coverage": 0.9990958408679931,
+        "minimum_field_coverage": 0.9990958408679927
+      },
+      "limitation": [
+        "Passing is a candidate signal, not production approval; source coverage and mechanism remain position/target specific.",
+        "Candidate status is not production approval and carries no promoted weight.",
+        "Scope is limited to the exact position and prediction target.",
+        "At least one family input is missing for part of the eligible panel; fold-local imputation remains required."
+      ],
+      "mechanism_review_result": "PASS",
+      "metric_kind": "regression",
+      "numeric_2026_contribution": null,
+      "numeric_application_status": "NOT_APPLIED_NO_AUDITED_2026_FEATURE_MATRIX_OR_APPROVED_FULL_FIT_WEIGHTS",
+      "pooled_improvement": 0.0453790585003632,
+      "position": "TE",
+      "rationale": "Step 13B candidate gate passed; mechanism review passed; no rookie/veteran direction conflict was recorded.",
+      "subgroup_direction_conflict": false,
+      "target": "games_played",
+      "worst_fold": -0.0087322637190938
+    },
+    {
+      "bootstrap_ci_high": 0.0624191546020078,
+      "bootstrap_ci_low": -0.0187751337872833,
+      "bootstrap_probability_of_improvement": 0.88,
+      "calibration_metrics": {
+        "applicable": false
+      },
+      "candidate_id": "S13B-REG-QB-GAMES-PLAYED-ROOKIE-DRAFT-CAPITAL",
+      "decision": "APPROVE_EXACT_SCOPE_SIGNAL",
+      "downstream_consequence": "Admitted only for the named position/target/configuration. No numeric 2026 contribution is applied without audited 2026 feature inputs and an approved full-fit model weight.",
+      "exact_input_columns": [
+        "true_rookie_flag",
+        "drafted_flag",
+        "undrafted_flag",
+        "draft_round",
+        "draft_overall_pick",
+        "draft_pick_log",
+        "draft_capital_percentile_position_year",
+        "draft_capital_z_position_year"
+      ],
+      "exact_model_configuration_reference": {
+        "accepted_fold_hyperparameters": [
+          {
+            "accepted_hyperparameter": "100.0",
+            "baseline_bundle": "G_BASE",
+            "test_year": 2023
+          },
+          {
+            "accepted_hyperparameter": "100.0",
+            "baseline_bundle": "G_BASE",
+            "test_year": 2024
+          },
+          {
+            "accepted_hyperparameter": "100.0",
+            "baseline_bundle": "G_BASE",
+            "test_year": 2025
+          }
+        ],
+        "code": "repository_snapshot/fantasy-draft/research/step13b/code/run_step13b_ablations_v1.py",
+        "commit": "e3cf26eb863e4f54b6635e5a4aac50fe88e53e09"
+      },
+      "feature_family": "rookie_draft_capital",
+      "folds_improved": 2,
+      "folds_total": 3,
+      "historical_coverage": {
+        "by_input_column": {
+          "draft_capital_percentile_position_year": 0.8331826401446655,
+          "draft_capital_z_position_year": 0.8295660036166366,
+          "draft_overall_pick": 0.8331826401446655,
+          "draft_pick_log": 0.8331826401446655,
+          "draft_round": 0.8331826401446655,
+          "drafted_flag": 0.9990958408679927,
+          "true_rookie_flag": 0.9990958408679927,
+          "undrafted_flag": 0.9990958408679927
+        },
+        "eligible_universe_rows": 2212,
+        "maximum_field_coverage": 0.9990958408679927,
+        "mean_field_coverage": 0.8949480108499096,
+        "minimum_field_coverage": 0.8295660036166366
+      },
+      "limitation": [
+        "Passing is a candidate signal, not production approval; source coverage and mechanism remain position/target specific.",
+        "Candidate status is not production approval and carries no promoted weight.",
+        "Scope is limited to the exact position and prediction target.",
+        "At least one family input is missing for part of the eligible panel; fold-local imputation remains required."
+      ],
+      "mechanism_review_result": "PASS",
+      "metric_kind": "regression",
+      "numeric_2026_contribution": null,
+      "numeric_application_status": "NOT_APPLIED_NO_AUDITED_2026_FEATURE_MATRIX_OR_APPROVED_FULL_FIT_WEIGHTS",
+      "pooled_improvement": 0.0245750005474362,
+      "position": "QB",
+      "rationale": "Step 13B candidate gate passed; mechanism review passed; no rookie/veteran direction conflict was recorded.",
+      "subgroup_direction_conflict": false,
+      "target": "games_played",
+      "worst_fold": -0.0393662069736563
+    },
+    {
+      "bootstrap_ci_high": 0.0636132336289646,
+      "bootstrap_ci_low": -0.0121968381709974,
+      "bootstrap_probability_of_improvement": 0.932,
+      "calibration_metrics": {
+        "applicable": false
+      },
+      "candidate_id": "S13B-REG-QB-GAMES-PLAYED-WEEKLY-ROSTER-STATUS",
+      "decision": "APPROVE_EXACT_SCOPE_SIGNAL",
+      "downstream_consequence": "Admitted only for the named position/target/configuration. No numeric 2026 contribution is applied without audited 2026 feature inputs and an approved full-fit model weight.",
+      "exact_input_columns": [
+        "roster_active_weeks_last1",
+        "roster_inactive_weeks_last1",
+        "roster_inactive_weeks_weighted3",
+        "roster_reserve_weeks_weighted3",
+        "roster_pup_weeks_weighted3",
+        "roster_nfi_weeks_weighted3",
+        "roster_suspension_weeks_weighted3",
+        "roster_role_loss_weeks_weighted3",
+        "roster_status_changes_last1"
+      ],
+      "exact_model_configuration_reference": {
+        "accepted_fold_hyperparameters": [
+          {
+            "accepted_hyperparameter": "100.0",
+            "baseline_bundle": "G_BASE",
+            "test_year": 2023
+          },
+          {
+            "accepted_hyperparameter": "100.0",
+            "baseline_bundle": "G_BASE",
+            "test_year": 2024
+          },
+          {
+            "accepted_hyperparameter": "100.0",
+            "baseline_bundle": "G_BASE",
+            "test_year": 2025
+          }
+        ],
+        "code": "repository_snapshot/fantasy-draft/research/step13b/code/run_step13b_ablations_v1.py",
+        "commit": "e3cf26eb863e4f54b6635e5a4aac50fe88e53e09"
+      },
+      "feature_family": "weekly_roster_status",
+      "folds_improved": 2,
+      "folds_total": 3,
+      "historical_coverage": {
+        "by_input_column": {
+          "roster_active_weeks_last1": 0.9990958408679927,
+          "roster_inactive_weeks_last1": 0.9990958408679927,
+          "roster_inactive_weeks_weighted3": 0.9990958408679927,
+          "roster_nfi_weeks_weighted3": 0.9990958408679927,
+          "roster_pup_weeks_weighted3": 0.9990958408679927,
+          "roster_reserve_weeks_weighted3": 0.9990958408679927,
+          "roster_role_loss_weeks_weighted3": 0.9990958408679927,
+          "roster_status_changes_last1": 0.9990958408679927,
+          "roster_suspension_weeks_weighted3": 0.9990958408679927
+        },
+        "eligible_universe_rows": 2212,
+        "maximum_field_coverage": 0.9990958408679927,
+        "mean_field_coverage": 0.9990958408679929,
+        "minimum_field_coverage": 0.9990958408679927
+      },
+      "limitation": [
+        "Passing is a candidate signal, not production approval; source coverage and mechanism remain position/target specific.",
+        "Candidate status is not production approval and carries no promoted weight.",
+        "Scope is limited to the exact position and prediction target.",
+        "At least one family input is missing for part of the eligible panel; fold-local imputation remains required."
+      ],
+      "mechanism_review_result": "PASS",
+      "metric_kind": "regression",
+      "numeric_2026_contribution": null,
+      "numeric_application_status": "NOT_APPLIED_NO_AUDITED_2026_FEATURE_MATRIX_OR_APPROVED_FULL_FIT_WEIGHTS",
+      "pooled_improvement": 0.0295914712095259,
+      "position": "QB",
+      "rationale": "Step 13B candidate gate passed; mechanism review passed; no rookie/veteran direction conflict was recorded.",
+      "subgroup_direction_conflict": false,
+      "target": "games_played",
+      "worst_fold": -0.0171919477712519
+    },
+    {
+      "bootstrap_ci_high": 0.0529500797850469,
+      "bootstrap_ci_low": -0.0077172468045238,
+      "bootstrap_probability_of_improvement": 0.938,
+      "calibration_metrics": {
+        "STEP13A_BASELINE": {
+          "ece": 0.1278494308632722,
+          "n": 178
+        },
+        "STEP13B_CANDIDATE": {
+          "ece": 0.1069405137646823,
+          "n": 178
+        }
+      },
+      "candidate_id": "S13B-CLA-QB-AVAILABILITY-BUST-FLAG-AGE-EXPERIENCE",
+      "decision": "APPROVE_EXACT_SCOPE_SIGNAL",
+      "downstream_consequence": "Admitted only for the named position/target/configuration. No numeric 2026 contribution is applied without audited 2026 feature inputs and an approved full-fit model weight.",
+      "exact_input_columns": [
+        "true_preseason_age",
+        "nfl_experience_years",
+        "nfl_first_active_season",
+        "career_team_count_prior",
+        "career_position_count_prior",
+        "career_team_change_count_prior"
+      ],
+      "exact_model_configuration_reference": {
+        "accepted_fold_hyperparameters": [
+          {
+            "accepted_hyperparameter": "0.1",
+            "baseline_bundle": "G_BASE",
+            "test_year": 2023
+          },
+          {
+            "accepted_hyperparameter": "0.03",
+            "baseline_bundle": "G_BASE",
+            "test_year": 2024
+          },
+          {
+            "accepted_hyperparameter": "0.03",
+            "baseline_bundle": "G_BASE",
+            "test_year": 2025
+          }
+        ],
+        "code": "repository_snapshot/fantasy-draft/research/step13b/code/run_step13b_ablations_v1.py",
+        "commit": "e3cf26eb863e4f54b6635e5a4aac50fe88e53e09"
+      },
+      "feature_family": "age_experience",
+      "folds_improved": 2,
+      "folds_total": 3,
+      "historical_coverage": {
+        "by_input_column": {
+          "career_position_count_prior": 0.9990958408679927,
+          "career_team_change_count_prior": 0.9990958408679927,
+          "career_team_count_prior": 0.9990958408679927,
+          "nfl_experience_years": 0.9990958408679927,
+          "nfl_first_active_season": 0.9990958408679927,
+          "true_preseason_age": 0.9990958408679927
+        },
+        "eligible_universe_rows": 2212,
+        "maximum_field_coverage": 0.9990958408679927,
+        "mean_field_coverage": 0.9990958408679927,
+        "minimum_field_coverage": 0.9990958408679927
+      },
+      "limitation": [
+        "Passing is a candidate signal, not production approval; source coverage and mechanism remain position/target specific.",
+        "Candidate status is not production approval and carries no promoted weight.",
+        "Scope is limited to the exact position and prediction target.",
+        "At least one family input is missing for part of the eligible panel; fold-local imputation remains required."
+      ],
+      "mechanism_review_result": "PASS",
+      "metric_kind": "classification",
+      "numeric_2026_contribution": null,
+      "numeric_application_status": "NOT_APPLIED_NO_AUDITED_2026_FEATURE_MATRIX_OR_APPROVED_FULL_FIT_WEIGHTS",
+      "pooled_improvement": 0.0234143028156165,
+      "position": "QB",
+      "rationale": "Step 13B candidate gate passed; mechanism review passed; no rookie/veteran direction conflict was recorded.",
+      "subgroup_direction_conflict": false,
+      "target": "availability_bust_flag",
+      "worst_fold": -0.0275263962687008
+    },
+    {
+      "bootstrap_ci_high": 0.0847418173217526,
+      "bootstrap_ci_low": -0.0153173714275638,
+      "bootstrap_probability_of_improvement": 0.904,
+      "calibration_metrics": {
+        "STEP13A_BASELINE": {
+          "ece": 0.1048804391712973,
+          "n": 242
+        },
+        "STEP13B_CANDIDATE": {
+          "ece": 0.1003063534891163,
+          "n": 242
+        }
+      },
+      "candidate_id": "S13B-CLA-TE-ELITE-FLAG-AGE-EXPERIENCE",
+      "decision": "APPROVE_EXACT_SCOPE_SIGNAL",
+      "downstream_consequence": "Admitted only for the named position/target/configuration. No numeric 2026 contribution is applied without audited 2026 feature inputs and an approved full-fit model weight.",
+      "exact_input_columns": [
+        "true_preseason_age",
+        "nfl_experience_years",
+        "nfl_first_active_season",
+        "career_team_count_prior",
+        "career_position_count_prior",
+        "career_team_change_count_prior"
+      ],
+      "exact_model_configuration_reference": {
+        "accepted_fold_hyperparameters": [
+          {
+            "accepted_hyperparameter": "0.1",
+            "baseline_bundle": "H_AVAILABILITY",
+            "test_year": 2023
+          },
+          {
+            "accepted_hyperparameter": "0.1",
+            "baseline_bundle": "H_AVAILABILITY",
+            "test_year": 2024
+          },
+          {
+            "accepted_hyperparameter": "0.1",
+            "baseline_bundle": "H_AVAILABILITY",
+            "test_year": 2025
+          }
+        ],
+        "code": "repository_snapshot/fantasy-draft/research/step13b/code/run_step13b_ablations_v1.py",
+        "commit": "e3cf26eb863e4f54b6635e5a4aac50fe88e53e09"
+      },
+      "feature_family": "age_experience",
+      "folds_improved": 2,
+      "folds_total": 3,
+      "historical_coverage": {
+        "by_input_column": {
+          "career_position_count_prior": 0.9990958408679927,
+          "career_team_change_count_prior": 0.9990958408679927,
+          "career_team_count_prior": 0.9990958408679927,
+          "nfl_experience_years": 0.9990958408679927,
+          "nfl_first_active_season": 0.9990958408679927,
+          "true_preseason_age": 0.9990958408679927
+        },
+        "eligible_universe_rows": 2212,
+        "maximum_field_coverage": 0.9990958408679927,
+        "mean_field_coverage": 0.9990958408679927,
+        "minimum_field_coverage": 0.9990958408679927
+      },
+      "limitation": [
+        "Passing is a candidate signal, not production approval; source coverage and mechanism remain position/target specific.",
+        "Candidate status is not production approval and carries no promoted weight.",
+        "Scope is limited to the exact position and prediction target.",
+        "At least one family input is missing for part of the eligible panel; fold-local imputation remains required."
+      ],
+      "mechanism_review_result": "PASS",
+      "metric_kind": "classification",
+      "numeric_2026_contribution": null,
+      "numeric_application_status": "NOT_APPLIED_NO_AUDITED_2026_FEATURE_MATRIX_OR_APPROVED_FULL_FIT_WEIGHTS",
+      "pooled_improvement": 0.0326634981300274,
+      "position": "TE",
+      "rationale": "Step 13B candidate gate passed; mechanism review passed; no rookie/veteran direction conflict was recorded.",
+      "subgroup_direction_conflict": false,
+      "target": "elite_flag",
+      "worst_fold": -0.0029146823079321
+    },
+    {
+      "bootstrap_ci_high": 0.0840714921209355,
+      "bootstrap_ci_low": -0.0151382881973486,
+      "bootstrap_probability_of_improvement": 0.908,
+      "calibration_metrics": {
+        "STEP13A_BASELINE": {
+          "ece": 0.1295887928559686,
+          "n": 242
+        },
+        "STEP13B_CANDIDATE": {
+          "ece": 0.1182759675349595,
+          "n": 242
+        }
+      },
+      "candidate_id": "S13B-CLA-TE-STARTER-FLAG-AGE-EXPERIENCE",
+      "decision": "APPROVE_EXACT_SCOPE_SIGNAL",
+      "downstream_consequence": "Admitted only for the named position/target/configuration. No numeric 2026 contribution is applied without audited 2026 feature inputs and an approved full-fit model weight.",
+      "exact_input_columns": [
+        "true_preseason_age",
+        "nfl_experience_years",
+        "nfl_first_active_season",
+        "career_team_count_prior",
+        "career_position_count_prior",
+        "career_team_change_count_prior"
+      ],
+      "exact_model_configuration_reference": {
+        "accepted_fold_hyperparameters": [
+          {
+            "accepted_hyperparameter": "0.1",
+            "baseline_bundle": "G_BASE",
+            "test_year": 2023
+          },
+          {
+            "accepted_hyperparameter": "0.1",
+            "baseline_bundle": "G_BASE",
+            "test_year": 2024
+          },
+          {
+            "accepted_hyperparameter": "0.1",
+            "baseline_bundle": "G_BASE",
+            "test_year": 2025
+          }
+        ],
+        "code": "repository_snapshot/fantasy-draft/research/step13b/code/run_step13b_ablations_v1.py",
+        "commit": "e3cf26eb863e4f54b6635e5a4aac50fe88e53e09"
+      },
+      "feature_family": "age_experience",
+      "folds_improved": 2,
+      "folds_total": 3,
+      "historical_coverage": {
+        "by_input_column": {
+          "career_position_count_prior": 0.9990958408679927,
+          "career_team_change_count_prior": 0.9990958408679927,
+          "career_team_count_prior": 0.9990958408679927,
+          "nfl_experience_years": 0.9990958408679927,
+          "nfl_first_active_season": 0.9990958408679927,
+          "true_preseason_age": 0.9990958408679927
+        },
+        "eligible_universe_rows": 2212,
+        "maximum_field_coverage": 0.9990958408679927,
+        "mean_field_coverage": 0.9990958408679927,
+        "minimum_field_coverage": 0.9990958408679927
+      },
+      "limitation": [
+        "Passing is a candidate signal, not production approval; source coverage and mechanism remain position/target specific.",
+        "Candidate status is not production approval and carries no promoted weight.",
+        "Scope is limited to the exact position and prediction target.",
+        "At least one family input is missing for part of the eligible panel; fold-local imputation remains required."
+      ],
+      "mechanism_review_result": "PASS",
+      "metric_kind": "classification",
+      "numeric_2026_contribution": null,
+      "numeric_application_status": "NOT_APPLIED_NO_AUDITED_2026_FEATURE_MATRIX_OR_APPROVED_FULL_FIT_WEIGHTS",
+      "pooled_improvement": 0.0351147983390918,
+      "position": "TE",
+      "rationale": "Step 13B candidate gate passed; mechanism review passed; no rookie/veteran direction conflict was recorded.",
+      "subgroup_direction_conflict": false,
+      "target": "starter_flag",
+      "worst_fold": -0.0025868538076619
+    },
+    {
+      "bootstrap_ci_high": 0.0588872391864487,
+      "bootstrap_ci_low": -0.0127183925446275,
+      "bootstrap_probability_of_improvement": 0.87,
+      "calibration_metrics": {
+        "STEP13A_BASELINE": {
+          "ece": 0.1278494308632722,
+          "n": 178
+        },
+        "STEP13B_CANDIDATE": {
+          "ece": 0.1154272408537338,
+          "n": 178
+        }
+      },
+      "candidate_id": "S13B-CLA-QB-AVAILABILITY-BUST-FLAG-COMBINE",
+      "decision": "APPROVE_EXACT_SCOPE_SIGNAL",
+      "downstream_consequence": "Admitted only for the named position/target/configuration. No numeric 2026 contribution is applied without audited 2026 feature inputs and an approved full-fit model weight.",
+      "exact_input_columns": [
+        "combine_height_inches",
+        "combine_weight_lbs",
+        "combine_forty_seconds",
+        "combine_bench_reps",
+        "combine_vertical_inches",
+        "combine_broad_jump_inches",
+        "combine_cone_seconds",
+        "combine_shuttle_seconds",
+        "combine_bmi",
+        "combine_speed_score"
+      ],
+      "exact_model_configuration_reference": {
+        "accepted_fold_hyperparameters": [
+          {
+            "accepted_hyperparameter": "0.1",
+            "baseline_bundle": "G_BASE",
+            "test_year": 2023
+          },
+          {
+            "accepted_hyperparameter": "0.03",
+            "baseline_bundle": "G_BASE",
+            "test_year": 2024
+          },
+          {
+            "accepted_hyperparameter": "0.03",
+            "baseline_bundle": "G_BASE",
+            "test_year": 2025
+          }
+        ],
+        "code": "repository_snapshot/fantasy-draft/research/step13b/code/run_step13b_ablations_v1.py",
+        "commit": "e3cf26eb863e4f54b6635e5a4aac50fe88e53e09"
+      },
+      "feature_family": "combine",
+      "folds_improved": 2,
+      "folds_total": 3,
+      "historical_coverage": {
+        "by_input_column": {
+          "combine_bench_reps": 0.4145569620253164,
+          "combine_bmi": 0.8286618444846293,
+          "combine_broad_jump_inches": 0.6577757685352622,
+          "combine_cone_seconds": 0.4267631103074141,
+          "combine_forty_seconds": 0.7007233273056058,
+          "combine_height_inches": 0.8286618444846293,
+          "combine_shuttle_seconds": 0.4525316455696203,
+          "combine_speed_score": 0.6975587703435805,
+          "combine_vertical_inches": 0.6826401446654611,
+          "combine_weight_lbs": 0.8309222423146474
+        },
+        "eligible_universe_rows": 2212,
+        "maximum_field_coverage": 0.8309222423146474,
+        "mean_field_coverage": 0.6520795660036167,
+        "minimum_field_coverage": 0.4145569620253164
+      },
+      "limitation": [
+        "Passing is a candidate signal, not production approval; source coverage and mechanism remain position/target specific.",
+        "Candidate status is not production approval and carries no promoted weight.",
+        "Scope is limited to the exact position and prediction target.",
+        "At least one family input is missing for part of the eligible panel; fold-local imputation remains required."
+      ],
+      "mechanism_review_result": "PASS",
+      "metric_kind": "classification",
+      "numeric_2026_contribution": null,
+      "numeric_application_status": "NOT_APPLIED_NO_AUDITED_2026_FEATURE_MATRIX_OR_APPROVED_FULL_FIT_WEIGHTS",
+      "pooled_improvement": 0.0221632223251101,
+      "position": "QB",
+      "rationale": "Step 13B candidate gate passed; mechanism review passed; no rookie/veteran direction conflict was recorded.",
+      "subgroup_direction_conflict": false,
+      "target": "availability_bust_flag",
+      "worst_fold": -0.0097705026782595
+    },
+    {
+      "bootstrap_ci_high": 0.093960580572392,
+      "bootstrap_ci_low": -0.0064639024799676,
+      "bootstrap_probability_of_improvement": 0.954,
+      "calibration_metrics": {
+        "STEP13A_BASELINE": {
+          "ece": 0.1363490995557082,
+          "n": 178
+        },
+        "STEP13B_CANDIDATE": {
+          "ece": 0.1426132189713434,
+          "n": 178
+        }
+      },
+      "candidate_id": "S13B-CLA-QB-BUST-FLAG-COMBINE",
+      "decision": "REJECT_STEP14_CALIBRATION",
+      "downstream_consequence": "No runtime bust-probability contribution; consensus and missing probability are preserved.",
+      "exact_input_columns": [
+        "combine_height_inches",
+        "combine_weight_lbs",
+        "combine_forty_seconds",
+        "combine_bench_reps",
+        "combine_vertical_inches",
+        "combine_broad_jump_inches",
+        "combine_cone_seconds",
+        "combine_shuttle_seconds",
+        "combine_bmi",
+        "combine_speed_score"
+      ],
+      "exact_model_configuration_reference": {
+        "accepted_fold_hyperparameters": [
+          {
+            "accepted_hyperparameter": "0.1",
+            "baseline_bundle": "G_BASE",
+            "test_year": 2023
+          },
+          {
+            "accepted_hyperparameter": "0.1",
+            "baseline_bundle": "G_BASE",
+            "test_year": 2024
+          },
+          {
+            "accepted_hyperparameter": "0.03",
+            "baseline_bundle": "G_BASE",
+            "test_year": 2025
+          }
+        ],
+        "code": "repository_snapshot/fantasy-draft/research/step13b/code/run_step13b_ablations_v1.py",
+        "commit": "e3cf26eb863e4f54b6635e5a4aac50fe88e53e09"
+      },
+      "feature_family": "combine",
+      "folds_improved": 2,
+      "folds_total": 3,
+      "historical_coverage": {
+        "by_input_column": {
+          "combine_bench_reps": 0.4145569620253164,
+          "combine_bmi": 0.8286618444846293,
+          "combine_broad_jump_inches": 0.6577757685352622,
+          "combine_cone_seconds": 0.4267631103074141,
+          "combine_forty_seconds": 0.7007233273056058,
+          "combine_height_inches": 0.8286618444846293,
+          "combine_shuttle_seconds": 0.4525316455696203,
+          "combine_speed_score": 0.6975587703435805,
+          "combine_vertical_inches": 0.6826401446654611,
+          "combine_weight_lbs": 0.8309222423146474
+        },
+        "eligible_universe_rows": 2212,
+        "maximum_field_coverage": 0.8309222423146474,
+        "mean_field_coverage": 0.6520795660036167,
+        "minimum_field_coverage": 0.4145569620253164
+      },
+      "limitation": [
+        "Passing is a candidate signal, not production approval; source coverage and mechanism remain position/target specific.",
+        "Candidate status is not production approval and carries no promoted weight.",
+        "Scope is limited to the exact position and prediction target.",
+        "At least one family input is missing for part of the eligible panel; fold-local imputation remains required.",
+        "Candidate expected calibration error is worse than baseline and requires explicit Step 14 review."
+      ],
+      "mechanism_review_result": "PASS",
+      "metric_kind": "classification",
+      "numeric_2026_contribution": null,
+      "numeric_application_status": "NOT_APPLIED_NO_AUDITED_2026_FEATURE_MATRIX_OR_APPROVED_FULL_FIT_WEIGHTS",
+      "pooled_improvement": 0.0404459839367008,
+      "position": "QB",
+      "rationale": "Brier lift passed the Step 13B candidate gate, but ECE worsened from 0.136349099556 to 0.142613218971; an uncalibrated probability is not promoted.",
+      "subgroup_direction_conflict": false,
+      "target": "bust_flag",
+      "worst_fold": -0.0078044782751651
+    },
+    {
+      "bootstrap_ci_high": 0.1566149747728241,
+      "bootstrap_ci_low": -0.0550402114096563,
+      "bootstrap_probability_of_improvement": 0.836,
+      "calibration_metrics": {
+        "STEP13A_BASELINE": {
+          "ece": 0.1048804391712973,
+          "n": 242
+        },
+        "STEP13B_CANDIDATE": {
+          "ece": 0.0999095623159029,
+          "n": 242
+        }
+      },
+      "candidate_id": "S13B-CLA-TE-ELITE-FLAG-HISTORICAL-INJURY",
+      "decision": "APPROVE_EXACT_SCOPE_SIGNAL",
+      "downstream_consequence": "Admitted only for the named position/target/configuration. No numeric 2026 contribution is applied without audited 2026 feature inputs and an approved full-fit model weight.",
+      "exact_input_columns": [
+        "injury_report_weeks_last1",
+        "injury_report_weeks_weighted3",
+        "injury_report_out_weeks_last1",
+        "injury_report_out_weeks_weighted3",
+        "injury_report_doubtful_weeks_weighted3",
+        "injury_report_questionable_weeks_weighted3",
+        "practice_dnp_weeks_last1",
+        "practice_dnp_weeks_weighted3",
+        "practice_limited_weeks_weighted3",
+        "injury_category_count_3y",
+        "injury_recurrence_category_count_3y",
+        "injury_recurrence_flag_3y",
+        "injury_concussion_head_weeks_3y",
+        "injury_neck_weeks_3y",
+        "injury_shoulder_weeks_3y",
+        "injury_arm_elbow_weeks_3y",
+        "injury_hand_wrist_finger_weeks_3y",
+        "injury_chest_rib_weeks_3y",
+        "injury_back_weeks_3y",
+        "injury_hip_groin_weeks_3y",
+        "injury_hamstring_weeks_3y",
+        "injury_quad_thigh_weeks_3y",
+        "injury_knee_weeks_3y",
+        "injury_calf_achilles_weeks_3y",
+        "injury_ankle_weeks_3y",
+        "injury_foot_toe_weeks_3y",
+        "injury_illness_weeks_3y",
+        "injury_rest_admin_weeks_3y",
+        "injury_other_weeks_3y"
+      ],
+      "exact_model_configuration_reference": {
+        "accepted_fold_hyperparameters": [
+          {
+            "accepted_hyperparameter": "0.1",
+            "baseline_bundle": "H_AVAILABILITY",
+            "test_year": 2023
+          },
+          {
+            "accepted_hyperparameter": "0.1",
+            "baseline_bundle": "H_AVAILABILITY",
+            "test_year": 2024
+          },
+          {
+            "accepted_hyperparameter": "0.1",
+            "baseline_bundle": "H_AVAILABILITY",
+            "test_year": 2025
+          }
+        ],
+        "code": "repository_snapshot/fantasy-draft/research/step13b/code/run_step13b_ablations_v1.py",
+        "commit": "e3cf26eb863e4f54b6635e5a4aac50fe88e53e09"
+      },
+      "feature_family": "historical_injury",
+      "folds_improved": 3,
+      "folds_total": 3,
+      "historical_coverage": {
+        "by_input_column": {
+          "injury_ankle_weeks_3y": 0.9990958408679927,
+          "injury_arm_elbow_weeks_3y": 0.9990958408679927,
+          "injury_back_weeks_3y": 0.9990958408679927,
+          "injury_calf_achilles_weeks_3y": 0.9990958408679927,
+          "injury_category_count_3y": 0.9990958408679927,
+          "injury_chest_rib_weeks_3y": 0.9990958408679927,
+          "injury_concussion_head_weeks_3y": 0.9990958408679927,
+          "injury_foot_toe_weeks_3y": 0.9990958408679927,
+          "injury_hamstring_weeks_3y": 0.9990958408679927,
+          "injury_hand_wrist_finger_weeks_3y": 0.9990958408679927,
+          "injury_hip_groin_weeks_3y": 0.9990958408679927,
+          "injury_illness_weeks_3y": 0.9990958408679927,
+          "injury_knee_weeks_3y": 0.9990958408679927,
+          "injury_neck_weeks_3y": 0.9990958408679927,
+          "injury_other_weeks_3y": 0.9990958408679927,
+          "injury_quad_thigh_weeks_3y": 0.9990958408679927,
+          "injury_recurrence_category_count_3y": 0.9990958408679927,
+          "injury_recurrence_flag_3y": 0.9990958408679927,
+          "injury_report_doubtful_weeks_weighted3": 0.9990958408679927,
+          "injury_report_out_weeks_last1": 0.9990958408679927,
+          "injury_report_out_weeks_weighted3": 0.9990958408679927,
+          "injury_report_questionable_weeks_weighted3": 0.9990958408679927,
+          "injury_report_weeks_last1": 0.9990958408679927,
+          "injury_report_weeks_weighted3": 0.9990958408679927,
+          "injury_rest_admin_weeks_3y": 0.9990958408679927,
+          "injury_shoulder_weeks_3y": 0.9990958408679927,
+          "practice_dnp_weeks_last1": 0.9990958408679927,
+          "practice_dnp_weeks_weighted3": 0.9990958408679927,
+          "practice_limited_weeks_weighted3": 0.9990958408679927
+        },
+        "eligible_universe_rows": 2212,
+        "maximum_field_coverage": 0.9990958408679927,
+        "mean_field_coverage": 0.9990958408679931,
+        "minimum_field_coverage": 0.9990958408679927
+      },
+      "limitation": [
+        "Passing is a candidate signal, not production approval; source coverage and mechanism remain position/target specific.",
+        "Candidate status is not production approval and carries no promoted weight.",
+        "Scope is limited to the exact position and prediction target.",
+        "At least one family input is missing for part of the eligible panel; fold-local imputation remains required."
+      ],
+      "mechanism_review_result": "PASS",
+      "metric_kind": "classification",
+      "numeric_2026_contribution": null,
+      "numeric_application_status": "NOT_APPLIED_NO_AUDITED_2026_FEATURE_MATRIX_OR_APPROVED_FULL_FIT_WEIGHTS",
+      "pooled_improvement": 0.0573863115209982,
+      "position": "TE",
+      "rationale": "Step 13B candidate gate passed; mechanism review passed; no rookie/veteran direction conflict was recorded.",
+      "subgroup_direction_conflict": false,
+      "target": "elite_flag",
+      "worst_fold": 0.0121761306662832
+    },
+    {
+      "bootstrap_ci_high": 0.0696950157132352,
+      "bootstrap_ci_low": -0.0053127972190155,
+      "bootstrap_probability_of_improvement": 0.964,
+      "calibration_metrics": {
+        "STEP13A_BASELINE": {
+          "ece": 0.1295887928559686,
+          "n": 242
+        },
+        "STEP13B_CANDIDATE": {
+          "ece": 0.1214291431451834,
+          "n": 242
+        }
+      },
+      "candidate_id": "S13B-CLA-TE-STARTER-FLAG-ROOKIE-DRAFT-CAPITAL",
+      "decision": "APPROVE_EXACT_SCOPE_SIGNAL",
+      "downstream_consequence": "Admitted only for the named position/target/configuration. No numeric 2026 contribution is applied without audited 2026 feature inputs and an approved full-fit model weight.",
+      "exact_input_columns": [
+        "true_rookie_flag",
+        "drafted_flag",
+        "undrafted_flag",
+        "draft_round",
+        "draft_overall_pick",
+        "draft_pick_log",
+        "draft_capital_percentile_position_year",
+        "draft_capital_z_position_year"
+      ],
+      "exact_model_configuration_reference": {
+        "accepted_fold_hyperparameters": [
+          {
+            "accepted_hyperparameter": "0.1",
+            "baseline_bundle": "G_BASE",
+            "test_year": 2023
+          },
+          {
+            "accepted_hyperparameter": "0.1",
+            "baseline_bundle": "G_BASE",
+            "test_year": 2024
+          },
+          {
+            "accepted_hyperparameter": "0.1",
+            "baseline_bundle": "G_BASE",
+            "test_year": 2025
+          }
+        ],
+        "code": "repository_snapshot/fantasy-draft/research/step13b/code/run_step13b_ablations_v1.py",
+        "commit": "e3cf26eb863e4f54b6635e5a4aac50fe88e53e09"
+      },
+      "feature_family": "rookie_draft_capital",
+      "folds_improved": 2,
+      "folds_total": 3,
+      "historical_coverage": {
+        "by_input_column": {
+          "draft_capital_percentile_position_year": 0.8331826401446655,
+          "draft_capital_z_position_year": 0.8295660036166366,
+          "draft_overall_pick": 0.8331826401446655,
+          "draft_pick_log": 0.8331826401446655,
+          "draft_round": 0.8331826401446655,
+          "drafted_flag": 0.9990958408679927,
+          "true_rookie_flag": 0.9990958408679927,
+          "undrafted_flag": 0.9990958408679927
+        },
+        "eligible_universe_rows": 2212,
+        "maximum_field_coverage": 0.9990958408679927,
+        "mean_field_coverage": 0.8949480108499096,
+        "minimum_field_coverage": 0.8295660036166366
+      },
+      "limitation": [
+        "Passing is a candidate signal, not production approval; source coverage and mechanism remain position/target specific.",
+        "Candidate status is not production approval and carries no promoted weight.",
+        "Scope is limited to the exact position and prediction target.",
+        "At least one family input is missing for part of the eligible panel; fold-local imputation remains required."
+      ],
+      "mechanism_review_result": "PASS",
+      "metric_kind": "classification",
+      "numeric_2026_contribution": null,
+      "numeric_application_status": "NOT_APPLIED_NO_AUDITED_2026_FEATURE_MATRIX_OR_APPROVED_FULL_FIT_WEIGHTS",
+      "pooled_improvement": 0.0315154163801482,
+      "position": "TE",
+      "rationale": "Step 13B candidate gate passed; mechanism review passed; no rookie/veteran direction conflict was recorded.",
+      "subgroup_direction_conflict": false,
+      "target": "starter_flag",
+      "worst_fold": -0.0157483767017078
+    },
+    {
+      "bootstrap_ci_high": 0.052122435677389,
+      "bootstrap_ci_low": 0.0080561341195165,
+      "bootstrap_probability_of_improvement": 0.994,
+      "calibration_metrics": {
+        "STEP13A_BASELINE": {
+          "ece": 0.1278494308632722,
+          "n": 178
+        },
+        "STEP13B_CANDIDATE": {
+          "ece": 0.1077535322649319,
+          "n": 178
+        }
+      },
+      "candidate_id": "S13B-CLA-QB-AVAILABILITY-BUST-FLAG-WEEKLY-ROSTER-STATUS",
+      "decision": "APPROVE_EXACT_SCOPE_SIGNAL",
+      "downstream_consequence": "Admitted only for the named position/target/configuration. No numeric 2026 contribution is applied without audited 2026 feature inputs and an approved full-fit model weight.",
+      "exact_input_columns": [
+        "roster_active_weeks_last1",
+        "roster_inactive_weeks_last1",
+        "roster_inactive_weeks_weighted3",
+        "roster_reserve_weeks_weighted3",
+        "roster_pup_weeks_weighted3",
+        "roster_nfi_weeks_weighted3",
+        "roster_suspension_weeks_weighted3",
+        "roster_role_loss_weeks_weighted3",
+        "roster_status_changes_last1"
+      ],
+      "exact_model_configuration_reference": {
+        "accepted_fold_hyperparameters": [
+          {
+            "accepted_hyperparameter": "0.1",
+            "baseline_bundle": "G_BASE",
+            "test_year": 2023
+          },
+          {
+            "accepted_hyperparameter": "0.03",
+            "baseline_bundle": "G_BASE",
+            "test_year": 2024
+          },
+          {
+            "accepted_hyperparameter": "0.03",
+            "baseline_bundle": "G_BASE",
+            "test_year": 2025
+          }
+        ],
+        "code": "repository_snapshot/fantasy-draft/research/step13b/code/run_step13b_ablations_v1.py",
+        "commit": "e3cf26eb863e4f54b6635e5a4aac50fe88e53e09"
+      },
+      "feature_family": "weekly_roster_status",
+      "folds_improved": 3,
+      "folds_total": 3,
+      "historical_coverage": {
+        "by_input_column": {
+          "roster_active_weeks_last1": 0.9990958408679927,
+          "roster_inactive_weeks_last1": 0.9990958408679927,
+          "roster_inactive_weeks_weighted3": 0.9990958408679927,
+          "roster_nfi_weeks_weighted3": 0.9990958408679927,
+          "roster_pup_weeks_weighted3": 0.9990958408679927,
+          "roster_reserve_weeks_weighted3": 0.9990958408679927,
+          "roster_role_loss_weeks_weighted3": 0.9990958408679927,
+          "roster_status_changes_last1": 0.9990958408679927,
+          "roster_suspension_weeks_weighted3": 0.9990958408679927
+        },
+        "eligible_universe_rows": 2212,
+        "maximum_field_coverage": 0.9990958408679927,
+        "mean_field_coverage": 0.9990958408679929,
+        "minimum_field_coverage": 0.9990958408679927
+      },
+      "limitation": [
+        "Passing is a candidate signal, not production approval; source coverage and mechanism remain position/target specific.",
+        "Candidate status is not production approval and carries no promoted weight.",
+        "Scope is limited to the exact position and prediction target.",
+        "At least one family input is missing for part of the eligible panel; fold-local imputation remains required."
+      ],
+      "mechanism_review_result": "PASS",
+      "metric_kind": "classification",
+      "numeric_2026_contribution": null,
+      "numeric_application_status": "NOT_APPLIED_NO_AUDITED_2026_FEATURE_MATRIX_OR_APPROVED_FULL_FIT_WEIGHTS",
+      "pooled_improvement": 0.0297982446453863,
+      "position": "QB",
+      "rationale": "Step 13B candidate gate passed; mechanism review passed; no rookie/veteran direction conflict was recorded.",
+      "subgroup_direction_conflict": false,
+      "target": "availability_bust_flag",
+      "worst_fold": 0.0149634958942035
+    }
+  ],
+  "production_weights_promoted": 0,
+  "schema_version": "1.0.0",
+  "source_commit": "e3cf26eb863e4f54b6635e5a4aac50fe88e53e09",
+  "universal_consensus_center_preserved": true
+}

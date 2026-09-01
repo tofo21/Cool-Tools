@@ -1,0 +1,19 @@
+{
+  "detail_artifact": "player_truth_step14_detail.json",
+  "fields": {
+    "availabilityStatus": "Current overlay enum; unknown when no overlay is present.",
+    "eligibleFeatureFamilies": "Step 14-approved exact position/target signal scopes; no numeric contribution implied.",
+    "eliteProbability/starterProbability/bustProbability": "Null because no calibrated 2026 probability output is available.",
+    "expectedGames": "Unadjusted 17-game schedule baseline; not an injury-adjusted model output.",
+    "fullPprPointsP10/fullPprPointsP90": "Null because no approved distribution bounds are available.",
+    "fullPprPointsP50": "Same frozen consensus center as projectedFullPprPoints.",
+    "modelConfidence": "Transparent source-governance confidence grade, not an outcome probability.",
+    "projectedFullPprPoints": "Frozen consensus standardized_full_ppr_points; universal full-season center.",
+    "projectedPpg": "Separate schedule-normalized PPG center: standardized_full_ppr_points / 17.",
+    "quarantinedFeatureFamilies": "Binding mechanism, H_ALL, and incomplete scopes excluded from live numeric use."
+  },
+  "null_policy": "Null means unavailable/not defensibly produced; null is never converted to numeric zero.",
+  "runtime_artifact": "player_truth_step14.json",
+  "runtime_schema": "fantasy-draft/contracts/player_truth.schema.json",
+  "schema_version": "1.0.0"
+}

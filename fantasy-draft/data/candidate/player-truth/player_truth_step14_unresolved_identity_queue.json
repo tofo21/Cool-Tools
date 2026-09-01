@@ -1,0 +1,36 @@
+{
+  "identity_records": [
+    {
+      "display_name": "Jaydon Blue",
+      "fallback_identity_invented": false,
+      "internal_player_id": 190,
+      "position": "RB",
+      "reason": "NO_STEP13B_STABLE_IDENTITY_CROSSWALK_ROW",
+      "runtime_identity_method": "unresolved",
+      "team": "DAL"
+    }
+  ],
+  "note": "Keenan Allen has a resolved stable identity but no approved consensus projection; he is not an identity failure.",
+  "projection_records": [
+    {
+      "coverage_exception": "APPROVED_DRAFT_COMMAND_SOLE_EXCEPTION",
+      "display_name": "Keenan Allen",
+      "draft_command_board_rank": 143,
+      "fallback_used": false,
+      "internal_player_id": 143,
+      "missing_fields": [
+        "consensus_baseline",
+        "projected_full_ppr_points",
+        "projected_ppg",
+        "expected_games"
+      ],
+      "normalized_name": "keenanallen",
+      "position": "WR",
+      "reason": "NO_APPROVED_CONSENSUS_RECORD_FOR_CANONICAL_NAME_PLUS_POSITION",
+      "team": "IND"
+    }
+  ],
+  "schema_version": "1.0.0",
+  "unresolved_identity_count": 1,
+  "unresolved_projection_count": 1
+}

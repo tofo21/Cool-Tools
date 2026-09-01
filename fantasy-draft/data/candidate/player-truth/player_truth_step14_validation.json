@@ -1,0 +1,21 @@
+{
+  "checks": {
+    "canonical_name_position_join": true,
+    "consensus_checksum_gate": true,
+    "contextual_rows_preserved": true,
+    "h_all_rejected_rows_preserved": true,
+    "josh_jacobs_consensus_unadjusted_256_850": true,
+    "josh_jacobs_games_adjustment_null": true,
+    "kayshon_boutte_team_conflict_preserved": true,
+    "mechanism_quarantine_rows_preserved": true,
+    "missing_values_zero_filled": false,
+    "production_weights_promoted": 0,
+    "prohibited_market_substitution": false,
+    "rejected_rows_preserved": true,
+    "runtime_player_count": 199,
+    "sole_missing_player_is_keenan_allen": true,
+    "step13b_invariants_preserved": true
+  },
+  "schema_version": "1.0.0",
+  "status": "PASS"
+}

@@ -1,0 +1,44 @@
+{
+  "generated_at": "2026-09-01T00:59:51Z",
+  "rejected_sources": [
+    {
+      "id": "2026-08-31-fantasypros-direct-page-capture",
+      "reason": "incomplete 40-row capture; not blended, substituted, or used"
+    }
+  ],
+  "schema_version": "1.0.0",
+  "sources": [
+    {
+      "commit": "160f739cbeca74e6b2d559b372891f1491260fe9",
+      "id": "consensus_2026_frozen_20260901T005951Z_93fbef0b61f0",
+      "path": "data/derived/consensus_2026/consensus_2026_frozen_20260901T005951Z_93fbef0b61f0/current_2026_consensus_components_20260901T005951Z.csv",
+      "sha256": "8ab2386145f49cf2a44bc0c5667400e68e8bb49b4d63d15f0d416d7bd1d742c6",
+      "tree": "efdd7a56b88b47b20dac62137c287c6891563969",
+      "universal_center_field": "standardized_full_ppr_points"
+    },
+    {
+      "commit": "e3cf26eb863e4f54b6635e5a4aac50fe88e53e09",
+      "id": "STEP14_CANDIDATE_REGISTRY_ENRICHED_v1",
+      "path": "research/step14/inputs/STEP14_CANDIDATE_REGISTRY_ENRICHED_v1.json",
+      "sha256": "edf13b11e981c9c3a2072ecfb05e64a14de45c1802dee9a83895d6f8d8598129"
+    },
+    {
+      "commit": "e3cf26eb863e4f54b6635e5a4aac50fe88e53e09",
+      "id": "NEGATIVE_FINDINGS_AND_QUARANTINES_v1",
+      "path": "research/step14/inputs/NEGATIVE_FINDINGS_AND_QUARANTINES_v1.json",
+      "sha256": "b283ce1b3fe68e6d3d34d3ac6c62417c1f44308850058f23dbf8b774b195669b"
+    },
+    {
+      "commit": "e3cf26eb863e4f54b6635e5a4aac50fe88e53e09",
+      "id": "CURRENT_2026_PLAYER_IDENTITY_STATUS_TRUTH_v1",
+      "path": "research/step14/inputs/CURRENT_2026_PLAYER_IDENTITY_STATUS_TRUTH_v1.csv",
+      "sha256": "e991bf99a606c1e784a44bd2723ecb235904304ce7775da210eca387a306178e"
+    },
+    {
+      "commit": "e3cf26eb863e4f54b6635e5a4aac50fe88e53e09",
+      "id": "JOSH_JACOBS_COMMISSIONER_EXEMPT_OVERLAY_v1",
+      "path": "research/step14/inputs/JOSH_JACOBS_COMMISSIONER_EXEMPT_OVERLAY_v1.json",
+      "sha256": "4973f8a2453861e64bdce70a31f307de043b84812d51302f88b119f366d1fc56"
+    }
+  ]
+}

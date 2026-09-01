@@ -1,0 +1,24 @@
+{
+  "fallback_projection_count": 0,
+  "missing_player_count": 1,
+  "records": [
+    {
+      "coverage_exception": "APPROVED_DRAFT_COMMAND_SOLE_EXCEPTION",
+      "display_name": "Keenan Allen",
+      "draft_command_board_rank": 143,
+      "fallback_used": false,
+      "internal_player_id": 143,
+      "missing_fields": [
+        "consensus_baseline",
+        "projected_full_ppr_points",
+        "projected_ppg",
+        "expected_games"
+      ],
+      "normalized_name": "keenanallen",
+      "position": "WR",
+      "reason": "NO_APPROVED_CONSENSUS_RECORD_FOR_CANONICAL_NAME_PLUS_POSITION",
+      "team": "IND"
+    }
+  ],
+  "schema_version": "1.0.0"
+}

@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0.0",
+  "source_commit": "e3cf26eb863e4f54b6635e5a4aac50fe88e53e09",
+  "record": {
+    "gsis_id": "00-0035700",
+    "canonical_player_id": "00-0035700",
+    "player_name": "Josh Jacobs",
+    "position": "RB",
+    "team": "GB",
+    "current_status": "COMMISSIONER_EXEMPT",
+    "injury_or_rehab_status": "Returned to limited individual work after a groin issue; administrative status now controls availability.",
+    "body_part_or_category": "groin; administrative absence",
+    "surgery_recovery_context": null,
+    "pup_flag": "False",
+    "nfi_flag": "False",
+    "ir_flag": "False",
+    "suspension_status": "Commissioner's Exempt List pending NFL review; not a final discipline finding.",
+    "holdout_reporting_status": null,
+    "expected_week1_availability": "unavailable_while_on_exempt_list",
+    "expected_return_week": "unknown_pending_NFL_review",
+    "expected_games_adjustment": null,
+    "primary_source": "https://www.packers.com/news/packers-keep-six-receivers-seven-defensive-linemen-here-s-the-initial-2026-roster",
+    "secondary_source": "https://www.packers.com/news/inbox-he-could-really-be-an-asset-aug-19-2026",
+    "source_date": "2026-08-31",
+    "last_verified_timestamp": "2026-08-31T23:22:51.244996+00:00",
+    "source_confidence": "high_official_team",
+    "material_adjustment_flag": "False",
+    "manual_review_flag": "True",
+    "notes": "Official Packers roster reporting overrides nflverse ACT and ESPN DAY_TO_DAY for availability. No games adjustment is approved.",
+    "espn_id": "4047365",
+    "draft_command_id": "34",
+    "espn_official_ppr_rank": "93",
+    "espn_adp": "52.85"
+  },
+  "binding_limitations": [
+    "No numerical games adjustment is approved or invented.",
+    "No return date is asserted; expected_return_week remains unknown pending NFL review.",
+    "No consensus projection is silently modified.",
+    "Preserve COMMISSIONER_EXEMPT and the cited provenance unless new evidence is explicitly approved to supersede it."
+  ],
+  "source_overlay_sha256": "097fe58966bf883a0eaa5585a49e64c3f8281834558b3f68461d8c9f99243519"
+}

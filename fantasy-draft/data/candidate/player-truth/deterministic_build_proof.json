@@ -1,0 +1,8 @@
+{
+  "canonical_input_sha256": "8ab2386145f49cf2a44bc0c5667400e68e8bb49b4d63d15f0d416d7bd1d742c6",
+  "deterministic": true,
+  "fixed_generated_at": "2026-09-01T00:59:51Z",
+  "generator": "research/step14/build_player_truth_step14.py",
+  "schema_version": "1.0.0",
+  "verification_command": "python3 -m unittest discover -s tests/step14 -p 'test_*.py'"
+}

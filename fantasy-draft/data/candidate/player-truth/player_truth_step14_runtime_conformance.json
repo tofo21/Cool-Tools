@@ -1,0 +1,17 @@
+{
+  "artifact_path": "fantasy-draft/data/candidate/player-truth/player_truth_step14.json",
+  "full_bundle_status": "BLOCKED_ON_OTHER_PRODUCERS_NOT_STEP14",
+  "player_truth_contract_status": "PASS_PENDING_EXECUTABLE_VALIDATION_REPORT",
+  "remaining_inputs": [
+    "fantasy-draft/data/candidate/espn-market/espn_market_frozen.json",
+    "fantasy-draft/data/candidate/league-value/espn_league_value_step15.json",
+    "fantasy-draft/data/candidate/opponent-intent/opponent_intent_streamlined.json"
+  ],
+  "schema_version": "1.0.0",
+  "top_160_exception": {
+    "display_name": "Keenan Allen",
+    "internal_player_id": 143,
+    "note": "This is an absent projection row with resolved identity, not an unresolved row inside Player Truth. Do not add a synthetic row or pass an inapplicable identity-gap flag.",
+    "runtime_harness_approval_flag_applicable": false
+  }
+}

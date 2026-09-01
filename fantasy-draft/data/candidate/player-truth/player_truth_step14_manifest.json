@@ -1,0 +1,103 @@
+{
+  "artifact_id": "player-truth-step14-package-2026",
+  "artifact_version": "step14-2026.1",
+  "artifacts": [
+    {
+      "bytes": 460422,
+      "path": "player_truth_step14.json",
+      "sha256": "f6488e648af2549f1b7fa50eb485aa8f29784280144796e5e6d581a13b477bd3"
+    },
+    {
+      "bytes": 1070650,
+      "path": "player_truth_step14_detail.json",
+      "sha256": "0b26fc2cbc1972f2ee14b6446b36669da6745bbf4ba8b1b79a29fe3b35ddbc9d"
+    },
+    {
+      "bytes": 1386,
+      "path": "player_truth_step14_schema_and_dictionary.json",
+      "sha256": "b7165f24c105c32c16570fc50f7255296517d315cb6f23c83d057b25f8a5dd47"
+    },
+    {
+      "bytes": 50090,
+      "path": "player_truth_step14_candidate_decisions.json",
+      "sha256": "b4d6bb2ded733cfa9b5c88a693c9e038cdbc2b9ac946c27917b430ab5a5e76cf"
+    },
+    {
+      "bytes": 195141,
+      "path": "player_truth_step14_negative_registry.json",
+      "sha256": "b283ce1b3fe68e6d3d34d3ac6c62417c1f44308850058f23dbf8b774b195669b"
+    },
+    {
+      "bytes": 28138,
+      "path": "player_truth_step14_identity_reconciliation.csv",
+      "sha256": "7910896524b414e589ea936735202229cc08849fb2b51078f18eef04073e3c47"
+    },
+    {
+      "bytes": 1102,
+      "path": "player_truth_step14_unresolved_identity_queue.json",
+      "sha256": "87338335ef4834f9729a17eae34869e09536700b86c1966fdae57a699e1cffcd"
+    },
+    {
+      "bytes": 40523,
+      "path": "player_truth_step14_current_status_overlay.json",
+      "sha256": "e06205325ad964cf85625ea16cd7f48b47a2fa0b7dc246266172130c6fafa66c"
+    },
+    {
+      "bytes": 2103,
+      "path": "player_truth_step14_josh_jacobs_invariant.json",
+      "sha256": "4973f8a2453861e64bdce70a31f307de043b84812d51302f88b119f366d1fc56"
+    },
+    {
+      "bytes": 2246,
+      "path": "player_truth_step14_coverage_report.json",
+      "sha256": "b092c6155af91cc119d2a59b102183e3ec08dabf2c867da84e3c5ef1e3e6be9d"
+    },
+    {
+      "bytes": 653,
+      "path": "player_truth_step14_missing_players.json",
+      "sha256": "e70015dd3fbaf3f5a34cc7784ed5bc36234236d16169ece3d55e5dbe1bf11d69"
+    },
+    {
+      "bytes": 6386,
+      "path": "player_truth_step14_calibration_uncertainty.json",
+      "sha256": "c2ccb1fddbc8c6534c81afb621991d4e3d3fa2ef18480b6ba03933c3820d8880"
+    },
+    {
+      "bytes": 718,
+      "path": "player_truth_step14_validation.json",
+      "sha256": "0f149649c01c8c31999cb9f8f2a15c8a5d0ab2107ad92864e280a073e9d9a4bf"
+    },
+    {
+      "bytes": 865,
+      "path": "player_truth_step14_runtime_conformance.json",
+      "sha256": "562c7dffc2fe03f8d5490c25ef793a36ca2147d2e2297b1a04b16360972fa874"
+    },
+    {
+      "bytes": 1957,
+      "path": "player_truth_step14_source_manifest.json",
+      "sha256": "03a1ff34dd3b91acd681032385a97d48104fe842d83642c96446fb769e7e1855"
+    },
+    {
+      "bytes": 353,
+      "path": "deterministic_build_proof.json",
+      "sha256": "256c3c9ce23d78c55400276b7150498c5b3d3b6963b633cf0ec73fb7ab8ee85f"
+    },
+    {
+      "bytes": 548,
+      "path": "REPRODUCTION.md",
+      "sha256": "94d4fc0fbaec831ae3f483cc3abcdbc3cf0c798d6754ca0809c45fd5d96f5837"
+    },
+    {
+      "bytes": 3102,
+      "path": "../../../reports/STEP14_2026_PLAYER_TRUTH_REPORT.md",
+      "sha256": "ac755de1e324fce3af205f43dfde202cd134412de54ecc2176d6755992fa1b8a"
+    }
+  ],
+  "generated_at": "2026-09-01T00:59:51Z",
+  "row_count": 199,
+  "schema_version": "1.0.0",
+  "source_commits": [
+    "e3cf26eb863e4f54b6635e5a4aac50fe88e53e09",
+    "160f739cbeca74e6b2d559b372891f1491260fe9"
+  ]
+}

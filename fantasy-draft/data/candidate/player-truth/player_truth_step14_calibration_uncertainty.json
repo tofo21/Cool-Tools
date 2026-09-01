@@ -1,0 +1,207 @@
+{
+  "approved_exact_scope_signal_count": 12,
+  "candidate_count": 13,
+  "candidate_uncertainty": [
+    {
+      "bootstrap_ci_high": 0.0686892344127285,
+      "bootstrap_ci_low": -0.0111340419405779,
+      "bootstrap_probability_of_improvement": 0.91,
+      "calibration_metrics": {
+        "applicable": false
+      },
+      "candidate_id": "S13B-REG-QB-GAMES-PLAYED-AGE-EXPERIENCE",
+      "decision": "APPROVE_EXACT_SCOPE_SIGNAL"
+    },
+    {
+      "bootstrap_ci_high": 0.0531618455752022,
+      "bootstrap_ci_low": -0.0048106731714645,
+      "bootstrap_probability_of_improvement": 0.942,
+      "calibration_metrics": {
+        "applicable": false
+      },
+      "candidate_id": "S13B-REG-QB-GAMES-PLAYED-COMBINE",
+      "decision": "APPROVE_EXACT_SCOPE_SIGNAL"
+    },
+    {
+      "bootstrap_ci_high": 0.0805475260274256,
+      "bootstrap_ci_low": 0.0057957526956148,
+      "bootstrap_probability_of_improvement": 0.988,
+      "calibration_metrics": {
+        "applicable": false
+      },
+      "candidate_id": "S13B-REG-TE-GAMES-PLAYED-HISTORICAL-INJURY",
+      "decision": "APPROVE_EXACT_SCOPE_SIGNAL"
+    },
+    {
+      "bootstrap_ci_high": 0.0624191546020078,
+      "bootstrap_ci_low": -0.0187751337872833,
+      "bootstrap_probability_of_improvement": 0.88,
+      "calibration_metrics": {
+        "applicable": false
+      },
+      "candidate_id": "S13B-REG-QB-GAMES-PLAYED-ROOKIE-DRAFT-CAPITAL",
+      "decision": "APPROVE_EXACT_SCOPE_SIGNAL"
+    },
+    {
+      "bootstrap_ci_high": 0.0636132336289646,
+      "bootstrap_ci_low": -0.0121968381709974,
+      "bootstrap_probability_of_improvement": 0.932,
+      "calibration_metrics": {
+        "applicable": false
+      },
+      "candidate_id": "S13B-REG-QB-GAMES-PLAYED-WEEKLY-ROSTER-STATUS",
+      "decision": "APPROVE_EXACT_SCOPE_SIGNAL"
+    },
+    {
+      "bootstrap_ci_high": 0.0529500797850469,
+      "bootstrap_ci_low": -0.0077172468045238,
+      "bootstrap_probability_of_improvement": 0.938,
+      "calibration_metrics": {
+        "STEP13A_BASELINE": {
+          "ece": 0.1278494308632722,
+          "n": 178
+        },
+        "STEP13B_CANDIDATE": {
+          "ece": 0.1069405137646823,
+          "n": 178
+        }
+      },
+      "candidate_id": "S13B-CLA-QB-AVAILABILITY-BUST-FLAG-AGE-EXPERIENCE",
+      "decision": "APPROVE_EXACT_SCOPE_SIGNAL"
+    },
+    {
+      "bootstrap_ci_high": 0.0847418173217526,
+      "bootstrap_ci_low": -0.0153173714275638,
+      "bootstrap_probability_of_improvement": 0.904,
+      "calibration_metrics": {
+        "STEP13A_BASELINE": {
+          "ece": 0.1048804391712973,
+          "n": 242
+        },
+        "STEP13B_CANDIDATE": {
+          "ece": 0.1003063534891163,
+          "n": 242
+        }
+      },
+      "candidate_id": "S13B-CLA-TE-ELITE-FLAG-AGE-EXPERIENCE",
+      "decision": "APPROVE_EXACT_SCOPE_SIGNAL"
+    },
+    {
+      "bootstrap_ci_high": 0.0840714921209355,
+      "bootstrap_ci_low": -0.0151382881973486,
+      "bootstrap_probability_of_improvement": 0.908,
+      "calibration_metrics": {
+        "STEP13A_BASELINE": {
+          "ece": 0.1295887928559686,
+          "n": 242
+        },
+        "STEP13B_CANDIDATE": {
+          "ece": 0.1182759675349595,
+          "n": 242
+        }
+      },
+      "candidate_id": "S13B-CLA-TE-STARTER-FLAG-AGE-EXPERIENCE",
+      "decision": "APPROVE_EXACT_SCOPE_SIGNAL"
+    },
+    {
+      "bootstrap_ci_high": 0.0588872391864487,
+      "bootstrap_ci_low": -0.0127183925446275,
+      "bootstrap_probability_of_improvement": 0.87,
+      "calibration_metrics": {
+        "STEP13A_BASELINE": {
+          "ece": 0.1278494308632722,
+          "n": 178
+        },
+        "STEP13B_CANDIDATE": {
+          "ece": 0.1154272408537338,
+          "n": 178
+        }
+      },
+      "candidate_id": "S13B-CLA-QB-AVAILABILITY-BUST-FLAG-COMBINE",
+      "decision": "APPROVE_EXACT_SCOPE_SIGNAL"
+    },
+    {
+      "bootstrap_ci_high": 0.093960580572392,
+      "bootstrap_ci_low": -0.0064639024799676,
+      "bootstrap_probability_of_improvement": 0.954,
+      "calibration_metrics": {
+        "STEP13A_BASELINE": {
+          "ece": 0.1363490995557082,
+          "n": 178
+        },
+        "STEP13B_CANDIDATE": {
+          "ece": 0.1426132189713434,
+          "n": 178
+        }
+      },
+      "candidate_id": "S13B-CLA-QB-BUST-FLAG-COMBINE",
+      "decision": "REJECT_STEP14_CALIBRATION"
+    },
+    {
+      "bootstrap_ci_high": 0.1566149747728241,
+      "bootstrap_ci_low": -0.0550402114096563,
+      "bootstrap_probability_of_improvement": 0.836,
+      "calibration_metrics": {
+        "STEP13A_BASELINE": {
+          "ece": 0.1048804391712973,
+          "n": 242
+        },
+        "STEP13B_CANDIDATE": {
+          "ece": 0.0999095623159029,
+          "n": 242
+        }
+      },
+      "candidate_id": "S13B-CLA-TE-ELITE-FLAG-HISTORICAL-INJURY",
+      "decision": "APPROVE_EXACT_SCOPE_SIGNAL"
+    },
+    {
+      "bootstrap_ci_high": 0.0696950157132352,
+      "bootstrap_ci_low": -0.0053127972190155,
+      "bootstrap_probability_of_improvement": 0.964,
+      "calibration_metrics": {
+        "STEP13A_BASELINE": {
+          "ece": 0.1295887928559686,
+          "n": 242
+        },
+        "STEP13B_CANDIDATE": {
+          "ece": 0.1214291431451834,
+          "n": 242
+        }
+      },
+      "candidate_id": "S13B-CLA-TE-STARTER-FLAG-ROOKIE-DRAFT-CAPITAL",
+      "decision": "APPROVE_EXACT_SCOPE_SIGNAL"
+    },
+    {
+      "bootstrap_ci_high": 0.052122435677389,
+      "bootstrap_ci_low": 0.0080561341195165,
+      "bootstrap_probability_of_improvement": 0.994,
+      "calibration_metrics": {
+        "STEP13A_BASELINE": {
+          "ece": 0.1278494308632722,
+          "n": 178
+        },
+        "STEP13B_CANDIDATE": {
+          "ece": 0.1077535322649319,
+          "n": 178
+        }
+      },
+      "candidate_id": "S13B-CLA-QB-AVAILABILITY-BUST-FLAG-WEEKLY-ROSTER-STATUS",
+      "decision": "APPROVE_EXACT_SCOPE_SIGNAL"
+    }
+  ],
+  "rejected_candidate": "S13B-CLA-QB-BUST-FLAG-COMBINE",
+  "rejected_candidate_calibration": {
+    "STEP13A_BASELINE": {
+      "ece": 0.1363490995557082,
+      "n": 178
+    },
+    "STEP13B_CANDIDATE": {
+      "ece": 0.1426132189713434,
+      "n": 178
+    }
+  },
+  "rejected_step14_calibration_count": 1,
+  "runtime_probability_outputs_emitted": 0,
+  "schema_version": "1.0.0",
+  "uncertainty_policy": "Historical bootstrap evidence is preserved by candidate; no P10/P90 or event probability is manufactured."
+}

@@ -1,0 +1,105 @@
+{
+  "draft_command_player_count": 200,
+  "field_coverage": {
+    "availability_bust_probability": {
+      "nonnull": 0,
+      "null": 199
+    },
+    "bust_probability": {
+      "nonnull": 0,
+      "null": 199
+    },
+    "elite_probability": {
+      "nonnull": 0,
+      "null": 199
+    },
+    "espn_id": {
+      "nonnull": 198,
+      "null": 1
+    },
+    "expected_games_p50": {
+      "nonnull": 199,
+      "null": 0
+    },
+    "full_season_p50": {
+      "nonnull": 199,
+      "null": 0
+    },
+    "p10": {
+      "nonnull": 0,
+      "null": 199
+    },
+    "p90": {
+      "nonnull": 0,
+      "null": 199
+    },
+    "ppr_ppg_p50": {
+      "nonnull": 199,
+      "null": 0
+    },
+    "starter_probability": {
+      "nonnull": 0,
+      "null": 199
+    }
+  },
+  "identity": {
+    "espn_id_count": 198,
+    "stable_identity_count": 199,
+    "team_conflict_count": 1,
+    "team_conflicts": [
+      {
+        "consensus_source_team": "NE",
+        "current_team": "HOU",
+        "display_name": "Kayshon Boutte",
+        "internal_player_id": 180
+      }
+    ],
+    "unresolved_identity_count": 1
+  },
+  "overall_coverage_count": 199,
+  "overall_coverage_fraction": 0.995,
+  "player_truth_row_count": 199,
+  "position_coverage": {
+    "QB": {
+      "covered": 27,
+      "expected": 27,
+      "fraction": 1.0
+    },
+    "RB": {
+      "covered": 65,
+      "expected": 65,
+      "fraction": 1.0
+    },
+    "TE": {
+      "covered": 26,
+      "expected": 26,
+      "fraction": 1.0
+    },
+    "WR": {
+      "covered": 81,
+      "expected": 82,
+      "fraction": 0.9878048780487805
+    }
+  },
+  "schema_version": "1.0.0",
+  "sole_documented_exception": {
+    "coverage_exception": "APPROVED_DRAFT_COMMAND_SOLE_EXCEPTION",
+    "display_name": "Keenan Allen",
+    "draft_command_board_rank": 143,
+    "fallback_used": false,
+    "internal_player_id": 143,
+    "missing_fields": [
+      "consensus_baseline",
+      "projected_full_ppr_points",
+      "projected_ppg",
+      "expected_games"
+    ],
+    "normalized_name": "keenanallen",
+    "position": "WR",
+    "reason": "NO_APPROVED_CONSENSUS_RECORD_FOR_CANONICAL_NAME_PLUS_POSITION",
+    "team": "IND"
+  },
+  "top_160_coverage_count": 159,
+  "top_160_coverage_fraction": 0.99375,
+  "top_160_expected_count": 160
+}

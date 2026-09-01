@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0.0",
+  "source_commit": "e3cf26eb863e4f54b6635e5a4aac50fe88e53e09",
+  "rows": 500,
+  "canonical_identity_key": "gsis_id mapped to canonical_player_id",
+  "identity_fields": [
+    "canonical_player_id",
+    "gsis_id",
+    "draft_command_id",
+    "espn_id",
+    "normalized_name",
+    "player_name",
+    "team",
+    "position",
+    "match_method",
+    "match_score",
+    "identity_confidence"
+  ],
+  "status_fields": [
+    "current_status",
+    "expected_week1_availability",
+    "expected_return_week",
+    "expected_games_adjustment",
+    "primary_source",
+    "secondary_source",
+    "source_date",
+    "last_verified_timestamp",
+    "source_confidence",
+    "material_adjustment_flag",
+    "notes"
+  ],
+  "missing_value_policy": "Missing and blank values mean unknown/not present, never zero. status_overlay_present=false means no overlay row, not a zero-risk or zero-status claim.",
+  "conflict_resolution_policy": [
+    "GSIS is the canonical identity spine.",
+    "ESPN ID and Draft Command ID remain nullable merge interfaces owned by their source lanes.",
+    "Stable-ID matches are not overwritten by fuzzy name matching.",
+    "Metadata conflicts and unresolved rows remain explicit manual-review records.",
+    "Current 2026 status remains separate from historical walk-forward features."
+  ],
+  "source_artifacts": [
+    "repository_snapshot/fantasy-draft/research/step13b/outputs/identity_bridge_v1.csv",
+    "repository_snapshot/fantasy-draft/research/step13b/outputs/current_2026_identity_merge_interface_v1.csv",
+    "repository_snapshot/fantasy-draft/research/step13b/outputs/current_2026_identity_merge_conflicts_v1.csv",
+    "repository_snapshot/fantasy-draft/research/step13b/outputs/current_2026_identity_merge_unmatched_v1.csv",
+    "repository_snapshot/fantasy-draft/research/step13b/outputs/current_2026_status_overlay_v1.csv",
+    "repository_snapshot/fantasy-draft/research/step13b/outputs/current_2026_status_overlay_audit_v1.json"
+  ]
+}

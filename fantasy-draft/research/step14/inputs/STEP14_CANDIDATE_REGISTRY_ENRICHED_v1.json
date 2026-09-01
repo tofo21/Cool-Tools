@@ -1,0 +1,3686 @@
+{
+  "schema_version": "1.0.0",
+  "source_commit": "e3cf26eb863e4f54b6635e5a4aac50fe88e53e09",
+  "candidate_count": 13,
+  "universal_consensus_center_preserved": true,
+  "production_weights_promoted": 0,
+  "candidates": [
+    {
+      "candidate_id": "S13B-REG-QB-GAMES-PLAYED-AGE-EXPERIENCE",
+      "status": "candidate",
+      "production_status": "not_promoted_step13b",
+      "research_owner_approval_required": true,
+      "metric_kind": "regression",
+      "target": "games_played",
+      "position_or_cohort": "QB",
+      "feature_family": "age_experience",
+      "intended_use": "expected-games head candidate for the named position only",
+      "historical_coverage": {
+        "eligible_universe_rows": 2212,
+        "minimum_field_coverage": 0.9990958408679927,
+        "mean_field_coverage": 0.9990958408679927,
+        "maximum_field_coverage": 0.9990958408679927,
+        "by_input_column": {
+          "true_preseason_age": 0.9990958408679927,
+          "nfl_experience_years": 0.9990958408679927,
+          "nfl_first_active_season": 0.9990958408679927,
+          "career_team_count_prior": 0.9990958408679927,
+          "career_position_count_prior": 0.9990958408679927,
+          "career_team_change_count_prior": 0.9990958408679927
+        }
+      },
+      "eligible_sample": {
+        "outer_test_observations": 178,
+        "canonical_eligible_player_seasons": 2212
+      },
+      "outer_test_seasons": [
+        2023,
+        2024,
+        2025
+      ],
+      "comparison_baseline": {
+        "model": "STEP13A_JOB_SPECIFIC",
+        "bundle": "G_BASE",
+        "job_specific": true
+      },
+      "candidate_model": "STEP13A_PLUS_AGE_EXPERIENCE",
+      "performance_metrics": {
+        "primary_metric": "MAE",
+        "baseline_metric_value": 3.331860219295508,
+        "candidate_metric_value": 3.2395101739465684,
+        "pooled_improvement": 0.0277172628113629,
+        "folds_improved": 2,
+        "folds_total": 3,
+        "worst_fold": -0.0089920370419303,
+        "fold_detail": [
+          {
+            "metric_kind": "regression",
+            "candidate_family": "age_experience",
+            "position": "QB",
+            "prediction_target": "games_played",
+            "test_year": 2023,
+            "baseline_bundle": "G_BASE",
+            "accepted_hyperparameter": "100.0",
+            "n": 57,
+            "baseline_metric": 3.811859281317021,
+            "candidate_metric": 3.785987421809807,
+            "improvement": 0.0067872021493605
+          },
+          {
+            "metric_kind": "regression",
+            "candidate_family": "age_experience",
+            "position": "QB",
+            "prediction_target": "games_played",
+            "test_year": 2024,
+            "baseline_bundle": "G_BASE",
+            "accepted_hyperparameter": "100.0",
+            "n": 63,
+            "baseline_metric": 2.9983386502241536,
+            "candidate_metric": 2.734144649427207,
+            "improvement": 0.0881134626928135
+          },
+          {
+            "metric_kind": "regression",
+            "candidate_family": "age_experience",
+            "position": "QB",
+            "prediction_target": "games_played",
+            "test_year": 2025,
+            "baseline_bundle": "G_BASE",
+            "accepted_hyperparameter": "100.0",
+            "n": 58,
+            "baseline_metric": 3.2224104316449718,
+            "candidate_metric": 3.2513864656106257,
+            "improvement": -0.0089920370419303
+          }
+        ]
+      },
+      "calibration_metrics": {
+        "applicable": false
+      },
+      "stability_and_sensitivity": {
+        "bootstrap_mean_improvement": 0.0279785303766218,
+        "bootstrap_ci_low": -0.0111340419405779,
+        "bootstrap_ci_high": 0.0686892344127285,
+        "bootstrap_probability_of_improvement": 0.91,
+        "mechanism_positive_folds": 2,
+        "mechanism_mean_metric_degradation": 0.0487412286635785,
+        "mechanism_review_result": "PASS",
+        "mechanism_fold_detail": [
+          {
+            "metric_kind": "regression",
+            "candidate_family": "age_experience",
+            "position": "QB",
+            "prediction_target": "games_played",
+            "test_year": 2023,
+            "candidate_metric": 3.785987421809807,
+            "permuted_candidate_metric": 3.894777111439612,
+            "permutation_metric_degradation": 0.108789689629805,
+            "candidate_feature_count": 6,
+            "mean_test_feature_coverage": 1.0
+          },
+          {
+            "metric_kind": "regression",
+            "candidate_family": "age_experience",
+            "position": "QB",
+            "prediction_target": "games_played",
+            "test_year": 2024,
+            "candidate_metric": 2.734144649427207,
+            "permuted_candidate_metric": 2.731133006568353,
+            "permutation_metric_degradation": -0.003011642858854,
+            "candidate_feature_count": 6,
+            "mean_test_feature_coverage": 1.0
+          },
+          {
+            "metric_kind": "regression",
+            "candidate_family": "age_experience",
+            "position": "QB",
+            "prediction_target": "games_played",
+            "test_year": 2025,
+            "candidate_metric": 3.2513864656106257,
+            "permuted_candidate_metric": 3.2918321048304104,
+            "permutation_metric_degradation": 0.0404456392197847,
+            "candidate_feature_count": 6,
+            "mean_test_feature_coverage": 1.0
+          }
+        ],
+        "rookie_pooled_improvement": 0.1109498818275095,
+        "veteran_pooled_improvement": 0.0176099791934456,
+        "subgroup_direction_conflict": false,
+        "subgroup_fold_detail": [
+          {
+            "metric_kind": "regression",
+            "candidate_family": "age_experience",
+            "position": "QB",
+            "prediction_target": "games_played",
+            "test_year": 2023,
+            "subgroup": "rookie",
+            "n": 8,
+            "baseline_metric": 3.989803731783281,
+            "candidate_metric": 3.9161507196403966,
+            "improvement": 0.0184603096027393
+          },
+          {
+            "metric_kind": "regression",
+            "candidate_family": "age_experience",
+            "position": "QB",
+            "prediction_target": "games_played",
+            "test_year": 2023,
+            "subgroup": "veteran",
+            "n": 49,
+            "baseline_metric": 3.782807126138857,
+            "candidate_metric": 3.764736271143587,
+            "improvement": 0.0047771018697733
+          },
+          {
+            "metric_kind": "regression",
+            "candidate_family": "age_experience",
+            "position": "QB",
+            "prediction_target": "games_played",
+            "test_year": 2024,
+            "subgroup": "rookie",
+            "n": 7,
+            "baseline_metric": 3.438165957824709,
+            "candidate_metric": 2.476226648401824,
+            "improvement": 0.2797826868228006
+          },
+          {
+            "metric_kind": "regression",
+            "candidate_family": "age_experience",
+            "position": "QB",
+            "prediction_target": "games_played",
+            "test_year": 2024,
+            "subgroup": "veteran",
+            "n": 56,
+            "baseline_metric": 2.943360236774084,
+            "candidate_metric": 2.76638439955538,
+            "improvement": 0.0601271414241395
+          },
+          {
+            "metric_kind": "regression",
+            "candidate_family": "age_experience",
+            "position": "QB",
+            "prediction_target": "games_played",
+            "test_year": 2025,
+            "subgroup": "rookie",
+            "n": 6,
+            "baseline_metric": 4.13900661952707,
+            "candidate_metric": 3.9846311690201657,
+            "improvement": 0.0372977056326968
+          },
+          {
+            "metric_kind": "regression",
+            "candidate_family": "age_experience",
+            "position": "QB",
+            "prediction_target": "games_played",
+            "test_year": 2025,
+            "subgroup": "veteran",
+            "n": 52,
+            "baseline_metric": 3.11664933304319,
+            "candidate_metric": 3.16678130752491,
+            "improvement": -0.0160852149615334
+          }
+        ]
+      },
+      "confidence": "candidate_only_pending_exact_scope_FFDA_review; no production confidence grade assigned",
+      "promotion_status": "CANDIDATE_SIGNAL",
+      "limitations": [
+        "Passing is a candidate signal, not production approval; source coverage and mechanism remain position/target specific.",
+        "Candidate status is not production approval and carries no promoted weight.",
+        "Scope is limited to the exact position and prediction target.",
+        "At least one family input is missing for part of the eligible panel; fold-local imputation remains required."
+      ],
+      "exact_input_columns": [
+        "true_preseason_age",
+        "nfl_experience_years",
+        "nfl_first_active_season",
+        "career_team_count_prior",
+        "career_position_count_prior",
+        "career_team_change_count_prior"
+      ],
+      "temporal_rules": [
+        "immutable/preseason-known"
+      ],
+      "exact_model_configuration_reference": {
+        "code": "repository_snapshot/fantasy-draft/research/step13b/code/run_step13b_ablations_v1.py",
+        "commit": "e3cf26eb863e4f54b6635e5a4aac50fe88e53e09",
+        "accepted_fold_hyperparameters": [
+          {
+            "test_year": 2023,
+            "accepted_hyperparameter": "100.0",
+            "baseline_bundle": "G_BASE"
+          },
+          {
+            "test_year": 2024,
+            "accepted_hyperparameter": "100.0",
+            "baseline_bundle": "G_BASE"
+          },
+          {
+            "test_year": 2025,
+            "accepted_hyperparameter": "100.0",
+            "baseline_bundle": "G_BASE"
+          }
+        ]
+      },
+      "source_artifact_paths": [
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step14_candidate_jobs_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_fold_metrics_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_bootstrap_uncertainty_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_mechanism_review_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_rookie_veteran_subgroups_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_probability_calibration_summary_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_feature_coverage_v1.csv"
+      ],
+      "permitted_downstream_use": "Step 14 candidate input and FFDA mechanism review only.",
+      "prohibited_downstream_use": "No production Player Truth weight or live-draft behavior change without FFDA approval."
+    },
+    {
+      "candidate_id": "S13B-REG-QB-GAMES-PLAYED-COMBINE",
+      "status": "candidate",
+      "production_status": "not_promoted_step13b",
+      "research_owner_approval_required": true,
+      "metric_kind": "regression",
+      "target": "games_played",
+      "position_or_cohort": "QB",
+      "feature_family": "combine",
+      "intended_use": "expected-games head candidate for the named position only",
+      "historical_coverage": {
+        "eligible_universe_rows": 2212,
+        "minimum_field_coverage": 0.4145569620253164,
+        "mean_field_coverage": 0.6520795660036167,
+        "maximum_field_coverage": 0.8309222423146474,
+        "by_input_column": {
+          "combine_height_inches": 0.8286618444846293,
+          "combine_weight_lbs": 0.8309222423146474,
+          "combine_forty_seconds": 0.7007233273056058,
+          "combine_bench_reps": 0.4145569620253164,
+          "combine_vertical_inches": 0.6826401446654611,
+          "combine_broad_jump_inches": 0.6577757685352622,
+          "combine_cone_seconds": 0.4267631103074141,
+          "combine_shuttle_seconds": 0.4525316455696203,
+          "combine_bmi": 0.8286618444846293,
+          "combine_speed_score": 0.6975587703435805
+        }
+      },
+      "eligible_sample": {
+        "outer_test_observations": 178,
+        "canonical_eligible_player_seasons": 2212
+      },
+      "outer_test_seasons": [
+        2023,
+        2024,
+        2025
+      ],
+      "comparison_baseline": {
+        "model": "STEP13A_JOB_SPECIFIC",
+        "bundle": "G_BASE",
+        "job_specific": true
+      },
+      "candidate_model": "STEP13A_PLUS_COMBINE",
+      "performance_metrics": {
+        "primary_metric": "MAE",
+        "baseline_metric_value": 3.331860219295508,
+        "candidate_metric_value": 3.254831311225157,
+        "pooled_improvement": 0.0231188894492812,
+        "folds_improved": 2,
+        "folds_total": 3,
+        "worst_fold": -0.0026102006168038,
+        "fold_detail": [
+          {
+            "metric_kind": "regression",
+            "candidate_family": "combine",
+            "position": "QB",
+            "prediction_target": "games_played",
+            "test_year": 2023,
+            "baseline_bundle": "G_BASE",
+            "accepted_hyperparameter": "100.0",
+            "n": 57,
+            "baseline_metric": 3.811859281317021,
+            "candidate_metric": 3.821808998764285,
+            "improvement": -0.0026102006168038
+          },
+          {
+            "metric_kind": "regression",
+            "candidate_family": "combine",
+            "position": "QB",
+            "prediction_target": "games_played",
+            "test_year": 2024,
+            "baseline_bundle": "G_BASE",
+            "accepted_hyperparameter": "100.0",
+            "n": 63,
+            "baseline_metric": 2.9983386502241536,
+            "candidate_metric": 2.8178656458784497,
+            "improvement": 0.0601910008838434
+          },
+          {
+            "metric_kind": "regression",
+            "candidate_family": "combine",
+            "position": "QB",
+            "prediction_target": "games_played",
+            "test_year": 2025,
+            "baseline_bundle": "G_BASE",
+            "accepted_hyperparameter": "100.0",
+            "n": 58,
+            "baseline_metric": 3.2224104316449718,
+            "candidate_metric": 3.1722642203132976,
+            "improvement": 0.0155617083532327
+          }
+        ]
+      },
+      "calibration_metrics": {
+        "applicable": false
+      },
+      "stability_and_sensitivity": {
+        "bootstrap_mean_improvement": 0.0236433127299836,
+        "bootstrap_ci_low": -0.0048106731714645,
+        "bootstrap_ci_high": 0.0531618455752022,
+        "bootstrap_probability_of_improvement": 0.942,
+        "mechanism_positive_folds": 2,
+        "mechanism_mean_metric_degradation": 0.0156840118547848,
+        "mechanism_review_result": "PASS",
+        "mechanism_fold_detail": [
+          {
+            "metric_kind": "regression",
+            "candidate_family": "combine",
+            "position": "QB",
+            "prediction_target": "games_played",
+            "test_year": 2023,
+            "candidate_metric": 3.821808998764285,
+            "permuted_candidate_metric": 3.804002420105543,
+            "permutation_metric_degradation": -0.0178065786587415,
+            "candidate_feature_count": 10,
+            "mean_test_feature_coverage": 0.6771929824561405
+          },
+          {
+            "metric_kind": "regression",
+            "candidate_family": "combine",
+            "position": "QB",
+            "prediction_target": "games_played",
+            "test_year": 2024,
+            "candidate_metric": 2.8178656458784497,
+            "permuted_candidate_metric": 2.8637294317568096,
+            "permutation_metric_degradation": 0.0458637858783599,
+            "candidate_feature_count": 10,
+            "mean_test_feature_coverage": 0.6507936507936508
+          },
+          {
+            "metric_kind": "regression",
+            "candidate_family": "combine",
+            "position": "QB",
+            "prediction_target": "games_played",
+            "test_year": 2025,
+            "candidate_metric": 3.1722642203132976,
+            "permuted_candidate_metric": 3.1912590486580337,
+            "permutation_metric_degradation": 0.018994828344736,
+            "candidate_feature_count": 10,
+            "mean_test_feature_coverage": 0.6344827586206897
+          }
+        ],
+        "rookie_pooled_improvement": 0.0186232272557196,
+        "veteran_pooled_improvement": 0.0262364829423007,
+        "subgroup_direction_conflict": false,
+        "subgroup_fold_detail": [
+          {
+            "metric_kind": "regression",
+            "candidate_family": "combine",
+            "position": "QB",
+            "prediction_target": "games_played",
+            "test_year": 2023,
+            "subgroup": "rookie",
+            "n": 8,
+            "baseline_metric": 3.989803731783281,
+            "candidate_metric": 4.120261414626214,
+            "improvement": -0.0326977695177562
+          },
+          {
+            "metric_kind": "regression",
+            "candidate_family": "combine",
+            "position": "QB",
+            "prediction_target": "games_played",
+            "test_year": 2023,
+            "subgroup": "veteran",
+            "n": 49,
+            "baseline_metric": 3.782807126138857,
+            "candidate_metric": 3.7730820737256017,
+            "improvement": 0.0025708560042768
+          },
+          {
+            "metric_kind": "regression",
+            "candidate_family": "combine",
+            "position": "QB",
+            "prediction_target": "games_played",
+            "test_year": 2024,
+            "subgroup": "rookie",
+            "n": 7,
+            "baseline_metric": 3.438165957824709,
+            "candidate_metric": 3.242061936165708,
+            "improvement": 0.0570373926286774
+          },
+          {
+            "metric_kind": "regression",
+            "candidate_family": "combine",
+            "position": "QB",
+            "prediction_target": "games_played",
+            "test_year": 2024,
+            "subgroup": "veteran",
+            "n": 56,
+            "baseline_metric": 2.943360236774084,
+            "candidate_metric": 2.7648411095925423,
+            "improvement": 0.0606514707072343
+          },
+          {
+            "metric_kind": "regression",
+            "candidate_family": "combine",
+            "position": "QB",
+            "prediction_target": "games_played",
+            "test_year": 2025,
+            "subgroup": "rookie",
+            "n": 6,
+            "baseline_metric": 4.13900661952707,
+            "candidate_metric": 3.964196930373157,
+            "improvement": 0.0422346966852367
+          },
+          {
+            "metric_kind": "regression",
+            "candidate_family": "combine",
+            "position": "QB",
+            "prediction_target": "games_played",
+            "test_year": 2025,
+            "subgroup": "veteran",
+            "n": 52,
+            "baseline_metric": 3.11664933304319,
+            "candidate_metric": 3.080887369152545,
+            "improvement": 0.0114744907332022
+          }
+        ]
+      },
+      "confidence": "candidate_only_pending_exact_scope_FFDA_review; no production confidence grade assigned",
+      "promotion_status": "CANDIDATE_SIGNAL",
+      "limitations": [
+        "Passing is a candidate signal, not production approval; source coverage and mechanism remain position/target specific.",
+        "Candidate status is not production approval and carries no promoted weight.",
+        "Scope is limited to the exact position and prediction target.",
+        "At least one family input is missing for part of the eligible panel; fold-local imputation remains required."
+      ],
+      "exact_input_columns": [
+        "combine_height_inches",
+        "combine_weight_lbs",
+        "combine_forty_seconds",
+        "combine_bench_reps",
+        "combine_vertical_inches",
+        "combine_broad_jump_inches",
+        "combine_cone_seconds",
+        "combine_shuttle_seconds",
+        "combine_bmi",
+        "combine_speed_score"
+      ],
+      "temporal_rules": [
+        "immutable/preseason-known"
+      ],
+      "exact_model_configuration_reference": {
+        "code": "repository_snapshot/fantasy-draft/research/step13b/code/run_step13b_ablations_v1.py",
+        "commit": "e3cf26eb863e4f54b6635e5a4aac50fe88e53e09",
+        "accepted_fold_hyperparameters": [
+          {
+            "test_year": 2023,
+            "accepted_hyperparameter": "100.0",
+            "baseline_bundle": "G_BASE"
+          },
+          {
+            "test_year": 2024,
+            "accepted_hyperparameter": "100.0",
+            "baseline_bundle": "G_BASE"
+          },
+          {
+            "test_year": 2025,
+            "accepted_hyperparameter": "100.0",
+            "baseline_bundle": "G_BASE"
+          }
+        ]
+      },
+      "source_artifact_paths": [
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step14_candidate_jobs_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_fold_metrics_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_bootstrap_uncertainty_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_mechanism_review_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_rookie_veteran_subgroups_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_probability_calibration_summary_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_feature_coverage_v1.csv"
+      ],
+      "permitted_downstream_use": "Step 14 candidate input and FFDA mechanism review only.",
+      "prohibited_downstream_use": "No production Player Truth weight or live-draft behavior change without FFDA approval."
+    },
+    {
+      "candidate_id": "S13B-REG-TE-GAMES-PLAYED-HISTORICAL-INJURY",
+      "status": "candidate",
+      "production_status": "not_promoted_step13b",
+      "research_owner_approval_required": true,
+      "metric_kind": "regression",
+      "target": "games_played",
+      "position_or_cohort": "TE",
+      "feature_family": "historical_injury",
+      "intended_use": "expected-games head candidate for the named position only",
+      "historical_coverage": {
+        "eligible_universe_rows": 2212,
+        "minimum_field_coverage": 0.9990958408679927,
+        "mean_field_coverage": 0.9990958408679931,
+        "maximum_field_coverage": 0.9990958408679927,
+        "by_input_column": {
+          "injury_report_weeks_last1": 0.9990958408679927,
+          "injury_report_weeks_weighted3": 0.9990958408679927,
+          "injury_report_out_weeks_last1": 0.9990958408679927,
+          "injury_report_out_weeks_weighted3": 0.9990958408679927,
+          "injury_report_doubtful_weeks_weighted3": 0.9990958408679927,
+          "injury_report_questionable_weeks_weighted3": 0.9990958408679927,
+          "practice_dnp_weeks_last1": 0.9990958408679927,
+          "practice_dnp_weeks_weighted3": 0.9990958408679927,
+          "practice_limited_weeks_weighted3": 0.9990958408679927,
+          "injury_category_count_3y": 0.9990958408679927,
+          "injury_recurrence_category_count_3y": 0.9990958408679927,
+          "injury_recurrence_flag_3y": 0.9990958408679927,
+          "injury_concussion_head_weeks_3y": 0.9990958408679927,
+          "injury_neck_weeks_3y": 0.9990958408679927,
+          "injury_shoulder_weeks_3y": 0.9990958408679927,
+          "injury_arm_elbow_weeks_3y": 0.9990958408679927,
+          "injury_hand_wrist_finger_weeks_3y": 0.9990958408679927,
+          "injury_chest_rib_weeks_3y": 0.9990958408679927,
+          "injury_back_weeks_3y": 0.9990958408679927,
+          "injury_hip_groin_weeks_3y": 0.9990958408679927,
+          "injury_hamstring_weeks_3y": 0.9990958408679927,
+          "injury_quad_thigh_weeks_3y": 0.9990958408679927,
+          "injury_knee_weeks_3y": 0.9990958408679927,
+          "injury_calf_achilles_weeks_3y": 0.9990958408679927,
+          "injury_ankle_weeks_3y": 0.9990958408679927,
+          "injury_foot_toe_weeks_3y": 0.9990958408679927,
+          "injury_illness_weeks_3y": 0.9990958408679927,
+          "injury_rest_admin_weeks_3y": 0.9990958408679927,
+          "injury_other_weeks_3y": 0.9990958408679927
+        }
+      },
+      "eligible_sample": {
+        "outer_test_observations": 242,
+        "canonical_eligible_player_seasons": 2212
+      },
+      "outer_test_seasons": [
+        2023,
+        2024,
+        2025
+      ],
+      "comparison_baseline": {
+        "model": "STEP13A_JOB_SPECIFIC",
+        "bundle": "H_AVAILABILITY",
+        "job_specific": true
+      },
+      "candidate_model": "STEP13A_PLUS_HISTORICAL_INJURY",
+      "performance_metrics": {
+        "primary_metric": "MAE",
+        "baseline_metric_value": 3.3195175719219763,
+        "candidate_metric_value": 3.168880989832745,
+        "pooled_improvement": 0.0453790585003632,
+        "folds_improved": 2,
+        "folds_total": 3,
+        "worst_fold": -0.0087322637190938,
+        "fold_detail": [
+          {
+            "metric_kind": "regression",
+            "candidate_family": "historical_injury",
+            "position": "TE",
+            "prediction_target": "games_played",
+            "test_year": 2023,
+            "baseline_bundle": "H_AVAILABILITY",
+            "accepted_hyperparameter": "100.0",
+            "n": 75,
+            "baseline_metric": 2.9450559084819474,
+            "candidate_metric": 2.8425284179384334,
+            "improvement": 0.0348134275645594
+          },
+          {
+            "metric_kind": "regression",
+            "candidate_family": "historical_injury",
+            "position": "TE",
+            "prediction_target": "games_played",
+            "test_year": 2024,
+            "baseline_bundle": "H_AVAILABILITY",
+            "accepted_hyperparameter": "100.0",
+            "n": 91,
+            "baseline_metric": 3.91491973516074,
+            "candidate_metric": 3.5771218225295947,
+            "improvement": 0.086284760731442
+          },
+          {
+            "metric_kind": "regression",
+            "candidate_family": "historical_injury",
+            "position": "TE",
+            "prediction_target": "games_played",
+            "test_year": 2025,
+            "baseline_bundle": "H_AVAILABILITY",
+            "accepted_hyperparameter": "1000.0",
+            "n": 76,
+            "baseline_metric": 2.976136360122959,
+            "candidate_metric": 3.0021247676835365,
+            "improvement": -0.0087322637190938
+          }
+        ]
+      },
+      "calibration_metrics": {
+        "applicable": false
+      },
+      "stability_and_sensitivity": {
+        "bootstrap_mean_improvement": 0.0450140381998408,
+        "bootstrap_ci_low": 0.0057957526956148,
+        "bootstrap_ci_high": 0.0805475260274256,
+        "bootstrap_probability_of_improvement": 0.988,
+        "mechanism_positive_folds": 3,
+        "mechanism_mean_metric_degradation": 0.1442910386001095,
+        "mechanism_review_result": "PASS",
+        "mechanism_fold_detail": [
+          {
+            "metric_kind": "regression",
+            "candidate_family": "historical_injury",
+            "position": "TE",
+            "prediction_target": "games_played",
+            "test_year": 2023,
+            "candidate_metric": 2.8425284179384334,
+            "permuted_candidate_metric": 3.120648262392192,
+            "permutation_metric_degradation": 0.2781198444537587,
+            "candidate_feature_count": 29,
+            "mean_test_feature_coverage": 1.0
+          },
+          {
+            "metric_kind": "regression",
+            "candidate_family": "historical_injury",
+            "position": "TE",
+            "prediction_target": "games_played",
+            "test_year": 2024,
+            "candidate_metric": 3.5771218225295947,
+            "permuted_candidate_metric": 3.711259107970946,
+            "permutation_metric_degradation": 0.1341372854413514,
+            "candidate_feature_count": 29,
+            "mean_test_feature_coverage": 1.0
+          },
+          {
+            "metric_kind": "regression",
+            "candidate_family": "historical_injury",
+            "position": "TE",
+            "prediction_target": "games_played",
+            "test_year": 2025,
+            "candidate_metric": 3.0021247676835365,
+            "permuted_candidate_metric": 3.022740753588755,
+            "permutation_metric_degradation": 0.0206159859052186,
+            "candidate_feature_count": 29,
+            "mean_test_feature_coverage": 1.0
+          }
+        ],
+        "rookie_pooled_improvement": 0.0262835587393178,
+        "veteran_pooled_improvement": 0.0422492225918056,
+        "subgroup_direction_conflict": false,
+        "subgroup_fold_detail": [
+          {
+            "metric_kind": "regression",
+            "candidate_family": "historical_injury",
+            "position": "TE",
+            "prediction_target": "games_played",
+            "test_year": 2023,
+            "subgroup": "rookie",
+            "n": 11,
+            "baseline_metric": 2.094771932168022,
+            "candidate_metric": 2.046133607407022,
+            "improvement": 0.0232189118128295
+          },
+          {
+            "metric_kind": "regression",
+            "candidate_family": "historical_injury",
+            "position": "TE",
+            "prediction_target": "games_played",
+            "test_year": 2023,
+            "subgroup": "veteran",
+            "n": 64,
+            "baseline_metric": 3.091198466910903,
+            "candidate_metric": 2.97940877599852,
+            "improvement": 0.0361638672214071
+          },
+          {
+            "metric_kind": "regression",
+            "candidate_family": "historical_injury",
+            "position": "TE",
+            "prediction_target": "games_played",
+            "test_year": 2024,
+            "subgroup": "rookie",
+            "n": 11,
+            "baseline_metric": 4.232950507519294,
+            "candidate_metric": 4.023743005801007,
+            "improvement": 0.0494235643309923
+          },
+          {
+            "metric_kind": "regression",
+            "candidate_family": "historical_injury",
+            "position": "TE",
+            "prediction_target": "games_played",
+            "test_year": 2024,
+            "subgroup": "veteran",
+            "n": 80,
+            "baseline_metric": 3.871190503961438,
+            "candidate_metric": 3.5157114098297755,
+            "improvement": 0.0918268149727832
+          },
+          {
+            "metric_kind": "regression",
+            "candidate_family": "historical_injury",
+            "position": "TE",
+            "prediction_target": "games_played",
+            "test_year": 2025,
+            "subgroup": "rookie",
+            "n": 11,
+            "baseline_metric": 4.381279813025444,
+            "candidate_metric": 4.354079951365427,
+            "improvement": 0.0062082000741317
+          },
+          {
+            "metric_kind": "regression",
+            "candidate_family": "historical_injury",
+            "position": "TE",
+            "prediction_target": "games_played",
+            "test_year": 2025,
+            "subgroup": "veteran",
+            "n": 65,
+            "baseline_metric": 2.738342852708693,
+            "candidate_metric": 2.7733323519835245,
+            "improvement": -0.0127776181277742
+          }
+        ]
+      },
+      "confidence": "candidate_only_pending_exact_scope_FFDA_review; no production confidence grade assigned",
+      "promotion_status": "CANDIDATE_SIGNAL",
+      "limitations": [
+        "Passing is a candidate signal, not production approval; source coverage and mechanism remain position/target specific.",
+        "Candidate status is not production approval and carries no promoted weight.",
+        "Scope is limited to the exact position and prediction target.",
+        "At least one family input is missing for part of the eligible panel; fold-local imputation remains required."
+      ],
+      "exact_input_columns": [
+        "injury_report_weeks_last1",
+        "injury_report_weeks_weighted3",
+        "injury_report_out_weeks_last1",
+        "injury_report_out_weeks_weighted3",
+        "injury_report_doubtful_weeks_weighted3",
+        "injury_report_questionable_weeks_weighted3",
+        "practice_dnp_weeks_last1",
+        "practice_dnp_weeks_weighted3",
+        "practice_limited_weeks_weighted3",
+        "injury_category_count_3y",
+        "injury_recurrence_category_count_3y",
+        "injury_recurrence_flag_3y",
+        "injury_concussion_head_weeks_3y",
+        "injury_neck_weeks_3y",
+        "injury_shoulder_weeks_3y",
+        "injury_arm_elbow_weeks_3y",
+        "injury_hand_wrist_finger_weeks_3y",
+        "injury_chest_rib_weeks_3y",
+        "injury_back_weeks_3y",
+        "injury_hip_groin_weeks_3y",
+        "injury_hamstring_weeks_3y",
+        "injury_quad_thigh_weeks_3y",
+        "injury_knee_weeks_3y",
+        "injury_calf_achilles_weeks_3y",
+        "injury_ankle_weeks_3y",
+        "injury_foot_toe_weeks_3y",
+        "injury_illness_weeks_3y",
+        "injury_rest_admin_weeks_3y",
+        "injury_other_weeks_3y"
+      ],
+      "temporal_rules": [
+        "source season < target season"
+      ],
+      "exact_model_configuration_reference": {
+        "code": "repository_snapshot/fantasy-draft/research/step13b/code/run_step13b_ablations_v1.py",
+        "commit": "e3cf26eb863e4f54b6635e5a4aac50fe88e53e09",
+        "accepted_fold_hyperparameters": [
+          {
+            "test_year": 2023,
+            "accepted_hyperparameter": "100.0",
+            "baseline_bundle": "H_AVAILABILITY"
+          },
+          {
+            "test_year": 2024,
+            "accepted_hyperparameter": "100.0",
+            "baseline_bundle": "H_AVAILABILITY"
+          },
+          {
+            "test_year": 2025,
+            "accepted_hyperparameter": "1000.0",
+            "baseline_bundle": "H_AVAILABILITY"
+          }
+        ]
+      },
+      "source_artifact_paths": [
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step14_candidate_jobs_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_fold_metrics_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_bootstrap_uncertainty_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_mechanism_review_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_rookie_veteran_subgroups_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_probability_calibration_summary_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_feature_coverage_v1.csv"
+      ],
+      "permitted_downstream_use": "Step 14 candidate input and FFDA mechanism review only.",
+      "prohibited_downstream_use": "No production Player Truth weight or live-draft behavior change without FFDA approval."
+    },
+    {
+      "candidate_id": "S13B-REG-QB-GAMES-PLAYED-ROOKIE-DRAFT-CAPITAL",
+      "status": "candidate",
+      "production_status": "not_promoted_step13b",
+      "research_owner_approval_required": true,
+      "metric_kind": "regression",
+      "target": "games_played",
+      "position_or_cohort": "QB",
+      "feature_family": "rookie_draft_capital",
+      "intended_use": "expected-games head candidate for the named position only",
+      "historical_coverage": {
+        "eligible_universe_rows": 2212,
+        "minimum_field_coverage": 0.8295660036166366,
+        "mean_field_coverage": 0.8949480108499096,
+        "maximum_field_coverage": 0.9990958408679927,
+        "by_input_column": {
+          "true_rookie_flag": 0.9990958408679927,
+          "drafted_flag": 0.9990958408679927,
+          "undrafted_flag": 0.9990958408679927,
+          "draft_round": 0.8331826401446655,
+          "draft_overall_pick": 0.8331826401446655,
+          "draft_pick_log": 0.8331826401446655,
+          "draft_capital_percentile_position_year": 0.8331826401446655,
+          "draft_capital_z_position_year": 0.8295660036166366
+        }
+      },
+      "eligible_sample": {
+        "outer_test_observations": 178,
+        "canonical_eligible_player_seasons": 2212
+      },
+      "outer_test_seasons": [
+        2023,
+        2024,
+        2025
+      ],
+      "comparison_baseline": {
+        "model": "STEP13A_JOB_SPECIFIC",
+        "bundle": "G_BASE",
+        "job_specific": true
+      },
+      "candidate_model": "STEP13A_PLUS_ROOKIE_DRAFT_CAPITAL",
+      "performance_metrics": {
+        "primary_metric": "MAE",
+        "baseline_metric_value": 3.331860219295508,
+        "candidate_metric_value": 3.24997975258234,
+        "pooled_improvement": 0.0245750005474362,
+        "folds_improved": 2,
+        "folds_total": 3,
+        "worst_fold": -0.0393662069736563,
+        "fold_detail": [
+          {
+            "metric_kind": "regression",
+            "candidate_family": "rookie_draft_capital",
+            "position": "QB",
+            "prediction_target": "games_played",
+            "test_year": 2023,
+            "baseline_bundle": "G_BASE",
+            "accepted_hyperparameter": "100.0",
+            "n": 57,
+            "baseline_metric": 3.811859281317021,
+            "candidate_metric": 3.9619177227398,
+            "improvement": -0.0393662069736563
+          },
+          {
+            "metric_kind": "regression",
+            "candidate_family": "rookie_draft_capital",
+            "position": "QB",
+            "prediction_target": "games_played",
+            "test_year": 2024,
+            "baseline_bundle": "G_BASE",
+            "accepted_hyperparameter": "100.0",
+            "n": 63,
+            "baseline_metric": 2.9983386502241536,
+            "candidate_metric": 2.7303744451326857,
+            "improvement": 0.0893708938019509
+          },
+          {
+            "metric_kind": "regression",
+            "candidate_family": "rookie_draft_capital",
+            "position": "QB",
+            "prediction_target": "games_played",
+            "test_year": 2025,
+            "baseline_bundle": "G_BASE",
+            "accepted_hyperparameter": "100.0",
+            "n": 58,
+            "baseline_metric": 3.2224104316449718,
+            "candidate_metric": 3.1147154434504927,
+            "improvement": 0.0334206304500766
+          }
+        ]
+      },
+      "calibration_metrics": {
+        "applicable": false
+      },
+      "stability_and_sensitivity": {
+        "bootstrap_mean_improvement": 0.0229817128457338,
+        "bootstrap_ci_low": -0.0187751337872833,
+        "bootstrap_ci_high": 0.0624191546020078,
+        "bootstrap_probability_of_improvement": 0.88,
+        "mechanism_positive_folds": 3,
+        "mechanism_mean_metric_degradation": 0.06971708912533,
+        "mechanism_review_result": "PASS",
+        "mechanism_fold_detail": [
+          {
+            "metric_kind": "regression",
+            "candidate_family": "rookie_draft_capital",
+            "position": "QB",
+            "prediction_target": "games_played",
+            "test_year": 2023,
+            "candidate_metric": 3.9619177227398,
+            "permuted_candidate_metric": 3.975464973239538,
+            "permutation_metric_degradation": 0.0135472504997378,
+            "candidate_feature_count": 8,
+            "mean_test_feature_coverage": 0.9649122807017544
+          },
+          {
+            "metric_kind": "regression",
+            "candidate_family": "rookie_draft_capital",
+            "position": "QB",
+            "prediction_target": "games_played",
+            "test_year": 2024,
+            "candidate_metric": 2.7303744451326857,
+            "permuted_candidate_metric": 2.73815995811755,
+            "permutation_metric_degradation": 0.0077855129848645,
+            "candidate_feature_count": 8,
+            "mean_test_feature_coverage": 0.9484126984126984
+          },
+          {
+            "metric_kind": "regression",
+            "candidate_family": "rookie_draft_capital",
+            "position": "QB",
+            "prediction_target": "games_played",
+            "test_year": 2025,
+            "candidate_metric": 3.1147154434504927,
+            "permuted_candidate_metric": 3.3025339473418804,
+            "permutation_metric_degradation": 0.1878185038913877,
+            "candidate_feature_count": 8,
+            "mean_test_feature_coverage": 0.976293103448276
+          }
+        ],
+        "rookie_pooled_improvement": 0.1101746228183339,
+        "veteran_pooled_improvement": 0.0175111682214792,
+        "subgroup_direction_conflict": false,
+        "subgroup_fold_detail": [
+          {
+            "metric_kind": "regression",
+            "candidate_family": "rookie_draft_capital",
+            "position": "QB",
+            "prediction_target": "games_played",
+            "test_year": 2023,
+            "subgroup": "rookie",
+            "n": 8,
+            "baseline_metric": 3.989803731783281,
+            "candidate_metric": 3.8816559657716967,
+            "improvement": 0.0271060366077823
+          },
+          {
+            "metric_kind": "regression",
+            "candidate_family": "rookie_draft_capital",
+            "position": "QB",
+            "prediction_target": "games_played",
+            "test_year": 2023,
+            "subgroup": "veteran",
+            "n": 49,
+            "baseline_metric": 3.782807126138857,
+            "candidate_metric": 3.975021683061124,
+            "improvement": -0.0508126770709722
+          },
+          {
+            "metric_kind": "regression",
+            "candidate_family": "rookie_draft_capital",
+            "position": "QB",
+            "prediction_target": "games_played",
+            "test_year": 2024,
+            "subgroup": "rookie",
+            "n": 7,
+            "baseline_metric": 3.438165957824709,
+            "candidate_metric": 2.5659022164619683,
+            "improvement": 0.2537003018651875
+          },
+          {
+            "metric_kind": "regression",
+            "candidate_family": "rookie_draft_capital",
+            "position": "QB",
+            "prediction_target": "games_played",
+            "test_year": 2024,
+            "subgroup": "veteran",
+            "n": 56,
+            "baseline_metric": 2.943360236774084,
+            "candidate_metric": 2.750933473716526,
+            "improvement": 0.0653765586194293
+          },
+          {
+            "metric_kind": "regression",
+            "candidate_family": "rookie_draft_capital",
+            "position": "QB",
+            "prediction_target": "games_played",
+            "test_year": 2025,
+            "subgroup": "rookie",
+            "n": 6,
+            "baseline_metric": 4.13900661952707,
+            "candidate_metric": 3.917627247032669,
+            "improvement": 0.0534861122110735
+          },
+          {
+            "metric_kind": "regression",
+            "candidate_family": "rookie_draft_capital",
+            "position": "QB",
+            "prediction_target": "games_played",
+            "test_year": 2025,
+            "subgroup": "veteran",
+            "n": 52,
+            "baseline_metric": 3.11664933304319,
+            "candidate_metric": 3.022071773806396,
+            "improvement": 0.0303459097031124
+          }
+        ]
+      },
+      "confidence": "candidate_only_pending_exact_scope_FFDA_review; no production confidence grade assigned",
+      "promotion_status": "CANDIDATE_SIGNAL",
+      "limitations": [
+        "Passing is a candidate signal, not production approval; source coverage and mechanism remain position/target specific.",
+        "Candidate status is not production approval and carries no promoted weight.",
+        "Scope is limited to the exact position and prediction target.",
+        "At least one family input is missing for part of the eligible panel; fold-local imputation remains required."
+      ],
+      "exact_input_columns": [
+        "true_rookie_flag",
+        "drafted_flag",
+        "undrafted_flag",
+        "draft_round",
+        "draft_overall_pick",
+        "draft_pick_log",
+        "draft_capital_percentile_position_year",
+        "draft_capital_z_position_year"
+      ],
+      "temporal_rules": [
+        "immutable/preseason-known"
+      ],
+      "exact_model_configuration_reference": {
+        "code": "repository_snapshot/fantasy-draft/research/step13b/code/run_step13b_ablations_v1.py",
+        "commit": "e3cf26eb863e4f54b6635e5a4aac50fe88e53e09",
+        "accepted_fold_hyperparameters": [
+          {
+            "test_year": 2023,
+            "accepted_hyperparameter": "100.0",
+            "baseline_bundle": "G_BASE"
+          },
+          {
+            "test_year": 2024,
+            "accepted_hyperparameter": "100.0",
+            "baseline_bundle": "G_BASE"
+          },
+          {
+            "test_year": 2025,
+            "accepted_hyperparameter": "100.0",
+            "baseline_bundle": "G_BASE"
+          }
+        ]
+      },
+      "source_artifact_paths": [
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step14_candidate_jobs_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_fold_metrics_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_bootstrap_uncertainty_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_mechanism_review_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_rookie_veteran_subgroups_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_probability_calibration_summary_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_feature_coverage_v1.csv"
+      ],
+      "permitted_downstream_use": "Step 14 candidate input and FFDA mechanism review only.",
+      "prohibited_downstream_use": "No production Player Truth weight or live-draft behavior change without FFDA approval."
+    },
+    {
+      "candidate_id": "S13B-REG-QB-GAMES-PLAYED-WEEKLY-ROSTER-STATUS",
+      "status": "candidate",
+      "production_status": "not_promoted_step13b",
+      "research_owner_approval_required": true,
+      "metric_kind": "regression",
+      "target": "games_played",
+      "position_or_cohort": "QB",
+      "feature_family": "weekly_roster_status",
+      "intended_use": "expected-games head candidate for the named position only",
+      "historical_coverage": {
+        "eligible_universe_rows": 2212,
+        "minimum_field_coverage": 0.9990958408679927,
+        "mean_field_coverage": 0.9990958408679929,
+        "maximum_field_coverage": 0.9990958408679927,
+        "by_input_column": {
+          "roster_active_weeks_last1": 0.9990958408679927,
+          "roster_inactive_weeks_last1": 0.9990958408679927,
+          "roster_inactive_weeks_weighted3": 0.9990958408679927,
+          "roster_reserve_weeks_weighted3": 0.9990958408679927,
+          "roster_pup_weeks_weighted3": 0.9990958408679927,
+          "roster_nfi_weeks_weighted3": 0.9990958408679927,
+          "roster_suspension_weeks_weighted3": 0.9990958408679927,
+          "roster_role_loss_weeks_weighted3": 0.9990958408679927,
+          "roster_status_changes_last1": 0.9990958408679927
+        }
+      },
+      "eligible_sample": {
+        "outer_test_observations": 178,
+        "canonical_eligible_player_seasons": 2212
+      },
+      "outer_test_seasons": [
+        2023,
+        2024,
+        2025
+      ],
+      "comparison_baseline": {
+        "model": "STEP13A_JOB_SPECIFIC",
+        "bundle": "G_BASE",
+        "job_specific": true
+      },
+      "candidate_model": "STEP13A_PLUS_WEEKLY_ROSTER_STATUS",
+      "performance_metrics": {
+        "primary_metric": "MAE",
+        "baseline_metric_value": 3.331860219295508,
+        "candidate_metric_value": 3.2332655735420595,
+        "pooled_improvement": 0.0295914712095259,
+        "folds_improved": 2,
+        "folds_total": 3,
+        "worst_fold": -0.0171919477712519,
+        "fold_detail": [
+          {
+            "metric_kind": "regression",
+            "candidate_family": "weekly_roster_status",
+            "position": "QB",
+            "prediction_target": "games_played",
+            "test_year": 2023,
+            "baseline_bundle": "G_BASE",
+            "accepted_hyperparameter": "100.0",
+            "n": 57,
+            "baseline_metric": 3.811859281317021,
+            "candidate_metric": 3.8773925669927856,
+            "improvement": -0.0171919477712519
+          },
+          {
+            "metric_kind": "regression",
+            "candidate_family": "weekly_roster_status",
+            "position": "QB",
+            "prediction_target": "games_played",
+            "test_year": 2024,
+            "baseline_bundle": "G_BASE",
+            "accepted_hyperparameter": "100.0",
+            "n": 63,
+            "baseline_metric": 2.9983386502241536,
+            "candidate_metric": 2.661578743061971,
+            "improvement": 0.1123155008314376
+          },
+          {
+            "metric_kind": "regression",
+            "candidate_family": "weekly_roster_status",
+            "position": "QB",
+            "prediction_target": "games_played",
+            "test_year": 2025,
+            "baseline_bundle": "G_BASE",
+            "accepted_hyperparameter": "100.0",
+            "n": 58,
+            "baseline_metric": 3.2224104316449718,
+            "candidate_metric": 3.221214395844718,
+            "improvement": 0.0003711618447196
+          }
+        ]
+      },
+      "calibration_metrics": {
+        "applicable": false
+      },
+      "stability_and_sensitivity": {
+        "bootstrap_mean_improvement": 0.0290013884063364,
+        "bootstrap_ci_low": -0.0121968381709974,
+        "bootstrap_ci_high": 0.0636132336289646,
+        "bootstrap_probability_of_improvement": 0.932,
+        "mechanism_positive_folds": 2,
+        "mechanism_mean_metric_degradation": 0.0628134230086156,
+        "mechanism_review_result": "PASS",
+        "mechanism_fold_detail": [
+          {
+            "metric_kind": "regression",
+            "candidate_family": "weekly_roster_status",
+            "position": "QB",
+            "prediction_target": "games_played",
+            "test_year": 2023,
+            "candidate_metric": 3.8773925669927856,
+            "permuted_candidate_metric": 3.838638415133196,
+            "permutation_metric_degradation": -0.0387541518595897,
+            "candidate_feature_count": 9,
+            "mean_test_feature_coverage": 1.0
+          },
+          {
+            "metric_kind": "regression",
+            "candidate_family": "weekly_roster_status",
+            "position": "QB",
+            "prediction_target": "games_played",
+            "test_year": 2024,
+            "candidate_metric": 2.661578743061971,
+            "permuted_candidate_metric": 2.778998385087245,
+            "permutation_metric_degradation": 0.1174196420252737,
+            "candidate_feature_count": 9,
+            "mean_test_feature_coverage": 1.0
+          },
+          {
+            "metric_kind": "regression",
+            "candidate_family": "weekly_roster_status",
+            "position": "QB",
+            "prediction_target": "games_played",
+            "test_year": 2025,
+            "candidate_metric": 3.221214395844718,
+            "permuted_candidate_metric": 3.330989174704881,
+            "permutation_metric_degradation": 0.1097747788601628,
+            "candidate_feature_count": 9,
+            "mean_test_feature_coverage": 1.0
+          }
+        ],
+        "rookie_pooled_improvement": 0.1041656481270316,
+        "veteran_pooled_improvement": 0.0234254215360837,
+        "subgroup_direction_conflict": false,
+        "subgroup_fold_detail": [
+          {
+            "metric_kind": "regression",
+            "candidate_family": "weekly_roster_status",
+            "position": "QB",
+            "prediction_target": "games_played",
+            "test_year": 2023,
+            "subgroup": "rookie",
+            "n": 8,
+            "baseline_metric": 3.989803731783281,
+            "candidate_metric": 3.8734335300529983,
+            "improvement": 0.0291668988134084
+          },
+          {
+            "metric_kind": "regression",
+            "candidate_family": "weekly_roster_status",
+            "position": "QB",
+            "prediction_target": "games_played",
+            "test_year": 2023,
+            "subgroup": "veteran",
+            "n": 49,
+            "baseline_metric": 3.782807126138857,
+            "candidate_metric": 3.878038940370709,
+            "improvement": -0.0251749061097535
+          },
+          {
+            "metric_kind": "regression",
+            "candidate_family": "weekly_roster_status",
+            "position": "QB",
+            "prediction_target": "games_played",
+            "test_year": 2024,
+            "subgroup": "rookie",
+            "n": 7,
+            "baseline_metric": 3.438165957824709,
+            "candidate_metric": 2.589809984163165,
+            "improvement": 0.2467466620483582
+          },
+          {
+            "metric_kind": "regression",
+            "candidate_family": "weekly_roster_status",
+            "position": "QB",
+            "prediction_target": "games_played",
+            "test_year": 2024,
+            "subgroup": "veteran",
+            "n": 56,
+            "baseline_metric": 2.943360236774084,
+            "candidate_metric": 2.6705498379243204,
+            "improvement": 0.0926867175282503
+          },
+          {
+            "metric_kind": "regression",
+            "candidate_family": "weekly_roster_status",
+            "position": "QB",
+            "prediction_target": "games_played",
+            "test_year": 2025,
+            "subgroup": "rookie",
+            "n": 6,
+            "baseline_metric": 4.13900661952707,
+            "candidate_metric": 3.982471606427303,
+            "improvement": 0.037819464303648
+          },
+          {
+            "metric_kind": "regression",
+            "candidate_family": "weekly_roster_status",
+            "position": "QB",
+            "prediction_target": "games_played",
+            "test_year": 2025,
+            "subgroup": "veteran",
+            "n": 52,
+            "baseline_metric": 3.11664933304319,
+            "candidate_metric": 3.1333770253928823,
+            "improvement": -0.0053672038661336
+          }
+        ]
+      },
+      "confidence": "candidate_only_pending_exact_scope_FFDA_review; no production confidence grade assigned",
+      "promotion_status": "CANDIDATE_SIGNAL",
+      "limitations": [
+        "Passing is a candidate signal, not production approval; source coverage and mechanism remain position/target specific.",
+        "Candidate status is not production approval and carries no promoted weight.",
+        "Scope is limited to the exact position and prediction target.",
+        "At least one family input is missing for part of the eligible panel; fold-local imputation remains required."
+      ],
+      "exact_input_columns": [
+        "roster_active_weeks_last1",
+        "roster_inactive_weeks_last1",
+        "roster_inactive_weeks_weighted3",
+        "roster_reserve_weeks_weighted3",
+        "roster_pup_weeks_weighted3",
+        "roster_nfi_weeks_weighted3",
+        "roster_suspension_weeks_weighted3",
+        "roster_role_loss_weeks_weighted3",
+        "roster_status_changes_last1"
+      ],
+      "temporal_rules": [
+        "source season < target season"
+      ],
+      "exact_model_configuration_reference": {
+        "code": "repository_snapshot/fantasy-draft/research/step13b/code/run_step13b_ablations_v1.py",
+        "commit": "e3cf26eb863e4f54b6635e5a4aac50fe88e53e09",
+        "accepted_fold_hyperparameters": [
+          {
+            "test_year": 2023,
+            "accepted_hyperparameter": "100.0",
+            "baseline_bundle": "G_BASE"
+          },
+          {
+            "test_year": 2024,
+            "accepted_hyperparameter": "100.0",
+            "baseline_bundle": "G_BASE"
+          },
+          {
+            "test_year": 2025,
+            "accepted_hyperparameter": "100.0",
+            "baseline_bundle": "G_BASE"
+          }
+        ]
+      },
+      "source_artifact_paths": [
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step14_candidate_jobs_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_fold_metrics_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_bootstrap_uncertainty_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_mechanism_review_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_rookie_veteran_subgroups_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_probability_calibration_summary_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_feature_coverage_v1.csv"
+      ],
+      "permitted_downstream_use": "Step 14 candidate input and FFDA mechanism review only.",
+      "prohibited_downstream_use": "No production Player Truth weight or live-draft behavior change without FFDA approval."
+    },
+    {
+      "candidate_id": "S13B-CLA-QB-AVAILABILITY-BUST-FLAG-AGE-EXPERIENCE",
+      "status": "candidate",
+      "production_status": "not_promoted_step13b",
+      "research_owner_approval_required": true,
+      "metric_kind": "classification",
+      "target": "availability_bust_flag",
+      "position_or_cohort": "QB",
+      "feature_family": "age_experience",
+      "intended_use": "availability-bust event probability for the named position only",
+      "historical_coverage": {
+        "eligible_universe_rows": 2212,
+        "minimum_field_coverage": 0.9990958408679927,
+        "mean_field_coverage": 0.9990958408679927,
+        "maximum_field_coverage": 0.9990958408679927,
+        "by_input_column": {
+          "true_preseason_age": 0.9990958408679927,
+          "nfl_experience_years": 0.9990958408679927,
+          "nfl_first_active_season": 0.9990958408679927,
+          "career_team_count_prior": 0.9990958408679927,
+          "career_position_count_prior": 0.9990958408679927,
+          "career_team_change_count_prior": 0.9990958408679927
+        }
+      },
+      "eligible_sample": {
+        "outer_test_observations": 178,
+        "canonical_eligible_player_seasons": 2212
+      },
+      "outer_test_seasons": [
+        2023,
+        2024,
+        2025
+      ],
+      "comparison_baseline": {
+        "model": "STEP13A_JOB_SPECIFIC",
+        "bundle": "G_BASE",
+        "job_specific": true
+      },
+      "candidate_model": "STEP13A_PLUS_AGE_EXPERIENCE",
+      "performance_metrics": {
+        "primary_metric": "Brier score",
+        "baseline_metric_value": 0.16525715860795,
+        "candidate_metric_value": 0.1613877774538551,
+        "pooled_improvement": 0.0234143028156165,
+        "folds_improved": 2,
+        "folds_total": 3,
+        "worst_fold": -0.0275263962687008,
+        "fold_detail": [
+          {
+            "metric_kind": "classification",
+            "candidate_family": "age_experience",
+            "position": "QB",
+            "prediction_target": "availability_bust_flag",
+            "test_year": 2023,
+            "baseline_bundle": "G_BASE",
+            "accepted_hyperparameter": "0.1",
+            "n": 57,
+            "baseline_metric": 0.209369658532942,
+            "candidate_metric": 0.2040524045774445,
+            "improvement": 0.0253964876895517
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "age_experience",
+            "position": "QB",
+            "prediction_target": "availability_bust_flag",
+            "test_year": 2024,
+            "baseline_bundle": "G_BASE",
+            "accepted_hyperparameter": "0.03",
+            "n": 63,
+            "baseline_metric": 0.132607878806492,
+            "candidate_metric": 0.1224981803768845,
+            "improvement": 0.0762375397344229
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "age_experience",
+            "position": "QB",
+            "prediction_target": "availability_bust_flag",
+            "test_year": 2025,
+            "baseline_bundle": "G_BASE",
+            "accepted_hyperparameter": "0.03",
+            "n": 58,
+            "baseline_metric": 0.157369091914283,
+            "candidate_metric": 0.1617008958987611,
+            "improvement": -0.0275263962687008
+          }
+        ]
+      },
+      "calibration_metrics": {
+        "STEP13A_BASELINE": {
+          "n": 178,
+          "ece": 0.1278494308632722
+        },
+        "STEP13B_CANDIDATE": {
+          "n": 178,
+          "ece": 0.1069405137646823
+        }
+      },
+      "stability_and_sensitivity": {
+        "bootstrap_mean_improvement": 0.0236285001721598,
+        "bootstrap_ci_low": -0.0077172468045238,
+        "bootstrap_ci_high": 0.0529500797850469,
+        "bootstrap_probability_of_improvement": 0.938,
+        "mechanism_positive_folds": 3,
+        "mechanism_mean_metric_degradation": 0.0037252543794792,
+        "mechanism_review_result": "PASS",
+        "mechanism_fold_detail": [
+          {
+            "metric_kind": "classification",
+            "candidate_family": "age_experience",
+            "position": "QB",
+            "prediction_target": "availability_bust_flag",
+            "test_year": 2023,
+            "candidate_metric": 0.2040524045774445,
+            "permuted_candidate_metric": 0.2058037673028104,
+            "permutation_metric_degradation": 0.0017513627253659,
+            "candidate_feature_count": 6,
+            "mean_test_feature_coverage": 1.0
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "age_experience",
+            "position": "QB",
+            "prediction_target": "availability_bust_flag",
+            "test_year": 2024,
+            "candidate_metric": 0.1224981803768845,
+            "permuted_candidate_metric": 0.1303817927282057,
+            "permutation_metric_degradation": 0.0078836123513211,
+            "candidate_feature_count": 6,
+            "mean_test_feature_coverage": 1.0
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "age_experience",
+            "position": "QB",
+            "prediction_target": "availability_bust_flag",
+            "test_year": 2025,
+            "candidate_metric": 0.1617008958987611,
+            "permuted_candidate_metric": 0.1632416839605117,
+            "permutation_metric_degradation": 0.0015407880617506,
+            "candidate_feature_count": 6,
+            "mean_test_feature_coverage": 1.0
+          }
+        ],
+        "rookie_pooled_improvement": 0.1025254628878402,
+        "veteran_pooled_improvement": 0.0125019861091649,
+        "subgroup_direction_conflict": false,
+        "subgroup_fold_detail": [
+          {
+            "metric_kind": "classification",
+            "candidate_family": "age_experience",
+            "position": "QB",
+            "prediction_target": "availability_bust_flag",
+            "test_year": 2023,
+            "subgroup": "rookie",
+            "n": 8,
+            "baseline_metric": 0.2603916942029065,
+            "candidate_metric": 0.2535178439384125,
+            "improvement": 0.026398116443521
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "age_experience",
+            "position": "QB",
+            "prediction_target": "availability_bust_flag",
+            "test_year": 2023,
+            "subgroup": "veteran",
+            "n": 49,
+            "baseline_metric": 0.2010395302602947,
+            "candidate_metric": 0.1959764144776946,
+            "improvement": 0.025184677739968
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "age_experience",
+            "position": "QB",
+            "prediction_target": "availability_bust_flag",
+            "test_year": 2024,
+            "subgroup": "rookie",
+            "n": 7,
+            "baseline_metric": 0.1151266360068089,
+            "candidate_metric": 0.090431448887759,
+            "improvement": 0.2145045488655584
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "age_experience",
+            "position": "QB",
+            "prediction_target": "availability_bust_flag",
+            "test_year": 2024,
+            "subgroup": "veteran",
+            "n": 56,
+            "baseline_metric": 0.1347930341564524,
+            "candidate_metric": 0.1265065218130253,
+            "improvement": 0.0614758202846675
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "age_experience",
+            "position": "QB",
+            "prediction_target": "availability_bust_flag",
+            "test_year": 2025,
+            "subgroup": "rookie",
+            "n": 6,
+            "baseline_metric": 0.2987760996380471,
+            "candidate_metric": 0.2768500198352943,
+            "improvement": 0.0733863245062613
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "age_experience",
+            "position": "QB",
+            "prediction_target": "availability_bust_flag",
+            "test_year": 2025,
+            "subgroup": "veteran",
+            "n": 52,
+            "baseline_metric": 0.1410528987153871,
+            "candidate_metric": 0.1484144585214688,
+            "improvement": -0.0521900639627098
+          }
+        ]
+      },
+      "confidence": "candidate_only_pending_exact_scope_FFDA_review; no production confidence grade assigned",
+      "promotion_status": "CANDIDATE_SIGNAL",
+      "limitations": [
+        "Passing is a candidate signal, not production approval; source coverage and mechanism remain position/target specific.",
+        "Candidate status is not production approval and carries no promoted weight.",
+        "Scope is limited to the exact position and prediction target.",
+        "At least one family input is missing for part of the eligible panel; fold-local imputation remains required."
+      ],
+      "exact_input_columns": [
+        "true_preseason_age",
+        "nfl_experience_years",
+        "nfl_first_active_season",
+        "career_team_count_prior",
+        "career_position_count_prior",
+        "career_team_change_count_prior"
+      ],
+      "temporal_rules": [
+        "immutable/preseason-known"
+      ],
+      "exact_model_configuration_reference": {
+        "code": "repository_snapshot/fantasy-draft/research/step13b/code/run_step13b_ablations_v1.py",
+        "commit": "e3cf26eb863e4f54b6635e5a4aac50fe88e53e09",
+        "accepted_fold_hyperparameters": [
+          {
+            "test_year": 2023,
+            "accepted_hyperparameter": "0.1",
+            "baseline_bundle": "G_BASE"
+          },
+          {
+            "test_year": 2024,
+            "accepted_hyperparameter": "0.03",
+            "baseline_bundle": "G_BASE"
+          },
+          {
+            "test_year": 2025,
+            "accepted_hyperparameter": "0.03",
+            "baseline_bundle": "G_BASE"
+          }
+        ]
+      },
+      "source_artifact_paths": [
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step14_candidate_jobs_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_fold_metrics_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_bootstrap_uncertainty_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_mechanism_review_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_rookie_veteran_subgroups_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_probability_calibration_summary_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_feature_coverage_v1.csv"
+      ],
+      "permitted_downstream_use": "Step 14 candidate input and FFDA mechanism review only.",
+      "prohibited_downstream_use": "No production Player Truth weight or live-draft behavior change without FFDA approval."
+    },
+    {
+      "candidate_id": "S13B-CLA-TE-ELITE-FLAG-AGE-EXPERIENCE",
+      "status": "candidate",
+      "production_status": "not_promoted_step13b",
+      "research_owner_approval_required": true,
+      "metric_kind": "classification",
+      "target": "elite_flag",
+      "position_or_cohort": "TE",
+      "feature_family": "age_experience",
+      "intended_use": "elite event probability for the named position only",
+      "historical_coverage": {
+        "eligible_universe_rows": 2212,
+        "minimum_field_coverage": 0.9990958408679927,
+        "mean_field_coverage": 0.9990958408679927,
+        "maximum_field_coverage": 0.9990958408679927,
+        "by_input_column": {
+          "true_preseason_age": 0.9990958408679927,
+          "nfl_experience_years": 0.9990958408679927,
+          "nfl_first_active_season": 0.9990958408679927,
+          "career_team_count_prior": 0.9990958408679927,
+          "career_position_count_prior": 0.9990958408679927,
+          "career_team_change_count_prior": 0.9990958408679927
+        }
+      },
+      "eligible_sample": {
+        "outer_test_observations": 242,
+        "canonical_eligible_player_seasons": 2212
+      },
+      "outer_test_seasons": [
+        2023,
+        2024,
+        2025
+      ],
+      "comparison_baseline": {
+        "model": "STEP13A_JOB_SPECIFIC",
+        "bundle": "H_AVAILABILITY",
+        "job_specific": true
+      },
+      "candidate_model": "STEP13A_PLUS_AGE_EXPERIENCE",
+      "performance_metrics": {
+        "primary_metric": "Brier score",
+        "baseline_metric_value": 0.0682578466490707,
+        "candidate_metric_value": 0.0660283066026891,
+        "pooled_improvement": 0.0326634981300274,
+        "folds_improved": 2,
+        "folds_total": 3,
+        "worst_fold": -0.0029146823079321,
+        "fold_detail": [
+          {
+            "metric_kind": "classification",
+            "candidate_family": "age_experience",
+            "position": "TE",
+            "prediction_target": "elite_flag",
+            "test_year": 2023,
+            "baseline_bundle": "H_AVAILABILITY",
+            "accepted_hyperparameter": "0.1",
+            "n": 75,
+            "baseline_metric": 0.0573389601921244,
+            "candidate_metric": 0.0575060850449516,
+            "improvement": -0.0029146823079321
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "age_experience",
+            "position": "TE",
+            "prediction_target": "elite_flag",
+            "test_year": 2024,
+            "baseline_bundle": "H_AVAILABILITY",
+            "accepted_hyperparameter": "0.1",
+            "n": 91,
+            "baseline_metric": 0.0751876865109208,
+            "candidate_metric": 0.0728182455474936,
+            "improvement": 0.0315136836014108
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "age_experience",
+            "position": "TE",
+            "prediction_target": "elite_flag",
+            "test_year": 2025,
+            "baseline_bundle": "H_AVAILABILITY",
+            "accepted_hyperparameter": "0.1",
+            "n": 76,
+            "baseline_metric": 0.070735492133842,
+            "candidate_metric": 0.0663083351928616,
+            "improvement": 0.0625874904864397
+          }
+        ]
+      },
+      "calibration_metrics": {
+        "STEP13A_BASELINE": {
+          "n": 242,
+          "ece": 0.1048804391712973
+        },
+        "STEP13B_CANDIDATE": {
+          "n": 242,
+          "ece": 0.1003063534891163
+        }
+      },
+      "stability_and_sensitivity": {
+        "bootstrap_mean_improvement": 0.0350602035542983,
+        "bootstrap_ci_low": -0.0153173714275638,
+        "bootstrap_ci_high": 0.0847418173217526,
+        "bootstrap_probability_of_improvement": 0.904,
+        "mechanism_positive_folds": 3,
+        "mechanism_mean_metric_degradation": 0.0044375101240679,
+        "mechanism_review_result": "PASS",
+        "mechanism_fold_detail": [
+          {
+            "metric_kind": "classification",
+            "candidate_family": "age_experience",
+            "position": "TE",
+            "prediction_target": "elite_flag",
+            "test_year": 2023,
+            "candidate_metric": 0.0575060850449516,
+            "permuted_candidate_metric": 0.0610058038717528,
+            "permutation_metric_degradation": 0.0034997188268012,
+            "candidate_feature_count": 6,
+            "mean_test_feature_coverage": 1.0
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "age_experience",
+            "position": "TE",
+            "prediction_target": "elite_flag",
+            "test_year": 2024,
+            "candidate_metric": 0.0728182455474936,
+            "permuted_candidate_metric": 0.0739955644864283,
+            "permutation_metric_degradation": 0.0011773189389346,
+            "candidate_feature_count": 6,
+            "mean_test_feature_coverage": 1.0
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "age_experience",
+            "position": "TE",
+            "prediction_target": "elite_flag",
+            "test_year": 2025,
+            "candidate_metric": 0.0663083351928616,
+            "permuted_candidate_metric": 0.0749438277993295,
+            "permutation_metric_degradation": 0.0086354926064679,
+            "candidate_feature_count": 6,
+            "mean_test_feature_coverage": 1.0
+          }
+        ],
+        "rookie_pooled_improvement": 0.0641506603428971,
+        "veteran_pooled_improvement": 0.0283364254341866,
+        "subgroup_direction_conflict": false,
+        "subgroup_fold_detail": [
+          {
+            "metric_kind": "classification",
+            "candidate_family": "age_experience",
+            "position": "TE",
+            "prediction_target": "elite_flag",
+            "test_year": 2023,
+            "subgroup": "rookie",
+            "n": 11,
+            "baseline_metric": 0.0873153224706147,
+            "candidate_metric": 0.0882003284836399,
+            "improvement": -0.0101357469454801
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "age_experience",
+            "position": "TE",
+            "prediction_target": "elite_flag",
+            "test_year": 2023,
+            "subgroup": "veteran",
+            "n": 64,
+            "baseline_metric": 0.0521867729255088,
+            "candidate_metric": 0.052230511953927,
+            "improvement": -0.0008381247961169
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "age_experience",
+            "position": "TE",
+            "prediction_target": "elite_flag",
+            "test_year": 2024,
+            "subgroup": "rookie",
+            "n": 11,
+            "baseline_metric": 0.0776419498242234,
+            "candidate_metric": 0.0785749654831442,
+            "improvement": -0.0120169014435254
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "age_experience",
+            "position": "TE",
+            "prediction_target": "elite_flag",
+            "test_year": 2024,
+            "subgroup": "veteran",
+            "n": 80,
+            "baseline_metric": 0.0748502253053417,
+            "candidate_metric": 0.0720266965563416,
+            "improvement": 0.0377223814288049
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "age_experience",
+            "position": "TE",
+            "prediction_target": "elite_flag",
+            "test_year": 2025,
+            "subgroup": "rookie",
+            "n": 11,
+            "baseline_metric": 0.0493569332040003,
+            "candidate_metric": 0.0387647068445618,
+            "improvement": 0.2146046294176971
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "age_experience",
+            "position": "TE",
+            "prediction_target": "elite_flag",
+            "test_year": 2025,
+            "subgroup": "veteran",
+            "n": 65,
+            "baseline_metric": 0.0743534021065845,
+            "candidate_metric": 0.0709695646056507,
+            "improvement": 0.0455101905906476
+          }
+        ]
+      },
+      "confidence": "candidate_only_pending_exact_scope_FFDA_review; no production confidence grade assigned",
+      "promotion_status": "CANDIDATE_SIGNAL",
+      "limitations": [
+        "Passing is a candidate signal, not production approval; source coverage and mechanism remain position/target specific.",
+        "Candidate status is not production approval and carries no promoted weight.",
+        "Scope is limited to the exact position and prediction target.",
+        "At least one family input is missing for part of the eligible panel; fold-local imputation remains required."
+      ],
+      "exact_input_columns": [
+        "true_preseason_age",
+        "nfl_experience_years",
+        "nfl_first_active_season",
+        "career_team_count_prior",
+        "career_position_count_prior",
+        "career_team_change_count_prior"
+      ],
+      "temporal_rules": [
+        "immutable/preseason-known"
+      ],
+      "exact_model_configuration_reference": {
+        "code": "repository_snapshot/fantasy-draft/research/step13b/code/run_step13b_ablations_v1.py",
+        "commit": "e3cf26eb863e4f54b6635e5a4aac50fe88e53e09",
+        "accepted_fold_hyperparameters": [
+          {
+            "test_year": 2023,
+            "accepted_hyperparameter": "0.1",
+            "baseline_bundle": "H_AVAILABILITY"
+          },
+          {
+            "test_year": 2024,
+            "accepted_hyperparameter": "0.1",
+            "baseline_bundle": "H_AVAILABILITY"
+          },
+          {
+            "test_year": 2025,
+            "accepted_hyperparameter": "0.1",
+            "baseline_bundle": "H_AVAILABILITY"
+          }
+        ]
+      },
+      "source_artifact_paths": [
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step14_candidate_jobs_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_fold_metrics_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_bootstrap_uncertainty_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_mechanism_review_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_rookie_veteran_subgroups_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_probability_calibration_summary_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_feature_coverage_v1.csv"
+      ],
+      "permitted_downstream_use": "Step 14 candidate input and FFDA mechanism review only.",
+      "prohibited_downstream_use": "No production Player Truth weight or live-draft behavior change without FFDA approval."
+    },
+    {
+      "candidate_id": "S13B-CLA-TE-STARTER-FLAG-AGE-EXPERIENCE",
+      "status": "candidate",
+      "production_status": "not_promoted_step13b",
+      "research_owner_approval_required": true,
+      "metric_kind": "classification",
+      "target": "starter_flag",
+      "position_or_cohort": "TE",
+      "feature_family": "age_experience",
+      "intended_use": "useful-starter event probability for the named position only",
+      "historical_coverage": {
+        "eligible_universe_rows": 2212,
+        "minimum_field_coverage": 0.9990958408679927,
+        "mean_field_coverage": 0.9990958408679927,
+        "maximum_field_coverage": 0.9990958408679927,
+        "by_input_column": {
+          "true_preseason_age": 0.9990958408679927,
+          "nfl_experience_years": 0.9990958408679927,
+          "nfl_first_active_season": 0.9990958408679927,
+          "career_team_count_prior": 0.9990958408679927,
+          "career_position_count_prior": 0.9990958408679927,
+          "career_team_change_count_prior": 0.9990958408679927
+        }
+      },
+      "eligible_sample": {
+        "outer_test_observations": 242,
+        "canonical_eligible_player_seasons": 2212
+      },
+      "outer_test_seasons": [
+        2023,
+        2024,
+        2025
+      ],
+      "comparison_baseline": {
+        "model": "STEP13A_JOB_SPECIFIC",
+        "bundle": "G_BASE",
+        "job_specific": true
+      },
+      "candidate_model": "STEP13A_PLUS_AGE_EXPERIENCE",
+      "performance_metrics": {
+        "primary_metric": "Brier score",
+        "baseline_metric_value": 0.1278554772450414,
+        "candidate_metric_value": 0.1233658579450334,
+        "pooled_improvement": 0.0351147983390918,
+        "folds_improved": 2,
+        "folds_total": 3,
+        "worst_fold": -0.0025868538076619,
+        "fold_detail": [
+          {
+            "metric_kind": "classification",
+            "candidate_family": "age_experience",
+            "position": "TE",
+            "prediction_target": "starter_flag",
+            "test_year": 2023,
+            "baseline_bundle": "G_BASE",
+            "accepted_hyperparameter": "0.1",
+            "n": 75,
+            "baseline_metric": 0.1411341918445804,
+            "candidate_metric": 0.1355586476239646,
+            "improvement": 0.039505269047459
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "age_experience",
+            "position": "TE",
+            "prediction_target": "starter_flag",
+            "test_year": 2024,
+            "baseline_bundle": "G_BASE",
+            "accepted_hyperparameter": "0.1",
+            "n": 91,
+            "baseline_metric": 0.1145910571705622,
+            "candidate_metric": 0.1148874874831278,
+            "improvement": -0.0025868538076619
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "age_experience",
+            "position": "TE",
+            "prediction_target": "starter_flag",
+            "test_year": 2025,
+            "baseline_bundle": "G_BASE",
+            "accepted_hyperparameter": "0.1",
+            "n": 76,
+            "baseline_metric": 0.1306338802952017,
+            "candidate_metric": 0.1214852327623172,
+            "improvement": 0.0700327320310068
+          }
+        ]
+      },
+      "calibration_metrics": {
+        "STEP13A_BASELINE": {
+          "n": 242,
+          "ece": 0.1295887928559686
+        },
+        "STEP13B_CANDIDATE": {
+          "n": 242,
+          "ece": 0.1182759675349595
+        }
+      },
+      "stability_and_sensitivity": {
+        "bootstrap_mean_improvement": 0.0358799584067986,
+        "bootstrap_ci_low": -0.0151382881973486,
+        "bootstrap_ci_high": 0.0840714921209355,
+        "bootstrap_probability_of_improvement": 0.908,
+        "mechanism_positive_folds": 2,
+        "mechanism_mean_metric_degradation": 0.0043152346552949,
+        "mechanism_review_result": "PASS",
+        "mechanism_fold_detail": [
+          {
+            "metric_kind": "classification",
+            "candidate_family": "age_experience",
+            "position": "TE",
+            "prediction_target": "starter_flag",
+            "test_year": 2023,
+            "candidate_metric": 0.1355586476239646,
+            "permuted_candidate_metric": 0.1393181886657528,
+            "permutation_metric_degradation": 0.0037595410417882,
+            "candidate_feature_count": 6,
+            "mean_test_feature_coverage": 1.0
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "age_experience",
+            "position": "TE",
+            "prediction_target": "starter_flag",
+            "test_year": 2024,
+            "candidate_metric": 0.1148874874831278,
+            "permuted_candidate_metric": 0.11424898215228,
+            "permutation_metric_degradation": -0.0006385053308478,
+            "candidate_feature_count": 6,
+            "mean_test_feature_coverage": 1.0
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "age_experience",
+            "position": "TE",
+            "prediction_target": "starter_flag",
+            "test_year": 2025,
+            "candidate_metric": 0.1214852327623172,
+            "permuted_candidate_metric": 0.1313099010172617,
+            "permutation_metric_degradation": 0.0098246682549444,
+            "candidate_feature_count": 6,
+            "mean_test_feature_coverage": 1.0
+          }
+        ],
+        "rookie_pooled_improvement": 0.021339459122977,
+        "veteran_pooled_improvement": 0.0335517024434971,
+        "subgroup_direction_conflict": false,
+        "subgroup_fold_detail": [
+          {
+            "metric_kind": "classification",
+            "candidate_family": "age_experience",
+            "position": "TE",
+            "prediction_target": "starter_flag",
+            "test_year": 2023,
+            "subgroup": "rookie",
+            "n": 11,
+            "baseline_metric": 0.0969117264164777,
+            "candidate_metric": 0.0966375975424954,
+            "improvement": 0.0028286450372812
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "age_experience",
+            "position": "TE",
+            "prediction_target": "starter_flag",
+            "test_year": 2023,
+            "subgroup": "veteran",
+            "n": 64,
+            "baseline_metric": 0.1487349280900356,
+            "candidate_metric": 0.1422482031067171,
+            "improvement": 0.0436126541802728
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "age_experience",
+            "position": "TE",
+            "prediction_target": "starter_flag",
+            "test_year": 2024,
+            "subgroup": "rookie",
+            "n": 11,
+            "baseline_metric": 0.0329876030413406,
+            "candidate_metric": 0.0338167289025734,
+            "improvement": -0.0251344682483807
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "age_experience",
+            "position": "TE",
+            "prediction_target": "starter_flag",
+            "test_year": 2024,
+            "subgroup": "veteran",
+            "n": 80,
+            "baseline_metric": 0.1258115321133301,
+            "candidate_metric": 0.1260347167879541,
+            "improvement": -0.0017739603903952
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "age_experience",
+            "position": "TE",
+            "prediction_target": "starter_flag",
+            "test_year": 2025,
+            "subgroup": "rookie",
+            "n": 11,
+            "baseline_metric": 0.1367624000204264,
+            "candidate_metric": 0.1249564951692567,
+            "improvement": 0.0863242005800305
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "age_experience",
+            "position": "TE",
+            "prediction_target": "starter_flag",
+            "test_year": 2025,
+            "subgroup": "veteran",
+            "n": 65,
+            "baseline_metric": 0.129596746187856,
+            "candidate_metric": 0.120897788354989,
+            "improvement": 0.0671232734520777
+          }
+        ]
+      },
+      "confidence": "candidate_only_pending_exact_scope_FFDA_review; no production confidence grade assigned",
+      "promotion_status": "CANDIDATE_SIGNAL",
+      "limitations": [
+        "Passing is a candidate signal, not production approval; source coverage and mechanism remain position/target specific.",
+        "Candidate status is not production approval and carries no promoted weight.",
+        "Scope is limited to the exact position and prediction target.",
+        "At least one family input is missing for part of the eligible panel; fold-local imputation remains required."
+      ],
+      "exact_input_columns": [
+        "true_preseason_age",
+        "nfl_experience_years",
+        "nfl_first_active_season",
+        "career_team_count_prior",
+        "career_position_count_prior",
+        "career_team_change_count_prior"
+      ],
+      "temporal_rules": [
+        "immutable/preseason-known"
+      ],
+      "exact_model_configuration_reference": {
+        "code": "repository_snapshot/fantasy-draft/research/step13b/code/run_step13b_ablations_v1.py",
+        "commit": "e3cf26eb863e4f54b6635e5a4aac50fe88e53e09",
+        "accepted_fold_hyperparameters": [
+          {
+            "test_year": 2023,
+            "accepted_hyperparameter": "0.1",
+            "baseline_bundle": "G_BASE"
+          },
+          {
+            "test_year": 2024,
+            "accepted_hyperparameter": "0.1",
+            "baseline_bundle": "G_BASE"
+          },
+          {
+            "test_year": 2025,
+            "accepted_hyperparameter": "0.1",
+            "baseline_bundle": "G_BASE"
+          }
+        ]
+      },
+      "source_artifact_paths": [
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step14_candidate_jobs_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_fold_metrics_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_bootstrap_uncertainty_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_mechanism_review_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_rookie_veteran_subgroups_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_probability_calibration_summary_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_feature_coverage_v1.csv"
+      ],
+      "permitted_downstream_use": "Step 14 candidate input and FFDA mechanism review only.",
+      "prohibited_downstream_use": "No production Player Truth weight or live-draft behavior change without FFDA approval."
+    },
+    {
+      "candidate_id": "S13B-CLA-QB-AVAILABILITY-BUST-FLAG-COMBINE",
+      "status": "candidate",
+      "production_status": "not_promoted_step13b",
+      "research_owner_approval_required": true,
+      "metric_kind": "classification",
+      "target": "availability_bust_flag",
+      "position_or_cohort": "QB",
+      "feature_family": "combine",
+      "intended_use": "availability-bust event probability for the named position only",
+      "historical_coverage": {
+        "eligible_universe_rows": 2212,
+        "minimum_field_coverage": 0.4145569620253164,
+        "mean_field_coverage": 0.6520795660036167,
+        "maximum_field_coverage": 0.8309222423146474,
+        "by_input_column": {
+          "combine_height_inches": 0.8286618444846293,
+          "combine_weight_lbs": 0.8309222423146474,
+          "combine_forty_seconds": 0.7007233273056058,
+          "combine_bench_reps": 0.4145569620253164,
+          "combine_vertical_inches": 0.6826401446654611,
+          "combine_broad_jump_inches": 0.6577757685352622,
+          "combine_cone_seconds": 0.4267631103074141,
+          "combine_shuttle_seconds": 0.4525316455696203,
+          "combine_bmi": 0.8286618444846293,
+          "combine_speed_score": 0.6975587703435805
+        }
+      },
+      "eligible_sample": {
+        "outer_test_observations": 178,
+        "canonical_eligible_player_seasons": 2212
+      },
+      "outer_test_seasons": [
+        2023,
+        2024,
+        2025
+      ],
+      "comparison_baseline": {
+        "model": "STEP13A_JOB_SPECIFIC",
+        "bundle": "G_BASE",
+        "job_specific": true
+      },
+      "candidate_model": "STEP13A_PLUS_COMBINE",
+      "performance_metrics": {
+        "primary_metric": "Brier score",
+        "baseline_metric_value": 0.16525715860795,
+        "candidate_metric_value": 0.161594527460906,
+        "pooled_improvement": 0.0221632223251101,
+        "folds_improved": 2,
+        "folds_total": 3,
+        "worst_fold": -0.0097705026782595,
+        "fold_detail": [
+          {
+            "metric_kind": "classification",
+            "candidate_family": "combine",
+            "position": "QB",
+            "prediction_target": "availability_bust_flag",
+            "test_year": 2023,
+            "baseline_bundle": "G_BASE",
+            "accepted_hyperparameter": "0.1",
+            "n": 57,
+            "baseline_metric": 0.209369658532942,
+            "candidate_metric": 0.2061388046443547,
+            "improvement": 0.0154313376218216
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "combine",
+            "position": "QB",
+            "prediction_target": "availability_bust_flag",
+            "test_year": 2024,
+            "baseline_bundle": "G_BASE",
+            "accepted_hyperparameter": "0.03",
+            "n": 63,
+            "baseline_metric": 0.132607878806492,
+            "candidate_metric": 0.1237671005477978,
+            "improvement": 0.0666685745844344
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "combine",
+            "position": "QB",
+            "prediction_target": "availability_bust_flag",
+            "test_year": 2025,
+            "baseline_bundle": "G_BASE",
+            "accepted_hyperparameter": "0.03",
+            "n": 58,
+            "baseline_metric": 0.157369091914283,
+            "candidate_metric": 0.1589066670483067,
+            "improvement": -0.0097705026782595
+          }
+        ]
+      },
+      "calibration_metrics": {
+        "STEP13A_BASELINE": {
+          "n": 178,
+          "ece": 0.1278494308632722
+        },
+        "STEP13B_CANDIDATE": {
+          "n": 178,
+          "ece": 0.1154272408537338
+        }
+      },
+      "stability_and_sensitivity": {
+        "bootstrap_mean_improvement": 0.0227424651916681,
+        "bootstrap_ci_low": -0.0127183925446275,
+        "bootstrap_ci_high": 0.0588872391864487,
+        "bootstrap_probability_of_improvement": 0.87,
+        "mechanism_positive_folds": 3,
+        "mechanism_mean_metric_degradation": 0.0051395965254222,
+        "mechanism_review_result": "PASS",
+        "mechanism_fold_detail": [
+          {
+            "metric_kind": "classification",
+            "candidate_family": "combine",
+            "position": "QB",
+            "prediction_target": "availability_bust_flag",
+            "test_year": 2023,
+            "candidate_metric": 0.2061388046443547,
+            "permuted_candidate_metric": 0.2079141653507541,
+            "permutation_metric_degradation": 0.0017753607063994,
+            "candidate_feature_count": 10,
+            "mean_test_feature_coverage": 0.6771929824561405
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "combine",
+            "position": "QB",
+            "prediction_target": "availability_bust_flag",
+            "test_year": 2024,
+            "candidate_metric": 0.1237671005477978,
+            "permuted_candidate_metric": 0.1367197374137716,
+            "permutation_metric_degradation": 0.0129526368659738,
+            "candidate_feature_count": 10,
+            "mean_test_feature_coverage": 0.6507936507936508
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "combine",
+            "position": "QB",
+            "prediction_target": "availability_bust_flag",
+            "test_year": 2025,
+            "candidate_metric": 0.1589066670483067,
+            "permuted_candidate_metric": 0.1595974590522001,
+            "permutation_metric_degradation": 0.0006907920038934,
+            "candidate_feature_count": 10,
+            "mean_test_feature_coverage": 0.6344827586206897
+          }
+        ],
+        "rookie_pooled_improvement": 0.0858338388916415,
+        "veteran_pooled_improvement": 0.0147582067559659,
+        "subgroup_direction_conflict": false,
+        "subgroup_fold_detail": [
+          {
+            "metric_kind": "classification",
+            "candidate_family": "combine",
+            "position": "QB",
+            "prediction_target": "availability_bust_flag",
+            "test_year": 2023,
+            "subgroup": "rookie",
+            "n": 8,
+            "baseline_metric": 0.2603916942029065,
+            "candidate_metric": 0.2570319573566134,
+            "improvement": 0.0129026267776231
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "combine",
+            "position": "QB",
+            "prediction_target": "availability_bust_flag",
+            "test_year": 2023,
+            "subgroup": "veteran",
+            "n": 49,
+            "baseline_metric": 0.2010395302602947,
+            "candidate_metric": 0.1978297184872512,
+            "improvement": 0.0159660727862209
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "combine",
+            "position": "QB",
+            "prediction_target": "availability_bust_flag",
+            "test_year": 2024,
+            "subgroup": "rookie",
+            "n": 7,
+            "baseline_metric": 0.1151266360068089,
+            "candidate_metric": 0.093862962312809,
+            "improvement": 0.1846981240096535
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "combine",
+            "position": "QB",
+            "prediction_target": "availability_bust_flag",
+            "test_year": 2024,
+            "subgroup": "veteran",
+            "n": 56,
+            "baseline_metric": 0.1347930341564524,
+            "candidate_metric": 0.1275051178271714,
+            "improvement": 0.0540674551536694
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "combine",
+            "position": "QB",
+            "prediction_target": "availability_bust_flag",
+            "test_year": 2025,
+            "subgroup": "rookie",
+            "n": 6,
+            "baseline_metric": 0.2987760996380471,
+            "candidate_metric": 0.2785388623252139,
+            "improvement": 0.067733789072652
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "combine",
+            "position": "QB",
+            "prediction_target": "availability_bust_flag",
+            "test_year": 2025,
+            "subgroup": "veteran",
+            "n": 52,
+            "baseline_metric": 0.1410528987153871,
+            "candidate_metric": 0.1451029522086636,
+            "improvement": -0.0287130114316088
+          }
+        ]
+      },
+      "confidence": "candidate_only_pending_exact_scope_FFDA_review; no production confidence grade assigned",
+      "promotion_status": "CANDIDATE_SIGNAL",
+      "limitations": [
+        "Passing is a candidate signal, not production approval; source coverage and mechanism remain position/target specific.",
+        "Candidate status is not production approval and carries no promoted weight.",
+        "Scope is limited to the exact position and prediction target.",
+        "At least one family input is missing for part of the eligible panel; fold-local imputation remains required."
+      ],
+      "exact_input_columns": [
+        "combine_height_inches",
+        "combine_weight_lbs",
+        "combine_forty_seconds",
+        "combine_bench_reps",
+        "combine_vertical_inches",
+        "combine_broad_jump_inches",
+        "combine_cone_seconds",
+        "combine_shuttle_seconds",
+        "combine_bmi",
+        "combine_speed_score"
+      ],
+      "temporal_rules": [
+        "immutable/preseason-known"
+      ],
+      "exact_model_configuration_reference": {
+        "code": "repository_snapshot/fantasy-draft/research/step13b/code/run_step13b_ablations_v1.py",
+        "commit": "e3cf26eb863e4f54b6635e5a4aac50fe88e53e09",
+        "accepted_fold_hyperparameters": [
+          {
+            "test_year": 2023,
+            "accepted_hyperparameter": "0.1",
+            "baseline_bundle": "G_BASE"
+          },
+          {
+            "test_year": 2024,
+            "accepted_hyperparameter": "0.03",
+            "baseline_bundle": "G_BASE"
+          },
+          {
+            "test_year": 2025,
+            "accepted_hyperparameter": "0.03",
+            "baseline_bundle": "G_BASE"
+          }
+        ]
+      },
+      "source_artifact_paths": [
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step14_candidate_jobs_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_fold_metrics_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_bootstrap_uncertainty_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_mechanism_review_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_rookie_veteran_subgroups_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_probability_calibration_summary_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_feature_coverage_v1.csv"
+      ],
+      "permitted_downstream_use": "Step 14 candidate input and FFDA mechanism review only.",
+      "prohibited_downstream_use": "No production Player Truth weight or live-draft behavior change without FFDA approval."
+    },
+    {
+      "candidate_id": "S13B-CLA-QB-BUST-FLAG-COMBINE",
+      "status": "candidate",
+      "production_status": "not_promoted_step13b",
+      "research_owner_approval_required": true,
+      "metric_kind": "classification",
+      "target": "bust_flag",
+      "position_or_cohort": "QB",
+      "feature_family": "combine",
+      "intended_use": "bust event probability for the named position only",
+      "historical_coverage": {
+        "eligible_universe_rows": 2212,
+        "minimum_field_coverage": 0.4145569620253164,
+        "mean_field_coverage": 0.6520795660036167,
+        "maximum_field_coverage": 0.8309222423146474,
+        "by_input_column": {
+          "combine_height_inches": 0.8286618444846293,
+          "combine_weight_lbs": 0.8309222423146474,
+          "combine_forty_seconds": 0.7007233273056058,
+          "combine_bench_reps": 0.4145569620253164,
+          "combine_vertical_inches": 0.6826401446654611,
+          "combine_broad_jump_inches": 0.6577757685352622,
+          "combine_cone_seconds": 0.4267631103074141,
+          "combine_shuttle_seconds": 0.4525316455696203,
+          "combine_bmi": 0.8286618444846293,
+          "combine_speed_score": 0.6975587703435805
+        }
+      },
+      "eligible_sample": {
+        "outer_test_observations": 178,
+        "canonical_eligible_player_seasons": 2212
+      },
+      "outer_test_seasons": [
+        2023,
+        2024,
+        2025
+      ],
+      "comparison_baseline": {
+        "model": "STEP13A_JOB_SPECIFIC",
+        "bundle": "G_BASE",
+        "job_specific": true
+      },
+      "candidate_model": "STEP13A_PLUS_COMBINE",
+      "performance_metrics": {
+        "primary_metric": "Brier score",
+        "baseline_metric_value": 0.2366171665152488,
+        "candidate_metric_value": 0.2270469523992253,
+        "pooled_improvement": 0.0404459839367008,
+        "folds_improved": 2,
+        "folds_total": 3,
+        "worst_fold": -0.0078044782751651,
+        "fold_detail": [
+          {
+            "metric_kind": "classification",
+            "candidate_family": "combine",
+            "position": "QB",
+            "prediction_target": "bust_flag",
+            "test_year": 2023,
+            "baseline_bundle": "G_BASE",
+            "accepted_hyperparameter": "0.1",
+            "n": 57,
+            "baseline_metric": 0.1688756976137981,
+            "candidate_metric": 0.1653197935192749,
+            "improvement": 0.0210563399279348
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "combine",
+            "position": "QB",
+            "prediction_target": "bust_flag",
+            "test_year": 2024,
+            "baseline_bundle": "G_BASE",
+            "accepted_hyperparameter": "0.1",
+            "n": 63,
+            "baseline_metric": 0.3191274219215096,
+            "candidate_metric": 0.2937705175569226,
+            "improvement": 0.0794569899756958
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "combine",
+            "position": "QB",
+            "prediction_target": "bust_flag",
+            "test_year": 2025,
+            "baseline_bundle": "G_BASE",
+            "accepted_hyperparameter": "0.03",
+            "n": 58,
+            "baseline_metric": 0.2135674705978051,
+            "candidate_metric": 0.2152342532823676,
+            "improvement": -0.0078044782751651
+          }
+        ]
+      },
+      "calibration_metrics": {
+        "STEP13A_BASELINE": {
+          "n": 178,
+          "ece": 0.1363490995557082
+        },
+        "STEP13B_CANDIDATE": {
+          "n": 178,
+          "ece": 0.1426132189713434
+        }
+      },
+      "stability_and_sensitivity": {
+        "bootstrap_mean_improvement": 0.0423164467833515,
+        "bootstrap_ci_low": -0.0064639024799676,
+        "bootstrap_ci_high": 0.093960580572392,
+        "bootstrap_probability_of_improvement": 0.954,
+        "mechanism_positive_folds": 3,
+        "mechanism_mean_metric_degradation": 0.0073532346173158,
+        "mechanism_review_result": "PASS",
+        "mechanism_fold_detail": [
+          {
+            "metric_kind": "classification",
+            "candidate_family": "combine",
+            "position": "QB",
+            "prediction_target": "bust_flag",
+            "test_year": 2023,
+            "candidate_metric": 0.1653197935192749,
+            "permuted_candidate_metric": 0.1688197219188327,
+            "permutation_metric_degradation": 0.0034999283995578,
+            "candidate_feature_count": 10,
+            "mean_test_feature_coverage": 0.6771929824561405
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "combine",
+            "position": "QB",
+            "prediction_target": "bust_flag",
+            "test_year": 2024,
+            "candidate_metric": 0.2937705175569226,
+            "permuted_candidate_metric": 0.3099633002918395,
+            "permutation_metric_degradation": 0.0161927827349169,
+            "candidate_feature_count": 10,
+            "mean_test_feature_coverage": 0.6507936507936508
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "combine",
+            "position": "QB",
+            "prediction_target": "bust_flag",
+            "test_year": 2025,
+            "candidate_metric": 0.2152342532823676,
+            "permuted_candidate_metric": 0.2176012459998402,
+            "permutation_metric_degradation": 0.0023669927174725,
+            "candidate_feature_count": 10,
+            "mean_test_feature_coverage": 0.6344827586206897
+          }
+        ],
+        "rookie_pooled_improvement": 0.030399746291133,
+        "veteran_pooled_improvement": 0.03494704958813,
+        "subgroup_direction_conflict": false,
+        "subgroup_fold_detail": [
+          {
+            "metric_kind": "classification",
+            "candidate_family": "combine",
+            "position": "QB",
+            "prediction_target": "bust_flag",
+            "test_year": 2023,
+            "subgroup": "rookie",
+            "n": 8,
+            "baseline_metric": 0.232463081099346,
+            "candidate_metric": 0.240256206549864,
+            "improvement": -0.0335241424731332
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "combine",
+            "position": "QB",
+            "prediction_target": "bust_flag",
+            "test_year": 2023,
+            "subgroup": "veteran",
+            "n": 49,
+            "baseline_metric": 0.1584940839835046,
+            "candidate_metric": 0.1530852771061175,
+            "improvement": 0.0341262382888062
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "combine",
+            "position": "QB",
+            "prediction_target": "bust_flag",
+            "test_year": 2024,
+            "subgroup": "rookie",
+            "n": 7,
+            "baseline_metric": 0.528583549883531,
+            "candidate_metric": 0.4977997373169087,
+            "improvement": 0.0582383098630391
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "combine",
+            "position": "QB",
+            "prediction_target": "bust_flag",
+            "test_year": 2024,
+            "subgroup": "veteran",
+            "n": 56,
+            "baseline_metric": 0.2929454059262569,
+            "candidate_metric": 0.2682668650869243,
+            "improvement": 0.0842427986242081
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "combine",
+            "position": "QB",
+            "prediction_target": "bust_flag",
+            "test_year": 2025,
+            "subgroup": "rookie",
+            "n": 6,
+            "baseline_metric": 0.1963992375612064,
+            "candidate_metric": 0.1800679979842832,
+            "improvement": 0.0831532738095977
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "combine",
+            "position": "QB",
+            "prediction_target": "bust_flag",
+            "test_year": 2025,
+            "subgroup": "veteran",
+            "n": 52,
+            "baseline_metric": 0.2155484205635664,
+            "candidate_metric": 0.2192918981244543,
+            "improvement": -0.017367223341745
+          }
+        ]
+      },
+      "confidence": "candidate_only_pending_exact_scope_FFDA_review; no production confidence grade assigned",
+      "promotion_status": "CANDIDATE_SIGNAL",
+      "limitations": [
+        "Passing is a candidate signal, not production approval; source coverage and mechanism remain position/target specific.",
+        "Candidate status is not production approval and carries no promoted weight.",
+        "Scope is limited to the exact position and prediction target.",
+        "At least one family input is missing for part of the eligible panel; fold-local imputation remains required.",
+        "Candidate expected calibration error is worse than baseline and requires explicit Step 14 review."
+      ],
+      "exact_input_columns": [
+        "combine_height_inches",
+        "combine_weight_lbs",
+        "combine_forty_seconds",
+        "combine_bench_reps",
+        "combine_vertical_inches",
+        "combine_broad_jump_inches",
+        "combine_cone_seconds",
+        "combine_shuttle_seconds",
+        "combine_bmi",
+        "combine_speed_score"
+      ],
+      "temporal_rules": [
+        "immutable/preseason-known"
+      ],
+      "exact_model_configuration_reference": {
+        "code": "repository_snapshot/fantasy-draft/research/step13b/code/run_step13b_ablations_v1.py",
+        "commit": "e3cf26eb863e4f54b6635e5a4aac50fe88e53e09",
+        "accepted_fold_hyperparameters": [
+          {
+            "test_year": 2023,
+            "accepted_hyperparameter": "0.1",
+            "baseline_bundle": "G_BASE"
+          },
+          {
+            "test_year": 2024,
+            "accepted_hyperparameter": "0.1",
+            "baseline_bundle": "G_BASE"
+          },
+          {
+            "test_year": 2025,
+            "accepted_hyperparameter": "0.03",
+            "baseline_bundle": "G_BASE"
+          }
+        ]
+      },
+      "source_artifact_paths": [
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step14_candidate_jobs_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_fold_metrics_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_bootstrap_uncertainty_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_mechanism_review_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_rookie_veteran_subgroups_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_probability_calibration_summary_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_feature_coverage_v1.csv"
+      ],
+      "permitted_downstream_use": "Step 14 candidate input and FFDA mechanism review only.",
+      "prohibited_downstream_use": "No production Player Truth weight or live-draft behavior change without FFDA approval."
+    },
+    {
+      "candidate_id": "S13B-CLA-TE-ELITE-FLAG-HISTORICAL-INJURY",
+      "status": "candidate",
+      "production_status": "not_promoted_step13b",
+      "research_owner_approval_required": true,
+      "metric_kind": "classification",
+      "target": "elite_flag",
+      "position_or_cohort": "TE",
+      "feature_family": "historical_injury",
+      "intended_use": "elite event probability for the named position only",
+      "historical_coverage": {
+        "eligible_universe_rows": 2212,
+        "minimum_field_coverage": 0.9990958408679927,
+        "mean_field_coverage": 0.9990958408679931,
+        "maximum_field_coverage": 0.9990958408679927,
+        "by_input_column": {
+          "injury_report_weeks_last1": 0.9990958408679927,
+          "injury_report_weeks_weighted3": 0.9990958408679927,
+          "injury_report_out_weeks_last1": 0.9990958408679927,
+          "injury_report_out_weeks_weighted3": 0.9990958408679927,
+          "injury_report_doubtful_weeks_weighted3": 0.9990958408679927,
+          "injury_report_questionable_weeks_weighted3": 0.9990958408679927,
+          "practice_dnp_weeks_last1": 0.9990958408679927,
+          "practice_dnp_weeks_weighted3": 0.9990958408679927,
+          "practice_limited_weeks_weighted3": 0.9990958408679927,
+          "injury_category_count_3y": 0.9990958408679927,
+          "injury_recurrence_category_count_3y": 0.9990958408679927,
+          "injury_recurrence_flag_3y": 0.9990958408679927,
+          "injury_concussion_head_weeks_3y": 0.9990958408679927,
+          "injury_neck_weeks_3y": 0.9990958408679927,
+          "injury_shoulder_weeks_3y": 0.9990958408679927,
+          "injury_arm_elbow_weeks_3y": 0.9990958408679927,
+          "injury_hand_wrist_finger_weeks_3y": 0.9990958408679927,
+          "injury_chest_rib_weeks_3y": 0.9990958408679927,
+          "injury_back_weeks_3y": 0.9990958408679927,
+          "injury_hip_groin_weeks_3y": 0.9990958408679927,
+          "injury_hamstring_weeks_3y": 0.9990958408679927,
+          "injury_quad_thigh_weeks_3y": 0.9990958408679927,
+          "injury_knee_weeks_3y": 0.9990958408679927,
+          "injury_calf_achilles_weeks_3y": 0.9990958408679927,
+          "injury_ankle_weeks_3y": 0.9990958408679927,
+          "injury_foot_toe_weeks_3y": 0.9990958408679927,
+          "injury_illness_weeks_3y": 0.9990958408679927,
+          "injury_rest_admin_weeks_3y": 0.9990958408679927,
+          "injury_other_weeks_3y": 0.9990958408679927
+        }
+      },
+      "eligible_sample": {
+        "outer_test_observations": 242,
+        "canonical_eligible_player_seasons": 2212
+      },
+      "outer_test_seasons": [
+        2023,
+        2024,
+        2025
+      ],
+      "comparison_baseline": {
+        "model": "STEP13A_JOB_SPECIFIC",
+        "bundle": "H_AVAILABILITY",
+        "job_specific": true
+      },
+      "candidate_model": "STEP13A_PLUS_HISTORICAL_INJURY",
+      "performance_metrics": {
+        "primary_metric": "Brier score",
+        "baseline_metric_value": 0.0682578466490707,
+        "candidate_metric_value": 0.0643407805975146,
+        "pooled_improvement": 0.0573863115209982,
+        "folds_improved": 3,
+        "folds_total": 3,
+        "worst_fold": 0.0121761306662832,
+        "fold_detail": [
+          {
+            "metric_kind": "classification",
+            "candidate_family": "historical_injury",
+            "position": "TE",
+            "prediction_target": "elite_flag",
+            "test_year": 2023,
+            "baseline_bundle": "H_AVAILABILITY",
+            "accepted_hyperparameter": "0.1",
+            "n": 75,
+            "baseline_metric": 0.0573389601921244,
+            "candidate_metric": 0.0538686261602858,
+            "improvement": 0.0605231420348493
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "historical_injury",
+            "position": "TE",
+            "prediction_target": "elite_flag",
+            "test_year": 2024,
+            "baseline_bundle": "H_AVAILABILITY",
+            "accepted_hyperparameter": "0.1",
+            "n": 91,
+            "baseline_metric": 0.0751876865109208,
+            "candidate_metric": 0.068350353512335,
+            "improvement": 0.0909368716590677
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "historical_injury",
+            "position": "TE",
+            "prediction_target": "elite_flag",
+            "test_year": 2025,
+            "baseline_bundle": "H_AVAILABILITY",
+            "accepted_hyperparameter": "0.1",
+            "n": 76,
+            "baseline_metric": 0.070735492133842,
+            "candidate_metric": 0.0698742075388765,
+            "improvement": 0.0121761306662832
+          }
+        ]
+      },
+      "calibration_metrics": {
+        "STEP13A_BASELINE": {
+          "n": 242,
+          "ece": 0.1048804391712973
+        },
+        "STEP13B_CANDIDATE": {
+          "n": 242,
+          "ece": 0.0999095623159029
+        }
+      },
+      "stability_and_sensitivity": {
+        "bootstrap_mean_improvement": 0.0549172734664259,
+        "bootstrap_ci_low": -0.0550402114096563,
+        "bootstrap_ci_high": 0.1566149747728241,
+        "bootstrap_probability_of_improvement": 0.836,
+        "mechanism_positive_folds": 2,
+        "mechanism_mean_metric_degradation": 0.0065795100991628,
+        "mechanism_review_result": "PASS",
+        "mechanism_fold_detail": [
+          {
+            "metric_kind": "classification",
+            "candidate_family": "historical_injury",
+            "position": "TE",
+            "prediction_target": "elite_flag",
+            "test_year": 2023,
+            "candidate_metric": 0.0538686261602858,
+            "permuted_candidate_metric": 0.0663132751105275,
+            "permutation_metric_degradation": 0.0124446489502416,
+            "candidate_feature_count": 29,
+            "mean_test_feature_coverage": 1.0
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "historical_injury",
+            "position": "TE",
+            "prediction_target": "elite_flag",
+            "test_year": 2024,
+            "candidate_metric": 0.068350353512335,
+            "permuted_candidate_metric": 0.0776547874695419,
+            "permutation_metric_degradation": 0.0093044339572069,
+            "candidate_feature_count": 29,
+            "mean_test_feature_coverage": 1.0
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "historical_injury",
+            "position": "TE",
+            "prediction_target": "elite_flag",
+            "test_year": 2025,
+            "candidate_metric": 0.0698742075388765,
+            "permuted_candidate_metric": 0.0678636549289164,
+            "permutation_metric_degradation": -0.0020105526099601,
+            "candidate_feature_count": 29,
+            "mean_test_feature_coverage": 1.0
+          }
+        ],
+        "rookie_pooled_improvement": 0.029419519982756,
+        "veteran_pooled_improvement": 0.0646496147213337,
+        "subgroup_direction_conflict": false,
+        "subgroup_fold_detail": [
+          {
+            "metric_kind": "classification",
+            "candidate_family": "historical_injury",
+            "position": "TE",
+            "prediction_target": "elite_flag",
+            "test_year": 2023,
+            "subgroup": "rookie",
+            "n": 11,
+            "baseline_metric": 0.0873153224706147,
+            "candidate_metric": 0.0879929934549807,
+            "improvement": -0.0077611920243902
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "historical_injury",
+            "position": "TE",
+            "prediction_target": "elite_flag",
+            "test_year": 2023,
+            "subgroup": "veteran",
+            "n": 64,
+            "baseline_metric": 0.0521867729255088,
+            "candidate_metric": 0.0480035005315102,
+            "improvement": 0.0801596297201564
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "historical_injury",
+            "position": "TE",
+            "prediction_target": "elite_flag",
+            "test_year": 2024,
+            "subgroup": "rookie",
+            "n": 11,
+            "baseline_metric": 0.0776419498242234,
+            "candidate_metric": 0.0755586236807254,
+            "improvement": 0.0268324810004708
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "historical_injury",
+            "position": "TE",
+            "prediction_target": "elite_flag",
+            "test_year": 2024,
+            "subgroup": "veteran",
+            "n": 80,
+            "baseline_metric": 0.0748502253053417,
+            "candidate_metric": 0.0673592163641813,
+            "improvement": 0.1000799785251392
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "historical_injury",
+            "position": "TE",
+            "prediction_target": "elite_flag",
+            "test_year": 2025,
+            "subgroup": "rookie",
+            "n": 11,
+            "baseline_metric": 0.0493569332040003,
+            "candidate_metric": 0.0459420616920589,
+            "improvement": 0.0691872709721875
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "historical_injury",
+            "position": "TE",
+            "prediction_target": "elite_flag",
+            "test_year": 2025,
+            "subgroup": "veteran",
+            "n": 65,
+            "baseline_metric": 0.0743534021065845,
+            "candidate_metric": 0.0739242629898764,
+            "improvement": 0.0057716137331939
+          }
+        ]
+      },
+      "confidence": "candidate_only_pending_exact_scope_FFDA_review; no production confidence grade assigned",
+      "promotion_status": "CANDIDATE_SIGNAL",
+      "limitations": [
+        "Passing is a candidate signal, not production approval; source coverage and mechanism remain position/target specific.",
+        "Candidate status is not production approval and carries no promoted weight.",
+        "Scope is limited to the exact position and prediction target.",
+        "At least one family input is missing for part of the eligible panel; fold-local imputation remains required."
+      ],
+      "exact_input_columns": [
+        "injury_report_weeks_last1",
+        "injury_report_weeks_weighted3",
+        "injury_report_out_weeks_last1",
+        "injury_report_out_weeks_weighted3",
+        "injury_report_doubtful_weeks_weighted3",
+        "injury_report_questionable_weeks_weighted3",
+        "practice_dnp_weeks_last1",
+        "practice_dnp_weeks_weighted3",
+        "practice_limited_weeks_weighted3",
+        "injury_category_count_3y",
+        "injury_recurrence_category_count_3y",
+        "injury_recurrence_flag_3y",
+        "injury_concussion_head_weeks_3y",
+        "injury_neck_weeks_3y",
+        "injury_shoulder_weeks_3y",
+        "injury_arm_elbow_weeks_3y",
+        "injury_hand_wrist_finger_weeks_3y",
+        "injury_chest_rib_weeks_3y",
+        "injury_back_weeks_3y",
+        "injury_hip_groin_weeks_3y",
+        "injury_hamstring_weeks_3y",
+        "injury_quad_thigh_weeks_3y",
+        "injury_knee_weeks_3y",
+        "injury_calf_achilles_weeks_3y",
+        "injury_ankle_weeks_3y",
+        "injury_foot_toe_weeks_3y",
+        "injury_illness_weeks_3y",
+        "injury_rest_admin_weeks_3y",
+        "injury_other_weeks_3y"
+      ],
+      "temporal_rules": [
+        "source season < target season"
+      ],
+      "exact_model_configuration_reference": {
+        "code": "repository_snapshot/fantasy-draft/research/step13b/code/run_step13b_ablations_v1.py",
+        "commit": "e3cf26eb863e4f54b6635e5a4aac50fe88e53e09",
+        "accepted_fold_hyperparameters": [
+          {
+            "test_year": 2023,
+            "accepted_hyperparameter": "0.1",
+            "baseline_bundle": "H_AVAILABILITY"
+          },
+          {
+            "test_year": 2024,
+            "accepted_hyperparameter": "0.1",
+            "baseline_bundle": "H_AVAILABILITY"
+          },
+          {
+            "test_year": 2025,
+            "accepted_hyperparameter": "0.1",
+            "baseline_bundle": "H_AVAILABILITY"
+          }
+        ]
+      },
+      "source_artifact_paths": [
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step14_candidate_jobs_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_fold_metrics_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_bootstrap_uncertainty_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_mechanism_review_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_rookie_veteran_subgroups_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_probability_calibration_summary_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_feature_coverage_v1.csv"
+      ],
+      "permitted_downstream_use": "Step 14 candidate input and FFDA mechanism review only.",
+      "prohibited_downstream_use": "No production Player Truth weight or live-draft behavior change without FFDA approval."
+    },
+    {
+      "candidate_id": "S13B-CLA-TE-STARTER-FLAG-ROOKIE-DRAFT-CAPITAL",
+      "status": "candidate",
+      "production_status": "not_promoted_step13b",
+      "research_owner_approval_required": true,
+      "metric_kind": "classification",
+      "target": "starter_flag",
+      "position_or_cohort": "TE",
+      "feature_family": "rookie_draft_capital",
+      "intended_use": "useful-starter event probability for the named position only",
+      "historical_coverage": {
+        "eligible_universe_rows": 2212,
+        "minimum_field_coverage": 0.8295660036166366,
+        "mean_field_coverage": 0.8949480108499096,
+        "maximum_field_coverage": 0.9990958408679927,
+        "by_input_column": {
+          "true_rookie_flag": 0.9990958408679927,
+          "drafted_flag": 0.9990958408679927,
+          "undrafted_flag": 0.9990958408679927,
+          "draft_round": 0.8331826401446655,
+          "draft_overall_pick": 0.8331826401446655,
+          "draft_pick_log": 0.8331826401446655,
+          "draft_capital_percentile_position_year": 0.8331826401446655,
+          "draft_capital_z_position_year": 0.8295660036166366
+        }
+      },
+      "eligible_sample": {
+        "outer_test_observations": 242,
+        "canonical_eligible_player_seasons": 2212
+      },
+      "outer_test_seasons": [
+        2023,
+        2024,
+        2025
+      ],
+      "comparison_baseline": {
+        "model": "STEP13A_JOB_SPECIFIC",
+        "bundle": "G_BASE",
+        "job_specific": true
+      },
+      "candidate_model": "STEP13A_PLUS_ROOKIE_DRAFT_CAPITAL",
+      "performance_metrics": {
+        "primary_metric": "Brier score",
+        "baseline_metric_value": 0.1278554772450414,
+        "candidate_metric_value": 0.1238260586431813,
+        "pooled_improvement": 0.0315154163801482,
+        "folds_improved": 2,
+        "folds_total": 3,
+        "worst_fold": -0.0157483767017078,
+        "fold_detail": [
+          {
+            "metric_kind": "classification",
+            "candidate_family": "rookie_draft_capital",
+            "position": "TE",
+            "prediction_target": "starter_flag",
+            "test_year": 2023,
+            "baseline_bundle": "G_BASE",
+            "accepted_hyperparameter": "0.1",
+            "n": 75,
+            "baseline_metric": 0.1411341918445804,
+            "candidate_metric": 0.132809438842276,
+            "improvement": 0.0589846648321184
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "rookie_draft_capital",
+            "position": "TE",
+            "prediction_target": "starter_flag",
+            "test_year": 2024,
+            "baseline_bundle": "G_BASE",
+            "accepted_hyperparameter": "0.1",
+            "n": 91,
+            "baseline_metric": 0.1145910571705622,
+            "candidate_metric": 0.1090183597551633,
+            "improvement": 0.0486311720390551
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "rookie_draft_capital",
+            "position": "TE",
+            "prediction_target": "starter_flag",
+            "test_year": 2025,
+            "baseline_bundle": "G_BASE",
+            "accepted_hyperparameter": "0.1",
+            "n": 76,
+            "baseline_metric": 0.1306338802952017,
+            "candidate_metric": 0.1326911518520963,
+            "improvement": -0.0157483767017078
+          }
+        ]
+      },
+      "calibration_metrics": {
+        "STEP13A_BASELINE": {
+          "n": 242,
+          "ece": 0.1295887928559686
+        },
+        "STEP13B_CANDIDATE": {
+          "n": 242,
+          "ece": 0.1214291431451834
+        }
+      },
+      "stability_and_sensitivity": {
+        "bootstrap_mean_improvement": 0.0306333097063897,
+        "bootstrap_ci_low": -0.0053127972190155,
+        "bootstrap_ci_high": 0.0696950157132352,
+        "bootstrap_probability_of_improvement": 0.964,
+        "mechanism_positive_folds": 2,
+        "mechanism_mean_metric_degradation": 0.0005377687371889,
+        "mechanism_review_result": "PASS",
+        "mechanism_fold_detail": [
+          {
+            "metric_kind": "classification",
+            "candidate_family": "rookie_draft_capital",
+            "position": "TE",
+            "prediction_target": "starter_flag",
+            "test_year": 2023,
+            "candidate_metric": 0.132809438842276,
+            "permuted_candidate_metric": 0.1390792555065653,
+            "permutation_metric_degradation": 0.0062698166642893,
+            "candidate_feature_count": 8,
+            "mean_test_feature_coverage": 0.9416666666666668
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "rookie_draft_capital",
+            "position": "TE",
+            "prediction_target": "starter_flag",
+            "test_year": 2024,
+            "candidate_metric": 0.1090183597551633,
+            "permuted_candidate_metric": 0.1025374774092091,
+            "permutation_metric_degradation": -0.0064808823459542,
+            "candidate_feature_count": 8,
+            "mean_test_feature_coverage": 0.896978021978022
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "rookie_draft_capital",
+            "position": "TE",
+            "prediction_target": "starter_flag",
+            "test_year": 2025,
+            "candidate_metric": 0.1326911518520963,
+            "permuted_candidate_metric": 0.1345155237453279,
+            "permutation_metric_degradation": 0.0018243718932316,
+            "candidate_feature_count": 8,
+            "mean_test_feature_coverage": 0.9342105263157896
+          }
+        ],
+        "rookie_pooled_improvement": 0.0876431983959293,
+        "veteran_pooled_improvement": 0.0276183311326821,
+        "subgroup_direction_conflict": false,
+        "subgroup_fold_detail": [
+          {
+            "metric_kind": "classification",
+            "candidate_family": "rookie_draft_capital",
+            "position": "TE",
+            "prediction_target": "starter_flag",
+            "test_year": 2023,
+            "subgroup": "rookie",
+            "n": 11,
+            "baseline_metric": 0.0969117264164777,
+            "candidate_metric": 0.0964482966440372,
+            "improvement": 0.0047819782969179
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "rookie_draft_capital",
+            "position": "TE",
+            "prediction_target": "starter_flag",
+            "test_year": 2023,
+            "subgroup": "veteran",
+            "n": 64,
+            "baseline_metric": 0.1487349280900356,
+            "candidate_metric": 0.1390590101575983,
+            "improvement": 0.0650547793762342
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "rookie_draft_capital",
+            "position": "TE",
+            "prediction_target": "starter_flag",
+            "test_year": 2024,
+            "subgroup": "rookie",
+            "n": 11,
+            "baseline_metric": 0.0329876030413406,
+            "candidate_metric": 0.0262530053313674,
+            "improvement": 0.2041554126116183
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "rookie_draft_capital",
+            "position": "TE",
+            "prediction_target": "starter_flag",
+            "test_year": 2024,
+            "subgroup": "veteran",
+            "n": 80,
+            "baseline_metric": 0.1258115321133301,
+            "candidate_metric": 0.1203985959884353,
+            "improvement": 0.0430241650663537
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "rookie_draft_capital",
+            "position": "TE",
+            "prediction_target": "starter_flag",
+            "test_year": 2025,
+            "subgroup": "rookie",
+            "n": 11,
+            "baseline_metric": 0.1367624000204264,
+            "candidate_metric": 0.1293782965808027,
+            "improvement": 0.0539922042792518
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "rookie_draft_capital",
+            "position": "TE",
+            "prediction_target": "starter_flag",
+            "test_year": 2025,
+            "subgroup": "veteran",
+            "n": 65,
+            "baseline_metric": 0.129596746187856,
+            "candidate_metric": 0.1332517888980075,
+            "improvement": -0.0282031981331802
+          }
+        ]
+      },
+      "confidence": "candidate_only_pending_exact_scope_FFDA_review; no production confidence grade assigned",
+      "promotion_status": "CANDIDATE_SIGNAL",
+      "limitations": [
+        "Passing is a candidate signal, not production approval; source coverage and mechanism remain position/target specific.",
+        "Candidate status is not production approval and carries no promoted weight.",
+        "Scope is limited to the exact position and prediction target.",
+        "At least one family input is missing for part of the eligible panel; fold-local imputation remains required."
+      ],
+      "exact_input_columns": [
+        "true_rookie_flag",
+        "drafted_flag",
+        "undrafted_flag",
+        "draft_round",
+        "draft_overall_pick",
+        "draft_pick_log",
+        "draft_capital_percentile_position_year",
+        "draft_capital_z_position_year"
+      ],
+      "temporal_rules": [
+        "immutable/preseason-known"
+      ],
+      "exact_model_configuration_reference": {
+        "code": "repository_snapshot/fantasy-draft/research/step13b/code/run_step13b_ablations_v1.py",
+        "commit": "e3cf26eb863e4f54b6635e5a4aac50fe88e53e09",
+        "accepted_fold_hyperparameters": [
+          {
+            "test_year": 2023,
+            "accepted_hyperparameter": "0.1",
+            "baseline_bundle": "G_BASE"
+          },
+          {
+            "test_year": 2024,
+            "accepted_hyperparameter": "0.1",
+            "baseline_bundle": "G_BASE"
+          },
+          {
+            "test_year": 2025,
+            "accepted_hyperparameter": "0.1",
+            "baseline_bundle": "G_BASE"
+          }
+        ]
+      },
+      "source_artifact_paths": [
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step14_candidate_jobs_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_fold_metrics_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_bootstrap_uncertainty_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_mechanism_review_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_rookie_veteran_subgroups_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_probability_calibration_summary_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_feature_coverage_v1.csv"
+      ],
+      "permitted_downstream_use": "Step 14 candidate input and FFDA mechanism review only.",
+      "prohibited_downstream_use": "No production Player Truth weight or live-draft behavior change without FFDA approval."
+    },
+    {
+      "candidate_id": "S13B-CLA-QB-AVAILABILITY-BUST-FLAG-WEEKLY-ROSTER-STATUS",
+      "status": "candidate",
+      "production_status": "not_promoted_step13b",
+      "research_owner_approval_required": true,
+      "metric_kind": "classification",
+      "target": "availability_bust_flag",
+      "position_or_cohort": "QB",
+      "feature_family": "weekly_roster_status",
+      "intended_use": "availability-bust event probability for the named position only",
+      "historical_coverage": {
+        "eligible_universe_rows": 2212,
+        "minimum_field_coverage": 0.9990958408679927,
+        "mean_field_coverage": 0.9990958408679929,
+        "maximum_field_coverage": 0.9990958408679927,
+        "by_input_column": {
+          "roster_active_weeks_last1": 0.9990958408679927,
+          "roster_inactive_weeks_last1": 0.9990958408679927,
+          "roster_inactive_weeks_weighted3": 0.9990958408679927,
+          "roster_reserve_weeks_weighted3": 0.9990958408679927,
+          "roster_pup_weeks_weighted3": 0.9990958408679927,
+          "roster_nfi_weeks_weighted3": 0.9990958408679927,
+          "roster_suspension_weeks_weighted3": 0.9990958408679927,
+          "roster_role_loss_weeks_weighted3": 0.9990958408679927,
+          "roster_status_changes_last1": 0.9990958408679927
+        }
+      },
+      "eligible_sample": {
+        "outer_test_observations": 178,
+        "canonical_eligible_player_seasons": 2212
+      },
+      "outer_test_seasons": [
+        2023,
+        2024,
+        2025
+      ],
+      "comparison_baseline": {
+        "model": "STEP13A_JOB_SPECIFIC",
+        "bundle": "G_BASE",
+        "job_specific": true
+      },
+      "candidate_model": "STEP13A_PLUS_WEEKLY_ROSTER_STATUS",
+      "performance_metrics": {
+        "primary_metric": "Brier score",
+        "baseline_metric_value": 0.16525715860795,
+        "candidate_metric_value": 0.1603327853663489,
+        "pooled_improvement": 0.0297982446453863,
+        "folds_improved": 3,
+        "folds_total": 3,
+        "worst_fold": 0.0149634958942035,
+        "fold_detail": [
+          {
+            "metric_kind": "classification",
+            "candidate_family": "weekly_roster_status",
+            "position": "QB",
+            "prediction_target": "availability_bust_flag",
+            "test_year": 2023,
+            "baseline_bundle": "G_BASE",
+            "accepted_hyperparameter": "0.1",
+            "n": 57,
+            "baseline_metric": 0.209369658532942,
+            "candidate_metric": 0.2062367565071135,
+            "improvement": 0.0149634958942035
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "weekly_roster_status",
+            "position": "QB",
+            "prediction_target": "availability_bust_flag",
+            "test_year": 2024,
+            "baseline_bundle": "G_BASE",
+            "accepted_hyperparameter": "0.03",
+            "n": 63,
+            "baseline_metric": 0.132607878806492,
+            "candidate_metric": 0.1237932081983232,
+            "improvement": 0.0664716960070798
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "weekly_roster_status",
+            "position": "QB",
+            "prediction_target": "availability_bust_flag",
+            "test_year": 2025,
+            "baseline_bundle": "G_BASE",
+            "accepted_hyperparameter": "0.03",
+            "n": 58,
+            "baseline_metric": 0.157369091914283,
+            "candidate_metric": 0.1549098027208667,
+            "improvement": 0.015627523572137
+          }
+        ]
+      },
+      "calibration_metrics": {
+        "STEP13A_BASELINE": {
+          "n": 178,
+          "ece": 0.1278494308632722
+        },
+        "STEP13B_CANDIDATE": {
+          "n": 178,
+          "ece": 0.1077535322649319
+        }
+      },
+      "stability_and_sensitivity": {
+        "bootstrap_mean_improvement": 0.029197753609844,
+        "bootstrap_ci_low": 0.0080561341195165,
+        "bootstrap_ci_high": 0.052122435677389,
+        "bootstrap_probability_of_improvement": 0.994,
+        "mechanism_positive_folds": 2,
+        "mechanism_mean_metric_degradation": 0.0059046954756825,
+        "mechanism_review_result": "PASS",
+        "mechanism_fold_detail": [
+          {
+            "metric_kind": "classification",
+            "candidate_family": "weekly_roster_status",
+            "position": "QB",
+            "prediction_target": "availability_bust_flag",
+            "test_year": 2023,
+            "candidate_metric": 0.2062367565071135,
+            "permuted_candidate_metric": 0.2051252964791564,
+            "permutation_metric_degradation": -0.0011114600279571,
+            "candidate_feature_count": 9,
+            "mean_test_feature_coverage": 1.0
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "weekly_roster_status",
+            "position": "QB",
+            "prediction_target": "availability_bust_flag",
+            "test_year": 2024,
+            "candidate_metric": 0.1237932081983232,
+            "permuted_candidate_metric": 0.1352225253166664,
+            "permutation_metric_degradation": 0.0114293171183432,
+            "candidate_feature_count": 9,
+            "mean_test_feature_coverage": 1.0
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "weekly_roster_status",
+            "position": "QB",
+            "prediction_target": "availability_bust_flag",
+            "test_year": 2025,
+            "candidate_metric": 0.1549098027208667,
+            "permuted_candidate_metric": 0.1623060320575281,
+            "permutation_metric_degradation": 0.0073962293366614,
+            "candidate_feature_count": 9,
+            "mean_test_feature_coverage": 1.0
+          }
+        ],
+        "rookie_pooled_improvement": 0.0649991063053604,
+        "veteran_pooled_improvement": 0.0283373118853142,
+        "subgroup_direction_conflict": false,
+        "subgroup_fold_detail": [
+          {
+            "metric_kind": "classification",
+            "candidate_family": "weekly_roster_status",
+            "position": "QB",
+            "prediction_target": "availability_bust_flag",
+            "test_year": 2023,
+            "subgroup": "rookie",
+            "n": 8,
+            "baseline_metric": 0.2603916942029065,
+            "candidate_metric": 0.2491860848578959,
+            "improvement": 0.0430336665664873
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "weekly_roster_status",
+            "position": "QB",
+            "prediction_target": "availability_bust_flag",
+            "test_year": 2023,
+            "subgroup": "veteran",
+            "n": 49,
+            "baseline_metric": 0.2010395302602947,
+            "candidate_metric": 0.1992246212661694,
+            "improvement": 0.0090276225365998
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "weekly_roster_status",
+            "position": "QB",
+            "prediction_target": "availability_bust_flag",
+            "test_year": 2024,
+            "subgroup": "rookie",
+            "n": 7,
+            "baseline_metric": 0.1151266360068089,
+            "candidate_metric": 0.1016268590173608,
+            "improvement": 0.1172602401815133
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "weekly_roster_status",
+            "position": "QB",
+            "prediction_target": "availability_bust_flag",
+            "test_year": 2024,
+            "subgroup": "veteran",
+            "n": 56,
+            "baseline_metric": 0.1347930341564524,
+            "candidate_metric": 0.1265640018459435,
+            "improvement": 0.0610493885088866
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "weekly_roster_status",
+            "position": "QB",
+            "prediction_target": "availability_bust_flag",
+            "test_year": 2025,
+            "subgroup": "rookie",
+            "n": 6,
+            "baseline_metric": 0.2987760996380471,
+            "candidate_metric": 0.2888223629926945,
+            "improvement": 0.0333150364350129
+          },
+          {
+            "metric_kind": "classification",
+            "candidate_family": "weekly_roster_status",
+            "position": "QB",
+            "prediction_target": "availability_bust_flag",
+            "test_year": 2025,
+            "subgroup": "veteran",
+            "n": 52,
+            "baseline_metric": 0.1410528987153871,
+            "candidate_metric": 0.1394583534587328,
+            "improvement": 0.0113045904846786
+          }
+        ]
+      },
+      "confidence": "candidate_only_pending_exact_scope_FFDA_review; no production confidence grade assigned",
+      "promotion_status": "CANDIDATE_SIGNAL",
+      "limitations": [
+        "Passing is a candidate signal, not production approval; source coverage and mechanism remain position/target specific.",
+        "Candidate status is not production approval and carries no promoted weight.",
+        "Scope is limited to the exact position and prediction target.",
+        "At least one family input is missing for part of the eligible panel; fold-local imputation remains required."
+      ],
+      "exact_input_columns": [
+        "roster_active_weeks_last1",
+        "roster_inactive_weeks_last1",
+        "roster_inactive_weeks_weighted3",
+        "roster_reserve_weeks_weighted3",
+        "roster_pup_weeks_weighted3",
+        "roster_nfi_weeks_weighted3",
+        "roster_suspension_weeks_weighted3",
+        "roster_role_loss_weeks_weighted3",
+        "roster_status_changes_last1"
+      ],
+      "temporal_rules": [
+        "source season < target season"
+      ],
+      "exact_model_configuration_reference": {
+        "code": "repository_snapshot/fantasy-draft/research/step13b/code/run_step13b_ablations_v1.py",
+        "commit": "e3cf26eb863e4f54b6635e5a4aac50fe88e53e09",
+        "accepted_fold_hyperparameters": [
+          {
+            "test_year": 2023,
+            "accepted_hyperparameter": "0.1",
+            "baseline_bundle": "G_BASE"
+          },
+          {
+            "test_year": 2024,
+            "accepted_hyperparameter": "0.03",
+            "baseline_bundle": "G_BASE"
+          },
+          {
+            "test_year": 2025,
+            "accepted_hyperparameter": "0.03",
+            "baseline_bundle": "G_BASE"
+          }
+        ]
+      },
+      "source_artifact_paths": [
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step14_candidate_jobs_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_fold_metrics_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_bootstrap_uncertainty_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_mechanism_review_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_rookie_veteran_subgroups_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_probability_calibration_summary_v1.csv",
+        "repository_snapshot/fantasy-draft/research/step13b/outputs/step13b_feature_coverage_v1.csv"
+      ],
+      "permitted_downstream_use": "Step 14 candidate input and FFDA mechanism review only.",
+      "prohibited_downstream_use": "No production Player Truth weight or live-draft behavior change without FFDA approval."
+    }
+  ]
+}
