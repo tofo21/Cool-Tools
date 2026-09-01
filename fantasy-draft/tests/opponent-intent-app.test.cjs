@@ -52,6 +52,8 @@ function boot({ storage = new Map(), packageOverride = null } = {}) {
   if (packageOverride) context.OPPONENT_INTENT_PACKAGE = packageOverride(context.OPPONENT_INTENT_PACKAGE);
   vm.runInContext(read("model/model-adapter.js"), context, { filename: "model-adapter.js" });
   vm.runInContext(read("model/opponent-intent.js"), context, { filename: "opponent-intent.js" });
+  vm.runInContext(read("model/runtime-bundle-adapter.js"), context, { filename: "runtime-bundle-adapter.js" });
+  context.DRAFT_RUNTIME_BUNDLE = JSON.parse(read("data/candidate/runtime-contract/draft_runtime_bundle.json"));
   vm.runInContext(read("app.js"), context, { filename: "app.js" });
   function flushTimers(max = 100) {
     let count = 0;
@@ -77,6 +79,7 @@ function sourcePick(player, overall) {
 const initial = boot();
 initial.flushTimers();
 assert.equal(initial.context.DraftCommandLive.opponentModelHealth().mode, "live");
+assert.equal(initial.context.DraftCommandLive.modelHealth().modelState, "ready");
 assert.equal(initial.context.DraftCommandLive.opponentModelHealth().managerWeights.position, 0);
 assert.equal(initial.context.DraftCommandLive.opponentModelHealth().managerWeights.player, 0);
 assert.match(initial.elements.get("onClockManagerCard").innerHTML, /Justin Gerkin/);
@@ -98,7 +101,7 @@ assert.ok(!initial.context.DraftCommandLive.opponentWindow({ simulations: 12 }).
 initial.context.DraftCommandLive.setBoardSort("leagueValue");
 assert.equal(initial.context.DraftCommandLive.boardSort().direction, "desc");
 const sorted = initial.context.DraftCommandLive.decisionBoard();
-assert.ok(sorted.every((player, index) => index === 0 || sorted[index - 1].leagueValue >= player.leagueValue));
+assert.ok(sorted.every((player, index) => index === 0 || player.leagueValue == null || sorted[index - 1].leagueValue >= player.leagueValue));
 initial.context.DraftCommandLive.setPositionFilter("WR");
 initial.context.DraftCommandLive.setPlayerSearch("Chase");
 const filtered = initial.context.DraftCommandLive.decisionBoard();

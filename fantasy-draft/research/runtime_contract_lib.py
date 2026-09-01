@@ -521,21 +521,41 @@ def calculate_coverage(
     market: dict[str, Any] | None,
     league_value: dict[str, Any] | None,
     unresolved: list[dict[str, Any]],
+    approved_market_only_ids: set[int] | None = None,
 ) -> dict[str, Any]:
     players = player_truth.get("players", []) if player_truth else []
+    truth_by_id = {item.get("internalPlayerId"): item for item in players}
     market_by_id = {item.get("internalPlayerId"): item for item in market.get("records", [])} if market else {}
     league_by_id = {item.get("internalPlayerId"): item for item in league_value.get("records", [])} if league_value else {}
     overall = empty_coverage_slice()
     positions = {position: empty_coverage_slice() for position in POSITIONS}
     ranges = {key: empty_coverage_slice() for key in ("1-50", "51-100", "101-160", "161+")}
-    for player in players:
-        player_id = player.get("internalPlayerId")
-        rank = player.get("draftCommandBoardRank", 9999)
+    board_universe: dict[int, dict[str, Any]] = {
+        player_id: {
+            "internalPlayerId": player_id,
+            "boardRank": player.get("draftCommandBoardRank", 9999),
+            "position": player.get("position"),
+        }
+        for player_id, player in truth_by_id.items()
+    }
+    for player_id, market_record in market_by_id.items():
+        if (player_id not in (approved_market_only_ids or set())
+                or not isinstance(player_id, int)
+                or not isinstance(market_record.get("draftCommandBoardRank"), int)):
+            continue
+        board_universe.setdefault(player_id, {
+            "internalPlayerId": player_id,
+            "boardRank": market_record["draftCommandBoardRank"],
+            "position": market_record.get("position"),
+        })
+    for player in sorted(board_universe.values(), key=lambda item: (item["boardRank"], item["internalPlayerId"])):
+        player_id = player["internalPlayerId"]
+        rank = player["boardRank"]
         slices = [overall, positions.get(player.get("position"), empty_coverage_slice()), ranges[board_bucket(rank)]]
         market_record = market_by_id.get(player_id)
         for current in slices:
             current["eligible"] += 1
-            current["playerTruth"] += 1
+            current["playerTruth"] += int(player_id in truth_by_id)
             current["marketRank"] += int(market_record is not None and market_record.get("espnDefaultRank") is not None)
             current["marketAdp"] += int(market_record is not None and market_record.get("espnContinuousAdp") is not None)
             current["leagueValue"] += int(player_id in league_by_id)
@@ -555,6 +575,7 @@ def calculate_coverage(
 def cross_artifact_issues(
     artifacts: dict[str, dict[str, Any] | None],
     approved_top160_ids: set[int],
+    approved_missing_projection_ids: set[int],
 ) -> tuple[list[Issue], list[dict[str, Any]], dict[str, Any]]:
     issues: list[Issue] = []
     unresolved: list[dict[str, Any]] = []
@@ -607,10 +628,82 @@ def cross_artifact_issues(
         if mapped and league and player_id not in league_by_id:
             report_gap("espn-league-value", "mapped Player Truth record has no League Value record")
 
-    for artifact_type, records in (("espn-market", market_records), ("espn-league-value", league_records)):
-        for record in records:
-            if record.get("internalPlayerId") not in truth_by_id:
-                issues.append(Issue("WARNING", "UNKNOWN_STABLE_ID", artifact_type, f"internalPlayerId={record.get('internalPlayerId')}", "record is excluded because it cannot join by stable ID; name-only joins are forbidden"))
+    market_only_ids: set[int] = set()
+    for record in market_records:
+        player_id = record.get("internalPlayerId")
+        if player_id in truth_by_id:
+            continue
+        market_only_ids.add(player_id)
+        board_rank = record.get("draftCommandBoardRank", 9999)
+        resolved_identity = (
+            record.get("espnPlayerId") is not None
+            and record.get("captureStatus") == "captured"
+            and isinstance(record.get("mappingConfidence"), (int, float))
+            and record.get("mappingConfidence") >= 0.8
+        )
+        reason = "resolved market identity has no approved Player Truth projection or League Value record"
+        approved = player_id in approved_missing_projection_ids
+        blocking = not (approved and resolved_identity)
+        unresolved.append({
+            "internalPlayerId": player_id,
+            "boardRank": board_rank,
+            "artifactType": "player-truth",
+            "blocking": blocking,
+            "reason": reason if resolved_identity else "market-only stable ID is not a resolved identity",
+        })
+        if approved and resolved_identity:
+            issues.append(Issue(
+                "WARNING",
+                "APPROVED_MISSING_PROJECTION",
+                "player-truth",
+                f"internalPlayerId={player_id}",
+                "resolved identity is explicitly approved to remain without Player Truth or League Value; market data remains independently usable",
+            ))
+        elif approved:
+            issues.append(Issue(
+                "BLOCKING",
+                "APPROVED_MISSING_PROJECTION_UNRESOLVED_IDENTITY",
+                "player-truth",
+                f"internalPlayerId={player_id}",
+                "missing-projection approval requires a resolved market identity with mapping confidence at least 0.8",
+            ))
+        elif board_rank <= 160:
+            issues.append(Issue(
+                "BLOCKING",
+                "TOP160_PLAYER_TRUTH_GAP",
+                "player-truth",
+                f"internalPlayerId={player_id}",
+                "top-160 board identity is missing from Player Truth and has no explicit missing-projection approval",
+            ))
+        else:
+            issues.append(Issue(
+                "WARNING",
+                "LOWER_BOARD_PLAYER_TRUTH_GAP",
+                "player-truth",
+                f"internalPlayerId={player_id}",
+                "lower-board market identity is missing from Player Truth; name-only joins remain forbidden",
+            ))
+        if not approved:
+            issues.append(Issue(
+                "WARNING",
+                "UNKNOWN_STABLE_ID",
+                "espn-market",
+                f"internalPlayerId={player_id}",
+                "market record cannot join to Player Truth and is excluded unless an explicit resolved missing-projection exception applies",
+            ))
+
+    for player_id in sorted(approved_missing_projection_ids - market_only_ids):
+        issues.append(Issue(
+            "BLOCKING",
+            "APPROVED_MISSING_PROJECTION_NOT_APPLICABLE",
+            "contract-set",
+            f"internalPlayerId={player_id}",
+            "approved missing-projection ID must exist as a resolved market-only record",
+        ))
+
+    for record in league_records:
+        if record.get("internalPlayerId") not in truth_by_id:
+            issues.append(Issue("WARNING", "UNKNOWN_STABLE_ID", "espn-league-value", f"internalPlayerId={record.get('internalPlayerId')}", "record is excluded because it cannot join by stable ID; name-only joins are forbidden"))
 
     if truth and league:
         position_groups: dict[str, list[dict[str, Any]]] = {position: [] for position in POSITIONS}
@@ -679,7 +772,7 @@ def cross_artifact_issues(
                 if taker is not None and taker not in opponent_ids:
                     issues.append(Issue("BLOCKING", "UNKNOWN_TAKER_TEAM", "opponent-intent", f"$.targetSurvival[{index}].{key}", f"unknown stable team ID {taker!r}"))
 
-    coverage = calculate_coverage(truth, market, league, unresolved)
+    coverage = calculate_coverage(truth, market, league, unresolved, approved_missing_projection_ids)
     return issues, unresolved, coverage
 
 
@@ -701,6 +794,7 @@ def validate_contract_set(
     allow_missing_espn_market: bool = False,
     allow_missing_opponent_intent: bool = False,
     approved_top160_ids: set[int] | None = None,
+    approved_missing_projection_ids: set[int] | None = None,
 ) -> dict[str, Any]:
     paths = {
         "player-truth": player_truth_path,
@@ -736,7 +830,8 @@ def validate_contract_set(
         artifacts[artifact] = value
         file_hashes[artifact] = digest
         issues.extend(artifact_issues)
-    cross_issues, unresolved, coverage = cross_artifact_issues(artifacts, approved_top160_ids or set())
+    approved_missing = approved_missing_projection_ids or set()
+    cross_issues, unresolved, coverage = cross_artifact_issues(artifacts, approved_top160_ids or set(), approved_missing)
     issues.extend(cross_issues)
     issues = sorted(issues, key=lambda item: ({"BLOCKING": 0, "WARNING": 1, "INFO": 2}.get(item.severity, 3), item.code, item.artifact, item.path, item.message))
     counts = count_issues(issues)
@@ -750,6 +845,7 @@ def validate_contract_set(
         "issueCounts": counts,
         "unresolved": unresolved,
         "coverage": coverage,
+        "approvedMissingProjectionIds": sorted(approved_missing),
     }
 
 
@@ -760,6 +856,7 @@ def public_validation_result(result: dict[str, Any]) -> dict[str, Any]:
         "issueCounts": result["issueCounts"],
         "issues": [issue.as_dict() for issue in result["issues"]],
         "coverage": result["coverage"],
+        "approvedMissingProjectionIds": result.get("approvedMissingProjectionIds", []),
         "inputHashes": {key: value for key, value in result["fileHashes"].items()},
     }
 
@@ -841,10 +938,24 @@ def assemble_runtime_bundle(result: dict[str, Any]) -> dict[str, Any]:
             "limitations": player["limitations"],
         })
     truth_ids = {player["internalPlayerId"] for player in truth["players"]}
+    approved_missing_ids = set(result.get("approvedMissingProjectionIds", []))
+    market_by_id = {record["internalPlayerId"]: record for record in market.get("records", [])} if market else {}
+    approved_exceptions = []
+    for player_id in sorted(approved_missing_ids):
+        record = market_by_id.get(player_id)
+        if not record:
+            continue
+        approved_exceptions.append({
+            "internalPlayerId": player_id,
+            "boardRank": record.get("draftCommandBoardRank", player_id),
+            "exceptionType": "resolved-identity-missing-projection",
+            "affectedArtifacts": ["player-truth", "espn-league-value"],
+            "reason": "Resolved ESPN identity has no approved 2026 component projection; market fields remain independent and no valuation is fabricated.",
+        })
     market_records = []
     if market:
         for record in sorted(market["records"], key=lambda item: item["internalPlayerId"]):
-            if record["internalPlayerId"] not in truth_ids:
+            if record["internalPlayerId"] not in truth_ids and record["internalPlayerId"] not in approved_missing_ids:
                 continue
             market_records.append({
                 "internalPlayerId": record["internalPlayerId"],
@@ -893,6 +1004,7 @@ def assemble_runtime_bundle(result: dict[str, Any]) -> dict[str, Any]:
             sanitized_opponents[team_id] = sanitized
         opponent_payload = {
             "modelArtifactVersion": opponent["modelArtifactVersion"],
+            "runtimeBridge": opponent.get("runtimeBridge", {"architecture": "static-initial-snapshot"}),
             "simulation": opponent["simulation"],
             "opponents": sanitized_opponents,
             "targetSurvival": target_survival,
@@ -939,6 +1051,7 @@ def assemble_runtime_bundle(result: dict[str, Any]) -> dict[str, Any]:
             "tonyFirstPick": config["draftSlot"],
             "keepers": config["keepers"],
         },
+        "approvedExceptions": approved_exceptions,
         "playerRecords": player_records,
         "marketRecords": market_records,
         "leagueValueRecords": league_records,
@@ -1041,6 +1154,11 @@ def validation_report_markdown(result: dict[str, Any], title: str = "Draft Runti
             lines.append(f"| {issue.severity} | `{issue.code}` | {issue.artifact} | `{issue.path}` | {message} |")
     else:
         lines.append("No findings.")
+    lines += ["", "## Approved missing-projection exceptions", ""]
+    if result.get("approvedMissingProjectionIds"):
+        lines.append(", ".join(f"`{player_id}`" for player_id in result["approvedMissingProjectionIds"]))
+    else:
+        lines.append("None.")
     lines += [
         "",
         "## Future real-artifact benchmark",
@@ -1062,7 +1180,12 @@ def validate_runtime_bundle(bundle: dict[str, Any], contracts_dir: Path) -> list
         issues.append(Issue("BLOCKING", "DUPLICATE_INTERNAL_PLAYER_ID", "draft-runtime-bundle", "$.marketRecords", "market IDs must be unique"))
     if len(league_ids) != len(set(league_ids)):
         issues.append(Issue("BLOCKING", "DUPLICATE_INTERNAL_PLAYER_ID", "draft-runtime-bundle", "$.leagueValueRecords", "League Value IDs must be unique"))
-    if set(market_ids) - set(player_ids) or set(league_ids) - set(player_ids):
+    approved_market_orphans = {
+        item.get("internalPlayerId")
+        for item in bundle.get("approvedExceptions", [])
+        if item.get("exceptionType") == "resolved-identity-missing-projection"
+    }
+    if (set(market_ids) - set(player_ids) - approved_market_orphans) or set(league_ids) - set(player_ids):
         issues.append(Issue("BLOCKING", "RUNTIME_ORPHAN_JOIN", "draft-runtime-bundle", "$", "runtime child records must join to playerRecords by stable ID"))
     if bundle.get("modelState") == "loading":
         issues.append(Issue("BLOCKING", "INDEFINITE_LOADING_STATE", "draft-runtime-bundle", "$.modelState", "runtime contract requires a definite ready, fallback, or rejected state"))

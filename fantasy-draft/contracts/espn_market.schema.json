@@ -79,6 +79,8 @@
       ],
       "properties": {
         "internalPlayerId": { "type": "integer", "minimum": 1 },
+        "draftCommandBoardRank": { "type": "integer", "minimum": 1 },
+        "position": { "enum": ["QB", "RB", "WR", "TE"] },
         "espnPlayerId": { "type": ["string", "null"], "minLength": 1 },
         "espnDefaultRank": { "$ref": "#/$defs/nullableRank" },
         "espnContinuousAdp": { "$ref": "#/$defs/nullableAdp" },

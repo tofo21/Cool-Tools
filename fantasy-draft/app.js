@@ -14,7 +14,7 @@
   const SYNC_SETTINGS_KEY = "draft-command-live-sync-v1";
   const SCHEMA_VERSION = 3;
   const AUDIT_SCHEMA_VERSION = "draft-command-audit-v2";
-  const APP_RELEASE = "F5D-2026.08.31-OI1-candidate";
+  const APP_RELEASE = "F5D-2026.09.01-final-integration-candidate";
   const MAX_AUDIT_RECORDS = 2500;
   const MAX_RECOVERY_SNAPSHOTS = 12;
   const MODEL_LEAGUE_PROFILE_ID = "espn-keeper-10-ppr-2flex-2026";
@@ -108,6 +108,14 @@
     leagueProfileId: MODEL_LEAGUE_PROFILE_ID,
     fallbackVersion: "fallback-2026.08.27",
   });
+
+  const RUNTIME = window.DraftRuntimeBundle?.createAdapter({ players: window.PLAYER_DATA }) || null;
+  if (RUNTIME && window.DRAFT_RUNTIME_BUNDLE) {
+    RUNTIME.load(window.DRAFT_RUNTIME_BUNDLE, { manifest: window.DRAFT_RUNTIME_MANIFEST || null });
+  }
+
+  function runtimeReady() { return Boolean(RUNTIME?.hasValidatedBase()); }
+  function modelHealth() { return RUNTIME?.health() || MODEL.health(); }
 
   const OPPONENT_INTENT = window.OpponentIntentModel?.createEngine({
     packageData: window.OPPONENT_INTENT_PACKAGE,
@@ -823,12 +831,18 @@
   }
 
   function fallbackPrice(player, platform = state.platform) { return player[platform] ?? player.market ?? player.adp; }
-  function price(player, platform = state.platform) { return MODEL.market(player, platform, () => fallbackPrice(player, platform)).price; }
+  function price(player, platform = state.platform) {
+    if (runtimeReady() && platform === "espn") return RUNTIME.market(player.id)?.defaultRank ?? null;
+    return MODEL.market(player, platform, () => fallbackPrice(player, platform)).price;
+  }
   function roomOrder(player, platform = state.platform) {
-    const value = Number(price(player, platform));
+    const raw = price(player, platform);
+    if (raw == null || raw === "") return Number.POSITIVE_INFINITY;
+    const value = Number(raw);
     return Number.isFinite(value) ? value : Number.POSITIVE_INFINITY;
   }
   function clamp(value, min, max) { return Math.max(min, Math.min(max, value)); }
+  function fixed(value, digits = 1) { return Number.isFinite(value) ? Number(value).toFixed(digits) : "—"; }
   function manager(team) { return MANAGERS[Number(team)]; }
 
   function teamRoster(team) {
@@ -880,22 +894,42 @@
   }
 
   function leagueBase(player) {
+    if (runtimeReady()) return RUNTIME.leagueValue(player.id)?.leagueValueScore ?? null;
     return MODEL.number(player, "leagueValue.score", () => fallbackLeagueBase(player));
   }
 
   function leagueScore(player) {
-    return leagueBase(player) + needBonus(player);
+    return leagueBase(player);
   }
 
   function fairPick(player) {
+    if (runtimeReady()) return RUNTIME.leagueValue(player.id)?.leagueValueRank ?? null;
     return MODEL.number(player, "leagueValue.fairPick", player.ecr);
   }
 
   function valueGap(player) {
-    return price(player) - fairPick(player);
+    const marketRank = price(player);
+    const valueRank = fairPick(player);
+    return Number.isFinite(marketRank) && Number.isFinite(valueRank) ? marketRank - valueRank : null;
   }
 
   function outcome(player) {
+    if (runtimeReady()) {
+      const record = RUNTIME.playerTruth(player.id);
+      const values = record?.outcome || {};
+      return {
+        ceilingProbability: values.ceilingProbability ?? null,
+        bustProbability: values.bustProbability ?? null,
+        eliteProbability: values.eliteProbability ?? null,
+        starterProbability: values.starterProbability ?? null,
+        p10: values.p10 ?? null,
+        p50: values.p50 ?? null,
+        p90: values.p90 ?? null,
+        projectedFullPprPoints: values.projectedFullPprPoints ?? null,
+        projectedPpg: values.projectedPpg ?? null,
+        expectedGames: values.expectedGames ?? null,
+      };
+    }
     const strength = clamp(1 - ((player.ecr || 200) - 1) / 200, 0, 1);
     return MODEL.outcome(player, {
       ceilingProbability: clamp(0.10 + strength * 0.21, 0.1, 0.31),
@@ -906,6 +940,7 @@
   }
 
   function confidence(player) {
+    if (runtimeReady()) return RUNTIME.leagueValue(player.id)?.confidence ?? RUNTIME.playerTruth(player.id)?.modelConfidence ?? null;
     return MODEL.number(player, "decision.confidence", 0.45);
   }
 
@@ -965,7 +1000,7 @@
     const recs = recommendations();
     const preferred = [recs.bestPickNow, recs.bestValue, recs.bestPlayer, recs.bestFit, recs.bestCeiling, recs.safestWait]
       .map((entry) => entry?.player).filter(Boolean);
-    const leaders = availablePlayers().slice().sort((a, b) => leagueScore(b) - leagueScore(a) || a.id - b.id);
+    const leaders = availablePlayers().filter((player) => Number.isFinite(leagueScore(player))).slice().sort((a, b) => leagueScore(b) - leagueScore(a) || a.id - b.id);
     const seen = new Set();
     return [...preferred, ...leaders].filter((player) => {
       if (seen.has(player.id)) return false;
@@ -975,7 +1010,7 @@
   }
 
   function opponentTierTargets() {
-    const leaders = availablePlayers().slice().sort((a, b) => leagueScore(b) - leagueScore(a) || a.id - b.id).slice(0, 5);
+    const leaders = availablePlayers().filter((player) => Number.isFinite(leagueScore(player))).slice().sort((a, b) => leagueScore(b) - leagueScore(a) || a.id - b.id).slice(0, 5);
     return { "Current League Value top five": leaders.map((player) => player.id) };
   }
 
@@ -1055,6 +1090,7 @@
   }
 
   function leagueRank(player) {
+    if (runtimeReady()) return RUNTIME.leagueValue(player.id)?.leagueValueRank ?? null;
     if (!renderCache.leagueRanks) {
       renderCache.leagueRanks = new Map(availablePlayers().slice().sort((a, b) => leagueScore(b) - leagueScore(a)).map((item, index) => [item.id, index + 1]));
     }
@@ -1066,6 +1102,25 @@
   }
 
   function survivalDetail(player, targetPick) {
+    if (runtimeReady()) {
+      const threat = threatFor(player);
+      if (!threat) return {
+        value: null,
+        source: opponentContext.status === "calculating" ? "opponent-intent-pending" : "opponent-intent-unavailable",
+        calibrated: false,
+        calibrationVersion: null,
+        qualification: opponentContext.status === "calculating" ? "pending" : "missing",
+        targetPick,
+      };
+      return {
+        value: threat.probabilitySurviving,
+        source: "dynamic-opponent-intent",
+        calibrated: false,
+        calibrationVersion: null,
+        qualification: threat.status === "CALIBRATED_BASELINE" ? "calibrated-baseline-advisory" : "contextual-unvalidated",
+        targetPick: opponentContext.window?.nextTony ?? targetPick,
+      };
+    }
     return MODEL.survivalDetail(player, state.platform, targetPick, () => {
       const sigma = clamp(3.2 + price(player) * 0.045, 3.5, 10.5);
       return clamp(1 / (1 + Math.exp((targetPick - price(player)) / sigma)), 0.01, 0.99);
@@ -1073,12 +1128,14 @@
   }
 
   function availabilitySignal(value) {
+    if (!Number.isFinite(value)) return "MISSING";
     if (value >= 0.68) return "HIGH";
     if (value >= 0.34) return "MEDIUM";
     return "LOW";
   }
 
   function availabilityDisplay(detail, { compact = false } = {}) {
+    if (!Number.isFinite(detail?.value)) return compact ? "—" : "Availability not modeled";
     if (detail.calibrated) return compact ? `${Math.round(detail.value * 100)}%` : `${Math.round(detail.value * 100)}% calibrated`;
     const signal = availabilitySignal(detail.value);
     if (detail.qualification === "heuristic") return compact ? `${signal} · UNCAL.` : `${signal} uncalibrated availability signal`;
@@ -1086,16 +1143,25 @@
   }
 
   function tierInfo(player) {
+    if (runtimeReady()) {
+      const rank = leagueRank(player);
+      if (!Number.isFinite(rank)) return { id: "LV-missing", label: "No validated tier", rank: null };
+      const tier = Math.max(1, Math.ceil(rank / 8));
+      return { id: `LV-${tier}`, label: `LV tier ${tier}`, rank: tier };
+    }
     const fallbackTier = Math.max(1, Math.ceil((leagueRank(player) || player.ecr || 1) / 8));
     return MODEL.tier(player, { id: `${player.pos}-${fallbackTier}`, label: `${player.pos} tier ${fallbackTier}`, rank: fallbackTier });
   }
 
   function samePositionNext(player) {
-    const same = availablePlayers().filter((item) => item.pos === player.pos && item.id !== player.id).sort((a, b) => leagueScore(b) - leagueScore(a));
+    const same = availablePlayers()
+      .filter((item) => item.pos === player.pos && item.id !== player.id && Number.isFinite(leagueScore(item)))
+      .sort((a, b) => leagueScore(b) - leagueScore(a));
     return same[0] || null;
   }
 
   function cliffDelta(player) {
+    if (!Number.isFinite(leagueScore(player))) return null;
     const next = samePositionNext(player);
     return next ? Math.max(0, leagueScore(player) - leagueScore(next)) : 12;
   }
@@ -1104,7 +1170,7 @@
     const target = nextTonyPick() || Math.min(currentPick(), TOTAL_PICKS);
     const onClock = currentPick() <= TOTAL_PICKS && pickOwner(currentPick()) === TONY_TEAM;
     const nextTurn = followingTonyPick(target) || TOTAL_PICKS;
-    return availablePlayers().map((player) => {
+    return availablePlayers().filter((player) => Number.isFinite(leagueBase(player))).map((player) => {
       const arrive = onClock ? 1 : survival(player, target);
       const surviveNext = survival(player, nextTurn);
       const gap = valueGap(player);
@@ -1112,11 +1178,17 @@
       const baseScore = leagueBase(player);
       const playerOutcome = outcome(player);
       const cliff = cliffDelta(player);
-      const fitImpact = needBonus(player) + MODEL.number(player, "leagueValue.rosterFitBase", 0);
-      const championshipEquity = MODEL.number(player, "leagueValue.championshipEquityBase", 0);
-      const vorpLost = MODEL.number(player, "decision.expectedVorpLostByWaiting", () => cliff * (1 - surviveNext));
-      const projected = score * (0.58 + arrive * 0.42);
-      const pickNow = score + gap * 0.72 + fitImpact * 0.9 + (1 - surviveNext) * 9 + vorpLost * 1.1 + championshipEquity * 100 - playerOutcome.bustProbability * 3;
+      const fitImpact = needBonus(player) + (runtimeReady() ? 0 : MODEL.number(player, "leagueValue.rosterFitBase", 0));
+      const championshipEquity = runtimeReady() ? 0 : MODEL.number(player, "leagueValue.championshipEquityBase", 0);
+      const vorpLost = runtimeReady() || !Number.isFinite(surviveNext) ? 0 : MODEL.number(player, "decision.expectedVorpLostByWaiting", () => cliff * (1 - surviveNext));
+      const projected = Number.isFinite(arrive) ? score * (0.58 + arrive * 0.42) : score;
+      const pickNow = score
+        + (Number.isFinite(gap) ? gap * 0.72 : 0)
+        + fitImpact * 0.9
+        + (Number.isFinite(surviveNext) ? (1 - surviveNext) * 9 : 0)
+        + vorpLost * 1.1
+        + championshipEquity * 100
+        - (Number.isFinite(playerOutcome.bustProbability) ? playerOutcome.bustProbability * 3 : 0);
       return {
         player,
         arrive,
@@ -1140,16 +1212,23 @@
     const pool = recommendationPool();
     const by = (scorer) => pool.slice().sort((a, b) => scorer(b) - scorer(a))[0];
     const bestPlayer = by((entry) => entry.baseScore);
-    const bestValue = by((entry) => entry.gap * 1.8 + entry.score * .12 + entry.arrive * 8);
-    const bestFit = by((entry) => (entry.score + entry.fitImpact * 1.8 + entry.cliff) * (0.65 + entry.arrive * .35));
-    const bestCeiling = by((entry) => entry.outcome.ceilingProbability * 60 + entry.outcome.eliteProbability * 35 + entry.score * .2 - entry.outcome.bustProbability * 12);
-    const safestWait = by((entry) => entry.surviveNext * 52 + entry.score * .2 - entry.vorpLost * 2.2);
+    const bestValue = by((entry) => (Number.isFinite(entry.gap) ? entry.gap * 1.8 : 0) + entry.score * .12 + (Number.isFinite(entry.arrive) ? entry.arrive * 8 : 0));
+    const bestFit = by((entry) => (entry.score + entry.fitImpact * 1.8 + entry.cliff) * (Number.isFinite(entry.arrive) ? 0.65 + entry.arrive * .35 : 1));
+    const bestCeiling = by((entry) => entry.score * .2
+      + (Number.isFinite(entry.outcome.ceilingProbability) ? entry.outcome.ceilingProbability * 60 : 0)
+      + (Number.isFinite(entry.outcome.eliteProbability) ? entry.outcome.eliteProbability * 35 : 0)
+      - (Number.isFinite(entry.outcome.bustProbability) ? entry.outcome.bustProbability * 12 : 0));
+    const safestWait = by((entry) => entry.score * .2 + (Number.isFinite(entry.surviveNext) ? entry.surviveNext * 52 : 0) - entry.vorpLost * 2.2);
     const projectedTarget = by((entry) => entry.projected);
     const bestPickNow = by((entry) => entry.pickNow);
     return { bestPlayer, bestValue, bestFit, bestCeiling, safestWait, projectedTarget, bestPickNow };
   }
 
   function verdict(player) {
+    if (runtimeReady()) {
+      const label = Number.isFinite(leagueBase(player)) ? "ADVISORY" : "NO LEAGUE VALUE";
+      return { label, cls: label.toLowerCase().replace(/\s+/g, "-") };
+    }
     const target = nextTonyPick() || Math.min(currentPick(), TOTAL_PICKS);
     const after = followingTonyPick(target) || TOTAL_PICKS;
     const survive = survival(player, after);
@@ -1166,7 +1245,7 @@
   }
 
   function modelAuditSnapshot() {
-    const health = MODEL.health();
+    const health = modelHealth();
     return {
       packageId: health.packageId,
       modelVersion: health.modelVersion,
@@ -1179,6 +1258,7 @@
       decisionPolicyApproved: health.decisionPolicyApproved,
       decisionPolicyVersion: health.decisionPolicyVersion,
       decisionPolicyReason: health.decisionPolicyReason,
+      runtime: RUNTIME?.auditMetadata() || null,
     };
   }
 
@@ -1239,13 +1319,13 @@
       name: entry.player.name,
       position: entry.player.pos,
       team: entry.player.team,
-      leagueScore: Number(entry.score.toFixed(4)),
-      leagueBase: Number(entry.baseScore.toFixed(4)),
+      leagueScore: Number.isFinite(entry.score) ? Number(entry.score.toFixed(4)) : null,
+      leagueBase: Number.isFinite(entry.baseScore) ? Number(entry.baseScore.toFixed(4)) : null,
       roomPrice: price(entry.player),
       fairPick: fairPick(entry.player),
-      valueGap: Number(entry.gap.toFixed(4)),
-      fitImpact: Number(entry.fitImpact.toFixed(4)),
-      cliffDelta: Number(entry.cliff.toFixed(4)),
+      valueGap: Number.isFinite(entry.gap) ? Number(entry.gap.toFixed(4)) : null,
+      fitImpact: Number.isFinite(entry.fitImpact) ? Number(entry.fitImpact.toFixed(4)) : null,
+      cliffDelta: Number.isFinite(entry.cliff) ? Number(entry.cliff.toFixed(4)) : null,
       confidence: entry.confidence,
       outcome: { ...entry.outcome },
       nextPickAvailability: {
@@ -1271,8 +1351,8 @@
         decisionPick: pickLabel(targetPick),
         advisoryState: {
           label: call?.label || "ADVISORY",
-          calibrated: MODEL.health().decisionPolicyApproved,
-          reason: MODEL.health().decisionPolicyReason,
+          calibrated: modelHealth().decisionPolicyApproved,
+          reason: modelHealth().decisionPolicyReason,
         },
         components: {
           bestPlayer: recommendationComponent(recs.bestPlayer, targetPick),
@@ -1375,9 +1455,10 @@
   function recCard(entry, label, detail) {
     const { player, arrive, gap } = entry;
     const tier = tierInfo(player);
+    const roomPrice = price(player);
     return `<div class="rec-label"><span>${label}</span><span class="pos-pill pos-${player.pos}">${player.pos}</span></div>
       <div class="rec-name">${player.name}</div>
-      <div class="rec-meta">${player.team} · ${tier.label} · ${state.platform.toUpperCase()} ${price(player)}</div>
+      <div class="rec-meta">${player.team} · ${tier.label} · ${state.platform.toUpperCase()} ${roomPrice ?? "—"}</div>
       <p class="rec-reason">${detail(player, arrive, gap)}</p>`;
   }
 
@@ -1396,25 +1477,28 @@
     const target = nextTonyPick() || Math.min(currentPick(), TOTAL_PICKS);
     const nextTurn = followingTonyPick(target);
     const after = nextTurn || TOTAL_PICKS;
-    els.bestOverallCard.innerHTML = recCard(primary, onClock ? "Best pick now" : "Projected target", (p) => `${availabilityDisplay(survivalDetail(p, target))} to Tony's next turn · league value ${leagueScore(p).toFixed(1)}.`);
-    els.bestValueCard.innerHTML = recCard(recs.bestValue, "Best value", (p, arrive, gap) => `${gap >= 0 ? "+" : ""}${gap.toFixed(1)} slots versus fair value · ${availabilityDisplay(survivalDetail(p, target))}.`);
-    els.bestFitCard.innerHTML = recCard(recs.bestFit, "Best fit", (p) => `${needBonus(p) > 2 ? "Fills a priority roster need" : "Supports the 2-FLEX build"} · ${cliffDelta(p).toFixed(1)}-point score-drop watch.`);
+    els.bestOverallCard.innerHTML = recCard(primary, onClock ? "Best pick now" : "Projected target", (p) => `${availabilityDisplay(survivalDetail(p, target))} to Tony's next modeled window · validated League Value ${fixed(leagueScore(p))}.`);
+    els.bestValueCard.innerHTML = recCard(recs.bestValue, "Best value", (p, arrive, gap) => `${Number.isFinite(gap) ? `${gap >= 0 ? "+" : ""}${fixed(gap)} slots versus League Value rank` : "ESPN or League Value rank unavailable"} · ${availabilityDisplay(survivalDetail(p, target))}.`);
+    els.bestFitCard.innerHTML = recCard(recs.bestFit, "Best fit", (p) => `${needBonus(p) > 2 ? "Fills a priority roster need" : "Supports the 2-FLEX build"} · ${fixed(cliffDelta(p))}-point immutable-value drop watch.`);
     els.decisionLenses.innerHTML = [
       { label: "Best player", entry: recs.bestPlayer, metric: `LV ${recs.bestPlayer.baseScore.toFixed(1)}` },
-      { label: "Best ceiling", entry: recs.bestCeiling, metric: `${Math.round(recs.bestCeiling.outcome.ceilingProbability * 100)}% upside` },
+      { label: "Best ceiling", entry: recs.bestCeiling, metric: Number.isFinite(recs.bestCeiling.outcome.ceilingProbability) ? `${Math.round(recs.bestCeiling.outcome.ceilingProbability * 100)}% upside` : "Upside not modeled" },
       { label: "Safest wait", entry: recs.safestWait, metric: availabilityDisplay(survivalDetail(recs.safestWait.player, after), { compact: true }) },
     ].map(({ label, entry, metric }) => `<div class="lens-card"><span>${label}</span><strong>${entry.player.name}</strong><small>${metric}</small></div>`).join("");
     const v = verdict(primary.player);
     const availability = survivalDetail(primary.player, after);
-    const health = MODEL.health();
-    const reason = MODEL.list(primary.player, "decision.reasons")[0];
+    const health = modelHealth();
+    const reason = runtimeReady() ? null : MODEL.list(primary.player, "decision.reasons")[0];
+    const advisoryCopy = runtimeReady()
+      ? "Validated base League Value with live roster fit kept separate. Opponent probabilities remain advisory; TAKE, WAIT, and POSITION CLIFF calls are disabled."
+      : "Directional fallback ranking only. TAKE, WAIT, and POSITION CLIFF calls are disabled until a validated runtime package is available.";
     els.decisionStrip.classList.toggle("uncalibrated", !health.decisionPolicyApproved);
     els.decisionStrip.innerHTML = health.decisionPolicyApproved
       ? `<div class="decision-call">${v.label}</div>
         <div class="decision-copy"><strong>${primary.player.name} at ${pickLabel(target)}</strong><span>${reason || (v.label === "TAKE" || v.label === "POSITION CLIFF" ? "The next viable window is unlikely to stay open." : "The calibrated policy sees enough depth to preserve optionality.")} ${samePositionNext(primary.player)?.name || "No comparable fallback"} is the next ${primary.player.pos}.</span></div>
         <div class="decision-metric"><strong>${availabilityDisplay(availability, { compact: true })}</strong><small>survival to ${nextTurn ? pickLabel(after) : "end"}</small></div>`
       : `<div class="decision-call">ADVISORY</div>
-        <div class="decision-copy"><strong>UNCALIBRATED · ${primary.player.name} at ${pickLabel(target)}</strong><span>Directional ranking only. TAKE, WAIT, and POSITION CLIFF calls are disabled until a fresh production package has explicit calibrated policy approval.</span></div>
+        <div class="decision-copy"><strong>${runtimeReady() ? "VALIDATED BASE" : "UNCALIBRATED FALLBACK"} · ${primary.player.name} at ${pickLabel(target)}</strong><span>${advisoryCopy}</span></div>
         <div class="decision-metric"><strong>${availabilityDisplay(availability, { compact: true })}</strong><small>availability signal to ${nextTurn ? pickLabel(after) : "end"}</small></div>`;
   }
 
@@ -1433,6 +1517,7 @@
   });
 
   function espnAdp(player) {
+    if (runtimeReady()) return RUNTIME.market(player.id)?.continuousAdp ?? null;
     return OPPONENT_INTENT?.market(player.id)?.espnAdp ?? null;
   }
 
@@ -1465,7 +1550,8 @@
       .filter((player) => state.position === "ALL" || player.pos === state.position)
       .filter((player) => !query || `${player.name} ${player.team}`.toLowerCase().includes(query))
       .sort((a, b) => compareMetrics(boardMetric(a, sort.key, platform, after), boardMetric(b, sort.key, platform, after), sort.direction)
-        || roomOrder(a, platform) - roomOrder(b, platform) || leagueScore(b) - leagueScore(a) || a.id - b.id);
+        || compareMetrics(price(a, platform), price(b, platform), "asc")
+        || compareMetrics(leagueScore(a), leagueScore(b), "desc") || a.id - b.id);
   }
 
   function sortLabel(key, platformName) {
@@ -1515,7 +1601,7 @@
     const nextTurn = followingTonyPick(target);
     const after = nextTurn || TOTAL_PICKS;
     const platformName = state.platform === "espn" ? "ESPN" : "Sleeper";
-    const health = MODEL.health();
+    const health = modelHealth();
     els.boardCount.textContent = `${rows.length} available`;
     els.platformHeader.textContent = `${platformName} price`;
     els.roomRankNote.textContent = `${platformName} controls the room-price column; League Value remains independent.`;
@@ -1530,15 +1616,23 @@
       const call = verdict(player);
       const tier = tierInfo(player);
       const signal = availabilitySignal(availability.value);
-      const barWidth = availability.calibrated ? Math.round(availability.value * 100) : signal === "HIGH" ? 100 : signal === "MEDIUM" ? 66 : 33;
+      const barWidth = !Number.isFinite(availability.value) ? 0 : availability.calibrated ? Math.round(availability.value * 100) : signal === "HIGH" ? 100 : signal === "MEDIUM" ? 66 : 33;
       const threat = threatFor(player);
       const taken = threat ? `${Math.round(threat.probabilityTakenBeforeTony * 100)}%` : opponentContext.status === "calculating" ? "…" : "—";
       const taker = threat?.mostLikelyTaker;
+      const score = leagueScore(player);
+      const roomPrice = price(player);
+      const leagueValueCell = Number.isFinite(score)
+        ? `<span class="metric-main">#${rank}</span><span class="metric-sub">${tier.label} · score ${fixed(score)}</span>`
+        : `<span class="metric-main">—</span><span class="metric-sub">No validated Player Truth / League Value</span>`;
+      const marketCell = Number.isFinite(roomPrice)
+        ? `<span class="metric-main ${Number.isFinite(gap) && gap >= 4 ? "value-positive" : Number.isFinite(gap) && gap <= -4 ? "value-negative" : ""}">#${roomPrice}</span><span class="metric-sub">${Number.isFinite(gap) ? `${gap >= 0 ? "+" : ""}${fixed(gap)} vs LV rank` : "League Value rank unavailable"}</span>`
+        : `<span class="metric-main">—</span><span class="metric-sub">ESPN market unavailable</span>`;
       return `<tr data-player-id="${player.id}">
         <td><div class="player-cell"><span class="rank-num">${index + 1}</span><div><span class="player-name">${player.name}</span><span class="player-meta">${player.team} · BYE ${player.bye}</span></div></div></td>
         <td><span class="pos-pill pos-${player.pos}">${player.pos}</span></td>
-        <td><span class="metric-main">#${rank}</span><span class="metric-sub">${tier.label} · score ${leagueScore(player).toFixed(1)}</span></td>
-        <td><span class="metric-main ${gap >= 4 ? "value-positive" : gap <= -4 ? "value-negative" : ""}">#${price(player)}</span><span class="metric-sub">${gap >= 0 ? "+" : ""}${gap.toFixed(1)} vs fair pick</span></td>
+        <td>${leagueValueCell}</td>
+        <td>${marketCell}</td>
         <td><span class="metric-main">${espnAdp(player) == null ? "—" : espnAdp(player).toFixed(1)}</span><span class="metric-sub">separate ESPN signal</span></td>
         <td><div class="survival"><div class="survival-head"><span>${nextTurn ? pickLabel(after) : "END"}</span><span>${availabilityDisplay(availability, { compact: true })}</span></div><div class="survival-bar ${availability.calibrated ? "" : "uncalibrated"}"><span style="width:${barWidth}%"></span></div></div></td>
         <td><span class="metric-main">${taken}</span><span class="metric-sub">${opponentContext.window?.nextTony ? `before ${pickLabel(opponentContext.window.nextTony)}` : "window complete"}</span></td>
@@ -1614,8 +1708,8 @@
 
   function renderCliffs() {
     const positions = ["RB", "WR", "TE", "QB"];
-    const items = positions.map((pos) => availablePlayers().filter((p) => p.pos === pos).sort((a, b) => leagueScore(b) - leagueScore(a))[0]).filter(Boolean);
-    const approved = MODEL.health().decisionPolicyApproved;
+    const items = positions.map((pos) => availablePlayers().filter((p) => p.pos === pos && Number.isFinite(leagueScore(p))).sort((a, b) => leagueScore(b) - leagueScore(a))[0]).filter(Boolean);
+    const approved = modelHealth().decisionPolicyApproved;
     els.cliffPanel.innerHTML = `<p class="eyebrow">Scarcity monitor</p><h2>Position cliffs</h2>${approved ? "" : '<p class="cliff-advisory">ADVISORY · score gaps only</p>'}${items.map((player) => {
       const next = samePositionNext(player);
       const delta = cliffDelta(player);
@@ -1744,26 +1838,24 @@
   }
 
   function renderModelHealth() {
-    const health = MODEL.health();
+    const health = modelHealth();
     const percent = Math.round(health.coverage * 100);
     els.modelStatusBadge.textContent = health.label;
     els.modelStatusBadge.className = `model-badge model-${health.mode}`;
     els.modelVersion.textContent = health.modelVersion;
     els.modelFreshness.textContent = freshnessLabel(health.effectiveAt);
     els.modelCoverage.textContent = `${percent}%`;
-    els.modelStatusCopy.textContent = health.mode === "research"
-      ? `${health.coveredPlayers} of ${health.totalPlayers} board players use the ${health.status} research package; ${health.decisionPolicyApproved ? "calibrated decision policy is approved" : "decision calls remain ADVISORY / UNCALIBRATED"}.`
+    els.modelStatusCopy.textContent = runtimeReady()
+      ? `${health.coveredPlayers} of ${health.totalPlayers} board players have validated Player Truth and immutable League Value; decision calls remain advisory.`
       : health.stale
         ? "The loaded research package has expired, so recommendations reverted to the provisional fallback."
-        : health.valid
-          ? "ADVISORY / UNCALIBRATED. Best-player and roster lenses remain available; calibrated TAKE/WAIT and POSITION CLIFF calls are disabled."
-          : `Research package rejected safely: ${health.errors[0] || "incompatible package"}`;
+        : `ADVISORY / UNCALIBRATED · ${health.modelState === "rejected" ? "Runtime rejected safely" : "Provisional fallback active"}: ${health.errors?.[0] || "validated runtime unavailable"}`;
     const roomSnapshot = window.PLAYER_DATA_META?.displayDate || "current snapshot";
     els.snapshotNote.textContent = `${health.modelVersion} · room board ${roomSnapshot}`;
-    const modelNote = health.mode === "research"
-      ? `<strong>Model:</strong> ${health.modelVersion} · ${percent}% player coverage · ${health.sourceCount} registered source layers. Missing player fields use the provisional fallback and are never imputed silently.`
-      : `<strong>Model:</strong> Provisional fallback active. The versioned research adapter is ready, but the production outcome, league-value and calibrated survival package has not been loaded yet.`;
-    els.modelSourceNote.innerHTML = `${modelNote}<br><strong>Decision safety:</strong> ${health.decisionPolicyApproved ? `Calibrated policy ${health.decisionPolicyVersion} is approved.` : "ADVISORY / UNCALIBRATED. Fallback logistic outputs are shown only as qualitative availability signals; TAKE/WAIT and POSITION CLIFF calls are suppressed."}<br><strong>Draft-room order:</strong> ESPN and Sleeper PPR defaults from ${window.PLAYER_DATA_META?.source || "the platform source layer"}, ${roomSnapshot}. The selected platform controls the player-list order; league value and recommendations remain independent.`;
+    const modelNote = runtimeReady()
+      ? `<strong>Model:</strong> ${health.modelVersion} · ${percent}% Player Truth / League Value coverage · ${health.sourceCount} signed source artifacts. Missing fields remain missing and are never imputed.`
+      : `<strong>Model:</strong> ${health.modelState === "rejected" ? "Validated runtime rejected" : "Provisional fallback active"}. Manual drafting and synchronization remain available.`;
+    els.modelSourceNote.innerHTML = `${modelNote}<br><strong>Projection semantics:</strong> Step 14 P50 is the frozen consensus baseline. Step 13B signals did not numerically adjust it; unavailable P10/P90 and event probabilities remain blank.<br><strong>Layer separation:</strong> Immutable League Value, live roster fit, frozen ESPN rank/ADP, and dynamic Opponent Intent remain separate. Opponent outputs are advisory; TAKE/WAIT and POSITION CLIFF calls are suppressed.<br><strong>Draft-room order:</strong> ESPN and Sleeper PPR defaults from ${window.PLAYER_DATA_META?.source || "the platform source layer"}, ${roomSnapshot}. The selected platform controls the player-list order; League Value remains independent.`;
   }
 
   function render() {
@@ -2136,7 +2228,7 @@
 
   function hardReset({ confirmed = false } = {}) {
     if (!confirmed) {
-      const message = "This clears the active draft, ESPN synchronization history, manual picks, active keeper seeds and audit events. League settings, managers, rankings, model data and the stored keeper template remain. Continue?";
+      const message = "WARNING: Do not Hard Reset after the real draft begins unless you intentionally want to restart the entire draft record. This clears the active draft, ESPN synchronization history, manual picks, active keeper seeds and audit events. League settings, managers, rankings, model data and the stored keeper template remain. Continue?";
       if (!window.confirm(message)) return false;
     }
     state.sourceIngestionPaused = true;
@@ -2274,7 +2366,14 @@
     configuredKeepers: () => KEEPERS.map((keeper) => ({ ...keeper })),
     recordManualPick: draftPlayer,
     auditExport: () => structuredClone(auditExportPayload()),
-    modelHealth: () => MODEL.health(),
+    modelHealth: () => modelHealth(),
+    runtimeAudit: () => structuredClone(RUNTIME?.auditMetadata() || null),
+    playerIntelligence: (playerId) => ({
+      playerTruth: structuredClone(RUNTIME?.playerTruth(playerId) || null),
+      market: structuredClone(RUNTIME?.market(playerId) || null),
+      leagueValue: structuredClone(RUNTIME?.leagueValue(playerId) || null),
+      approvedException: structuredClone(RUNTIME?.approvedException(playerId) || null),
+    }),
     opponentModelHealth: () => OPPONENT_INTENT?.health() || { mode: "fallback", valid: false, errors: ["runtime missing"] },
     opponentBoard: () => structuredClone(opponentContext.board || OPPONENT_INTENT?.fullBoard({ currentOverallPick: currentPick(), nextTonyPick: nextTonyPick(currentPick()), liveState: opponentLiveState() }) || { opponents: [] }),
     opponentWindow: (options = {}) => {
@@ -2307,7 +2406,7 @@
     decisionBoard: (sort = state.boardSort, platform = state.platform) => boardRows(platform, sort).map((player) => {
       const threat = threatFor(player);
       return {
-        id: player.id, name: player.name, position: player.pos, leagueValue: leagueScore(player), roomRank: roomOrder(player, platform),
+        id: player.id, name: player.name, position: player.pos, leagueValue: leagueScore(player), roomRank: price(player, platform),
         espnAdp: espnAdp(player), probabilityTakenBeforeTony: threat?.probabilityTakenBeforeTony ?? null,
         opponentThreat: threat?.mostLikelyTaker?.probability ?? null,
       };
@@ -2316,14 +2415,19 @@
       id: player.id,
       name: player.name,
       pos: player.pos,
-      roomRank: roomOrder(player, platform),
+      roomRank: price(player, platform),
       leagueRank: leagueRank(player),
       leagueScore: leagueScore(player),
     })),
   });
 
   els.rosterManager.innerHTML = MANAGERS.slice(1).map((item) => `<option value="${item.id}">${item.id}. ${item.name}</option>`).join("");
+  RUNTIME?.onChange(() => {
+    renderCache = {};
+    render();
+  });
   loadState();
   renderKeepers();
   render();
+  if (RUNTIME && !window.DRAFT_RUNTIME_BUNDLE) RUNTIME.start();
 })();

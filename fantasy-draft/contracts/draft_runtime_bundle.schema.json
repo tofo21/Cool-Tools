@@ -17,6 +17,7 @@
     "coverage",
     "confidencePolicy",
     "leagueConfiguration",
+    "approvedExceptions",
     "playerRecords",
     "marketRecords",
     "leagueValueRecords",
@@ -70,6 +71,7 @@
       "additionalProperties": false
     },
     "leagueConfiguration": { "$ref": "#/$defs/leagueConfiguration" },
+    "approvedExceptions": { "type": "array", "items": { "$ref": "#/$defs/approvedException" }, "uniqueItems": true },
     "playerRecords": { "type": "array", "items": { "$ref": "#/$defs/playerRecord" } },
     "marketRecords": { "type": "array", "items": { "$ref": "#/$defs/marketRecord" } },
     "leagueValueRecords": { "type": "array", "items": { "$ref": "#/$defs/leagueValueRecord" } },
@@ -120,6 +122,23 @@
     "probability": { "type": "number", "minimum": 0, "maximum": 1 },
     "nullableProbability": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
     "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "approvedException": {
+      "type": "object",
+      "required": ["internalPlayerId", "boardRank", "exceptionType", "affectedArtifacts", "reason"],
+      "properties": {
+        "internalPlayerId": { "type": "integer", "minimum": 1 },
+        "boardRank": { "type": "integer", "minimum": 1 },
+        "exceptionType": { "const": "resolved-identity-missing-projection" },
+        "affectedArtifacts": {
+          "type": "array",
+          "items": { "enum": ["player-truth", "espn-league-value"] },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "reason": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
     "coverageSlice": {
       "type": "object",
       "required": ["eligible", "playerTruth", "marketRank", "marketAdp", "leagueValue"],
@@ -311,9 +330,10 @@
     },
     "opponentIntent": {
       "type": "object",
-      "required": ["modelArtifactVersion", "simulation", "opponents", "targetSurvival", "tierSurvival"],
+      "required": ["modelArtifactVersion", "runtimeBridge", "simulation", "opponents", "targetSurvival", "tierSurvival"],
       "properties": {
         "modelArtifactVersion": { "type": "string", "minLength": 1 },
+        "runtimeBridge": { "type": "object", "additionalProperties": true },
         "simulation": { "type": "object", "additionalProperties": true },
         "opponents": { "type": "object", "additionalProperties": true },
         "targetSurvival": { "type": "array", "items": { "type": "object", "additionalProperties": true } },

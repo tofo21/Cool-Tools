@@ -1,0 +1,171 @@
+{
+  "approvedExceptions": [
+    {
+      "affectedArtifacts": [
+        "player-truth",
+        "espn-league-value"
+      ],
+      "boardRank": 143,
+      "exceptionType": "resolved-identity-missing-projection",
+      "internalPlayerId": 143,
+      "reason": "Resolved ESPN identity has no approved 2026 component projection; market fields remain independent and no valuation is fabricated."
+    }
+  ],
+  "artifactType": "draft-runtime-manifest",
+  "bundleVersion": "runtime-4d0a973853ba4bd7",
+  "canonicalization": "draft-command-canonical-json-v1",
+  "coverage": {
+    "byBoardRange": {
+      "1-50": {
+        "eligible": 50,
+        "leagueValue": 50,
+        "marketAdp": 50,
+        "marketRank": 50,
+        "playerTruth": 50
+      },
+      "101-160": {
+        "eligible": 60,
+        "leagueValue": 59,
+        "marketAdp": 60,
+        "marketRank": 60,
+        "playerTruth": 59
+      },
+      "161+": {
+        "eligible": 40,
+        "leagueValue": 40,
+        "marketAdp": 39,
+        "marketRank": 39,
+        "playerTruth": 40
+      },
+      "51-100": {
+        "eligible": 50,
+        "leagueValue": 50,
+        "marketAdp": 50,
+        "marketRank": 50,
+        "playerTruth": 50
+      }
+    },
+    "byPosition": {
+      "QB": {
+        "eligible": 27,
+        "leagueValue": 27,
+        "marketAdp": 27,
+        "marketRank": 27,
+        "playerTruth": 27
+      },
+      "RB": {
+        "eligible": 65,
+        "leagueValue": 65,
+        "marketAdp": 64,
+        "marketRank": 64,
+        "playerTruth": 65
+      },
+      "TE": {
+        "eligible": 26,
+        "leagueValue": 26,
+        "marketAdp": 26,
+        "marketRank": 26,
+        "playerTruth": 26
+      },
+      "WR": {
+        "eligible": 82,
+        "leagueValue": 81,
+        "marketAdp": 82,
+        "marketRank": 82,
+        "playerTruth": 81
+      }
+    },
+    "keeperIdentities": {
+      "expected": 10,
+      "resolved": 10
+    },
+    "overall": {
+      "eligible": 200,
+      "leagueValue": 199,
+      "marketAdp": 199,
+      "marketRank": 199,
+      "playerTruth": 199
+    },
+    "unresolvedIdentities": [
+      {
+        "artifactType": "player-truth",
+        "blocking": false,
+        "boardRank": 143,
+        "internalPlayerId": 143,
+        "reason": "resolved market identity has no approved Player Truth projection or League Value record"
+      },
+      {
+        "artifactType": "player-truth",
+        "blocking": false,
+        "boardRank": 190,
+        "internalPlayerId": 190,
+        "reason": "Player Truth identity remains unresolved"
+      }
+    ]
+  },
+  "determinism": {
+    "bundleVersionSource": "canonical source file hashes and league ID",
+    "generationTimeSource": "maximum source artifact generatedAt",
+    "identicalInputsProduceIdenticalBytes": true
+  },
+  "gates": {
+    "blocking": 0,
+    "informational": 0,
+    "result": "pass",
+    "warnings": 2
+  },
+  "generatedAt": "2026-09-01T02:18:40Z",
+  "inputs": [
+    {
+      "artifactId": "player-truth-step14-2026",
+      "artifactType": "player-truth",
+      "artifactVersion": "step14-2026.1",
+      "fileSha256": "f6488e648af2549f1b7fa50eb485aa8f29784280144796e5e6d581a13b477bd3",
+      "payloadSha256": "be052a59ad9a0643246b2ed113e2c728fc5abfafb97e4278c53b8ea621f89694",
+      "schemaVersion": "1.0.0",
+      "status": "validated"
+    },
+    {
+      "artifactId": "espn-market-contract-espn_2026_frozen_20260901T003012Z_3379127ab1c0",
+      "artifactType": "espn-market",
+      "artifactVersion": "espn_2026_frozen_20260901T003012Z_3379127ab1c0",
+      "fileSha256": "a6037c4b575f9c9a9381812d8d27ad0c741c36caefa899bdf5ddea683f4bc87a",
+      "payloadSha256": "6be8b17b90f9aebdaa4c0d9a4a1442577b127a54d45d97ca5229f49d3acf50b1",
+      "schemaVersion": "1.0.0",
+      "status": "frozen"
+    },
+    {
+      "artifactId": "espn-league-value-step15-2026",
+      "artifactType": "espn-league-value",
+      "artifactVersion": "step15-2026.1",
+      "fileSha256": "d3acb8a3e681df4835e512cb6a3b694c7d470787a76be072166876db489b2272",
+      "payloadSha256": "5957c33276b19d5d73305e1be50f9649c97be55c9bc55932ed9bafc39fd5f785",
+      "schemaVersion": "1.0.0",
+      "status": "validated"
+    },
+    {
+      "artifactId": "opponent-intent-streamlined-2026-initial-state",
+      "artifactType": "opponent-intent",
+      "artifactVersion": "opponent-intent-streamlined-2026.1",
+      "fileSha256": "c839913ddd199d87b6260eca543af60d934641243d2e7409fb26263d0fad72ed",
+      "payloadSha256": "7ead6636829585a920ae758b2ecd53237b5ef67a048ab95d33ee2635e1e012c1",
+      "schemaVersion": "1.0.0",
+      "status": "validated"
+    }
+  ],
+  "outputs": {
+    "bundle": {
+      "bytes": 658812,
+      "path": "draft_runtime_bundle.json",
+      "sha256": "eaa86a28d978eccf0a161e5112f39a0e47c7d585b12bc844064ceaa33fe8fbe1"
+    },
+    "validationReport": {
+      "bytes": 2316,
+      "path": "draft_runtime_bundle_validation.md",
+      "sha256": "685ee140d318faf54202fd3ce2fc8f7d398491c53c48c0e7a79fdb981a4dc649"
+    }
+  },
+  "promotionEligible": true,
+  "schemaVersion": "1.0.0",
+  "status": "candidate"
+}

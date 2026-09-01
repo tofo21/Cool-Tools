@@ -21,6 +21,12 @@ const fixtures = Object.freeze({
   manifest: path.join(draftRoot, "data", "candidate", "runtime-contract", "synthetic_runtime_bundle_manifest.json"),
   expectedRuntimeBundle: path.join(fixtureRoot, "expected_runtime_bundle.json"),
 });
+const realArtifacts = Object.freeze({
+  playerTruth: path.join(draftRoot, "data", "candidate", "player-truth", "player_truth_step14.json"),
+  espnMarket: path.join(draftRoot, "data", "candidate", "espn-market", "espn_market_frozen.json"),
+  leagueValue: path.join(draftRoot, "data", "candidate", "league-value", "espn_league_value_step15.json"),
+  opponentIntent: path.join(draftRoot, "data", "candidate", "opponent-intent", "opponent_intent_streamlined.json"),
+});
 
 function canonical(value) {
   if (Array.isArray(value)) return value.map(canonical);
@@ -60,6 +66,24 @@ function validate(overrides = {}, extra = []) {
     ...extra,
   ];
   const result = spawnSync("python3", args, { encoding: "utf8" });
+  let payload = null;
+  try { payload = JSON.parse(result.stdout); } catch {}
+  return { ...result, payload };
+}
+
+function validateReal(overrides = {}, extra = []) {
+  const selected = { ...realArtifacts, ...overrides };
+  const result = spawnSync("python3", [
+    validator,
+    "--player-truth", selected.playerTruth,
+    "--espn-market", selected.espnMarket,
+    "--league-value", selected.leagueValue,
+    "--opponent-intent", selected.opponentIntent,
+    "--approve-missing-projection", "143",
+    "--as-of", "2026-09-01T04:04:09Z",
+    "--json",
+    ...extra,
+  ], { encoding: "utf8" });
   let payload = null;
   try { payload = JSON.parse(result.stdout); } catch {}
   return { ...result, payload };
@@ -245,6 +269,29 @@ const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "draft-runtime-contract-")
   const duplicateEspn = validate({ espnMarket: path.join(fixtureRoot, "failures", "duplicate_espn_id.json") });
   assert.equal(duplicateEspn.status, 1);
   assert.ok(issueCodes(duplicateEspn).has("DUPLICATE_ESPN_PLAYER_ID"));
+
+  // The narrow Keenan exception cannot hide an unresolved ID or a new top-160 omission.
+  const resolvedMissingProjection = validateReal();
+  assert.equal(resolvedMissingProjection.status, 0, resolvedMissingProjection.stderr || resolvedMissingProjection.stdout);
+  assert.ok(issueCodes(resolvedMissingProjection).has("APPROVED_MISSING_PROJECTION"));
+  assert.equal(resolvedMissingProjection.payload.coverage.overall.eligible, 200);
+  assert.equal(resolvedMissingProjection.payload.coverage.overall.playerTruth, 199);
+
+  const unresolvedApprovedMarket = writeFixture(tempDir, "real-keenan-unresolved.json", realArtifacts.espnMarket, (value) => {
+    const record = value.records.find((item) => item.internalPlayerId === 143);
+    record.espnPlayerId = null;
+    record.mappingConfidence = 0;
+  });
+  const unresolvedApproved = validateReal({ espnMarket: unresolvedApprovedMarket });
+  assert.equal(unresolvedApproved.status, 1);
+  assert.ok(issueCodes(unresolvedApproved).has("APPROVED_MISSING_PROJECTION_UNRESOLVED_IDENTITY"));
+
+  const accidentalTop160Truth = writeFixture(tempDir, "real-top160-missing-truth.json", realArtifacts.playerTruth, (value) => {
+    value.players = value.players.filter((player) => player.internalPlayerId !== 1);
+  });
+  const accidentalTop160 = validateReal({ playerTruth: accidentalTop160Truth });
+  assert.equal(accidentalTop160.status, 1);
+  assert.ok(issueCodes(accidentalTop160).has("TOP160_PLAYER_TRUTH_GAP"));
 }
 
 // C. Mathematical and semantic artifact validation.

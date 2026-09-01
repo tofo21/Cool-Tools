@@ -39,6 +39,14 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--allow-missing-espn-market", action="store_true")
     parser.add_argument("--allow-missing-opponent-intent", action="store_true")
     parser.add_argument("--approve-top160-identity-gap", type=int, action="append", default=[], metavar="INTERNAL_ID")
+    parser.add_argument(
+        "--approve-missing-projection",
+        type=int,
+        action="append",
+        default=[],
+        metavar="INTERNAL_ID",
+        help="Approve a resolved market-only identity to remain without Player Truth or League Value",
+    )
     parser.add_argument("--bundle-filename", default="draft_runtime_bundle.json")
     parser.add_argument("--manifest-filename", default="draft_runtime_bundle_manifest.json")
     parser.add_argument("--report-filename", default="draft_runtime_bundle_validation.md")
@@ -84,6 +92,7 @@ def main() -> int:
         allow_missing_espn_market=args.allow_missing_espn_market,
         allow_missing_opponent_intent=args.allow_missing_opponent_intent,
         approved_top160_ids=set(args.approve_top160_identity_gap),
+        approved_missing_projection_ids=set(args.approve_missing_projection),
     )
     if not result["promotionEligible"]:
         output_dir.mkdir(parents=True, exist_ok=True)
@@ -125,6 +134,7 @@ def main() -> int:
             "validationReport": {"path": args.report_filename, "sha256": report_hash, "bytes": len(report_bytes)},
         },
         "coverage": result["coverage"],
+        "approvedExceptions": bundle["approvedExceptions"],
         "gates": {
             "result": "pass",
             "blocking": result["issueCounts"]["BLOCKING"],

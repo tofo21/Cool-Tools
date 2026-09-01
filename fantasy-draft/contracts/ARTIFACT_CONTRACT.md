@@ -13,7 +13,8 @@ This contract defines the integration boundary among Player Truth, ESPN market, 
 | Layer | Owns | Must not modify |
 | --- | --- | --- |
 | Player Truth | Football outcome distributions and player availability | League Value, ESPN price, opponent behavior, room survival |
-| League Value | League scoring, replacement, scarcity, FLEX, and roster-adjusted marginal value | Player Truth projections or ESPN source values |
+| League Value | Frozen league scoring, replacement, scarcity, FLEX, and immutable base value | Player Truth projections, ESPN source values, or live roster-fit state |
+| Live roster fit | Tony's current roster needs and recommendation-only adjustment | Immutable League Value scores/ranks or source projections |
 | ESPN Price | Default rank, continuous ADP, source-supplied ordinal ADP, and live-room rank | Player Truth or League Value |
 | Opponent Intent | Per-opponent position and exact-player selection probabilities | Player Truth and Tony-side target valuation |
 | Room survival | Probability a target is taken or survives before Tony | Opponent selection probabilities in response to Tony labels |
@@ -122,6 +123,8 @@ All record fields are required so source absence is explicit. Nullable fields re
 | `mappingConfidence` | probability `[0,1]` | Confidence in stable-ID-to-ESPN mapping |
 | `captureStatus` | enum | `captured`, `missing-market`, `unmapped`, or `excluded` |
 
+Final-integration adapters may also include `draftCommandBoardRank` and `position` as board-coverage metadata. They do not become ESPN values and may not substitute for `espnDefaultRank` or Player Truth position.
+
 Artifact-level fields include capture time/status, upstream `sourceArtifactId`, upstream `sourceHash`, and declared `rankCoverage`/`adpCoverage`. Coverage is a fraction of `eligiblePlayerCount`; declared coverage must equal values calculated from the records.
 
 ## 3. ESPN League Value adapter output
@@ -185,6 +188,10 @@ Schema: `opponent_intent.schema.json`
 
 The artifact also requires deterministic `simulation.seed`, positive `simulation.count`, prediction/model source versions, and limitations. Tony’s tiers, BPA, or League Value may choose which stable player IDs appear on a Threat Board, but those labels cannot feed back into opponent selection probabilities.
 
+### Dynamic browser bridge
+
+`runtimeBridge` is an optional backward-compatible extension. When present with `architecture: dynamic-browser-engine`, it identifies the public engine/package/worker assets, fixed seed, recalculation triggers, live inputs, and whether the embedded snapshot remains authoritative after a pick. The final 2026 artifact sets `initialSnapshotAuthoritativeAfterPick: false` and `ingestionBlocking: false`: its pre-draft opponents and survival rows are acceptance snapshots only. The browser engine recalculates from accepted picks, current rosters, availability, and snake geometry after ESPN, Manual, keeper, recovery, and reset events.
+
 ## 5. Combined runtime bundle
 
 Schema: `draft_runtime_bundle.schema.json`
@@ -198,6 +205,7 @@ The bundle is a compact public-safe browser payload:
 - league geometry, roster format, and keeper slots;
 - normalized Player Truth records;
 - independent market and League Value arrays joined by stable ID;
+- explicit approved exceptions for market-only resolved identities that lack an approved projection;
 - compact Opponent Intent data or `null`;
 - feature flags, limitations, fallback policy, and application compatibility.
 
@@ -214,9 +222,10 @@ The bundle must not contain raw historical drafts, training ledgers, raw manager
 5. Cross-artifact ESPN IDs for the same internal ID must agree when both are non-null.
 6. Every keeper must resolve in Player Truth and League Value.
 7. An identity gap at board rank 160 or better is blocking unless the exact internal ID is explicitly approved on the validation command. The approval is reported and does not manufacture a mapping.
-8. Lower-board gaps remain in the coverage report but need not block.
-9. An individual nonblocking mismatch is excluded from only the affected join; later players continue.
-10. If an unknown stable player appears in an Opponent Intent top-five list, that named entry is removed and its unchanged probability mass is added to `otherProbability`. Unknown roster and target-survival entries are removed. No remaining opponent probability is renormalized or otherwise changed.
+8. `--approve-missing-projection` is narrower than an identity-gap approval: it applies only to a resolved market-only identity with a non-null ESPN ID, `captured` status, and mapping confidence of at least `0.8`. It never approves an unresolved identity or a new top-160 omission. The final 2026 exception is Keenan Allen (`internalPlayerId: 143`).
+9. Lower-board gaps remain in the coverage report but need not block.
+10. An individual nonblocking mismatch is excluded from only the affected join; later players continue.
+11. If an unknown stable player appears in an Opponent Intent top-five list, that named entry is removed and its unchanged probability mass is added to `otherProbability`. Unknown roster and target-survival entries are removed. No remaining opponent probability is renormalized or otherwise changed.
 
 The known future ESPN benchmark is 199/200 Draft Command identities matched, 10/10 keepers resolved, zero unresolved raw ESPN top-160 players, and zero unresolved raw ranked top-250 players. Jaydon Blue was the sole Draft Command-only miss and was absent from ESPN’s 500-player payload. This is an acceptance benchmark for incoming real artifacts, not synthetic data.
 

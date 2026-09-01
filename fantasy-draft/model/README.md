@@ -1,17 +1,28 @@
 # Draft Command model handoff
 
-The app consumes one versioned intelligence package from `../data/model-package.js`.
-The research pipeline can replace that file without changing draft-state, sync,
-keeper, recovery, or interface code.
+The final integration consumes the signed browser bundle at
+`../data/candidate/runtime-contract/draft_runtime_bundle.json` through
+`runtime-bundle-adapter.js`. The legacy `../data/model-package.js` adapter remains
+only as the clearly labeled provisional fallback; it is not allowed to overwrite
+validated Player Truth, League Value, or ESPN market fields.
 
-## Contract
+The primary bundle contains three independent stable-ID indexes:
+
+1. Step 14 Player Truth and its explicit nulls;
+2. frozen ESPN default rank and continuous ADP;
+3. Step 15 immutable `leagueValueScore` and `leagueValueRank`.
+
+Dynamic Opponent Intent remains a fourth, advisory browser layer. Live roster fit
+is a fifth presentation/recommendation layer and never mutates the Step 15 base.
+
+## Legacy fallback contract
 
 - Schema: `model-package.schema.json`
 - Runtime adapter: `model-adapter.js`
 - Schema version: `1.0.0`
 - Active league profile: `espn-keeper-10-ppr-2flex-2026`
 
-Every player record may contain five independent layers:
+The legacy package may contain five independent layers while fallback is active:
 
 1. `outcome`: the underlying outcome distribution, availability and upside/downside probabilities.
 2. `leagueValue`: league-specific score, VORP, fair pick, tier and base roster/championship impact.
@@ -22,27 +33,29 @@ Every player record may contain five independent layers:
 The package-level `decisionPolicy` holds calibrated TAKE/WAIT/value/cliff/fade
 thresholds. These are runtime policy inputs, not hard-coded research conclusions.
 
-## Output definitions
+## Final output definitions
 
-- **Best Player:** highest league-adjusted base value before Tony's live roster-fit adjustment.
+- **Best Player:** highest immutable Step 15 League Value before Tony's live roster-fit adjustment.
 - **Best Value:** strongest positive difference between platform price and league fair pick.
 - **Best Fit:** best combination of league value, live roster need and positional cliff.
-- **Best Ceiling:** strongest calibrated upside/elite outcome after bust risk.
+- **Best Ceiling:** a separate lens only when a calibrated upside field exists; missing Step 14 probabilities remain unavailable.
 - **Safest Wait:** best option that combines next-pick survival with limited VORP loss.
 - **Projected Target:** best expected option before Tony is on the clock, including arrival probability.
 - **Best Pick Now:** on-clock composite of league value, price, fit, urgency, VORP loss and championship-equity input.
 
-The app keeps these lenses separate. `TAKE`, `WAIT`, `VALUE`, `UPSIDE`,
-`POSITION CLIFF` and `FADE AT PRICE` are policy tags derived from the active
-package and live draft state, not substitutes for the underlying scores.
+The app keeps these lenses separate. The final bundle does not approve a calibrated
+decision policy, so `TAKE`, `WAIT`, and `POSITION CLIFF` calls stay suppressed and
+the visible decision state remains advisory.
 
 ## Safe fallback
 
-The adapter rejects an incompatible schema, season or league profile. Missing
-player fields fall back individually to the existing ECR/room-price/roster
-heuristics. Model health exposes package validity, mode, version, freshness and
-coverage so a partial or invalid research package cannot silently masquerade as
-the production model.
+The runtime adapter rejects an incompatible schema/application contract and falls
+back on missing/corrupt Player Truth, League Value, or ESPN market layers. In
+validated mode, missing per-player fields never fall back individually: Keenan
+Allen has market data but no fabricated projection/value, Jaydon Blue has
+projection/value but null market fields, and null P10/P90/event probabilities stay
+null. Draft tracking, Manual entry, synchronization, roster state, and audit state
+remain available in every model state.
 
 Set `metadata.expiresAt` on candidate or production exports when the package
 depends on time-sensitive rankings, injuries or room markets. An expired
@@ -111,3 +124,9 @@ manifest:
 ```sh
 node fantasy-draft/model/build-opponent-intent-manifest.js
 ```
+
+The contract adapter at
+`../data/candidate/opponent-intent/opponent_intent_streamlined.json` includes a
+backward-compatible `runtimeBridge` object. Its embedded opponent predictions are
+an initial-state acceptance snapshot only; `initialSnapshotAuthoritativeAfterPick`
+is false, and the live engine recalculates after every accepted ESPN or Manual pick.

@@ -1,0 +1,22 @@
+{
+  "artifactType": "final-integration-adapter-manifest",
+  "determinism": "Identical verified source bytes produce byte-identical adapter outputs.",
+  "generator": "fantasy-draft/research/build_final_integration_adapters.py",
+  "outputs": {
+    "data/candidate/espn-market/espn_market_frozen.json": {
+      "bytes": 72489,
+      "fileSha256": "a6037c4b575f9c9a9381812d8d27ad0c741c36caefa899bdf5ddea683f4bc87a",
+      "payloadSha256": "6be8b17b90f9aebdaa4c0d9a4a1442577b127a54d45d97ca5229f49d3acf50b1"
+    },
+    "data/candidate/opponent-intent/opponent_intent_streamlined.json": {
+      "bytes": 56105,
+      "fileSha256": "c839913ddd199d87b6260eca543af60d934641243d2e7409fb26263d0fad72ed",
+      "payloadSha256": "7ead6636829585a920ae758b2ecd53237b5ef67a048ab95d33ee2635e1e012c1"
+    }
+  },
+  "schemaVersion": "1.0.0",
+  "sourceHashes": {
+    "data/derived/espn_market/espn_2026_market_snapshot_espn_2026_frozen_20260901T003012Z_3379127ab1c0.json": "e333dfbc3196351ea1b04f6fa8a5525db5903067f38318c8d2a725d6f75bc2a2",
+    "data/opponent-intent-package.js": "c2f25109da2ba5b23e52b8e8cceb8da7736acfaf45a8ac083a9a6b79813c0beb"
+  }
+}

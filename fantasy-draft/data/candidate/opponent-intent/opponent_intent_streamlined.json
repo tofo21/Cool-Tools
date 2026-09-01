@@ -1,0 +1,1960 @@
+{
+  "artifactId": "opponent-intent-streamlined-2026-initial-state",
+  "artifactType": "opponent-intent",
+  "artifactVersion": "opponent-intent-streamlined-2026.1",
+  "effectiveAt": "2026-09-01T00:30:12Z",
+  "espnLeagueId": "167404",
+  "expiresAt": null,
+  "generatedAt": "2026-09-01T02:18:40Z",
+  "integrity": {
+    "canonicalization": "draft-command-canonical-json-v1",
+    "payloadSha256": "7ead6636829585a920ae758b2ecd53237b5ef67a048ab95d33ee2635e1e012c1"
+  },
+  "limitations": [
+    "Rounds 1-6 are calibrated; Rounds 7-16 remain contextual and unvalidated.",
+    "Manager residual weights are zero and manager history remains explanatory only.",
+    "Outputs are advisory and may never block draft tracking, Manual mode, or ESPN synchronization.",
+    "The embedded predictions are an initial-state acceptance snapshot; the browser engine recalculates after every accepted pick."
+  ],
+  "modelArtifactVersion": "espn_opponent_intent_v1.1_candidate",
+  "opponents": {
+    "team-01": {
+      "confidence": 0.75,
+      "currentRoster": [
+        {
+          "internalPlayerId": 68,
+          "position": "TE",
+          "rosterSlot": "KEEPER"
+        }
+      ],
+      "displayLabel": "M01",
+      "explanatoryDrivers": [
+        "Roster before pick: QB 0 / RB 0 / WR 0 / TE 1",
+        "Separate ESPN rank and ESPN ADP signals favor RB among available players.",
+        "Roster need, room context and current board drive the forecast.",
+        "Manager profile is explanatory only; predictive residual weight is 0."
+      ],
+      "limitations": [
+        "Rounds 1-6 are calibrated; Rounds 7-16 remain contextual and unvalidated.",
+        "Manager history is explanatory only and both manager residual weights are zero."
+      ],
+      "nextOverallPick": 1,
+      "openRosterPositions": {
+        "BENCH": 8,
+        "FLEX": 2,
+        "QB": 1,
+        "RB": 2,
+        "TE": 0,
+        "WR": 2
+      },
+      "otherProbability": 0.17680930263606898,
+      "positionProbabilities": {
+        "QB": 0.0014168394822540275,
+        "RB": 0.5430545145163134,
+        "TE": 0.0012730252350836209,
+        "WR": 0.4542556207663489
+      },
+      "predictionStatus": "calibrated",
+      "teamId": "team-01",
+      "topFivePlayerProbabilities": [
+        {
+          "internalPlayerId": 1,
+          "probability": 0.24938651499019196
+        },
+        {
+          "internalPlayerId": 3,
+          "probability": 0.18890572768856548
+        },
+        {
+          "internalPlayerId": 2,
+          "probability": 0.17573970685004564
+        },
+        {
+          "internalPlayerId": 4,
+          "probability": 0.1331196163817787
+        },
+        {
+          "internalPlayerId": 7,
+          "probability": 0.07603913145334916
+        }
+      ]
+    },
+    "team-02": {
+      "confidence": 0.75,
+      "currentRoster": [
+        {
+          "internalPlayerId": 24,
+          "position": "WR",
+          "rosterSlot": "KEEPER"
+        }
+      ],
+      "displayLabel": "M02",
+      "explanatoryDrivers": [
+        "Roster before pick: QB 0 / RB 0 / WR 1 / TE 0",
+        "Separate ESPN rank and ESPN ADP signals favor RB among available players.",
+        "Roster need, room context and current board drive the forecast.",
+        "Manager profile is explanatory only; predictive residual weight is 0."
+      ],
+      "limitations": [
+        "Rounds 1-6 are calibrated; Rounds 7-16 remain contextual and unvalidated.",
+        "Manager history is explanatory only and both manager residual weights are zero."
+      ],
+      "nextOverallPick": 2,
+      "openRosterPositions": {
+        "BENCH": 8,
+        "FLEX": 2,
+        "QB": 1,
+        "RB": 2,
+        "TE": 1,
+        "WR": 1
+      },
+      "otherProbability": 0.18281245149141756,
+      "positionProbabilities": {
+        "QB": 0.001694009659805497,
+        "RB": 0.6492899195102199,
+        "TE": 0.003451963694701513,
+        "WR": 0.34556410713527325
+      },
+      "predictionStatus": "calibrated",
+      "teamId": "team-02",
+      "topFivePlayerProbabilities": [
+        {
+          "internalPlayerId": 1,
+          "probability": 0.29817291987552724
+        },
+        {
+          "internalPlayerId": 2,
+          "probability": 0.21011890531293628
+        },
+        {
+          "internalPlayerId": 3,
+          "probability": 0.1437055176363248
+        },
+        {
+          "internalPlayerId": 4,
+          "probability": 0.10126756670518061
+        },
+        {
+          "internalPlayerId": 6,
+          "probability": 0.06392263897861357
+        }
+      ]
+    },
+    "team-03": {
+      "confidence": 0.75,
+      "currentRoster": [
+        {
+          "internalPlayerId": 45,
+          "position": "RB",
+          "rosterSlot": "KEEPER"
+        }
+      ],
+      "displayLabel": "M03",
+      "explanatoryDrivers": [
+        "Roster before pick: QB 0 / RB 1 / WR 0 / TE 0",
+        "Separate ESPN rank and ESPN ADP signals favor WR among available players.",
+        "Roster need, room context and current board drive the forecast.",
+        "Manager profile is explanatory only; predictive residual weight is 0."
+      ],
+      "limitations": [
+        "Rounds 1-6 are calibrated; Rounds 7-16 remain contextual and unvalidated.",
+        "Manager history is explanatory only and both manager residual weights are zero."
+      ],
+      "nextOverallPick": 3,
+      "openRosterPositions": {
+        "BENCH": 8,
+        "FLEX": 2,
+        "QB": 1,
+        "RB": 1,
+        "TE": 1,
+        "WR": 2
+      },
+      "otherProbability": 0.170465428043444,
+      "positionProbabilities": {
+        "QB": 0.0016926163787910785,
+        "RB": 0.4521852791866617,
+        "TE": 0.0034491245400069402,
+        "WR": 0.5426729798945403
+      },
+      "predictionStatus": "calibrated",
+      "teamId": "team-03",
+      "topFivePlayerProbabilities": [
+        {
+          "internalPlayerId": 3,
+          "probability": 0.22567477313974635
+        },
+        {
+          "internalPlayerId": 1,
+          "probability": 0.2076567046066625
+        },
+        {
+          "internalPlayerId": 4,
+          "probability": 0.15903032478155188
+        },
+        {
+          "internalPlayerId": 2,
+          "probability": 0.14633320648655215
+        },
+        {
+          "internalPlayerId": 7,
+          "probability": 0.09083956294204325
+        }
+      ]
+    },
+    "team-04": {
+      "confidence": 0.75,
+      "currentRoster": [
+        {
+          "internalPlayerId": 50,
+          "position": "TE",
+          "rosterSlot": "KEEPER"
+        }
+      ],
+      "displayLabel": "M04",
+      "explanatoryDrivers": [
+        "Roster before pick: QB 0 / RB 0 / WR 0 / TE 1",
+        "Separate ESPN rank and ESPN ADP signals favor RB among available players.",
+        "Roster need, room context and current board drive the forecast.",
+        "Manager profile is explanatory only; predictive residual weight is 0."
+      ],
+      "limitations": [
+        "Rounds 1-6 are calibrated; Rounds 7-16 remain contextual and unvalidated.",
+        "Manager history is explanatory only and both manager residual weights are zero."
+      ],
+      "nextOverallPick": 4,
+      "openRosterPositions": {
+        "BENCH": 8,
+        "FLEX": 2,
+        "QB": 1,
+        "RB": 2,
+        "TE": 0,
+        "WR": 2
+      },
+      "otherProbability": 0.17680930263606898,
+      "positionProbabilities": {
+        "QB": 0.0014168394822540275,
+        "RB": 0.5430545145163134,
+        "TE": 0.0012730252350836209,
+        "WR": 0.4542556207663489
+      },
+      "predictionStatus": "calibrated",
+      "teamId": "team-04",
+      "topFivePlayerProbabilities": [
+        {
+          "internalPlayerId": 1,
+          "probability": 0.24938651499019196
+        },
+        {
+          "internalPlayerId": 3,
+          "probability": 0.18890572768856548
+        },
+        {
+          "internalPlayerId": 2,
+          "probability": 0.17573970685004564
+        },
+        {
+          "internalPlayerId": 4,
+          "probability": 0.1331196163817787
+        },
+        {
+          "internalPlayerId": 7,
+          "probability": 0.07603913145334916
+        }
+      ]
+    },
+    "team-06": {
+      "confidence": 0.75,
+      "currentRoster": [
+        {
+          "internalPlayerId": 30,
+          "position": "WR",
+          "rosterSlot": "KEEPER"
+        }
+      ],
+      "displayLabel": "M06",
+      "explanatoryDrivers": [
+        "Roster before pick: QB 0 / RB 0 / WR 1 / TE 0",
+        "Separate ESPN rank and ESPN ADP signals favor RB among available players.",
+        "Roster need, room context and current board drive the forecast.",
+        "Manager profile is explanatory only; predictive residual weight is 0."
+      ],
+      "limitations": [
+        "Rounds 1-6 are calibrated; Rounds 7-16 remain contextual and unvalidated.",
+        "Manager history is explanatory only and both manager residual weights are zero."
+      ],
+      "nextOverallPick": 6,
+      "openRosterPositions": {
+        "BENCH": 8,
+        "FLEX": 2,
+        "QB": 1,
+        "RB": 2,
+        "TE": 1,
+        "WR": 1
+      },
+      "otherProbability": 0.18281245149141756,
+      "positionProbabilities": {
+        "QB": 0.001694009659805497,
+        "RB": 0.6492899195102199,
+        "TE": 0.003451963694701513,
+        "WR": 0.34556410713527325
+      },
+      "predictionStatus": "calibrated",
+      "teamId": "team-06",
+      "topFivePlayerProbabilities": [
+        {
+          "internalPlayerId": 1,
+          "probability": 0.29817291987552724
+        },
+        {
+          "internalPlayerId": 2,
+          "probability": 0.21011890531293628
+        },
+        {
+          "internalPlayerId": 3,
+          "probability": 0.1437055176363248
+        },
+        {
+          "internalPlayerId": 4,
+          "probability": 0.10126756670518061
+        },
+        {
+          "internalPlayerId": 6,
+          "probability": 0.06392263897861357
+        }
+      ]
+    },
+    "team-07": {
+      "confidence": 0.75,
+      "currentRoster": [
+        {
+          "internalPlayerId": 47,
+          "position": "RB",
+          "rosterSlot": "KEEPER"
+        }
+      ],
+      "displayLabel": "M07",
+      "explanatoryDrivers": [
+        "Roster before pick: QB 0 / RB 1 / WR 0 / TE 0",
+        "Separate ESPN rank and ESPN ADP signals favor WR among available players.",
+        "Roster need, room context and current board drive the forecast.",
+        "Manager profile is explanatory only; predictive residual weight is 0."
+      ],
+      "limitations": [
+        "Rounds 1-6 are calibrated; Rounds 7-16 remain contextual and unvalidated.",
+        "Manager history is explanatory only and both manager residual weights are zero."
+      ],
+      "nextOverallPick": 7,
+      "openRosterPositions": {
+        "BENCH": 8,
+        "FLEX": 2,
+        "QB": 1,
+        "RB": 1,
+        "TE": 1,
+        "WR": 2
+      },
+      "otherProbability": 0.170465428043444,
+      "positionProbabilities": {
+        "QB": 0.0016926163787910785,
+        "RB": 0.4521852791866617,
+        "TE": 0.0034491245400069402,
+        "WR": 0.5426729798945403
+      },
+      "predictionStatus": "calibrated",
+      "teamId": "team-07",
+      "topFivePlayerProbabilities": [
+        {
+          "internalPlayerId": 3,
+          "probability": 0.22567477313974635
+        },
+        {
+          "internalPlayerId": 1,
+          "probability": 0.2076567046066625
+        },
+        {
+          "internalPlayerId": 4,
+          "probability": 0.15903032478155188
+        },
+        {
+          "internalPlayerId": 2,
+          "probability": 0.14633320648655215
+        },
+        {
+          "internalPlayerId": 7,
+          "probability": 0.09083956294204325
+        }
+      ]
+    },
+    "team-08": {
+      "confidence": 0.75,
+      "currentRoster": [
+        {
+          "internalPlayerId": 52,
+          "position": "WR",
+          "rosterSlot": "KEEPER"
+        }
+      ],
+      "displayLabel": "M08",
+      "explanatoryDrivers": [
+        "Roster before pick: QB 0 / RB 0 / WR 1 / TE 0",
+        "Separate ESPN rank and ESPN ADP signals favor RB among available players.",
+        "Roster need, room context and current board drive the forecast.",
+        "Manager profile is explanatory only; predictive residual weight is 0."
+      ],
+      "limitations": [
+        "Rounds 1-6 are calibrated; Rounds 7-16 remain contextual and unvalidated.",
+        "Manager history is explanatory only and both manager residual weights are zero."
+      ],
+      "nextOverallPick": 8,
+      "openRosterPositions": {
+        "BENCH": 8,
+        "FLEX": 2,
+        "QB": 1,
+        "RB": 2,
+        "TE": 1,
+        "WR": 1
+      },
+      "otherProbability": 0.18281245149141756,
+      "positionProbabilities": {
+        "QB": 0.001694009659805497,
+        "RB": 0.6492899195102199,
+        "TE": 0.003451963694701513,
+        "WR": 0.34556410713527325
+      },
+      "predictionStatus": "calibrated",
+      "teamId": "team-08",
+      "topFivePlayerProbabilities": [
+        {
+          "internalPlayerId": 1,
+          "probability": 0.29817291987552724
+        },
+        {
+          "internalPlayerId": 2,
+          "probability": 0.21011890531293628
+        },
+        {
+          "internalPlayerId": 3,
+          "probability": 0.1437055176363248
+        },
+        {
+          "internalPlayerId": 4,
+          "probability": 0.10126756670518061
+        },
+        {
+          "internalPlayerId": 6,
+          "probability": 0.06392263897861357
+        }
+      ]
+    },
+    "team-09": {
+      "confidence": 0.75,
+      "currentRoster": [
+        {
+          "internalPlayerId": 26,
+          "position": "WR",
+          "rosterSlot": "KEEPER"
+        }
+      ],
+      "displayLabel": "M09",
+      "explanatoryDrivers": [
+        "Roster before pick: QB 0 / RB 0 / WR 1 / TE 0",
+        "Separate ESPN rank and ESPN ADP signals favor RB among available players.",
+        "Roster need, room context and current board drive the forecast.",
+        "Manager profile is explanatory only; predictive residual weight is 0."
+      ],
+      "limitations": [
+        "Rounds 1-6 are calibrated; Rounds 7-16 remain contextual and unvalidated.",
+        "Manager history is explanatory only and both manager residual weights are zero."
+      ],
+      "nextOverallPick": 9,
+      "openRosterPositions": {
+        "BENCH": 8,
+        "FLEX": 2,
+        "QB": 1,
+        "RB": 2,
+        "TE": 1,
+        "WR": 1
+      },
+      "otherProbability": 0.18281245149141756,
+      "positionProbabilities": {
+        "QB": 0.001694009659805497,
+        "RB": 0.6492899195102199,
+        "TE": 0.003451963694701513,
+        "WR": 0.34556410713527325
+      },
+      "predictionStatus": "calibrated",
+      "teamId": "team-09",
+      "topFivePlayerProbabilities": [
+        {
+          "internalPlayerId": 1,
+          "probability": 0.29817291987552724
+        },
+        {
+          "internalPlayerId": 2,
+          "probability": 0.21011890531293628
+        },
+        {
+          "internalPlayerId": 3,
+          "probability": 0.1437055176363248
+        },
+        {
+          "internalPlayerId": 4,
+          "probability": 0.10126756670518061
+        },
+        {
+          "internalPlayerId": 6,
+          "probability": 0.06392263897861357
+        }
+      ]
+    },
+    "team-10": {
+      "confidence": 0.75,
+      "currentRoster": [
+        {
+          "internalPlayerId": 33,
+          "position": "RB",
+          "rosterSlot": "KEEPER"
+        }
+      ],
+      "displayLabel": "M10",
+      "explanatoryDrivers": [
+        "Roster before pick: QB 0 / RB 1 / WR 0 / TE 0",
+        "Separate ESPN rank and ESPN ADP signals favor WR among available players.",
+        "Roster need, room context and current board drive the forecast.",
+        "Manager profile is explanatory only; predictive residual weight is 0."
+      ],
+      "limitations": [
+        "Rounds 1-6 are calibrated; Rounds 7-16 remain contextual and unvalidated.",
+        "Manager history is explanatory only and both manager residual weights are zero."
+      ],
+      "nextOverallPick": 10,
+      "openRosterPositions": {
+        "BENCH": 8,
+        "FLEX": 2,
+        "QB": 1,
+        "RB": 1,
+        "TE": 1,
+        "WR": 2
+      },
+      "otherProbability": 0.170465428043444,
+      "positionProbabilities": {
+        "QB": 0.0016926163787910785,
+        "RB": 0.4521852791866617,
+        "TE": 0.0034491245400069402,
+        "WR": 0.5426729798945403
+      },
+      "predictionStatus": "calibrated",
+      "teamId": "team-10",
+      "topFivePlayerProbabilities": [
+        {
+          "internalPlayerId": 3,
+          "probability": 0.22567477313974635
+        },
+        {
+          "internalPlayerId": 1,
+          "probability": 0.2076567046066625
+        },
+        {
+          "internalPlayerId": 4,
+          "probability": 0.15903032478155188
+        },
+        {
+          "internalPlayerId": 2,
+          "probability": 0.14633320648655215
+        },
+        {
+          "internalPlayerId": 7,
+          "probability": 0.09083956294204325
+        }
+      ]
+    }
+  },
+  "runtimeBridge": {
+    "architecture": "dynamic-browser-engine",
+    "deterministicSeed": 20260831,
+    "engineAsset": "fantasy-draft/model/opponent-intent.js",
+    "engineContractVersion": "1.0.0",
+    "ingestionBlocking": false,
+    "initialSnapshot": {
+      "nextTonyPick": 5,
+      "overallPick": 1
+    },
+    "initialSnapshotAuthoritativeAfterPick": false,
+    "liveInputs": [
+      "accepted-picks",
+      "current-rosters",
+      "available-player-ids",
+      "snake-calendar",
+      "frozen-espn-market"
+    ],
+    "packageAsset": "fantasy-draft/data/opponent-intent-package.js",
+    "recalculationTriggers": [
+      "espn-synchronized-pick",
+      "manual-pick",
+      "keeper-initialization",
+      "refresh-recovery",
+      "hard-reset"
+    ],
+    "workerAsset": "fantasy-draft/model/opponent-intent-worker.js"
+  },
+  "schemaVersion": "1.0.0",
+  "simulation": {
+    "count": 300,
+    "seed": 20260831
+  },
+  "sourceVersions": {
+    "espnMarket": "espn_2026_frozen_20260901T003012Z_3379127ab1c0",
+    "leagueValue": "step15-2026.1",
+    "opponentModel": "espn_opponent_intent_v1.1_candidate",
+    "playerTruth": "step14-2026.1"
+  },
+  "status": "validated",
+  "targetSurvival": [
+    {
+      "internalPlayerId": 1,
+      "mostLikelyTakerTeamId": "team-02",
+      "probabilitySurvives": 0.31999999999999995,
+      "probabilityTakenBeforeTony": 0.68,
+      "secondMostLikelyTakerTeamId": "team-01"
+    },
+    {
+      "internalPlayerId": 2,
+      "mostLikelyTakerTeamId": "team-01",
+      "probabilitySurvives": 0.3866666666666667,
+      "probabilityTakenBeforeTony": 0.6133333333333333,
+      "secondMostLikelyTakerTeamId": "team-03"
+    },
+    {
+      "internalPlayerId": 3,
+      "mostLikelyTakerTeamId": "team-03",
+      "probabilitySurvives": 0.4,
+      "probabilityTakenBeforeTony": 0.6,
+      "secondMostLikelyTakerTeamId": "team-01"
+    },
+    {
+      "internalPlayerId": 4,
+      "mostLikelyTakerTeamId": "team-03",
+      "probabilitySurvives": 0.4933333333333333,
+      "probabilityTakenBeforeTony": 0.5066666666666667,
+      "secondMostLikelyTakerTeamId": "team-02"
+    },
+    {
+      "internalPlayerId": 5,
+      "mostLikelyTakerTeamId": "team-04",
+      "probabilitySurvives": 0.77,
+      "probabilityTakenBeforeTony": 0.23,
+      "secondMostLikelyTakerTeamId": "team-01"
+    },
+    {
+      "internalPlayerId": 6,
+      "mostLikelyTakerTeamId": "team-04",
+      "probabilitySurvives": 0.6799999999999999,
+      "probabilityTakenBeforeTony": 0.32,
+      "secondMostLikelyTakerTeamId": "team-02"
+    },
+    {
+      "internalPlayerId": 7,
+      "mostLikelyTakerTeamId": "team-04",
+      "probabilitySurvives": 0.6033333333333333,
+      "probabilityTakenBeforeTony": 0.39666666666666667,
+      "secondMostLikelyTakerTeamId": "team-03"
+    },
+    {
+      "internalPlayerId": 8,
+      "mostLikelyTakerTeamId": "team-03",
+      "probabilitySurvives": 0.8166666666666667,
+      "probabilityTakenBeforeTony": 0.18333333333333332,
+      "secondMostLikelyTakerTeamId": "team-04"
+    },
+    {
+      "internalPlayerId": 9,
+      "mostLikelyTakerTeamId": "team-04",
+      "probabilitySurvives": 0.87,
+      "probabilityTakenBeforeTony": 0.13,
+      "secondMostLikelyTakerTeamId": "team-02"
+    },
+    {
+      "internalPlayerId": 10,
+      "mostLikelyTakerTeamId": "team-04",
+      "probabilitySurvives": 0.8966666666666667,
+      "probabilityTakenBeforeTony": 0.10333333333333333,
+      "secondMostLikelyTakerTeamId": "team-03"
+    },
+    {
+      "internalPlayerId": 11,
+      "mostLikelyTakerTeamId": "team-03",
+      "probabilitySurvives": 0.95,
+      "probabilityTakenBeforeTony": 0.05,
+      "secondMostLikelyTakerTeamId": "team-04"
+    },
+    {
+      "internalPlayerId": 12,
+      "mostLikelyTakerTeamId": "team-04",
+      "probabilitySurvives": 0.9366666666666666,
+      "probabilityTakenBeforeTony": 0.06333333333333334,
+      "secondMostLikelyTakerTeamId": "team-02"
+    },
+    {
+      "internalPlayerId": 13,
+      "mostLikelyTakerTeamId": "team-04",
+      "probabilitySurvives": 0.9766666666666667,
+      "probabilityTakenBeforeTony": 0.023333333333333334,
+      "secondMostLikelyTakerTeamId": "team-03"
+    },
+    {
+      "internalPlayerId": 14,
+      "mostLikelyTakerTeamId": "team-03",
+      "probabilitySurvives": 0.98,
+      "probabilityTakenBeforeTony": 0.02,
+      "secondMostLikelyTakerTeamId": "team-04"
+    },
+    {
+      "internalPlayerId": 15,
+      "mostLikelyTakerTeamId": "team-02",
+      "probabilitySurvives": 0.9766666666666667,
+      "probabilityTakenBeforeTony": 0.023333333333333334,
+      "secondMostLikelyTakerTeamId": "team-04"
+    },
+    {
+      "internalPlayerId": 16,
+      "mostLikelyTakerTeamId": "team-04",
+      "probabilitySurvives": 0.9833333333333333,
+      "probabilityTakenBeforeTony": 0.016666666666666666,
+      "secondMostLikelyTakerTeamId": "team-01"
+    },
+    {
+      "internalPlayerId": 17,
+      "mostLikelyTakerTeamId": "team-02",
+      "probabilitySurvives": 0.9966666666666667,
+      "probabilityTakenBeforeTony": 0.0033333333333333335,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 18,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 19,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 20,
+      "mostLikelyTakerTeamId": "team-04",
+      "probabilitySurvives": 0.9966666666666667,
+      "probabilityTakenBeforeTony": 0.0033333333333333335,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 21,
+      "mostLikelyTakerTeamId": "team-03",
+      "probabilitySurvives": 0.9966666666666667,
+      "probabilityTakenBeforeTony": 0.0033333333333333335,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 22,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 23,
+      "mostLikelyTakerTeamId": "team-01",
+      "probabilitySurvives": 0.9933333333333333,
+      "probabilityTakenBeforeTony": 0.006666666666666667,
+      "secondMostLikelyTakerTeamId": "team-02"
+    },
+    {
+      "internalPlayerId": 25,
+      "mostLikelyTakerTeamId": "team-01",
+      "probabilitySurvives": 0.9866666666666667,
+      "probabilityTakenBeforeTony": 0.013333333333333334,
+      "secondMostLikelyTakerTeamId": "team-02"
+    },
+    {
+      "internalPlayerId": 27,
+      "mostLikelyTakerTeamId": "team-03",
+      "probabilitySurvives": 0.99,
+      "probabilityTakenBeforeTony": 0.01,
+      "secondMostLikelyTakerTeamId": "team-01"
+    },
+    {
+      "internalPlayerId": 28,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 29,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 31,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 32,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 34,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 35,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 36,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 37,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 38,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 39,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 40,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 41,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 42,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 43,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 44,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 46,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 48,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 49,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 51,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 53,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 54,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 55,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 56,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 57,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 58,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 59,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 60,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 61,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 62,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 63,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 64,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 65,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 66,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 67,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 69,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 70,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 71,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 72,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 73,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 74,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 75,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 76,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 77,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 78,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 79,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 80,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 81,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 82,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 83,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 84,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 85,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 86,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 87,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 88,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 89,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 91,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 92,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 93,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 94,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 95,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 96,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 97,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 98,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 99,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 100,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 101,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 102,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 103,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 104,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 105,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 106,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 107,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 108,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 109,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 110,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 111,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 112,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 113,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 114,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 115,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 116,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 117,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 118,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 119,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 120,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 121,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 122,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 123,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 124,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 125,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 126,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 127,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 128,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 129,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 130,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 131,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 132,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 133,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 134,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 135,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 136,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 137,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 138,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 139,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 140,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 141,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 142,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 144,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 145,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 146,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 147,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 148,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 149,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 150,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 151,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 152,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 153,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 154,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 155,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 156,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 157,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 158,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 159,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 160,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 161,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 162,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 163,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 164,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 165,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 166,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 167,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 168,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 169,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 170,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 171,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 172,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 173,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 174,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 175,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 176,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 177,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 178,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 179,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 180,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 181,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 182,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 183,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 184,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 185,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 186,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 187,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 188,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 189,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 190,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 191,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 192,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 193,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 194,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 195,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 196,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 197,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 198,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 199,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    },
+    {
+      "internalPlayerId": 200,
+      "mostLikelyTakerTeamId": null,
+      "probabilitySurvives": 1,
+      "probabilityTakenBeforeTony": 0,
+      "secondMostLikelyTakerTeamId": null
+    }
+  ],
+  "tierSurvival": [
+    {
+      "expectedSurvivors": 8.383333333333333,
+      "probabilityAtLeastOneSurvives": 1,
+      "tierId": "LV-01-12"
+    },
+    {
+      "expectedSurvivors": 9.63,
+      "probabilityAtLeastOneSurvives": 1,
+      "tierId": "LV-13-24"
+    },
+    {
+      "expectedSurvivors": 19.986666666666668,
+      "probabilityAtLeastOneSurvives": 1,
+      "tierId": "LV-25-48"
+    },
+    {
+      "expectedSurvivors": 44,
+      "probabilityAtLeastOneSurvives": 1,
+      "tierId": "LV-49-96"
+    }
+  ],
+  "tonyNextOverallPick": 5,
+  "tonyTeamId": "team-05"
+}

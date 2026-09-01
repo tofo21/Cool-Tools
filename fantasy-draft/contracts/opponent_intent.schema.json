@@ -38,6 +38,7 @@
     "espnLeagueId": { "type": "string", "minLength": 1 },
     "tonyTeamId": { "type": "string", "pattern": "^team-[0-9]{2}$" },
     "tonyNextOverallPick": { "type": "integer", "minimum": 1 },
+    "runtimeBridge": { "$ref": "#/$defs/runtimeBridge" },
     "integrity": { "$ref": "#/$defs/integrity" },
     "simulation": {
       "type": "object",
@@ -80,6 +81,44 @@
       "properties": {
         "canonicalization": { "const": "draft-command-canonical-json-v1" },
         "payloadSha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      },
+      "additionalProperties": false
+    },
+    "runtimeBridge": {
+      "type": "object",
+      "required": [
+        "architecture",
+        "engineContractVersion",
+        "engineAsset",
+        "packageAsset",
+        "workerAsset",
+        "recalculationTriggers",
+        "liveInputs",
+        "initialSnapshot",
+        "initialSnapshotAuthoritativeAfterPick",
+        "ingestionBlocking",
+        "deterministicSeed"
+      ],
+      "properties": {
+        "architecture": { "const": "dynamic-browser-engine" },
+        "engineContractVersion": { "type": "string", "minLength": 1 },
+        "engineAsset": { "type": "string", "minLength": 1 },
+        "packageAsset": { "type": "string", "minLength": 1 },
+        "workerAsset": { "type": "string", "minLength": 1 },
+        "recalculationTriggers": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+        "liveInputs": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+        "initialSnapshot": {
+          "type": "object",
+          "required": ["overallPick", "nextTonyPick"],
+          "properties": {
+            "overallPick": { "type": "integer", "minimum": 1 },
+            "nextTonyPick": { "type": "integer", "minimum": 1 }
+          },
+          "additionalProperties": false
+        },
+        "initialSnapshotAuthoritativeAfterPick": { "const": false },
+        "ingestionBlocking": { "const": false },
+        "deterministicSeed": { "type": "integer", "minimum": 0 }
       },
       "additionalProperties": false
     },

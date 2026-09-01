@@ -1,2 +1,3 @@
 fantasy-draft/data/raw/consensus/2026/*.html -diff
 fantasy-draft/data/raw/consensus/2026/*.xlsm binary
+fantasy-draft/data/derived/espn_market/*.csv whitespace=cr-at-eol

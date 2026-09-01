@@ -2,7 +2,9 @@
 
 Contract version: 1.0.0
 
-Feature branch: `codex/draft-runtime-contract-harness`
+Harness source branch: `codex/draft-runtime-contract-harness`
+
+Final integration branch: `codex/final-draft-command-integration`
 
 This handoff is the executable boundary for integrating the four completed intelligence artifacts. No undocumented columns, name-based joins, or zero-filled missing values are permitted.
 
@@ -46,6 +48,7 @@ python3 fantasy-draft/research/validate_draft_runtime_bundle.py \
   --espn-market fantasy-draft/data/candidate/espn-market/espn_market_frozen.json \
   --league-value fantasy-draft/data/candidate/league-value/espn_league_value_step15.json \
   --opponent-intent fantasy-draft/data/candidate/opponent-intent/opponent_intent_streamlined.json \
+  --approve-missing-projection 143 \
   --as-of "$DRAFT_RUNTIME_AS_OF" \
   --report fantasy-draft/reports/DRAFT_RUNTIME_REAL_ARTIFACT_VALIDATION.md \
   --json
@@ -54,6 +57,8 @@ python3 fantasy-draft/research/validate_draft_runtime_bundle.py \
 Exit code `0` means the promotion gate passed. Exit code `1` means at least one blocking gate failed. Exit code `2` means command input was invalid.
 
 Do not use `--approve-top160-identity-gap` without an explicit, recorded integration decision naming the exact stable internal ID. Approval downgrades the one gap to a visible warning; it does not create a mapping.
+
+The final candidate uses only `--approve-missing-projection 143`. This is the recorded Keenan Allen exception: ESPN identity and market values are resolved, but no approved Player Truth projection or League Value exists. The validator separately blocks an unresolved market identity and an accidental top-160 Player Truth loss, even when ID 143 is approved.
 
 ## 4. Build the candidate runtime bundle
 
@@ -65,6 +70,7 @@ python3 fantasy-draft/research/build_draft_runtime_bundle.py \
   --espn-market fantasy-draft/data/candidate/espn-market/espn_market_frozen.json \
   --league-value fantasy-draft/data/candidate/league-value/espn_league_value_step15.json \
   --opponent-intent fantasy-draft/data/candidate/opponent-intent/opponent_intent_streamlined.json \
+  --approve-missing-projection 143 \
   --output-dir fantasy-draft/data/candidate/runtime-contract \
   --bundle-filename draft_runtime_bundle.json \
   --manifest-filename draft_runtime_bundle_manifest.json \
@@ -120,34 +126,30 @@ For an unknown player in an opponent top-five list, the builder preserves the pr
 
 The final Step 18 candidate should not use missing-artifact flags when all four real artifacts are available.
 
-## 7. Later application integration
+## 7. Final application integration
 
-Current application code is synchronous and loads:
+The final candidate loads:
 
 1. `data/players.js`;
 2. `data/model-package.js`;
-3. `model/model-adapter.js`;
-4. `app.js`;
-5. `sync.js`.
+3. `data/opponent-intent-package.js`;
+4. `model/model-adapter.js`;
+5. `model/opponent-intent.js`;
+6. `model/runtime-bundle-adapter.js`;
+7. `app.js`;
+8. `sync.js`.
 
-The later integration branch must add a bounded runtime-bundle load/validation step before Draft Command intelligence is consumed. It must index `playerRecords`, `marketRecords`, and `leagueValueRecords` by `internalPlayerId`; no runtime name join is allowed.
+`runtime-bundle-adapter.js` starts in a definite `fallback` state, fetches the bundle and manifest without browser persistence, verifies byte count and SHA-256, validates compatibility and stable-ID joins, and then enters `ready`, `fallback`, or `rejected`. It indexes `playerRecords`, `marketRecords`, and `leagueValueRecords` by `internalPlayerId`; no runtime name join is allowed.
 
-Required application changes still outstanding:
+Completed application behavior:
 
-- add a browser runtime adapter supporting schema/status/compatibility validation and stable-ID indexes;
-- map Player Truth outcomes to existing recommendation inputs without allowing market or Opponent Intent to mutate them;
-- map `leagueValueScore` as the numeric League Value sort/calculation input and keep display formatting separate;
-- map ESPN `defaultRank` and `continuousAdp` independently, preserving `null` values;
-- connect Opponent Intent opponent cards, Threat Board, target survival, and tier survival to current draft/roster state;
-- exclude drafted/keeper players and update room availability sequentially without selecting a player twice;
-- add the bounded `ready`/`fallback`/`rejected` model state transition so “Loading model” cannot persist;
-- on Player Truth or League Value failure, display a clearly labeled provisional fallback;
-- on ESPN market failure, preserve Player Truth and Manual board operation while disabling market-dependent views;
-- on Opponent Intent failure, hide/downgrade threat features without blocking the Decision Board;
-- on an individual mismatch, report and exclude only the affected join;
-- on bundle incompatibility, reject the bundle without clearing events, source observations, rosters, manual picks, synchronization state, or audit history;
-- add runtime bundle metadata/source hashes to audit export while keeping export read-only;
-- fetch the bundle without storing the bundle, raw artifacts, or simulation data in `localStorage`.
+- Step 15 `leagueValueScore` and `leagueValueRank` are immutable base fields and numeric sort inputs; live roster fit remains recommendation-only.
+- Frozen ESPN default rank and continuous ADP are independent, nullable fields.
+- Step 14 optional P10/P90/event probabilities remain blank when null; the old outcome heuristics are not substituted in validated mode.
+- Dynamic Opponent Intent recalculates after accepted picks using a fixed seed and all currently available players. Its failure hides/downgrades threat information without blocking the board, Manual entry, or synchronization.
+- Drafted and deliberately loaded keeper players are excluded sequentially; keeper mode remains off at first load and Tony's configured keeper is Jaxson Dart, ID 90.
+- Keenan Allen remains visible with market fields and no fabricated Player Truth/League Value. Jaydon Blue remains visible with Player Truth/League Value and null ESPN fields.
+- Bundle source hashes and approved exceptions are included in the read-only audit export. Runtime artifacts and simulation output never enter `localStorage`.
 
 The integration branch must retain the current deterministic UI tests for League Value sorting, ESPN Price sorting, position filtering, search, and drafted-player exclusion.
 
@@ -185,6 +187,7 @@ python3 fantasy-draft/research/validate_draft_runtime_bundle.py \
   --espn-market fantasy-draft/data/candidate/espn-market/espn_market_frozen.json \
   --league-value fantasy-draft/data/candidate/league-value/espn_league_value_step15.json \
   --opponent-intent fantasy-draft/data/candidate/opponent-intent/opponent_intent_streamlined.json \
+  --approve-missing-projection 143 \
   --as-of "$DRAFT_RUNTIME_AS_OF" \
   --report fantasy-draft/reports/DRAFT_RUNTIME_REAL_ARTIFACT_VALIDATION.md \
   --json
@@ -194,6 +197,7 @@ python3 fantasy-draft/research/build_draft_runtime_bundle.py \
   --espn-market fantasy-draft/data/candidate/espn-market/espn_market_frozen.json \
   --league-value fantasy-draft/data/candidate/league-value/espn_league_value_step15.json \
   --opponent-intent fantasy-draft/data/candidate/opponent-intent/opponent_intent_streamlined.json \
+  --approve-missing-projection 143 \
   --output-dir fantasy-draft/data/candidate/runtime-contract \
   --bundle-filename draft_runtime_bundle.json \
   --manifest-filename draft_runtime_bundle_manifest.json \

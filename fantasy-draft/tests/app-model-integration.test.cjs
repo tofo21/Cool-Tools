@@ -34,7 +34,7 @@ function element() {
   };
 }
 
-function boot(modelPackageOverride) {
+function boot(modelPackageOverride, runtimeBundleOverride = null) {
   const elements = new Map();
   const store = new Map();
   const documentListeners = new Map();
@@ -83,6 +83,8 @@ function boot(modelPackageOverride) {
   if (modelPackageOverride) context.DRAFT_INTELLIGENCE_PACKAGE = modelPackageOverride(context.PLAYER_DATA);
   vm.runInContext(read("model/model-adapter.js"), context, { filename: "model-adapter.js" });
   vm.runInContext(read("model/opponent-intent.js"), context, { filename: "opponent-intent.js" });
+  vm.runInContext(read("model/runtime-bundle-adapter.js"), context, { filename: "runtime-bundle-adapter.js" });
+  if (runtimeBundleOverride) context.DRAFT_RUNTIME_BUNDLE = structuredClone(runtimeBundleOverride);
   vm.runInContext(read("app.js"), context, { filename: "app.js" });
   return { context, elements, documentListeners };
 }
@@ -95,7 +97,7 @@ function clickDocument(booted, selector, dataset) {
 
 const fallback = boot();
 assert.equal(fallback.context.DraftCommandLive.modelHealth().mode, "fallback");
-assert.equal(fallback.elements.get("modelStatusBadge").textContent, "Provisional");
+assert.equal(fallback.elements.get("modelStatusBadge").textContent, "Provisional fallback");
 assert.match(fallback.elements.get("modelStatusCopy").textContent, /ADVISORY \/ UNCALIBRATED/i);
 assert.match(fallback.elements.get("decisionStrip").innerHTML, /ADVISORY/);
 assert.match(fallback.elements.get("decisionStrip").innerHTML, /UNCALIBRATED/);
@@ -230,11 +232,11 @@ const research = boot((players) => ({
   }],
 }));
 const health = research.context.DraftCommandLive.modelHealth();
-assert.equal(health.mode, "research");
-assert.equal(health.modelVersion, "candidate-integration-1");
+assert.equal(health.mode, "fallback");
+assert.equal(health.modelState, "fallback");
 assert.equal(health.decisionPolicyApproved, false);
 assert.equal(research.context.DraftCommandLive.recommendations().bestPlayer.player.name, "Justin Jefferson");
-assert.equal(research.elements.get("modelStatusBadge").textContent, "Research candidate");
+assert.equal(research.elements.get("modelStatusBadge").textContent, "Provisional fallback");
 assert.match(research.elements.get("bestOverallCard").innerHTML, /Research fixture/);
 assert.match(research.elements.get("decisionStrip").innerHTML, /ADVISORY/);
 
@@ -248,14 +250,83 @@ const invalidSync = invalidPackage.context.DraftCommandLive.ingestSnapshot({ sou
 assert.equal(invalidSync.ok, false);
 assert.equal(invalidPackage.context.DraftCommandLive.state().currentPick, 1);
 
+// The production runtime bundle owns Player Truth, ESPN market, and immutable League Value.
+const runtimeBundle = JSON.parse(read("data/candidate/runtime-contract/draft_runtime_bundle.json"));
+const runtime = boot(null, runtimeBundle);
+const runtimeHealth = runtime.context.DraftCommandLive.modelHealth();
+assert.equal(runtimeHealth.modelState, "ready");
+assert.equal(runtimeHealth.label, "Validated League Value");
+assert.equal(runtimeHealth.coveredPlayers, 199);
+assert.equal(runtimeHealth.totalPlayers, 200);
+assert.match(runtime.elements.get("modelSourceNote").innerHTML, /Step 13B signals did not numerically adjust/i);
+assert.match(runtime.elements.get("modelSourceNote").innerHTML, /Missing fields remain missing/i);
+
+const runtimeEspn = runtime.context.DraftCommandLive.boardOrder();
+assert.equal(runtimeEspn.length, 200);
+assert.ok(runtimeEspn.every((player, index) => index === 0 || player.roomRank == null || runtimeEspn[index - 1].roomRank <= player.roomRank));
+const keenan = runtimeEspn.find((player) => player.id === 143);
+const jaydon = runtimeEspn.find((player) => player.id === 190);
+assert.equal(keenan.roomRank, 201);
+assert.equal(keenan.leagueScore, null);
+assert.equal(keenan.leagueRank, null);
+assert.equal(jaydon.roomRank, null);
+assert.equal(jaydon.leagueScore, -143.38);
+assert.equal(jaydon.leagueRank, 192);
+
+runtime.context.DraftCommandLive.setBoardSort("leagueValue");
+const runtimeLeague = runtime.context.DraftCommandLive.boardOrder();
+assert.ok(runtimeLeague.every((player, index) => index === 0 || player.leagueScore == null || runtimeLeague[index - 1].leagueScore >= player.leagueScore));
+assert.equal(runtimeLeague.at(-1).id, 143, "missing League Value sorts last without becoming zero");
+runtime.context.DraftCommandLive.setPlayerSearch("Keenan Allen");
+assert.match(runtime.elements.get("playerTable").innerHTML, /Keenan Allen/);
+assert.match(runtime.elements.get("playerTable").innerHTML, /No validated Player Truth \/ League Value/);
+runtime.context.DraftCommandLive.setPlayerSearch("Jaydon Blue");
+assert.match(runtime.elements.get("playerTable").innerHTML, /Jaydon Blue/);
+assert.match(runtime.elements.get("playerTable").innerHTML, /ESPN market unavailable/);
+
+const jacobs = runtime.context.DraftCommandLive.playerIntelligence(34).playerTruth;
+assert.equal(jacobs.outcome.p50, 256.85);
+assert.equal(jacobs.outcome.p10, null);
+assert.equal(jacobs.outcome.p90, null);
+assert.equal(jacobs.outcome.bustProbability, null);
+assert.ok(jacobs.limitations.some((item) => item.includes("COMMISSIONER_EXEMPT")));
+const immutableBefore = runtime.context.DraftCommandLive.playerIntelligence(2).leagueValue.leagueValueScore;
+runtime.context.DraftCommandLive.recordManualPick(1);
+assert.equal(runtime.context.DraftCommandLive.playerIntelligence(2).leagueValue.leagueValueScore, immutableBefore, "live roster changes cannot mutate base League Value");
+assert.equal(runtime.context.DraftCommandLive.recommendations().bestPlayer.player.id === 143, false, "missing League Value cannot enter recommendations");
+assert.doesNotMatch(JSON.stringify(runtime.context.DraftCommandLive.decisionBoard()), /NaN|Infinity/);
+
+for (const mutate of [
+  (value) => value.playerRecords.pop(),
+  (value) => value.leagueValueRecords.pop(),
+  (value) => value.marketRecords.pop(),
+]) {
+  const corrupt = structuredClone(runtimeBundle);
+  mutate(corrupt);
+  const degraded = boot(null, corrupt);
+  assert.equal(degraded.context.DraftCommandLive.modelHealth().modelState, "fallback");
+  assert.equal(degraded.context.DraftCommandLive.modelHealth().validatedBaseAvailable, false);
+  assert.match(degraded.elements.get("modelStatusCopy").textContent, /fallback/i);
+  assert.ok(degraded.context.DraftCommandLive.decisionBoard().length > 0);
+  assert.doesNotThrow(() => degraded.context.DraftCommandLive.recordManualPick(1));
+}
+
+const incompatibleRuntime = structuredClone(runtimeBundle);
+incompatibleRuntime.schemaVersion = "9.0.0";
+const rejectedRuntime = boot(null, incompatibleRuntime);
+assert.equal(rejectedRuntime.context.DraftCommandLive.modelHealth().modelState, "rejected");
+assert.match(rejectedRuntime.elements.get("modelStatusCopy").textContent, /rejected safely/i);
+assert.ok(rejectedRuntime.context.DraftCommandLive.decisionBoard().length > 0);
+
 const index = read("index.html");
 const scripts = [...index.matchAll(/<script src="([^"]+)"/g)].map((match) => match[1]);
-assert.deepEqual(scripts.slice(-7), [
+assert.deepEqual(scripts.slice(-8), [
   "./data/players.js",
   "./data/model-package.js",
   "./data/opponent-intent-package.js",
   "./model/model-adapter.js",
   "./model/opponent-intent.js",
+  "./model/runtime-bundle-adapter.js",
   "./app.js",
   "./sync.js",
 ]);
