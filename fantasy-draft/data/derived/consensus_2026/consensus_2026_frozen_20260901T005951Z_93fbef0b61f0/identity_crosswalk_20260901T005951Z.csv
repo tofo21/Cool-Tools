@@ -1,0 +1,521 @@
+source_order,source_name,source_team,position,normalized_name,canonical_name,draft_command_id,draft_command_name,draft_command_team,draft_command_board_order,match_method,match_confidence,join_state
+1,Josh Allen,BUF,QB,joshallen,Josh Allen,25,Josh Allen,BUF,25,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+2,Drake Maye,NE,QB,drakemaye,Drake Maye,56,Drake Maye,NE,56,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+3,Lamar Jackson,BAL,QB,lamarjackson,Lamar Jackson,44,Lamar Jackson,BAL,44,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+4,Jayden Daniels,WAS,QB,jaydendaniels,Jayden Daniels,60,Jayden Daniels,WAS,60,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+5,Jalen Hurts,PHI,QB,jalenhurts,Jalen Hurts,64,Jalen Hurts,PHI,64,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+6,Jaxson Dart,NYG,QB,jaxsondart,Jaxson Dart,90,Jaxson Dart,NYG,90,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+7,Joe Burrow,CIN,QB,joeburrow,Joe Burrow,59,Joe Burrow,CIN,59,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+8,Brock Purdy,SF,QB,brockpurdy,Brock Purdy,104,Brock Purdy,SF,104,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+9,Dak Prescott,DAL,QB,dakprescott,Dak Prescott,75,Dak Prescott,DAL,75,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+10,Trevor Lawrence,JAC,QB,trevorlawrence,Trevor Lawrence,87,Trevor Lawrence,JAC,87,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+11,Patrick Mahomes II,KC,QB,patrickmahomes,Patrick Mahomes,112,Patrick Mahomes,KC,112,normalized_name_position_team,0.995,MATCHED_DRAFT_COMMAND
+12,Justin Herbert,LAC,QB,justinherbert,Justin Herbert,80,Justin Herbert,LAC,80,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+13,Caleb Williams,CHI,QB,calebwilliams,Caleb Williams,79,Caleb Williams,CHI,79,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+14,Bo Nix,DEN,QB,bonix,Bo Nix,113,Bo Nix,DEN,113,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+15,Matthew Stafford,LAR,QB,matthewstafford,Matthew Stafford,106,Matthew Stafford,LAR,106,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+16,Jared Goff,DET,QB,jaredgoff,Jared Goff,124,Jared Goff,DET,124,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+17,Tyler Shough,NO,QB,tylershough,Tyler Shough,138,Tyler Shough,NO,138,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+18,Baker Mayfield,TB,QB,bakermayfield,Baker Mayfield,131,Baker Mayfield,TB,131,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+19,Kyler Murray,MIN,QB,kylermurray,Kyler Murray,123,Kyler Murray,MIN,123,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+20,Daniel Jones,IND,QB,danieljones,Daniel Jones,155,Daniel Jones,IND,155,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+21,Malik Willis,MIA,QB,malikwillis,Malik Willis,148,Malik Willis,MIA,148,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+22,Jordan Love,GB,QB,jordanlove,Jordan Love,137,Jordan Love,GB,137,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+23,Sam Darnold,SEA,QB,samdarnold,Sam Darnold,160,Sam Darnold,SEA,160,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+24,C.J. Stroud,HOU,QB,cjstroud,C.J. Stroud,170,C.J. Stroud,HOU,170,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+25,Bryce Young,CAR,QB,bryceyoung,Bryce Young,177,Bryce Young,CAR,177,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+26,Geno Smith,NYJ,QB,genosmith,Geno Smith,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+27,Jacoby Brissett,ARI,QB,jacobybrissett,Jacoby Brissett,200,Jacoby Brissett,ARI,200,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+28,Cam Ward,TEN,QB,camward,Cam Ward,182,Cam Ward,TEN,182,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+29,Aaron Rodgers,PIT,QB,aaronrodgers,Aaron Rodgers,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+30,Fernando Mendoza,LV,QB,fernandomendoza,Fernando Mendoza,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+31,Tua Tagovailoa,ATL,QB,tuatagovailoa,Tua Tagovailoa,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+32,Deshaun Watson,CLE,QB,deshaunwatson,Deshaun Watson,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+33,Shedeur Sanders,CLE,QB,shedeursanders,Shedeur Sanders,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+34,Michael Penix Jr.,ATL,QB,michaelpenix,Michael Penix Jr.,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+35,Kirk Cousins,LV,QB,kirkcousins,Kirk Cousins,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+36,Ty Simpson,LAR,QB,tysimpson,Ty Simpson,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+37,Carson Beck,ARI,QB,carsonbeck,Carson Beck,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+38,J.J. McCarthy,MIN,QB,jjmccarthy,J.J. McCarthy,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+39,Anthony Richardson Sr.,IND,QB,anthonyrichardson,Anthony Richardson Sr.,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+40,Marcus Mariota,WAS,QB,marcusmariota,Marcus Mariota,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+41,Riley Leonard,IND,QB,rileyleonard,Riley Leonard,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+42,Davis Mills,HOU,QB,davismills,Davis Mills,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+43,Joe Milton III,DAL,QB,joemilton,Joe Milton III,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+44,Justin Fields,KC,QB,justinfields,Justin Fields,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+45,Shane Buechele,BUF,QB,shanebuechele,Shane Buechele,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+46,Jameis Winston,NYG,QB,jameiswinston,Jameis Winston,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+47,Kenny Pickett,CAR,QB,kennypickett,Kenny Pickett,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+48,Quinn Ewers,MIA,QB,quinnewers,Quinn Ewers,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+49,Tyson Bagent,CHI,QB,tysonbagent,Tyson Bagent,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+50,Will Levis,TEN,QB,willlevis,Will Levis,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+51,Jake Browning,TB,QB,jakebrowning,Jake Browning,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+52,Jarrett Stidham,DEN,QB,jarrettstidham,Jarrett Stidham,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+53,Teddy Bridgewater,DET,QB,teddybridgewater,Teddy Bridgewater,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+54,Tyrod Taylor,GB,QB,tyrodtaylor,Tyrod Taylor,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+55,Tommy DeVito,NE,QB,tommydevito,Tommy DeVito,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+56,Tyler Huntley,BAL,QB,tylerhuntley,Tyler Huntley,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+57,Mac Jones,SF,QB,macjones,Mac Jones,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+58,Trey Lance,LAC,QB,treylance,Trey Lance,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+59,Tanner McKee,PHI,QB,tannermckee,Tanner McKee,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+60,Joe Flacco,CIN,QB,joeflacco,Joe Flacco,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+61,Mason Rudolph,PIT,QB,masonrudolph,Mason Rudolph,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+62,Spencer Rattler,NO,QB,spencerrattler,Spencer Rattler,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+63,Drew Lock,SEA,QB,drewlock,Drew Lock,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+64,Andy Dalton,PHI,QB,andydalton,Andy Dalton,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+65,Behren Morton,NE,QB,behrenmorton,Behren Morton,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+66,Nick Mullens,JAC,QB,nickmullens,Nick Mullens,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+67,Chris Oladokun,KC,QB,chrisoladokun,Chris Oladokun,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+68,Gardner Minshew II,ARI,QB,gardnerminshew,Gardner Minshew II,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+69,Cade Klubnik,NYJ,QB,cadeklubnik,Cade Klubnik,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+70,Adrian Martinez,SF,QB,adrianmartinez,Adrian Martinez,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+71,Garrett Nussmeier,KC,QB,garrettnussmeier,Garrett Nussmeier,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+72,Cole Payton,PHI,QB,colepayton,Cole Payton,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+73,Kyle Allen,BUF,QB,kyleallen,Kyle Allen,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+74,Mitchell Trubisky,TEN,QB,mitchelltrubisky,Mitchell Trubisky,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+75,Jalen Milroe,SEA,QB,jalenmilroe,Jalen Milroe,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+76,Drew Allar,PIT,QB,drewallar,Drew Allar,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+77,Will Howard,PIT,QB,willhoward,Will Howard,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+78,Brady Cook,NYJ,QB,bradycook,Brady Cook,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+79,Josh Johnson,CIN,QB,joshjohnson,Josh Johnson,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+80,Stetson Bennett IV,LAR,QB,stetsonbennett,Stetson Bennett IV,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+81,Aidan O'Connell,LV,QB,aidanoconnell,Aidan O'Connell,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+82,Jahmyr Gibbs,DET,RB,jahmyrgibbs,Jahmyr Gibbs,1,Jahmyr Gibbs,DET,1,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+83,Bijan Robinson,ATL,RB,bijanrobinson,Bijan Robinson,2,Bijan Robinson,ATL,2,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+84,Christian McCaffrey,SF,RB,christianmccaffrey,Christian McCaffrey,5,Christian McCaffrey,SF,5,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+85,Jonathan Taylor,IND,RB,jonathantaylor,Jonathan Taylor,6,Jonathan Taylor,IND,6,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+86,Derrick Henry,BAL,RB,derrickhenry,Derrick Henry,16,Derrick Henry,BAL,16,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+87,De'Von Achane,MIA,RB,devonachane,De'Von Achane,12,De'Von Achane,MIA,12,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+88,James Cook III,BUF,RB,jamescook,James Cook,9,James Cook,BUF,9,normalized_name_position_team,0.995,MATCHED_DRAFT_COMMAND
+89,Ashton Jeanty,LV,RB,ashtonjeanty,Ashton Jeanty,18,Ashton Jeanty,LV,18,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+90,Chase Brown,CIN,RB,chasebrown,Chase Brown,14,Chase Brown,CIN,14,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+91,Saquon Barkley,PHI,RB,saquonbarkley,Saquon Barkley,13,Saquon Barkley,PHI,13,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+92,Josh Jacobs,GB,RB,joshjacobs,Josh Jacobs,34,Josh Jacobs,GB,34,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+93,Omarion Hampton,LAC,RB,omarionhampton,Omarion Hampton,15,Omarion Hampton,LAC,15,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+94,Breece Hall,NYJ,RB,breecehall,Breece Hall,31,Breece Hall,NYJ,31,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+95,Kenneth Walker III,KC,RB,kennethwalker,Kenneth Walker,19,Kenneth Walker,KC,19,normalized_name_position_team,0.995,MATCHED_DRAFT_COMMAND
+96,Jeremiyah Love,ARI,RB,jeremiyahlove,Jeremiyah Love,27,Jeremiyah Love,ARI,27,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+97,Kyren Williams,LAR,RB,kyrenwilliams,Kyren Williams,29,Kyren Williams,LAR,29,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+98,Cam Skattebo,NYG,RB,camskattebo,Cam Skattebo,45,Cam Skattebo,NYG,45,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+99,Javonte Williams,DAL,RB,javontewilliams,Javonte Williams,33,Javonte Williams,DAL,33,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+100,Travis Etienne Jr.,NO,RB,travisetienne,Travis Etienne,42,Travis Etienne,NO,42,normalized_name_position_team,0.995,MATCHED_DRAFT_COMMAND
+101,D'Andre Swift,CHI,RB,dandreswift,D'Andre Swift,46,D'Andre Swift,CHI,46,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+102,Bucky Irving,TB,RB,buckyirving,Bucky Irving,49,Bucky Irving,TB,49,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+103,Quinshon Judkins,CLE,RB,quinshonjudkins,Quinshon Judkins,47,Quinshon Judkins,CLE,47,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+104,Bhayshul Tuten,JAC,RB,bhayshultuten,Bhayshul Tuten,57,Bhayshul Tuten,JAC,57,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+105,TreVeyon Henderson,NE,RB,treveyonhenderson,TreVeyon Henderson,61,TreVeyon Henderson,NE,61,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+106,David Montgomery,HOU,RB,davidmontgomery,David Montgomery,53,David Montgomery,HOU,53,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+107,Jadarian Price,SEA,RB,jadarianprice,Jadarian Price,63,Jadarian Price,SEA,63,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+108,Tony Pollard,TEN,RB,tonypollard,Tony Pollard,77,Tony Pollard,TEN,77,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+109,Jaylen Warren,PIT,RB,jaylenwarren,Jaylen Warren,72,Jaylen Warren,PIT,72,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+110,Rico Dowdle,PIT,RB,ricodowdle,Rico Dowdle,82,Rico Dowdle,PIT,82,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+111,Chuba Hubbard,CAR,RB,chubahubbard,Chuba Hubbard,84,Chuba Hubbard,CAR,84,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+112,Rhamondre Stevenson,NE,RB,rhamondrestevenson,Rhamondre Stevenson,70,Rhamondre Stevenson,NE,70,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+113,J.K. Dobbins,DEN,RB,jkdobbins,J.K. Dobbins,91,J.K. Dobbins,DEN,91,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+114,RJ Harvey,DEN,RB,rjharvey,RJ Harvey,94,RJ Harvey,DEN,94,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+115,Rachaad White,WAS,RB,rachaadwhite,Rachaad White,111,Rachaad White,WAS,111,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+116,Aaron Jones Sr.,MIN,RB,aaronjones,Aaron Jones,114,Aaron Jones,MIN,114,normalized_name_position_team,0.995,MATCHED_DRAFT_COMMAND
+117,Kyle Monangai,CHI,RB,kylemonangai,Kyle Monangai,99,Kyle Monangai,CHI,99,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+118,Kenny Gainwell,TB,RB,kennygainwell,Kenny Gainwell,98,Kenny Gainwell,TB,98,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+119,Jacory Croskey-Merritt,WAS,RB,jacorycroskeymerritt,Jacory Croskey-Merritt,102,Jacory Croskey-Merritt,WAS,102,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+120,Jonathon Brooks,CAR,RB,jonathonbrooks,Jonathon Brooks,88,Jonathon Brooks,CAR,88,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+121,Jordan Mason,MIN,RB,jordanmason,Jordan Mason,116,Jordan Mason,MIN,116,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+122,Blake Corum,LAR,RB,blakecorum,Blake Corum,97,Blake Corum,LAR,97,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+123,Alvin Kamara,NO,RB,alvinkamara,Alvin Kamara,153,Alvin Kamara,NO,153,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+124,Tyjae Spears,TEN,RB,tyjaespears,Tyjae Spears,130,Tyjae Spears,TEN,130,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+125,Zach Charbonnet,SEA,RB,zachcharbonnet,Zach Charbonnet,135,Zach Charbonnet,SEA,135,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+126,Woody Marks,HOU,RB,woodymarks,Woody Marks,134,Woody Marks,HOU,134,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+127,Tyrone Tracy Jr.,NYG,RB,tyronetracy,Tyrone Tracy,195,Tyrone Tracy,NYG,195,normalized_name_position_team,0.995,MATCHED_DRAFT_COMMAND
+128,Isiah Pacheco,DET,RB,isiahpacheco,Isiah Pacheco,156,Isiah Pacheco,DET,156,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+129,Justice Hill,BAL,RB,justicehill,Justice Hill,194,Justice Hill,BAL,194,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+130,Chris Rodriguez Jr.,JAC,RB,chrisrodriguez,Chris Rodriguez,128,Chris Rodriguez,JAC,128,normalized_name_position_team,0.995,MATCHED_DRAFT_COMMAND
+131,Brian Robinson Jr.,ATL,RB,brianrobinson,Brian Robinson,152,Brian Robinson,ATL,152,normalized_name_position_team,0.995,MATCHED_DRAFT_COMMAND
+132,Dylan Sampson,CLE,RB,dylansampson,Dylan Sampson,159,Dylan Sampson,CLE,159,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+133,Samaje Perine,CIN,RB,samajeperine,Samaje Perine,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+134,Tyler Allgeier,ARI,RB,tylerallgeier,Tyler Allgeier,136,Tyler Allgeier,ARI,136,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+135,AJ Dillon,CAR,RB,ajdillon,AJ Dillon,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+136,Ty Johnson,BUF,RB,tyjohnson,Ty Johnson,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+137,Jordan James,SF,RB,jordanjames,Jordan James,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+138,Braelon Allen,NYJ,RB,braelonallen,Braelon Allen,166,Braelon Allen,NYJ,166,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+139,Emari Demercado,KC,RB,emaridemercado,Emari Demercado,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+140,Mike Washington Jr.,LV,RB,mikewashington,Mike Washington,145,Mike Washington,LV,145,normalized_name_position_team,0.995,MATCHED_DRAFT_COMMAND
+141,Kaelon Black,SF,RB,kaelonblack,Kaelon Black,181,Kaelon Black,SF,181,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+142,Tank Bigsby,PHI,RB,tankbigsby,Tank Bigsby,150,Tank Bigsby,PHI,150,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+143,Keaton Mitchell,LAC,RB,keatonmitchell,Keaton Mitchell,140,Keaton Mitchell,LAC,140,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+144,Malik Davis,DAL,RB,malikdavis,Malik Davis,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+145,Adam Randall,BAL,RB,adamrandall,Adam Randall,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+146,Chris Brooks,GB,RB,chrisbrooks,Chris Brooks,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+147,Kimani Vidal,LAC,RB,kimanividal,Kimani Vidal,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+148,James Conner,ARI,RB,jamesconner,James Conner,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+149,Emanuel Wilson,SEA,RB,emanuelwilson,Emanuel Wilson,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+150,Jaylen Wright,MIA,RB,jaylenwright,Jaylen Wright,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+151,Jawhar Jordan,HOU,RB,jawharjordan,Jawhar Jordan,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+152,Kyle Juszczyk,SF,RB,kylejuszczyk,Kyle Juszczyk,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+153,Jaydon Blue,DAL,RB,jaydonblue,Jaydon Blue,190,Jaydon Blue,DAL,190,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+154,MarShawn Lloyd,GB,RB,marshawnlloyd,MarShawn Lloyd,151,MarShawn Lloyd,GB,151,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+155,Isaiah Davis,NYJ,RB,isaiahdavis,Isaiah Davis,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+156,George Holani,SEA,RB,georgeholani,George Holani,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+157,LeQuint Allen Jr.,JAC,RB,lequintallen,LeQuint Allen Jr.,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+158,Sean Tucker,TB,RB,seantucker,Sean Tucker,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+159,Frank Gore Jr.,BUF,RB,frankgore,Frank Gore Jr.,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+160,Roschon Johnson,CHI,RB,roschonjohnson,Roschon Johnson,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+161,Ollie Gordon II,MIA,RB,olliegordon,Ollie Gordon,191,Ollie Gordon,MIA,191,normalized_name_position_team,0.995,MATCHED_DRAFT_COMMAND
+162,Ray Davis,BUF,RB,raydavis,Ray Davis,169,Ray Davis,BUF,169,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+163,Emmett Johnson,KC,RB,emmettjohnson,Emmett Johnson,184,Emmett Johnson,KC,184,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+164,DJ Giddens,IND,RB,djgiddens,DJ Giddens,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+165,Ty Chandler,NO,RB,tychandler,Ty Chandler,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+166,Jonah Coleman,DEN,RB,jonahcoleman,Jonah Coleman,147,Jonah Coleman,DEN,147,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+167,Brashard Smith,KC,RB,brashardsmith,Brashard Smith,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+168,Phil Mafah,DAL,RB,philmafah,Phil Mafah,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+169,Elijah Mitchell,PHI,RB,elijahmitchell,Elijah Mitchell,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+170,Jam Miller,NE,RB,jammiller,Jam Miller,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+171,Jeremy McNichols,WAS,RB,jeremymcnichols,Jeremy McNichols,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+172,Salvon Ahmed,CHI,RB,salvonahmed,Salvon Ahmed,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+173,Israel Abanikanda,DAL,RB,israelabanikanda,Israel Abanikanda,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+174,Dameon Pierce,PHI,RB,dameonpierce,Dameon Pierce,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+175,Audric Estime,NO,RB,audricestime,Audric Estime,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+176,Demond Claiborne,MIN,RB,demondclaiborne,Demond Claiborne,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+177,Donovan Edwards,MIA,RB,donovanedwards,Donovan Edwards,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+178,Will Shipley,PHI,RB,willshipley,Will Shipley,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+179,Seth McGowan,IND,RB,sethmcgowan,Seth McGowan,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+180,Najee Harris,LAC,RB,najeeharris,Najee Harris,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+181,Hunter Luepke,DAL,RB,hunterluepke,Hunter Luepke,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+182,Kaytron Allen,WAS,RB,kaytronallen,Kaytron Allen,199,Kaytron Allen,WAS,199,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+183,Tahj Brooks,CIN,RB,tahjbrooks,Tahj Brooks,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+184,Devin Neal,NO,RB,devinneal,Devin Neal,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+185,Devin Singletary,NYG,RB,devinsingletary,Devin Singletary,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+186,Nicholas Singleton,TEN,RB,nicholassingleton,Nicholas Singleton,196,Nicholas Singleton,TEN,196,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+187,Jerome Ford,WAS,RB,jeromeford,Jerome Ford,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+188,Tyler Badie,DEN,RB,tylerbadie,Tyler Badie,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+189,Isaac Guerendo,SF,RB,isaacguerendo,Isaac Guerendo,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+190,Michael Burton,CLE,RB,michaelburton,Michael Burton,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+191,Trevor Etienne,CAR,RB,trevoretienne,Trevor Etienne,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+192,Andrew Beck,NYJ,RB,andrewbeck,Andrew Beck,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+193,Alec Ingold,LAC,RB,alecingold,Alec Ingold,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+194,Adam Prentice,DEN,RB,adamprentice,Adam Prentice,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+195,Connor Heyward,LV,RB,connorheyward,Connor Heyward,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+196,Max Bredeson,MIN,RB,maxbredeson,Max Bredeson,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+197,Kendre Miller,NO,RB,kendremiller,Kendre Miller,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+198,Riley Nowakowski,PIT,RB,rileynowakowski,Riley Nowakowski,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+199,Reggie Gilliam,NE,RB,reggiegilliam,Reggie Gilliam,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+200,Patrick Ricard,NYG,RB,patrickricard,Patrick Ricard,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+201,Kaleb Johnson,PIT,RB,kalebjohnson,Kaleb Johnson,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+202,British Brooks,HOU,RB,britishbrooks,British Brooks,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+203,DeeJay Dallas,JAC,RB,deejaydallas,DeeJay Dallas,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+204,Kene Nwangwu,NYJ,RB,kenenwangwu,Kene Nwangwu,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+205,Bam Knight,ARI,RB,bamknight,Bam Knight,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+206,Trey Benson,ARI,RB,treybenson,Trey Benson,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+207,Jacob Saylors,DET,RB,jacobsaylors,Jacob Saylors,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+208,Zavier Scott,MIN,RB,zavierscott,Zavier Scott,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+209,Rasheen Ali,BAL,RB,rasheenali,Rasheen Ali,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+210,Dylan Laube,LV,RB,dylanlaube,Dylan Laube,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+211,Chris Collier,LV,RB,chriscollier,Chris Collier,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+212,Josh Williams,TB,RB,joshwilliams,Josh Williams,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+213,Puka Nacua,LAR,WR,pukanacua,Puka Nacua,4,Puka Nacua,LAR,4,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+214,Ja'Marr Chase,CIN,WR,jamarrchase,Ja'Marr Chase,3,Ja'Marr Chase,CIN,3,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+215,Jaxon Smith-Njigba,SEA,WR,jaxonsmithnjigba,Jaxon Smith-Njigba,7,Jaxon Smith-Njigba,SEA,7,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+216,Amon-Ra St. Brown,DET,WR,amonrastbrown,Amon-Ra St. Brown,8,Amon-Ra St. Brown,DET,8,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+217,Drake London,ATL,WR,drakelondon,Drake London,17,Drake London,ATL,17,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+218,CeeDee Lamb,DAL,WR,ceedeelamb,CeeDee Lamb,10,CeeDee Lamb,DAL,10,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+219,Rashee Rice,KC,WR,rasheerice,Rashee Rice,30,Rashee Rice,KC,30,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+220,Justin Jefferson,MIN,WR,justinjefferson,Justin Jefferson,11,Justin Jefferson,MIN,11,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+221,A.J. Brown,NE,WR,ajbrown,A.J. Brown,20,A.J. Brown,NE,20,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+222,George Pickens,DAL,WR,georgepickens,George Pickens,24,George Pickens,DAL,24,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+223,Chris Olave,NO,WR,chrisolave,Chris Olave,26,Chris Olave,NO,26,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+224,Nico Collins,HOU,WR,nicocollins,Nico Collins,22,Nico Collins,HOU,22,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+225,Zay Flowers,BAL,WR,zayflowers,Zay Flowers,37,Zay Flowers,BAL,37,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+226,Malik Nabers,NYG,WR,maliknabers,Malik Nabers,28,Malik Nabers,NYG,28,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+227,Garrett Wilson,NYJ,WR,garrettwilson,Garrett Wilson,38,Garrett Wilson,NYJ,38,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+228,DeVonta Smith,PHI,WR,devontasmith,DeVonta Smith,32,DeVonta Smith,PHI,32,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+229,Emeka Egbuka,TB,WR,emekaegbuka,Emeka Egbuka,41,Emeka Egbuka,TB,41,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+230,Tetairoa McMillan,CAR,WR,tetairoamcmillan,Tetairoa McMillan,36,Tetairoa McMillan,CAR,36,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+231,Davante Adams,LAR,WR,davanteadams,Davante Adams,48,Davante Adams,LAR,48,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+232,Tee Higgins,CIN,WR,teehiggins,Tee Higgins,35,Tee Higgins,CIN,35,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+233,Jameson Williams,DET,WR,jamesonwilliams,Jameson Williams,55,Jameson Williams,DET,55,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+234,Rome Odunze,CHI,WR,romeodunze,Rome Odunze,58,Rome Odunze,CHI,58,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+235,Terry McLaurin,WAS,WR,terrymclaurin,Terry McLaurin,51,Terry McLaurin,WAS,51,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+236,Alec Pierce,IND,WR,alecpierce,Alec Pierce,93,Alec Pierce,IND,93,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+237,Ladd McConkey,LAC,WR,laddmcconkey,Ladd McConkey,39,Ladd McConkey,LAC,39,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+238,DJ Moore,BUF,WR,djmoore,DJ Moore,54,DJ Moore,BUF,54,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+239,Jaylen Waddle,DEN,WR,jaylenwaddle,Jaylen Waddle,43,Jaylen Waddle,DEN,43,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+240,Luther Burden III,CHI,WR,lutherburden,Luther Burden,52,Luther Burden,CHI,52,normalized_name_position_team,0.995,MATCHED_DRAFT_COMMAND
+241,Mike Evans,SF,WR,mikeevans,Mike Evans,62,Mike Evans,SF,62,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+242,Courtland Sutton,DEN,WR,courtlandsutton,Courtland Sutton,81,Courtland Sutton,DEN,81,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+243,Marvin Harrison Jr.,ARI,WR,marvinharrison,Marvin Harrison,67,Marvin Harrison,ARI,67,normalized_name_position_team,0.995,MATCHED_DRAFT_COMMAND
+244,Christian Watson,GB,WR,christianwatson,Christian Watson,65,Christian Watson,GB,65,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+245,DK Metcalf,PIT,WR,dkmetcalf,DK Metcalf,73,DK Metcalf,PIT,73,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+246,Brian Thomas Jr.,JAC,WR,brianthomas,Brian Thomas,78,Brian Thomas,JAC,78,normalized_name_position_team,0.995,MATCHED_DRAFT_COMMAND
+247,Michael Pittman Jr.,PIT,WR,michaelpittman,Michael Pittman,86,Michael Pittman,PIT,86,normalized_name_position_team,0.995,MATCHED_DRAFT_COMMAND
+248,Parker Washington,JAC,WR,parkerwashington,Parker Washington,69,Parker Washington,JAC,69,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+249,Jakobi Meyers,JAC,WR,jakobimeyers,Jakobi Meyers,109,Jakobi Meyers,JAC,109,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+250,Carnell Tate,TEN,WR,carnelltate,Carnell Tate,66,Carnell Tate,TEN,66,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+251,Wan'Dale Robinson,TEN,WR,wandalerobinson,Wan'Dale Robinson,103,Wan'Dale Robinson,TEN,103,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+252,Jayden Reed,GB,WR,jaydenreed,Jayden Reed,110,Jayden Reed,GB,110,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+253,Deebo Samuel Sr.,SF,WR,deebosamuel,Deebo Samuel,133,Deebo Samuel,SF,133,normalized_name_position_team,0.995,MATCHED_DRAFT_COMMAND
+254,Quentin Johnston,LAC,WR,quentinjohnston,Quentin Johnston,101,Quentin Johnston,LAC,101,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+255,Michael Wilson,ARI,WR,michaelwilson,Michael Wilson,83,Michael Wilson,ARI,83,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+256,Chris Godwin Jr.,TB,WR,chrisgodwin,Chris Godwin,89,Chris Godwin,TB,89,normalized_name_position_team,0.995,MATCHED_DRAFT_COMMAND
+257,Jordan Addison,MIN,WR,jordanaddison,Jordan Addison,95,Jordan Addison,MIN,95,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+258,Jordyn Tyson,NO,WR,jordyntyson,Jordyn Tyson,127,Jordyn Tyson,NO,127,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+259,Stefon Diggs,WAS,WR,stefondiggs,Stefon Diggs,92,Stefon Diggs,WAS,92,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+260,Xavier Worthy,KC,WR,xavierworthy,Xavier Worthy,126,Xavier Worthy,KC,126,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+261,Josh Downs,IND,WR,joshdowns,Josh Downs,96,Josh Downs,IND,96,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+262,Khalil Shakir,BUF,WR,khalilshakir,Khalil Shakir,129,Khalil Shakir,BUF,129,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+263,Makai Lemon,PHI,WR,makailemon,Makai Lemon,100,Makai Lemon,PHI,100,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+264,Romeo Doubs,NE,WR,romeodoubs,Romeo Doubs,122,Romeo Doubs,NE,122,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+265,Rashid Shaheed,SEA,WR,rashidshaheed,Rashid Shaheed,141,Rashid Shaheed,SEA,141,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+266,John Metchie III,CAR,WR,johnmetchie,John Metchie III,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+267,Matthew Golden,GB,WR,matthewgolden,Matthew Golden,108,Matthew Golden,GB,108,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+268,Calvin Ridley,TEN,WR,calvinridley,Calvin Ridley,192,Calvin Ridley,TEN,192,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+269,Jalen Coker,CAR,WR,jalencoker,Jalen Coker,121,Jalen Coker,CAR,121,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+270,Theo Wease Jr.,MIA,WR,theowease,Theo Wease Jr.,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+271,Tre Tucker,LV,WR,tretucker,Tre Tucker,154,Tre Tucker,LV,154,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+272,Tank Dell,HOU,WR,tankdell,Tank Dell,189,Tank Dell,HOU,189,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+273,KC Concepcion,CLE,WR,kcconcepcion,KC Concepcion,120,KC Concepcion,CLE,120,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+274,Jerry Jeudy,CLE,WR,jerryjeudy,Jerry Jeudy,171,Jerry Jeudy,CLE,171,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+275,Rashod Bateman,BAL,WR,rashodbateman,Rashod Bateman,186,Rashod Bateman,BAL,186,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+276,Jayden Higgins,HOU,WR,jaydenhiggins,Jayden Higgins,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+277,Jalen McMillan,TB,WR,jalenmcmillan,Jalen McMillan,149,Jalen McMillan,TB,149,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+278,Jauan Jennings,MIN,WR,jauanjennings,Jauan Jennings,183,Jauan Jennings,MIN,183,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+279,Jalen Nailor,LV,WR,jalennailor,Jalen Nailor,162,Jalen Nailor,LV,162,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+280,De'Zhaun Stribling,SF,WR,dezhaunstribling,De'Zhaun Stribling,118,De'Zhaun Stribling,SF,118,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+281,Adonai Mitchell,NYJ,WR,adonaimitchell,Adonai Mitchell,168,Adonai Mitchell,NYJ,168,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+282,Antonio Williams,WAS,WR,antoniowilliams,Antonio Williams,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+283,Cooper Kupp,SEA,WR,cooperkupp,Cooper Kupp,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+284,Denzel Boston,CLE,WR,denzelboston,Denzel Boston,144,Denzel Boston,CLE,144,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+285,Omar Cooper Jr.,NYJ,WR,omarcooper,Omar Cooper,188,Omar Cooper,NYJ,188,normalized_name_position_team,0.995,MATCHED_DRAFT_COMMAND
+286,Germie Bernard,PIT,WR,germiebernard,Germie Bernard,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+287,Travis Hunter,JAC,WR,travishunter,Travis Hunter,132,Travis Hunter,JAC,132,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+288,Xavier Legette,CAR,WR,xavierlegette,Xavier Legette,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+289,Ja'Kobi Lane,BAL,WR,jakobilane,Ja'Kobi Lane,178,Ja'Kobi Lane,BAL,178,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+290,Kayshon Boutte,NE,WR,kayshonboutte,Kayshon Boutte,180,Kayshon Boutte,HOU,180,exact_name_position_team_conflict,0.990,MATCHED_DRAFT_COMMAND
+291,Darnell Mooney,NYG,WR,darnellmooney,Darnell Mooney,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+292,Bub Means,NO,WR,bubmeans,Bub Means,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+293,Malik Washington,MIA,WR,malikwashington,Malik Washington,187,Malik Washington,MIA,187,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+294,Darius Slayton,NYG,WR,dariusslayton,Darius Slayton,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+295,Troy Franklin,DEN,WR,troyfranklin,Troy Franklin,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+296,Tyquan Thornton,KC,WR,tyquanthornton,Tyquan Thornton,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+297,Zachariah Branch,ATL,WR,zachariahbranch,Zachariah Branch,193,Zachariah Branch,ATL,193,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+298,Tory Horton,SEA,WR,toryhorton,Tory Horton,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+299,Christian Kirk,SF,WR,christiankirk,Christian Kirk,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+300,Devaughn Vele,NO,WR,devaughnvele,Devaughn Vele,167,Devaughn Vele,NO,167,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+301,Hollywood Brown,PHI,WR,hollywoodbrown,Hollywood Brown,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+302,Andrei Iosivas,CIN,WR,andreiiosivas,Andrei Iosivas,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+303,Ryan Flournoy,DAL,WR,ryanflournoy,Ryan Flournoy,175,Ryan Flournoy,DAL,175,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+304,Isaac TeSlaa,DET,WR,isaacteslaa,Isaac TeSlaa,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+305,Tre' Harris,LAC,WR,treharris,Tre' Harris,179,Tre' Harris,LAC,179,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+306,Jalen Tolbert,MIA,WR,jalentolbert,Jalen Tolbert,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+307,Chris Bell,MIA,WR,chrisbell,Chris Bell,198,Chris Bell,MIA,198,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+308,Caleb Douglas,MIA,WR,calebdouglas,Caleb Douglas,158,Caleb Douglas,MIA,158,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+309,Dyami Brown,WAS,WR,dyamibrown,Dyami Brown,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+310,Ted Hurst III,TB,WR,tedhurst,Ted Hurst III,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+311,Treylon Burks,WAS,WR,treylonburks,Treylon Burks,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+312,Ashton Dulin,IND,WR,ashtondulin,Ashton Dulin,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+313,Jack Bech,LV,WR,jackbech,Jack Bech,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+314,Elic Ayomanor,TEN,WR,elicayomanor,Elic Ayomanor,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+315,Chimere Dike,TEN,WR,chimeredike,Chimere Dike,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+316,Jahan Dotson,ATL,WR,jahandotson,Jahan Dotson,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+317,Jaylin Noel,HOU,WR,jaylinnoel,Jaylin Noel,172,Jaylin Noel,HOU,172,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+318,Pat Bryant,DEN,WR,patbryant,Pat Bryant,176,Pat Bryant,DEN,176,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+319,Savion Williams,GB,WR,savionwilliams,Savion Williams,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+320,Joshua Palmer,BUF,WR,joshuapalmer,Joshua Palmer,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+321,Marvin Mims Jr.,DEN,WR,marvinmims,Marvin Mims Jr.,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+322,KaVontae Turpin,DAL,WR,kavontaeturpin,KaVontae Turpin,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+323,Olamide Zaccheaus,ATL,WR,olamidezaccheaus,Olamide Zaccheaus,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+324,Luke McCaffrey,WAS,WR,lukemccaffrey,Luke McCaffrey,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+325,Dontayvion Wicks,PHI,WR,dontayvionwicks,Dontayvion Wicks,163,Dontayvion Wicks,PHI,163,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+326,Xavier Hutchinson,HOU,WR,xavierhutchinson,Xavier Hutchinson,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+327,Calvin Austin III,NYG,WR,calvinaustin,Calvin Austin III,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+328,DeMario Douglas,NE,WR,demariodouglas,DeMario Douglas,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+329,Elijah Sarratt,BAL,WR,elijahsarratt,Elijah Sarratt,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+330,Keon Coleman,BUF,WR,keoncoleman,Keon Coleman,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+331,Jaylin Lane,WAS,WR,jaylinlane,Jaylin Lane,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+332,Nick Westbrook-Ikhine,IND,WR,nickwestbrookikhine,Nick Westbrook-Ikhine,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+333,Jahdae Walker,CHI,WR,jahdaewalker,Jahdae Walker,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+334,Demarcus Robinson,SF,WR,demarcusrobinson,Demarcus Robinson,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+335,Cedric Tillman,CLE,WR,cedrictillman,Cedric Tillman,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+336,Tutu Atwell,MIA,WR,tutuatwell,Tutu Atwell,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+337,Kevin Coleman Jr.,MIA,WR,kevincoleman,Kevin Coleman Jr.,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+338,Kendrick Bourne,ARI,WR,kendrickbourne,Kendrick Bourne,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+339,Kalif Raymond,CHI,WR,kalifraymond,Kalif Raymond,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+340,Cyrus Allen,KC,WR,cyrusallen,Cyrus Allen,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+341,Skyler Bell,BUF,WR,skylerbell,Skyler Bell,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+342,Bryce Lance,NO,WR,brycelance,Bryce Lance,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+343,Jordan Whittington,LAR,WR,jordanwhittington,Jordan Whittington,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+344,Devontez Walker,BAL,WR,devontezwalker,Devontez Walker,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+345,Zavion Thomas,CHI,WR,zavionthomas,Zavion Thomas,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+346,Odell Beckham Jr.,NYG,WR,odellbeckham,Odell Beckham Jr.,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+347,Malachi Fields,NYG,WR,malachifields,Malachi Fields,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+348,Dont'e Thornton Jr.,LV,WR,dontethornton,Dont'e Thornton Jr.,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+349,Isaiah Bond,CLE,WR,isaiahbond,Isaiah Bond,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+350,Konata Mumpfield,LAR,WR,konatamumpfield,Konata Mumpfield,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+351,Brenen Thompson,LAC,WR,brenenthompson,Brenen Thompson,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+352,Mack Hollins,NE,WR,mackhollins,Mack Hollins,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+353,KeAndre Lambert-Smith,LAC,WR,keandrelambertsmith,KeAndre Lambert-Smith,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+354,Kyle Williams,NE,WR,kylewilliams,Kyle Williams,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+355,Tez Johnson,TB,WR,tezjohnson,Tez Johnson,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+356,Jimmy Horn Jr.,CAR,WR,jimmyhorn,Jimmy Horn Jr.,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+357,Mitch Tinsley,CIN,WR,mitchtinsley,Mitch Tinsley,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+358,Jalen Royals,KC,WR,jalenroyals,Jalen Royals,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+359,Anthony Gould,IND,WR,anthonygould,Anthony Gould,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+360,Malik Benson,LV,WR,malikbenson,Malik Benson,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+361,Greg Dortch,DET,WR,gregdortch,Greg Dortch,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+362,Bo Melton,GB,WR,bomelton,Bo Melton,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+363,Ben Skowronek,PIT,WR,benskowronek,Ben Skowronek,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+364,Tyrell Shavers,BUF,WR,tyrellshavers,Tyrell Shavers,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+365,Derius Davis,LAC,WR,deriusdavis,Derius Davis,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+366,Malachi Corley,CLE,WR,malachicorley,Malachi Corley,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+367,Xavier Smith,LAR,WR,xaviersmith,Xavier Smith,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+368,Isaiah Williams,NYJ,WR,isaiahwilliams,Isaiah Williams,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+369,Colbie Young,CIN,WR,colbieyoung,Colbie Young,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+370,CJ Daniels,LAR,WR,cjdaniels,CJ Daniels,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+371,Justin Watson,HOU,WR,justinwatson,Justin Watson,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+372,Jonathan Mingo,DAL,WR,jonathanmingo,Jonathan Mingo,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+373,Tai Felton,MIN,WR,taifelton,Tai Felton,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+374,Darius Cooper,PHI,WR,dariuscooper,Darius Cooper,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+375,Barion Brown,NO,WR,barionbrown,Barion Brown,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+376,Laquon Treadwell,IND,WR,laquontreadwell,Laquon Treadwell,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+377,Reggie Virgil,ARI,WR,reggievirgil,Reggie Virgil,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+378,Brycen Tremayne,CAR,WR,brycentremayne,Brycen Tremayne,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+379,Kaden Wetjen,PIT,WR,kadenwetjen,Kaden Wetjen,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+380,Arian Smith,NYJ,WR,ariansmith,Arian Smith,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+381,Kameron Johnson,TB,WR,kameronjohnson,Kameron Johnson,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+382,JuJu Smith-Schuster,NYG,WR,jujusmithschuster,JuJu Smith-Schuster,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+383,David Moore,CAR,WR,davidmoore,David Moore,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+384,Braxton Berrios,NYG,WR,braxtonberrios,Braxton Berrios,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+385,Devin Duvernay,ARI,WR,devinduvernay,Devin Duvernay,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+386,Mason Kinsey,TEN,WR,masonkinsey,Mason Kinsey,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+387,Michael Bandy,DEN,WR,michaelbandy,Michael Bandy,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+388,Skyy Moore,GB,WR,skyymoore,Skyy Moore,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+389,Britain Covey,PHI,WR,britaincovey,Britain Covey,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+390,Dareke Young,LV,WR,darekeyoung,Dareke Young,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+391,Jacob Cowing,SF,WR,jacobcowing,Jacob Cowing,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+392,Charlie Jones,CIN,WR,charliejones,Charlie Jones,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+393,Jalen Brooks,ARI,WR,jalenbrooks,Jalen Brooks,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+394,Nikko Remigio,KC,WR,nikkoremigio,Nikko Remigio,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+395,Jeshaun Jones,MIN,WR,jeshaunjones,Jeshaun Jones,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+396,Mason Tipton,NO,WR,masontipton,Mason Tipton,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+397,Efton Chism III,NE,WR,eftonchism,Efton Chism III,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+398,LaJohntay Wester,BAL,WR,lajohntaywester,LaJohntay Wester,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+399,Ke'Shawn Williams,CIN,WR,keshawnwilliams,Ke'Shawn Williams,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+400,Myles Price,MIN,WR,mylesprice,Myles Price,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+401,Gage Larvadain,CLE,WR,gagelarvadain,Gage Larvadain,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+402,Josh Cameron,JAC,WR,joshcameron,Josh Cameron,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+403,Trey McBride,ARI,TE,treymcbride,Trey McBride,23,Trey McBride,ARI,23,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+404,Brock Bowers,LV,TE,brockbowers,Brock Bowers,21,Brock Bowers,LV,21,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+405,Colston Loveland,CHI,TE,colstonloveland,Colston Loveland,40,Colston Loveland,CHI,40,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+406,Tyler Warren,IND,TE,tylerwarren,Tyler Warren,50,Tyler Warren,IND,50,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+407,Kyle Pitts Sr.,ATL,TE,kylepitts,Kyle Pitts,74,Kyle Pitts,ATL,74,normalized_name_position_team,0.995,MATCHED_DRAFT_COMMAND
+408,Harold Fannin Jr.,CLE,TE,haroldfannin,Harold Fannin,71,Harold Fannin,CLE,71,normalized_name_position_team,0.995,MATCHED_DRAFT_COMMAND
+409,Sam LaPorta,DET,TE,samlaporta,Sam LaPorta,68,Sam LaPorta,DET,68,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+410,Dallas Goedert,PHI,TE,dallasgoedert,Dallas Goedert,117,Dallas Goedert,PHI,117,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+411,Tucker Kraft,GB,TE,tuckerkraft,Tucker Kraft,76,Tucker Kraft,GB,76,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+412,Travis Kelce,KC,TE,traviskelce,Travis Kelce,105,Travis Kelce,KC,105,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+413,George Kittle,SF,TE,georgekittle,George Kittle,85,George Kittle,SF,85,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+414,Mark Andrews,BAL,TE,markandrews,Mark Andrews,125,Mark Andrews,BAL,125,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+415,Isaiah Likely,NYG,TE,isaiahlikely,Isaiah Likely,115,Isaiah Likely,NYG,115,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+416,Dalton Kincaid,BUF,TE,daltonkincaid,Dalton Kincaid,107,Dalton Kincaid,BUF,107,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+417,Jake Ferguson,DAL,TE,jakeferguson,Jake Ferguson,119,Jake Ferguson,DAL,119,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+418,Hunter Henry,NE,TE,hunterhenry,Hunter Henry,139,Hunter Henry,NE,139,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+419,Juwan Johnson,NO,TE,juwanjohnson,Juwan Johnson,142,Juwan Johnson,NO,142,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+420,Brenton Strange,JAC,TE,brentonstrange,Brenton Strange,146,Brenton Strange,JAC,146,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+421,Dalton Schultz,HOU,TE,daltonschultz,Dalton Schultz,164,Dalton Schultz,HOU,164,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+422,T.J. Hockenson,MIN,TE,tjhockenson,T.J. Hockenson,161,T.J. Hockenson,MIN,161,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+423,Pat Freiermuth,PIT,TE,patfreiermuth,Pat Freiermuth,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+424,Greg Dulcich,MIA,TE,gregdulcich,Greg Dulcich,185,Greg Dulcich,MIA,185,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+425,Kenyon Sadiq,NYJ,TE,kenyonsadiq,Kenyon Sadiq,173,Kenyon Sadiq,NYJ,173,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+426,Cade Otton,TB,TE,cadeotton,Cade Otton,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+427,AJ Barner,SEA,TE,ajbarner,AJ Barner,174,AJ Barner,SEA,174,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+428,Chig Okonkwo,WAS,TE,chigokonkwo,Chig Okonkwo,165,Chig Okonkwo,WAS,165,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+429,Oronde Gadsden II,LAC,TE,orondegadsden,Oronde Gadsden II,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+430,Terrance Ferguson,LAR,TE,terranceferguson,Terrance Ferguson,157,Terrance Ferguson,LAR,157,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+431,Mike Gesicki,CIN,TE,mikegesicki,Mike Gesicki,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+432,Evan Engram,DEN,TE,evanengram,Evan Engram,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+433,Gunnar Helm,TEN,TE,gunnarhelm,Gunnar Helm,197,Gunnar Helm,TEN,197,exact_name_position_team,1.000,MATCHED_DRAFT_COMMAND
+434,Mason Taylor,NYJ,TE,masontaylor,Mason Taylor,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+435,Colby Parkinson,LAR,TE,colbyparkinson,Colby Parkinson,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+436,David Njoku,LAC,TE,davidnjoku,David Njoku,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+437,Michael Mayer,LV,TE,michaelmayer,Michael Mayer,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+438,Dawson Knox,BUF,TE,dawsonknox,Dawson Knox,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+439,Theo Johnson,NYG,TE,theojohnson,Theo Johnson,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+440,Darnell Washington,PIT,TE,darnellwashington,Darnell Washington,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+441,Tyler Higbee,LAR,TE,tylerhigbee,Tyler Higbee,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+442,Cole Kmet,CHI,TE,colekmet,Cole Kmet,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+443,Ja'Tavion Sanders,CAR,TE,jatavionsanders,Ja'Tavion Sanders,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+444,Noah Fant,NO,TE,noahfant,Noah Fant,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+445,Tommy Tremble,CAR,TE,tommytremble,Tommy Tremble,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+446,Will Kacmarek,MIA,TE,willkacmarek,Will Kacmarek,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+447,Erick All Jr.,CIN,TE,erickall,Erick All Jr.,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+448,Charlie Kolar,LAC,TE,charliekolar,Charlie Kolar,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+449,Austin Hooper,ATL,TE,austinhooper,Austin Hooper,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+450,Josh Oliver,MIN,TE,josholiver,Josh Oliver,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+451,Eli Stowers,PHI,TE,elistowers,Eli Stowers,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+452,Daniel Bellinger,TEN,TE,danielbellinger,Daniel Bellinger,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+453,Brock Wright,DET,TE,brockwright,Brock Wright,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+454,Noah Gray,KC,TE,noahgray,Noah Gray,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+455,Luke Musgrave,GB,TE,lukemusgrave,Luke Musgrave,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+456,Elijah Arroyo,SEA,TE,elijaharroyo,Elijah Arroyo,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+457,Jake Tonges,SF,TE,jaketonges,Jake Tonges,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+458,Adam Trautman,DEN,TE,adamtrautman,Adam Trautman,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+459,Eli Raridon,NE,TE,eliraridon,Eli Raridon,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+460,Davis Allen,LAR,TE,davisallen,Davis Allen,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+461,Ben Sims,MIA,TE,bensims,Ben Sims,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+462,Marlin Klein,HOU,TE,marlinklein,Marlin Klein,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+463,Elijah Higgins,ARI,TE,elijahhiggins,Elijah Higgins,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+464,John Bates,WAS,TE,johnbates,John Bates,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+465,Jeremy Ruckert,NYJ,TE,jeremyruckert,Jeremy Ruckert,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+466,Mitchell Evans,CAR,TE,mitchellevans,Mitchell Evans,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+467,Nate Boerkircher,JAC,TE,nateboerkircher,Nate Boerkircher,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+468,Connor Heyward,LV,TE,connorheyward,Connor Heyward,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+469,Nick Vannett,SEA,TE,nickvannett,Nick Vannett,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+470,Drew Sample,CIN,TE,drewsample,Drew Sample,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+471,Nate Adkins,DEN,TE,nateadkins,Nate Adkins,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+472,Ben Sinnott,WAS,TE,bensinnott,Ben Sinnott,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+473,Cade Stover,HOU,TE,cadestover,Cade Stover,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+474,Jackson Hawes,BUF,TE,jacksonhawes,Jackson Hawes,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+475,Zack Kuntz,DAL,TE,zackkuntz,Zack Kuntz,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+476,Jack Endries,CIN,TE,jackendries,Jack Endries,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+477,Luke Schoonmaker,DAL,TE,lukeschoonmaker,Luke Schoonmaker,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+478,Will Mallory,IND,TE,willmallory,Will Mallory,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+479,Hayden Rucci,SF,TE,haydenrucci,Hayden Rucci,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+480,Charlie Woerner,ATL,TE,charliewoerner,Charlie Woerner,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+481,Grant Calcaterra,PHI,TE,grantcalcaterra,Grant Calcaterra,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+482,Foster Moreau,HOU,TE,fostermoreau,Foster Moreau,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+483,Rivaldo Fairweather,ARI,TE,rivaldofairweather,Rivaldo Fairweather,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+484,Bauer Sharp,TB,TE,bauersharp,Bauer Sharp,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+485,Tanner Hudson,CIN,TE,tannerhudson,Tanner Hudson,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+486,Zaire Mitchell-Paden,NO,TE,zairemitchellpaden,Zaire Mitchell-Paden,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+487,Mo Alie-Cox,IND,TE,moaliecox,Mo Alie-Cox,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+488,Thomas Fidone II,NYG,TE,thomasfidone,Thomas Fidone II,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+489,Jaheim Bell,PIT,TE,jaheimbell,Jaheim Bell,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+490,Drake Dabney,GB,TE,drakedabney,Drake Dabney,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+491,Seydou Traore,MIA,TE,seydoutraore,Seydou Traore,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+492,Durham Smythe,BAL,TE,durhamsmythe,Durham Smythe,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+493,Payne Durham,TB,TE,paynedurham,Payne Durham,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+494,Max Klare,LAR,TE,maxklare,Max Klare,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+495,Justin Joly,DEN,TE,justinjoly,Justin Joly,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+496,Oscar Delp,NO,TE,oscardelp,Oscar Delp,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+497,Devin Culp,TB,TE,devinculp,Devin Culp,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+498,Tanner Koziol,JAC,TE,tannerkoziol,Tanner Koziol,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+499,Sam Roush,CHI,TE,samroush,Sam Roush,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+500,Tip Reiman,ARI,TE,tipreiman,Tip Reiman,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+501,Josh Cuevas,BAL,TE,joshcuevas,Josh Cuevas,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+502,Hunter Long,JAC,TE,hunterlong,Hunter Long,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+503,Joe Royer,CLE,TE,joeroyer,Joe Royer,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+504,Chris Manhertz,NYG,TE,chrismanhertz,Chris Manhertz,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+505,Luke Farrell,SF,TE,lukefarrell,Luke Farrell,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+506,Brevyn Spann-Ford,DAL,TE,brevynspannford,Brevyn Spann-Ford,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+507,Ko Kieft,TB,TE,kokieft,Ko Kieft,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+508,CJ Dippre,NE,TE,cjdippre,CJ Dippre,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+509,Tyler Conklin,DET,TE,tylerconklin,Tyler Conklin,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+510,Eric Saubert,SEA,TE,ericsaubert,Eric Saubert,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+511,Drew Ogletree,IND,TE,drewogletree,Drew Ogletree,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+512,Johnny Mundt,PHI,TE,johnnymundt,Johnny Mundt,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+513,Ian Thomas,LV,TE,ianthomas,Ian Thomas,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+514,Jack Stoll,CLE,TE,jackstoll,Jack Stoll,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+515,Quintin Morris,JAC,TE,quintinmorris,Quintin Morris,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+516,Cole Turner,MIA,TE,coleturner,Cole Turner,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+517,Jelani Woods,NYJ,TE,jelaniwoods,Jelani Woods,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+518,Lucas Krull,DEN,TE,lucaskrull,Lucas Krull,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+519,Blake Whiteheart,CLE,TE,blakewhiteheart,Blake Whiteheart,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
+520,Julian Hill,NE,TE,julianhill,Julian Hill,,,,,source_only_exact_name_position,1.000,SOURCE_ONLY
