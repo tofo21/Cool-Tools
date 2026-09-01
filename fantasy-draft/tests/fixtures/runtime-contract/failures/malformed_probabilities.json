@@ -1,0 +1,604 @@
+{
+  "artifactId": "synthetic-opponent-intent",
+  "artifactType": "opponent-intent",
+  "artifactVersion": "synthetic-oi-v1",
+  "effectiveAt": "2026-08-31T22:00:00Z",
+  "espnLeagueId": "synthetic-espn-league",
+  "expiresAt": "2026-09-03T12:00:00Z",
+  "generatedAt": "2026-08-31T22:00:00Z",
+  "integrity": {
+    "canonicalization": "draft-command-canonical-json-v1",
+    "payloadSha256": "d4da803385ecc07ff03642f5e78f731664e4f3b0bab326added5a21d090d13c6"
+  },
+  "limitations": [
+    "Synthetic fixture; not an opponent forecast."
+  ],
+  "modelArtifactVersion": "synthetic-oi-v1",
+  "opponents": {
+    "team-01": {
+      "confidence": 0.77,
+      "currentRoster": [
+        {
+          "internalPlayerId": 1015,
+          "position": "WR",
+          "rosterSlot": "KEEPER"
+        }
+      ],
+      "displayLabel": "M01",
+      "explanatoryDrivers": [
+        "synthetic roster state",
+        "synthetic room price"
+      ],
+      "limitations": [
+        "Synthetic fixture; not an opponent forecast."
+      ],
+      "nextOverallPick": 1,
+      "openRosterPositions": {
+        "BENCH": 7,
+        "FLEX": 2,
+        "QB": 1,
+        "RB": 2,
+        "TE": 1,
+        "WR": 2
+      },
+      "otherProbability": 0.45,
+      "positionProbabilities": {
+        "QB": 0.2,
+        "RB": 0.35,
+        "TE": 0.15,
+        "WR": 0.4
+      },
+      "predictionStatus": "contextual",
+      "teamId": "team-01",
+      "topFivePlayerProbabilities": [
+        {
+          "internalPlayerId": 1001,
+          "probability": 0.18
+        },
+        {
+          "internalPlayerId": 1002,
+          "probability": 0.14
+        },
+        {
+          "internalPlayerId": 1003,
+          "probability": 0.1
+        },
+        {
+          "internalPlayerId": 1004,
+          "probability": 0.08
+        },
+        {
+          "internalPlayerId": 1005,
+          "probability": 0.05
+        }
+      ]
+    },
+    "team-02": {
+      "confidence": 0.76,
+      "currentRoster": [
+        {
+          "internalPlayerId": 1016,
+          "position": "TE",
+          "rosterSlot": "KEEPER"
+        }
+      ],
+      "displayLabel": "M02",
+      "explanatoryDrivers": [
+        "synthetic roster state",
+        "synthetic room price"
+      ],
+      "limitations": [
+        "Synthetic fixture; not an opponent forecast."
+      ],
+      "nextOverallPick": 2,
+      "openRosterPositions": {
+        "BENCH": 7,
+        "FLEX": 2,
+        "QB": 1,
+        "RB": 2,
+        "TE": 1,
+        "WR": 2
+      },
+      "otherProbability": 0.45,
+      "positionProbabilities": {
+        "QB": 0.1,
+        "RB": 0.35,
+        "TE": 0.15,
+        "WR": 0.4
+      },
+      "predictionStatus": "contextual",
+      "teamId": "team-02",
+      "topFivePlayerProbabilities": [
+        {
+          "internalPlayerId": 1001,
+          "probability": 0.18
+        },
+        {
+          "internalPlayerId": 1002,
+          "probability": 0.14
+        },
+        {
+          "internalPlayerId": 1003,
+          "probability": 0.1
+        },
+        {
+          "internalPlayerId": 1004,
+          "probability": 0.08
+        },
+        {
+          "internalPlayerId": 1005,
+          "probability": 0.05
+        }
+      ]
+    },
+    "team-03": {
+      "confidence": 0.75,
+      "currentRoster": [
+        {
+          "internalPlayerId": 1017,
+          "position": "QB",
+          "rosterSlot": "KEEPER"
+        }
+      ],
+      "displayLabel": "M03",
+      "explanatoryDrivers": [
+        "synthetic roster state",
+        "synthetic room price"
+      ],
+      "limitations": [
+        "Synthetic fixture; not an opponent forecast."
+      ],
+      "nextOverallPick": 3,
+      "openRosterPositions": {
+        "BENCH": 7,
+        "FLEX": 2,
+        "QB": 1,
+        "RB": 2,
+        "TE": 1,
+        "WR": 2
+      },
+      "otherProbability": 0.45,
+      "positionProbabilities": {
+        "QB": 0.1,
+        "RB": 0.35,
+        "TE": 0.15,
+        "WR": 0.4
+      },
+      "predictionStatus": "contextual",
+      "teamId": "team-03",
+      "topFivePlayerProbabilities": [
+        {
+          "internalPlayerId": 1001,
+          "probability": 0.18
+        },
+        {
+          "internalPlayerId": 1002,
+          "probability": 0.14
+        },
+        {
+          "internalPlayerId": 1003,
+          "probability": 0.1
+        },
+        {
+          "internalPlayerId": 1004,
+          "probability": 0.08
+        },
+        {
+          "internalPlayerId": 1005,
+          "probability": 0.05
+        }
+      ]
+    },
+    "team-04": {
+      "confidence": 0.74,
+      "currentRoster": [
+        {
+          "internalPlayerId": 1018,
+          "position": "RB",
+          "rosterSlot": "KEEPER"
+        }
+      ],
+      "displayLabel": "M04",
+      "explanatoryDrivers": [
+        "synthetic roster state",
+        "synthetic room price"
+      ],
+      "limitations": [
+        "Synthetic fixture; not an opponent forecast."
+      ],
+      "nextOverallPick": 4,
+      "openRosterPositions": {
+        "BENCH": 7,
+        "FLEX": 2,
+        "QB": 1,
+        "RB": 2,
+        "TE": 1,
+        "WR": 2
+      },
+      "otherProbability": 0.45,
+      "positionProbabilities": {
+        "QB": 0.1,
+        "RB": 0.35,
+        "TE": 0.15,
+        "WR": 0.4
+      },
+      "predictionStatus": "contextual",
+      "teamId": "team-04",
+      "topFivePlayerProbabilities": [
+        {
+          "internalPlayerId": 1001,
+          "probability": 0.18
+        },
+        {
+          "internalPlayerId": 1002,
+          "probability": 0.14
+        },
+        {
+          "internalPlayerId": 1003,
+          "probability": 0.1
+        },
+        {
+          "internalPlayerId": 1004,
+          "probability": 0.08
+        },
+        {
+          "internalPlayerId": 1005,
+          "probability": 0.05
+        }
+      ]
+    },
+    "team-06": {
+      "confidence": 0.73,
+      "currentRoster": [
+        {
+          "internalPlayerId": 1020,
+          "position": "TE",
+          "rosterSlot": "KEEPER"
+        }
+      ],
+      "displayLabel": "M05",
+      "explanatoryDrivers": [
+        "synthetic roster state",
+        "synthetic room price"
+      ],
+      "limitations": [
+        "Synthetic fixture; not an opponent forecast."
+      ],
+      "nextOverallPick": 6,
+      "openRosterPositions": {
+        "BENCH": 7,
+        "FLEX": 2,
+        "QB": 1,
+        "RB": 2,
+        "TE": 1,
+        "WR": 2
+      },
+      "otherProbability": 0.45,
+      "positionProbabilities": {
+        "QB": 0.1,
+        "RB": 0.35,
+        "TE": 0.15,
+        "WR": 0.4
+      },
+      "predictionStatus": "contextual",
+      "teamId": "team-06",
+      "topFivePlayerProbabilities": [
+        {
+          "internalPlayerId": 1001,
+          "probability": 0.18
+        },
+        {
+          "internalPlayerId": 1002,
+          "probability": 0.14
+        },
+        {
+          "internalPlayerId": 1003,
+          "probability": 0.1
+        },
+        {
+          "internalPlayerId": 1004,
+          "probability": 0.08
+        },
+        {
+          "internalPlayerId": 1005,
+          "probability": 0.05
+        }
+      ]
+    },
+    "team-07": {
+      "confidence": 0.72,
+      "currentRoster": [
+        {
+          "internalPlayerId": 1021,
+          "position": "QB",
+          "rosterSlot": "KEEPER"
+        }
+      ],
+      "displayLabel": "M06",
+      "explanatoryDrivers": [
+        "synthetic roster state",
+        "synthetic room price"
+      ],
+      "limitations": [
+        "Synthetic fixture; not an opponent forecast."
+      ],
+      "nextOverallPick": 7,
+      "openRosterPositions": {
+        "BENCH": 7,
+        "FLEX": 2,
+        "QB": 1,
+        "RB": 2,
+        "TE": 1,
+        "WR": 2
+      },
+      "otherProbability": 0.45,
+      "positionProbabilities": {
+        "QB": 0.1,
+        "RB": 0.35,
+        "TE": 0.15,
+        "WR": 0.4
+      },
+      "predictionStatus": "contextual",
+      "teamId": "team-07",
+      "topFivePlayerProbabilities": [
+        {
+          "internalPlayerId": 1001,
+          "probability": 0.18
+        },
+        {
+          "internalPlayerId": 1002,
+          "probability": 0.14
+        },
+        {
+          "internalPlayerId": 1003,
+          "probability": 0.1
+        },
+        {
+          "internalPlayerId": 1004,
+          "probability": 0.08
+        },
+        {
+          "internalPlayerId": 1005,
+          "probability": 0.05
+        }
+      ]
+    },
+    "team-08": {
+      "confidence": 0.71,
+      "currentRoster": [
+        {
+          "internalPlayerId": 1022,
+          "position": "RB",
+          "rosterSlot": "KEEPER"
+        }
+      ],
+      "displayLabel": "M07",
+      "explanatoryDrivers": [
+        "synthetic roster state",
+        "synthetic room price"
+      ],
+      "limitations": [
+        "Synthetic fixture; not an opponent forecast."
+      ],
+      "nextOverallPick": 8,
+      "openRosterPositions": {
+        "BENCH": 7,
+        "FLEX": 2,
+        "QB": 1,
+        "RB": 2,
+        "TE": 1,
+        "WR": 2
+      },
+      "otherProbability": 0.45,
+      "positionProbabilities": {
+        "QB": 0.1,
+        "RB": 0.35,
+        "TE": 0.15,
+        "WR": 0.4
+      },
+      "predictionStatus": "contextual",
+      "teamId": "team-08",
+      "topFivePlayerProbabilities": [
+        {
+          "internalPlayerId": 1001,
+          "probability": 0.18
+        },
+        {
+          "internalPlayerId": 1002,
+          "probability": 0.14
+        },
+        {
+          "internalPlayerId": 1003,
+          "probability": 0.1
+        },
+        {
+          "internalPlayerId": 1004,
+          "probability": 0.08
+        },
+        {
+          "internalPlayerId": 1005,
+          "probability": 0.05
+        }
+      ]
+    },
+    "team-09": {
+      "confidence": 0.7,
+      "currentRoster": [
+        {
+          "internalPlayerId": 1023,
+          "position": "WR",
+          "rosterSlot": "KEEPER"
+        }
+      ],
+      "displayLabel": "M08",
+      "explanatoryDrivers": [
+        "synthetic roster state",
+        "synthetic room price"
+      ],
+      "limitations": [
+        "Synthetic fixture; not an opponent forecast."
+      ],
+      "nextOverallPick": 9,
+      "openRosterPositions": {
+        "BENCH": 7,
+        "FLEX": 2,
+        "QB": 1,
+        "RB": 2,
+        "TE": 1,
+        "WR": 2
+      },
+      "otherProbability": 0.45,
+      "positionProbabilities": {
+        "QB": 0.1,
+        "RB": 0.35,
+        "TE": 0.15,
+        "WR": 0.4
+      },
+      "predictionStatus": "contextual",
+      "teamId": "team-09",
+      "topFivePlayerProbabilities": [
+        {
+          "internalPlayerId": 1001,
+          "probability": 0.18
+        },
+        {
+          "internalPlayerId": 1002,
+          "probability": 0.14
+        },
+        {
+          "internalPlayerId": 1003,
+          "probability": 0.1
+        },
+        {
+          "internalPlayerId": 1004,
+          "probability": 0.08
+        },
+        {
+          "internalPlayerId": 1005,
+          "probability": 0.05
+        }
+      ]
+    },
+    "team-10": {
+      "confidence": 0.69,
+      "currentRoster": [
+        {
+          "internalPlayerId": 1024,
+          "position": "TE",
+          "rosterSlot": "KEEPER"
+        }
+      ],
+      "displayLabel": "M09",
+      "explanatoryDrivers": [
+        "synthetic roster state",
+        "synthetic room price"
+      ],
+      "limitations": [
+        "Synthetic fixture; not an opponent forecast."
+      ],
+      "nextOverallPick": 10,
+      "openRosterPositions": {
+        "BENCH": 7,
+        "FLEX": 2,
+        "QB": 1,
+        "RB": 2,
+        "TE": 1,
+        "WR": 2
+      },
+      "otherProbability": 0.45,
+      "positionProbabilities": {
+        "QB": 0.1,
+        "RB": 0.35,
+        "TE": 0.15,
+        "WR": 0.4
+      },
+      "predictionStatus": "contextual",
+      "teamId": "team-10",
+      "topFivePlayerProbabilities": [
+        {
+          "internalPlayerId": 1001,
+          "probability": 0.18
+        },
+        {
+          "internalPlayerId": 1002,
+          "probability": 0.14
+        },
+        {
+          "internalPlayerId": 1003,
+          "probability": 0.1
+        },
+        {
+          "internalPlayerId": 1004,
+          "probability": 0.08
+        },
+        {
+          "internalPlayerId": 1005,
+          "probability": 0.05
+        }
+      ]
+    }
+  },
+  "schemaVersion": "1.0.0",
+  "simulation": {
+    "count": 10000,
+    "seed": 20260831
+  },
+  "sourceVersions": {
+    "espnMarket": "synthetic-market-v1",
+    "leagueValue": "synthetic-lv-v1",
+    "opponentModel": "synthetic-oi-v1",
+    "playerTruth": "synthetic-pt-v1"
+  },
+  "status": "candidate",
+  "targetSurvival": [
+    {
+      "internalPlayerId": 1001,
+      "mostLikelyTakerTeamId": "team-01",
+      "probabilitySurvives": 0.28,
+      "probabilityTakenBeforeTony": 0.72,
+      "secondMostLikelyTakerTeamId": "team-02"
+    },
+    {
+      "internalPlayerId": 1002,
+      "mostLikelyTakerTeamId": "team-02",
+      "probabilitySurvives": 0.39,
+      "probabilityTakenBeforeTony": 0.61,
+      "secondMostLikelyTakerTeamId": "team-03"
+    },
+    {
+      "internalPlayerId": 1003,
+      "mostLikelyTakerTeamId": "team-03",
+      "probabilitySurvives": 0.5,
+      "probabilityTakenBeforeTony": 0.5,
+      "secondMostLikelyTakerTeamId": "team-04"
+    },
+    {
+      "internalPlayerId": 1004,
+      "mostLikelyTakerTeamId": "team-04",
+      "probabilitySurvives": 0.61,
+      "probabilityTakenBeforeTony": 0.39,
+      "secondMostLikelyTakerTeamId": "team-06"
+    },
+    {
+      "internalPlayerId": 1005,
+      "mostLikelyTakerTeamId": "team-06",
+      "probabilitySurvives": 0.72,
+      "probabilityTakenBeforeTony": 0.28,
+      "secondMostLikelyTakerTeamId": "team-07"
+    }
+  ],
+  "tierSurvival": [
+    {
+      "expectedSurvivors": 1.3,
+      "probabilityAtLeastOneSurvives": 0.64,
+      "tierId": "synthetic-tier-a"
+    },
+    {
+      "expectedSurvivors": 2.8,
+      "probabilityAtLeastOneSurvives": 0.91,
+      "tierId": "synthetic-tier-b"
+    }
+  ],
+  "tonyNextOverallPick": 5,
+  "tonyTeamId": "team-05"
+}

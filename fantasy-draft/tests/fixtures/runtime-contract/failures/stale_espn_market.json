@@ -1,0 +1,291 @@
+{
+  "artifactId": "synthetic-espn-market",
+  "artifactType": "espn-market",
+  "artifactVersion": "synthetic-market-v1",
+  "captureStatus": "partial",
+  "captureTimestamp": "2026-08-31T21:55:00Z",
+  "coverage": {
+    "adpCoverage": 0.9166666666666666,
+    "eligiblePlayerCount": 24,
+    "mappedPlayerCount": 23,
+    "rankCoverage": 0.9166666666666666
+  },
+  "effectiveAt": "2026-08-31T22:00:00Z",
+  "expiresAt": "2026-08-30T12:00:00Z",
+  "generatedAt": "2026-08-31T22:00:00Z",
+  "integrity": {
+    "canonicalization": "draft-command-canonical-json-v1",
+    "payloadSha256": "7baafe837e361f372d8aed4a853c60bb770776c56fb5253c92d008baf69706ac"
+  },
+  "records": [
+    {
+      "captureStatus": "captured",
+      "espnContinuousAdp": 1.37,
+      "espnDefaultRank": 1,
+      "espnPlayerId": "900001",
+      "internalPlayerId": 1001,
+      "liveRoomRank": null,
+      "mappingConfidence": 0.99,
+      "ordinalAdpRank": null,
+      "ordinalAdpRankSource": null
+    },
+    {
+      "captureStatus": "captured",
+      "espnContinuousAdp": 2.37,
+      "espnDefaultRank": 2,
+      "espnPlayerId": "900002",
+      "internalPlayerId": 1002,
+      "liveRoomRank": null,
+      "mappingConfidence": 0.99,
+      "ordinalAdpRank": null,
+      "ordinalAdpRankSource": null
+    },
+    {
+      "captureStatus": "captured",
+      "espnContinuousAdp": 3.37,
+      "espnDefaultRank": 3,
+      "espnPlayerId": "900003",
+      "internalPlayerId": 1003,
+      "liveRoomRank": null,
+      "mappingConfidence": 0.99,
+      "ordinalAdpRank": null,
+      "ordinalAdpRankSource": null
+    },
+    {
+      "captureStatus": "captured",
+      "espnContinuousAdp": 4.37,
+      "espnDefaultRank": 4,
+      "espnPlayerId": "900004",
+      "internalPlayerId": 1004,
+      "liveRoomRank": null,
+      "mappingConfidence": 0.99,
+      "ordinalAdpRank": null,
+      "ordinalAdpRankSource": null
+    },
+    {
+      "captureStatus": "captured",
+      "espnContinuousAdp": 5.37,
+      "espnDefaultRank": 5,
+      "espnPlayerId": "900005",
+      "internalPlayerId": 1005,
+      "liveRoomRank": null,
+      "mappingConfidence": 0.99,
+      "ordinalAdpRank": null,
+      "ordinalAdpRankSource": null
+    },
+    {
+      "captureStatus": "captured",
+      "espnContinuousAdp": 6.37,
+      "espnDefaultRank": 6,
+      "espnPlayerId": "900006",
+      "internalPlayerId": 1006,
+      "liveRoomRank": null,
+      "mappingConfidence": 0.99,
+      "ordinalAdpRank": null,
+      "ordinalAdpRankSource": null
+    },
+    {
+      "captureStatus": "captured",
+      "espnContinuousAdp": 7.37,
+      "espnDefaultRank": null,
+      "espnPlayerId": "900007",
+      "internalPlayerId": 1007,
+      "liveRoomRank": null,
+      "mappingConfidence": 0.99,
+      "ordinalAdpRank": null,
+      "ordinalAdpRankSource": null
+    },
+    {
+      "captureStatus": "captured",
+      "espnContinuousAdp": null,
+      "espnDefaultRank": 8,
+      "espnPlayerId": "900008",
+      "internalPlayerId": 1008,
+      "liveRoomRank": null,
+      "mappingConfidence": 0.99,
+      "ordinalAdpRank": null,
+      "ordinalAdpRankSource": null
+    },
+    {
+      "captureStatus": "captured",
+      "espnContinuousAdp": 9.37,
+      "espnDefaultRank": 9,
+      "espnPlayerId": "900009",
+      "internalPlayerId": 1009,
+      "liveRoomRank": null,
+      "mappingConfidence": 0.99,
+      "ordinalAdpRank": null,
+      "ordinalAdpRankSource": null
+    },
+    {
+      "captureStatus": "captured",
+      "espnContinuousAdp": 10.37,
+      "espnDefaultRank": 10,
+      "espnPlayerId": "900010",
+      "internalPlayerId": 1010,
+      "liveRoomRank": null,
+      "mappingConfidence": 0.99,
+      "ordinalAdpRank": null,
+      "ordinalAdpRankSource": null
+    },
+    {
+      "captureStatus": "captured",
+      "espnContinuousAdp": 11.37,
+      "espnDefaultRank": 11,
+      "espnPlayerId": "900011",
+      "internalPlayerId": 1011,
+      "liveRoomRank": null,
+      "mappingConfidence": 0.99,
+      "ordinalAdpRank": null,
+      "ordinalAdpRankSource": null
+    },
+    {
+      "captureStatus": "captured",
+      "espnContinuousAdp": 12.37,
+      "espnDefaultRank": 12,
+      "espnPlayerId": "900012",
+      "internalPlayerId": 1012,
+      "liveRoomRank": null,
+      "mappingConfidence": 0.99,
+      "ordinalAdpRank": null,
+      "ordinalAdpRankSource": null
+    },
+    {
+      "captureStatus": "captured",
+      "espnContinuousAdp": 13.37,
+      "espnDefaultRank": 13,
+      "espnPlayerId": "900013",
+      "internalPlayerId": 1013,
+      "liveRoomRank": null,
+      "mappingConfidence": 0.99,
+      "ordinalAdpRank": null,
+      "ordinalAdpRankSource": null
+    },
+    {
+      "captureStatus": "captured",
+      "espnContinuousAdp": 14.37,
+      "espnDefaultRank": 14,
+      "espnPlayerId": "900014",
+      "internalPlayerId": 1014,
+      "liveRoomRank": null,
+      "mappingConfidence": 0.99,
+      "ordinalAdpRank": null,
+      "ordinalAdpRankSource": null
+    },
+    {
+      "captureStatus": "captured",
+      "espnContinuousAdp": 15.37,
+      "espnDefaultRank": 15,
+      "espnPlayerId": "900015",
+      "internalPlayerId": 1015,
+      "liveRoomRank": null,
+      "mappingConfidence": 0.99,
+      "ordinalAdpRank": null,
+      "ordinalAdpRankSource": null
+    },
+    {
+      "captureStatus": "captured",
+      "espnContinuousAdp": 16.37,
+      "espnDefaultRank": 16,
+      "espnPlayerId": "900016",
+      "internalPlayerId": 1016,
+      "liveRoomRank": null,
+      "mappingConfidence": 0.99,
+      "ordinalAdpRank": null,
+      "ordinalAdpRankSource": null
+    },
+    {
+      "captureStatus": "captured",
+      "espnContinuousAdp": 17.37,
+      "espnDefaultRank": 17,
+      "espnPlayerId": "900017",
+      "internalPlayerId": 1017,
+      "liveRoomRank": null,
+      "mappingConfidence": 0.99,
+      "ordinalAdpRank": null,
+      "ordinalAdpRankSource": null
+    },
+    {
+      "captureStatus": "captured",
+      "espnContinuousAdp": 18.37,
+      "espnDefaultRank": 18,
+      "espnPlayerId": "900018",
+      "internalPlayerId": 1018,
+      "liveRoomRank": null,
+      "mappingConfidence": 0.99,
+      "ordinalAdpRank": null,
+      "ordinalAdpRankSource": null
+    },
+    {
+      "captureStatus": "captured",
+      "espnContinuousAdp": 19.37,
+      "espnDefaultRank": 19,
+      "espnPlayerId": "900019",
+      "internalPlayerId": 1019,
+      "liveRoomRank": null,
+      "mappingConfidence": 0.99,
+      "ordinalAdpRank": null,
+      "ordinalAdpRankSource": null
+    },
+    {
+      "captureStatus": "captured",
+      "espnContinuousAdp": 20.37,
+      "espnDefaultRank": 20,
+      "espnPlayerId": "900020",
+      "internalPlayerId": 1020,
+      "liveRoomRank": null,
+      "mappingConfidence": 0.99,
+      "ordinalAdpRank": null,
+      "ordinalAdpRankSource": null
+    },
+    {
+      "captureStatus": "captured",
+      "espnContinuousAdp": 21.37,
+      "espnDefaultRank": 21,
+      "espnPlayerId": "900021",
+      "internalPlayerId": 1021,
+      "liveRoomRank": null,
+      "mappingConfidence": 0.99,
+      "ordinalAdpRank": null,
+      "ordinalAdpRankSource": null
+    },
+    {
+      "captureStatus": "captured",
+      "espnContinuousAdp": 22.37,
+      "espnDefaultRank": 22,
+      "espnPlayerId": "900022",
+      "internalPlayerId": 1022,
+      "liveRoomRank": null,
+      "mappingConfidence": 0.99,
+      "ordinalAdpRank": null,
+      "ordinalAdpRankSource": null
+    },
+    {
+      "captureStatus": "captured",
+      "espnContinuousAdp": 23.37,
+      "espnDefaultRank": 23,
+      "espnPlayerId": "900023",
+      "internalPlayerId": 1023,
+      "liveRoomRank": null,
+      "mappingConfidence": 0.99,
+      "ordinalAdpRank": null,
+      "ordinalAdpRankSource": null
+    },
+    {
+      "captureStatus": "unmapped",
+      "espnContinuousAdp": null,
+      "espnDefaultRank": null,
+      "espnPlayerId": null,
+      "internalPlayerId": 1024,
+      "liveRoomRank": null,
+      "mappingConfidence": 0.4,
+      "ordinalAdpRank": null,
+      "ordinalAdpRankSource": null
+    }
+  ],
+  "schemaVersion": "1.0.0",
+  "season": 2026,
+  "sourceArtifactId": "synthetic-espn-capture",
+  "sourceHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "status": "candidate"
+}

@@ -1,0 +1,132 @@
+{
+  "draftSlot": 5,
+  "keepers": [
+    {
+      "internalPlayerId": 1015,
+      "overallPick": 160,
+      "round": 16,
+      "teamId": "team-01"
+    },
+    {
+      "internalPlayerId": 1016,
+      "overallPick": 159,
+      "round": 16,
+      "teamId": "team-02"
+    },
+    {
+      "internalPlayerId": 1017,
+      "overallPick": 158,
+      "round": 16,
+      "teamId": "team-03"
+    },
+    {
+      "internalPlayerId": 1018,
+      "overallPick": 157,
+      "round": 16,
+      "teamId": "team-04"
+    },
+    {
+      "internalPlayerId": 1019,
+      "overallPick": 156,
+      "round": 16,
+      "teamId": "team-05"
+    },
+    {
+      "internalPlayerId": 1020,
+      "overallPick": 155,
+      "round": 16,
+      "teamId": "team-06"
+    },
+    {
+      "internalPlayerId": 1021,
+      "overallPick": 154,
+      "round": 16,
+      "teamId": "team-07"
+    },
+    {
+      "internalPlayerId": 1022,
+      "overallPick": 153,
+      "round": 16,
+      "teamId": "team-08"
+    },
+    {
+      "internalPlayerId": 1023,
+      "overallPick": 152,
+      "round": 16,
+      "teamId": "team-09"
+    },
+    {
+      "internalPlayerId": 1024,
+      "overallPick": 151,
+      "round": 16,
+      "teamId": "team-10"
+    }
+  ],
+  "picks": [
+    {
+      "internalPlayerId": 1001,
+      "overall": 1,
+      "source": "synthetic",
+      "teamId": "team-01"
+    },
+    {
+      "externalPlayerId": "unresolved-synthetic-02",
+      "overall": 2,
+      "source": "synthetic",
+      "status": "unresolved",
+      "teamId": "team-02"
+    },
+    {
+      "internalPlayerId": 1003,
+      "overall": 3,
+      "source": "synthetic",
+      "teamId": "team-03"
+    },
+    {
+      "internalPlayerId": 1004,
+      "overall": 4,
+      "source": "synthetic",
+      "teamId": "team-04"
+    },
+    {
+      "internalPlayerId": 1005,
+      "overall": 5,
+      "source": "manual",
+      "teamId": "team-05"
+    },
+    {
+      "internalPlayerId": 1006,
+      "overall": 6,
+      "source": "synthetic",
+      "teamId": "team-06"
+    },
+    {
+      "internalPlayerId": 1007,
+      "overall": 7,
+      "source": "synthetic",
+      "teamId": "team-07"
+    },
+    {
+      "internalPlayerId": 1008,
+      "overall": 8,
+      "source": "synthetic",
+      "teamId": "team-08"
+    },
+    {
+      "internalPlayerId": 1009,
+      "overall": 9,
+      "source": "synthetic",
+      "teamId": "team-09"
+    },
+    {
+      "internalPlayerId": 1010,
+      "overall": 10,
+      "source": "synthetic",
+      "teamId": "team-10"
+    }
+  ],
+  "rounds": 16,
+  "schemaVersion": "synthetic-draft-sequence/1.0.0",
+  "teamCount": 10,
+  "totalPicks": 160
+}

@@ -1,0 +1,152 @@
+{
+  "artifactType": "draft-runtime-manifest",
+  "bundleVersion": "runtime-26b44c83490b6ba2",
+  "canonicalization": "draft-command-canonical-json-v1",
+  "coverage": {
+    "byBoardRange": {
+      "1-50": {
+        "eligible": 23,
+        "leagueValue": 23,
+        "marketAdp": 22,
+        "marketRank": 22,
+        "playerTruth": 23
+      },
+      "101-160": {
+        "eligible": 0,
+        "leagueValue": 0,
+        "marketAdp": 0,
+        "marketRank": 0,
+        "playerTruth": 0
+      },
+      "161+": {
+        "eligible": 1,
+        "leagueValue": 1,
+        "marketAdp": 0,
+        "marketRank": 0,
+        "playerTruth": 1
+      },
+      "51-100": {
+        "eligible": 0,
+        "leagueValue": 0,
+        "marketAdp": 0,
+        "marketRank": 0,
+        "playerTruth": 0
+      }
+    },
+    "byPosition": {
+      "QB": {
+        "eligible": 6,
+        "leagueValue": 6,
+        "marketAdp": 6,
+        "marketRank": 6,
+        "playerTruth": 6
+      },
+      "RB": {
+        "eligible": 6,
+        "leagueValue": 6,
+        "marketAdp": 6,
+        "marketRank": 6,
+        "playerTruth": 6
+      },
+      "TE": {
+        "eligible": 6,
+        "leagueValue": 6,
+        "marketAdp": 4,
+        "marketRank": 5,
+        "playerTruth": 6
+      },
+      "WR": {
+        "eligible": 6,
+        "leagueValue": 6,
+        "marketAdp": 6,
+        "marketRank": 5,
+        "playerTruth": 6
+      }
+    },
+    "keeperIdentities": {
+      "expected": 10,
+      "resolved": 10
+    },
+    "overall": {
+      "eligible": 24,
+      "leagueValue": 24,
+      "marketAdp": 22,
+      "marketRank": 22,
+      "playerTruth": 24
+    },
+    "unresolvedIdentities": [
+      {
+        "artifactType": "player-truth",
+        "blocking": false,
+        "boardRank": 200,
+        "internalPlayerId": 1024,
+        "reason": "Player Truth identity remains unresolved"
+      }
+    ]
+  },
+  "determinism": {
+    "bundleVersionSource": "canonical source file hashes and league ID",
+    "generationTimeSource": "maximum source artifact generatedAt",
+    "identicalInputsProduceIdenticalBytes": true
+  },
+  "gates": {
+    "blocking": 0,
+    "informational": 0,
+    "result": "pass",
+    "warnings": 1
+  },
+  "generatedAt": "2026-08-31T22:00:00Z",
+  "inputs": [
+    {
+      "artifactId": "synthetic-player-truth",
+      "artifactType": "player-truth",
+      "artifactVersion": "synthetic-pt-v1",
+      "fileSha256": "2a4da36e59a0e70882a5fc6253c458982e4ec70b198a730a5331b50d3d5a10dc",
+      "payloadSha256": "4f5734ff1845e22b829f68a82ef334f41c561a7bb19162964e0c8d5b5864a762",
+      "schemaVersion": "1.0.0",
+      "status": "candidate"
+    },
+    {
+      "artifactId": "synthetic-espn-market",
+      "artifactType": "espn-market",
+      "artifactVersion": "synthetic-market-v1",
+      "fileSha256": "aa6470bad9c77626e6533a195c3a1b4965fbfb188bed8da4c74c006ca187119e",
+      "payloadSha256": "c78c409317f10ebbb3539c4d719590832b4806f98df79def8cb1a088c7c71243",
+      "schemaVersion": "1.0.0",
+      "status": "candidate"
+    },
+    {
+      "artifactId": "synthetic-espn-league-value",
+      "artifactType": "espn-league-value",
+      "artifactVersion": "synthetic-lv-v1",
+      "fileSha256": "2a5e999c31583146763f5590667bb4ceafecbeb5524d014348b91b5f6bfddc07",
+      "payloadSha256": "37a22fb9ca613cc47a58b396ef09cf918162b2ab0b13162e84f3dc2aa1e4340b",
+      "schemaVersion": "1.0.0",
+      "status": "candidate"
+    },
+    {
+      "artifactId": "synthetic-opponent-intent",
+      "artifactType": "opponent-intent",
+      "artifactVersion": "synthetic-oi-v1",
+      "fileSha256": "9a30e5de70239fb5225536a40e2dac48aa6e13a2cc26fc7992c811ff9813e82d",
+      "payloadSha256": "4d96cfadf728cd68ab031fda7016f5b12f60a851fdaa6eacd5eef98b9415cdaa",
+      "schemaVersion": "1.0.0",
+      "status": "candidate"
+    }
+  ],
+  "outputs": {
+    "bundle": {
+      "bytes": 64821,
+      "path": "synthetic_runtime_bundle.json",
+      "sha256": "3e16229aea98f88199a89d10bf3b2d3fbef4b174e8349ea298fe864b0f2b56a6"
+    },
+    "validationReport": {
+      "bytes": 1888,
+      "path": "synthetic_runtime_bundle_validation.md",
+      "sha256": "f7eb2748635c829299f9a09b079dac08f46031f448405d9c7fa7ad6291125a2d"
+    }
+  },
+  "promotionEligible": true,
+  "schemaVersion": "1.0.0",
+  "status": "candidate"
+}
