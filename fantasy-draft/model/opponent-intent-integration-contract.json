@@ -12,8 +12,18 @@
   },
   "inputs": {
     "immutableBundle": "../data/opponent-intent-package.js",
+    "frozenMarket": {
+      "snapshotId": "espn_2026_frozen_20260901T003012Z_3379127ab1c0",
+      "snapshotPath": "../data/derived/espn_market/espn_2026_market_snapshot_espn_2026_frozen_20260901T003012Z_3379127ab1c0.json",
+      "manifestPath": "../data/production/espn_2026_market_manifest_espn_2026_frozen_20260901T003012Z_3379127ab1c0.json",
+      "snapshotSha256": "e333dfbc3196351ea1b04f6fa8a5525db5903067f38318c8d2a725d6f75bc2a2",
+      "publicationCommit": "49951ca1d45b92a906f84366a02d40c8c2e07e12",
+      "captureTimestampUtc": "2026-09-01T00:30:12Z",
+      "schemaVersion": "espn-market-2026-v1.1",
+      "status": "frozen"
+    },
     "canonicalLiveState": ["draft events", "source observations after resolution", "keeper template and reconciliations"],
-    "market": ["ESPN default rank", "ESPN ADP"],
+    "market": ["nullable ESPN default rank", "nullable continuous ESPN ADP", "rank and ADP remain distinct; no ordinal ADP rank or silent blend"],
     "dynamic": ["manager on clock", "round", "overall pick", "roster counts", "open starter slots", "FLEX pressure", "last manager position", "recent positional run", "available pool", "exact snake geometry"]
   },
   "outputs": {
@@ -35,7 +45,9 @@
     "mayMutateLeagueValue": false,
     "mayMutateTiers": false,
     "mayMutateBpa": false,
-    "mayMutateEspnRankOrAdp": false
+    "mayMutateEspnRankOrAdp": false,
+    "mayBlendEspnRankAndAdp": false,
+    "mayCreateOrdinalEspnAdpRank": false
   },
   "runtime": {
     "simulation": "deterministic seeded sequential depletion",

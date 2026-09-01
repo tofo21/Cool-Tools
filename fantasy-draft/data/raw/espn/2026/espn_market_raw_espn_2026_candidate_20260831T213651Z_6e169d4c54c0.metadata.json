@@ -1,0 +1,23 @@
+{
+  "captured_at_cdt": "2026-08-31T16:36:51-05:00",
+  "captured_at_utc": "2026-08-31T21:36:51Z",
+  "prior_crosswalk": null,
+  "raw_bytes": 1650946,
+  "raw_sha256": "6e169d4c54c056af8f41d0c8b9e96abac38c2f18d0aacced61660351dbb9dd9a",
+  "schema_version": "espn-market-2026-v1",
+  "scoring_key": "PPR",
+  "snapshot_id": "espn_2026_candidate_20260831T213651Z_6e169d4c54c0",
+  "source_id": "espn-fantasy-api-kona-player-info-2026-ppr",
+  "source_request": {
+    "http_status": 200,
+    "request_headers": {
+      "User-Agent": "DraftCommandESPNMarketFreeze/1.0 (+https://github.com/tofo21/Cool-Tools)",
+      "x-fantasy-filter": "{\"players\":{\"filterSlotIds\":{\"value\":[0,2,4,6,23]},\"filterStatsForExternalIds\":{\"value\":[2026]},\"sortDraftRanks\":{\"sortPriority\":1,\"sortAsc\":true,\"value\":\"PPR\"},\"limit\":500}}"
+    },
+    "request_url": "https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/2026/segments/0/leaguedefaults/1?view=kona_player_info",
+    "response_content_type": "application/json;charset=utf-8",
+    "source_state": "success"
+  },
+  "source_tier": 1,
+  "status": "candidate"
+}

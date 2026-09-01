@@ -1,0 +1,320 @@
+# ESPN Market QA — espn_2026_candidate_20260831T213651Z_6e169d4c54c0
+
+## Release gate
+
+- Ready: **true**
+- Source rows: 500
+- Draft Command identity coverage: 99.50%
+- Rank coverage: 100.00%
+- ADP coverage: 100.00%
+- Dual rank/ADP coverage: 100.00%
+- Keeper coverage: 100.00%
+- Exact scoring verification: incomplete_authentication_required
+
+## Blocking conflicts
+
+- None
+
+## Unresolved top-250 union
+
+- Najee Harris (NYG RB): no Draft Command player match
+- Malachi Fields (NYG WR): no Draft Command player match
+- Germie Bernard (PIT WR): no Draft Command player match
+- Pat Freiermuth (PIT TE): no Draft Command player match
+- Kimani Vidal (LAC RB): no Draft Command player match
+- Jaylen Wright (MIA RB): no Draft Command player match
+- Samaje Perine (CIN RB): no Draft Command player match
+- Ty Johnson (BUF RB): no Draft Command player match
+- Malik Davis (DAL RB): no Draft Command player match
+- Brashard Smith (KC RB): no Draft Command player match
+- Cooper Kupp (SEA WR): no Draft Command player match
+- Xavier Legette (CAR WR): no Draft Command player match
+- Jahan Dotson (ATL WR): no Draft Command player match
+- Xavier Hutchinson (HOU WR): no Draft Command player match
+- Jalen Tolbert (MIA WR): no Draft Command player match
+- DeMario Douglas (NE WR): no Draft Command player match
+- Darius Slayton (NYG WR): no Draft Command player match
+- Chris Brooks (GB RB): no Draft Command player match
+- Isaiah Davis (NYJ RB): no Draft Command player match
+- LeQuint Allen Jr. (JAX RB): no Draft Command player match
+- George Holani (SEA RB): no Draft Command player match
+- Sean Tucker (TB RB): no Draft Command player match
+- Seth McGowan (IND RB): no Draft Command player match
+- Jordan James (SF RB): no Draft Command player match
+- Will Shipley (PHI RB): no Draft Command player match
+- Jacob Saylors (DET RB): no Draft Command player match
+- Kendre Miller (NO RB): no Draft Command player match
+- Antonio Williams (WAS WR): no Draft Command player match
+- Tyquan Thornton (KC WR): no Draft Command player match
+- Darren Waller (CAR TE): no Draft Command player match
+- Cade Otton (TB TE): no Draft Command player match
+- Keon Coleman (BUF WR): no Draft Command player match
+- Isaac TeSlaa (DET WR): no Draft Command player match
+- Marvin Mims Jr. (DEN WR): no Draft Command player match
+- Tahj Brooks (CIN RB): no Draft Command player match
+- Demond Claiborne (MIN RB): no Draft Command player match
+- Geno Smith (NYJ QB): no Draft Command player match
+- Fernando Mendoza (LV QB): no Draft Command player match
+- Aaron Rodgers (PIT QB): no Draft Command player match
+- Deshaun Watson (CLE QB): no Draft Command player match
+- Andrei Iosivas (CIN WR): no Draft Command player match
+- Kevin Coleman Jr. (MIA WR): no Draft Command player match
+- KaVontae Turpin (DAL WR): no Draft Command player match
+- Jack Bech (LV WR): no Draft Command player match
+- Tory Horton (SEA WR): no Draft Command player match
+- Rasheen Ali (BAL RB): no Draft Command player match
+- DJ Giddens (IND RB): no Draft Command player match
+- Emanuel Wilson (SEA RB): no Draft Command player match
+- Kaleb Johnson (GB RB): no Draft Command player match
+- Kene Nwangwu (NYJ RB): no Draft Command player match
+- Bam Knight (ARI RB): no Draft Command player match
+- Sione Vaki (DET RB): no Draft Command player match
+- Ted Hurst III (TB WR): no Draft Command player match
+- Evan Engram (DEN TE): no Draft Command player match
+- David Njoku (LAC TE): no Draft Command player match
+- Oronde Gadsden (LAC TE): no Draft Command player match
+- Mike Gesicki (CIN TE): no Draft Command player match
+- Michael Mayer (LV TE): no Draft Command player match
+- Darnell Mooney (NYG WR): no Draft Command player match
+- Mack Hollins (NE WR): no Draft Command player match
+- Tua Tagovailoa (ATL QB): no Draft Command player match
+- Shedeur Sanders (CLE QB): no Draft Command player match
+- Kirk Cousins (LV QB): no Draft Command player match
+- Dylan Laube (LV RB): no Draft Command player match
+- Tyler Badie (DEN RB): no Draft Command player match
+- Adam Randall (BAL RB): no Draft Command player match
+- James Conner (ARI RB): no Draft Command player match
+- Eli Heidenreich (PIT RB): no Draft Command player match
+- Jam Miller (FA RB): no Draft Command player match
+- Trey Benson (ARI RB): no Draft Command player match
+- Michael Penix Jr. (ATL QB): no Draft Command player match
+- Jake Tonges (SF TE): no Draft Command player match
+- Colby Parkinson (LAR TE): no Draft Command player match
+- Erick All Jr. (CIN TE): no Draft Command player match
+- Darnell Washington (PIT TE): no Draft Command player match
+- J.J. McCarthy (MIN QB): no Draft Command player match
+- Carson Beck (ARI QB): no Draft Command player match
+- Justin Fields (KC QB): no Draft Command player match
+- Joe Flacco (CIN QB): no Draft Command player match
+- Mac Jones (SF QB): no Draft Command player match
+- Riley Nowakowski (PIT RB): no Draft Command player match
+- Kyle Juszczyk (SF RB): no Draft Command player match
+- Hunter Luepke (DAL RB): no Draft Command player match
+- Dawson Knox (BUF TE): no Draft Command player match
+- Elijah Arroyo (SEA TE): no Draft Command player match
+- Mason Taylor (NYJ TE): no Draft Command player match
+- Theo Johnson (NYG TE): no Draft Command player match
+- Cole Kmet (CHI TE): no Draft Command player match
+- Ja'Tavion Sanders (CAR TE): no Draft Command player match
+- Noah Gray (KC TE): no Draft Command player match
+- Eli Stowers (PHI TE): no Draft Command player match
+- Tyler Higbee (LAR TE): no Draft Command player match
+- Max Klare (LAR TE): no Draft Command player match
+- Eli Raridon (NE TE): no Draft Command player match
+- Tommy Tremble (CAR TE): no Draft Command player match
+- Ty Simpson (LAR QB): no Draft Command player match
+- Jameis Winston (NYG QB): no Draft Command player match
+- Anthony Richardson Sr. (IND QB): no Draft Command player match
+- Jalon Daniels (TB QB): no Draft Command player match
+- Jarrett Stidham (DEN QB): no Draft Command player match
+- Tommy DeVito (NE QB): no Draft Command player match
+- Marcus Mariota (WAS QB): no Draft Command player match
+- Tyson Bagent (CHI QB): no Draft Command player match
+- Sam Howell (DAL QB): no Draft Command player match
+- Tanner McKee (PHI QB): no Draft Command player match
+- Cyrus Allen (KC WR): no Draft Command player match
+- Kyle Williams (NE WR): no Draft Command player match
+- Troy Franklin (DEN WR): no Draft Command player match
+- Joshua Palmer (BUF WR): no Draft Command player match
+- Kendrick Bourne (ARI WR): no Draft Command player match
+- Malik Benson (LV WR): no Draft Command player match
+- Kalif Raymond (CHI WR): no Draft Command player match
+- Dyami Brown (WAS WR): no Draft Command player match
+- Treylon Burks (WAS WR): no Draft Command player match
+- Devontez Walker (BAL WR): no Draft Command player match
+- Austin Hooper (ATL TE): no Draft Command player match
+- Elijah Higgins (ARI TE): no Draft Command player match
+- Savion Williams (GB WR): no Draft Command player match
+- Will Kacmarek (MIA TE): no Draft Command player match
+- Chimere Dike (TEN WR): no Draft Command player match
+- Bryce Lance (NO WR): no Draft Command player match
+- Jonnu Smith (GB TE): no Draft Command player match
+- Drew Sample (CIN TE): no Draft Command player match
+- Josh Oliver (MIN TE): no Draft Command player match
+- Adam Trautman (DEN TE): no Draft Command player match
+- Jaylin Lane (WAS WR): no Draft Command player match
+- Zavion Thomas (CHI WR): no Draft Command player match
+- Charlie Kolar (LAC TE): no Draft Command player match
+- Noah Fant (NO TE): no Draft Command player match
+- Isaiah Bond (CLE WR): no Draft Command player match
+- Cade Stover (HOU TE): no Draft Command player match
+- John Bates (WAS TE): no Draft Command player match
+- Skyler Bell (BUF WR): no Draft Command player match
+- Hollywood Brown (PHI WR): no Draft Command player match
+- Olamide Zaccheaus (ATL WR): no Draft Command player match
+- Ashton Dulin (IND WR): no Draft Command player match
+- Isaiah Williams (NYJ WR): no Draft Command player match
+- Tutu Atwell (LAR WR): no Draft Command player match
+- Colbie Young (CIN WR): no Draft Command player match
+- Tanner Hudson (CIN TE): no Draft Command player match
+- Roman Wilson (PIT WR): no Draft Command player match
+- Luke Schoonmaker (DAL TE): no Draft Command player match
+- Mo Alie-Cox (IND TE): no Draft Command player match
+- Brenen Thompson (LAC WR): no Draft Command player match
+- Jackson Hawes (BUF TE): no Draft Command player match
+- Daniel Bellinger (TEN TE): no Draft Command player match
+- Ben Sinnott (WAS TE): no Draft Command player match
+- Jeremy Ruckert (NYJ TE): no Draft Command player match
+- Elijah Sarratt (BAL WR): no Draft Command player match
+- Odell Beckham Jr. (NYG WR): no Draft Command player match
+- Elic Ayomanor (TEN WR): no Draft Command player match
+- Durham Smythe (BAL TE): no Draft Command player match
+- Jordan Whittington (LAR WR): no Draft Command player match
+- Tez Johnson (TB WR): no Draft Command player match
+- Jimmy Horn Jr. (CAR WR): no Draft Command player match
+- Davis Allen (LAR TE): no Draft Command player match
+- Konata Mumpfield (LAR WR): no Draft Command player match
+- Foster Moreau (HOU TE): no Draft Command player match
+- Demarcus Robinson (SF WR): no Draft Command player match
+- Nate Adkins (DEN TE): no Draft Command player match
+- Brock Wright (DET TE): no Draft Command player match
+- Nate Boerkircher (JAX TE): no Draft Command player match
+- Luke McCaffrey (WAS WR): no Draft Command player match
+- Jalen Royals (KC WR): no Draft Command player match
+- KeAndre Lambert-Smith (LAC WR): no Draft Command player match
+- Payne Durham (TB TE): no Draft Command player match
+- Oscar Delp (NO TE): no Draft Command player match
+- Barion Brown (NO WR): no Draft Command player match
+- Laquon Treadwell (IND WR): no Draft Command player match
+- Alec Ingold (LAC RB): no Draft Command player match
+- Dont'e Thornton Jr. (LV WR): no Draft Command player match
+- Bo Melton (GB WR): no Draft Command player match
+- Blake Whiteheart (CLE TE): no Draft Command player match
+- Ben Sims (MIA TE): no Draft Command player match
+- Malachi Corley (CLE WR): no Draft Command player match
+- Kevin Austin Jr. (NO WR): no Draft Command player match
+- Tay Martin (DET WR): no Draft Command player match
+- Derius Davis (LAC WR): no Draft Command player match
+- Xavier Smith (LAR WR): no Draft Command player match
+- Adam Prentice (FA RB): no Draft Command player match
+- Jacob Cowing (SF WR): no Draft Command player match
+- Connor Heyward (LV RB): no Draft Command player match
+- Dohnte Meyers (CIN WR): no Draft Command player match
+- Michael Burton (CLE RB): no Draft Command player match
+- Efton Chism III (NE WR): no Draft Command player match
+- Max Bredeson (MIN RB): no Draft Command player match
+- Brevyn Spann-Ford (DAL TE): no Draft Command player match
+- Drew Allar (PIT QB): no Draft Command player match
+- Trey Lance (LAC QB): no Draft Command player match
+- Jackson Meeks (DET TE): no Draft Command player match
+- Riley Leonard (IND QB): no Draft Command player match
+- Quinn Ewers (JAX QB): no Draft Command player match
+- Tyrod Taylor (GB QB): no Draft Command player match
+- Tanner Koziol (JAX TE): no Draft Command player match
+- Ko Kieft (TB TE): no Draft Command player match
+- Kenny Pickett (CAR QB): no Draft Command player match
+- Tai Felton (MIN WR): no Draft Command player match
+- Josh Cameron (JAX WR): no Draft Command player match
+- Spencer Rattler (NO QB): no Draft Command player match
+- Marlin Klein (HOU TE): no Draft Command player match
+- Josh Whyle (GB TE): no Draft Command player match
+- Luke Farrell (SF TE): no Draft Command player match
+- Drew Ogletree (IND TE): no Draft Command player match
+- Sam Roush (CHI TE): no Draft Command player match
+- Jahdae Walker (CHI WR): no Draft Command player match
+- Joshua Dobbs (DET QB): no Draft Command player match
+- Tyler Huntley (BAL QB): no Draft Command player match
+- Matthew Hibner (BAL TE): no Draft Command player match
+- Josh Cuevas (BAL TE): no Draft Command player match
+- Eric Saubert (SEA TE): no Draft Command player match
+- Darius Cooper (PHI WR): no Draft Command player match
+- Andrew Beck (NYJ RB): no Draft Command player match
+- Jonathan Mingo (DAL WR): no Draft Command player match
+- Davis Mills (HOU QB): no Draft Command player match
+- Hunter Long (ARI TE): no Draft Command player match
+- Ian Thomas (LV TE): no Draft Command player match
+- Charlie Woerner (ATL TE): no Draft Command player match
+- Cade Klubnik (NYJ QB): no Draft Command player match
+- Johnny Mundt (PHI TE): no Draft Command player match
+- Carsen Ryan (CLE TE): no Draft Command player match
+- Reggie Virgil (ARI WR): no Draft Command player match
+- Kyle Allen (BUF QB): no Draft Command player match
+- Kyle McCord (MIA QB): no Draft Command player match
+- Brycen Tremayne (CAR WR): no Draft Command player match
+- Drew Lock (SEA QB): no Draft Command player match
+- Reggie Gilliam (NE RB): no Draft Command player match
+- Mitchell Trubisky (TEN QB): no Draft Command player match
+- Patrick Ricard (NYG RB): no Draft Command player match
+- Gardner Minshew II (ARI QB): no Draft Command player match
+- Chris Manhertz (NYG TE): no Draft Command player match
+- Kaden Wetjen (PIT WR): no Draft Command player match
+- Ben Skowronek (PIT WR): no Draft Command player match
+- Kameron Johnson (TB WR): no Draft Command player match
+- Arian Smith (NYJ WR): no Draft Command player match
+- Braxton Berrios (FA WR): no Draft Command player match
+- British Brooks (HOU RB): no Draft Command player match
+- Ke'Shawn Williams (CIN WR): no Draft Command player match
+- Myles Price (MIN WR): no Draft Command player match
+- LaJohntay Wester (BAL WR): no Draft Command player match
+- Devin Duvernay (ARI WR): no Draft Command player match
+- Nikko Remigio (KC WR): no Draft Command player match
+- Skyy Moore (GB WR): no Draft Command player match
+- Dareke Young (LV WR): no Draft Command player match
+- Jalen Brooks (ARI WR): no Draft Command player match
+- Robert Tonyan (PIT TE): no Draft Command player match
+- Ray-Ray McCloud III (CHI WR): no Draft Command player match
+- Cooper Rush (ATL QB): no Draft Command player match
+- Mason Rudolph (PIT QB): no Draft Command player match
+- Jeremy McNichols (WAS RB): no Draft Command player match
+- Ameer Abdullah (JAX RB): no Draft Command player match
+- Devin Singletary (NYG RB): no Draft Command player match
+- Christian Kirk (SF WR): no Draft Command player match
+- Tim Patrick (NYJ WR): no Draft Command player match
+- Carson Wentz (MIN QB): no Draft Command player match
+- Andy Dalton (PHI QB): no Draft Command player match
+- Case Keenum (CHI QB): no Draft Command player match
+- Lil'Jordan Humphrey (DEN WR): no Draft Command player match
+- Gunner Olszewski (NYG WR): no Draft Command player match
+- Brandon Aiyuk (SF WR): no Draft Command player match
+- AJ Dillon (CAR RB): no Draft Command player match
+- Trey Sermon (ATL RB): no Draft Command player match
+- Elijah Moore (PHI WR): no Draft Command player match
+- Zach Wilson (NO QB): no Draft Command player match
+- Jermar Jefferson (MIN RB): no Draft Command player match
+- Tylan Wallace (CLE WR): no Draft Command player match
+- Kylen Granson (TEN TE): no Draft Command player match
+- Simi Fehoko (ARI WR): no Draft Command player match
+- Sam Ehlinger (DEN QB): no Draft Command player match
+- Feleipe Franks (CAR TE): no Draft Command player match
+- D.J. Montgomery (IND WR): no Draft Command player match
+- David Sills V (TB WR): no Draft Command player match
+- John Metchie III (CAR WR): no Draft Command player match
+- Jelani Woods (NYJ TE): no Draft Command player match
+- Calvin Austin III (NYG WR): no Draft Command player match
+- Grant Calcaterra (PHI TE): no Draft Command player match
+- Cole Turner (MIA TE): no Draft Command player match
+- Ty Chandler (NO RB): no Draft Command player match
+- Skylar Thompson (BAL QB): no Draft Command player match
+- Brittain Brown (CHI RB): no Draft Command player match
+- Julius Chestnut (TEN RB): no Draft Command player match
+- Quintin Morris (JAX TE): no Draft Command player match
+- Ronnie Rivers (LAR RB): no Draft Command player match
+- Nikola Kalinic (CHI TE): no Draft Command player match
+- Roschon Johnson (CHI RB): no Draft Command player match
+- Luke Musgrave (GB TE): no Draft Command player match
+- Stetson Bennett IV (LAR QB): no Draft Command player match
+- Justin Shorter (LV WR): no Draft Command player match
+- Will Mallory (IND TE): no Draft Command player match
+- Scott Matlock (LAC RB): no Draft Command player match
+- Aidan O'Connell (LV QB): no Draft Command player match
+- Brayden Willis (SF TE): no Draft Command player match
+- Julian Hill (NE TE): no Draft Command player match
+- Irv Charles (SEA WR): no Draft Command player match
+- Jake Bobo (SEA WR): no Draft Command player match
+- Princeton Fant (DAL TE): no Draft Command player match
+- Brady Russell (SEA RB): no Draft Command player match
+- Ryan Miller (MIA WR): no Draft Command player match
+- Chris Blair (ATL WR): no Draft Command player match
+- Ricky Pearsall (SF WR): no Draft Command player match
+- Tip Reiman (ARI TE): no Draft Command player match
+- Isaac Guerendo (SF RB): no Draft Command player match

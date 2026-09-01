@@ -1,0 +1,1204 @@
+{
+  "adp_coverage": {
+    "count": 199,
+    "denominator": 199,
+    "percentage": 1.0
+  },
+  "approved_downstream_uses": [
+    "ESPN room-price analysis",
+    "Opponent Intent available-board inputs",
+    "Step 15 league adapter inputs",
+    "Step 17 survival inputs",
+    "Draft Command display and matching after integration approval"
+  ],
+  "artifacts": {
+    "aliases_csv": "fantasy-draft/data/derived/espn_market/espn_2026_alias_adjudications_espn_2026_candidate_20260831T213926Z_6e169d4c54c0.csv",
+    "crosswalk_csv": "fantasy-draft/data/derived/espn_market/espn_2026_player_identity_crosswalk_espn_2026_candidate_20260831T213926Z_6e169d4c54c0.csv",
+    "league_json": "fantasy-draft/data/derived/espn_market/espn_2026_league_keeper_verification_espn_2026_candidate_20260831T213926Z_6e169d4c54c0.json",
+    "league_md": "fantasy-draft/data/derived/espn_market/espn_2026_league_keeper_verification_espn_2026_candidate_20260831T213926Z_6e169d4c54c0.md",
+    "qa_json": "fantasy-draft/data/derived/espn_market/espn_2026_market_qa_espn_2026_candidate_20260831T213926Z_6e169d4c54c0.json",
+    "qa_md": "fantasy-draft/data/derived/espn_market/espn_2026_market_qa_espn_2026_candidate_20260831T213926Z_6e169d4c54c0.md",
+    "raw_json": "fantasy-draft/data/raw/espn/2026/espn_market_raw_espn_2026_candidate_20260831T213926Z_6e169d4c54c0.json",
+    "raw_metadata": "fantasy-draft/data/raw/espn/2026/espn_market_raw_espn_2026_candidate_20260831T213926Z_6e169d4c54c0.metadata.json",
+    "snapshot_csv": "fantasy-draft/data/derived/espn_market/espn_2026_market_snapshot_espn_2026_candidate_20260831T213926Z_6e169d4c54c0.csv",
+    "snapshot_json": "fantasy-draft/data/derived/espn_market/espn_2026_market_snapshot_espn_2026_candidate_20260831T213926Z_6e169d4c54c0.json"
+  },
+  "blocking_conflicts": [
+    "unresolved top-160 players: 1"
+  ],
+  "dual_coverage": {
+    "count": 199,
+    "denominator": 199,
+    "percentage": 1.0
+  },
+  "freshness_status": "current_candidate",
+  "generation_time_cdt": "2026-08-31T16:39:26-05:00",
+  "generation_time_utc": "2026-08-31T21:39:26Z",
+  "git_commit": "aeb4d7fce2b7fcd8e47d343c42551a4603c759dc",
+  "identity_match_coverage": {
+    "count": 199,
+    "denominator": 200,
+    "percentage": 0.995
+  },
+  "keeper_coverage": 1.0,
+  "manifest_path": "fantasy-draft/data/production/espn_2026_market_manifest_espn_2026_candidate_20260831T213926Z_6e169d4c54c0.json",
+  "position_counts": {
+    "QB": 76,
+    "RB": 123,
+    "TE": 110,
+    "WR": 191
+  },
+  "processed_file_hashes": {
+    "fantasy-draft/data/derived/espn_market/espn_2026_alias_adjudications_espn_2026_candidate_20260831T213926Z_6e169d4c54c0.csv": "c53c0d5f5ce276723085c476deaff70e32e26623188a99ece4a572bc19615537",
+    "fantasy-draft/data/derived/espn_market/espn_2026_league_keeper_verification_espn_2026_candidate_20260831T213926Z_6e169d4c54c0.json": "113a4bc3e2fbf621287a66a0431c696f61d9b391fadb0dda8f6c365d96289cfe",
+    "fantasy-draft/data/derived/espn_market/espn_2026_league_keeper_verification_espn_2026_candidate_20260831T213926Z_6e169d4c54c0.md": "a5dc6463bd82dacd888fd34c764c889eb161c807419bb431657705a75529adc8",
+    "fantasy-draft/data/derived/espn_market/espn_2026_market_qa_espn_2026_candidate_20260831T213926Z_6e169d4c54c0.json": "6b652187b5028a8d9e1d3712a7ffaeddc790eebc2e13c2c76b35fa05ffe6f4bb",
+    "fantasy-draft/data/derived/espn_market/espn_2026_market_qa_espn_2026_candidate_20260831T213926Z_6e169d4c54c0.md": "f671e23ae1e5a538904f68e6c0b79202c8f3ebe9ac2b3ab2bb8c1fd716c7c029",
+    "fantasy-draft/data/derived/espn_market/espn_2026_market_snapshot_espn_2026_candidate_20260831T213926Z_6e169d4c54c0.csv": "df4c3c4c2d1d5fe896b0a6b308e16a354faf5cf59bd6573b390e6485769b8d84",
+    "fantasy-draft/data/derived/espn_market/espn_2026_market_snapshot_espn_2026_candidate_20260831T213926Z_6e169d4c54c0.json": "2277ad5ab4fb6e9e8f5d765231941e4e356f25c24f939310642053a03954ccee",
+    "fantasy-draft/data/derived/espn_market/espn_2026_player_identity_crosswalk_espn_2026_candidate_20260831T213926Z_6e169d4c54c0.csv": "4402533123098c4da5ec1f77bf0959ed38b3aca0aa6499cc00ede917e850586d",
+    "fantasy-draft/data/raw/espn/2026/espn_market_raw_espn_2026_candidate_20260831T213926Z_6e169d4c54c0.json": "6e169d4c54c056af8f41d0c8b9e96abac38c2f18d0aacced61660351dbb9dd9a",
+    "fantasy-draft/data/raw/espn/2026/espn_market_raw_espn_2026_candidate_20260831T213926Z_6e169d4c54c0.metadata.json": "2c8cdfdd4f4dcff846f8d3fd308601f7bd83189c08c94623ee7aeae4e690314d"
+  },
+  "prohibited_uses": [
+    "changing Player Truth",
+    "using ADP as a projection",
+    "overriding BPA by itself",
+    "enabling TAKE/WAIT",
+    "silently blending ESPN rank with ESPN ADP"
+  ],
+  "rank_coverage": {
+    "count": 199,
+    "denominator": 199,
+    "percentage": 1.0
+  },
+  "raw_hashes": {
+    "fantasy-draft/data/raw/espn/2026/espn_market_raw_espn_2026_candidate_20260831T213926Z_6e169d4c54c0.json": "6e169d4c54c056af8f41d0c8b9e96abac38c2f18d0aacced61660351dbb9dd9a"
+  },
+  "row_counts": {
+    "mapped_to_draft_command": 199,
+    "source": 500
+  },
+  "schema_version": "espn-market-2026-v1",
+  "scoring_key": "PPR",
+  "snapshot_id": "espn_2026_candidate_20260831T213926Z_6e169d4c54c0",
+  "sources": [
+    {
+      "endpoint": "https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/2026/segments/0/leaguedefaults/1?view=kona_player_info",
+      "scoring_key": "PPR",
+      "source_id": "espn-fantasy-api-kona-player-info-2026-ppr",
+      "source_tier": 1,
+      "state": "success"
+    }
+  ],
+  "status": "candidate",
+  "unresolved_players": [
+    {
+      "espn_adp": 170.22,
+      "espn_player_id": 4241457,
+      "espn_rank": 270,
+      "player_name": "Najee Harris",
+      "position": "RB",
+      "reason": "no Draft Command player match",
+      "team": "NYG"
+    },
+    {
+      "espn_adp": 170.1,
+      "espn_player_id": 4682648,
+      "espn_rank": 287,
+      "player_name": "Malachi Fields",
+      "position": "WR",
+      "reason": "no Draft Command player match",
+      "team": "NYG"
+    },
+    {
+      "espn_adp": 171.33,
+      "espn_player_id": 4685261,
+      "espn_rank": 290,
+      "player_name": "Germie Bernard",
+      "position": "WR",
+      "reason": "no Draft Command player match",
+      "team": "PIT"
+    },
+    {
+      "espn_adp": 169.54,
+      "espn_player_id": 4361411,
+      "espn_rank": 296,
+      "player_name": "Pat Freiermuth",
+      "position": "TE",
+      "reason": "no Draft Command player match",
+      "team": "PIT"
+    },
+    {
+      "espn_adp": 170.97,
+      "espn_player_id": 4430968,
+      "espn_rank": 307,
+      "player_name": "Kimani Vidal",
+      "position": "RB",
+      "reason": "no Draft Command player match",
+      "team": "LAC"
+    },
+    {
+      "espn_adp": 170.57,
+      "espn_player_id": 4682745,
+      "espn_rank": 308,
+      "player_name": "Jaylen Wright",
+      "position": "RB",
+      "reason": "no Draft Command player match",
+      "team": "MIA"
+    },
+    {
+      "espn_adp": 171.17,
+      "espn_player_id": 3116389,
+      "espn_rank": 320,
+      "player_name": "Samaje Perine",
+      "position": "RB",
+      "reason": "no Draft Command player match",
+      "team": "CIN"
+    },
+    {
+      "espn_adp": 170.75,
+      "espn_player_id": 3915411,
+      "espn_rank": 321,
+      "player_name": "Ty Johnson",
+      "position": "RB",
+      "reason": "no Draft Command player match",
+      "team": "BUF"
+    },
+    {
+      "espn_adp": 170.1,
+      "espn_player_id": 4240603,
+      "espn_rank": 324,
+      "player_name": "Malik Davis",
+      "position": "RB",
+      "reason": "no Draft Command player match",
+      "team": "DAL"
+    },
+    {
+      "espn_adp": 170.09,
+      "espn_player_id": 4596602,
+      "espn_rank": 325,
+      "player_name": "Brashard Smith",
+      "position": "RB",
+      "reason": "no Draft Command player match",
+      "team": "KC"
+    },
+    {
+      "espn_adp": 169.21,
+      "espn_player_id": 2977187,
+      "espn_rank": 326,
+      "player_name": "Cooper Kupp",
+      "position": "WR",
+      "reason": "no Draft Command player match",
+      "team": "SEA"
+    },
+    {
+      "espn_adp": 170.72,
+      "espn_player_id": 4430034,
+      "espn_rank": 327,
+      "player_name": "Xavier Legette",
+      "position": "WR",
+      "reason": "no Draft Command player match",
+      "team": "CAR"
+    },
+    {
+      "espn_adp": 170.67,
+      "espn_player_id": 4361409,
+      "espn_rank": 328,
+      "player_name": "Jahan Dotson",
+      "position": "WR",
+      "reason": "no Draft Command player match",
+      "team": "ATL"
+    },
+    {
+      "espn_adp": 170.06,
+      "espn_player_id": 4686422,
+      "espn_rank": 329,
+      "player_name": "Xavier Hutchinson",
+      "position": "WR",
+      "reason": "no Draft Command player match",
+      "team": "HOU"
+    },
+    {
+      "espn_adp": 170.55,
+      "espn_player_id": 4249417,
+      "espn_rank": 330,
+      "player_name": "Jalen Tolbert",
+      "position": "WR",
+      "reason": "no Draft Command player match",
+      "team": "MIA"
+    },
+    {
+      "espn_adp": 170.44,
+      "espn_player_id": 4427095,
+      "espn_rank": 332,
+      "player_name": "DeMario Douglas",
+      "position": "WR",
+      "reason": "no Draft Command player match",
+      "team": "NE"
+    },
+    {
+      "espn_adp": 170.6,
+      "espn_player_id": 3916945,
+      "espn_rank": 333,
+      "player_name": "Darius Slayton",
+      "position": "WR",
+      "reason": "no Draft Command player match",
+      "team": "NYG"
+    },
+    {
+      "espn_adp": 170.2,
+      "espn_player_id": 3149687,
+      "espn_rank": 340,
+      "player_name": "Chris Brooks",
+      "position": "RB",
+      "reason": "no Draft Command player match",
+      "team": "GB"
+    },
+    {
+      "espn_adp": 170.58,
+      "espn_player_id": 4695404,
+      "espn_rank": 343,
+      "player_name": "Isaiah Davis",
+      "position": "RB",
+      "reason": "no Draft Command player match",
+      "team": "NYJ"
+    },
+    {
+      "espn_adp": 170.33,
+      "espn_player_id": 4911851,
+      "espn_rank": 344,
+      "player_name": "LeQuint Allen Jr.",
+      "position": "RB",
+      "reason": "no Draft Command player match",
+      "team": "JAX"
+    },
+    {
+      "espn_adp": 170.28,
+      "espn_player_id": 4429835,
+      "espn_rank": 345,
+      "player_name": "George Holani",
+      "position": "RB",
+      "reason": "no Draft Command player match",
+      "team": "SEA"
+    },
+    {
+      "espn_adp": 170.34,
+      "espn_player_id": 4430871,
+      "espn_rank": 348,
+      "player_name": "Sean Tucker",
+      "position": "RB",
+      "reason": "no Draft Command player match",
+      "team": "TB"
+    },
+    {
+      "espn_adp": 170.22,
+      "espn_player_id": 4686468,
+      "espn_rank": 350,
+      "player_name": "Seth McGowan",
+      "position": "RB",
+      "reason": "no Draft Command player match",
+      "team": "IND"
+    },
+    {
+      "espn_adp": 170.96,
+      "espn_player_id": 4685397,
+      "espn_rank": 351,
+      "player_name": "Jordan James",
+      "position": "RB",
+      "reason": "no Draft Command player match",
+      "team": "SF"
+    },
+    {
+      "espn_adp": 170.12,
+      "espn_player_id": 4431545,
+      "espn_rank": 352,
+      "player_name": "Will Shipley",
+      "position": "RB",
+      "reason": "no Draft Command player match",
+      "team": "PHI"
+    },
+    {
+      "espn_adp": 169.99,
+      "espn_player_id": 4383429,
+      "espn_rank": 353,
+      "player_name": "Jacob Saylors",
+      "position": "RB",
+      "reason": "no Draft Command player match",
+      "team": "DET"
+    },
+    {
+      "espn_adp": 170.16,
+      "espn_player_id": 4599739,
+      "espn_rank": 356,
+      "player_name": "Kendre Miller",
+      "position": "RB",
+      "reason": "no Draft Command player match",
+      "team": "NO"
+    },
+    {
+      "espn_adp": 170.53,
+      "espn_player_id": 5081432,
+      "espn_rank": 357,
+      "player_name": "Antonio Williams",
+      "position": "WR",
+      "reason": "no Draft Command player match",
+      "team": "WAS"
+    },
+    {
+      "espn_adp": 170.41,
+      "espn_player_id": 4362921,
+      "espn_rank": 358,
+      "player_name": "Tyquan Thornton",
+      "position": "WR",
+      "reason": "no Draft Command player match",
+      "team": "KC"
+    },
+    {
+      "espn_adp": 170.36,
+      "espn_player_id": 2576925,
+      "espn_rank": 366,
+      "player_name": "Darren Waller",
+      "position": "TE",
+      "reason": "no Draft Command player match",
+      "team": "CAR"
+    },
+    {
+      "espn_adp": 170.35,
+      "espn_player_id": 4243331,
+      "espn_rank": 368,
+      "player_name": "Cade Otton",
+      "position": "TE",
+      "reason": "no Draft Command player match",
+      "team": "TB"
+    },
+    {
+      "espn_adp": 170.32,
+      "espn_player_id": 4635008,
+      "espn_rank": 369,
+      "player_name": "Keon Coleman",
+      "position": "WR",
+      "reason": "no Draft Command player match",
+      "team": "BUF"
+    },
+    {
+      "espn_adp": 170.29,
+      "espn_player_id": 5123663,
+      "espn_rank": 370,
+      "player_name": "Isaac TeSlaa",
+      "position": "WR",
+      "reason": "no Draft Command player match",
+      "team": "DET"
+    },
+    {
+      "espn_adp": 170.16,
+      "espn_player_id": 4686472,
+      "espn_rank": 372,
+      "player_name": "Marvin Mims Jr.",
+      "position": "WR",
+      "reason": "no Draft Command player match",
+      "team": "DEN"
+    },
+    {
+      "espn_adp": 170.14,
+      "espn_player_id": 4429299,
+      "espn_rank": 376,
+      "player_name": "Tahj Brooks",
+      "position": "RB",
+      "reason": "no Draft Command player match",
+      "team": "CIN"
+    },
+    {
+      "espn_adp": 170.37,
+      "espn_player_id": 4832846,
+      "espn_rank": 378,
+      "player_name": "Demond Claiborne",
+      "position": "RB",
+      "reason": "no Draft Command player match",
+      "team": "MIN"
+    },
+    {
+      "espn_adp": 170.09,
+      "espn_player_id": 15864,
+      "espn_rank": 379,
+      "player_name": "Geno Smith",
+      "position": "QB",
+      "reason": "no Draft Command player match",
+      "team": "NYJ"
+    },
+    {
+      "espn_adp": 168.33,
+      "espn_player_id": 4837248,
+      "espn_rank": 383,
+      "player_name": "Fernando Mendoza",
+      "position": "QB",
+      "reason": "no Draft Command player match",
+      "team": "LV"
+    },
+    {
+      "espn_adp": 169.2,
+      "espn_player_id": 8439,
+      "espn_rank": 385,
+      "player_name": "Aaron Rodgers",
+      "position": "QB",
+      "reason": "no Draft Command player match",
+      "team": "PIT"
+    },
+    {
+      "espn_adp": 170.09,
+      "espn_player_id": 3122840,
+      "espn_rank": 387,
+      "player_name": "Deshaun Watson",
+      "position": "QB",
+      "reason": "no Draft Command player match",
+      "team": "CLE"
+    },
+    {
+      "espn_adp": 170.13,
+      "espn_player_id": 4368003,
+      "espn_rank": 390,
+      "player_name": "Andrei Iosivas",
+      "position": "WR",
+      "reason": "no Draft Command player match",
+      "team": "CIN"
+    },
+    {
+      "espn_adp": 169.99,
+      "espn_player_id": 4685307,
+      "espn_rank": 391,
+      "player_name": "Kevin Coleman Jr.",
+      "position": "WR",
+      "reason": "no Draft Command player match",
+      "team": "MIA"
+    },
+    {
+      "espn_adp": 169.77,
+      "espn_player_id": 3676833,
+      "espn_rank": 392,
+      "player_name": "KaVontae Turpin",
+      "position": "WR",
+      "reason": "no Draft Command player match",
+      "team": "DAL"
+    },
+    {
+      "espn_adp": 170.21,
+      "espn_player_id": 4603186,
+      "espn_rank": 393,
+      "player_name": "Jack Bech",
+      "position": "WR",
+      "reason": "no Draft Command player match",
+      "team": "LV"
+    },
+    {
+      "espn_adp": 170.21,
+      "espn_player_id": 4597703,
+      "espn_rank": 395,
+      "player_name": "Tory Horton",
+      "position": "WR",
+      "reason": "no Draft Command player match",
+      "team": "SEA"
+    },
+    {
+      "espn_adp": 170.07,
+      "espn_player_id": 4690013,
+      "espn_rank": 396,
+      "player_name": "Rasheen Ali",
+      "position": "RB",
+      "reason": "no Draft Command player match",
+      "team": "BAL"
+    },
+    {
+      "espn_adp": 170.15,
+      "espn_player_id": 4874509,
+      "espn_rank": 398,
+      "player_name": "DJ Giddens",
+      "position": "RB",
+      "reason": "no Draft Command player match",
+      "team": "IND"
+    },
+    {
+      "espn_adp": 170.21,
+      "espn_player_id": 4887558,
+      "espn_rank": 399,
+      "player_name": "Emanuel Wilson",
+      "position": "RB",
+      "reason": "no Draft Command player match",
+      "team": "SEA"
+    },
+    {
+      "espn_adp": 169.93,
+      "espn_player_id": 4819231,
+      "espn_rank": 402,
+      "player_name": "Kaleb Johnson",
+      "position": "RB",
+      "reason": "no Draft Command player match",
+      "team": "GB"
+    },
+    {
+      "espn_adp": 170.1,
+      "espn_player_id": 4035537,
+      "espn_rank": 403,
+      "player_name": "Kene Nwangwu",
+      "position": "RB",
+      "reason": "no Draft Command player match",
+      "team": "NYJ"
+    },
+    {
+      "espn_adp": 170.09,
+      "espn_player_id": 4427728,
+      "espn_rank": 404,
+      "player_name": "Bam Knight",
+      "position": "RB",
+      "reason": "no Draft Command player match",
+      "team": "ARI"
+    },
+    {
+      "espn_adp": 169.66,
+      "espn_player_id": 3123076,
+      "espn_rank": 414,
+      "player_name": "David Njoku",
+      "position": "TE",
+      "reason": "no Draft Command player match",
+      "team": "LAC"
+    },
+    {
+      "espn_adp": 169.85,
+      "espn_player_id": 4432762,
+      "espn_rank": 429,
+      "player_name": "Shedeur Sanders",
+      "position": "QB",
+      "reason": "no Draft Command player match",
+      "team": "CLE"
+    },
+    {
+      "espn_adp": 169.97,
+      "espn_player_id": 14880,
+      "espn_rank": 430,
+      "player_name": "Kirk Cousins",
+      "position": "QB",
+      "reason": "no Draft Command player match",
+      "team": "LV"
+    },
+    {
+      "espn_adp": 169.97,
+      "espn_player_id": 4429275,
+      "espn_rank": 438,
+      "player_name": "Trey Benson",
+      "position": "RB",
+      "reason": "no Draft Command player match",
+      "team": "ARI"
+    },
+    {
+      "espn_adp": 169.79,
+      "espn_player_id": 4430802,
+      "espn_rank": 445,
+      "player_name": "Darnell Washington",
+      "position": "TE",
+      "reason": "no Draft Command player match",
+      "team": "PIT"
+    },
+    {
+      "espn_adp": 169.88,
+      "espn_player_id": 4433970,
+      "espn_rank": 447,
+      "player_name": "J.J. McCarthy",
+      "position": "QB",
+      "reason": "no Draft Command player match",
+      "team": "MIN"
+    },
+    {
+      "espn_adp": 169.97,
+      "espn_player_id": 4362887,
+      "espn_rank": 453,
+      "player_name": "Justin Fields",
+      "position": "QB",
+      "reason": "no Draft Command player match",
+      "team": "KC"
+    },
+    {
+      "espn_adp": 169.97,
+      "espn_player_id": 11252,
+      "espn_rank": 454,
+      "player_name": "Joe Flacco",
+      "position": "QB",
+      "reason": "no Draft Command player match",
+      "team": "CIN"
+    },
+    {
+      "espn_adp": 169.96,
+      "espn_player_id": 16002,
+      "espn_rank": 457,
+      "player_name": "Kyle Juszczyk",
+      "position": "RB",
+      "reason": "no Draft Command player match",
+      "team": "SF"
+    },
+    {
+      "espn_adp": 169.97,
+      "espn_player_id": 4383396,
+      "espn_rank": 458,
+      "player_name": "Hunter Luepke",
+      "position": "RB",
+      "reason": "no Draft Command player match",
+      "team": "DAL"
+    },
+    {
+      "espn_adp": 169.8,
+      "espn_player_id": 3930086,
+      "espn_rank": 459,
+      "player_name": "Dawson Knox",
+      "position": "TE",
+      "reason": "no Draft Command player match",
+      "team": "BUF"
+    },
+    {
+      "espn_adp": 169.92,
+      "espn_player_id": 4678006,
+      "espn_rank": 460,
+      "player_name": "Elijah Arroyo",
+      "position": "TE",
+      "reason": "no Draft Command player match",
+      "team": "SEA"
+    },
+    {
+      "espn_adp": 169.74,
+      "espn_player_id": 4258595,
+      "espn_rank": 466,
+      "player_name": "Cole Kmet",
+      "position": "TE",
+      "reason": "no Draft Command player match",
+      "team": "CHI"
+    },
+    {
+      "espn_adp": 169.95,
+      "espn_player_id": 4431588,
+      "espn_rank": 467,
+      "player_name": "Ja'Tavion Sanders",
+      "position": "TE",
+      "reason": "no Draft Command player match",
+      "team": "CAR"
+    },
+    {
+      "espn_adp": 169.93,
+      "espn_player_id": 4240472,
+      "espn_rank": 468,
+      "player_name": "Noah Gray",
+      "position": "TE",
+      "reason": "no Draft Command player match",
+      "team": "KC"
+    },
+    {
+      "espn_adp": 169.97,
+      "espn_player_id": 4431574,
+      "espn_rank": 469,
+      "player_name": "Eli Stowers",
+      "position": "TE",
+      "reason": "no Draft Command player match",
+      "team": "PHI"
+    },
+    {
+      "espn_adp": 169.88,
+      "espn_player_id": 2573401,
+      "espn_rank": 470,
+      "player_name": "Tyler Higbee",
+      "position": "TE",
+      "reason": "no Draft Command player match",
+      "team": "LAR"
+    },
+    {
+      "espn_adp": 169.97,
+      "espn_player_id": 4831959,
+      "espn_rank": 472,
+      "player_name": "Eli Raridon",
+      "position": "TE",
+      "reason": "no Draft Command player match",
+      "team": "NE"
+    },
+    {
+      "espn_adp": 169.95,
+      "espn_player_id": 4372780,
+      "espn_rank": 473,
+      "player_name": "Tommy Tremble",
+      "position": "TE",
+      "reason": "no Draft Command player match",
+      "team": "CAR"
+    },
+    {
+      "espn_adp": 169.96,
+      "espn_player_id": 4685522,
+      "espn_rank": 476,
+      "player_name": "Ty Simpson",
+      "position": "QB",
+      "reason": "no Draft Command player match",
+      "team": "LAR"
+    },
+    {
+      "espn_adp": 169.95,
+      "espn_player_id": 2969939,
+      "espn_rank": 477,
+      "player_name": "Jameis Winston",
+      "position": "QB",
+      "reason": "no Draft Command player match",
+      "team": "NYG"
+    },
+    {
+      "espn_adp": 169.96,
+      "espn_player_id": 4596472,
+      "espn_rank": 479,
+      "player_name": "Jalon Daniels",
+      "position": "QB",
+      "reason": "no Draft Command player match",
+      "team": "TB"
+    },
+    {
+      "espn_adp": 169.94,
+      "espn_player_id": 4240391,
+      "espn_rank": 482,
+      "player_name": "Tommy DeVito",
+      "position": "QB",
+      "reason": "no Draft Command player match",
+      "team": "NE"
+    },
+    {
+      "espn_adp": 169.97,
+      "espn_player_id": 4685201,
+      "espn_rank": 486,
+      "player_name": "Tanner McKee",
+      "position": "QB",
+      "reason": "no Draft Command player match",
+      "team": "PHI"
+    },
+    {
+      "espn_adp": 169.76,
+      "espn_player_id": 4912218,
+      "espn_rank": 978,
+      "player_name": "Cyrus Allen",
+      "position": "WR",
+      "reason": "no Draft Command player match",
+      "team": "KC"
+    },
+    {
+      "espn_adp": 169.97,
+      "espn_player_id": 4613202,
+      "espn_rank": 979,
+      "player_name": "Kyle Williams",
+      "position": "WR",
+      "reason": "no Draft Command player match",
+      "team": "NE"
+    },
+    {
+      "espn_adp": 169.95,
+      "espn_player_id": 4242433,
+      "espn_rank": 981,
+      "player_name": "Joshua Palmer",
+      "position": "WR",
+      "reason": "no Draft Command player match",
+      "team": "BUF"
+    },
+    {
+      "espn_adp": 169.97,
+      "espn_player_id": 2973405,
+      "espn_rank": 984,
+      "player_name": "Kalif Raymond",
+      "position": "WR",
+      "reason": "no Draft Command player match",
+      "team": "CHI"
+    },
+    {
+      "espn_adp": 169.97,
+      "espn_player_id": 4696882,
+      "espn_rank": 1000,
+      "player_name": "Devontez Walker",
+      "position": "WR",
+      "reason": "no Draft Command player match",
+      "team": "BAL"
+    },
+    {
+      "espn_adp": 169.94,
+      "espn_player_id": 4426844,
+      "espn_rank": 1008,
+      "player_name": "Elijah Higgins",
+      "position": "TE",
+      "reason": "no Draft Command player match",
+      "team": "ARI"
+    },
+    {
+      "espn_adp": 169.85,
+      "espn_player_id": 4431268,
+      "espn_rank": 1017,
+      "player_name": "Chimere Dike",
+      "position": "WR",
+      "reason": "no Draft Command player match",
+      "team": "TEN"
+    },
+    {
+      "espn_adp": 169.96,
+      "espn_player_id": 3054212,
+      "espn_rank": 1020,
+      "player_name": "Jonnu Smith",
+      "position": "TE",
+      "reason": "no Draft Command player match",
+      "team": "GB"
+    },
+    {
+      "espn_adp": 169.95,
+      "espn_player_id": 3921690,
+      "espn_rank": 1022,
+      "player_name": "Josh Oliver",
+      "position": "TE",
+      "reason": "no Draft Command player match",
+      "team": "MIN"
+    },
+    {
+      "espn_adp": 169.97,
+      "espn_player_id": 3911853,
+      "espn_rank": 1023,
+      "player_name": "Adam Trautman",
+      "position": "TE",
+      "reason": "no Draft Command player match",
+      "team": "DEN"
+    },
+    {
+      "espn_adp": 169.89,
+      "espn_player_id": 4869748,
+      "espn_rank": 1030,
+      "player_name": "Zavion Thomas",
+      "position": "WR",
+      "reason": "no Draft Command player match",
+      "team": "CHI"
+    },
+    {
+      "espn_adp": 169.92,
+      "espn_player_id": 4683153,
+      "espn_rank": 1046,
+      "player_name": "Skyler Bell",
+      "position": "WR",
+      "reason": "no Draft Command player match",
+      "team": "BUF"
+    },
+    {
+      "espn_adp": 169.97,
+      "espn_player_id": 4241372,
+      "espn_rank": 1047,
+      "player_name": "Hollywood Brown",
+      "position": "WR",
+      "reason": "no Draft Command player match",
+      "team": "PHI"
+    },
+    {
+      "espn_adp": 169.93,
+      "espn_player_id": 4372096,
+      "espn_rank": 1076,
+      "player_name": "Luke Schoonmaker",
+      "position": "TE",
+      "reason": "no Draft Command player match",
+      "team": "DAL"
+    },
+    {
+      "espn_adp": 169.97,
+      "espn_player_id": 2998565,
+      "espn_rank": 1078,
+      "player_name": "Mo Alie-Cox",
+      "position": "TE",
+      "reason": "no Draft Command player match",
+      "team": "IND"
+    },
+    {
+      "espn_adp": 169.97,
+      "espn_player_id": 4573699,
+      "espn_rank": 1082,
+      "player_name": "Jackson Hawes",
+      "position": "TE",
+      "reason": "no Draft Command player match",
+      "team": "BUF"
+    },
+    {
+      "espn_adp": 169.42,
+      "espn_player_id": 16733,
+      "espn_rank": 1102,
+      "player_name": "Odell Beckham Jr.",
+      "position": "WR",
+      "reason": "no Draft Command player match",
+      "team": "NYG"
+    },
+    {
+      "espn_adp": 169.97,
+      "espn_player_id": 4569382,
+      "espn_rank": 1115,
+      "player_name": "Jordan Whittington",
+      "position": "WR",
+      "reason": "no Draft Command player match",
+      "team": "LAR"
+    },
+    {
+      "espn_adp": 169.97,
+      "espn_player_id": 4708486,
+      "espn_rank": 1120,
+      "player_name": "Jimmy Horn Jr.",
+      "position": "WR",
+      "reason": "no Draft Command player match",
+      "team": "CAR"
+    },
+    {
+      "espn_adp": 169.91,
+      "espn_player_id": 4242392,
+      "espn_rank": 1139,
+      "player_name": "Brock Wright",
+      "position": "TE",
+      "reason": "no Draft Command player match",
+      "team": "DET"
+    },
+    {
+      "espn_adp": 169.91,
+      "espn_player_id": 4426948,
+      "espn_rank": 1141,
+      "player_name": "Luke McCaffrey",
+      "position": "WR",
+      "reason": "no Draft Command player match",
+      "team": "WAS"
+    },
+    {
+      "espn_adp": 169.97,
+      "espn_player_id": 4430870,
+      "espn_rank": 1145,
+      "player_name": "KeAndre Lambert-Smith",
+      "position": "WR",
+      "reason": "no Draft Command player match",
+      "team": "LAC"
+    },
+    {
+      "espn_adp": 169.97,
+      "espn_player_id": 4384852,
+      "espn_rank": 1210,
+      "player_name": "Dohnte Meyers",
+      "position": "WR",
+      "reason": "no Draft Command player match",
+      "team": "CIN"
+    },
+    {
+      "espn_adp": 169.98,
+      "espn_player_id": 2515270,
+      "espn_rank": 1211,
+      "player_name": "Michael Burton",
+      "position": "RB",
+      "reason": "no Draft Command player match",
+      "team": "CLE"
+    },
+    {
+      "espn_adp": 169.96,
+      "espn_player_id": 4695193,
+      "espn_rank": 1212,
+      "player_name": "Efton Chism III",
+      "position": "WR",
+      "reason": "no Draft Command player match",
+      "team": "NE"
+    },
+    {
+      "espn_adp": 169.97,
+      "espn_player_id": 4360967,
+      "espn_rank": 1221,
+      "player_name": "Brevyn Spann-Ford",
+      "position": "TE",
+      "reason": "no Draft Command player match",
+      "team": "DAL"
+    },
+    {
+      "espn_adp": 169.94,
+      "espn_player_id": 4714771,
+      "espn_rank": 1223,
+      "player_name": "Drew Allar",
+      "position": "QB",
+      "reason": "no Draft Command player match",
+      "team": "PIT"
+    },
+    {
+      "espn_adp": 169.97,
+      "espn_player_id": 4889929,
+      "espn_rank": 1229,
+      "player_name": "Quinn Ewers",
+      "position": "QB",
+      "reason": "no Draft Command player match",
+      "team": "JAX"
+    },
+    {
+      "espn_adp": 169.97,
+      "espn_player_id": 14163,
+      "espn_rank": 1231,
+      "player_name": "Tyrod Taylor",
+      "position": "QB",
+      "reason": "no Draft Command player match",
+      "team": "GB"
+    },
+    {
+      "espn_adp": 169.97,
+      "espn_player_id": 4240703,
+      "espn_rank": 1236,
+      "player_name": "Kenny Pickett",
+      "position": "QB",
+      "reason": "no Draft Command player match",
+      "team": "CAR"
+    },
+    {
+      "espn_adp": 169.97,
+      "espn_player_id": 5160110,
+      "espn_rank": 1246,
+      "player_name": "Jahdae Walker",
+      "position": "WR",
+      "reason": "no Draft Command player match",
+      "team": "CHI"
+    },
+    {
+      "espn_adp": 169.95,
+      "espn_player_id": 3044720,
+      "espn_rank": 1248,
+      "player_name": "Joshua Dobbs",
+      "position": "QB",
+      "reason": "no Draft Command player match",
+      "team": "DET"
+    },
+    {
+      "espn_adp": 169.97,
+      "espn_player_id": 4035671,
+      "espn_rank": 1249,
+      "player_name": "Tyler Huntley",
+      "position": "QB",
+      "reason": "no Draft Command player match",
+      "team": "BAL"
+    },
+    {
+      "espn_adp": 169.97,
+      "espn_player_id": 4715355,
+      "espn_rank": 1254,
+      "player_name": "Darius Cooper",
+      "position": "WR",
+      "reason": "no Draft Command player match",
+      "team": "PHI"
+    },
+    {
+      "espn_adp": 169.97,
+      "espn_player_id": 4426485,
+      "espn_rank": 1257,
+      "player_name": "Jonathan Mingo",
+      "position": "WR",
+      "reason": "no Draft Command player match",
+      "team": "DAL"
+    },
+    {
+      "espn_adp": 169.96,
+      "espn_player_id": 3115293,
+      "espn_rank": 1267,
+      "player_name": "Kyle Allen",
+      "position": "QB",
+      "reason": "no Draft Command player match",
+      "team": "BUF"
+    },
+    {
+      "espn_adp": 169.97,
+      "espn_player_id": 3924327,
+      "espn_rank": 1271,
+      "player_name": "Drew Lock",
+      "position": "QB",
+      "reason": "no Draft Command player match",
+      "team": "SEA"
+    },
+    {
+      "espn_adp": 169.96,
+      "espn_player_id": 5081338,
+      "espn_rank": 1302,
+      "player_name": "Kaden Wetjen",
+      "position": "WR",
+      "reason": "no Draft Command player match",
+      "team": "PIT"
+    },
+    {
+      "espn_adp": 169.96,
+      "espn_player_id": 3123075,
+      "espn_rank": 1321,
+      "player_name": "Braxton Berrios",
+      "position": "WR",
+      "reason": "no Draft Command player match",
+      "team": "FA"
+    },
+    {
+      "espn_adp": 169.96,
+      "espn_player_id": 4430656,
+      "espn_rank": 1326,
+      "player_name": "Myles Price",
+      "position": "WR",
+      "reason": "no Draft Command player match",
+      "team": "MIN"
+    },
+    {
+      "espn_adp": 169.97,
+      "espn_player_id": 3728262,
+      "espn_rank": 1335,
+      "player_name": "Ray-Ray McCloud III",
+      "position": "WR",
+      "reason": "no Draft Command player match",
+      "team": "CHI"
+    },
+    {
+      "espn_adp": 169.93,
+      "espn_player_id": 3895856,
+      "espn_rank": 1341,
+      "player_name": "Christian Kirk",
+      "position": "WR",
+      "reason": "no Draft Command player match",
+      "team": "SF"
+    },
+    {
+      "espn_adp": 169.93,
+      "espn_player_id": 4039057,
+      "espn_rank": 1346,
+      "player_name": "Lil'Jordan Humphrey",
+      "position": "WR",
+      "reason": "no Draft Command player match",
+      "team": "DEN"
+    },
+    {
+      "espn_adp": 169.96,
+      "espn_player_id": 4360438,
+      "espn_rank": 1348,
+      "player_name": "Brandon Aiyuk",
+      "position": "WR",
+      "reason": "no Draft Command player match",
+      "team": "SF"
+    },
+    {
+      "espn_adp": 169.94,
+      "espn_player_id": 4374033,
+      "espn_rank": 1354,
+      "player_name": "Jermar Jefferson",
+      "position": "RB",
+      "reason": "no Draft Command player match",
+      "team": "MIN"
+    },
+    {
+      "espn_adp": 169.96,
+      "espn_player_id": 4249030,
+      "espn_rank": 1360,
+      "player_name": "D.J. Montgomery",
+      "position": "WR",
+      "reason": "no Draft Command player match",
+      "team": "IND"
+    },
+    {
+      "espn_adp": 169.97,
+      "espn_player_id": 4259553,
+      "espn_rank": 1376,
+      "player_name": "Stetson Bennett IV",
+      "position": "QB",
+      "reason": "no Draft Command player match",
+      "team": "LAR"
+    },
+    {
+      "espn_adp": 169.94,
+      "espn_player_id": 4428209,
+      "espn_rank": 1391,
+      "player_name": "Ricky Pearsall",
+      "position": "WR",
+      "reason": "no Draft Command player match",
+      "team": "SF"
+    }
+  ]
+}

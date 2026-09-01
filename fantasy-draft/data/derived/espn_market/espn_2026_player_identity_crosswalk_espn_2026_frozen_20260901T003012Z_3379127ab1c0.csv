@@ -1,0 +1,501 @@
+snapshot_id,espn_player_id,raw_player_name,normalized_player_name,nfl_team,primary_position,draft_command_player_id,canonical_research_player_id,mapping_method,mapping_confidence,unresolved_reason
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4429795,Jahmyr Gibbs,jahmyr gibbs,DET,RB,1,draft-command:1,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4430807,Bijan Robinson,bijan robinson,ATL,RB,2,draft-command:2,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4362628,Ja'Marr Chase,ja marr chase,CIN,WR,3,draft-command:3,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4426515,Puka Nacua,puka nacua,LAR,WR,4,draft-command:4,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4242335,Jonathan Taylor,jonathan taylor,IND,RB,6,draft-command:6,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4430878,Jaxon Smith-Njigba,jaxon smith njigba,SEA,WR,7,draft-command:7,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3117251,Christian McCaffrey,christian mccaffrey,SF,RB,5,draft-command:5,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4374302,Amon-Ra St. Brown,amon ra st brown,DET,WR,8,draft-command:8,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4379399,James Cook III,james cook,BUF,RB,9,draft-command:9,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4429160,De'Von Achane,de von achane,MIA,RB,12,draft-command:12,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4241389,CeeDee Lamb,ceedee lamb,DAL,WR,10,draft-command:10,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4262921,Justin Jefferson,justin jefferson,MIN,WR,11,draft-command:11,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4685382,Omarion Hampton,omarion hampton,LAC,RB,15,draft-command:15,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4362238,Chase Brown,chase brown,CIN,RB,14,draft-command:14,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3929630,Saquon Barkley,saquon barkley,PHI,RB,13,draft-command:13,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3043078,Derrick Henry,derrick henry,BAL,RB,16,draft-command:16,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4426502,Drake London,drake london,ATL,WR,17,draft-command:17,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4890973,Ashton Jeanty,ashton jeanty,LV,RB,18,draft-command:18,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4047646,A.J. Brown,a j brown,NE,WR,20,draft-command:20,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4361307,Trey McBride,trey mcbride,ARI,TE,23,draft-command:23,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4870808,Jeremiyah Love,jeremiyah love,ARI,RB,27,draft-command:27,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4432665,Brock Bowers,brock bowers,LV,TE,21,draft-command:21,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4258173,Nico Collins,nico collins,HOU,WR,22,draft-command:22,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4361370,Chris Olave,chris olave,NO,WR,26,draft-command:26,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4567048,Kenneth Walker III,kenneth walker,KC,RB,19,draft-command:19,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3918298,Josh Allen,josh allen,BUF,QB,25,draft-command:25,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4428331,Rashee Rice,rashee rice,KC,WR,30,draft-command:30,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4426354,George Pickens,george pickens,DAL,WR,24,draft-command:24,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4569618,Garrett Wilson,garrett wilson,NYJ,WR,38,draft-command:38,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4427366,Breece Hall,breece hall,NYJ,RB,31,draft-command:31,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4361579,Javonte Williams,javonte williams,DAL,RB,33,draft-command:33,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4430737,Kyren Williams,kyren williams,LAR,RB,29,draft-command:29,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4595348,Malik Nabers,malik nabers,NYG,WR,28,draft-command:28,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4239996,Travis Etienne Jr.,travis etienne,NO,RB,42,draft-command:42,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4241478,DeVonta Smith,devonta smith,PHI,WR,32,draft-command:32,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4685472,Tetairoa McMillan,tetairoa mcmillan,CAR,WR,36,draft-command:36,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4429615,Zay Flowers,zay flowers,BAL,WR,37,draft-command:37,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4567750,Emeka Egbuka,emeka egbuka,TB,WR,41,draft-command:41,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4685702,Quinshon Judkins,quinshon judkins,CLE,RB,47,draft-command:47,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4612826,Ladd McConkey,ladd mcconkey,LAC,WR,39,draft-command:39,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4696981,Cam Skattebo,cam skattebo,NYG,RB,45,draft-command:45,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4723086,Colston Loveland,colston loveland,CHI,TE,40,draft-command:40,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4239993,Tee Higgins,tee higgins,CIN,WR,35,draft-command:35,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,16800,Davante Adams,davante adams,LAR,WR,48,draft-command:48,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4372016,Jaylen Waddle,jaylen waddle,DEN,WR,43,draft-command:43,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4259545,D'Andre Swift,d andre swift,CHI,RB,46,draft-command:46,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4882093,Bhayshul Tuten,bhayshul tuten,JAX,RB,57,draft-command:57,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3916387,Lamar Jackson,lamar jackson,BAL,QB,44,draft-command:44,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4596448,Bucky Irving,bucky irving,TB,RB,49,draft-command:49,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4035538,David Montgomery,david montgomery,HOU,RB,53,draft-command:53,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3121422,Terry McLaurin,terry mclaurin,WAS,WR,51,draft-command:51,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3915416,DJ Moore,dj moore,BUF,WR,54,draft-command:54,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4685512,Jadarian Price,jadarian price,SEA,RB,63,draft-command:63,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4426388,Jameson Williams,jameson williams,DET,WR,55,draft-command:55,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4431459,Tyler Warren,tyler warren,IND,TE,50,draft-command:50,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4431299,Rome Odunze,rome odunze,CHI,WR,58,draft-command:58,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4426348,Jayden Daniels,jayden daniels,WAS,QB,60,draft-command:60,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4431452,Drake Maye,drake maye,NE,QB,56,draft-command:56,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4432710,TreVeyon Henderson,treveyon henderson,NE,RB,61,draft-command:61,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4685278,Luther Burden III,luther burden,CHI,WR,52,draft-command:52,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4871023,Carnell Tate,carnell tate,TEN,WR,66,draft-command:66,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,16737,Mike Evans,mike evans,SF,WR,62,draft-command:62,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4569173,Rhamondre Stevenson,rhamondre stevenson,NE,RB,70,draft-command:70,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3915511,Joe Burrow,joe burrow,CIN,QB,59,draft-command:59,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4432708,Marvin Harrison Jr.,marvin harrison,ARI,WR,67,draft-command:67,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4035687,Michael Pittman Jr.,michael pittman,PIT,WR,86,draft-command:86,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3916148,Tony Pollard,tony pollard,TEN,RB,77,draft-command:77,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4047650,DK Metcalf,dk metcalf,PIT,WR,73,draft-command:73,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4040715,Jalen Hurts,jalen hurts,PHI,QB,64,draft-command:64,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,5083076,Harold Fannin Jr.,harold fannin,CLE,TE,71,draft-command:71,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3128429,Courtland Sutton,courtland sutton,DEN,WR,81,draft-command:81,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4360248,Kyle Pitts Sr.,kyle pitts,ATL,TE,74,draft-command:74,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,2577417,Dak Prescott,dak prescott,DAL,QB,75,draft-command:75,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4569987,Jaylen Warren,jaylen warren,PIT,RB,72,draft-command:72,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4248528,Christian Watson,christian watson,GB,WR,65,draft-command:65,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4432620,Parker Washington,parker washington,JAX,WR,69,draft-command:69,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4371733,Kenny Gainwell,kenny gainwell,TB,RB,98,draft-command:98,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3040151,George Kittle,george kittle,SF,TE,85,draft-command:85,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4429023,MarShawn Lloyd,marshawn lloyd,GB,RB,151,draft-command:151,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4569587,Wan'Dale Robinson,wan dale robinson,TEN,WR,103,draft-command:103,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4430027,Sam LaPorta,sam laporta,DET,TE,68,draft-command:68,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4047365,Josh Jacobs,josh jacobs,GB,RB,34,draft-command:34,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4038815,Rico Dowdle,rico dowdle,PIT,RB,82,draft-command:82,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4360761,Michael Wilson,michael wilson,ARI,WR,83,draft-command:83,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4689114,Jaxson Dart,jaxson dart,NYG,QB,90,draft-command:90,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4038941,Justin Herbert,justin herbert,LAC,QB,80,draft-command:80,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4678008,Jonathon Brooks,jonathon brooks,CAR,RB,88,draft-command:88,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,2976212,Stefon Diggs,stefon diggs,WAS,WR,92,draft-command:92,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4431611,Caleb Williams,caleb williams,CHI,QB,79,draft-command:79,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4241416,Chuba Hubbard,chuba hubbard,CAR,RB,84,draft-command:84,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4685415,Travis Hunter,travis hunter,JAX,WR,132,draft-command:132,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3042519,Aaron Jones Sr.,aaron jones,MIN,RB,114,draft-command:114,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4360078,Alec Pierce,alec pierce,IND,WR,93,draft-command:93,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3916433,Jakobi Meyers,jakobi meyers,JAX,WR,109,draft-command:109,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4432773,Brian Thomas Jr.,brian thomas,JAX,WR,78,draft-command:78,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4701936,Matthew Golden,matthew golden,GB,WR,108,draft-command:108,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3116165,Chris Godwin Jr.,chris godwin,TB,WR,89,draft-command:89,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4429205,Jordan Addison,jordan addison,MIN,WR,95,draft-command:95,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4360310,Trevor Lawrence,trevor lawrence,JAX,QB,87,draft-command:87,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4697815,Rachaad White,rachaad white,WAS,RB,111,draft-command:111,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4241985,J.K. Dobbins,j k dobbins,DEN,RB,91,draft-command:91,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4361741,Brock Purdy,brock purdy,SF,QB,104,draft-command:104,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4608686,Kyle Monangai,kyle monangai,CHI,RB,99,draft-command:99,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4572680,Tucker Kraft,tucker kraft,GB,TE,76,draft-command:76,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4688813,Josh Downs,josh downs,IND,WR,96,draft-command:96,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4373678,Khalil Shakir,khalil shakir,BUF,WR,129,draft-command:129,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,15847,Travis Kelce,travis kelce,KC,TE,105,draft-command:105,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3139477,Patrick Mahomes,patrick mahomes,KC,QB,112,draft-command:112,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4568490,RJ Harvey,rj harvey,DEN,RB,94,draft-command:94,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3121023,Dallas Goedert,dallas goedert,PHI,TE,117,draft-command:117,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4870795,Makai Lemon,makai lemon,PHI,WR,100,draft-command:100,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4429096,Blake Corum,blake corum,LAR,RB,97,draft-command:97,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4426338,Bo Nix,bo nix,DEN,QB,113,draft-command:113,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4242355,Jake Ferguson,jake ferguson,DAL,TE,119,draft-command:119,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,12483,Matthew Stafford,matthew stafford,LAR,QB,106,draft-command:106,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3917315,Kyler Murray,kyler murray,MIN,QB,123,draft-command:123,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4575131,Jacory Croskey-Merritt,jacory croskey merritt,WAS,RB,102,draft-command:102,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4361050,Isaiah Likely,isaiah likely,NYG,TE,115,draft-command:115,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4429025,Quentin Johnston,quentin johnston,LAC,WR,101,draft-command:101,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4362249,Jayden Reed,jayden reed,GB,WR,110,draft-command:110,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4683062,Xavier Worthy,xavier worthy,KC,WR,126,draft-command:126,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4710714,De'Zhaun Stribling,de zhaun stribling,SF,WR,118,draft-command:118,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3116365,Mark Andrews,mark andrews,BAL,TE,125,draft-command:125,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4361432,Romeo Doubs,romeo doubs,NE,WR,122,draft-command:122,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4695883,Jalen Coker,jalen coker,CAR,WR,121,draft-command:121,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4385690,Dalton Kincaid,dalton kincaid,BUF,TE,107,draft-command:107,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4360689,Tyler Shough,tyler shough,NO,QB,138,draft-command:138,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3046779,Jared Goff,jared goff,DET,QB,124,draft-command:124,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4428557,Tyjae Spears,tyjae spears,TEN,RB,130,draft-command:130,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4360569,Jordan Mason,jordan mason,MIN,RB,116,draft-command:116,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3126486,Deebo Samuel Sr.,deebo samuel,SF,WR,133,draft-command:133,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4870653,KC Concepcion,kc concepcion,CLE,WR,120,draft-command:120,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4426385,Zach Charbonnet,zach charbonnet,SEA,RB,135,draft-command:135,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4429059,Woody Marks,woody marks,HOU,RB,134,draft-command:134,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4430834,Jalen McMillan,jalen mcmillan,TB,WR,149,draft-command:149,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4702555,Jonah Coleman,jonah coleman,DEN,RB,147,draft-command:147,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3052587,Baker Mayfield,baker mayfield,TB,QB,131,draft-command:131,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4366031,Tank Dell,tank dell,HOU,WR,189,draft-command:189,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3917792,Daniel Jones,daniel jones,IND,QB,155,draft-command:155,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4362619,Chris Rodriguez Jr.,chris rodriguez,JAX,RB,128,draft-command:128,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4361529,Isiah Pacheco,isiah pacheco,DET,RB,156,draft-command:156,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3054850,Alvin Kamara,alvin kamara,NO,RB,153,draft-command:153,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3929645,Juwan Johnson,juwan johnson,NO,TE,142,draft-command:142,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3046439,Hunter Henry,hunter henry,NE,TE,139,draft-command:139,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4373626,Tyler Allgeier,tyler allgeier,ARI,RB,136,draft-command:136,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4036133,T.J. Hockenson,t j hockenson,MIN,TE,161,draft-command:161,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,5083315,Kenyon Sadiq,kenyon sadiq,NYJ,TE,173,draft-command:173,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,15818,Keenan Allen,keenan allen,IND,WR,143,draft-command:143,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4036378,Jordan Love,jordan love,GB,QB,137,draft-command:137,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3925357,Calvin Ridley,calvin ridley,TEN,WR,192,draft-command:192,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,5081397,Dylan Sampson,dylan sampson,CLE,RB,159,draft-command:159,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4241474,Brian Robinson Jr.,brian robinson,ATL,RB,152,draft-command:152,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4430539,Brenton Strange,brenton strange,JAX,TE,146,draft-command:146,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4586312,Jaylin Noel,jaylin noel,HOU,WR,172,draft-command:172,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4570037,Terrance Ferguson,terrance ferguson,LAR,TE,157,draft-command:157,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4032473,Rashid Shaheed,rashid shaheed,SEA,WR,141,draft-command:141,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4832800,Denzel Boston,denzel boston,CLE,WR,144,draft-command:144,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4241463,Jerry Jeudy,jerry jeudy,CLE,WR,171,draft-command:171,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4597500,Adonai Mitchell,adonai mitchell,NYJ,WR,168,draft-command:168,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4869645,Caleb Douglas,caleb douglas,MIA,WR,158,draft-command:158,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4242512,Malik Willis,malik willis,MIA,QB,148,draft-command:148,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4880281,Jordyn Tyson,jordyn tyson,NO,WR,127,draft-command:127,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4428718,Tre Tucker,tre tucker,LV,WR,154,draft-command:154,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4382466,Jalen Nailor,jalen nailor,LV,WR,162,draft-command:162,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4596334,Keaton Mitchell,keaton mitchell,LAC,RB,140,draft-command:140,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4686658,Mike Washington Jr.,mike washington,LV,RB,145,draft-command:145,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4685247,Braelon Allen,braelon allen,NYJ,RB,166,draft-command:166,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4360939,Rashod Bateman,rashod bateman,BAL,WR,186,draft-command:186,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4428850,Dontayvion Wicks,dontayvion wicks,PHI,WR,163,draft-command:163,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4569559,Devaughn Vele,devaughn vele,NO,WR,167,draft-command:167,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4429013,Tank Bigsby,tank bigsby,PHI,RB,150,draft-command:150,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4429501,Ray Davis,ray davis,BUF,RB,169,draft-command:169,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4241457,Najee Harris,najee harris,NYG,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4038441,Justice Hill,justice hill,BAL,RB,194,draft-command:194,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4870847,Ja'Kobi Lane,ja kobi lane,BAL,WR,178,draft-command:178,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4432577,C.J. Stroud,c j stroud,HOU,QB,170,draft-command:170,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3912547,Sam Darnold,sam darnold,SEA,QB,160,draft-command:160,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3886598,Jauan Jennings,jauan jennings,MIN,WR,183,draft-command:183,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4682648,Malachi Fields,malachi fields,NYG,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4685261,Germie Bernard,germie bernard,PIT,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4686612,Tre' Harris,tre harris,LAC,WR,179,draft-command:179,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4361411,Pat Freiermuth,pat freiermuth,PIT,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3117256,Dalton Schultz,dalton schultz,HOU,TE,164,draft-command:164,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,5083754,Ryan Flournoy,ryan flournoy,DAL,WR,175,draft-command:175,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4870612,Zachariah Branch,zachariah branch,ATL,WR,193,draft-command:193,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4723820,Omar Cooper Jr.,omar cooper,NYJ,WR,188,draft-command:188,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4429022,Kayshon Boutte,kayshon boutte,HOU,WR,180,draft-command:180,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4696044,Kaelon Black,kaelon black,SF,RB,181,draft-command:181,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4430968,Kimani Vidal,kimani vidal,LAC,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4682745,Jaylen Wright,jaylen wright,MIA,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4686728,Gunnar Helm,gunnar helm,TEN,TE,197,draft-command:197,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4360635,Chig Okonkwo,chig okonkwo,WAS,TE,165,draft-command:165,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4576297,AJ Barner,aj barner,SEA,TE,174,draft-command:174,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4685720,Bryce Young,bryce young,CAR,QB,177,draft-command:177,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4688380,Cam Ward,cam ward,TEN,QB,182,draft-command:182,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,2578570,Jacoby Brissett,jacoby brissett,ARI,QB,200,draft-command:200,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4711533,Ollie Gordon II,ollie gordon,MIA,RB,191,draft-command:191,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3116389,Samaje Perine,samaje perine,CIN,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3915411,Ty Johnson,ty johnson,BUF,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4569603,Malik Washington,malik washington,MIA,WR,187,draft-command:187,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4240603,Malik Davis,malik davis,DAL,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4596602,Brashard Smith,brashard smith,KC,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,2977187,Cooper Kupp,cooper kupp,SEA,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4430034,Xavier Legette,xavier legette,CAR,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4361409,Jahan Dotson,jahan dotson,ATL,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4686422,Xavier Hutchinson,xavier hutchinson,HOU,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4249417,Jalen Tolbert,jalen tolbert,MIA,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4869961,Chris Bell,chris bell,MIA,WR,198,draft-command:198,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4427095,DeMario Douglas,demario douglas,NE,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3916945,Darius Slayton,darius slayton,NYG,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3149687,Chris Brooks,chris brooks,GB,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4832955,Emmett Johnson,emmett johnson,KC,RB,184,draft-command:184,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4695404,Isaiah Davis,isaiah davis,NYJ,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4911851,LeQuint Allen Jr.,lequint allen,JAX,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4429835,George Holani,george holani,SEA,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4360516,Tyrone Tracy Jr.,tyrone tracy,NYG,RB,195,draft-command:195,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4430871,Sean Tucker,sean tucker,TB,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4686468,Seth McGowan,seth mcgowan,IND,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4685397,Jordan James,jordan james,SF,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4431545,Will Shipley,will shipley,PHI,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4383429,Jacob Saylors,jacob saylors,DET,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4685555,Nicholas Singleton,nicholas singleton,TEN,RB,196,draft-command:196,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4599739,Kendre Miller,kendre miller,NO,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,5081432,Antonio Williams,antonio williams,WAS,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4362921,Tyquan Thornton,tyquan thornton,KC,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4367209,Greg Dulcich,greg dulcich,MIA,TE,185,draft-command:185,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,2576925,Darren Waller,darren waller,CAR,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4243331,Cade Otton,cade otton,TB,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4635008,Keon Coleman,keon coleman,BUF,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,5123663,Isaac TeSlaa,isaac teslaa,DET,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4600981,Pat Bryant,pat bryant,DEN,WR,176,draft-command:176,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4686472,Marvin Mims Jr.,marvin mims,DEN,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4429299,Tahj Brooks,tahj brooks,CIN,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4832846,Demond Claiborne,demond claiborne,MIN,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,15864,Geno Smith,geno smith,NYJ,QB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4837248,Fernando Mendoza,fernando mendoza,LV,QB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,8439,Aaron Rodgers,aaron rodgers,PIT,QB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3122840,Deshaun Watson,deshaun watson,CLE,QB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4368003,Andrei Iosivas,andrei iosivas,CIN,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4685307,Kevin Coleman Jr.,kevin coleman,MIA,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3676833,KaVontae Turpin,kavontae turpin,DAL,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4603186,Jack Bech,jack bech,LV,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4597703,Tory Horton,tory horton,SEA,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4690013,Rasheen Ali,rasheen ali,BAL,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4685246,Kaytron Allen,kaytron allen,WAS,RB,199,draft-command:199,exact stable-ID match,1.0,
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4874509,DJ Giddens,dj giddens,IND,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4887558,Emanuel Wilson,emanuel wilson,SEA,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4819231,Kaleb Johnson,kaleb johnson,GB,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4035537,Kene Nwangwu,kene nwangwu,NYJ,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4427728,Bam Knight,bam knight,ARI,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4912274,Sione Vaki,sione vaki,DET,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,5220680,Ted Hurst III,ted hurst,TB,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3051876,Evan Engram,evan engram,DEN,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3123076,David Njoku,david njoku,LAC,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4595342,Oronde Gadsden,oronde gadsden,LAC,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3116164,Mike Gesicki,mike gesicki,CIN,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4429086,Michael Mayer,michael mayer,LV,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4040655,Darnell Mooney,darnell mooney,NYG,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,2991662,Mack Hollins,mack hollins,NE,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4241479,Tua Tagovailoa,tua tagovailoa,ATL,QB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4432762,Shedeur Sanders,shedeur sanders,CLE,QB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,14880,Kirk Cousins,kirk cousins,LV,QB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4366963,Dylan Laube,dylan laube,LV,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4362748,Tyler Badie,tyler badie,DEN,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4685526,Adam Randall,adam randall,BAL,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3045147,James Conner,james conner,ARI,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,5081508,Eli Heidenreich,eli heidenreich,PIT,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4685477,Jam Miller,jam miller,FA,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4429275,Trey Benson,trey benson,ARI,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4360423,Michael Penix Jr.,michael penix,ATL,QB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4259147,Jake Tonges,jake tonges,SF,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4242557,Colby Parkinson,colby parkinson,LAR,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4427834,Erick All Jr.,erick all,CIN,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4430802,Darnell Washington,darnell washington,PIT,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4433970,J.J. McCarthy,j j mccarthy,MIN,QB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4430841,Carson Beck,carson beck,ARI,QB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4362887,Justin Fields,justin fields,KC,QB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,11252,Joe Flacco,joe flacco,CIN,QB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4241464,Mac Jones,mac jones,SF,QB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4693370,Riley Nowakowski,riley nowakowski,PIT,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,16002,Kyle Juszczyk,kyle juszczyk,SF,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4383396,Hunter Luepke,hunter luepke,DAL,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3930086,Dawson Knox,dawson knox,BUF,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4678006,Elijah Arroyo,elijah arroyo,SEA,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4808766,Mason Taylor,mason taylor,NYJ,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4429148,Theo Johnson,theo johnson,NYG,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4258595,Cole Kmet,cole kmet,CHI,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4431588,Ja'Tavion Sanders,ja tavion sanders,CAR,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4240472,Noah Gray,noah gray,KC,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4431574,Eli Stowers,eli stowers,PHI,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,2573401,Tyler Higbee,tyler higbee,LAR,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4833029,Max Klare,max klare,LAR,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4831959,Eli Raridon,eli raridon,NE,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4372780,Tommy Tremble,tommy tremble,CAR,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4685522,Ty Simpson,ty simpson,LAR,QB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,2969939,Jameis Winston,jameis winston,NYG,QB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4429084,Anthony Richardson Sr.,anthony richardson,IND,QB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4596472,Jalon Daniels,jalon daniels,TB,QB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3892775,Jarrett Stidham,jarrett stidham,DEN,QB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4240391,Tommy DeVito,tommy devito,NE,QB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,2576980,Marcus Mariota,marcus mariota,WAS,QB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4434153,Tyson Bagent,tyson bagent,CHI,QB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4426875,Sam Howell,sam howell,DAL,QB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4685201,Tanner McKee,tanner mckee,PHI,QB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4912218,Cyrus Allen,cyrus allen,KC,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4613202,Kyle Williams,kyle williams,NE,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4431280,Troy Franklin,troy franklin,DEN,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4242433,Joshua Palmer,joshua palmer,BUF,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3045523,Kendrick Bourne,kendrick bourne,ARI,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,5150247,Malik Benson,malik benson,LV,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,2973405,Kalif Raymond,kalif raymond,CHI,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4361577,Dyami Brown,dyami brown,WAS,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4567156,Treylon Burks,treylon burks,WAS,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4696882,Devontez Walker,devontez walker,BAL,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3043275,Austin Hooper,austin hooper,ATL,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4426844,Elijah Higgins,elijah higgins,ARI,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4431487,Savion Williams,savion williams,GB,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4880236,Will Kacmarek,will kacmarek,MIA,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4431268,Chimere Dike,chimere dike,TEN,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4879276,Bryce Lance,bryce lance,NO,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3054212,Jonnu Smith,jonnu smith,GB,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3127310,Drew Sample,drew sample,CIN,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3921690,Josh Oliver,josh oliver,MIN,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3911853,Adam Trautman,adam trautman,DEN,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4602667,Jaylin Lane,jaylin lane,WAS,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4869748,Zavion Thomas,zavion thomas,CHI,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4241263,Charlie Kolar,charlie kolar,LAC,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4036131,Noah Fant,noah fant,NO,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4808839,Isaiah Bond,isaiah bond,CLE,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4426496,Cade Stover,cade stover,HOU,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4048228,John Bates,john bates,WAS,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4683153,Skyler Bell,skyler bell,BUF,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4241372,Hollywood Brown,hollywood brown,PHI,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3917914,Olamide Zaccheaus,olamide zaccheaus,ATL,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4061956,Ashton Dulin,ashton dulin,IND,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4569371,Isaiah Williams,isaiah williams,NYJ,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4360797,Tutu Atwell,tutu atwell,LAR,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,5092508,Colbie Young,colbie young,CIN,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3050481,Tanner Hudson,tanner hudson,CIN,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4431492,Roman Wilson,roman wilson,PIT,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4372096,Luke Schoonmaker,luke schoonmaker,DAL,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,2998565,Mo Alie-Cox,mo alie cox,IND,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4685553,Brenen Thompson,brenen thompson,LAC,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4573699,Jackson Hawes,jackson hawes,BUF,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4361516,Daniel Bellinger,daniel bellinger,TEN,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4690923,Ben Sinnott,ben sinnott,WAS,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4361372,Jeremy Ruckert,jeremy ruckert,NYJ,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,5088338,Elijah Sarratt,elijah sarratt,BAL,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,16733,Odell Beckham Jr.,odell beckham,NYG,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4883647,Elic Ayomanor,elic ayomanor,TEN,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3052897,Durham Smythe,durham smythe,BAL,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4569382,Jordan Whittington,jordan whittington,LAR,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4608810,Tez Johnson,tez johnson,TB,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4708486,Jimmy Horn Jr.,jimmy horn,CAR,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4426553,Davis Allen,davis allen,LAR,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4710855,Konata Mumpfield,konata mumpfield,LAR,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3843945,Foster Moreau,foster moreau,HOU,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3043116,Demarcus Robinson,demarcus robinson,SF,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4383440,Nate Adkins,nate adkins,DEN,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4242392,Brock Wright,brock wright,DET,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4686248,Nate Boerkircher,nate boerkircher,JAX,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4426948,Luke McCaffrey,luke mccaffrey,WAS,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,5082630,Jalen Royals,jalen royals,KC,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4430870,KeAndre Lambert-Smith,keandre lambert smith,LAC,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4372505,Payne Durham,payne durham,TB,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4702559,Oscar Delp,oscar delp,NO,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4698597,Barion Brown,barion brown,NO,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3051889,Laquon Treadwell,laquon treadwell,IND,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3917668,Alec Ingold,alec ingold,LAC,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4432775,Dont'e Thornton Jr.,dont e thornton,LV,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4259305,Bo Melton,bo melton,GB,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4362018,Blake Whiteheart,blake whiteheart,CLE,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4373030,Ben Sims,ben sims,MIA,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4613104,Malachi Corley,malachi corley,CLE,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4372758,Kevin Austin Jr.,kevin austin,NO,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4245144,Tay Martin,tay martin,DET,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4362477,Derius Davis,derius davis,LAC,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4386544,Xavier Smith,xavier smith,LAR,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3929914,Adam Prentice,adam prentice,FA,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4575665,Jacob Cowing,jacob cowing,SF,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4241961,Connor Heyward,connor heyward,LV,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4384852,Dohnte Meyers,dohnte meyers,CIN,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,2515270,Michael Burton,michael burton,CLE,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4695193,Efton Chism III,efton chism,NE,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4878695,Max Bredeson,max bredeson,MIN,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4360967,Brevyn Spann-Ford,brevyn spann ford,DAL,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4714771,Drew Allar,drew allar,PIT,QB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4383351,Trey Lance,trey lance,LAC,QB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4602788,Jackson Meeks,jackson meeks,DET,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4683423,Riley Leonard,riley leonard,IND,QB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4889929,Quinn Ewers,quinn ewers,JAX,QB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,14163,Tyrod Taylor,tyrod taylor,GB,QB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4917427,Tanner Koziol,tanner koziol,JAX,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4034779,Ko Kieft,ko kieft,TB,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4240703,Kenny Pickett,kenny pickett,CAR,QB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4565185,Tai Felton,tai felton,MIN,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4879194,Josh Cameron,josh cameron,JAX,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4426339,Spencer Rattler,spencer rattler,NO,QB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4695705,Marlin Klein,marlin klein,HOU,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4360086,Josh Whyle,josh whyle,GB,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4040612,Luke Farrell,luke farrell,SF,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4722908,Drew Ogletree,drew ogletree,IND,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4685504,Sam Roush,sam roush,CHI,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,5160110,Jahdae Walker,jahdae walker,CHI,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3044720,Joshua Dobbs,joshua dobbs,DET,QB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4035671,Tyler Huntley,tyler huntley,BAL,QB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4432260,Matthew Hibner,matthew hibner,BAL,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4876132,Josh Cuevas,josh cuevas,BAL,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,2975863,Eric Saubert,eric saubert,SEA,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4715355,Darius Cooper,darius cooper,PHI,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3125107,Andrew Beck,andrew beck,NYJ,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4426485,Jonathan Mingo,jonathan mingo,DAL,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4242546,Davis Mills,davis mills,HOU,QB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4239944,Hunter Long,hunter long,ARI,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4045305,Ian Thomas,ian thomas,LV,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4035020,Charlie Woerner,charlie woerner,ATL,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4685413,Cade Klubnik,cade klubnik,NYJ,QB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3052096,Johnny Mundt,johnny mundt,PHI,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4685540,Carsen Ryan,carsen ryan,CLE,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4869132,Reggie Virgil,reggie virgil,ARI,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3115293,Kyle Allen,kyle allen,BUF,QB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4433971,Kyle McCord,kyle mccord,MIA,QB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4360763,Brycen Tremayne,brycen tremayne,CAR,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3924327,Drew Lock,drew lock,SEA,QB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4039505,Reggie Gilliam,reggie gilliam,NE,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3039707,Mitchell Trubisky,mitchell trubisky,TEN,QB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,2975417,Patrick Ricard,patrick ricard,NYG,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4038524,Gardner Minshew II,gardner minshew,ARI,QB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,2531358,Chris Manhertz,chris manhertz,NYG,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,5081338,Kaden Wetjen,kaden wetjen,PIT,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4035656,Ben Skowronek,ben skowronek,PIT,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,5097554,Kameron Johnson,kameron johnson,TB,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4429105,Arian Smith,arian smith,NYJ,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3123075,Braxton Berrios,braxton berrios,FA,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4373273,British Brooks,british brooks,HOU,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4570738,Ke'Shawn Williams,ke shawn williams,CIN,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4430656,Myles Price,myles price,MIN,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4690143,LaJohntay Wester,lajohntay wester,BAL,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4039050,Devin Duvernay,devin duvernay,ARI,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4372716,Nikko Remigio,nikko remigio,KC,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4430191,Skyy Moore,skyy moore,GB,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4401805,Dareke Young,dareke young,LV,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4692835,Jalen Brooks,jalen brooks,ARI,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,2975674,Robert Tonyan,robert tonyan,PIT,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3728262,Ray-Ray McCloud III,ray ray mccloud,CHI,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,2972515,Cooper Rush,cooper rush,ATL,QB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3116407,Mason Rudolph,mason rudolph,PIT,QB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3127586,Jeremy McNichols,jeremy mcnichols,WAS,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,2576336,Ameer Abdullah,ameer abdullah,JAX,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4040761,Devin Singletary,devin singletary,NYG,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3895856,Christian Kirk,christian kirk,SF,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3134353,Tim Patrick,tim patrick,NYJ,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,2573079,Carson Wentz,carson wentz,MIN,QB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,14012,Andy Dalton,andy dalton,PHI,QB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,15168,Case Keenum,case keenum,CHI,QB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4039057,Lil'Jordan Humphrey,lil jordan humphrey,DEN,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4424106,Gunner Olszewski,gunner olszewski,NYG,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4360438,Brandon Aiyuk,brandon aiyuk,SF,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4239934,AJ Dillon,aj dillon,CAR,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4241401,Trey Sermon,trey sermon,ATL,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4372414,Elijah Moore,elijah moore,PHI,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4361259,Zach Wilson,zach wilson,NO,QB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4374033,Jermar Jefferson,jermar jefferson,MIN,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4241424,Tylan Wallace,tylan wallace,CLE,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4039160,Kylen Granson,kylen granson,TEN,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4360739,Simi Fehoko,simi fehoko,ARI,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4241820,Sam Ehlinger,sam ehlinger,DEN,QB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4034948,Feleipe Franks,feleipe franks,CAR,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4249030,D.J. Montgomery,d j montgomery,IND,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3871102,David Sills V,david sills,TB,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4567096,John Metchie III,john metchie,CAR,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4241410,Jelani Woods,jelani woods,NYJ,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4243389,Calvin Austin III,calvin austin,NYG,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4241374,Grant Calcaterra,grant calcaterra,PHI,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4361438,Cole Turner,cole turner,MIA,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4242431,Ty Chandler,ty chandler,NO,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4036419,Skylar Thompson,skylar thompson,BAL,QB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4036032,Brittain Brown,brittain brown,CHI,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4367567,Julius Chestnut,julius chestnut,TEN,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4244049,Quintin Morris,quintin morris,JAX,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4243003,Ronnie Rivers,ronnie rivers,LAR,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4916349,Nikola Kalinic,nikola kalinic,CHI,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4426386,Roschon Johnson,roschon johnson,CHI,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4428085,Luke Musgrave,luke musgrave,GB,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4259553,Stetson Bennett IV,stetson bennett,LAR,QB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4361426,Justin Shorter,justin shorter,LV,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4362523,Will Mallory,will mallory,IND,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4373684,Scott Matlock,scott matlock,LAC,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4260394,Aidan O'Connell,aidan o connell,LV,QB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4360290,Brayden Willis,brayden willis,SF,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4365395,Julian Hill,julian hill,NE,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,3929636,Irv Charles,irv charles,SEA,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4360405,Jake Bobo,jake bobo,SEA,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4242442,Princeton Fant,princeton fant,DAL,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4243176,Brady Russell,brady russell,SEA,RB,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4369466,Ryan Miller,ryan miller,MIA,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4369886,Chris Blair,chris blair,ATL,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4428209,Ricky Pearsall,ricky pearsall,SF,WR,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4696700,Tip Reiman,tip reiman,ARI,TE,,,unresolved,0.0,no Draft Command player match
+espn_2026_frozen_20260901T003012Z_3379127ab1c0,4372561,Isaac Guerendo,isaac guerendo,SF,RB,,,unresolved,0.0,no Draft Command player match
