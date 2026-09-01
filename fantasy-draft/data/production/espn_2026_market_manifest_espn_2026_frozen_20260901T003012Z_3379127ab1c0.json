@@ -1,0 +1,101 @@
+{
+  "adp_coverage": {
+    "count": 199,
+    "denominator": 199,
+    "percentage": 1.0
+  },
+  "approved_downstream_uses": [
+    "ESPN room-price analysis",
+    "Opponent Intent available-board inputs",
+    "Step 15 league adapter inputs",
+    "Step 17 survival inputs",
+    "Draft Command display and matching after integration approval"
+  ],
+  "artifacts": {
+    "aliases_csv": "fantasy-draft/data/derived/espn_market/espn_2026_alias_adjudications_espn_2026_frozen_20260901T003012Z_3379127ab1c0.csv",
+    "crosswalk_csv": "fantasy-draft/data/derived/espn_market/espn_2026_player_identity_crosswalk_espn_2026_frozen_20260901T003012Z_3379127ab1c0.csv",
+    "league_json": "fantasy-draft/data/derived/espn_market/espn_2026_league_keeper_verification_espn_2026_frozen_20260901T003012Z_3379127ab1c0.json",
+    "league_md": "fantasy-draft/data/derived/espn_market/espn_2026_league_keeper_verification_espn_2026_frozen_20260901T003012Z_3379127ab1c0.md",
+    "qa_json": "fantasy-draft/data/derived/espn_market/espn_2026_market_qa_espn_2026_frozen_20260901T003012Z_3379127ab1c0.json",
+    "qa_md": "fantasy-draft/data/derived/espn_market/espn_2026_market_qa_espn_2026_frozen_20260901T003012Z_3379127ab1c0.md",
+    "raw_json": "fantasy-draft/data/raw/espn/2026/espn_market_raw_espn_2026_frozen_20260901T003012Z_3379127ab1c0.json",
+    "raw_metadata": "fantasy-draft/data/raw/espn/2026/espn_market_raw_espn_2026_frozen_20260901T003012Z_3379127ab1c0.metadata.json",
+    "snapshot_csv": "fantasy-draft/data/derived/espn_market/espn_2026_market_snapshot_espn_2026_frozen_20260901T003012Z_3379127ab1c0.csv",
+    "snapshot_json": "fantasy-draft/data/derived/espn_market/espn_2026_market_snapshot_espn_2026_frozen_20260901T003012Z_3379127ab1c0.json"
+  },
+  "blocking_conflicts": [],
+  "dual_coverage": {
+    "count": 199,
+    "denominator": 199,
+    "percentage": 1.0
+  },
+  "freshness_status": "draft_night_frozen",
+  "generation_time_cdt": "2026-08-31T19:30:12-05:00",
+  "generation_time_utc": "2026-09-01T00:30:12Z",
+  "git_commit": "3646237904d3426e837e070969b17a4246f2f13f",
+  "identity_match_coverage": {
+    "count": 199,
+    "denominator": 200,
+    "percentage": 0.995
+  },
+  "keeper_coverage": 1.0,
+  "manifest_path": "fantasy-draft/data/production/espn_2026_market_manifest_espn_2026_frozen_20260901T003012Z_3379127ab1c0.json",
+  "position_counts": {
+    "QB": 76,
+    "RB": 123,
+    "TE": 110,
+    "WR": 191
+  },
+  "processed_file_hashes": {
+    "fantasy-draft/data/derived/espn_market/espn_2026_alias_adjudications_espn_2026_frozen_20260901T003012Z_3379127ab1c0.csv": "d5ebdaa3241051949f06c127824757d2707955bedbad24a0eea8b469ac61b463",
+    "fantasy-draft/data/derived/espn_market/espn_2026_league_keeper_verification_espn_2026_frozen_20260901T003012Z_3379127ab1c0.json": "113a4bc3e2fbf621287a66a0431c696f61d9b391fadb0dda8f6c365d96289cfe",
+    "fantasy-draft/data/derived/espn_market/espn_2026_league_keeper_verification_espn_2026_frozen_20260901T003012Z_3379127ab1c0.md": "045f8faadcb10b2d282e872349a27f79af76929db344949d4a1b51ea7ee2a629",
+    "fantasy-draft/data/derived/espn_market/espn_2026_market_qa_espn_2026_frozen_20260901T003012Z_3379127ab1c0.json": "7bd01ad793e11abb65ec163942e1b518e188ff4be37dea66ce3a95af753ea131",
+    "fantasy-draft/data/derived/espn_market/espn_2026_market_qa_espn_2026_frozen_20260901T003012Z_3379127ab1c0.md": "151931944ebf0878a5234111e5d577608985d495a1fac1e494d393d4df328892",
+    "fantasy-draft/data/derived/espn_market/espn_2026_market_snapshot_espn_2026_frozen_20260901T003012Z_3379127ab1c0.csv": "e166f4c0114d844be56073e3b9f13796f732ea5ca986c37695eceb14bd999aa7",
+    "fantasy-draft/data/derived/espn_market/espn_2026_market_snapshot_espn_2026_frozen_20260901T003012Z_3379127ab1c0.json": "e333dfbc3196351ea1b04f6fa8a5525db5903067f38318c8d2a725d6f75bc2a2",
+    "fantasy-draft/data/derived/espn_market/espn_2026_player_identity_crosswalk_espn_2026_frozen_20260901T003012Z_3379127ab1c0.csv": "0a638f0ad415ac59dd16e606bd21f9596f2aa2bff9386f7c354a57b10b293d67",
+    "fantasy-draft/data/raw/espn/2026/espn_market_raw_espn_2026_frozen_20260901T003012Z_3379127ab1c0.json": "3379127ab1c0b9a812a37e70008d20fd57fbf04e7139f7af72ef51f4c8945682",
+    "fantasy-draft/data/raw/espn/2026/espn_market_raw_espn_2026_frozen_20260901T003012Z_3379127ab1c0.metadata.json": "353d6f7df1e5d91a84748c15a5e41ddb0674e09a4f6421cd5b95e03c513280de"
+  },
+  "prohibited_uses": [
+    "changing Player Truth",
+    "using ADP as a projection",
+    "overriding BPA by itself",
+    "enabling TAKE/WAIT",
+    "silently blending ESPN rank with ESPN ADP"
+  ],
+  "rank_coverage": {
+    "count": 199,
+    "denominator": 199,
+    "percentage": 1.0
+  },
+  "raw_hashes": {
+    "fantasy-draft/data/raw/espn/2026/espn_market_raw_espn_2026_frozen_20260901T003012Z_3379127ab1c0.json": "3379127ab1c0b9a812a37e70008d20fd57fbf04e7139f7af72ef51f4c8945682"
+  },
+  "row_counts": {
+    "mapped_to_draft_command": 199,
+    "source": 500
+  },
+  "schema_version": "espn-market-2026-v1.1",
+  "scoring_key": "PPR",
+  "scoring_verification_status": "incomplete_authentication_required",
+  "snapshot_id": "espn_2026_frozen_20260901T003012Z_3379127ab1c0",
+  "sources": [
+    {
+      "endpoint": "https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/2026/segments/0/leaguedefaults/1?view=kona_player_info",
+      "scoring_key": "PPR",
+      "source_id": "espn-fantasy-api-kona-player-info-2026-ppr",
+      "source_tier": 1,
+      "state": "success"
+    },
+    {
+      "endpoint": "https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/2026/segments/0/leagues/167404?view=mSettings&view=mTeam&view=mRoster&view=mDraftDetail",
+      "source_id": "espn-league-167404-settings",
+      "source_tier": 1,
+      "state": "incomplete_authentication_required"
+    }
+  ],
+  "status": "frozen",
+  "unresolved_players": []
+}
