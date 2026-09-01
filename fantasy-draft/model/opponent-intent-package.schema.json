@@ -12,7 +12,33 @@
     "leagueId": { "const": "167404" },
     "metadata": {
       "type": "object",
-      "required": ["status", "modelVersion", "generatedAt", "effectiveAt", "historicalCoverage", "calibratedRounds", "confidencePolicy", "knownLimitations", "publicAssetPolicy"]
+      "required": ["status", "modelVersion", "generatedAt", "effectiveAt", "sourceVersions", "market", "historicalCoverage", "calibratedRounds", "confidencePolicy", "knownLimitations", "publicAssetPolicy"],
+      "properties": {
+        "market": {
+          "type": "object",
+          "required": ["snapshotId", "captureTimestampUtc", "publicationCommit", "snapshotSha256", "schemaVersion", "status", "canonicalSnapshotPath", "canonicalManifestPath", "coverage", "fieldPolicy"],
+          "properties": {
+            "snapshotId": { "const": "espn_2026_frozen_20260901T003012Z_3379127ab1c0" },
+            "captureTimestampUtc": { "const": "2026-09-01T00:30:12Z" },
+            "publicationCommit": { "const": "49951ca1d45b92a906f84366a02d40c8c2e07e12" },
+            "snapshotSha256": { "const": "e333dfbc3196351ea1b04f6fa8a5525db5903067f38318c8d2a725d6f75bc2a2" },
+            "schemaVersion": { "const": "espn-market-2026-v1.1" },
+            "status": { "const": "frozen" },
+            "coverage": {
+              "type": "object",
+              "required": ["sourceRows", "draftCommandIdentities", "mappedWithEspnDefaultRank", "mappedWithContinuousEspnAdp", "keepersRepresented", "unresolvedEspnTop160", "duplicateInternalPlayerIds", "duplicateEspnPlayerIds", "draftCommandOnlyMisses"]
+            },
+            "fieldPolicy": {
+              "type": "object",
+              "required": ["espnDefaultRank", "espnAdp", "ordinalAdpRankCreated", "rankAdpBlended"],
+              "properties": {
+                "ordinalAdpRankCreated": { "const": false },
+                "rankAdpBlended": { "const": false }
+              }
+            }
+          }
+        }
+      }
     },
     "policy": {
       "type": "object",
@@ -51,7 +77,8 @@
         "properties": {
           "playerId": { "type": "integer", "minimum": 1 },
           "espnDefaultRank": { "type": ["number", "null"] },
-          "espnAdp": { "type": ["number", "null"] }
+          "espnAdp": { "type": ["number", "null"] },
+          "marketCoverage": { "enum": ["matched-current-espn", "default-rank-only"] }
         }
       }
     }

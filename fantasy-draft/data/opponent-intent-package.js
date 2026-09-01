@@ -17,12 +17,57 @@
       "status": "candidate",
       "modelVersion": "espn_opponent_intent_v1.1_candidate",
       "generatedAt": "2026-08-31T22:45:00Z",
-      "effectiveAt": "2026-08-31T22:45:00Z",
+      "effectiveAt": "2026-09-01T00:30:12Z",
       "sourceVersions": {
         "history": "ESPN League Draft Picks.xlsx; 2020-2025",
         "enrichment": "StepB Rounds 1-6; ESPN rank and ESPN ADP separate",
         "league": "espn_league_2026_v1_1_api_reconciled",
-        "market": "espn_2026_candidate_20260831T214508Z_6e169d4c54c0"
+        "market": "espn_2026_frozen_20260901T003012Z_3379127ab1c0"
+      },
+      "market": {
+        "snapshotId": "espn_2026_frozen_20260901T003012Z_3379127ab1c0",
+        "captureTimestampUtc": "2026-09-01T00:30:12Z",
+        "publicationCommit": "49951ca1d45b92a906f84366a02d40c8c2e07e12",
+        "snapshotSha256": "e333dfbc3196351ea1b04f6fa8a5525db5903067f38318c8d2a725d6f75bc2a2",
+        "schemaVersion": "espn-market-2026-v1.1",
+        "status": "frozen",
+        "canonicalSnapshotPath": "fantasy-draft/data/derived/espn_market/espn_2026_market_snapshot_espn_2026_frozen_20260901T003012Z_3379127ab1c0.json",
+        "canonicalManifestPath": "fantasy-draft/data/production/espn_2026_market_manifest_espn_2026_frozen_20260901T003012Z_3379127ab1c0.json",
+        "coverage": {
+          "sourceRows": 500,
+          "draftCommandIdentities": {
+            "mapped": 199,
+            "total": 200
+          },
+          "mappedWithEspnDefaultRank": {
+            "count": 199,
+            "total": 199
+          },
+          "mappedWithContinuousEspnAdp": {
+            "count": 199,
+            "total": 199
+          },
+          "keepersRepresented": {
+            "count": 10,
+            "total": 10
+          },
+          "unresolvedEspnTop160": 0,
+          "duplicateInternalPlayerIds": 0,
+          "duplicateEspnPlayerIds": 0,
+          "draftCommandOnlyMisses": [
+            {
+              "playerId": 190,
+              "reason": "outside ESPN payload",
+              "blocking": false
+            }
+          ]
+        },
+        "fieldPolicy": {
+          "espnDefaultRank": "distinct nullable ESPN PPR default-rank field",
+          "espnAdp": "distinct nullable continuous ESPN ADP field",
+          "ordinalAdpRankCreated": false,
+          "rankAdpBlended": false
+        }
       },
       "historicalCoverage": "2020-2025 history; held-out 2023-2025; Rounds 1-6",
       "calibratedRounds": [
@@ -35,8 +80,10 @@
       ],
       "confidencePolicy": "MEDIUM only in validated Rounds 1-6; manager probability weight 0; fallback otherwise",
       "knownLimitations": [
-        "Rounds 7+ unvalidated.",
-        "Final 2026 market snapshot not frozen."
+        "Rounds 7-16 are contextual and unvalidated.",
+        "Authenticated league-settings verification remains incomplete; the public market lock did not verify private scoring, roster or IR/Stash settings.",
+        "Manager profiles remain explanatory and do not alter probabilities.",
+        "Runtime Monte Carlo sampling adds finite-simulation noise, controlled by a fixed seed."
       ],
       "publicAssetPolicy": "Aggregate runtime features only; raw history and pick-level ledgers excluded."
     },
@@ -1451,7 +1498,7 @@
       {
         "playerId": 6,
         "espnDefaultRank": 5,
-        "espnAdp": 6.43,
+        "espnAdp": 6.42,
         "marketCoverage": "matched-current-espn"
       },
       {
@@ -1469,13 +1516,13 @@
       {
         "playerId": 9,
         "espnDefaultRank": 9,
-        "espnAdp": 10.57,
+        "espnAdp": 10.56,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 10,
         "espnDefaultRank": 11,
-        "espnAdp": 11.66,
+        "espnAdp": 11.67,
         "marketCoverage": "matched-current-espn"
       },
       {
@@ -1493,19 +1540,19 @@
       {
         "playerId": 13,
         "espnDefaultRank": 15,
-        "espnAdp": 14.2,
+        "espnAdp": 14.19,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 14,
         "espnDefaultRank": 14,
-        "espnAdp": 17.64,
+        "espnAdp": 17.65,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 15,
         "espnDefaultRank": 13,
-        "espnAdp": 19.87,
+        "espnAdp": 19.85,
         "marketCoverage": "matched-current-espn"
       },
       {
@@ -1523,19 +1570,19 @@
       {
         "playerId": 18,
         "espnDefaultRank": 18,
-        "espnAdp": 21.41,
+        "espnAdp": 21.42,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 19,
         "espnDefaultRank": 25,
-        "espnAdp": 24.8,
+        "espnAdp": 24.82,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 20,
         "espnDefaultRank": 19,
-        "espnAdp": 21.93,
+        "espnAdp": 21.9,
         "marketCoverage": "matched-current-espn"
       },
       {
@@ -1553,7 +1600,7 @@
       {
         "playerId": 23,
         "espnDefaultRank": 20,
-        "espnAdp": 22.34,
+        "espnAdp": 22.35,
         "marketCoverage": "matched-current-espn"
       },
       {
@@ -1565,151 +1612,151 @@
       {
         "playerId": 25,
         "espnDefaultRank": 26,
-        "espnAdp": 19.6,
+        "espnAdp": 19.57,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 26,
         "espnDefaultRank": 24,
-        "espnAdp": 29.84,
+        "espnAdp": 29.83,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 27,
         "espnDefaultRank": 21,
-        "espnAdp": 25.79,
+        "espnAdp": 25.8,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 28,
         "espnDefaultRank": 33,
-        "espnAdp": 34.54,
+        "espnAdp": 34.56,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 29,
         "espnDefaultRank": 32,
-        "espnAdp": 36.8,
+        "espnAdp": 36.79,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 30,
         "espnDefaultRank": 27,
-        "espnAdp": 28.14,
+        "espnAdp": 28.16,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 31,
         "espnDefaultRank": 30,
-        "espnAdp": 35.79,
+        "espnAdp": 35.81,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 32,
         "espnDefaultRank": 35,
-        "espnAdp": 37.32,
+        "espnAdp": 37.31,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 33,
         "espnDefaultRank": 31,
-        "espnAdp": 33.55,
+        "espnAdp": 33.56,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 34,
         "espnDefaultRank": 93,
-        "espnAdp": 52.85,
+        "espnAdp": 54.26,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 35,
         "espnDefaultRank": 44,
-        "espnAdp": 51.29,
+        "espnAdp": 51.3,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 36,
         "espnDefaultRank": 36,
-        "espnAdp": 41.76,
+        "espnAdp": 41.78,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 37,
         "espnDefaultRank": 38,
-        "espnAdp": 44.05,
+        "espnAdp": 44.06,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 38,
         "espnDefaultRank": 29,
-        "espnAdp": 37.19,
+        "espnAdp": 37.18,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 39,
         "espnDefaultRank": 41,
-        "espnAdp": 46.73,
+        "espnAdp": 46.75,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 40,
         "espnDefaultRank": 43,
-        "espnAdp": 42.89,
+        "espnAdp": 42.87,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 41,
         "espnDefaultRank": 39,
-        "espnAdp": 45.46,
+        "espnAdp": 45.47,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 42,
         "espnDefaultRank": 34,
-        "espnAdp": 42.4,
+        "espnAdp": 42.33,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 43,
         "espnDefaultRank": 46,
-        "espnAdp": 52.74,
+        "espnAdp": 52.78,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 44,
         "espnDefaultRank": 49,
-        "espnAdp": 35.4,
+        "espnAdp": 35.36,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 45,
         "espnDefaultRank": 42,
-        "espnAdp": 45.49,
+        "espnAdp": 45.48,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 46,
         "espnDefaultRank": 47,
-        "espnAdp": 54.71,
+        "espnAdp": 54.65,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 47,
         "espnDefaultRank": 40,
-        "espnAdp": 50.27,
+        "espnAdp": 50.28,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 48,
         "espnDefaultRank": 45,
-        "espnAdp": 46.3,
+        "espnAdp": 46.34,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 49,
         "espnDefaultRank": 50,
-        "espnAdp": 56.88,
+        "espnAdp": 56.92,
         "marketCoverage": "matched-current-espn"
       },
       {
@@ -1721,55 +1768,55 @@
       {
         "playerId": 51,
         "espnDefaultRank": 52,
-        "espnAdp": 60.98,
+        "espnAdp": 61.06,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 52,
         "espnDefaultRank": 66,
-        "espnAdp": 76.14,
+        "espnAdp": 76.19,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 53,
         "espnDefaultRank": 51,
-        "espnAdp": 63.7,
+        "espnAdp": 63.66,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 54,
         "espnDefaultRank": 53,
-        "espnAdp": 62.27,
+        "espnAdp": 62.23,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 55,
         "espnDefaultRank": 55,
-        "espnAdp": 64.64,
+        "espnAdp": 64.73,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 56,
         "espnDefaultRank": 62,
-        "espnAdp": 47.43,
+        "espnAdp": 47.42,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 57,
         "espnDefaultRank": 48,
-        "espnAdp": 63.77,
+        "espnAdp": 63.78,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 58,
         "espnDefaultRank": 58,
-        "espnAdp": 64.78,
+        "espnAdp": 64.86,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 59,
         "espnDefaultRank": 70,
-        "espnAdp": 54.51,
+        "espnAdp": 54.47,
         "marketCoverage": "matched-current-espn"
       },
       {
@@ -1787,205 +1834,205 @@
       {
         "playerId": 62,
         "espnDefaultRank": 68,
-        "espnAdp": 86.54,
+        "espnAdp": 86.52,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 63,
         "espnDefaultRank": 54,
-        "espnAdp": 69.95,
+        "espnAdp": 69.96,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 64,
         "espnDefaultRank": 76,
-        "espnAdp": 53.91,
+        "espnAdp": 53.96,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 65,
         "espnDefaultRank": 85,
-        "espnAdp": 90.73,
+        "espnAdp": 90.79,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 66,
         "espnDefaultRank": 67,
-        "espnAdp": 76.89,
+        "espnAdp": 76.94,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 67,
         "espnDefaultRank": 72,
-        "espnAdp": 79.84,
+        "espnAdp": 79.9,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 68,
         "espnDefaultRank": 92,
-        "espnAdp": 72.7,
+        "espnAdp": 72.77,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 69,
         "espnDefaultRank": 87,
-        "espnAdp": 90.79,
+        "espnAdp": 90.84,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 70,
         "espnDefaultRank": 69,
-        "espnAdp": 80.63,
+        "espnAdp": 80.65,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 71,
         "espnDefaultRank": 77,
-        "espnAdp": 71.35,
+        "espnAdp": 71.37,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 72,
         "espnDefaultRank": 81,
-        "espnAdp": 90.18,
+        "espnAdp": 90.19,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 73,
         "espnDefaultRank": 75,
-        "espnAdp": 85.6,
+        "espnAdp": 85.67,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 74,
         "espnDefaultRank": 79,
-        "espnAdp": 67.8,
+        "espnAdp": 67.85,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 75,
         "espnDefaultRank": 80,
-        "espnAdp": 73.91,
+        "espnAdp": 73.89,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 76,
         "espnDefaultRank": 126,
-        "espnAdp": 90.86,
+        "espnAdp": 90.95,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 77,
         "espnDefaultRank": 74,
-        "espnAdp": 92.4,
+        "espnAdp": 92.3,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 78,
         "espnDefaultRank": 114,
-        "espnAdp": 112.73,
+        "espnAdp": 112.81,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 79,
         "espnDefaultRank": 107,
-        "espnAdp": 92.41,
+        "espnAdp": 92.39,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 80,
         "espnDefaultRank": 102,
-        "espnAdp": 89.6,
+        "espnAdp": 89.56,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 81,
         "espnDefaultRank": 78,
-        "espnAdp": 81.23,
+        "espnAdp": 81.35,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 82,
         "espnDefaultRank": 95,
-        "espnAdp": 96.53,
+        "espnAdp": 96.59,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 83,
         "espnDefaultRank": 97,
-        "espnAdp": 101.93,
+        "espnAdp": 102.11,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 84,
         "espnDefaultRank": 108,
-        "espnAdp": 109.05,
+        "espnAdp": 109.22,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 85,
         "espnDefaultRank": 89,
-        "espnAdp": 78.09,
+        "espnAdp": 77.88,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 86,
         "espnDefaultRank": 73,
-        "espnAdp": 90.15,
+        "espnAdp": 90.21,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 87,
         "espnDefaultRank": 120,
-        "espnAdp": 97.6,
+        "espnAdp": 97.88,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 88,
         "espnDefaultRank": 104,
-        "espnAdp": 107.18,
+        "espnAdp": 107.19,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 89,
         "espnDefaultRank": 118,
-        "espnAdp": 125.72,
+        "espnAdp": 125.66,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 90,
         "espnDefaultRank": 100,
-        "espnAdp": 82.23,
+        "espnAdp": 82.26,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 91,
         "espnDefaultRank": 122,
-        "espnAdp": 113.11,
+        "espnAdp": 113.19,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 92,
         "espnDefaultRank": 106,
-        "espnAdp": 105.87,
+        "espnAdp": 105.88,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 93,
         "espnDefaultRank": 111,
-        "espnAdp": 108.09,
+        "espnAdp": 108.22,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 94,
         "espnDefaultRank": 133,
-        "espnAdp": 127.39,
+        "espnAdp": 127.45,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 95,
         "espnDefaultRank": 119,
-        "espnAdp": 119.85,
+        "espnAdp": 119.9,
         "marketCoverage": "matched-current-espn"
       },
       {
@@ -1997,211 +2044,211 @@
       {
         "playerId": 97,
         "espnDefaultRank": 138,
-        "espnAdp": 127.64,
+        "espnAdp": 127.68,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 98,
         "espnDefaultRank": 88,
-        "espnAdp": 104.24,
+        "espnAdp": 104.17,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 99,
         "espnDefaultRank": 125,
-        "espnAdp": 124.3,
+        "espnAdp": 124.35,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 100,
         "espnDefaultRank": 137,
-        "espnAdp": 133.17,
+        "espnAdp": 133.19,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 101,
         "espnDefaultRank": 148,
-        "espnAdp": 130,
+        "espnAdp": 130.09,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 102,
         "espnDefaultRank": 145,
-        "espnAdp": 135.86,
+        "espnAdp": 135.91,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 103,
         "espnDefaultRank": 91,
-        "espnAdp": 115.52,
+        "espnAdp": 115.48,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 104,
         "espnDefaultRank": 124,
-        "espnAdp": 109,
+        "espnAdp": 109.11,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 105,
         "espnDefaultRank": 131,
-        "espnAdp": 95.18,
+        "espnAdp": 95.23,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 106,
         "espnDefaultRank": 141,
-        "espnAdp": 90.69,
+        "espnAdp": 90.81,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 107,
         "espnDefaultRank": 157,
-        "espnAdp": 130.82,
+        "espnAdp": 130.87,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 108,
         "espnDefaultRank": 117,
-        "espnAdp": 111.11,
+        "espnAdp": 111.18,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 109,
         "espnDefaultRank": 112,
-        "espnAdp": 122.25,
+        "espnAdp": 122.29,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 110,
         "espnDefaultRank": 150,
-        "espnAdp": 137.73,
+        "espnAdp": 137.86,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 111,
         "espnDefaultRank": 121,
-        "espnAdp": 126.06,
+        "espnAdp": 126.12,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 112,
         "espnDefaultRank": 132,
-        "espnAdp": 107.71,
+        "espnAdp": 107.81,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 113,
         "espnDefaultRank": 139,
-        "espnAdp": 99.49,
+        "espnAdp": 99.71,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 114,
         "espnDefaultRank": 110,
-        "espnAdp": 116.7,
+        "espnAdp": 116.72,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 115,
         "espnDefaultRank": 147,
-        "espnAdp": 123.31,
+        "espnAdp": 123.37,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 116,
         "espnDefaultRank": 161,
-        "espnAdp": 139.34,
+        "espnAdp": 139.47,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 117,
         "espnDefaultRank": 134,
-        "espnAdp": 104.08,
+        "espnAdp": 104.06,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 118,
         "espnDefaultRank": 152,
-        "espnAdp": 141.89,
+        "espnAdp": 141.9,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 119,
         "espnDefaultRank": 140,
-        "espnAdp": 108.93,
+        "espnAdp": 109.18,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 120,
         "espnDefaultRank": 164,
-        "espnAdp": 146.64,
+        "espnAdp": 146.68,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 121,
         "espnDefaultRank": 156,
-        "espnAdp": 155.9,
+        "espnAdp": 155.89,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 122,
         "espnDefaultRank": 154,
-        "espnAdp": 148.26,
+        "espnAdp": 148.29,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 123,
         "espnDefaultRank": 143,
-        "espnAdp": 139.8,
+        "espnAdp": 139.71,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 124,
         "espnDefaultRank": 159,
-        "espnAdp": 136,
+        "espnAdp": 136.05,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 125,
         "espnDefaultRank": 153,
-        "espnAdp": 125.66,
+        "espnAdp": 125.74,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 126,
         "espnDefaultRank": 151,
-        "espnAdp": 129.28,
+        "espnAdp": 129.34,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 127,
         "espnDefaultRank": 223,
-        "espnAdp": 168.09,
+        "espnAdp": 168.1,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 128,
         "espnDefaultRank": 183,
-        "espnAdp": 164.94,
+        "espnAdp": 164.95,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 129,
         "espnDefaultRank": 130,
-        "espnAdp": 139.72,
+        "espnAdp": 139.65,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 130,
         "espnDefaultRank": 160,
-        "espnAdp": 146.85,
+        "espnAdp": 146.91,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 131,
         "espnDefaultRank": 175,
-        "espnAdp": 145.94,
+        "espnAdp": 145.99,
         "marketCoverage": "matched-current-espn"
       },
       {
@@ -2213,31 +2260,31 @@
       {
         "playerId": 133,
         "espnDefaultRank": 163,
-        "espnAdp": 140.88,
+        "espnAdp": 141.06,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 134,
         "espnDefaultRank": 167,
-        "espnAdp": 151.44,
+        "espnAdp": 151.49,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 135,
         "espnDefaultRank": 165,
-        "espnAdp": 153.16,
+        "espnAdp": 153.25,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 136,
         "espnDefaultRank": 195,
-        "espnAdp": 162.78,
+        "espnAdp": 162.85,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 137,
         "espnDefaultRank": 203,
-        "espnAdp": 155.67,
+        "espnAdp": 155.68,
         "marketCoverage": "matched-current-espn"
       },
       {
@@ -2249,43 +2296,43 @@
       {
         "playerId": 139,
         "espnDefaultRank": 192,
-        "espnAdp": 151.43,
+        "espnAdp": 151.46,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 140,
         "espnDefaultRank": 228,
-        "espnAdp": 169.36,
+        "espnAdp": 169.37,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 141,
         "espnDefaultRank": 214,
-        "espnAdp": 159.95,
+        "espnAdp": 160.04,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 142,
         "espnDefaultRank": 191,
-        "espnAdp": 158.95,
+        "espnAdp": 158.96,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 143,
         "espnDefaultRank": 201,
-        "espnAdp": 165.62,
+        "espnAdp": 165.64,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 144,
         "espnDefaultRank": 215,
-        "espnAdp": 168.78,
+        "espnAdp": 168.79,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 145,
         "espnDefaultRank": 229,
-        "espnAdp": 164.22,
+        "espnAdp": 164.24,
         "marketCoverage": "matched-current-espn"
       },
       {
@@ -2297,19 +2344,19 @@
       {
         "playerId": 147,
         "espnDefaultRank": 173,
-        "espnAdp": 169.21,
+        "espnAdp": 169.15,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 148,
         "espnDefaultRank": 222,
-        "espnAdp": 167.53,
+        "espnAdp": 167.52,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 149,
         "espnDefaultRank": 171,
-        "espnAdp": 165.09,
+        "espnAdp": 165.08,
         "marketCoverage": "matched-current-espn"
       },
       {
@@ -2321,7 +2368,7 @@
       {
         "playerId": 151,
         "espnDefaultRank": 90,
-        "espnAdp": 140.43,
+        "espnAdp": 140.02,
         "marketCoverage": "matched-current-espn"
       },
       {
@@ -2333,7 +2380,7 @@
       {
         "playerId": 153,
         "espnDefaultRank": 189,
-        "espnAdp": 160.27,
+        "espnAdp": 160.38,
         "marketCoverage": "matched-current-espn"
       },
       {
@@ -2345,13 +2392,13 @@
       {
         "playerId": 155,
         "espnDefaultRank": 177,
-        "espnAdp": 159.39,
+        "espnAdp": 159.42,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 156,
         "espnDefaultRank": 184,
-        "espnAdp": 157.96,
+        "espnAdp": 158.09,
         "marketCoverage": "matched-current-espn"
       },
       {
@@ -2369,25 +2416,25 @@
       {
         "playerId": 159,
         "espnDefaultRank": 206,
-        "espnAdp": 169.09,
+        "espnAdp": 169.1,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 160,
         "espnDefaultRank": 283,
-        "espnAdp": 162.2,
+        "espnAdp": 162.24,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 161,
         "espnDefaultRank": 199,
-        "espnAdp": 147.94,
+        "espnAdp": 148.13,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 162,
         "espnDefaultRank": 227,
-        "espnAdp": 171.08,
+        "espnAdp": 171.07,
         "marketCoverage": "matched-current-espn"
       },
       {
@@ -2399,13 +2446,13 @@
       {
         "playerId": 164,
         "espnDefaultRank": 297,
-        "espnAdp": 168.61,
+        "espnAdp": 168.62,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 165,
         "espnDefaultRank": 311,
-        "espnAdp": 170.16,
+        "espnAdp": 170.15,
         "marketCoverage": "matched-current-espn"
       },
       {
@@ -2417,7 +2464,7 @@
       {
         "playerId": 167,
         "espnDefaultRank": 236,
-        "espnAdp": 171.66,
+        "espnAdp": 171.65,
         "marketCoverage": "matched-current-espn"
       },
       {
@@ -2429,31 +2476,31 @@
       {
         "playerId": 169,
         "espnDefaultRank": 238,
-        "espnAdp": 171.05,
+        "espnAdp": 171.04,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 170,
         "espnDefaultRank": 280,
-        "espnAdp": 165.24,
+        "espnAdp": 165.25,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 171,
         "espnDefaultRank": 216,
-        "espnAdp": 168.27,
+        "espnAdp": 168.29,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 172,
         "espnDefaultRank": 212,
-        "espnAdp": 171.85,
+        "espnAdp": 171.84,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 173,
         "espnDefaultRank": 200,
-        "espnAdp": 161.1,
+        "espnAdp": 161.15,
         "marketCoverage": "matched-current-espn"
       },
       {
@@ -2483,7 +2530,7 @@
       {
         "playerId": 178,
         "espnDefaultRank": 276,
-        "espnAdp": 168.63,
+        "espnAdp": 168.64,
         "marketCoverage": "matched-current-espn"
       },
       {
@@ -2495,7 +2542,7 @@
       {
         "playerId": 180,
         "espnDefaultRank": 305,
-        "espnAdp": 170.6,
+        "espnAdp": 170.59,
         "marketCoverage": "matched-current-espn"
       },
       {
@@ -2513,7 +2560,7 @@
       {
         "playerId": 183,
         "espnDefaultRank": 285,
-        "espnAdp": 171.11,
+        "espnAdp": 171.1,
         "marketCoverage": "matched-current-espn"
       },
       {
@@ -2531,7 +2578,7 @@
       {
         "playerId": 186,
         "espnDefaultRank": 232,
-        "espnAdp": 171.4,
+        "espnAdp": 171.39,
         "marketCoverage": "matched-current-espn"
       },
       {
@@ -2549,7 +2596,7 @@
       {
         "playerId": 189,
         "espnDefaultRank": 176,
-        "espnAdp": 162.61,
+        "espnAdp": 162.72,
         "marketCoverage": "matched-current-espn"
       },
       {
@@ -2579,13 +2626,13 @@
       {
         "playerId": 194,
         "espnDefaultRank": 273,
-        "espnAdp": 168.51,
+        "espnAdp": 168.54,
         "marketCoverage": "matched-current-espn"
       },
       {
         "playerId": 195,
         "espnDefaultRank": 346,
-        "espnAdp": 170.34,
+        "espnAdp": 170.33,
         "marketCoverage": "matched-current-espn"
       },
       {
@@ -2615,7 +2662,7 @@
       {
         "playerId": 200,
         "espnDefaultRank": 317,
-        "espnAdp": 169.98,
+        "espnAdp": 169.97,
         "marketCoverage": "matched-current-espn"
       }
     ]

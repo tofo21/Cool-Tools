@@ -8,6 +8,26 @@
     "heldOutContexts": 173,
     "validatedRounds": [1, 2, 3, 4, 5, 6]
   },
+  "marketLockValidation": {
+    "snapshotId": "espn_2026_frozen_20260901T003012Z_3379127ab1c0",
+    "captureTimestampUtc": "2026-09-01T00:30:12Z",
+    "publicationCommit": "49951ca1d45b92a906f84366a02d40c8c2e07e12",
+    "snapshotSha256": "e333dfbc3196351ea1b04f6fa8a5525db5903067f38318c8d2a725d6f75bc2a2",
+    "schemaVersion": "espn-market-2026-v1.1",
+    "status": "frozen",
+    "sourceRows": 500,
+    "draftCommandIdentities": { "mapped": 199, "total": 200 },
+    "mappedWithEspnDefaultRank": { "count": 199, "total": 199 },
+    "mappedWithContinuousEspnAdp": { "count": 199, "total": 199 },
+    "keepersRepresented": { "count": 10, "total": 10 },
+    "unresolvedEspnTop160": 0,
+    "duplicateInternalPlayerIds": 0,
+    "duplicateEspnPlayerIds": 0,
+    "draftCommandOnlyMisses": [
+      { "playerId": 190, "reason": "outside ESPN payload", "blocking": false }
+    ],
+    "fieldPolicy": "ESPN default rank and continuous ESPN ADP remain distinct nullable fields; no ordinal ADP rank is created and the fields are not blended."
+  },
   "position": {
     "roomRoundBaseline": { "logLoss": 1.1505931914, "brier": 0.1581844837, "top1Accuracy": 0.5028901734, "top2Coverage": 0.8265895954 },
     "plusRosterNeeds": { "logLoss": 1.0625610588, "brier": 0.1486573518, "top1Accuracy": 0.5375722543, "top2Coverage": 0.8265895954 },
@@ -69,9 +89,9 @@
     "reason": "Manager candidate worsened held-out position log loss and top-two coverage; no robust exact-player improvement was demonstrated."
   },
   "limitations": [
-    "Final same-day ESPN market snapshot is not frozen.",
     "Historical ESPN enrichment covers Rounds 1-6 only.",
     "Manager profiles remain explanatory and do not alter probabilities.",
-    "Runtime Monte Carlo sampling adds finite-simulation noise, controlled by a fixed seed."
+    "Runtime Monte Carlo sampling adds finite-simulation noise, controlled by a fixed seed.",
+    "Authenticated league-settings verification remains incomplete; the public market lock did not verify private scoring, roster or IR/Stash settings."
   ]
 }

@@ -8,6 +8,20 @@
 const fs = require("node:fs");
 const path = require("node:path");
 const vm = require("node:vm");
+const crypto = require("node:crypto");
+
+const MARKET_LOCK = Object.freeze({
+  snapshotId: "espn_2026_frozen_20260901T003012Z_3379127ab1c0",
+  captureTimestampUtc: "2026-09-01T00:30:12Z",
+  publicationCommit: "49951ca1d45b92a906f84366a02d40c8c2e07e12",
+  snapshotSha256: "e333dfbc3196351ea1b04f6fa8a5525db5903067f38318c8d2a725d6f75bc2a2",
+  schemaVersion: "espn-market-2026-v1.1",
+  status: "frozen",
+  snapshotPath: "data/derived/espn_market/espn_2026_market_snapshot_espn_2026_frozen_20260901T003012Z_3379127ab1c0.json",
+  manifestPath: "data/production/espn_2026_market_manifest_espn_2026_frozen_20260901T003012Z_3379127ab1c0.json",
+  qaPath: "data/derived/espn_market/espn_2026_market_qa_espn_2026_frozen_20260901T003012Z_3379127ab1c0.json",
+  leagueVerificationPath: "data/derived/espn_market/espn_2026_league_keeper_verification_espn_2026_frozen_20260901T003012Z_3379127ab1c0.json",
+});
 
 function fail(message) {
   process.stderr.write(`${message}\n`);
@@ -18,13 +32,50 @@ function readJson(file) {
   return JSON.parse(fs.readFileSync(file, "utf8"));
 }
 
-function normalizeName(value) {
-  return String(value || "")
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .toLowerCase()
-    .replace(/\b(jr|sr|ii|iii|iv)\b/g, "")
-    .replace(/[^a-z0-9]/g, "");
+function sha256(bytes) {
+  return crypto.createHash("sha256").update(bytes).digest("hex");
+}
+
+function expectEqual(actual, expected, label) {
+  if (JSON.stringify(actual) !== JSON.stringify(expected)) {
+    fail(`${label}: expected ${JSON.stringify(expected)}, received ${JSON.stringify(actual)}`);
+  }
+}
+
+function validateFrozenMarket(projectRoot) {
+  const snapshotFile = path.join(projectRoot, MARKET_LOCK.snapshotPath);
+  const manifestFile = path.join(projectRoot, MARKET_LOCK.manifestPath);
+  const snapshotBytes = fs.readFileSync(snapshotFile);
+  const market = JSON.parse(snapshotBytes.toString("utf8"));
+  const manifest = readJson(manifestFile);
+  const qa = readJson(path.join(projectRoot, MARKET_LOCK.qaPath));
+  const leagueVerification = readJson(path.join(projectRoot, MARKET_LOCK.leagueVerificationPath));
+
+  expectEqual(sha256(snapshotBytes), MARKET_LOCK.snapshotSha256, "Frozen ESPN snapshot SHA-256 mismatch");
+  expectEqual(manifest.snapshot_id, MARKET_LOCK.snapshotId, "Frozen ESPN manifest snapshot ID mismatch");
+  expectEqual(manifest.schema_version, MARKET_LOCK.schemaVersion, "Frozen ESPN manifest schema mismatch");
+  expectEqual(manifest.status, MARKET_LOCK.status, "Frozen ESPN manifest status mismatch");
+  expectEqual(manifest.generation_time_utc, MARKET_LOCK.captureTimestampUtc, "Frozen ESPN capture timestamp mismatch");
+  expectEqual(manifest.artifacts?.snapshot_json, `fantasy-draft/${MARKET_LOCK.snapshotPath}`, "Frozen ESPN manifest snapshot path mismatch");
+  expectEqual(manifest.processed_file_hashes?.[`fantasy-draft/${MARKET_LOCK.snapshotPath}`], MARKET_LOCK.snapshotSha256, "Frozen ESPN manifest snapshot hash mismatch");
+  expectEqual(manifest.row_counts, { mapped_to_draft_command: 199, source: 500 }, "Frozen ESPN manifest row coverage mismatch");
+  expectEqual(manifest.identity_match_coverage, { count: 199, denominator: 200, percentage: 0.995 }, "Frozen ESPN identity coverage mismatch");
+  expectEqual(manifest.rank_coverage, { count: 199, denominator: 199, percentage: 1 }, "Frozen ESPN rank coverage mismatch");
+  expectEqual(manifest.adp_coverage, { count: 199, denominator: 199, percentage: 1 }, "Frozen ESPN ADP coverage mismatch");
+  expectEqual(manifest.keeper_coverage, 1, "Frozen ESPN keeper coverage mismatch");
+  expectEqual(qa.source_row_count, 500, "Frozen ESPN source-row benchmark mismatch");
+  expectEqual(qa.top_160_unresolved, [], "Frozen ESPN top-160 resolution benchmark mismatch");
+  expectEqual(qa.duplicate_internal_player_ids, [], "Frozen ESPN duplicate internal-ID benchmark mismatch");
+  expectEqual(qa.duplicate_espn_player_ids, [], "Frozen ESPN duplicate ESPN-ID benchmark mismatch");
+  expectEqual(qa.missing_draft_command_player_ids, [190], "Frozen ESPN sole Draft Command miss mismatch");
+  expectEqual(leagueVerification.keepers?.length, 10, "Frozen ESPN keeper-row benchmark mismatch");
+  expectEqual(leagueVerification.keepers?.filter((keeper) => keeper.mapped).length, 10, "Frozen ESPN mapped-keeper benchmark mismatch");
+  expectEqual(market.metadata?.snapshot_id, MARKET_LOCK.snapshotId, "Frozen ESPN snapshot metadata ID mismatch");
+  expectEqual(market.metadata?.captured_at_utc, MARKET_LOCK.captureTimestampUtc, "Frozen ESPN snapshot metadata timestamp mismatch");
+  expectEqual(market.metadata?.schema_version, MARKET_LOCK.schemaVersion, "Frozen ESPN snapshot metadata schema mismatch");
+  expectEqual(market.metadata?.status, MARKET_LOCK.status, "Frozen ESPN snapshot metadata status mismatch");
+
+  return { market, manifest, qa, leagueVerification };
 }
 
 function loadPlayers(file) {
@@ -65,6 +116,7 @@ function quantile(values, probability) {
 }
 
 function numberOrNull(value) {
+  if (value === null || value === undefined || value === "") return null;
   const parsed = Number(value);
   return Number.isFinite(parsed) ? parsed : null;
 }
@@ -122,35 +174,35 @@ const players = loadPlayers(path.join(projectRoot, "data", "players.js"));
 const model = readJson(path.join(researchRoot, "engine", "F_survival_model", "opponent_intent", "opponent_intent_model_v1.json"));
 const profiles = readJson(path.join(researchRoot, "data", "derived", "C_manager_profiles", "espn_manager_static_profiles_2026.json"));
 const priors = readJson(path.join(researchRoot, "data", "derived", "C_manager_profiles", "espn_manager_selection_priors_2026.recovered.json"));
-const market = readJson(path.join(researchRoot, "data", "derived", "espn_market", "espn_2026_market_snapshot_espn_2026_candidate_20260831T214508Z_6e169d4c54c0.json"));
+const { market } = validateFrozenMarket(projectRoot);
 const enrichedHistory = parseCsv(fs.readFileSync(path.join(researchRoot, "data", "raw", "B_enriched_history", "espn_historical_draft_events_enriched_stepb_2020_2025.csv"), "utf8"));
 
 if (Number(model.position_model?.manager_overlay_weight) !== 0 || Number(model.player_model?.profile_overlay_weight) !== 0) {
   fail("Manager residuals are not eligible for public runtime promotion; expected zero weights.");
 }
 
-const marketByName = new Map((market.players || []).map((entry) => [
-  normalizeName(entry.player_name || entry.raw_player_name),
-  entry,
-]));
-const aliases = new Map([
-  ["gabrieldavis", "gabedavis"],
-  ["marquisebrown", "hollywoodbrown"],
-  ["nathanieldell", "tankdell"],
-]);
+const marketByDraftCommandId = new Map((market.players || [])
+  .filter((entry) => entry.draft_command_player_id !== null && entry.draft_command_player_id !== undefined && Number.isInteger(Number(entry.draft_command_player_id)))
+  .map((entry) => [Number(entry.draft_command_player_id), entry]));
 
 const playerMarket = players.map((player) => {
-  const normalized = normalizeName(player.name);
-  const source = marketByName.get(normalized) || marketByName.get(aliases.get(normalized));
-  const sourceRank = Number(source?.espn_rank ?? source?.espn_official_ppr_rank);
-  const sourceAdp = Number(source?.espn_adp);
+  const source = marketByDraftCommandId.get(Number(player.id));
+  const sourceRank = numberOrNull(source?.espn_official_ppr_rank);
+  const sourceAdp = numberOrNull(source?.espn_adp);
   return {
     playerId: Number(player.id),
-    espnDefaultRank: Number.isFinite(sourceRank) ? sourceRank : (Number.isFinite(Number(player.espn)) ? Number(player.espn) : null),
-    espnAdp: Number.isFinite(sourceAdp) ? sourceAdp : null,
+    espnDefaultRank: sourceRank ?? numberOrNull(player.espn),
+    espnAdp: sourceAdp,
     marketCoverage: source ? "matched-current-espn" : "default-rank-only",
   };
 });
+
+expectEqual(market.players?.length, 500, "Frozen ESPN runtime source-row benchmark mismatch");
+expectEqual(marketByDraftCommandId.size, 199, "Frozen ESPN runtime mapped-identity benchmark mismatch");
+expectEqual(playerMarket.filter((entry) => entry.marketCoverage === "matched-current-espn").length, 199, "Frozen ESPN runtime player mapping mismatch");
+expectEqual(playerMarket.filter((entry) => entry.marketCoverage === "matched-current-espn" && entry.espnDefaultRank !== null).length, 199, "Frozen ESPN runtime rank coverage mismatch");
+expectEqual(playerMarket.filter((entry) => entry.marketCoverage === "matched-current-espn" && entry.espnAdp !== null).length, 199, "Frozen ESPN runtime ADP coverage mismatch");
+expectEqual(playerMarket.filter((entry) => entry.marketCoverage !== "matched-current-espn").map((entry) => entry.playerId), [190], "Frozen ESPN runtime sole miss mismatch");
 
 const priorByManager = new Map(priors.managers.map((prior) => [prior.manager, prior]));
 const managers = profiles.managers.map((profile) => {
@@ -210,12 +262,47 @@ const payload = {
     status: "candidate",
     modelVersion: model.model_id,
     generatedAt: model.metadata.build_timestamp_utc,
-    effectiveAt: market.metadata?.capture_timestamp_utc || model.metadata.build_timestamp_utc,
-    sourceVersions: model.metadata.source_versions,
+    effectiveAt: MARKET_LOCK.captureTimestampUtc,
+    sourceVersions: {
+      ...model.metadata.source_versions,
+      market: MARKET_LOCK.snapshotId,
+    },
+    market: {
+      snapshotId: MARKET_LOCK.snapshotId,
+      captureTimestampUtc: MARKET_LOCK.captureTimestampUtc,
+      publicationCommit: MARKET_LOCK.publicationCommit,
+      snapshotSha256: MARKET_LOCK.snapshotSha256,
+      schemaVersion: MARKET_LOCK.schemaVersion,
+      status: MARKET_LOCK.status,
+      canonicalSnapshotPath: `fantasy-draft/${MARKET_LOCK.snapshotPath}`,
+      canonicalManifestPath: `fantasy-draft/${MARKET_LOCK.manifestPath}`,
+      coverage: {
+        sourceRows: 500,
+        draftCommandIdentities: { mapped: 199, total: 200 },
+        mappedWithEspnDefaultRank: { count: 199, total: 199 },
+        mappedWithContinuousEspnAdp: { count: 199, total: 199 },
+        keepersRepresented: { count: 10, total: 10 },
+        unresolvedEspnTop160: 0,
+        duplicateInternalPlayerIds: 0,
+        duplicateEspnPlayerIds: 0,
+        draftCommandOnlyMisses: [{ playerId: 190, reason: "outside ESPN payload", blocking: false }],
+      },
+      fieldPolicy: {
+        espnDefaultRank: "distinct nullable ESPN PPR default-rank field",
+        espnAdp: "distinct nullable continuous ESPN ADP field",
+        ordinalAdpRankCreated: false,
+        rankAdpBlended: false,
+      },
+    },
     historicalCoverage: model.metadata.coverage,
     calibratedRounds: model.scope.calibrated_rounds,
     confidencePolicy: model.metadata.confidence_policy,
-    knownLimitations: model.metadata.known_limitations,
+    knownLimitations: [
+      "Rounds 7-16 are contextual and unvalidated.",
+      "Authenticated league-settings verification remains incomplete; the public market lock did not verify private scoring, roster or IR/Stash settings.",
+      "Manager profiles remain explanatory and do not alter probabilities.",
+      "Runtime Monte Carlo sampling adds finite-simulation noise, controlled by a fixed seed.",
+    ],
     publicAssetPolicy: "Aggregate runtime features only; raw history and pick-level ledgers excluded.",
   },
   policy: {
