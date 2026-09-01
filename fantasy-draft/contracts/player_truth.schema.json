@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tofo21.github.io/Cool-Tools/fantasy-draft/contracts/player_truth.schema.json",
+  "title": "Draft Command Player Truth Artifact",
+  "description": "Projected full-PPR football outcomes and identity metadata. This artifact does not contain league-value, ESPN market, or opponent-intent adjustments.",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "artifactType",
+    "artifactId",
+    "artifactVersion",
+    "generatedAt",
+    "effectiveAt",
+    "expiresAt",
+    "status",
+    "season",
+    "integrity",
+    "provenance",
+    "players"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "artifactType": { "const": "player-truth" },
+    "artifactId": { "type": "string", "minLength": 1 },
+    "artifactVersion": { "type": "string", "minLength": 1 },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "effectiveAt": { "type": "string", "format": "date-time" },
+    "expiresAt": { "type": ["string", "null"], "format": "date-time" },
+    "status": { "$ref": "#/$defs/artifactStatus" },
+    "season": { "type": "integer", "minimum": 2026, "maximum": 2100 },
+    "integrity": { "$ref": "#/$defs/integrity" },
+    "provenance": {
+      "type": "object",
+      "required": ["modelVersion", "generator", "sourceCommits", "sourceArtifactIds"],
+      "properties": {
+        "modelVersion": { "type": "string", "minLength": 1 },
+        "generator": { "type": "string", "minLength": 1 },
+        "sourceCommits": { "type": "array", "items": { "type": "string", "minLength": 7 }, "uniqueItems": true },
+        "sourceArtifactIds": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true }
+      },
+      "additionalProperties": false
+    },
+    "players": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/player" }
+    }
+  },
+  "$defs": {
+    "artifactStatus": { "enum": ["candidate", "validated", "frozen", "fallback", "rejected"] },
+    "probability": { "type": "number", "minimum": 0, "maximum": 1 },
+    "nullableProbability": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+    "nullableNonnegativeNumber": { "type": ["number", "null"], "minimum": 0 },
+    "integrity": {
+      "type": "object",
+      "required": ["canonicalization", "payloadSha256"],
+      "properties": {
+        "canonicalization": { "const": "draft-command-canonical-json-v1" },
+        "payloadSha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      },
+      "additionalProperties": false
+    },
+    "player": {
+      "type": "object",
+      "required": [
+        "internalPlayerId",
+        "draftCommandBoardRank",
+        "canonicalPlayerKey",
+        "espnPlayerId",
+        "normalizedName",
+        "nflTeam",
+        "position",
+        "identityMatchMethod",
+        "identityConfidence",
+        "projectedFullPprPoints",
+        "projectedPpg",
+        "expectedGames",
+        "availabilityStatus",
+        "availabilityConfidence",
+        "modelConfidence",
+        "eligibleFeatureFamilies",
+        "quarantinedFeatureFamilies",
+        "provenance",
+        "limitations"
+      ],
+      "properties": {
+        "internalPlayerId": { "type": "integer", "minimum": 1 },
+        "draftCommandBoardRank": { "type": "integer", "minimum": 1 },
+        "canonicalPlayerKey": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]+$" },
+        "espnPlayerId": { "type": ["string", "null"], "minLength": 1 },
+        "normalizedName": { "type": "string", "minLength": 1 },
+        "nflTeam": { "type": "string", "pattern": "^[A-Z]{2,3}$" },
+        "position": { "enum": ["QB", "RB", "WR", "TE"] },
+        "identityMatchMethod": { "enum": ["espn-id", "canonical-key", "verified-crosswalk", "manual-reviewed", "unresolved"] },
+        "identityConfidence": { "$ref": "#/$defs/probability" },
+        "projectedFullPprPoints": { "type": "number", "minimum": 0 },
+        "projectedPpg": { "type": "number", "minimum": 0 },
+        "expectedGames": { "type": "number", "minimum": 0, "maximum": 17 },
+        "fullPprPointsP10": { "$ref": "#/$defs/nullableNonnegativeNumber" },
+        "fullPprPointsP50": { "$ref": "#/$defs/nullableNonnegativeNumber" },
+        "fullPprPointsP90": { "$ref": "#/$defs/nullableNonnegativeNumber" },
+        "eliteProbability": { "$ref": "#/$defs/nullableProbability" },
+        "starterProbability": { "$ref": "#/$defs/nullableProbability" },
+        "bustProbability": { "$ref": "#/$defs/nullableProbability" },
+        "availabilityStatus": { "enum": ["available", "probable", "questionable", "doubtful", "out", "ir", "pup", "suspended", "unknown"] },
+        "availabilityConfidence": { "$ref": "#/$defs/probability" },
+        "modelConfidence": { "$ref": "#/$defs/probability" },
+        "eligibleFeatureFamilies": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+        "quarantinedFeatureFamilies": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+        "provenance": {
+          "type": "object",
+          "required": ["modelVersion", "sourceArtifactIds"],
+          "properties": {
+            "modelVersion": { "type": "string", "minLength": 1 },
+            "sourceArtifactIds": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true }
+          },
+          "additionalProperties": false
+        },
+        "limitations": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

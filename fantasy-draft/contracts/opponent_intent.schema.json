@@ -1,0 +1,194 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tofo21.github.io/Cool-Tools/fantasy-draft/contracts/opponent_intent.schema.json",
+  "title": "Draft Command Opponent Intent Artifact",
+  "description": "Opponent selection probabilities and room-survival outputs. Tony-side labels may select display targets but cannot change opponent selection probabilities.",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "artifactType",
+    "artifactId",
+    "artifactVersion",
+    "modelArtifactVersion",
+    "generatedAt",
+    "effectiveAt",
+    "expiresAt",
+    "status",
+    "espnLeagueId",
+    "tonyTeamId",
+    "tonyNextOverallPick",
+    "integrity",
+    "simulation",
+    "opponents",
+    "targetSurvival",
+    "tierSurvival",
+    "sourceVersions",
+    "limitations"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "artifactType": { "const": "opponent-intent" },
+    "artifactId": { "type": "string", "minLength": 1 },
+    "artifactVersion": { "type": "string", "minLength": 1 },
+    "modelArtifactVersion": { "type": "string", "minLength": 1 },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "effectiveAt": { "type": "string", "format": "date-time" },
+    "expiresAt": { "type": ["string", "null"], "format": "date-time" },
+    "status": { "$ref": "#/$defs/artifactStatus" },
+    "espnLeagueId": { "type": "string", "minLength": 1 },
+    "tonyTeamId": { "type": "string", "pattern": "^team-[0-9]{2}$" },
+    "tonyNextOverallPick": { "type": "integer", "minimum": 1 },
+    "integrity": { "$ref": "#/$defs/integrity" },
+    "simulation": {
+      "type": "object",
+      "required": ["seed", "count"],
+      "properties": {
+        "seed": { "type": "integer", "minimum": 0 },
+        "count": { "type": "integer", "minimum": 1 }
+      },
+      "additionalProperties": false
+    },
+    "opponents": {
+      "type": "object",
+      "minProperties": 1,
+      "patternProperties": {
+        "^team-[0-9]{2}$": { "$ref": "#/$defs/opponent" }
+      },
+      "additionalProperties": false
+    },
+    "targetSurvival": { "type": "array", "items": { "$ref": "#/$defs/targetSurvival" } },
+    "tierSurvival": { "type": "array", "items": { "$ref": "#/$defs/tierSurvival" } },
+    "sourceVersions": {
+      "type": "object",
+      "required": ["playerTruth", "espnMarket", "leagueValue", "opponentModel"],
+      "properties": {
+        "playerTruth": { "type": "string", "minLength": 1 },
+        "espnMarket": { "type": "string", "minLength": 1 },
+        "leagueValue": { "type": "string", "minLength": 1 },
+        "opponentModel": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "limitations": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true }
+  },
+  "$defs": {
+    "artifactStatus": { "enum": ["candidate", "validated", "frozen", "fallback", "rejected"] },
+    "probability": { "type": "number", "minimum": 0, "maximum": 1 },
+    "integrity": {
+      "type": "object",
+      "required": ["canonicalization", "payloadSha256"],
+      "properties": {
+        "canonicalization": { "const": "draft-command-canonical-json-v1" },
+        "payloadSha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      },
+      "additionalProperties": false
+    },
+    "rosterPlayer": {
+      "type": "object",
+      "required": ["internalPlayerId", "position", "rosterSlot"],
+      "properties": {
+        "internalPlayerId": { "type": "integer", "minimum": 1 },
+        "position": { "enum": ["QB", "RB", "WR", "TE"] },
+        "rosterSlot": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "playerProbability": {
+      "type": "object",
+      "required": ["internalPlayerId", "probability"],
+      "properties": {
+        "internalPlayerId": { "type": "integer", "minimum": 1 },
+        "probability": { "$ref": "#/$defs/probability" }
+      },
+      "additionalProperties": false
+    },
+    "opponent": {
+      "type": "object",
+      "required": [
+        "teamId",
+        "displayLabel",
+        "nextOverallPick",
+        "currentRoster",
+        "openRosterPositions",
+        "positionProbabilities",
+        "topFivePlayerProbabilities",
+        "otherProbability",
+        "confidence",
+        "predictionStatus",
+        "explanatoryDrivers",
+        "limitations"
+      ],
+      "properties": {
+        "teamId": { "type": "string", "pattern": "^team-[0-9]{2}$" },
+        "displayLabel": { "type": ["string", "null"], "pattern": "^M[0-9]{2}$" },
+        "nextOverallPick": { "type": "integer", "minimum": 1 },
+        "currentRoster": { "type": "array", "items": { "$ref": "#/$defs/rosterPlayer" } },
+        "openRosterPositions": {
+          "type": "object",
+          "required": ["QB", "RB", "WR", "TE", "FLEX", "BENCH"],
+          "properties": {
+            "QB": { "type": "integer", "minimum": 0 },
+            "RB": { "type": "integer", "minimum": 0 },
+            "WR": { "type": "integer", "minimum": 0 },
+            "TE": { "type": "integer", "minimum": 0 },
+            "FLEX": { "type": "integer", "minimum": 0 },
+            "BENCH": { "type": "integer", "minimum": 0 }
+          },
+          "additionalProperties": false
+        },
+        "positionProbabilities": {
+          "type": "object",
+          "required": ["QB", "RB", "WR", "TE"],
+          "properties": {
+            "QB": { "$ref": "#/$defs/probability" },
+            "RB": { "$ref": "#/$defs/probability" },
+            "WR": { "$ref": "#/$defs/probability" },
+            "TE": { "$ref": "#/$defs/probability" }
+          },
+          "additionalProperties": false
+        },
+        "topFivePlayerProbabilities": {
+          "type": "array",
+          "minItems": 5,
+          "maxItems": 5,
+          "items": { "$ref": "#/$defs/playerProbability" }
+        },
+        "otherProbability": { "$ref": "#/$defs/probability" },
+        "confidence": { "$ref": "#/$defs/probability" },
+        "predictionStatus": { "enum": ["calibrated", "contextual", "unvalidated", "fallback"] },
+        "explanatoryDrivers": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+        "limitations": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true }
+      },
+      "additionalProperties": false
+    },
+    "targetSurvival": {
+      "type": "object",
+      "required": [
+        "internalPlayerId",
+        "probabilityTakenBeforeTony",
+        "probabilitySurvives",
+        "mostLikelyTakerTeamId",
+        "secondMostLikelyTakerTeamId"
+      ],
+      "properties": {
+        "internalPlayerId": { "type": "integer", "minimum": 1 },
+        "probabilityTakenBeforeTony": { "$ref": "#/$defs/probability" },
+        "probabilitySurvives": { "$ref": "#/$defs/probability" },
+        "mostLikelyTakerTeamId": { "type": ["string", "null"], "pattern": "^team-[0-9]{2}$" },
+        "secondMostLikelyTakerTeamId": { "type": ["string", "null"], "pattern": "^team-[0-9]{2}$" }
+      },
+      "additionalProperties": false
+    },
+    "tierSurvival": {
+      "type": "object",
+      "required": ["tierId", "probabilityAtLeastOneSurvives", "expectedSurvivors"],
+      "properties": {
+        "tierId": { "type": "string", "minLength": 1 },
+        "probabilityAtLeastOneSurvives": { "$ref": "#/$defs/probability" },
+        "expectedSurvivors": { "type": "number", "minimum": 0 }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

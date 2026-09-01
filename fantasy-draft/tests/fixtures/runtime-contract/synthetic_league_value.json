@@ -1,0 +1,569 @@
+{
+  "artifactId": "synthetic-espn-league-value",
+  "artifactType": "espn-league-value",
+  "artifactVersion": "synthetic-lv-v1",
+  "effectiveAt": "2026-08-31T22:00:00Z",
+  "expiresAt": "2026-09-03T12:00:00Z",
+  "formula": {
+    "description": "Synthetic numeric outputs that exercise the Step 15 socket; not a production formula.",
+    "formulaVersion": "synthetic-step15-socket-v1",
+    "generator": "synthetic-step15-adapter",
+    "sourceArtifactIds": [
+      "synthetic-player-truth"
+    ],
+    "sourceCommits": [
+      "bfe0bfd000137115b774718851fac999f08bec36"
+    ]
+  },
+  "generatedAt": "2026-08-31T22:00:00Z",
+  "integrity": {
+    "canonicalization": "draft-command-canonical-json-v1",
+    "payloadSha256": "37a22fb9ca613cc47a58b396ef09cf918162b2ab0b13162e84f3dc2aa1e4340b"
+  },
+  "leagueConfiguration": {
+    "draftSlot": 5,
+    "keepers": [
+      {
+        "internalPlayerId": 1015,
+        "overallPick": 160,
+        "round": 16,
+        "teamId": "team-01"
+      },
+      {
+        "internalPlayerId": 1016,
+        "overallPick": 159,
+        "round": 16,
+        "teamId": "team-02"
+      },
+      {
+        "internalPlayerId": 1017,
+        "overallPick": 158,
+        "round": 16,
+        "teamId": "team-03"
+      },
+      {
+        "internalPlayerId": 1018,
+        "overallPick": 157,
+        "round": 16,
+        "teamId": "team-04"
+      },
+      {
+        "internalPlayerId": 1019,
+        "overallPick": 156,
+        "round": 16,
+        "teamId": "team-05"
+      },
+      {
+        "internalPlayerId": 1020,
+        "overallPick": 155,
+        "round": 16,
+        "teamId": "team-06"
+      },
+      {
+        "internalPlayerId": 1021,
+        "overallPick": 154,
+        "round": 16,
+        "teamId": "team-07"
+      },
+      {
+        "internalPlayerId": 1022,
+        "overallPick": 153,
+        "round": 16,
+        "teamId": "team-08"
+      },
+      {
+        "internalPlayerId": 1023,
+        "overallPick": 152,
+        "round": 16,
+        "teamId": "team-09"
+      },
+      {
+        "internalPlayerId": 1024,
+        "overallPick": 151,
+        "round": 16,
+        "teamId": "team-10"
+      }
+    ],
+    "leagueId": "synthetic-espn-league",
+    "leagueSettingsVersion": "synthetic-settings-v1",
+    "replacementLevelMethodVersion": "synthetic-replacement-v1",
+    "rosterFormat": {
+      "bench": 7,
+      "ir": 1,
+      "starters": {
+        "FLEX": 2,
+        "QB": 1,
+        "RB": 2,
+        "TE": 1,
+        "WR": 2
+      }
+    },
+    "rounds": 16,
+    "scoringFormat": "full-PPR",
+    "settingsHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "teamCount": 10,
+    "tonyTeamId": "team-05",
+    "totalPicks": 160
+  },
+  "records": [
+    {
+      "confidence": 0.915,
+      "flexAdjustedValue": 198.375,
+      "internalPlayerId": 1001,
+      "leagueValueRank": 1,
+      "leagueValueScore": 199.875,
+      "marginalValue": 88.25,
+      "positionalRank": 1,
+      "projectedLeaguePoints": 336.25,
+      "provenance": {
+        "formulaVersion": "synthetic-step15-socket-v1",
+        "sourceArtifactIds": [
+          "synthetic-player-truth"
+        ]
+      },
+      "replacementValueByPosition": 248,
+      "rosterFitAdjustment": 0.0,
+      "status": "candidate"
+    },
+    {
+      "confidence": 0.91,
+      "flexAdjustedValue": 195.75,
+      "internalPlayerId": 1002,
+      "leagueValueRank": 2,
+      "leagueValueScore": 195.75,
+      "marginalValue": 156.5,
+      "positionalRank": 1,
+      "projectedLeaguePoints": 330.5,
+      "provenance": {
+        "formulaVersion": "synthetic-step15-socket-v1",
+        "sourceArtifactIds": [
+          "synthetic-player-truth"
+        ]
+      },
+      "replacementValueByPosition": 174,
+      "rosterFitAdjustment": 0.4,
+      "status": "candidate"
+    },
+    {
+      "confidence": 0.905,
+      "flexAdjustedValue": 191.625,
+      "internalPlayerId": 1003,
+      "leagueValueRank": 3,
+      "leagueValueScore": 191.625,
+      "marginalValue": 158.75,
+      "positionalRank": 1,
+      "projectedLeaguePoints": 324.75,
+      "provenance": {
+        "formulaVersion": "synthetic-step15-socket-v1",
+        "sourceArtifactIds": [
+          "synthetic-player-truth"
+        ]
+      },
+      "replacementValueByPosition": 166,
+      "rosterFitAdjustment": -0.4,
+      "status": "candidate"
+    },
+    {
+      "confidence": 0.9,
+      "flexAdjustedValue": 186.0,
+      "internalPlayerId": 1004,
+      "leagueValueRank": 4,
+      "leagueValueScore": 187.5,
+      "marginalValue": 184.0,
+      "positionalRank": 1,
+      "projectedLeaguePoints": 319.0,
+      "provenance": {
+        "formulaVersion": "synthetic-step15-socket-v1",
+        "sourceArtifactIds": [
+          "synthetic-player-truth"
+        ]
+      },
+      "replacementValueByPosition": 135,
+      "rosterFitAdjustment": 0.0,
+      "status": "candidate"
+    },
+    {
+      "confidence": 0.895,
+      "flexAdjustedValue": 181.875,
+      "internalPlayerId": 1005,
+      "leagueValueRank": 5,
+      "leagueValueScore": 183.375,
+      "marginalValue": 65.25,
+      "positionalRank": 2,
+      "projectedLeaguePoints": 313.25,
+      "provenance": {
+        "formulaVersion": "synthetic-step15-socket-v1",
+        "sourceArtifactIds": [
+          "synthetic-player-truth"
+        ]
+      },
+      "replacementValueByPosition": 248,
+      "rosterFitAdjustment": 0.4,
+      "status": "candidate"
+    },
+    {
+      "confidence": 0.89,
+      "flexAdjustedValue": 179.25,
+      "internalPlayerId": 1006,
+      "leagueValueRank": 6,
+      "leagueValueScore": 179.25,
+      "marginalValue": 133.5,
+      "positionalRank": 2,
+      "projectedLeaguePoints": 307.5,
+      "provenance": {
+        "formulaVersion": "synthetic-step15-socket-v1",
+        "sourceArtifactIds": [
+          "synthetic-player-truth"
+        ]
+      },
+      "replacementValueByPosition": 174,
+      "rosterFitAdjustment": null,
+      "status": "candidate"
+    },
+    {
+      "confidence": 0.885,
+      "flexAdjustedValue": 175.125,
+      "internalPlayerId": 1007,
+      "leagueValueRank": 7,
+      "leagueValueScore": 175.125,
+      "marginalValue": 135.75,
+      "positionalRank": 2,
+      "projectedLeaguePoints": 301.75,
+      "provenance": {
+        "formulaVersion": "synthetic-step15-socket-v1",
+        "sourceArtifactIds": [
+          "synthetic-player-truth"
+        ]
+      },
+      "replacementValueByPosition": 166,
+      "rosterFitAdjustment": 0.0,
+      "status": "candidate"
+    },
+    {
+      "confidence": 0.88,
+      "flexAdjustedValue": 169.5,
+      "internalPlayerId": 1008,
+      "leagueValueRank": 8,
+      "leagueValueScore": 171.0,
+      "marginalValue": 161.0,
+      "positionalRank": 2,
+      "projectedLeaguePoints": 296.0,
+      "provenance": {
+        "formulaVersion": "synthetic-step15-socket-v1",
+        "sourceArtifactIds": [
+          "synthetic-player-truth"
+        ]
+      },
+      "replacementValueByPosition": 135,
+      "rosterFitAdjustment": 0.4,
+      "status": "candidate"
+    },
+    {
+      "confidence": 0.875,
+      "flexAdjustedValue": 165.375,
+      "internalPlayerId": 1009,
+      "leagueValueRank": 9,
+      "leagueValueScore": 166.875,
+      "marginalValue": 42.25,
+      "positionalRank": 3,
+      "projectedLeaguePoints": 290.25,
+      "provenance": {
+        "formulaVersion": "synthetic-step15-socket-v1",
+        "sourceArtifactIds": [
+          "synthetic-player-truth"
+        ]
+      },
+      "replacementValueByPosition": 248,
+      "rosterFitAdjustment": -0.4,
+      "status": "candidate"
+    },
+    {
+      "confidence": 0.87,
+      "flexAdjustedValue": 162.75,
+      "internalPlayerId": 1010,
+      "leagueValueRank": 10,
+      "leagueValueScore": 162.75,
+      "marginalValue": 110.5,
+      "positionalRank": 3,
+      "projectedLeaguePoints": 284.5,
+      "provenance": {
+        "formulaVersion": "synthetic-step15-socket-v1",
+        "sourceArtifactIds": [
+          "synthetic-player-truth"
+        ]
+      },
+      "replacementValueByPosition": 174,
+      "rosterFitAdjustment": 0.0,
+      "status": "candidate"
+    },
+    {
+      "confidence": 0.865,
+      "flexAdjustedValue": 158.625,
+      "internalPlayerId": 1011,
+      "leagueValueRank": 11,
+      "leagueValueScore": 158.625,
+      "marginalValue": 112.75,
+      "positionalRank": 3,
+      "projectedLeaguePoints": 278.75,
+      "provenance": {
+        "formulaVersion": "synthetic-step15-socket-v1",
+        "sourceArtifactIds": [
+          "synthetic-player-truth"
+        ]
+      },
+      "replacementValueByPosition": 166,
+      "rosterFitAdjustment": 0.4,
+      "status": "candidate"
+    },
+    {
+      "confidence": 0.86,
+      "flexAdjustedValue": 153.0,
+      "internalPlayerId": 1012,
+      "leagueValueRank": 12,
+      "leagueValueScore": 154.5,
+      "marginalValue": 138.0,
+      "positionalRank": 3,
+      "projectedLeaguePoints": 273.0,
+      "provenance": {
+        "formulaVersion": "synthetic-step15-socket-v1",
+        "sourceArtifactIds": [
+          "synthetic-player-truth"
+        ]
+      },
+      "replacementValueByPosition": 135,
+      "rosterFitAdjustment": null,
+      "status": "candidate"
+    },
+    {
+      "confidence": 0.855,
+      "flexAdjustedValue": 148.875,
+      "internalPlayerId": 1013,
+      "leagueValueRank": 13,
+      "leagueValueScore": 150.375,
+      "marginalValue": 19.25,
+      "positionalRank": 4,
+      "projectedLeaguePoints": 267.25,
+      "provenance": {
+        "formulaVersion": "synthetic-step15-socket-v1",
+        "sourceArtifactIds": [
+          "synthetic-player-truth"
+        ]
+      },
+      "replacementValueByPosition": 248,
+      "rosterFitAdjustment": 0.0,
+      "status": "candidate"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 146.25,
+      "internalPlayerId": 1014,
+      "leagueValueRank": 14,
+      "leagueValueScore": 146.25,
+      "marginalValue": 87.5,
+      "positionalRank": 4,
+      "projectedLeaguePoints": 261.5,
+      "provenance": {
+        "formulaVersion": "synthetic-step15-socket-v1",
+        "sourceArtifactIds": [
+          "synthetic-player-truth"
+        ]
+      },
+      "replacementValueByPosition": 174,
+      "rosterFitAdjustment": 0.4,
+      "status": "candidate"
+    },
+    {
+      "confidence": 0.845,
+      "flexAdjustedValue": 142.125,
+      "internalPlayerId": 1015,
+      "leagueValueRank": 15,
+      "leagueValueScore": 142.125,
+      "marginalValue": 89.75,
+      "positionalRank": 4,
+      "projectedLeaguePoints": 255.75,
+      "provenance": {
+        "formulaVersion": "synthetic-step15-socket-v1",
+        "sourceArtifactIds": [
+          "synthetic-player-truth"
+        ]
+      },
+      "replacementValueByPosition": 166,
+      "rosterFitAdjustment": -0.4,
+      "status": "candidate"
+    },
+    {
+      "confidence": 0.84,
+      "flexAdjustedValue": 136.5,
+      "internalPlayerId": 1016,
+      "leagueValueRank": 16,
+      "leagueValueScore": 138.0,
+      "marginalValue": 115.0,
+      "positionalRank": 4,
+      "projectedLeaguePoints": 250.0,
+      "provenance": {
+        "formulaVersion": "synthetic-step15-socket-v1",
+        "sourceArtifactIds": [
+          "synthetic-player-truth"
+        ]
+      },
+      "replacementValueByPosition": 135,
+      "rosterFitAdjustment": 0.0,
+      "status": "candidate"
+    },
+    {
+      "confidence": 0.835,
+      "flexAdjustedValue": 132.375,
+      "internalPlayerId": 1017,
+      "leagueValueRank": 17,
+      "leagueValueScore": 133.875,
+      "marginalValue": -3.75,
+      "positionalRank": 5,
+      "projectedLeaguePoints": 244.25,
+      "provenance": {
+        "formulaVersion": "synthetic-step15-socket-v1",
+        "sourceArtifactIds": [
+          "synthetic-player-truth"
+        ]
+      },
+      "replacementValueByPosition": 248,
+      "rosterFitAdjustment": 0.4,
+      "status": "candidate"
+    },
+    {
+      "confidence": 0.83,
+      "flexAdjustedValue": 129.75,
+      "internalPlayerId": 1018,
+      "leagueValueRank": 18,
+      "leagueValueScore": 129.75,
+      "marginalValue": 64.5,
+      "positionalRank": 5,
+      "projectedLeaguePoints": 238.5,
+      "provenance": {
+        "formulaVersion": "synthetic-step15-socket-v1",
+        "sourceArtifactIds": [
+          "synthetic-player-truth"
+        ]
+      },
+      "replacementValueByPosition": 174,
+      "rosterFitAdjustment": null,
+      "status": "candidate"
+    },
+    {
+      "confidence": 0.825,
+      "flexAdjustedValue": 125.625,
+      "internalPlayerId": 1019,
+      "leagueValueRank": 19,
+      "leagueValueScore": 125.625,
+      "marginalValue": 66.75,
+      "positionalRank": 5,
+      "projectedLeaguePoints": 232.75,
+      "provenance": {
+        "formulaVersion": "synthetic-step15-socket-v1",
+        "sourceArtifactIds": [
+          "synthetic-player-truth"
+        ]
+      },
+      "replacementValueByPosition": 166,
+      "rosterFitAdjustment": 0.0,
+      "status": "candidate"
+    },
+    {
+      "confidence": 0.82,
+      "flexAdjustedValue": 120.0,
+      "internalPlayerId": 1020,
+      "leagueValueRank": 20,
+      "leagueValueScore": 121.5,
+      "marginalValue": 92.0,
+      "positionalRank": 5,
+      "projectedLeaguePoints": 227.0,
+      "provenance": {
+        "formulaVersion": "synthetic-step15-socket-v1",
+        "sourceArtifactIds": [
+          "synthetic-player-truth"
+        ]
+      },
+      "replacementValueByPosition": 135,
+      "rosterFitAdjustment": 0.4,
+      "status": "candidate"
+    },
+    {
+      "confidence": 0.815,
+      "flexAdjustedValue": 115.875,
+      "internalPlayerId": 1021,
+      "leagueValueRank": 21,
+      "leagueValueScore": 117.375,
+      "marginalValue": -26.75,
+      "positionalRank": 6,
+      "projectedLeaguePoints": 221.25,
+      "provenance": {
+        "formulaVersion": "synthetic-step15-socket-v1",
+        "sourceArtifactIds": [
+          "synthetic-player-truth"
+        ]
+      },
+      "replacementValueByPosition": 248,
+      "rosterFitAdjustment": -0.4,
+      "status": "candidate"
+    },
+    {
+      "confidence": 0.81,
+      "flexAdjustedValue": 113.25,
+      "internalPlayerId": 1022,
+      "leagueValueRank": 22,
+      "leagueValueScore": 113.25,
+      "marginalValue": 41.5,
+      "positionalRank": 6,
+      "projectedLeaguePoints": 215.5,
+      "provenance": {
+        "formulaVersion": "synthetic-step15-socket-v1",
+        "sourceArtifactIds": [
+          "synthetic-player-truth"
+        ]
+      },
+      "replacementValueByPosition": 174,
+      "rosterFitAdjustment": 0.0,
+      "status": "candidate"
+    },
+    {
+      "confidence": 0.805,
+      "flexAdjustedValue": 109.125,
+      "internalPlayerId": 1023,
+      "leagueValueRank": 23,
+      "leagueValueScore": 109.125,
+      "marginalValue": 43.75,
+      "positionalRank": 6,
+      "projectedLeaguePoints": 209.75,
+      "provenance": {
+        "formulaVersion": "synthetic-step15-socket-v1",
+        "sourceArtifactIds": [
+          "synthetic-player-truth"
+        ]
+      },
+      "replacementValueByPosition": 166,
+      "rosterFitAdjustment": 0.4,
+      "status": "candidate"
+    },
+    {
+      "confidence": 0.8,
+      "flexAdjustedValue": 103.5,
+      "internalPlayerId": 1024,
+      "leagueValueRank": 24,
+      "leagueValueScore": 105.0,
+      "marginalValue": 69.0,
+      "positionalRank": 6,
+      "projectedLeaguePoints": 204.0,
+      "provenance": {
+        "formulaVersion": "synthetic-step15-socket-v1",
+        "sourceArtifactIds": [
+          "synthetic-player-truth"
+        ]
+      },
+      "replacementValueByPosition": 135,
+      "rosterFitAdjustment": null,
+      "status": "candidate"
+    }
+  ],
+  "schemaVersion": "1.0.0",
+  "season": 2026,
+  "status": "candidate"
+}

@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tofo21.github.io/Cool-Tools/fantasy-draft/contracts/espn_market.schema.json",
+  "title": "Draft Command Frozen ESPN Market Artifact",
+  "description": "ESPN default rank and continuous ADP remain distinct source values. Ordinal ADP is accepted only when supplied by the frozen source.",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "artifactType",
+    "artifactId",
+    "artifactVersion",
+    "generatedAt",
+    "effectiveAt",
+    "expiresAt",
+    "status",
+    "season",
+    "captureTimestamp",
+    "captureStatus",
+    "sourceArtifactId",
+    "sourceHash",
+    "integrity",
+    "coverage",
+    "records"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "artifactType": { "const": "espn-market" },
+    "artifactId": { "type": "string", "minLength": 1 },
+    "artifactVersion": { "type": "string", "minLength": 1 },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "effectiveAt": { "type": "string", "format": "date-time" },
+    "expiresAt": { "type": ["string", "null"], "format": "date-time" },
+    "status": { "$ref": "#/$defs/artifactStatus" },
+    "season": { "type": "integer", "minimum": 2026, "maximum": 2100 },
+    "captureTimestamp": { "type": "string", "format": "date-time" },
+    "captureStatus": { "enum": ["complete", "partial", "unavailable"] },
+    "sourceArtifactId": { "type": "string", "minLength": 1 },
+    "sourceHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "integrity": { "$ref": "#/$defs/integrity" },
+    "coverage": {
+      "type": "object",
+      "required": ["eligiblePlayerCount", "mappedPlayerCount", "rankCoverage", "adpCoverage"],
+      "properties": {
+        "eligiblePlayerCount": { "type": "integer", "minimum": 0 },
+        "mappedPlayerCount": { "type": "integer", "minimum": 0 },
+        "rankCoverage": { "$ref": "#/$defs/probability" },
+        "adpCoverage": { "$ref": "#/$defs/probability" }
+      },
+      "additionalProperties": false
+    },
+    "records": { "type": "array", "items": { "$ref": "#/$defs/marketRecord" } }
+  },
+  "$defs": {
+    "artifactStatus": { "enum": ["candidate", "validated", "frozen", "fallback", "rejected"] },
+    "probability": { "type": "number", "minimum": 0, "maximum": 1 },
+    "integrity": {
+      "type": "object",
+      "required": ["canonicalization", "payloadSha256"],
+      "properties": {
+        "canonicalization": { "const": "draft-command-canonical-json-v1" },
+        "payloadSha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      },
+      "additionalProperties": false
+    },
+    "nullableRank": { "type": ["integer", "null"], "minimum": 1 },
+    "nullableAdp": { "type": ["number", "null"], "exclusiveMinimum": 0 },
+    "marketRecord": {
+      "type": "object",
+      "required": [
+        "internalPlayerId",
+        "espnPlayerId",
+        "espnDefaultRank",
+        "espnContinuousAdp",
+        "liveRoomRank",
+        "ordinalAdpRank",
+        "ordinalAdpRankSource",
+        "mappingConfidence",
+        "captureStatus"
+      ],
+      "properties": {
+        "internalPlayerId": { "type": "integer", "minimum": 1 },
+        "espnPlayerId": { "type": ["string", "null"], "minLength": 1 },
+        "espnDefaultRank": { "$ref": "#/$defs/nullableRank" },
+        "espnContinuousAdp": { "$ref": "#/$defs/nullableAdp" },
+        "liveRoomRank": { "$ref": "#/$defs/nullableRank" },
+        "ordinalAdpRank": { "$ref": "#/$defs/nullableRank" },
+        "ordinalAdpRankSource": { "type": ["string", "null"], "minLength": 1 },
+        "mappingConfidence": { "$ref": "#/$defs/probability" },
+        "captureStatus": { "enum": ["captured", "missing-market", "unmapped", "excluded"] }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

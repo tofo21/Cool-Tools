@@ -1,0 +1,161 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tofo21.github.io/Cool-Tools/fantasy-draft/contracts/espn_league_value.schema.json",
+  "title": "Draft Command ESPN League Value Adapter Output",
+  "description": "The output socket for Step 15. It validates league-adjusted values without prescribing or implementing the Step 15 formula.",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "artifactType",
+    "artifactId",
+    "artifactVersion",
+    "generatedAt",
+    "effectiveAt",
+    "expiresAt",
+    "status",
+    "season",
+    "integrity",
+    "leagueConfiguration",
+    "formula",
+    "records"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "artifactType": { "const": "espn-league-value" },
+    "artifactId": { "type": "string", "minLength": 1 },
+    "artifactVersion": { "type": "string", "minLength": 1 },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "effectiveAt": { "type": "string", "format": "date-time" },
+    "expiresAt": { "type": ["string", "null"], "format": "date-time" },
+    "status": { "$ref": "#/$defs/artifactStatus" },
+    "season": { "type": "integer", "minimum": 2026, "maximum": 2100 },
+    "integrity": { "$ref": "#/$defs/integrity" },
+    "leagueConfiguration": {
+      "type": "object",
+      "required": [
+        "leagueId",
+        "leagueSettingsVersion",
+        "settingsHash",
+        "scoringFormat",
+        "rosterFormat",
+        "replacementLevelMethodVersion",
+        "teamCount",
+        "rounds",
+        "draftSlot",
+        "totalPicks",
+        "tonyTeamId",
+        "keepers"
+      ],
+      "properties": {
+        "leagueId": { "type": "string", "minLength": 1 },
+        "leagueSettingsVersion": { "type": "string", "minLength": 1 },
+        "settingsHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "scoringFormat": { "type": "string", "minLength": 1 },
+        "rosterFormat": {
+          "type": "object",
+          "required": ["starters", "bench", "ir"],
+          "properties": {
+            "starters": { "type": "object", "additionalProperties": { "type": "integer", "minimum": 0 } },
+            "bench": { "type": "integer", "minimum": 0 },
+            "ir": { "type": "integer", "minimum": 0 }
+          },
+          "additionalProperties": false
+        },
+        "replacementLevelMethodVersion": { "type": "string", "minLength": 1 },
+        "teamCount": { "type": "integer", "minimum": 2 },
+        "rounds": { "type": "integer", "minimum": 1 },
+        "draftSlot": { "type": "integer", "minimum": 1 },
+        "totalPicks": { "type": "integer", "minimum": 1 },
+        "tonyTeamId": { "type": "string", "pattern": "^team-[0-9]{2}$" },
+        "keepers": {
+          "type": "array",
+          "minItems": 10,
+          "maxItems": 10,
+          "items": {
+            "type": "object",
+            "required": ["teamId", "internalPlayerId", "round", "overallPick"],
+            "properties": {
+              "teamId": { "type": "string", "pattern": "^team-[0-9]{2}$" },
+              "internalPlayerId": { "type": "integer", "minimum": 1 },
+              "round": { "type": "integer", "minimum": 1 },
+              "overallPick": { "type": "integer", "minimum": 1 }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "formula": {
+      "type": "object",
+      "required": ["formulaVersion", "generator", "sourceArtifactIds", "sourceCommits", "description"],
+      "properties": {
+        "formulaVersion": { "type": "string", "minLength": 1 },
+        "generator": { "type": "string", "minLength": 1 },
+        "sourceArtifactIds": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+        "sourceCommits": { "type": "array", "items": { "type": "string", "minLength": 7 }, "uniqueItems": true },
+        "description": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "records": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/leagueValueRecord" }
+    }
+  },
+  "$defs": {
+    "artifactStatus": { "enum": ["candidate", "validated", "frozen", "fallback", "rejected"] },
+    "probability": { "type": "number", "minimum": 0, "maximum": 1 },
+    "integrity": {
+      "type": "object",
+      "required": ["canonicalization", "payloadSha256"],
+      "properties": {
+        "canonicalization": { "const": "draft-command-canonical-json-v1" },
+        "payloadSha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      },
+      "additionalProperties": false
+    },
+    "leagueValueRecord": {
+      "type": "object",
+      "required": [
+        "internalPlayerId",
+        "projectedLeaguePoints",
+        "replacementValueByPosition",
+        "marginalValue",
+        "flexAdjustedValue",
+        "leagueValueScore",
+        "leagueValueRank",
+        "positionalRank",
+        "rosterFitAdjustment",
+        "confidence",
+        "status",
+        "provenance"
+      ],
+      "properties": {
+        "internalPlayerId": { "type": "integer", "minimum": 1 },
+        "projectedLeaguePoints": { "type": "number" },
+        "replacementValueByPosition": { "type": "number" },
+        "marginalValue": { "type": "number" },
+        "flexAdjustedValue": { "type": "number" },
+        "leagueValueScore": { "type": "number" },
+        "leagueValueRank": { "type": "integer", "minimum": 1 },
+        "positionalRank": { "type": "integer", "minimum": 1 },
+        "rosterFitAdjustment": { "type": ["number", "null"] },
+        "confidence": { "$ref": "#/$defs/probability" },
+        "status": { "$ref": "#/$defs/artifactStatus" },
+        "provenance": {
+          "type": "object",
+          "required": ["formulaVersion", "sourceArtifactIds"],
+          "properties": {
+            "formulaVersion": { "type": "string", "minLength": 1 },
+            "sourceArtifactIds": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

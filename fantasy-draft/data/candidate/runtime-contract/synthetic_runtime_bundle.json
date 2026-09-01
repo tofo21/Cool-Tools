@@ -1,0 +1,2511 @@
+{
+  "artifactType": "draft-runtime-bundle",
+  "bundleVersion": "runtime-26b44c83490b6ba2",
+  "compatibility": {
+    "applicationId": "draft-command",
+    "minimumApplicationRelease": "post-runtime-contract-integration",
+    "persistencePolicy": "bundle-fetch-only-no-localStorage",
+    "requiredCapabilities": [
+      "definite-model-state",
+      "numeric-league-value-sort",
+      "separate-espn-rank-adp",
+      "stable-id-only-joins"
+    ],
+    "supportedSchemaMajor": 1
+  },
+  "confidencePolicy": {
+    "identityMinimum": 0.8,
+    "leagueValueMinimum": 0.6,
+    "nullMeansMissing": true,
+    "opponentPredictionLabels": [
+      "calibrated",
+      "contextual",
+      "unvalidated",
+      "fallback"
+    ],
+    "playerTruthMinimum": 0.6
+  },
+  "coverage": {
+    "byBoardRange": {
+      "1-50": {
+        "eligible": 23,
+        "leagueValue": 23,
+        "marketAdp": 22,
+        "marketRank": 22,
+        "playerTruth": 23
+      },
+      "101-160": {
+        "eligible": 0,
+        "leagueValue": 0,
+        "marketAdp": 0,
+        "marketRank": 0,
+        "playerTruth": 0
+      },
+      "161+": {
+        "eligible": 1,
+        "leagueValue": 1,
+        "marketAdp": 0,
+        "marketRank": 0,
+        "playerTruth": 1
+      },
+      "51-100": {
+        "eligible": 0,
+        "leagueValue": 0,
+        "marketAdp": 0,
+        "marketRank": 0,
+        "playerTruth": 0
+      }
+    },
+    "byPosition": {
+      "QB": {
+        "eligible": 6,
+        "leagueValue": 6,
+        "marketAdp": 6,
+        "marketRank": 6,
+        "playerTruth": 6
+      },
+      "RB": {
+        "eligible": 6,
+        "leagueValue": 6,
+        "marketAdp": 6,
+        "marketRank": 6,
+        "playerTruth": 6
+      },
+      "TE": {
+        "eligible": 6,
+        "leagueValue": 6,
+        "marketAdp": 4,
+        "marketRank": 5,
+        "playerTruth": 6
+      },
+      "WR": {
+        "eligible": 6,
+        "leagueValue": 6,
+        "marketAdp": 6,
+        "marketRank": 5,
+        "playerTruth": 6
+      }
+    },
+    "keeperIdentities": {
+      "expected": 10,
+      "resolved": 10
+    },
+    "overall": {
+      "eligible": 24,
+      "leagueValue": 24,
+      "marketAdp": 22,
+      "marketRank": 22,
+      "playerTruth": 24
+    },
+    "unresolvedIdentities": [
+      {
+        "artifactType": "player-truth",
+        "blocking": false,
+        "boardRank": 200,
+        "internalPlayerId": 1024,
+        "reason": "Player Truth identity remains unresolved"
+      }
+    ]
+  },
+  "fallbackPolicy": {
+    "bundleIncompatibility": "reject-bundle-preserve-draft-tracking",
+    "espnMarketFailure": "manual-board-without-market",
+    "leagueValueFailure": "provisional-labeled-valuation",
+    "opponentIntentFailure": "hide-or-downgrade-threats",
+    "playerMismatch": "exclude-affected-join-and-continue",
+    "playerTruthFailure": "provisional-labeled-valuation"
+  },
+  "featureAvailability": {
+    "espnAdp": true,
+    "espnRank": true,
+    "leagueValue": true,
+    "manualDraft": true,
+    "opponentIntent": true,
+    "playerTruth": true,
+    "roomSurvival": true
+  },
+  "generatedAt": "2026-08-31T22:00:00Z",
+  "knownLimitations": [
+    "LOWER_BOARD_IDENTITY_GAP: Player Truth identity remains unresolved",
+    "Synthetic fixture; not a player valuation.",
+    "Synthetic fixture; not an opponent forecast."
+  ],
+  "leagueConfiguration": {
+    "draftSlot": 5,
+    "keepers": [
+      {
+        "internalPlayerId": 1015,
+        "overallPick": 160,
+        "round": 16,
+        "teamId": "team-01"
+      },
+      {
+        "internalPlayerId": 1016,
+        "overallPick": 159,
+        "round": 16,
+        "teamId": "team-02"
+      },
+      {
+        "internalPlayerId": 1017,
+        "overallPick": 158,
+        "round": 16,
+        "teamId": "team-03"
+      },
+      {
+        "internalPlayerId": 1018,
+        "overallPick": 157,
+        "round": 16,
+        "teamId": "team-04"
+      },
+      {
+        "internalPlayerId": 1019,
+        "overallPick": 156,
+        "round": 16,
+        "teamId": "team-05"
+      },
+      {
+        "internalPlayerId": 1020,
+        "overallPick": 155,
+        "round": 16,
+        "teamId": "team-06"
+      },
+      {
+        "internalPlayerId": 1021,
+        "overallPick": 154,
+        "round": 16,
+        "teamId": "team-07"
+      },
+      {
+        "internalPlayerId": 1022,
+        "overallPick": 153,
+        "round": 16,
+        "teamId": "team-08"
+      },
+      {
+        "internalPlayerId": 1023,
+        "overallPick": 152,
+        "round": 16,
+        "teamId": "team-09"
+      },
+      {
+        "internalPlayerId": 1024,
+        "overallPick": 151,
+        "round": 16,
+        "teamId": "team-10"
+      }
+    ],
+    "leagueId": "synthetic-espn-league",
+    "leagueSettingsVersion": "synthetic-settings-v1",
+    "rosterFormat": {
+      "bench": 7,
+      "ir": 1,
+      "starters": {
+        "FLEX": 2,
+        "QB": 1,
+        "RB": 2,
+        "TE": 1,
+        "WR": 2
+      }
+    },
+    "rounds": 16,
+    "scoringFormat": "full-PPR",
+    "settingsHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "teamCount": 10,
+    "tonyFirstPick": 5,
+    "tonyTeamId": "team-05",
+    "totalPicks": 160
+  },
+  "leagueValueRecords": [
+    {
+      "confidence": 0.915,
+      "flexAdjustedValue": 198.375,
+      "internalPlayerId": 1001,
+      "leagueValueRank": 1,
+      "leagueValueScore": 199.875,
+      "marginalValue": 88.25,
+      "positionalRank": 1,
+      "projectedLeaguePoints": 336.25,
+      "replacementValueByPosition": 248,
+      "rosterFitAdjustment": 0.0,
+      "status": "candidate"
+    },
+    {
+      "confidence": 0.91,
+      "flexAdjustedValue": 195.75,
+      "internalPlayerId": 1002,
+      "leagueValueRank": 2,
+      "leagueValueScore": 195.75,
+      "marginalValue": 156.5,
+      "positionalRank": 1,
+      "projectedLeaguePoints": 330.5,
+      "replacementValueByPosition": 174,
+      "rosterFitAdjustment": 0.4,
+      "status": "candidate"
+    },
+    {
+      "confidence": 0.905,
+      "flexAdjustedValue": 191.625,
+      "internalPlayerId": 1003,
+      "leagueValueRank": 3,
+      "leagueValueScore": 191.625,
+      "marginalValue": 158.75,
+      "positionalRank": 1,
+      "projectedLeaguePoints": 324.75,
+      "replacementValueByPosition": 166,
+      "rosterFitAdjustment": -0.4,
+      "status": "candidate"
+    },
+    {
+      "confidence": 0.9,
+      "flexAdjustedValue": 186.0,
+      "internalPlayerId": 1004,
+      "leagueValueRank": 4,
+      "leagueValueScore": 187.5,
+      "marginalValue": 184.0,
+      "positionalRank": 1,
+      "projectedLeaguePoints": 319.0,
+      "replacementValueByPosition": 135,
+      "rosterFitAdjustment": 0.0,
+      "status": "candidate"
+    },
+    {
+      "confidence": 0.895,
+      "flexAdjustedValue": 181.875,
+      "internalPlayerId": 1005,
+      "leagueValueRank": 5,
+      "leagueValueScore": 183.375,
+      "marginalValue": 65.25,
+      "positionalRank": 2,
+      "projectedLeaguePoints": 313.25,
+      "replacementValueByPosition": 248,
+      "rosterFitAdjustment": 0.4,
+      "status": "candidate"
+    },
+    {
+      "confidence": 0.89,
+      "flexAdjustedValue": 179.25,
+      "internalPlayerId": 1006,
+      "leagueValueRank": 6,
+      "leagueValueScore": 179.25,
+      "marginalValue": 133.5,
+      "positionalRank": 2,
+      "projectedLeaguePoints": 307.5,
+      "replacementValueByPosition": 174,
+      "rosterFitAdjustment": null,
+      "status": "candidate"
+    },
+    {
+      "confidence": 0.885,
+      "flexAdjustedValue": 175.125,
+      "internalPlayerId": 1007,
+      "leagueValueRank": 7,
+      "leagueValueScore": 175.125,
+      "marginalValue": 135.75,
+      "positionalRank": 2,
+      "projectedLeaguePoints": 301.75,
+      "replacementValueByPosition": 166,
+      "rosterFitAdjustment": 0.0,
+      "status": "candidate"
+    },
+    {
+      "confidence": 0.88,
+      "flexAdjustedValue": 169.5,
+      "internalPlayerId": 1008,
+      "leagueValueRank": 8,
+      "leagueValueScore": 171.0,
+      "marginalValue": 161.0,
+      "positionalRank": 2,
+      "projectedLeaguePoints": 296.0,
+      "replacementValueByPosition": 135,
+      "rosterFitAdjustment": 0.4,
+      "status": "candidate"
+    },
+    {
+      "confidence": 0.875,
+      "flexAdjustedValue": 165.375,
+      "internalPlayerId": 1009,
+      "leagueValueRank": 9,
+      "leagueValueScore": 166.875,
+      "marginalValue": 42.25,
+      "positionalRank": 3,
+      "projectedLeaguePoints": 290.25,
+      "replacementValueByPosition": 248,
+      "rosterFitAdjustment": -0.4,
+      "status": "candidate"
+    },
+    {
+      "confidence": 0.87,
+      "flexAdjustedValue": 162.75,
+      "internalPlayerId": 1010,
+      "leagueValueRank": 10,
+      "leagueValueScore": 162.75,
+      "marginalValue": 110.5,
+      "positionalRank": 3,
+      "projectedLeaguePoints": 284.5,
+      "replacementValueByPosition": 174,
+      "rosterFitAdjustment": 0.0,
+      "status": "candidate"
+    },
+    {
+      "confidence": 0.865,
+      "flexAdjustedValue": 158.625,
+      "internalPlayerId": 1011,
+      "leagueValueRank": 11,
+      "leagueValueScore": 158.625,
+      "marginalValue": 112.75,
+      "positionalRank": 3,
+      "projectedLeaguePoints": 278.75,
+      "replacementValueByPosition": 166,
+      "rosterFitAdjustment": 0.4,
+      "status": "candidate"
+    },
+    {
+      "confidence": 0.86,
+      "flexAdjustedValue": 153.0,
+      "internalPlayerId": 1012,
+      "leagueValueRank": 12,
+      "leagueValueScore": 154.5,
+      "marginalValue": 138.0,
+      "positionalRank": 3,
+      "projectedLeaguePoints": 273.0,
+      "replacementValueByPosition": 135,
+      "rosterFitAdjustment": null,
+      "status": "candidate"
+    },
+    {
+      "confidence": 0.855,
+      "flexAdjustedValue": 148.875,
+      "internalPlayerId": 1013,
+      "leagueValueRank": 13,
+      "leagueValueScore": 150.375,
+      "marginalValue": 19.25,
+      "positionalRank": 4,
+      "projectedLeaguePoints": 267.25,
+      "replacementValueByPosition": 248,
+      "rosterFitAdjustment": 0.0,
+      "status": "candidate"
+    },
+    {
+      "confidence": 0.85,
+      "flexAdjustedValue": 146.25,
+      "internalPlayerId": 1014,
+      "leagueValueRank": 14,
+      "leagueValueScore": 146.25,
+      "marginalValue": 87.5,
+      "positionalRank": 4,
+      "projectedLeaguePoints": 261.5,
+      "replacementValueByPosition": 174,
+      "rosterFitAdjustment": 0.4,
+      "status": "candidate"
+    },
+    {
+      "confidence": 0.845,
+      "flexAdjustedValue": 142.125,
+      "internalPlayerId": 1015,
+      "leagueValueRank": 15,
+      "leagueValueScore": 142.125,
+      "marginalValue": 89.75,
+      "positionalRank": 4,
+      "projectedLeaguePoints": 255.75,
+      "replacementValueByPosition": 166,
+      "rosterFitAdjustment": -0.4,
+      "status": "candidate"
+    },
+    {
+      "confidence": 0.84,
+      "flexAdjustedValue": 136.5,
+      "internalPlayerId": 1016,
+      "leagueValueRank": 16,
+      "leagueValueScore": 138.0,
+      "marginalValue": 115.0,
+      "positionalRank": 4,
+      "projectedLeaguePoints": 250.0,
+      "replacementValueByPosition": 135,
+      "rosterFitAdjustment": 0.0,
+      "status": "candidate"
+    },
+    {
+      "confidence": 0.835,
+      "flexAdjustedValue": 132.375,
+      "internalPlayerId": 1017,
+      "leagueValueRank": 17,
+      "leagueValueScore": 133.875,
+      "marginalValue": -3.75,
+      "positionalRank": 5,
+      "projectedLeaguePoints": 244.25,
+      "replacementValueByPosition": 248,
+      "rosterFitAdjustment": 0.4,
+      "status": "candidate"
+    },
+    {
+      "confidence": 0.83,
+      "flexAdjustedValue": 129.75,
+      "internalPlayerId": 1018,
+      "leagueValueRank": 18,
+      "leagueValueScore": 129.75,
+      "marginalValue": 64.5,
+      "positionalRank": 5,
+      "projectedLeaguePoints": 238.5,
+      "replacementValueByPosition": 174,
+      "rosterFitAdjustment": null,
+      "status": "candidate"
+    },
+    {
+      "confidence": 0.825,
+      "flexAdjustedValue": 125.625,
+      "internalPlayerId": 1019,
+      "leagueValueRank": 19,
+      "leagueValueScore": 125.625,
+      "marginalValue": 66.75,
+      "positionalRank": 5,
+      "projectedLeaguePoints": 232.75,
+      "replacementValueByPosition": 166,
+      "rosterFitAdjustment": 0.0,
+      "status": "candidate"
+    },
+    {
+      "confidence": 0.82,
+      "flexAdjustedValue": 120.0,
+      "internalPlayerId": 1020,
+      "leagueValueRank": 20,
+      "leagueValueScore": 121.5,
+      "marginalValue": 92.0,
+      "positionalRank": 5,
+      "projectedLeaguePoints": 227.0,
+      "replacementValueByPosition": 135,
+      "rosterFitAdjustment": 0.4,
+      "status": "candidate"
+    },
+    {
+      "confidence": 0.815,
+      "flexAdjustedValue": 115.875,
+      "internalPlayerId": 1021,
+      "leagueValueRank": 21,
+      "leagueValueScore": 117.375,
+      "marginalValue": -26.75,
+      "positionalRank": 6,
+      "projectedLeaguePoints": 221.25,
+      "replacementValueByPosition": 248,
+      "rosterFitAdjustment": -0.4,
+      "status": "candidate"
+    },
+    {
+      "confidence": 0.81,
+      "flexAdjustedValue": 113.25,
+      "internalPlayerId": 1022,
+      "leagueValueRank": 22,
+      "leagueValueScore": 113.25,
+      "marginalValue": 41.5,
+      "positionalRank": 6,
+      "projectedLeaguePoints": 215.5,
+      "replacementValueByPosition": 174,
+      "rosterFitAdjustment": 0.0,
+      "status": "candidate"
+    },
+    {
+      "confidence": 0.805,
+      "flexAdjustedValue": 109.125,
+      "internalPlayerId": 1023,
+      "leagueValueRank": 23,
+      "leagueValueScore": 109.125,
+      "marginalValue": 43.75,
+      "positionalRank": 6,
+      "projectedLeaguePoints": 209.75,
+      "replacementValueByPosition": 166,
+      "rosterFitAdjustment": 0.4,
+      "status": "candidate"
+    },
+    {
+      "confidence": 0.8,
+      "flexAdjustedValue": 103.5,
+      "internalPlayerId": 1024,
+      "leagueValueRank": 24,
+      "leagueValueScore": 105.0,
+      "marginalValue": 69.0,
+      "positionalRank": 6,
+      "projectedLeaguePoints": 204.0,
+      "replacementValueByPosition": 135,
+      "rosterFitAdjustment": null,
+      "status": "candidate"
+    }
+  ],
+  "marketRecords": [
+    {
+      "captureStatus": "captured",
+      "continuousAdp": 1.37,
+      "defaultRank": 1,
+      "espnPlayerId": "900001",
+      "internalPlayerId": 1001,
+      "liveRoomRank": null,
+      "mappingConfidence": 0.99,
+      "ordinalAdpRank": null
+    },
+    {
+      "captureStatus": "captured",
+      "continuousAdp": 2.37,
+      "defaultRank": 2,
+      "espnPlayerId": "900002",
+      "internalPlayerId": 1002,
+      "liveRoomRank": null,
+      "mappingConfidence": 0.99,
+      "ordinalAdpRank": null
+    },
+    {
+      "captureStatus": "captured",
+      "continuousAdp": 3.37,
+      "defaultRank": 3,
+      "espnPlayerId": "900003",
+      "internalPlayerId": 1003,
+      "liveRoomRank": null,
+      "mappingConfidence": 0.99,
+      "ordinalAdpRank": null
+    },
+    {
+      "captureStatus": "captured",
+      "continuousAdp": 4.37,
+      "defaultRank": 4,
+      "espnPlayerId": "900004",
+      "internalPlayerId": 1004,
+      "liveRoomRank": null,
+      "mappingConfidence": 0.99,
+      "ordinalAdpRank": null
+    },
+    {
+      "captureStatus": "captured",
+      "continuousAdp": 5.37,
+      "defaultRank": 5,
+      "espnPlayerId": "900005",
+      "internalPlayerId": 1005,
+      "liveRoomRank": null,
+      "mappingConfidence": 0.99,
+      "ordinalAdpRank": null
+    },
+    {
+      "captureStatus": "captured",
+      "continuousAdp": 6.37,
+      "defaultRank": 6,
+      "espnPlayerId": "900006",
+      "internalPlayerId": 1006,
+      "liveRoomRank": null,
+      "mappingConfidence": 0.99,
+      "ordinalAdpRank": null
+    },
+    {
+      "captureStatus": "captured",
+      "continuousAdp": 7.37,
+      "defaultRank": null,
+      "espnPlayerId": "900007",
+      "internalPlayerId": 1007,
+      "liveRoomRank": null,
+      "mappingConfidence": 0.99,
+      "ordinalAdpRank": null
+    },
+    {
+      "captureStatus": "captured",
+      "continuousAdp": null,
+      "defaultRank": 8,
+      "espnPlayerId": "900008",
+      "internalPlayerId": 1008,
+      "liveRoomRank": null,
+      "mappingConfidence": 0.99,
+      "ordinalAdpRank": null
+    },
+    {
+      "captureStatus": "captured",
+      "continuousAdp": 9.37,
+      "defaultRank": 9,
+      "espnPlayerId": "900009",
+      "internalPlayerId": 1009,
+      "liveRoomRank": null,
+      "mappingConfidence": 0.99,
+      "ordinalAdpRank": null
+    },
+    {
+      "captureStatus": "captured",
+      "continuousAdp": 10.37,
+      "defaultRank": 10,
+      "espnPlayerId": "900010",
+      "internalPlayerId": 1010,
+      "liveRoomRank": null,
+      "mappingConfidence": 0.99,
+      "ordinalAdpRank": null
+    },
+    {
+      "captureStatus": "captured",
+      "continuousAdp": 11.37,
+      "defaultRank": 11,
+      "espnPlayerId": "900011",
+      "internalPlayerId": 1011,
+      "liveRoomRank": null,
+      "mappingConfidence": 0.99,
+      "ordinalAdpRank": null
+    },
+    {
+      "captureStatus": "captured",
+      "continuousAdp": 12.37,
+      "defaultRank": 12,
+      "espnPlayerId": "900012",
+      "internalPlayerId": 1012,
+      "liveRoomRank": null,
+      "mappingConfidence": 0.99,
+      "ordinalAdpRank": null
+    },
+    {
+      "captureStatus": "captured",
+      "continuousAdp": 13.37,
+      "defaultRank": 13,
+      "espnPlayerId": "900013",
+      "internalPlayerId": 1013,
+      "liveRoomRank": null,
+      "mappingConfidence": 0.99,
+      "ordinalAdpRank": null
+    },
+    {
+      "captureStatus": "captured",
+      "continuousAdp": 14.37,
+      "defaultRank": 14,
+      "espnPlayerId": "900014",
+      "internalPlayerId": 1014,
+      "liveRoomRank": null,
+      "mappingConfidence": 0.99,
+      "ordinalAdpRank": null
+    },
+    {
+      "captureStatus": "captured",
+      "continuousAdp": 15.37,
+      "defaultRank": 15,
+      "espnPlayerId": "900015",
+      "internalPlayerId": 1015,
+      "liveRoomRank": null,
+      "mappingConfidence": 0.99,
+      "ordinalAdpRank": null
+    },
+    {
+      "captureStatus": "captured",
+      "continuousAdp": 16.37,
+      "defaultRank": 16,
+      "espnPlayerId": "900016",
+      "internalPlayerId": 1016,
+      "liveRoomRank": null,
+      "mappingConfidence": 0.99,
+      "ordinalAdpRank": null
+    },
+    {
+      "captureStatus": "captured",
+      "continuousAdp": 17.37,
+      "defaultRank": 17,
+      "espnPlayerId": "900017",
+      "internalPlayerId": 1017,
+      "liveRoomRank": null,
+      "mappingConfidence": 0.99,
+      "ordinalAdpRank": null
+    },
+    {
+      "captureStatus": "captured",
+      "continuousAdp": 18.37,
+      "defaultRank": 18,
+      "espnPlayerId": "900018",
+      "internalPlayerId": 1018,
+      "liveRoomRank": null,
+      "mappingConfidence": 0.99,
+      "ordinalAdpRank": null
+    },
+    {
+      "captureStatus": "captured",
+      "continuousAdp": 19.37,
+      "defaultRank": 19,
+      "espnPlayerId": "900019",
+      "internalPlayerId": 1019,
+      "liveRoomRank": null,
+      "mappingConfidence": 0.99,
+      "ordinalAdpRank": null
+    },
+    {
+      "captureStatus": "captured",
+      "continuousAdp": 20.37,
+      "defaultRank": 20,
+      "espnPlayerId": "900020",
+      "internalPlayerId": 1020,
+      "liveRoomRank": null,
+      "mappingConfidence": 0.99,
+      "ordinalAdpRank": null
+    },
+    {
+      "captureStatus": "captured",
+      "continuousAdp": 21.37,
+      "defaultRank": 21,
+      "espnPlayerId": "900021",
+      "internalPlayerId": 1021,
+      "liveRoomRank": null,
+      "mappingConfidence": 0.99,
+      "ordinalAdpRank": null
+    },
+    {
+      "captureStatus": "captured",
+      "continuousAdp": 22.37,
+      "defaultRank": 22,
+      "espnPlayerId": "900022",
+      "internalPlayerId": 1022,
+      "liveRoomRank": null,
+      "mappingConfidence": 0.99,
+      "ordinalAdpRank": null
+    },
+    {
+      "captureStatus": "captured",
+      "continuousAdp": 23.37,
+      "defaultRank": 23,
+      "espnPlayerId": "900023",
+      "internalPlayerId": 1023,
+      "liveRoomRank": null,
+      "mappingConfidence": 0.99,
+      "ordinalAdpRank": null
+    },
+    {
+      "captureStatus": "unmapped",
+      "continuousAdp": null,
+      "defaultRank": null,
+      "espnPlayerId": null,
+      "internalPlayerId": 1024,
+      "liveRoomRank": null,
+      "mappingConfidence": 0.4,
+      "ordinalAdpRank": null
+    }
+  ],
+  "modelState": "ready",
+  "opponentIntent": {
+    "modelArtifactVersion": "synthetic-oi-v1",
+    "opponents": {
+      "team-01": {
+        "confidence": 0.77,
+        "currentRoster": [
+          {
+            "internalPlayerId": 1015,
+            "position": "WR",
+            "rosterSlot": "KEEPER"
+          }
+        ],
+        "displayLabel": "M01",
+        "explanatoryDrivers": [
+          "synthetic roster state",
+          "synthetic room price"
+        ],
+        "limitations": [
+          "Synthetic fixture; not an opponent forecast."
+        ],
+        "nextOverallPick": 1,
+        "openRosterPositions": {
+          "BENCH": 7,
+          "FLEX": 2,
+          "QB": 1,
+          "RB": 2,
+          "TE": 1,
+          "WR": 2
+        },
+        "otherProbability": 0.45,
+        "positionProbabilities": {
+          "QB": 0.1,
+          "RB": 0.35,
+          "TE": 0.15,
+          "WR": 0.4
+        },
+        "predictionStatus": "contextual",
+        "teamId": "team-01",
+        "topFivePlayerProbabilities": [
+          {
+            "internalPlayerId": 1001,
+            "probability": 0.18
+          },
+          {
+            "internalPlayerId": 1002,
+            "probability": 0.14
+          },
+          {
+            "internalPlayerId": 1003,
+            "probability": 0.1
+          },
+          {
+            "internalPlayerId": 1004,
+            "probability": 0.08
+          },
+          {
+            "internalPlayerId": 1005,
+            "probability": 0.05
+          }
+        ]
+      },
+      "team-02": {
+        "confidence": 0.76,
+        "currentRoster": [
+          {
+            "internalPlayerId": 1016,
+            "position": "TE",
+            "rosterSlot": "KEEPER"
+          }
+        ],
+        "displayLabel": "M02",
+        "explanatoryDrivers": [
+          "synthetic roster state",
+          "synthetic room price"
+        ],
+        "limitations": [
+          "Synthetic fixture; not an opponent forecast."
+        ],
+        "nextOverallPick": 2,
+        "openRosterPositions": {
+          "BENCH": 7,
+          "FLEX": 2,
+          "QB": 1,
+          "RB": 2,
+          "TE": 1,
+          "WR": 2
+        },
+        "otherProbability": 0.45,
+        "positionProbabilities": {
+          "QB": 0.1,
+          "RB": 0.35,
+          "TE": 0.15,
+          "WR": 0.4
+        },
+        "predictionStatus": "contextual",
+        "teamId": "team-02",
+        "topFivePlayerProbabilities": [
+          {
+            "internalPlayerId": 1001,
+            "probability": 0.18
+          },
+          {
+            "internalPlayerId": 1002,
+            "probability": 0.14
+          },
+          {
+            "internalPlayerId": 1003,
+            "probability": 0.1
+          },
+          {
+            "internalPlayerId": 1004,
+            "probability": 0.08
+          },
+          {
+            "internalPlayerId": 1005,
+            "probability": 0.05
+          }
+        ]
+      },
+      "team-03": {
+        "confidence": 0.75,
+        "currentRoster": [
+          {
+            "internalPlayerId": 1017,
+            "position": "QB",
+            "rosterSlot": "KEEPER"
+          }
+        ],
+        "displayLabel": "M03",
+        "explanatoryDrivers": [
+          "synthetic roster state",
+          "synthetic room price"
+        ],
+        "limitations": [
+          "Synthetic fixture; not an opponent forecast."
+        ],
+        "nextOverallPick": 3,
+        "openRosterPositions": {
+          "BENCH": 7,
+          "FLEX": 2,
+          "QB": 1,
+          "RB": 2,
+          "TE": 1,
+          "WR": 2
+        },
+        "otherProbability": 0.45,
+        "positionProbabilities": {
+          "QB": 0.1,
+          "RB": 0.35,
+          "TE": 0.15,
+          "WR": 0.4
+        },
+        "predictionStatus": "contextual",
+        "teamId": "team-03",
+        "topFivePlayerProbabilities": [
+          {
+            "internalPlayerId": 1001,
+            "probability": 0.18
+          },
+          {
+            "internalPlayerId": 1002,
+            "probability": 0.14
+          },
+          {
+            "internalPlayerId": 1003,
+            "probability": 0.1
+          },
+          {
+            "internalPlayerId": 1004,
+            "probability": 0.08
+          },
+          {
+            "internalPlayerId": 1005,
+            "probability": 0.05
+          }
+        ]
+      },
+      "team-04": {
+        "confidence": 0.74,
+        "currentRoster": [
+          {
+            "internalPlayerId": 1018,
+            "position": "RB",
+            "rosterSlot": "KEEPER"
+          }
+        ],
+        "displayLabel": "M04",
+        "explanatoryDrivers": [
+          "synthetic roster state",
+          "synthetic room price"
+        ],
+        "limitations": [
+          "Synthetic fixture; not an opponent forecast."
+        ],
+        "nextOverallPick": 4,
+        "openRosterPositions": {
+          "BENCH": 7,
+          "FLEX": 2,
+          "QB": 1,
+          "RB": 2,
+          "TE": 1,
+          "WR": 2
+        },
+        "otherProbability": 0.45,
+        "positionProbabilities": {
+          "QB": 0.1,
+          "RB": 0.35,
+          "TE": 0.15,
+          "WR": 0.4
+        },
+        "predictionStatus": "contextual",
+        "teamId": "team-04",
+        "topFivePlayerProbabilities": [
+          {
+            "internalPlayerId": 1001,
+            "probability": 0.18
+          },
+          {
+            "internalPlayerId": 1002,
+            "probability": 0.14
+          },
+          {
+            "internalPlayerId": 1003,
+            "probability": 0.1
+          },
+          {
+            "internalPlayerId": 1004,
+            "probability": 0.08
+          },
+          {
+            "internalPlayerId": 1005,
+            "probability": 0.05
+          }
+        ]
+      },
+      "team-06": {
+        "confidence": 0.73,
+        "currentRoster": [
+          {
+            "internalPlayerId": 1020,
+            "position": "TE",
+            "rosterSlot": "KEEPER"
+          }
+        ],
+        "displayLabel": "M05",
+        "explanatoryDrivers": [
+          "synthetic roster state",
+          "synthetic room price"
+        ],
+        "limitations": [
+          "Synthetic fixture; not an opponent forecast."
+        ],
+        "nextOverallPick": 6,
+        "openRosterPositions": {
+          "BENCH": 7,
+          "FLEX": 2,
+          "QB": 1,
+          "RB": 2,
+          "TE": 1,
+          "WR": 2
+        },
+        "otherProbability": 0.45,
+        "positionProbabilities": {
+          "QB": 0.1,
+          "RB": 0.35,
+          "TE": 0.15,
+          "WR": 0.4
+        },
+        "predictionStatus": "contextual",
+        "teamId": "team-06",
+        "topFivePlayerProbabilities": [
+          {
+            "internalPlayerId": 1001,
+            "probability": 0.18
+          },
+          {
+            "internalPlayerId": 1002,
+            "probability": 0.14
+          },
+          {
+            "internalPlayerId": 1003,
+            "probability": 0.1
+          },
+          {
+            "internalPlayerId": 1004,
+            "probability": 0.08
+          },
+          {
+            "internalPlayerId": 1005,
+            "probability": 0.05
+          }
+        ]
+      },
+      "team-07": {
+        "confidence": 0.72,
+        "currentRoster": [
+          {
+            "internalPlayerId": 1021,
+            "position": "QB",
+            "rosterSlot": "KEEPER"
+          }
+        ],
+        "displayLabel": "M06",
+        "explanatoryDrivers": [
+          "synthetic roster state",
+          "synthetic room price"
+        ],
+        "limitations": [
+          "Synthetic fixture; not an opponent forecast."
+        ],
+        "nextOverallPick": 7,
+        "openRosterPositions": {
+          "BENCH": 7,
+          "FLEX": 2,
+          "QB": 1,
+          "RB": 2,
+          "TE": 1,
+          "WR": 2
+        },
+        "otherProbability": 0.45,
+        "positionProbabilities": {
+          "QB": 0.1,
+          "RB": 0.35,
+          "TE": 0.15,
+          "WR": 0.4
+        },
+        "predictionStatus": "contextual",
+        "teamId": "team-07",
+        "topFivePlayerProbabilities": [
+          {
+            "internalPlayerId": 1001,
+            "probability": 0.18
+          },
+          {
+            "internalPlayerId": 1002,
+            "probability": 0.14
+          },
+          {
+            "internalPlayerId": 1003,
+            "probability": 0.1
+          },
+          {
+            "internalPlayerId": 1004,
+            "probability": 0.08
+          },
+          {
+            "internalPlayerId": 1005,
+            "probability": 0.05
+          }
+        ]
+      },
+      "team-08": {
+        "confidence": 0.71,
+        "currentRoster": [
+          {
+            "internalPlayerId": 1022,
+            "position": "RB",
+            "rosterSlot": "KEEPER"
+          }
+        ],
+        "displayLabel": "M07",
+        "explanatoryDrivers": [
+          "synthetic roster state",
+          "synthetic room price"
+        ],
+        "limitations": [
+          "Synthetic fixture; not an opponent forecast."
+        ],
+        "nextOverallPick": 8,
+        "openRosterPositions": {
+          "BENCH": 7,
+          "FLEX": 2,
+          "QB": 1,
+          "RB": 2,
+          "TE": 1,
+          "WR": 2
+        },
+        "otherProbability": 0.45,
+        "positionProbabilities": {
+          "QB": 0.1,
+          "RB": 0.35,
+          "TE": 0.15,
+          "WR": 0.4
+        },
+        "predictionStatus": "contextual",
+        "teamId": "team-08",
+        "topFivePlayerProbabilities": [
+          {
+            "internalPlayerId": 1001,
+            "probability": 0.18
+          },
+          {
+            "internalPlayerId": 1002,
+            "probability": 0.14
+          },
+          {
+            "internalPlayerId": 1003,
+            "probability": 0.1
+          },
+          {
+            "internalPlayerId": 1004,
+            "probability": 0.08
+          },
+          {
+            "internalPlayerId": 1005,
+            "probability": 0.05
+          }
+        ]
+      },
+      "team-09": {
+        "confidence": 0.7,
+        "currentRoster": [
+          {
+            "internalPlayerId": 1023,
+            "position": "WR",
+            "rosterSlot": "KEEPER"
+          }
+        ],
+        "displayLabel": "M08",
+        "explanatoryDrivers": [
+          "synthetic roster state",
+          "synthetic room price"
+        ],
+        "limitations": [
+          "Synthetic fixture; not an opponent forecast."
+        ],
+        "nextOverallPick": 9,
+        "openRosterPositions": {
+          "BENCH": 7,
+          "FLEX": 2,
+          "QB": 1,
+          "RB": 2,
+          "TE": 1,
+          "WR": 2
+        },
+        "otherProbability": 0.45,
+        "positionProbabilities": {
+          "QB": 0.1,
+          "RB": 0.35,
+          "TE": 0.15,
+          "WR": 0.4
+        },
+        "predictionStatus": "contextual",
+        "teamId": "team-09",
+        "topFivePlayerProbabilities": [
+          {
+            "internalPlayerId": 1001,
+            "probability": 0.18
+          },
+          {
+            "internalPlayerId": 1002,
+            "probability": 0.14
+          },
+          {
+            "internalPlayerId": 1003,
+            "probability": 0.1
+          },
+          {
+            "internalPlayerId": 1004,
+            "probability": 0.08
+          },
+          {
+            "internalPlayerId": 1005,
+            "probability": 0.05
+          }
+        ]
+      },
+      "team-10": {
+        "confidence": 0.69,
+        "currentRoster": [
+          {
+            "internalPlayerId": 1024,
+            "position": "TE",
+            "rosterSlot": "KEEPER"
+          }
+        ],
+        "displayLabel": "M09",
+        "explanatoryDrivers": [
+          "synthetic roster state",
+          "synthetic room price"
+        ],
+        "limitations": [
+          "Synthetic fixture; not an opponent forecast."
+        ],
+        "nextOverallPick": 10,
+        "openRosterPositions": {
+          "BENCH": 7,
+          "FLEX": 2,
+          "QB": 1,
+          "RB": 2,
+          "TE": 1,
+          "WR": 2
+        },
+        "otherProbability": 0.45,
+        "positionProbabilities": {
+          "QB": 0.1,
+          "RB": 0.35,
+          "TE": 0.15,
+          "WR": 0.4
+        },
+        "predictionStatus": "contextual",
+        "teamId": "team-10",
+        "topFivePlayerProbabilities": [
+          {
+            "internalPlayerId": 1001,
+            "probability": 0.18
+          },
+          {
+            "internalPlayerId": 1002,
+            "probability": 0.14
+          },
+          {
+            "internalPlayerId": 1003,
+            "probability": 0.1
+          },
+          {
+            "internalPlayerId": 1004,
+            "probability": 0.08
+          },
+          {
+            "internalPlayerId": 1005,
+            "probability": 0.05
+          }
+        ]
+      }
+    },
+    "simulation": {
+      "count": 10000,
+      "seed": 20260831
+    },
+    "targetSurvival": [
+      {
+        "internalPlayerId": 1001,
+        "mostLikelyTakerTeamId": "team-01",
+        "probabilitySurvives": 0.28,
+        "probabilityTakenBeforeTony": 0.72,
+        "secondMostLikelyTakerTeamId": "team-02"
+      },
+      {
+        "internalPlayerId": 1002,
+        "mostLikelyTakerTeamId": "team-02",
+        "probabilitySurvives": 0.39,
+        "probabilityTakenBeforeTony": 0.61,
+        "secondMostLikelyTakerTeamId": "team-03"
+      },
+      {
+        "internalPlayerId": 1003,
+        "mostLikelyTakerTeamId": "team-03",
+        "probabilitySurvives": 0.5,
+        "probabilityTakenBeforeTony": 0.5,
+        "secondMostLikelyTakerTeamId": "team-04"
+      },
+      {
+        "internalPlayerId": 1004,
+        "mostLikelyTakerTeamId": "team-04",
+        "probabilitySurvives": 0.61,
+        "probabilityTakenBeforeTony": 0.39,
+        "secondMostLikelyTakerTeamId": "team-06"
+      },
+      {
+        "internalPlayerId": 1005,
+        "mostLikelyTakerTeamId": "team-06",
+        "probabilitySurvives": 0.72,
+        "probabilityTakenBeforeTony": 0.28,
+        "secondMostLikelyTakerTeamId": "team-07"
+      }
+    ],
+    "tierSurvival": [
+      {
+        "expectedSurvivors": 1.3,
+        "probabilityAtLeastOneSurvives": 0.64,
+        "tierId": "synthetic-tier-a"
+      },
+      {
+        "expectedSurvivors": 2.8,
+        "probabilityAtLeastOneSurvives": 0.91,
+        "tierId": "synthetic-tier-b"
+      }
+    ]
+  },
+  "overallStatus": "ready",
+  "playerRecords": [
+    {
+      "availability": {
+        "confidence": 0.98,
+        "status": "available"
+      },
+      "boardRank": 1,
+      "canonicalPlayerKey": "synthetic.player.01",
+      "espnPlayerId": "900001",
+      "features": {
+        "eligible": [
+          "consensus-projection",
+          "football-fundamentals"
+        ],
+        "quarantined": []
+      },
+      "identity": {
+        "confidence": 0.99,
+        "method": "espn-id"
+      },
+      "internalPlayerId": 1001,
+      "limitations": [
+        "Synthetic fixture; not a player valuation."
+      ],
+      "modelConfidence": 0.934,
+      "name": "Synthetic Player 01",
+      "nflTeam": "AAA",
+      "outcome": {
+        "bustProbability": 0.11,
+        "eliteProbability": 0.35,
+        "expectedGames": 16,
+        "p10": 242.1,
+        "p50": 329.52,
+        "p90": 416.95,
+        "projectedFullPprPoints": 336.25,
+        "projectedPpg": 21.0156,
+        "starterProbability": 0.875
+      },
+      "position": "QB",
+      "provenance": {
+        "modelVersion": "synthetic-player-truth-model-v1",
+        "sourceArtifactIds": [
+          "synthetic-consensus",
+          "synthetic-fundamentals"
+        ]
+      }
+    },
+    {
+      "availability": {
+        "confidence": 0.98,
+        "status": "available"
+      },
+      "boardRank": 2,
+      "canonicalPlayerKey": "synthetic.player.02",
+      "espnPlayerId": "900002",
+      "features": {
+        "eligible": [
+          "consensus-projection",
+          "football-fundamentals"
+        ],
+        "quarantined": []
+      },
+      "identity": {
+        "confidence": 0.99,
+        "method": "espn-id"
+      },
+      "internalPlayerId": 1002,
+      "limitations": [
+        "Synthetic fixture; not a player valuation."
+      ],
+      "modelConfidence": 0.928,
+      "name": "Synthetic Player 02",
+      "nflTeam": "BBB",
+      "outcome": {
+        "bustProbability": 0.12,
+        "eliteProbability": 0.34,
+        "expectedGames": 16,
+        "p10": 237.96,
+        "p50": 323.89,
+        "p90": 409.82,
+        "projectedFullPprPoints": 330.5,
+        "projectedPpg": 20.6562,
+        "starterProbability": 0.86
+      },
+      "position": "RB",
+      "provenance": {
+        "modelVersion": "synthetic-player-truth-model-v1",
+        "sourceArtifactIds": [
+          "synthetic-consensus",
+          "synthetic-fundamentals"
+        ]
+      }
+    },
+    {
+      "availability": {
+        "confidence": 0.98,
+        "status": "available"
+      },
+      "boardRank": 3,
+      "canonicalPlayerKey": "synthetic.player.03",
+      "espnPlayerId": "900003",
+      "features": {
+        "eligible": [
+          "consensus-projection",
+          "football-fundamentals"
+        ],
+        "quarantined": []
+      },
+      "identity": {
+        "confidence": 0.99,
+        "method": "espn-id"
+      },
+      "internalPlayerId": 1003,
+      "limitations": [
+        "Synthetic fixture; not a player valuation."
+      ],
+      "modelConfidence": 0.922,
+      "name": "Synthetic Player 03",
+      "nflTeam": "CCC",
+      "outcome": {
+        "bustProbability": 0.13,
+        "eliteProbability": 0.33,
+        "expectedGames": 16,
+        "p10": 233.82,
+        "p50": 318.25,
+        "p90": 402.69,
+        "projectedFullPprPoints": 324.75,
+        "projectedPpg": 20.2969,
+        "starterProbability": 0.845
+      },
+      "position": "WR",
+      "provenance": {
+        "modelVersion": "synthetic-player-truth-model-v1",
+        "sourceArtifactIds": [
+          "synthetic-consensus",
+          "synthetic-fundamentals"
+        ]
+      }
+    },
+    {
+      "availability": {
+        "confidence": 0.98,
+        "status": "available"
+      },
+      "boardRank": 4,
+      "canonicalPlayerKey": "synthetic.player.04",
+      "espnPlayerId": "900004",
+      "features": {
+        "eligible": [
+          "consensus-projection",
+          "football-fundamentals"
+        ],
+        "quarantined": []
+      },
+      "identity": {
+        "confidence": 0.99,
+        "method": "espn-id"
+      },
+      "internalPlayerId": 1004,
+      "limitations": [
+        "Synthetic fixture; not a player valuation."
+      ],
+      "modelConfidence": 0.916,
+      "name": "Synthetic Player 04",
+      "nflTeam": "DDD",
+      "outcome": {
+        "bustProbability": 0.14,
+        "eliteProbability": 0.32,
+        "expectedGames": 16,
+        "p10": 229.68,
+        "p50": 312.62,
+        "p90": 395.56,
+        "projectedFullPprPoints": 319.0,
+        "projectedPpg": 19.9375,
+        "starterProbability": 0.83
+      },
+      "position": "TE",
+      "provenance": {
+        "modelVersion": "synthetic-player-truth-model-v1",
+        "sourceArtifactIds": [
+          "synthetic-consensus",
+          "synthetic-fundamentals"
+        ]
+      }
+    },
+    {
+      "availability": {
+        "confidence": 0.98,
+        "status": "available"
+      },
+      "boardRank": 5,
+      "canonicalPlayerKey": "synthetic.player.05",
+      "espnPlayerId": "900005",
+      "features": {
+        "eligible": [
+          "consensus-projection",
+          "football-fundamentals"
+        ],
+        "quarantined": []
+      },
+      "identity": {
+        "confidence": 0.99,
+        "method": "espn-id"
+      },
+      "internalPlayerId": 1005,
+      "limitations": [
+        "Synthetic fixture; not a player valuation."
+      ],
+      "modelConfidence": 0.91,
+      "name": "Synthetic Player 05",
+      "nflTeam": "EEE",
+      "outcome": {
+        "bustProbability": 0.15,
+        "eliteProbability": 0.31,
+        "expectedGames": 16,
+        "p10": 225.54,
+        "p50": 306.99,
+        "p90": 388.43,
+        "projectedFullPprPoints": 313.25,
+        "projectedPpg": 19.5781,
+        "starterProbability": 0.815
+      },
+      "position": "QB",
+      "provenance": {
+        "modelVersion": "synthetic-player-truth-model-v1",
+        "sourceArtifactIds": [
+          "synthetic-consensus",
+          "synthetic-fundamentals"
+        ]
+      }
+    },
+    {
+      "availability": {
+        "confidence": 0.98,
+        "status": "available"
+      },
+      "boardRank": 6,
+      "canonicalPlayerKey": "synthetic.player.06",
+      "espnPlayerId": "900006",
+      "features": {
+        "eligible": [
+          "consensus-projection",
+          "football-fundamentals"
+        ],
+        "quarantined": []
+      },
+      "identity": {
+        "confidence": 0.99,
+        "method": "espn-id"
+      },
+      "internalPlayerId": 1006,
+      "limitations": [
+        "Synthetic fixture; not a player valuation."
+      ],
+      "modelConfidence": 0.904,
+      "name": "Synthetic Player 06",
+      "nflTeam": "FFF",
+      "outcome": {
+        "bustProbability": null,
+        "eliteProbability": null,
+        "expectedGames": 16,
+        "p10": null,
+        "p50": null,
+        "p90": null,
+        "projectedFullPprPoints": 307.5,
+        "projectedPpg": 19.2188,
+        "starterProbability": null
+      },
+      "position": "RB",
+      "provenance": {
+        "modelVersion": "synthetic-player-truth-model-v1",
+        "sourceArtifactIds": [
+          "synthetic-consensus",
+          "synthetic-fundamentals"
+        ]
+      }
+    },
+    {
+      "availability": {
+        "confidence": 0.98,
+        "status": "available"
+      },
+      "boardRank": 7,
+      "canonicalPlayerKey": "synthetic.player.07",
+      "espnPlayerId": "900007",
+      "features": {
+        "eligible": [
+          "consensus-projection",
+          "football-fundamentals"
+        ],
+        "quarantined": [
+          "unvalidated-signal"
+        ]
+      },
+      "identity": {
+        "confidence": 0.99,
+        "method": "espn-id"
+      },
+      "internalPlayerId": 1007,
+      "limitations": [
+        "Synthetic fixture; not a player valuation."
+      ],
+      "modelConfidence": 0.898,
+      "name": "Synthetic Player 07",
+      "nflTeam": "AAA",
+      "outcome": {
+        "bustProbability": 0.17,
+        "eliteProbability": 0.29,
+        "expectedGames": 16,
+        "p10": 217.26,
+        "p50": 295.71,
+        "p90": 374.17,
+        "projectedFullPprPoints": 301.75,
+        "projectedPpg": 18.8594,
+        "starterProbability": 0.785
+      },
+      "position": "WR",
+      "provenance": {
+        "modelVersion": "synthetic-player-truth-model-v1",
+        "sourceArtifactIds": [
+          "synthetic-consensus",
+          "synthetic-fundamentals"
+        ]
+      }
+    },
+    {
+      "availability": {
+        "confidence": 0.98,
+        "status": "available"
+      },
+      "boardRank": 8,
+      "canonicalPlayerKey": "synthetic.player.08",
+      "espnPlayerId": "900008",
+      "features": {
+        "eligible": [
+          "consensus-projection",
+          "football-fundamentals"
+        ],
+        "quarantined": []
+      },
+      "identity": {
+        "confidence": 0.99,
+        "method": "espn-id"
+      },
+      "internalPlayerId": 1008,
+      "limitations": [
+        "Synthetic fixture; not a player valuation."
+      ],
+      "modelConfidence": 0.892,
+      "name": "Synthetic Player 08",
+      "nflTeam": "BBB",
+      "outcome": {
+        "bustProbability": 0.18,
+        "eliteProbability": 0.28,
+        "expectedGames": 16,
+        "p10": 213.12,
+        "p50": 290.08,
+        "p90": 367.04,
+        "projectedFullPprPoints": 296.0,
+        "projectedPpg": 18.5,
+        "starterProbability": 0.77
+      },
+      "position": "TE",
+      "provenance": {
+        "modelVersion": "synthetic-player-truth-model-v1",
+        "sourceArtifactIds": [
+          "synthetic-consensus",
+          "synthetic-fundamentals"
+        ]
+      }
+    },
+    {
+      "availability": {
+        "confidence": 0.8,
+        "status": "questionable"
+      },
+      "boardRank": 9,
+      "canonicalPlayerKey": "synthetic.player.09",
+      "espnPlayerId": "900009",
+      "features": {
+        "eligible": [
+          "consensus-projection",
+          "football-fundamentals"
+        ],
+        "quarantined": []
+      },
+      "identity": {
+        "confidence": 0.99,
+        "method": "espn-id"
+      },
+      "internalPlayerId": 1009,
+      "limitations": [
+        "Synthetic fixture; not a player valuation."
+      ],
+      "modelConfidence": 0.886,
+      "name": "Synthetic Player 09",
+      "nflTeam": "CCC",
+      "outcome": {
+        "bustProbability": 0.19,
+        "eliteProbability": 0.27,
+        "expectedGames": 16,
+        "p10": 208.98,
+        "p50": 284.44,
+        "p90": 359.91,
+        "projectedFullPprPoints": 290.25,
+        "projectedPpg": 18.1406,
+        "starterProbability": 0.755
+      },
+      "position": "QB",
+      "provenance": {
+        "modelVersion": "synthetic-player-truth-model-v1",
+        "sourceArtifactIds": [
+          "synthetic-consensus",
+          "synthetic-fundamentals"
+        ]
+      }
+    },
+    {
+      "availability": {
+        "confidence": 0.98,
+        "status": "available"
+      },
+      "boardRank": 10,
+      "canonicalPlayerKey": "synthetic.player.10",
+      "espnPlayerId": "900010",
+      "features": {
+        "eligible": [
+          "consensus-projection",
+          "football-fundamentals"
+        ],
+        "quarantined": []
+      },
+      "identity": {
+        "confidence": 0.99,
+        "method": "espn-id"
+      },
+      "internalPlayerId": 1010,
+      "limitations": [
+        "Synthetic fixture; not a player valuation."
+      ],
+      "modelConfidence": 0.88,
+      "name": "Synthetic Player 10",
+      "nflTeam": "DDD",
+      "outcome": {
+        "bustProbability": 0.2,
+        "eliteProbability": 0.26,
+        "expectedGames": 16,
+        "p10": 204.84,
+        "p50": 278.81,
+        "p90": 352.78,
+        "projectedFullPprPoints": 284.5,
+        "projectedPpg": 17.7812,
+        "starterProbability": 0.74
+      },
+      "position": "RB",
+      "provenance": {
+        "modelVersion": "synthetic-player-truth-model-v1",
+        "sourceArtifactIds": [
+          "synthetic-consensus",
+          "synthetic-fundamentals"
+        ]
+      }
+    },
+    {
+      "availability": {
+        "confidence": 0.98,
+        "status": "available"
+      },
+      "boardRank": 11,
+      "canonicalPlayerKey": "synthetic.player.11",
+      "espnPlayerId": "900011",
+      "features": {
+        "eligible": [
+          "consensus-projection",
+          "football-fundamentals"
+        ],
+        "quarantined": []
+      },
+      "identity": {
+        "confidence": 0.99,
+        "method": "espn-id"
+      },
+      "internalPlayerId": 1011,
+      "limitations": [
+        "Synthetic fixture; not a player valuation."
+      ],
+      "modelConfidence": 0.874,
+      "name": "Synthetic Player 11",
+      "nflTeam": "EEE",
+      "outcome": {
+        "bustProbability": 0.21,
+        "eliteProbability": 0.25,
+        "expectedGames": 16,
+        "p10": 200.7,
+        "p50": 273.18,
+        "p90": 345.65,
+        "projectedFullPprPoints": 278.75,
+        "projectedPpg": 17.4219,
+        "starterProbability": 0.725
+      },
+      "position": "WR",
+      "provenance": {
+        "modelVersion": "synthetic-player-truth-model-v1",
+        "sourceArtifactIds": [
+          "synthetic-consensus",
+          "synthetic-fundamentals"
+        ]
+      }
+    },
+    {
+      "availability": {
+        "confidence": 0.98,
+        "status": "available"
+      },
+      "boardRank": 12,
+      "canonicalPlayerKey": "synthetic.player.12",
+      "espnPlayerId": "900012",
+      "features": {
+        "eligible": [
+          "consensus-projection",
+          "football-fundamentals"
+        ],
+        "quarantined": []
+      },
+      "identity": {
+        "confidence": 0.99,
+        "method": "espn-id"
+      },
+      "internalPlayerId": 1012,
+      "limitations": [
+        "Synthetic fixture; not a player valuation."
+      ],
+      "modelConfidence": 0.868,
+      "name": "Synthetic Player 12",
+      "nflTeam": "FFF",
+      "outcome": {
+        "bustProbability": 0.22,
+        "eliteProbability": 0.24,
+        "expectedGames": 16,
+        "p10": 196.56,
+        "p50": 267.54,
+        "p90": 338.52,
+        "projectedFullPprPoints": 273.0,
+        "projectedPpg": 17.0625,
+        "starterProbability": 0.71
+      },
+      "position": "TE",
+      "provenance": {
+        "modelVersion": "synthetic-player-truth-model-v1",
+        "sourceArtifactIds": [
+          "synthetic-consensus",
+          "synthetic-fundamentals"
+        ]
+      }
+    },
+    {
+      "availability": {
+        "confidence": 0.98,
+        "status": "available"
+      },
+      "boardRank": 13,
+      "canonicalPlayerKey": "synthetic.player.13",
+      "espnPlayerId": "900013",
+      "features": {
+        "eligible": [
+          "consensus-projection",
+          "football-fundamentals"
+        ],
+        "quarantined": []
+      },
+      "identity": {
+        "confidence": 0.99,
+        "method": "espn-id"
+      },
+      "internalPlayerId": 1013,
+      "limitations": [
+        "Synthetic fixture; not a player valuation."
+      ],
+      "modelConfidence": 0.862,
+      "name": "Synthetic Player 13",
+      "nflTeam": "AAA",
+      "outcome": {
+        "bustProbability": 0.23,
+        "eliteProbability": 0.23,
+        "expectedGames": 16,
+        "p10": 192.42,
+        "p50": 261.9,
+        "p90": 331.39,
+        "projectedFullPprPoints": 267.25,
+        "projectedPpg": 16.7031,
+        "starterProbability": 0.695
+      },
+      "position": "QB",
+      "provenance": {
+        "modelVersion": "synthetic-player-truth-model-v1",
+        "sourceArtifactIds": [
+          "synthetic-consensus",
+          "synthetic-fundamentals"
+        ]
+      }
+    },
+    {
+      "availability": {
+        "confidence": 0.98,
+        "status": "available"
+      },
+      "boardRank": 14,
+      "canonicalPlayerKey": "synthetic.player.14",
+      "espnPlayerId": "900014",
+      "features": {
+        "eligible": [
+          "consensus-projection",
+          "football-fundamentals"
+        ],
+        "quarantined": [
+          "unvalidated-signal"
+        ]
+      },
+      "identity": {
+        "confidence": 0.99,
+        "method": "espn-id"
+      },
+      "internalPlayerId": 1014,
+      "limitations": [
+        "Synthetic fixture; not a player valuation."
+      ],
+      "modelConfidence": 0.856,
+      "name": "Synthetic Player 14",
+      "nflTeam": "BBB",
+      "outcome": {
+        "bustProbability": 0.24,
+        "eliteProbability": 0.22,
+        "expectedGames": 16,
+        "p10": 188.28,
+        "p50": 256.27,
+        "p90": 324.26,
+        "projectedFullPprPoints": 261.5,
+        "projectedPpg": 16.3438,
+        "starterProbability": 0.68
+      },
+      "position": "RB",
+      "provenance": {
+        "modelVersion": "synthetic-player-truth-model-v1",
+        "sourceArtifactIds": [
+          "synthetic-consensus",
+          "synthetic-fundamentals"
+        ]
+      }
+    },
+    {
+      "availability": {
+        "confidence": 0.98,
+        "status": "available"
+      },
+      "boardRank": 15,
+      "canonicalPlayerKey": "synthetic.player.15",
+      "espnPlayerId": "900015",
+      "features": {
+        "eligible": [
+          "consensus-projection",
+          "football-fundamentals"
+        ],
+        "quarantined": []
+      },
+      "identity": {
+        "confidence": 0.99,
+        "method": "espn-id"
+      },
+      "internalPlayerId": 1015,
+      "limitations": [
+        "Synthetic fixture; not a player valuation."
+      ],
+      "modelConfidence": 0.85,
+      "name": "Synthetic Player 15",
+      "nflTeam": "CCC",
+      "outcome": {
+        "bustProbability": 0.25,
+        "eliteProbability": 0.21,
+        "expectedGames": 16,
+        "p10": 184.14,
+        "p50": 250.63,
+        "p90": 317.13,
+        "projectedFullPprPoints": 255.75,
+        "projectedPpg": 15.9844,
+        "starterProbability": 0.665
+      },
+      "position": "WR",
+      "provenance": {
+        "modelVersion": "synthetic-player-truth-model-v1",
+        "sourceArtifactIds": [
+          "synthetic-consensus",
+          "synthetic-fundamentals"
+        ]
+      }
+    },
+    {
+      "availability": {
+        "confidence": 0.98,
+        "status": "available"
+      },
+      "boardRank": 16,
+      "canonicalPlayerKey": "synthetic.player.16",
+      "espnPlayerId": "900016",
+      "features": {
+        "eligible": [
+          "consensus-projection",
+          "football-fundamentals"
+        ],
+        "quarantined": []
+      },
+      "identity": {
+        "confidence": 0.99,
+        "method": "espn-id"
+      },
+      "internalPlayerId": 1016,
+      "limitations": [
+        "Synthetic fixture; not a player valuation."
+      ],
+      "modelConfidence": 0.844,
+      "name": "Synthetic Player 16",
+      "nflTeam": "DDD",
+      "outcome": {
+        "bustProbability": 0.26,
+        "eliteProbability": 0.2,
+        "expectedGames": 16,
+        "p10": 180.0,
+        "p50": 245.0,
+        "p90": 310.0,
+        "projectedFullPprPoints": 250.0,
+        "projectedPpg": 15.625,
+        "starterProbability": 0.65
+      },
+      "position": "TE",
+      "provenance": {
+        "modelVersion": "synthetic-player-truth-model-v1",
+        "sourceArtifactIds": [
+          "synthetic-consensus",
+          "synthetic-fundamentals"
+        ]
+      }
+    },
+    {
+      "availability": {
+        "confidence": 0.98,
+        "status": "available"
+      },
+      "boardRank": 17,
+      "canonicalPlayerKey": "synthetic.player.17",
+      "espnPlayerId": "900017",
+      "features": {
+        "eligible": [
+          "consensus-projection",
+          "football-fundamentals"
+        ],
+        "quarantined": []
+      },
+      "identity": {
+        "confidence": 0.99,
+        "method": "espn-id"
+      },
+      "internalPlayerId": 1017,
+      "limitations": [
+        "Synthetic fixture; not a player valuation."
+      ],
+      "modelConfidence": 0.838,
+      "name": "Synthetic Player 17",
+      "nflTeam": "EEE",
+      "outcome": {
+        "bustProbability": 0.27,
+        "eliteProbability": 0.19,
+        "expectedGames": 16,
+        "p10": 175.86,
+        "p50": 239.37,
+        "p90": 302.87,
+        "projectedFullPprPoints": 244.25,
+        "projectedPpg": 15.2656,
+        "starterProbability": 0.635
+      },
+      "position": "QB",
+      "provenance": {
+        "modelVersion": "synthetic-player-truth-model-v1",
+        "sourceArtifactIds": [
+          "synthetic-consensus",
+          "synthetic-fundamentals"
+        ]
+      }
+    },
+    {
+      "availability": {
+        "confidence": 0.98,
+        "status": "available"
+      },
+      "boardRank": 18,
+      "canonicalPlayerKey": "synthetic.player.18",
+      "espnPlayerId": "900018",
+      "features": {
+        "eligible": [
+          "consensus-projection",
+          "football-fundamentals"
+        ],
+        "quarantined": []
+      },
+      "identity": {
+        "confidence": 0.99,
+        "method": "espn-id"
+      },
+      "internalPlayerId": 1018,
+      "limitations": [
+        "Synthetic fixture; not a player valuation."
+      ],
+      "modelConfidence": 0.832,
+      "name": "Synthetic Player 18",
+      "nflTeam": "FFF",
+      "outcome": {
+        "bustProbability": 0.28,
+        "eliteProbability": 0.18,
+        "expectedGames": 16,
+        "p10": 171.72,
+        "p50": 233.73,
+        "p90": 295.74,
+        "projectedFullPprPoints": 238.5,
+        "projectedPpg": 14.9062,
+        "starterProbability": 0.62
+      },
+      "position": "RB",
+      "provenance": {
+        "modelVersion": "synthetic-player-truth-model-v1",
+        "sourceArtifactIds": [
+          "synthetic-consensus",
+          "synthetic-fundamentals"
+        ]
+      }
+    },
+    {
+      "availability": {
+        "confidence": 0.98,
+        "status": "available"
+      },
+      "boardRank": 19,
+      "canonicalPlayerKey": "synthetic.player.19",
+      "espnPlayerId": "900019",
+      "features": {
+        "eligible": [
+          "consensus-projection",
+          "football-fundamentals"
+        ],
+        "quarantined": []
+      },
+      "identity": {
+        "confidence": 0.99,
+        "method": "espn-id"
+      },
+      "internalPlayerId": 1019,
+      "limitations": [
+        "Synthetic fixture; not a player valuation."
+      ],
+      "modelConfidence": 0.826,
+      "name": "Synthetic Player 19",
+      "nflTeam": "AAA",
+      "outcome": {
+        "bustProbability": 0.29,
+        "eliteProbability": 0.17,
+        "expectedGames": 16,
+        "p10": 167.58,
+        "p50": 228.09,
+        "p90": 288.61,
+        "projectedFullPprPoints": 232.75,
+        "projectedPpg": 14.5469,
+        "starterProbability": 0.605
+      },
+      "position": "WR",
+      "provenance": {
+        "modelVersion": "synthetic-player-truth-model-v1",
+        "sourceArtifactIds": [
+          "synthetic-consensus",
+          "synthetic-fundamentals"
+        ]
+      }
+    },
+    {
+      "availability": {
+        "confidence": 0.98,
+        "status": "available"
+      },
+      "boardRank": 20,
+      "canonicalPlayerKey": "synthetic.player.20",
+      "espnPlayerId": "900020",
+      "features": {
+        "eligible": [
+          "consensus-projection",
+          "football-fundamentals"
+        ],
+        "quarantined": []
+      },
+      "identity": {
+        "confidence": 0.99,
+        "method": "espn-id"
+      },
+      "internalPlayerId": 1020,
+      "limitations": [
+        "Synthetic fixture; not a player valuation."
+      ],
+      "modelConfidence": 0.82,
+      "name": "Synthetic Player 20",
+      "nflTeam": "BBB",
+      "outcome": {
+        "bustProbability": 0.3,
+        "eliteProbability": 0.16,
+        "expectedGames": 16,
+        "p10": 163.44,
+        "p50": 222.46,
+        "p90": 281.48,
+        "projectedFullPprPoints": 227.0,
+        "projectedPpg": 14.1875,
+        "starterProbability": 0.59
+      },
+      "position": "TE",
+      "provenance": {
+        "modelVersion": "synthetic-player-truth-model-v1",
+        "sourceArtifactIds": [
+          "synthetic-consensus",
+          "synthetic-fundamentals"
+        ]
+      }
+    },
+    {
+      "availability": {
+        "confidence": 0.98,
+        "status": "available"
+      },
+      "boardRank": 21,
+      "canonicalPlayerKey": "synthetic.player.21",
+      "espnPlayerId": "900021",
+      "features": {
+        "eligible": [
+          "consensus-projection",
+          "football-fundamentals"
+        ],
+        "quarantined": [
+          "unvalidated-signal"
+        ]
+      },
+      "identity": {
+        "confidence": 0.99,
+        "method": "espn-id"
+      },
+      "internalPlayerId": 1021,
+      "limitations": [
+        "Synthetic fixture; not a player valuation."
+      ],
+      "modelConfidence": 0.814,
+      "name": "Synthetic Player 21",
+      "nflTeam": "CCC",
+      "outcome": {
+        "bustProbability": 0.31,
+        "eliteProbability": 0.15,
+        "expectedGames": 16,
+        "p10": 159.3,
+        "p50": 216.82,
+        "p90": 274.35,
+        "projectedFullPprPoints": 221.25,
+        "projectedPpg": 13.8281,
+        "starterProbability": 0.575
+      },
+      "position": "QB",
+      "provenance": {
+        "modelVersion": "synthetic-player-truth-model-v1",
+        "sourceArtifactIds": [
+          "synthetic-consensus",
+          "synthetic-fundamentals"
+        ]
+      }
+    },
+    {
+      "availability": {
+        "confidence": 0.98,
+        "status": "available"
+      },
+      "boardRank": 22,
+      "canonicalPlayerKey": "synthetic.player.22",
+      "espnPlayerId": "900022",
+      "features": {
+        "eligible": [
+          "consensus-projection",
+          "football-fundamentals"
+        ],
+        "quarantined": []
+      },
+      "identity": {
+        "confidence": 0.99,
+        "method": "espn-id"
+      },
+      "internalPlayerId": 1022,
+      "limitations": [
+        "Synthetic fixture; not a player valuation."
+      ],
+      "modelConfidence": 0.808,
+      "name": "Synthetic Player 22",
+      "nflTeam": "DDD",
+      "outcome": {
+        "bustProbability": 0.32,
+        "eliteProbability": 0.14,
+        "expectedGames": 16,
+        "p10": 155.16,
+        "p50": 211.19,
+        "p90": 267.22,
+        "projectedFullPprPoints": 215.5,
+        "projectedPpg": 13.4688,
+        "starterProbability": 0.56
+      },
+      "position": "RB",
+      "provenance": {
+        "modelVersion": "synthetic-player-truth-model-v1",
+        "sourceArtifactIds": [
+          "synthetic-consensus",
+          "synthetic-fundamentals"
+        ]
+      }
+    },
+    {
+      "availability": {
+        "confidence": 0.98,
+        "status": "available"
+      },
+      "boardRank": 23,
+      "canonicalPlayerKey": "synthetic.player.23",
+      "espnPlayerId": "900023",
+      "features": {
+        "eligible": [
+          "consensus-projection",
+          "football-fundamentals"
+        ],
+        "quarantined": []
+      },
+      "identity": {
+        "confidence": 0.99,
+        "method": "espn-id"
+      },
+      "internalPlayerId": 1023,
+      "limitations": [
+        "Synthetic fixture; not a player valuation."
+      ],
+      "modelConfidence": 0.802,
+      "name": "Synthetic Player 23",
+      "nflTeam": "EEE",
+      "outcome": {
+        "bustProbability": 0.33,
+        "eliteProbability": 0.13,
+        "expectedGames": 16,
+        "p10": 151.02,
+        "p50": 205.56,
+        "p90": 260.09,
+        "projectedFullPprPoints": 209.75,
+        "projectedPpg": 13.1094,
+        "starterProbability": 0.545
+      },
+      "position": "WR",
+      "provenance": {
+        "modelVersion": "synthetic-player-truth-model-v1",
+        "sourceArtifactIds": [
+          "synthetic-consensus",
+          "synthetic-fundamentals"
+        ]
+      }
+    },
+    {
+      "availability": {
+        "confidence": 0.98,
+        "status": "available"
+      },
+      "boardRank": 200,
+      "canonicalPlayerKey": "synthetic.player.24",
+      "espnPlayerId": null,
+      "features": {
+        "eligible": [
+          "consensus-projection",
+          "football-fundamentals"
+        ],
+        "quarantined": []
+      },
+      "identity": {
+        "confidence": 0.45,
+        "method": "unresolved"
+      },
+      "internalPlayerId": 1024,
+      "limitations": [
+        "Synthetic fixture; not a player valuation."
+      ],
+      "modelConfidence": 0.796,
+      "name": "Synthetic Player 24",
+      "nflTeam": "FFF",
+      "outcome": {
+        "bustProbability": 0.34,
+        "eliteProbability": 0.12,
+        "expectedGames": 16,
+        "p10": 146.88,
+        "p50": 199.92,
+        "p90": 252.96,
+        "projectedFullPprPoints": 204.0,
+        "projectedPpg": 12.75,
+        "starterProbability": 0.53
+      },
+      "position": "TE",
+      "provenance": {
+        "modelVersion": "synthetic-player-truth-model-v1",
+        "sourceArtifactIds": [
+          "synthetic-consensus",
+          "synthetic-fundamentals"
+        ]
+      }
+    }
+  ],
+  "schemaVersion": "1.0.0",
+  "sourceArtifacts": [
+    {
+      "artifactId": "synthetic-player-truth",
+      "artifactType": "player-truth",
+      "artifactVersion": "synthetic-pt-v1",
+      "fileSha256": "2a4da36e59a0e70882a5fc6253c458982e4ec70b198a730a5331b50d3d5a10dc",
+      "payloadSha256": "4f5734ff1845e22b829f68a82ef334f41c561a7bb19162964e0c8d5b5864a762",
+      "schemaVersion": "1.0.0",
+      "status": "candidate"
+    },
+    {
+      "artifactId": "synthetic-espn-market",
+      "artifactType": "espn-market",
+      "artifactVersion": "synthetic-market-v1",
+      "fileSha256": "aa6470bad9c77626e6533a195c3a1b4965fbfb188bed8da4c74c006ca187119e",
+      "payloadSha256": "c78c409317f10ebbb3539c4d719590832b4806f98df79def8cb1a088c7c71243",
+      "schemaVersion": "1.0.0",
+      "status": "candidate"
+    },
+    {
+      "artifactId": "synthetic-espn-league-value",
+      "artifactType": "espn-league-value",
+      "artifactVersion": "synthetic-lv-v1",
+      "fileSha256": "2a5e999c31583146763f5590667bb4ceafecbeb5524d014348b91b5f6bfddc07",
+      "payloadSha256": "37a22fb9ca613cc47a58b396ef09cf918162b2ab0b13162e84f3dc2aa1e4340b",
+      "schemaVersion": "1.0.0",
+      "status": "candidate"
+    },
+    {
+      "artifactId": "synthetic-opponent-intent",
+      "artifactType": "opponent-intent",
+      "artifactVersion": "synthetic-oi-v1",
+      "fileSha256": "9a30e5de70239fb5225536a40e2dac48aa6e13a2cc26fc7992c811ff9813e82d",
+      "payloadSha256": "4d96cfadf728cd68ab031fda7016f5b12f60a851fdaa6eacd5eef98b9415cdaa",
+      "schemaVersion": "1.0.0",
+      "status": "candidate"
+    }
+  ],
+  "sourceCommits": [
+    "bfe0bfd000137115b774718851fac999f08bec36"
+  ],
+  "status": "candidate"
+}
